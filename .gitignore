@@ -1,0 +1,42 @@
+# Build outputs
+build/
+out/
+results/
+logs/
+reports/
+objects/
+
+# EDA tool artifacts
+*.log
+*.rpt
+*.gds
+*.oas
+*.lef
+*.def
+*.spef
+*.sdf
+*.lib
+*.db
+*.vcd
+*.fsdb
+*.shm/
+
+# Synthesis intermediates
+*.blif
+*.json.gz
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
