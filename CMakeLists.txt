@@ -35,6 +35,7 @@ add_subdirectory(test)
 add_subdirectory(flow)
 if(SYSTEMC_FOUND AND AC_TYPES_FOUND)
   add_subdirectory(model)
+  add_subdirectory(tools)
 endif()
 
 # --- Summary ---
