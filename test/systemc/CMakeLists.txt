@@ -5,6 +5,7 @@ if(NOT (SYSTEMC_FOUND AND AC_TYPES_FOUND))
 endif()
 
 set(_systemc_modules
+  bf16_math
   rom_bank scale_store lut_interp
   mac_pe dequant mac_array
   kv_cache attention_unit rmsnorm swiglu rope
