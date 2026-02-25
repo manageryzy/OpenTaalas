@@ -26,6 +26,10 @@ objects/
 *.blif
 *.json.gz
 
+# Kanagawa test artifacts
+*.done
+syntax_test_temp_file.k
+
 # OS
 .DS_Store
 Thumbs.db
