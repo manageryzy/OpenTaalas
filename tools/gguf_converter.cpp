@@ -263,4 +263,68 @@ void save_converted(const std::vector<ConvertedTensor>& tensors, const std::stri
     std::fprintf(stderr, "Saved %zu tensors to %s\n", tensors.size(), output_dir.c_str());
 }
 
+ConvertedTensor load_converted_tensor(const std::string& dir, const std::string& name) {
+    // Sanitize name same way as save_converted
+    std::string safe = name;
+    for (auto& c : safe) { if (c == '.') c = '_'; }
+
+    ConvertedTensor ct;
+    ct.name = name;
+
+    // Read metadata
+    std::string mpath = dir + "/" + safe + ".meta";
+    FILE* f = std::fopen(mpath.c_str(), "r");
+    if (!f) {
+        std::fprintf(stderr, "load_converted_tensor: cannot open %s\n", mpath.c_str());
+        return ct;
+    }
+    char line[512];
+    while (std::fgets(line, sizeof(line), f)) {
+        std::string s(line);
+        if (s.rfind("rows=", 0) == 0) ct.rows = std::atol(s.c_str() + 5);
+        else if (s.rfind("cols=", 0) == 0) ct.cols = std::atol(s.c_str() + 5);
+        else if (s.rfind("quantized=", 0) == 0) ct.is_quantized = std::atoi(s.c_str() + 10) != 0;
+        else if (s.rfind("tensor_scale=", 0) == 0) ct.tensor_scale = std::atof(s.c_str() + 13);
+    }
+    std::fclose(f);
+
+    if (ct.is_quantized) {
+        // Load weights
+        std::string wpath = dir + "/" + safe + ".weights.bin";
+        f = std::fopen(wpath.c_str(), "rb");
+        if (f) {
+            std::fseek(f, 0, SEEK_END);
+            long sz = std::ftell(f);
+            std::fseek(f, 0, SEEK_SET);
+            ct.weights.resize(sz);
+            std::fread(ct.weights.data(), 1, sz, f);
+            std::fclose(f);
+        }
+        // Load bank scales
+        std::string spath = dir + "/" + safe + ".scales.bin";
+        f = std::fopen(spath.c_str(), "rb");
+        if (f) {
+            std::fseek(f, 0, SEEK_END);
+            long sz = std::ftell(f);
+            std::fseek(f, 0, SEEK_SET);
+            ct.bank_scales.resize(sz);
+            std::fread(ct.bank_scales.data(), 1, sz, f);
+            std::fclose(f);
+        }
+    } else {
+        std::string fpath = dir + "/" + safe + ".float.bin";
+        f = std::fopen(fpath.c_str(), "rb");
+        if (f) {
+            std::fseek(f, 0, SEEK_END);
+            long sz = std::ftell(f);
+            std::fseek(f, 0, SEEK_SET);
+            ct.float_data.resize(sz / sizeof(float));
+            std::fread(ct.float_data.data(), sizeof(float), ct.float_data.size(), f);
+            std::fclose(f);
+        }
+    }
+
+    return ct;
+}
+
 } // namespace opentaalas
