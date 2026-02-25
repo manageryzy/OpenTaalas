@@ -19,11 +19,23 @@ if(VERILATOR_BIN)
   message(STATUS "Found Verilator: ${VERILATOR_BIN}")
 endif()
 
+# --- SystemC + ac_types (for reference models) ---
+include(FindSystemC)
+include(FindACTypes)
+if(SYSTEMC_FOUND AND AC_TYPES_FOUND)
+  enable_language(CXX)
+  set(CMAKE_CXX_STANDARD 17)
+  set(CMAKE_CXX_STANDARD_REQUIRED ON)
+endif()
+
 # --- Subdirectories ---
 enable_testing()
 add_subdirectory(rtl)
 add_subdirectory(test)
 add_subdirectory(flow)
+if(SYSTEMC_FOUND AND AC_TYPES_FOUND)
+  add_subdirectory(model)
+endif()
 
 # --- Summary ---
 message(STATUS "")
@@ -32,5 +44,7 @@ message(STATUS "  Chisel toolchain:  ${CHISEL_TOOLS_FOUND}")
 message(STATUS "  Kanagawa compiler: ${KANAGAWA_FOUND}")
 message(STATUS "  ORFS backend:      ${ORFS_FOUND}")
 message(STATUS "  Verilator:         ${VERILATOR_BIN}")
+message(STATUS "  SystemC:           ${SYSTEMC_FOUND}")
+message(STATUS "  ac_types:          ${AC_TYPES_FOUND}")
 message(STATUS "  Platform:          ${PLATFORM}")
 message(STATUS "======================================")

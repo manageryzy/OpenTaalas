@@ -1,0 +1,26 @@
+# test/systemc/CMakeLists.txt — Per-module SystemC reference model tests
+
+if(NOT (SYSTEMC_FOUND AND AC_TYPES_FOUND))
+  return()
+endif()
+
+set(_systemc_modules
+  rom_bank scale_store lut_interp
+  mac_pe dequant mac_array
+  kv_cache attention_unit rmsnorm swiglu rope
+  vector_unit layer_tile
+  embed_rom lm_head global_controller llama_chip
+)
+
+foreach(_mod ${_systemc_modules})
+  add_executable(test_${_mod} test_${_mod}.cpp)
+  target_link_libraries(test_${_mod} PRIVATE opentaalas_model)
+  add_test(
+    NAME systemc_${_mod}
+    COMMAND test_${_mod}
+  )
+  set_tests_properties(systemc_${_mod} PROPERTIES
+    LABELS "systemc"
+    TIMEOUT 30
+  )
+endforeach()
