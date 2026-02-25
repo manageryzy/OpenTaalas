@@ -30,6 +30,9 @@ objects/
 *.done
 syntax_test_temp_file.k
 
+# Worktrees
+.worktrees/
+
 # OS
 .DS_Store
 Thumbs.db
