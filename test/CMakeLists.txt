@@ -63,6 +63,32 @@ if(KANAGAWA_FOUND)
     LABELS "kanagawa"
     TIMEOUT 120
   )
+
+  # --- LLaMA 3.1 8B module RTL generation tests ---
+  set(_llama_modules
+    rom_bank scale_store lut_interp
+    mac_pe dequant mac_array
+    kv_cache attention_unit rmsnorm swiglu rope
+    vector_unit layer_tile
+    embed_rom lm_head global_controller llama_chip
+  )
+
+  foreach(_mod ${_llama_modules})
+    add_test(
+      NAME kanagawa_rtl_${_mod}
+      COMMAND ${KANAGAWA_EXE}
+        --backend=sv
+        --import-dir=${KANAGAWA_LIBRARY_DIR}
+        --base-library=${KANAGAWA_BASE_LIBRARY}
+        --output=${_kng_test_out}/${_mod}
+        "${CMAKE_SOURCE_DIR}/rtl/kanagawa/${_mod}.k"
+      WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+    )
+    set_tests_properties(kanagawa_rtl_${_mod} PROPERTIES
+      LABELS "kanagawa;llama"
+      TIMEOUT 300
+    )
+  endforeach()
 endif()
 
 # =============================================================================

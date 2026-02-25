@@ -68,16 +68,66 @@ endfunction()
 # --- Register Kanagawa designs ---
 add_kanagawa_rtl(NAME smoke_accumulator SOURCE smoke_accumulator.k)
 
+# --- LLaMA 3.1 8B accelerator modules ---
+# Phase 1: Foundation
+add_kanagawa_rtl(NAME rom_bank SOURCE rom_bank.k)
+add_kanagawa_rtl(NAME scale_store SOURCE scale_store.k)
+add_kanagawa_rtl(NAME lut_interp SOURCE lut_interp.k)
+
+# Phase 2: Compute cores
+add_kanagawa_rtl(NAME mac_pe SOURCE mac_pe.k)
+add_kanagawa_rtl(NAME dequant SOURCE dequant.k)
+add_kanagawa_rtl(NAME mac_array SOURCE mac_array.k)
+
+# Phase 3: Attention and vector processing
+add_kanagawa_rtl(NAME kv_cache SOURCE kv_cache.k)
+add_kanagawa_rtl(NAME attention_unit SOURCE attention_unit.k)
+add_kanagawa_rtl(NAME rmsnorm SOURCE rmsnorm.k)
+add_kanagawa_rtl(NAME swiglu SOURCE swiglu.k)
+add_kanagawa_rtl(NAME rope SOURCE rope.k)
+
+# Phase 4: Integration
+add_kanagawa_rtl(NAME vector_unit SOURCE vector_unit.k)
+add_kanagawa_rtl(NAME layer_tile SOURCE layer_tile.k)
+
+# Phase 5: Top-level
+add_kanagawa_rtl(NAME embed_rom SOURCE embed_rom.k)
+add_kanagawa_rtl(NAME lm_head SOURCE lm_head.k)
+add_kanagawa_rtl(NAME global_controller SOURCE global_controller.k)
+add_kanagawa_rtl(NAME llama_chip SOURCE llama_chip.k)
+
 # =============================================================================
-# Aggregate target
+# Aggregate targets
 # =============================================================================
 add_custom_target(rtl_all
   COMMENT "Generating all RTL"
+)
+
+# LLaMA accelerator modules only
+add_custom_target(rtl_llama
+  COMMENT "Generating LLaMA 3.1 8B accelerator RTL"
 )
 
 if(CHISEL_TOOLS_FOUND)
   add_dependencies(rtl_all chisel_smoke_adder)
 endif()
 if(KANAGAWA_FOUND)
-  add_dependencies(rtl_all kanagawa_smoke_accumulator)
+  add_dependencies(rtl_all kanagawa_smoke_accumulator
+    kanagawa_rom_bank kanagawa_scale_store kanagawa_lut_interp
+    kanagawa_mac_pe kanagawa_dequant kanagawa_mac_array
+    kanagawa_kv_cache kanagawa_attention_unit kanagawa_rmsnorm
+    kanagawa_swiglu kanagawa_rope
+    kanagawa_vector_unit kanagawa_layer_tile
+    kanagawa_embed_rom kanagawa_lm_head kanagawa_global_controller
+    kanagawa_llama_chip
+  )
+  add_dependencies(rtl_llama
+    kanagawa_rom_bank kanagawa_scale_store kanagawa_lut_interp
+    kanagawa_mac_pe kanagawa_dequant kanagawa_mac_array
+    kanagawa_kv_cache kanagawa_attention_unit kanagawa_rmsnorm
+    kanagawa_swiglu kanagawa_rope
+    kanagawa_vector_unit kanagawa_layer_tile
+    kanagawa_embed_rom kanagawa_lm_head kanagawa_global_controller
+    kanagawa_llama_chip
+  )
 endif()
