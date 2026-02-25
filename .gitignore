@@ -1,5 +1,6 @@
 # Build outputs
 build/
+.build/
 out/
 results/
 logs/
@@ -40,3 +41,7 @@ Thumbs.db
 __pycache__/
 *.pyc
 .venv/
+
+# Keep git keep for rtl/generated
+rtl/generated/*
+!.gitkeep

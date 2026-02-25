@@ -1,0 +1,3 @@
+[submodule "third-party/kanagawa"]
+	path = third-party/kanagawa
+	url = https://github.com/microsoft/kanagawa.git

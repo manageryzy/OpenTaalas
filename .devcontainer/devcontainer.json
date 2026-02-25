@@ -1,0 +1,26 @@
+{
+  "name": "OpenTaalas",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "USER_UID": "${localEnv:UID:1000}",
+      "USER_GID": "${localEnv:GID:1000}"
+    }
+  },
+  "remoteUser": "dev",
+  "containerEnv": {
+    "JAVA_HOME": "/usr/lib/jvm/java-17-openjdk-amd64",
+    "Boost_DIR": "/opt/boost/lib/cmake/Boost-1.88.0",
+    "GHCUP_DIR": "/opt/.ghcup/bin"
+  },
+  "postCreateCommand": "git submodule update --init --recursive",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "scalameta.metals",
+        "ms-vscode.cmake-tools"
+      ]
+    }
+  }
+}
