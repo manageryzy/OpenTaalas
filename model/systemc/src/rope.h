@@ -1,5 +1,6 @@
 #pragma once
 #include <opentaalas/types.h>
+#include <bf16_math.h>
 #include <vector>
 
 namespace opentaalas {
@@ -31,8 +32,11 @@ public:
   }
 
   uint16 rotate_pair(uint16 x_even, uint16 x_odd, uint16 cos_val, uint16 sin_val) {
-    (void)x_odd; (void)cos_val; (void)sin_val;
-    return x_even;
+    return bf16_add(bf16_mul(x_even, cos_val), bf16_neg(bf16_mul(x_odd, sin_val)));
+  }
+
+  uint16 rotate_pair_odd(uint16 x_even, uint16 x_odd, uint16 cos_val, uint16 sin_val) const {
+    return bf16_add(bf16_mul(x_even, sin_val), bf16_mul(x_odd, cos_val));
   }
 };
 
