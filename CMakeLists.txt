@@ -20,12 +20,12 @@ if(VERILATOR_BIN)
 endif()
 
 # --- SystemC + ac_types (for reference models) ---
-include(FindSystemC)
 include(FindACTypes)
-if(SYSTEMC_FOUND AND AC_TYPES_FOUND)
+if(AC_TYPES_FOUND)
   enable_language(CXX)
   set(CMAKE_CXX_STANDARD 17)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
+  include(FindSystemC)
 endif()
 
 # --- Subdirectories ---

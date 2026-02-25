@@ -4,3 +4,6 @@
 [submodule "third-party/ac_types"]
 	path = third-party/ac_types
 	url = https://github.com/hlslibs/ac_types.git
+[submodule "third-party/systemc"]
+	path = third-party/systemc
+	url = https://github.com/accellera-official/systemc.git
