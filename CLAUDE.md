@@ -12,14 +12,25 @@ rtl/
   kanagawa/            # Kanagawa HLS source (.k files)
   generated/           # Output SV from both tools
     kanagawa/          # Kanagawa-generated RTL
+  CMakeLists.txt       # RTL generation targets
 third-party/
   kanagawa/            # Kanagawa compiler (git submodule)
-flow/                  # ORFS configs (see docs/orfs-reference.md)
+flow/                  # ORFS backend configs + scripts
+  designs/sky130hd/    # Per-design ORFS config.mk + constraint.sdc
+  scripts/run_orfs.sh  # ORFS invocation wrapper
+  CMakeLists.txt       # Backend synthesis/PnR/GDS targets
+test/
+  CMakeLists.txt       # CTest targets
+cmake/                 # CMake Find modules
+  FindChiselTools.cmake
+  FindKanagawaCompiler.cmake
+  FindORFS.cmake
 constraints/           # SDC timing constraints
 docs/                  # Architecture notes, ORFS reference
 scripts/               # smoke-test.sh and helpers
 .devcontainer/         # Dev container (all toolchains pre-installed)
 .build/                # Build artifacts (gitignored)
+CMakeLists.txt         # Top-level CMake project
 ```
 
 ## Dev Container
@@ -138,3 +149,82 @@ OpenROAD 26Q1 at `~/workspace/OpenROAD-flow-scripts/`. See `docs/orfs-reference.
 source ~/workspace/eda-env.sh
 cd flow && make DESIGN_CONFIG=designs/sky130hd/<nickname>/config.mk
 ```
+
+## CMake Build System
+
+Unified build system orchestrating RTL generation (Chisel + Kanagawa), testing, and backend ORFS flow.
+
+### Quick Start
+
+```bash
+# Configure (auto-detects JDK17, Mill, firtool, kanagawa, ORFS)
+cmake -B build -DORFS_PATH=~/workspace/OpenROAD-flow-scripts
+
+# Generate all RTL
+cmake --build build --target rtl_all
+
+# Run tests
+cd build && ctest --verbose
+
+# Full RTL → GDS
+cmake --build build --target gds_smoke_adder
+```
+
+### CMake Options
+
+| Option | Default | Purpose |
+|--------|---------|---------|
+| `ORFS_PATH` | `~/workspace/OpenROAD-flow-scripts` | Path to ORFS installation |
+| `PLATFORM` | `sky130hd` | Target PDK platform |
+| `BUILD_KANAGAWA_COMPILER` | `ON` | Build kanagawa from source if not found |
+
+### Available Targets
+
+| Target | What it does |
+|--------|-------------|
+| `rtl_all` | Generate all RTL (Chisel + Kanagawa) |
+| `chisel_smoke_adder` | Mill → `rtl/generated/SmokeAdder.sv` |
+| `kanagawa_smoke_accumulator` | Kanagawa → `rtl/generated/kanagawa/smoke_accumulator*.sv` |
+| `synth_smoke_adder` | Yosys synthesis only |
+| `pnr_smoke_adder` | Full PnR (synth → floorplan → place → CTS → route → finish) |
+| `gds_smoke_adder` | Alias for `pnr_` — produces GDS |
+| `backend_all` | All backend GDS targets |
+
+### CTest Tests
+
+| Test | What it checks |
+|------|---------------|
+| `chisel_compile` | Scala/Chisel type-check via `mill smoke.compile` |
+| `kanagawa_syntax` | Kanagawa syntax test on `smoke_adder.k` |
+| `kanagawa_rtl_gen` | Kanagawa generates valid SV from `smoke_accumulator.k` |
+| `verilator_lint_smoke_adder` | Verilator lint on `SmokeAdder.sv` (if Verilator installed) |
+
+### Find Modules
+
+Three CMake modules in `cmake/` auto-detect toolchains:
+- **FindChiselTools** — JDK 17, Mill, firtool → sets `CHISEL_TOOLS_FOUND`
+- **FindKanagawaCompiler** — pre-built binary or ExternalProject build → sets `KANAGAWA_FOUND`, `KANAGAWA_EXE`
+- **FindORFS** — validates ORFS Makefile → sets `ORFS_FOUND`, `ORFS_FLOW_DIR`
+
+Missing tools degrade gracefully — targets that need them are skipped.
+
+### Adding a New Design
+
+**Chisel:** Add a new `ScalaModule` in `rtl/chisel/`, add a `add_custom_target()` in `rtl/CMakeLists.txt`.
+
+**Kanagawa:** Add a `.k` file in `rtl/kanagawa/`, register with the helper function:
+```cmake
+add_kanagawa_rtl(NAME my_design SOURCE my_design.k)
+```
+
+**Backend:** Create `flow/designs/sky130hd/<name>/config.mk` + `constraint.sdc`, register:
+```cmake
+add_orfs_design(NAME my_design PLATFORM ${PLATFORM}
+  CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/my_design")
+```
+
+### ORFS Design Config Notes
+
+- Tiny designs need explicit `DIE_AREA`/`CORE_AREA` — utilization-based sizing can produce dies too small for PDN straps
+- Paths in `config.mk` must be absolute — use `$(abspath ...)` relative to `MAKEFILE_LIST`
+- ORFS outputs land in `.build/flow/<platform>/<design>/`
