@@ -1,3 +1,6 @@
 [submodule "third-party/kanagawa"]
 	path = third-party/kanagawa
 	url = https://github.com/microsoft/kanagawa.git
+[submodule "third-party/ac_types"]
+	path = third-party/ac_types
+	url = https://github.com/hlslibs/ac_types.git

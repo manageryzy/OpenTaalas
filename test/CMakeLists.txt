@@ -108,3 +108,10 @@ if(VERILATOR_BIN)
     )
   endif()
 endif()
+
+# =============================================================================
+# SystemC reference model tests
+# =============================================================================
+if(SYSTEMC_FOUND AND AC_TYPES_FOUND)
+  add_subdirectory(systemc)
+endif()
