@@ -108,3 +108,12 @@ add_verilator_cosim_test(NAME lut_interp  TOP lut_unit    TEST test_vl_lut_inter
 add_verilator_cosim_test(NAME codebook_decoder TOP codebook_decoder TEST test_vl_codebook_decoder.cpp)
 add_verilator_cosim_test(NAME dequant         TOP dequant_unit     TEST test_vl_dequant.cpp)
 add_verilator_cosim_test(NAME mac_array       TOP mac_array        TEST test_vl_mac_array.cpp)
+
+# =============================================================================
+# Phase 3: Attention & Vector
+# =============================================================================
+add_verilator_cosim_test(NAME kv_cache        TOP kv_cache        TEST test_vl_kv_cache.cpp)
+add_verilator_cosim_test(NAME attention_unit  TOP attention_unit  TEST test_vl_attention_unit.cpp)
+add_verilator_cosim_test(NAME rmsnorm        TOP rmsnorm_unit    TEST test_vl_rmsnorm.cpp)
+add_verilator_cosim_test(NAME swiglu         TOP swiglu_unit     TEST test_vl_swiglu.cpp)
+add_verilator_cosim_test(NAME rope           TOP rope_unit       TEST test_vl_rope.cpp)
