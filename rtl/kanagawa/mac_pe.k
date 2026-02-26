@@ -1,7 +1,7 @@
-// OpenTaalas - INT3xINT8 MAC Processing Element
-// Multiplies a 3-bit weight by an 8-bit activation and accumulates into a 32-bit register.
-// Weight is unsigned 3-bit interpreted as signed: 0-3 map to 0-3, 4-7 map to -4 to -1.
-// Uses shift-and-add to avoid DSP multiply intrinsics.
+// OpenTaalas - IQ3_S MAC Processing Element
+// Multiplies codebook magnitude (uint4, odd 1-15) by INT8 activation
+// with separate sign bit, accumulates into INT24 register.
+// Uses shift-and-add: mag = 2k+1, so mag*a = (k*a)<<1 + a
 
 module opentaalas.mac_pe
     { mac_pe
@@ -10,63 +10,39 @@ module opentaalas.mac_pe
 class mac_pe
 {
 private:
-    int32 _accum = 0;
+    int<24> _accum = 0;
 
 public:
-    int32 mac(uint3 weight, int8 activation)
+    int<24> mac(uint4 magnitude, uint<1> sign_bit, int8 activation)
     {
-        int32 result;
-
+        int<24> result;
         atomic
         {
-            int32 a = cast<int32>(activation);
-            int32 product = 0;
+            int<24> a = cast<int<24>>(activation);
+            int<24> k_val = cast<int<24>>(magnitude >> 1);
 
-            if (weight == 0)
+            // k*a via shift-and-add
+            int<24> ka = 0;
+            if ((k_val & 1) != 0) { ka = ka + a; }
+            if ((k_val & 2) != 0) { ka = ka + (a << 1); }
+            if ((k_val & 4) != 0) { ka = ka + (a << 2); }
+
+            // product = (k*a)<<1 + a = (2k+1)*a
+            int<24> product = (ka << 1) + a;
+
+            // Apply sign
+            if (sign_bit == 1)
             {
-                product = 0;
-            }
-            else if (weight == 1)
-            {
-                product = a;
-            }
-            else if (weight == 2)
-            {
-                product = a << 1;
-            }
-            else if (weight == 3)
-            {
-                product = (a << 1) + a;
-            }
-            else if (weight == 4)
-            {
-                // -4
-                product = 0 - (a << 2);
-            }
-            else if (weight == 5)
-            {
-                // -3
-                product = 0 - ((a << 1) + a);
-            }
-            else if (weight == 6)
-            {
-                // -2
-                product = 0 - (a << 1);
-            }
-            else
-            {
-                // -1
-                product = 0 - a;
+                product = 0 - product;
             }
 
             _accum = _accum + product;
             result = _accum;
         }
-
         return result;
     }
 
-    int32 read_accum()
+    int<24> read_accum()
     {
         return _accum;
     }

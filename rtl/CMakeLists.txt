@@ -75,6 +75,7 @@ add_kanagawa_rtl(NAME scale_store SOURCE scale_store.k)
 add_kanagawa_rtl(NAME lut_interp SOURCE lut_interp.k)
 
 # Phase 2: Compute cores
+add_kanagawa_rtl(NAME codebook_decoder SOURCE codebook_decoder.k)
 add_kanagawa_rtl(NAME mac_pe SOURCE mac_pe.k)
 add_kanagawa_rtl(NAME dequant SOURCE dequant.k)
 add_kanagawa_rtl(NAME mac_array SOURCE mac_array.k)
@@ -114,7 +115,7 @@ endif()
 if(KANAGAWA_FOUND)
   add_dependencies(rtl_all kanagawa_smoke_accumulator
     kanagawa_rom_bank kanagawa_scale_store kanagawa_lut_interp
-    kanagawa_mac_pe kanagawa_dequant kanagawa_mac_array
+    kanagawa_codebook_decoder kanagawa_mac_pe kanagawa_dequant kanagawa_mac_array
     kanagawa_kv_cache kanagawa_attention_unit kanagawa_rmsnorm
     kanagawa_swiglu kanagawa_rope
     kanagawa_vector_unit kanagawa_layer_tile
@@ -123,7 +124,7 @@ if(KANAGAWA_FOUND)
   )
   add_dependencies(rtl_llama
     kanagawa_rom_bank kanagawa_scale_store kanagawa_lut_interp
-    kanagawa_mac_pe kanagawa_dequant kanagawa_mac_array
+    kanagawa_codebook_decoder kanagawa_mac_pe kanagawa_dequant kanagawa_mac_array
     kanagawa_kv_cache kanagawa_attention_unit kanagawa_rmsnorm
     kanagawa_swiglu kanagawa_rope
     kanagawa_vector_unit kanagawa_layer_tile

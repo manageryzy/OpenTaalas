@@ -67,7 +67,7 @@ if(KANAGAWA_FOUND)
   # --- LLaMA 3.1 8B module RTL generation tests ---
   set(_llama_modules
     rom_bank scale_store lut_interp
-    mac_pe dequant mac_array
+    codebook_decoder mac_pe dequant mac_array
     kv_cache attention_unit rmsnorm swiglu rope
     vector_unit layer_tile
     embed_rom lm_head global_controller llama_chip

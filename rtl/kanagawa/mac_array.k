@@ -1,7 +1,8 @@
-// OpenTaalas - MAC Array GEMV Engine
-// Composes 4 PE accumulators, weight ROM, scale storage, and dequantization
-// into a self-contained GEMV (General Matrix-Vector multiply) engine.
-// Each PE accumulates INT3xINT8 dot products; outputs are dequantized to BF16.
+// OpenTaalas - IQ3_S MAC Array GEMV Engine
+// Composes 4 PE accumulators, block-packed weight ROM, codebook decoder,
+// and dequantization into a self-contained GEMV engine.
+// Each PE accumulates magnitude*sign*activation products into INT24;
+// outputs are dequantized to FP32 via BF16 super-scale and 4-bit sub-scale.
 
 module opentaalas.mac_array
     { mac_array
@@ -10,142 +11,148 @@ module opentaalas.mac_array
 class mac_array
 {
 private:
-    // 4 PE accumulators (INT32)
-    int32[4] _accum;
+    // 4 PE accumulators (INT24)
+    int<24>[4] _accum;
 
-    // Weight storage: 4096 rows x 8192 cols of 3-bit weights
-    [[memory]] uint3[33554432] _weights;
+    // FP32 row accumulators (stored as uint32 bit patterns)
+    uint32[4] _fp32_accum;
 
-    // Dequantization scales
-    uint8 _bank_scale;
-    uint32 _tensor_scale;
+    // Weight storage: block-packed IQ3_S ROM
+    // 1024 blocks x 110 bytes = 112640 bytes
+    [[memory]] uint8[112640] _rom;
+
+    // Codebook: 512 entries x 32 bits
+    [[memory]] uint32[512] _grid;
 
 public:
-    // Perform one MAC on specified PE using shift-and-add multiply
-    int32 mac_step(uint<2> pe_id, uint3 weight, int8 activation)
+    // --- MAC operation on specified PE using shift-and-add ---
+    int<24> mac_step(uint<2> pe_id, uint4 magnitude, uint<1> sign_bit, int8 activation)
     {
-        int32 result;
-
+        int<24> result;
         atomic
         {
-            int32 a = cast<int32>(activation);
-            int32 product = 0;
+            int<24> a = cast<int<24>>(activation);
+            int<24> k_val = cast<int<24>>(magnitude >> 1);
 
-            if (weight == 0)
+            // k*a via shift-and-add
+            int<24> ka = 0;
+            if ((k_val & 1) != 0) { ka = ka + a; }
+            if ((k_val & 2) != 0) { ka = ka + (a << 1); }
+            if ((k_val & 4) != 0) { ka = ka + (a << 2); }
+
+            // product = (k*a)<<1 + a = (2k+1)*a
+            int<24> product = (ka << 1) + a;
+
+            // Apply sign
+            if (sign_bit == 1)
             {
-                product = 0;
-            }
-            else if (weight == 1)
-            {
-                product = a;
-            }
-            else if (weight == 2)
-            {
-                product = a << 1;
-            }
-            else if (weight == 3)
-            {
-                product = (a << 1) + a;
-            }
-            else if (weight == 4)
-            {
-                // -4
-                product = 0 - (a << 2);
-            }
-            else if (weight == 5)
-            {
-                // -3
-                product = 0 - ((a << 1) + a);
-            }
-            else if (weight == 6)
-            {
-                // -2
-                product = 0 - (a << 1);
-            }
-            else
-            {
-                // -1
-                product = 0 - a;
+                product = 0 - product;
             }
 
             _accum[pe_id] = _accum[pe_id] + product;
             result = _accum[pe_id];
         }
-
         return result;
     }
 
-    // Read a 3-bit weight from embedded ROM
-    uint3 read_weight(uint12 row, uint13 col)
-    {
-        uint3 result;
-        atomic
-        {
-            result = _weights[concat(row, col)];
-        }
-        return result;
-    }
-
-    // Write a weight (for initialization / programming)
-    void write_weight(uint12 row, uint13 col, uint3 value)
-    {
-        atomic
-        {
-            _weights[concat(row, col)] = value;
-        }
-    }
-
-    // Read dequantized BF16 output from a PE (inline dequant logic)
-    uint16 read_output(uint<2> pe_id)
-    {
-        uint32 accum = cast<uint32>(_accum[pe_id]);
-
-        // Extract sign and magnitude from INT32
-        uint32 sign = (accum >> 31) & 1;
-
-        // Expand FP8 E4M3 bank scale to FP32 bit pattern
-        // FP8 E4M3: [sign(1)][exp(4)][mantissa(3)], bias=7
-        // FP32:     [sign(1)][exp(8)][mantissa(23)], bias=127
-        uint32 fp8 = cast<uint32>(_bank_scale);
-        uint32 fp8_sign = (fp8 >> 7) & 1;
-        uint32 fp8_exp = (fp8 >> 3) & 0xF;
-        uint32 fp8_mant = fp8 & 0x7;
-        uint32 fp32_exp = fp8_exp + 120;
-        uint32 fp32_scale = (fp8_sign << 31) | (fp32_exp << 23) | (fp8_mant << 20);
-
-        // Simplified BF16: combine sign with scale, truncate to upper 16 bits
-        // Full IEEE-754 multiply with magnitude will be refined in VPU integration
-        uint32 combined = (sign << 31) | (fp32_scale & 0x7FFFFFFF);
-        uint16 result = cast<uint16>(combined >> 16);
-
-        return result;
-    }
-
-    // Read raw INT32 accumulator value
-    int32 read_accum(uint<2> pe_id)
+    // Read raw INT24 accumulator value
+    int<24> read_accum(uint<2> pe_id)
     {
         return _accum[pe_id];
     }
 
-    // Set FP8 E4M3 bank scale for dequantization
-    void set_bank_scale(uint8 value)
+    // --- Codebook decode ---
+    uint4 decode_m0(uint<9> index) { return cast<uint4>(_grid[index] & 0xFF); }
+    uint4 decode_m1(uint<9> index) { return cast<uint4>((_grid[index] >> 8) & 0xFF); }
+    uint4 decode_m2(uint<9> index) { return cast<uint4>((_grid[index] >> 16) & 0xFF); }
+    uint4 decode_m3(uint<9> index) { return cast<uint4>((_grid[index] >> 24) & 0xFF); }
+
+    void write_grid_entry(uint<9> index, uint32 value)
+    {
+        atomic { _grid[index] = value; }
+    }
+
+    // --- ROM access ---
+    void write_rom_byte(uint<16> block_addr, uint8 byte_offset, uint8 value)
     {
         atomic
         {
-            _bank_scale = value;
+            _rom[cast<uint<17>>(block_addr) * 110 + cast<uint<17>>(byte_offset)] = value;
         }
     }
 
-    // Set FP32 tensor scale for dequantization
-    void set_tensor_scale(uint32 value)
+    uint16 get_super_scale(uint<16> block_addr)
     {
+        uint16 result;
         atomic
         {
-            _tensor_scale = value;
+            uint<17> base = cast<uint<17>>(block_addr) * 110;
+            uint16 lo = cast<uint16>(_rom[base]);
+            uint16 hi = cast<uint16>(_rom[base + 1]);
+            result = (hi << 8) | lo;
         }
+        return result;
     }
 
-    // Clear one PE accumulator
+    uint<9> get_codebook_index(uint<16> block_addr, uint8 group_in_block)
+    {
+        uint<9> result;
+        atomic
+        {
+            uint<17> base = cast<uint<17>>(block_addr) * 110;
+            uint8 qs_val = _rom[base + 2 + cast<uint<17>>(group_in_block)];
+            uint8 qh_byte = _rom[base + 66 + cast<uint<17>>(group_in_block >> 3)];
+            uint8 bit_pos = group_in_block & 7;
+            uint<1> high_bit = cast<uint<1>>((qh_byte >> bit_pos) & 1);
+            result = concat(high_bit, qs_val);
+        }
+        return result;
+    }
+
+    uint<1> get_sign(uint<16> block_addr, uint8 weight_in_block)
+    {
+        uint<1> result;
+        atomic
+        {
+            uint<17> base = cast<uint<17>>(block_addr) * 110;
+            uint8 sign_byte = _rom[base + 74 + cast<uint<17>>(weight_in_block >> 3)];
+            uint8 bit_pos = weight_in_block & 7;
+            result = cast<uint<1>>((sign_byte >> bit_pos) & 1);
+        }
+        return result;
+    }
+
+    uint4 get_sub_scale(uint<16> block_addr, uint8 sub_block_idx)
+    {
+        uint4 result;
+        atomic
+        {
+            uint<17> base = cast<uint<17>>(block_addr) * 110;
+            uint8 scale_byte = _rom[base + 106 + cast<uint<17>>(sub_block_idx >> 1)];
+            if ((sub_block_idx & 1) == 0)
+            {
+                result = cast<uint4>(scale_byte & 0xF);
+            }
+            else
+            {
+                result = cast<uint4>(scale_byte >> 4);
+            }
+        }
+        return result;
+    }
+
+    // --- FP32 accumulator (stored as bit pattern) ---
+    void set_fp32_accum(uint<2> pe_id, uint32 value)
+    {
+        atomic { _fp32_accum[pe_id] = value; }
+    }
+
+    uint32 read_fp32_accum(uint<2> pe_id)
+    {
+        return _fp32_accum[pe_id];
+    }
+
+    // --- Control ---
     void clear_pe(uint<2> pe_id)
     {
         atomic
@@ -154,7 +161,14 @@ public:
         }
     }
 
-    // Clear all PE accumulators
+    void clear_fp32(uint<2> pe_id)
+    {
+        atomic
+        {
+            _fp32_accum[pe_id] = 0;
+        }
+    }
+
     void clear_all()
     {
         atomic
@@ -163,6 +177,10 @@ public:
             _accum[1] = 0;
             _accum[2] = 0;
             _accum[3] = 0;
+            _fp32_accum[0] = 0;
+            _fp32_accum[1] = 0;
+            _fp32_accum[2] = 0;
+            _fp32_accum[3] = 0;
         }
     }
 }
