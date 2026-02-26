@@ -77,7 +77,7 @@ function(add_verilator_cosim_test)
       ${KANAGAWA_RUNTIME_SV}
       ${_top_sv}
     VERILATOR_ARGS
-      -Wno-lint -Wno-UNOPTFLAT -Wno-TIMESCALEMOD -DSIMULATION
+      -Wno-lint -Wno-UNOPTFLAT -Wno-TIMESCALEMOD -Wno-WIDTHCONCAT -DSIMULATION
   )
 
   add_test(
@@ -94,3 +94,10 @@ endfunction()
 # Phase 1: Compute Core
 # =============================================================================
 add_verilator_cosim_test(NAME mac_pe TOP mac_pe TEST test_vl_mac_pe.cpp)
+
+# =============================================================================
+# Phase 1: Storage
+# =============================================================================
+add_verilator_cosim_test(NAME rom_bank    TOP rom_bank    TEST test_vl_rom_bank.cpp)
+add_verilator_cosim_test(NAME scale_store TOP scale_store TEST test_vl_scale_store.cpp)
+add_verilator_cosim_test(NAME lut_interp  TOP lut_unit    TEST test_vl_lut_interp.cpp)
