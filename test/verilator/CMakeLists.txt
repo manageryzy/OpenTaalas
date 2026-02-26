@@ -101,3 +101,10 @@ add_verilator_cosim_test(NAME mac_pe TOP mac_pe TEST test_vl_mac_pe.cpp)
 add_verilator_cosim_test(NAME rom_bank    TOP rom_bank    TEST test_vl_rom_bank.cpp)
 add_verilator_cosim_test(NAME scale_store TOP scale_store TEST test_vl_scale_store.cpp)
 add_verilator_cosim_test(NAME lut_interp  TOP lut_unit    TEST test_vl_lut_interp.cpp)
+
+# =============================================================================
+# Phase 2: Compute
+# =============================================================================
+add_verilator_cosim_test(NAME codebook_decoder TOP codebook_decoder TEST test_vl_codebook_decoder.cpp)
+add_verilator_cosim_test(NAME dequant         TOP dequant_unit     TEST test_vl_dequant.cpp)
+add_verilator_cosim_test(NAME mac_array       TOP mac_array        TEST test_vl_mac_array.cpp)
