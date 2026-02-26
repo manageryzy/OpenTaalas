@@ -1,28 +1,39 @@
 #pragma once
 #include <opentaalas/types.h>
+#include <bf16_math.h>
 #include <cstdint>
+#include <cstring>
 
 namespace opentaalas {
 
+// IQ3_S Dequantization Unit
+// Converts INT24 accumulator to FP32 using BF16 super-scale and 4-bit sub-scale.
+// Formula: result = accum × (1 + 2×sub_scale) × bf16_to_fp32(super_scale)
+// No subnormal support (FTZ).
 class DequantUnit {
  public:
-  uint16 dequantize(uint32 accum, uint8 bank_scale_fp8,
-                    uint32 tensor_scale_fp32) const {
-    auto acc = static_cast<std::uint32_t>(accum.to_int64());
-    std::uint32_t sign = (acc >> 31) & 1u;
+  float dequantize(int24 accum, uint16 super_scale_bf16, uint4 sub_scale) const {
+    // Step 1: Integer sub-scale multiplier: 1, 3, 5, ..., 31
+    int32_t int_scale = 1 + 2 * sub_scale.to_int();
 
-    auto fp8 = static_cast<std::uint32_t>(bank_scale_fp8.to_int());
-    std::uint32_t fp8_sign = (fp8 >> 7) & 1u;
-    std::uint32_t fp8_exp = (fp8 >> 3) & 0xFu;
-    std::uint32_t fp8_mant = fp8 & 0x7u;
-    std::uint32_t fp32_exp = fp8_exp + 120u;
-    std::uint32_t fp32_scale =
-        (fp8_sign << 31) | (fp32_exp << 23) | (fp8_mant << 20);
+    // Step 2: Scale the accumulator (INT24 × 5-bit → fits INT32)
+    int32_t scaled = static_cast<int32_t>(accum.to_int64()) * int_scale;
 
-    std::uint32_t combined = (sign << 31) | (fp32_scale & 0x7FFFFFFFu);
-    auto result = static_cast<std::uint16_t>(combined >> 16);
+    // Step 3: Convert to FP32 (FTZ)
+    float fp_accum = static_cast<float>(scaled);
 
-    return uint16(result);
+    // Step 4: Expand BF16 super-scale to FP32
+    float d = bf16_to_float(super_scale_bf16);
+
+    // Step 5: FP32 multiply (no subnormals)
+    float result = fp_accum * d;
+
+    // FTZ: flush subnormal result to zero
+    uint32_t bits;
+    std::memcpy(&bits, &result, 4);
+    if (((bits >> 23) & 0xFF) == 0) result = 0.0f;
+
+    return result;
   }
 };
 

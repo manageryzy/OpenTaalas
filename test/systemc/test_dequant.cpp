@@ -1,107 +1,87 @@
-// test_dequant.cpp — Tests for FP8 E4M3 dequantization to BF16
+// test_dequant.cpp — Tests for IQ3_S dequantization
+// New: INT24 × BF16_d × (1+2×sub_scale_4bit) → FP32
 #include <dequant.h>
+#include <bf16_math.h>
 #include <cassert>
-#include <cstdint>
+#include <cmath>
 #include <cstdio>
 
 using namespace opentaalas;
 
-// Helper: manually compute expected BF16 from the Kanagawa algorithm
-static std::uint16_t ref_dequant(std::uint32_t accum, std::uint8_t fp8,
-                                 std::uint32_t /*tensor_scale*/) {
-  std::uint32_t sign = (accum >> 31) & 1u;
-  std::uint32_t fp8_sign = (fp8 >> 7) & 1u;
-  std::uint32_t fp8_exp = (fp8 >> 3) & 0xFu;
-  std::uint32_t fp8_mant = fp8 & 0x7u;
-  std::uint32_t fp32_exp = fp8_exp + 120u;
-  std::uint32_t fp32_scale =
-      (fp8_sign << 31) | (fp32_exp << 23) | (fp8_mant << 20);
-  std::uint32_t combined = (sign << 31) | (fp32_scale & 0x7FFFFFFFu);
-  return static_cast<std::uint16_t>(combined >> 16);
+static void test_unit_scale() {
+  // accum=100, super_scale=BF16(1.0)=0x3F80, sub_scale=0
+  // result = 100 × 1.0 × (1+2×0) = 100.0
+  DequantUnit dq;
+  float result = dq.dequantize(int24(100), uint16(0x3F80), uint4(0));
+  assert(std::fabs(result - 100.0f) < 0.01f);
+  std::puts("[PASS] unit scale: accum=100, d=1.0, sub=0 → 100.0");
 }
 
-static void test_bank_scale_one() {
-  // FP8 E4M3 encoding of 1.0: sign=0, exp=7 (bias=7, so 2^0), mant=0
-  // Binary: 0_0111_000 = 0x38
+static void test_sub_scale_multiplier() {
+  // accum=10, d=BF16(1.0)=0x3F80, sub_scale=3
+  // result = 10 × 1.0 × (1+2×3) = 10 × 7 = 70.0
   DequantUnit dq;
-  uint16 result = dq.dequantize(uint32(100), uint8(0x38), uint32(0));
-
-  // exp=7, fp32_exp=7+120=127, mant=0
-  // fp32_scale = (0<<31)|(127<<23)|(0<<20) = 0x3F800000 (IEEE 1.0)
-  // sign from accum=100 is 0
-  // combined = (0<<31) | (0x3F800000 & 0x7FFFFFFF) = 0x3F800000
-  // BF16 = 0x3F800000 >> 16 = 0x3F80
-  assert(result.to_int() == 0x3F80);
-  std::puts("[PASS] bank_scale=0x38 (1.0 in E4M3) -> BF16 0x3F80");
+  float result = dq.dequantize(int24(10), uint16(0x3F80), uint4(3));
+  assert(std::fabs(result - 70.0f) < 0.01f);
+  std::puts("[PASS] sub_scale=3: 10 × 1.0 × 7 = 70.0");
 }
 
-static void test_bank_scale_zero() {
-  // FP8 = 0x00: sign=0, exp=0, mant=0
-  // fp32_exp = 0+120 = 120, fp32_scale = (120<<23)|(0<<20) = 0x3C000000
-  // BF16 = 0x3C000000 >> 16 = 0x3C00
+static void test_max_sub_scale() {
+  // sub_scale=15: multiplier = 1+2×15 = 31
+  // accum=1, d=BF16(1.0)
+  // result = 1 × 1.0 × 31 = 31.0
   DequantUnit dq;
-  uint16 result = dq.dequantize(uint32(42), uint8(0x00), uint32(0));
-  std::uint16_t expected = ref_dequant(42, 0x00, 0);
-  assert(result.to_int() == expected);
-  std::puts("[PASS] bank_scale=0x00 (subnormal zero)");
+  float result = dq.dequantize(int24(1), uint16(0x3F80), uint4(15));
+  assert(std::fabs(result - 31.0f) < 0.01f);
+  std::puts("[PASS] max sub_scale=15: 1 × 1.0 × 31 = 31.0");
 }
 
-static void test_sign_bit_from_accum() {
-  // accum with bit 31 set (negative INT32 reinterpreted as uint32)
-  // accum = 0x80000000 -> sign=1
+static void test_negative_accum() {
+  // accum=-50, d=BF16(2.0)=0x4000, sub_scale=0
+  // result = -50 × 2.0 × 1 = -100.0
   DequantUnit dq;
-  uint16 result = dq.dequantize(uint32(0x80000000u), uint8(0x38), uint32(0));
-
-  // sign=1, fp32_scale=0x3F800000
-  // combined = (1<<31) | 0x3F800000 = 0xBF800000
-  // BF16 = 0xBF800000 >> 16 = 0xBF80
-  assert(result.to_int() == 0xBF80);
-  std::puts("[PASS] accum sign bit propagates to BF16 sign");
+  float result = dq.dequantize(int24(-50), uint16(0x4000), uint4(0));
+  assert(std::fabs(result - (-100.0f)) < 0.01f);
+  std::puts("[PASS] negative accum: -50 × 2.0 × 1 = -100.0");
 }
 
-static void test_negative_fp8_sign() {
-  // FP8 = 0xB8: sign=1, exp=7, mant=0 -> -1.0 in E4M3
-  // fp32_scale = (1<<31)|(127<<23)|(0<<20) = 0xBF800000
-  // accum=0 -> sign=0
-  // combined = (0<<31) | (0xBF800000 & 0x7FFFFFFF) = 0x3F800000
-  // BF16 = 0x3F80
+static void test_bf16_scale_precision() {
+  // d=BF16(0.125)=0x3E00, accum=80, sub_scale=1
+  // result = 80 × 0.125 × (1+2) = 80 × 0.125 × 3 = 30.0
   DequantUnit dq;
-  uint16 result = dq.dequantize(uint32(0), uint8(0xB8), uint32(0));
-  assert(result.to_int() == 0x3F80);
-  std::puts("[PASS] negative FP8 sign, positive accum");
+  float result = dq.dequantize(int24(80), uint16(0x3E00), uint4(1));
+  assert(std::fabs(result - 30.0f) < 0.01f);
+  std::puts("[PASS] BF16 scale 0.125: 80 × 0.125 × 3 = 30.0");
 }
 
-static void test_both_signs_negative() {
-  // accum sign=1, fp8 sign=1
-  // combined = (1<<31) | (0x3F800000) = 0xBF800000
-  // BF16 = 0xBF80
+static void test_ftz_zero_accum() {
+  // accum=0 should always produce 0 regardless of scales
   DequantUnit dq;
-  uint16 result =
-      dq.dequantize(uint32(0x80000000u), uint8(0xB8), uint32(0));
-  assert(result.to_int() == 0xBF80);
-  std::puts("[PASS] both accum and FP8 negative");
+  float result = dq.dequantize(int24(0), uint16(0x4000), uint4(15));
+  assert(result == 0.0f);
+  std::puts("[PASS] zero accum → 0.0");
 }
 
-static void test_various_fp8_patterns() {
-  // Verify model matches reference for a sweep of FP8 values
+static void test_realistic_values() {
+  // Simulate a realistic sub-block: accum=1234, d=BF16(0.00390625)=0x3B80, sub=5
+  // result = 1234 × 0.00390625 × (1+10) = 1234 × 0.00390625 × 11 = 53.015625
   DequantUnit dq;
-  for (unsigned fp8 = 0; fp8 < 256; ++fp8) {
-    for (std::uint32_t acc : {0u, 1u, 0x7FFFFFFFu, 0x80000000u}) {
-      uint16 got = dq.dequantize(uint32(acc), uint8(fp8), uint32(0));
-      std::uint16_t expected = ref_dequant(acc, static_cast<std::uint8_t>(fp8), 0);
-      assert(got.to_int() == expected);
-    }
-  }
-  std::puts("[PASS] exhaustive FP8 sweep (256 values x 4 accum patterns)");
+  float d_val = 0.00390625f;  // 2^-8
+  uint16 d_bf16 = bf16_from_float(d_val);
+  float result = dq.dequantize(int24(1234), d_bf16, uint4(5));
+  float expected = 1234.0f * d_val * 11.0f;
+  assert(std::fabs(result - expected) < 0.1f);
+  std::puts("[PASS] realistic values");
 }
 
 int main() {
-  test_bank_scale_one();
-  test_bank_scale_zero();
-  test_sign_bit_from_accum();
-  test_negative_fp8_sign();
-  test_both_signs_negative();
-  test_various_fp8_patterns();
+  test_unit_scale();
+  test_sub_scale_multiplier();
+  test_max_sub_scale();
+  test_negative_accum();
+  test_bf16_scale_precision();
+  test_ftz_zero_accum();
+  test_realistic_values();
   std::puts("\nAll dequant tests passed.");
   return 0;
 }
