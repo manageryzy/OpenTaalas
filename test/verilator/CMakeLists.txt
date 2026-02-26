@@ -123,3 +123,11 @@ add_verilator_cosim_test(NAME rope           TOP rope_unit       TEST test_vl_ro
 # =============================================================================
 add_verilator_cosim_test(NAME vector_unit TOP vector_unit TEST test_vl_vector_unit.cpp)
 add_verilator_cosim_test(NAME layer_tile  TOP layer_tile  TEST test_vl_layer_tile.cpp)
+
+# =============================================================================
+# Phase 5: Top-Level
+# =============================================================================
+add_verilator_cosim_test(NAME embed_rom         TOP embed_rom         TEST test_vl_embed_rom.cpp)
+add_verilator_cosim_test(NAME lm_head           TOP lm_head           TEST test_vl_lm_head.cpp)
+add_verilator_cosim_test(NAME global_controller TOP global_controller TEST test_vl_global_controller.cpp)
+add_verilator_cosim_test(NAME llama_chip        TOP llama_chip        TEST test_vl_llama_chip.cpp)
