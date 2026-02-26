@@ -38,10 +38,10 @@ if(LLAMA_FOUND)
     "${CMAKE_CURRENT_SOURCE_DIR}")
   target_link_libraries(tensor_extractor PRIVATE llama ggml)
 
-  # --- C Model Forward Pass Runner ---
-  add_executable(cmodel_runner cmodel_runner_main.cpp)
-  target_include_directories(cmodel_runner PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
-  target_link_libraries(cmodel_runner PRIVATE gguf_converter_lib opentaalas_model)
+  # --- C Model Forward Pass Runner (Q3_K — disabled, superseded by llama_iq3s_forward) ---
+  # add_executable(cmodel_runner cmodel_runner_main.cpp)
+  # target_include_directories(cmodel_runner PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
+  # target_link_libraries(cmodel_runner PRIVATE gguf_converter_lib opentaalas_model)
 
   # --- Full Float Forward Pass (GGUF → logits) ---
   add_executable(llama_forward llama_forward.cpp)

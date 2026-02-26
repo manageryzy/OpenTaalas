@@ -124,20 +124,21 @@ static void test_sigmoid_lut_and_swiglu() {
 static void test_dequantize() {
   small_vpu vpu;
 
-  // Known FP8 E4M3 bit pattern: bank_scale = 0x3C = 0_0111_100
-  //   fp8_sign=0, fp8_exp=7, fp8_mant=4
-  //   fp32_exp = 7+120 = 127 = 0x7F
-  //   fp32_scale = (0<<31)|(127<<23)|(4<<20) = 0x3FC00000
-  //   With accum sign=0: combined = 0x3FC00000
-  //   result = combined >> 16 = 0x3FC0
-  uint16 r = vpu.dequantize(uint32(0x00000001), uint8(0x3C), uint32(0));
-  assert(r == 0x3FC0);
+  // accum=100, super_scale=BF16(1.0)=0x3F80, sub_scale=0 → (1+0)*100*1.0 = 100.0
+  float r = vpu.dequantize(int24(100), uint16(0x3F80), uint4(0));
+  assert(std::fabs(r - 100.0f) < 0.01f);
 
-  // Negative accum (sign bit set)
-  //   accum sign=1: combined = (1<<31) | (0x3FC00000 & 0x7FFFFFFF) = 0xBFC00000
-  //   result = 0xBFC0
-  r = vpu.dequantize(uint32(0x80000000), uint8(0x3C), uint32(0));
-  assert(r == 0xBFC0);
+  // sub_scale=1 → int_scale=3, 100*3*1.0 = 300.0
+  r = vpu.dequantize(int24(100), uint16(0x3F80), uint4(1));
+  assert(std::fabs(r - 300.0f) < 0.01f);
+
+  // Negative accum: accum=-50, sub_scale=0, d=1.0 → -50.0
+  r = vpu.dequantize(int24(-50), uint16(0x3F80), uint4(0));
+  assert(std::fabs(r - (-50.0f)) < 0.01f);
+
+  // super_scale=BF16(0.5)=0x3F00, accum=200, sub_scale=0 → 200*1*0.5 = 100.0
+  r = vpu.dequantize(int24(200), uint16(0x3F00), uint4(0));
+  assert(std::fabs(r - 100.0f) < 0.5f);
 
   std::puts("  dequantize: PASS");
 }

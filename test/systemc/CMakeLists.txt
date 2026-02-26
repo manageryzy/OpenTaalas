@@ -6,7 +6,7 @@ endif()
 
 set(_systemc_modules
   bf16_math
-  rom_bank scale_store lut_interp
+  rom_bank lut_interp
   mac_pe dequant mac_array
   codebook_decoder
   kv_cache attention_unit rmsnorm swiglu rope

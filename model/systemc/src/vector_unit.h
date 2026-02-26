@@ -2,6 +2,7 @@
 #include <opentaalas/types.h>
 #include <bf16_math.h>
 #include <array>
+#include <cstring>
 
 namespace opentaalas {
 
@@ -91,20 +92,21 @@ class vector_unit {
     return bf16_mul(silu, up_bf16);
   }
 
-  // --- Dequantization ---
+  // --- Dequantization (IQ3_S: INT24 × BF16_d × (1+2×sub_scale) → FP32) ---
 
-  inline uint16 dequantize(uint32 accum, uint8 bank_scale,
-                           uint32 /*tensor_scale*/) {
-    uint32 sign = (accum >> 31) & 1;
-    uint32 fp8 = bank_scale;
-    uint32 fp8_sign = (fp8 >> 7) & 1;
-    uint32 fp8_exp = (fp8 >> 3) & 0xF;
-    uint32 fp8_mant = fp8 & 0x7;
-    uint32 fp32_exp = fp8_exp + 120;
-    uint32 fp32_scale =
-        (fp8_sign << 31) | (fp32_exp << 23) | (fp8_mant << 20);
-    uint32 combined = (sign << 31) | (fp32_scale & 0x7FFFFFFF);
-    uint16 result = combined >> 16;
+  inline float dequantize(int24 accum, uint16 super_scale_bf16, uint4 sub_scale) {
+    int32_t int_scale = 1 + 2 * sub_scale.to_int();
+    int32_t scaled = accum.to_int() * int_scale;
+    float fp_accum = static_cast<float>(scaled);
+    float d = bf16_to_float(super_scale_bf16);
+    float result = fp_accum * d;
+    // FTZ
+    uint32_t bits;
+    std::memcpy(&bits, &result, 4);
+    if (((bits >> 23) & 0xFF) == 0) {
+      bits &= 0x80000000u;
+      std::memcpy(&result, &bits, 4);
+    }
     return result;
   }
 
