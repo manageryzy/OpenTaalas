@@ -7,3 +7,6 @@
 [submodule "third-party/systemc"]
 	path = third-party/systemc
 	url = https://github.com/accellera-official/systemc.git
+[submodule "third-party/llama.cpp"]
+	path = third-party/llama.cpp
+	url = https://github.com/ggml-org/llama.cpp.git

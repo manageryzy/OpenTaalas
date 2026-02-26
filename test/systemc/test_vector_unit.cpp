@@ -1,7 +1,9 @@
 // test_vector_unit.cpp — Tests for the VPU reference model
 #include <vector_unit.h>
+#include <bf16_math.h>
 #include <cassert>
 #include <cstdio>
+#include <cmath>
 
 using namespace opentaalas;
 
@@ -96,18 +98,25 @@ static void test_rope_tables() {
 static void test_sigmoid_lut_and_swiglu() {
   small_vpu vpu;
 
-  // Fill a few sigmoid LUT entries
-  vpu.set_sigmoid_lut(uint8(0), uint16(0x0000));
-  vpu.set_sigmoid_lut(uint8(128), uint16(0x3F00));
-  vpu.set_sigmoid_lut(uint8(255), uint16(0x3F80));
+  // Fill all sigmoid LUT entries with bf16(0.5)
+  uint16 half = bf16_from_float(0.5f);
+  for (int i = 0; i < 256; ++i)
+    vpu.set_sigmoid_lut(uint8(i), half);
 
-  // swiglu_compute returns gate_bf16 (per Kanagawa source)
-  uint16 result = vpu.swiglu_compute(uint16(0x4000), uint16(0x4100));
-  assert(result == 0x4000);
+  // swiglu_compute(gate, up) = gate * sigmoid(gate) * up
+  // gate=2.0, sigmoid=0.5 => silu=1.0, up=3.0 => 3.0
+  uint16 gate = bf16_from_float(2.0f);
+  uint16 up = bf16_from_float(3.0f);
+  uint16 result = vpu.swiglu_compute(gate, up);
+  float result_f = bf16_to_float(result);
+  assert(std::fabs(result_f - 3.0f) < 0.1f);
 
-  // Different gate value
-  result = vpu.swiglu_compute(uint16(0xBEEF), uint16(0x0000));
-  assert(result == 0xBEEF);
+  // gate=4.0, up=0.5 => silu=2.0, swiglu = 2.0 * 0.5 = 1.0
+  gate = bf16_from_float(4.0f);
+  up = bf16_from_float(0.5f);
+  result = vpu.swiglu_compute(gate, up);
+  result_f = bf16_to_float(result);
+  assert(std::fabs(result_f - 1.0f) < 0.05f);
 
   std::puts("  swiglu: PASS");
 }
@@ -136,12 +145,27 @@ static void test_dequantize() {
 static void test_residual_add() {
   small_vpu vpu;
 
-  uint16 a(0x4000);
-  uint16 b(0x4100);
-  assert(vpu.residual_add(a, b) == a);
+  // residual_add(a, b) = bf16_add(a, b)
+  // 1.0 + 2.0 = 3.0
+  uint16 a = bf16_from_float(1.0f);
+  uint16 b = bf16_from_float(2.0f);
+  uint16 result = vpu.residual_add(a, b);
+  float result_f = bf16_to_float(result);
+  assert(std::fabs(result_f - 3.0f) < 0.05f);
 
-  // Verify it always returns first argument
-  assert(vpu.residual_add(uint16(0), uint16(0xFFFF)) == 0);
+  // 0.0 + 5.0 = 5.0
+  a = bf16_from_float(0.0f);
+  b = bf16_from_float(5.0f);
+  result = vpu.residual_add(a, b);
+  result_f = bf16_to_float(result);
+  assert(std::fabs(result_f - 5.0f) < 0.05f);
+
+  // -1.0 + 1.0 = 0.0
+  a = bf16_from_float(-1.0f);
+  b = bf16_from_float(1.0f);
+  result = vpu.residual_add(a, b);
+  result_f = bf16_to_float(result);
+  assert(std::fabs(result_f - 0.0f) < 0.05f);
 
   std::puts("  residual_add: PASS");
 }

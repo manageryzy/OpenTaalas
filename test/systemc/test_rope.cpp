@@ -1,7 +1,9 @@
-// test_rope — RopeUnit<32,8> cos/sin tables, address calc, rotate_pair stub
+// test_rope — RopeUnit<32,8> cos/sin tables, address calc, rotate_pair with BF16 math
 #include <rope.h>
+#include <bf16_math.h>
 #include <cassert>
 #include <cstdio>
+#include <cmath>
 
 using namespace opentaalas;
 
@@ -28,10 +30,44 @@ int main() {
   // Original entry still intact
   assert(rope.get_cos(uint12(0), uint6(0)) == 0x3F80);
 
-  // --- rotate_pair returns x_even (stub) ---
-  uint16 result = rope.rotate_pair(
-      uint16(0xAAAA), uint16(0xBBBB), uint16(0xCCCC), uint16(0xDDDD));
-  assert(result == 0xAAAA);
+  // --- rotate_pair: x_even*cos - x_odd*sin ---
+  // cos=1.0, sin=0.0 => result = x_even*1 - x_odd*0 = x_even
+  uint16 x_even = bf16_from_float(2.0f);
+  uint16 x_odd  = bf16_from_float(3.0f);
+  uint16 cos_v  = bf16_from_float(1.0f);
+  uint16 sin_v  = bf16_from_float(0.0f);
+  uint16 result = rope.rotate_pair(x_even, x_odd, cos_v, sin_v);
+  float result_f = bf16_to_float(result);
+  assert(std::fabs(result_f - 2.0f) < 0.05f);
+
+  // cos=0.0, sin=1.0 => result = x_even*0 - x_odd*1 = -3.0
+  cos_v = bf16_from_float(0.0f);
+  sin_v = bf16_from_float(1.0f);
+  result = rope.rotate_pair(x_even, x_odd, cos_v, sin_v);
+  result_f = bf16_to_float(result);
+  assert(std::fabs(result_f - (-3.0f)) < 0.1f);
+
+  // cos=0.5, sin=0.5 => result = 2*0.5 - 3*0.5 = 1.0 - 1.5 = -0.5
+  cos_v = bf16_from_float(0.5f);
+  sin_v = bf16_from_float(0.5f);
+  result = rope.rotate_pair(x_even, x_odd, cos_v, sin_v);
+  result_f = bf16_to_float(result);
+  assert(std::fabs(result_f - (-0.5f)) < 0.1f);
+
+  // --- rotate_pair_odd: x_even*sin + x_odd*cos ---
+  // cos=1.0, sin=0.0 => result = x_even*0 + x_odd*1 = 3.0
+  cos_v = bf16_from_float(1.0f);
+  sin_v = bf16_from_float(0.0f);
+  result = rope.rotate_pair_odd(x_even, x_odd, cos_v, sin_v);
+  result_f = bf16_to_float(result);
+  assert(std::fabs(result_f - 3.0f) < 0.05f);
+
+  // cos=0.0, sin=1.0 => result = x_even*1 + x_odd*0 = 2.0
+  cos_v = bf16_from_float(0.0f);
+  sin_v = bf16_from_float(1.0f);
+  result = rope.rotate_pair_odd(x_even, x_odd, cos_v, sin_v);
+  result_f = bf16_to_float(result);
+  assert(std::fabs(result_f - 2.0f) < 0.05f);
 
   std::printf("PASS: test_rope\n");
   return 0;

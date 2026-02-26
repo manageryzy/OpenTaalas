@@ -5,6 +5,7 @@ if(NOT (SYSTEMC_FOUND AND AC_TYPES_FOUND))
 endif()
 
 set(_systemc_modules
+  bf16_math
   rom_bank scale_store lut_interp
   mac_pe dequant mac_array
   kv_cache attention_unit rmsnorm swiglu rope
@@ -24,3 +25,15 @@ foreach(_mod ${_systemc_modules})
     TIMEOUT 30
   )
 endforeach()
+
+# GGUF converter test (needs tools/ include path, no ggml dependency for unit test)
+if(LLAMA_FOUND)
+  add_executable(test_gguf_converter test_gguf_converter.cpp)
+  target_include_directories(test_gguf_converter PRIVATE
+    "${CMAKE_SOURCE_DIR}/tools")
+  add_test(NAME systemc_gguf_converter COMMAND test_gguf_converter)
+  set_tests_properties(systemc_gguf_converter PROPERTIES
+    LABELS "systemc"
+    TIMEOUT 30
+  )
+endif()

@@ -31,11 +31,12 @@ endif()
 # --- Subdirectories ---
 enable_testing()
 add_subdirectory(rtl)
-add_subdirectory(test)
 add_subdirectory(flow)
 if(SYSTEMC_FOUND AND AC_TYPES_FOUND)
   add_subdirectory(model)
+  add_subdirectory(tools)
 endif()
+add_subdirectory(test)
 
 # --- Summary ---
 message(STATUS "")

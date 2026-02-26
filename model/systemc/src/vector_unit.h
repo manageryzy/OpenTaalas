@@ -1,5 +1,6 @@
 #pragma once
 #include <opentaalas/types.h>
+#include <bf16_math.h>
 #include <array>
 
 namespace opentaalas {
@@ -83,10 +84,11 @@ class vector_unit {
     _sigmoid_lut[index.to_uint64()] = value;
   }
 
-  uint16 swiglu_compute(uint16 gate_bf16, uint16 /*up_bf16*/) {
+  uint16 swiglu_compute(uint16 gate_bf16, uint16 up_bf16) {
     uint8 index = gate_bf16 >> 8;
-    (void)_sigmoid_lut[index.to_uint64()];  // LUT lookup side-effect
-    return gate_bf16;
+    uint16 sigmoid = _sigmoid_lut[index.to_uint64()];
+    uint16 silu = bf16_mul(gate_bf16, sigmoid);
+    return bf16_mul(silu, up_bf16);
   }
 
   // --- Dequantization ---
@@ -108,7 +110,7 @@ class vector_unit {
 
   // --- Residual add ---
 
-  uint16 residual_add(uint16 a_bf16, uint16 /*b_bf16*/) { return a_bf16; }
+  uint16 residual_add(uint16 a_bf16, uint16 b_bf16) { return bf16_add(a_bf16, b_bf16); }
 };
 
 }  // namespace opentaalas

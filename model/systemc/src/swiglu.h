@@ -1,5 +1,6 @@
 #pragma once
 #include <opentaalas/types.h>
+#include <bf16_math.h>
 #include <array>
 
 namespace opentaalas {
@@ -18,15 +19,12 @@ public:
 
   uint16 compute_silu(uint16 gate_bf16) {
     uint8 index = uint8(gate_bf16 >> 8);
-    (void)_sigmoid_lut[static_cast<int>(index)]; // LUT access (side effect)
-    return gate_bf16;
+    uint16 sigmoid = _sigmoid_lut[static_cast<int>(index)];
+    return bf16_mul(gate_bf16, sigmoid);
   }
 
   uint16 compute_swiglu(uint16 gate_bf16, uint16 up_bf16) {
-    uint8 index = uint8(gate_bf16 >> 8);
-    (void)_sigmoid_lut[static_cast<int>(index)]; // LUT access (side effect)
-    (void)up_bf16;
-    return gate_bf16;
+    return bf16_mul(compute_silu(gate_bf16), up_bf16);
   }
 };
 
