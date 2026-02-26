@@ -1,78 +1,79 @@
 #pragma once
 #include <opentaalas/types.h>
-#include "dequant.h"
-#include <cstdint>
-#include <vector>
+#include <mac_pe.h>
+#include <dequant.h>
+#include <rom_bank.h>
+#include <codebook_decoder.h>
 
 namespace opentaalas {
 
-template <int ROWS = 4096, int COLS = 8192>
+// IQ3_S MAC Array GEMV Engine
+// Composes: 4x MacPE + RomBank + CodebookDecoder + DequantUnit + FP32 accumulators
 class MacArray {
  public:
-  MacArray()
-      : _weights(static_cast<size_t>(ROWS) * COLS, uint3(0)),
-        _bank_scale(0),
-        _tensor_scale(0) {
-    for (int i = 0; i < 4; ++i) _accum[i] = int32(0);
+  MacArray() {
+    for (int i = 0; i < 4; ++i) _fp32_accum[i] = 0.0f;
   }
 
-  int32 mac_step(int pe_id, uint3 weight, int8 activation) {
-    int32 a = activation;
-    int32 product(0);
-    int w = weight.to_int();
-
-    if (w == 0)
-      product = int32(0);
-    else if (w == 1)
-      product = a;
-    else if (w == 2)
-      product = a << 1;
-    else if (w == 3)
-      product = (a << 1) + a;
-    else if (w == 4)
-      product = int32(0) - (a << 2);
-    else if (w == 5)
-      product = int32(0) - ((a << 1) + a);
-    else if (w == 6)
-      product = int32(0) - (a << 1);
-    else
-      product = int32(0) - a;
-
-    _accum[pe_id] = _accum[pe_id] + product;
-    return _accum[pe_id];
+  // --- Weight ROM access ---
+  void write_block(int block_addr, const IQ3SBlock& blk) {
+    _rom.write_block(block_addr, blk);
   }
 
-  uint3 read_weight(uint12 row, uint13 col) const {
-    return _weights[static_cast<size_t>(row.to_int()) * COLS + col.to_int()];
+  IQ3SBlock read_block(int block_addr) const {
+    return _rom.read_block(block_addr);
   }
 
-  void write_weight(uint12 row, uint13 col, uint3 value) {
-    _weights[static_cast<size_t>(row.to_int()) * COLS + col.to_int()] = value;
+  // --- MAC operations ---
+  int24 mac_step(int pe_id, uint4 magnitude, uint1 sign, int8 activation) {
+    return _pe[pe_id].mac(magnitude, sign, activation);
   }
 
-  uint16 read_output(int pe_id) const {
-    auto acc_s = static_cast<std::int32_t>(_accum[pe_id].to_int64());
-    uint32 accum_u(static_cast<std::uint32_t>(acc_s));
-    return _dequant.dequantize(accum_u, _bank_scale, _tensor_scale);
+  int24 read_accum(int pe_id) const {
+    return _pe[pe_id].read_accum();
   }
 
-  int32 read_accum(int pe_id) const { return _accum[pe_id]; }
+  // --- Dequantization ---
+  float read_dequant(int pe_id, uint16 super_scale_bf16, uint4 sub_scale) const {
+    return _dequant.dequantize(_pe[pe_id].read_accum(), super_scale_bf16, sub_scale);
+  }
 
-  void set_bank_scale(uint8 value) { _bank_scale = value; }
-  void set_tensor_scale(uint32 value) { _tensor_scale = value; }
+  // --- FP32 row accumulator ---
+  void accumulate_fp32(int pe_id, float partial) {
+    _fp32_accum[pe_id] += partial;
+  }
 
-  void clear_pe(int pe_id) { _accum[pe_id] = int32(0); }
+  float read_fp32_accum(int pe_id) const {
+    return _fp32_accum[pe_id];
+  }
+
+  // --- Codebook decode ---
+  void decode_codebook(uint9 index, uint4& m0, uint4& m1, uint4& m2, uint4& m3) const {
+    _codebook.decode(index, m0, m1, m2, m3);
+  }
+
+  // --- Control ---
+  void clear_pe(int pe_id) {
+    _pe[pe_id].clear();
+  }
+
+  void clear_fp32(int pe_id) {
+    _fp32_accum[pe_id] = 0.0f;
+  }
 
   void clear_all() {
-    for (int i = 0; i < 4; ++i) _accum[i] = int32(0);
+    for (int i = 0; i < 4; ++i) {
+      _pe[i].clear();
+      _fp32_accum[i] = 0.0f;
+    }
   }
 
  private:
-  int32 _accum[4];
-  std::vector<uint3> _weights;
-  uint8 _bank_scale;
-  uint32 _tensor_scale;
+  MacPE _pe[4];
+  RomBank _rom;
+  CodebookDecoder _codebook;
   DequantUnit _dequant;
+  float _fp32_accum[4];
 };
 
 }  // namespace opentaalas
