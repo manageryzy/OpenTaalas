@@ -71,6 +71,9 @@ int main(int argc, char** argv) {
     tokens.resize(n_tokens);
 
     fprintf(stderr, "Tokens: %d, Vocab: %d, Embd: %d\n", n_tokens, n_vocab, n_embd);
+    fprintf(stderr, "Token IDs:");
+    for (int i = 0; i < n_tokens; i++) fprintf(stderr, " %d", tokens[i]);
+    fprintf(stderr, "\n");
 
     // Decode
     struct llama_batch batch = llama_batch_get_one(tokens.data(), n_tokens);

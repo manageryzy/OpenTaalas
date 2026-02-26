@@ -42,6 +42,15 @@ if(LLAMA_FOUND)
   add_executable(cmodel_runner cmodel_runner_main.cpp)
   target_include_directories(cmodel_runner PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
   target_link_libraries(cmodel_runner PRIVATE gguf_converter_lib opentaalas_model)
+
+  # --- Full Float Forward Pass (GGUF → logits) ---
+  add_executable(llama_forward llama_forward.cpp)
+  target_include_directories(llama_forward PRIVATE
+    "${_llama_src}/include"
+    "${_llama_src}/ggml/include"
+    "${_llama_src}/ggml/src"
+    "${CMAKE_CURRENT_SOURCE_DIR}")
+  target_link_libraries(llama_forward PRIVATE ggml)
 endif()
 
 # --- Tensor Comparison Tool (standalone, no dependencies) ---
