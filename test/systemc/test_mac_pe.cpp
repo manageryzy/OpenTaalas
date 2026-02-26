@@ -1,93 +1,101 @@
-// test_mac_pe.cpp — Tests for INT3xINT8 MAC Processing Element
+// test_mac_pe.cpp — Tests for IQ3_S codebook MAC Processing Element
+// New interface: mac(uint4 magnitude, uint1 sign, int8 activation) → int24
+// Magnitudes are from codebook: {1,3,5,7,9,11,13,15} = (2k+1) where k=0..7
 #include <mac_pe.h>
 #include <cassert>
 #include <cstdio>
 
 using namespace opentaalas;
 
-static void test_all_weights_act1() {
-  // weight 0-7 with activation=1 should produce 0,1,2,3,-4,-3,-2,-1
-  const int expected[] = {0, 1, 2, 3, -4, -3, -2, -1};
-  for (int w = 0; w < 8; ++w) {
+static void test_all_magnitudes_positive() {
+  // magnitude × activation with sign=0 (positive)
+  // mag=1: 1×10=10, mag=3: 3×10=30, ..., mag=15: 15×10=150
+  const int mags[] = {1, 3, 5, 7, 9, 11, 13, 15};
+  for (int m : mags) {
     MacPE pe;
-    int32 result = pe.mac(uint3(w), int8(1));
-    assert(result.to_int64() == expected[w]);
+    int24 result = pe.mac(uint4(m), uint1(0), int8(10));
+    assert(result.to_int64() == m * 10);
   }
-  std::puts("[PASS] all weights with activation=1");
+  std::puts("[PASS] all magnitudes with positive sign, act=10");
 }
 
-static void test_all_weights_act10() {
-  // activation=10: products should be 0,10,20,30,-40,-30,-20,-10
-  const int expected[] = {0, 10, 20, 30, -40, -30, -20, -10};
-  for (int w = 0; w < 8; ++w) {
+static void test_all_magnitudes_negative() {
+  // sign=1 negates the product
+  const int mags[] = {1, 3, 5, 7, 9, 11, 13, 15};
+  for (int m : mags) {
     MacPE pe;
-    int32 result = pe.mac(uint3(w), int8(10));
-    assert(result.to_int64() == expected[w]);
+    int24 result = pe.mac(uint4(m), uint1(1), int8(10));
+    assert(result.to_int64() == -(m * 10));
   }
-  std::puts("[PASS] all weights with activation=10");
+  std::puts("[PASS] all magnitudes with negative sign, act=10");
 }
 
 static void test_negative_activation() {
-  // activation=-5: products should be 0,-5,-10,-15,20,15,10,5
-  const int expected[] = {0, -5, -10, -15, 20, 15, 10, 5};
-  for (int w = 0; w < 8; ++w) {
-    MacPE pe;
-    int32 result = pe.mac(uint3(w), int8(-5));
-    assert(result.to_int64() == expected[w]);
-  }
-  std::puts("[PASS] negative activation (-5)");
+  // mag=5, sign=0, act=-7: product = 5 × (-7) = -35
+  MacPE pe;
+  int24 result = pe.mac(uint4(5), uint1(0), int8(-7));
+  assert(result.to_int64() == -35);
+
+  // mag=5, sign=1, act=-7: product = -(5 × (-7)) = 35
+  MacPE pe2;
+  int24 result2 = pe2.mac(uint4(5), uint1(1), int8(-7));
+  assert(result2.to_int64() == 35);
+  std::puts("[PASS] negative activation");
 }
 
-static void test_accumulation() {
+static void test_accumulation_32_weights() {
+  // Simulate a 32-weight sub-block: all mag=1, sign=0, act=1
+  // Expected: 32 × 1 × 1 = 32
   MacPE pe;
-  // MAC weight=1, act=10 three times -> 10, 20, 30
-  pe.mac(uint3(1), int8(10));
-  pe.mac(uint3(1), int8(10));
-  int32 result = pe.mac(uint3(1), int8(10));
-  assert(result.to_int64() == 30);
+  for (int i = 0; i < 32; ++i)
+    pe.mac(uint4(1), uint1(0), int8(1));
+  assert(pe.read_accum().to_int64() == 32);
+  std::puts("[PASS] accumulation over 32 weights");
+}
 
-  // MAC weight=7 (=-1), act=10 -> 30 + (-10) = 20
-  result = pe.mac(uint3(7), int8(10));
-  assert(result.to_int64() == 20);
-
-  // MAC weight=4 (=-4), act=3 -> 20 + (-12) = 8
-  result = pe.mac(uint3(4), int8(3));
-  assert(result.to_int64() == 8);
-
-  std::puts("[PASS] accumulation across multiple MACs");
+static void test_worst_case_accumulation() {
+  // Worst case: 32 × mag=15 × act=127 = 60960
+  MacPE pe;
+  for (int i = 0; i < 32; ++i)
+    pe.mac(uint4(15), uint1(0), int8(127));
+  assert(pe.read_accum().to_int64() == 60960);
+  // Fits in INT24 (max 8388607)
+  std::puts("[PASS] worst case accumulation (60960 fits INT24)");
 }
 
 static void test_clear() {
   MacPE pe;
-  pe.mac(uint3(3), int8(100));
-  assert(pe.read_accum().to_int64() == 300);
-
+  pe.mac(uint4(15), uint1(0), int8(100));
+  assert(pe.read_accum().to_int64() == 1500);
   pe.clear();
   assert(pe.read_accum().to_int64() == 0);
-
-  // Verify MAC works after clear
-  int32 result = pe.mac(uint3(2), int8(7));
-  assert(result.to_int64() == 14);
-
+  pe.mac(uint4(3), uint1(0), int8(7));
+  assert(pe.read_accum().to_int64() == 21);
   std::puts("[PASS] clear resets accumulator");
 }
 
-static void test_weight_zero_no_effect() {
+static void test_shift_and_add_correctness() {
+  // Verify (2k+1)×a = (k<<1)×a + a for all k=0..7
   MacPE pe;
-  pe.mac(uint3(3), int8(42));
-  int32 before = pe.read_accum();
-  pe.mac(uint3(0), int8(127));
-  assert(pe.read_accum().to_int64() == before.to_int64());
-  std::puts("[PASS] weight=0 does not change accumulator");
+  for (int k = 0; k < 8; ++k) {
+    int mag = 2 * k + 1;
+    for (int a : {1, -1, 42, -128, 127}) {
+      pe.clear();
+      int24 result = pe.mac(uint4(mag), uint1(0), int8(a));
+      assert(result.to_int64() == mag * a);
+    }
+  }
+  std::puts("[PASS] shift-and-add matches mag×act for all k");
 }
 
 int main() {
-  test_all_weights_act1();
-  test_all_weights_act10();
+  test_all_magnitudes_positive();
+  test_all_magnitudes_negative();
   test_negative_activation();
-  test_accumulation();
+  test_accumulation_32_weights();
+  test_worst_case_accumulation();
   test_clear();
-  test_weight_zero_no_effect();
+  test_shift_and_add_correctness();
   std::puts("\nAll mac_pe tests passed.");
   return 0;
 }
