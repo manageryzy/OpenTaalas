@@ -51,6 +51,15 @@ if(LLAMA_FOUND)
     "${_llama_src}/ggml/src"
     "${CMAKE_CURRENT_SOURCE_DIR}")
   target_link_libraries(llama_forward PRIVATE ggml)
+
+  # --- Quantized Forward Pass (INT3×INT8 MAC + FP8 dequant) ---
+  add_executable(llama_quantized_forward llama_quantized_forward.cpp)
+  target_include_directories(llama_quantized_forward PRIVATE
+    "${_llama_src}/include"
+    "${_llama_src}/ggml/include"
+    "${_llama_src}/ggml/src"
+    "${CMAKE_CURRENT_SOURCE_DIR}")
+  target_link_libraries(llama_quantized_forward PRIVATE ggml)
 endif()
 
 # --- Tensor Comparison Tool (standalone, no dependencies) ---
