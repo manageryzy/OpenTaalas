@@ -8,6 +8,7 @@ set(_systemc_modules
   bf16_math
   rom_bank scale_store lut_interp
   mac_pe dequant mac_array
+  codebook_decoder
   kv_cache attention_unit rmsnorm swiglu rope
   vector_unit layer_tile
   embed_rom lm_head global_controller llama_chip
