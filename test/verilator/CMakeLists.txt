@@ -70,6 +70,7 @@ function(add_verilator_cosim_test)
   target_include_directories(${_target} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
   verilate(${_target}
+    PREFIX V${ARG_TOP}
     TOP_MODULE ${ARG_TOP}
     SOURCES
       ${_types_sv}
@@ -88,3 +89,8 @@ function(add_verilator_cosim_test)
     TIMEOUT 30
   )
 endfunction()
+
+# =============================================================================
+# Phase 1: Compute Core
+# =============================================================================
+add_verilator_cosim_test(NAME mac_pe TOP mac_pe TEST test_vl_mac_pe.cpp)
