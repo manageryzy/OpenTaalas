@@ -27,6 +27,26 @@ foreach(_mod ${_systemc_modules})
   )
 endforeach()
 
+# Weight generator test (header-only, no SystemC/ac_types dependency)
+add_executable(test_weight_generator test_weight_generator.cpp)
+target_include_directories(test_weight_generator PRIVATE
+  "${CMAKE_SOURCE_DIR}/tools")
+add_test(NAME systemc_weight_generator COMMAND test_weight_generator)
+set_tests_properties(systemc_weight_generator PROPERTIES
+  LABELS "systemc"
+  TIMEOUT 30
+)
+
+# ROM SV generator test (header-only, no SystemC/ac_types dependency)
+add_executable(test_rom_sv_generator test_rom_sv_generator.cpp)
+target_include_directories(test_rom_sv_generator PRIVATE
+  "${CMAKE_SOURCE_DIR}/tools")
+add_test(NAME systemc_rom_sv_generator COMMAND test_rom_sv_generator)
+set_tests_properties(systemc_rom_sv_generator PROPERTIES
+  LABELS "systemc"
+  TIMEOUT 30
+)
+
 # GGUF converter test (needs tools/ include path, no ggml dependency for unit test)
 if(LLAMA_FOUND)
   add_executable(test_gguf_converter test_gguf_converter.cpp)
