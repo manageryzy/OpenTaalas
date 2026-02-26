@@ -117,3 +117,9 @@ add_verilator_cosim_test(NAME attention_unit  TOP attention_unit  TEST test_vl_a
 add_verilator_cosim_test(NAME rmsnorm        TOP rmsnorm_unit    TEST test_vl_rmsnorm.cpp)
 add_verilator_cosim_test(NAME swiglu         TOP swiglu_unit     TEST test_vl_swiglu.cpp)
 add_verilator_cosim_test(NAME rope           TOP rope_unit       TEST test_vl_rope.cpp)
+
+# =============================================================================
+# Phase 4: Integration
+# =============================================================================
+add_verilator_cosim_test(NAME vector_unit TOP vector_unit TEST test_vl_vector_unit.cpp)
+add_verilator_cosim_test(NAME layer_tile  TOP layer_tile  TEST test_vl_layer_tile.cpp)
