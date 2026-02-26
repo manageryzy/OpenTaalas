@@ -67,6 +67,27 @@ static void test_gt() {
   std::puts("[PASS] bf16_gt");
 }
 
+static void test_fp16_to_bf16() {
+  // FP16 1.0 = 0x3C00: sign=0, exp=15, mant=0
+  // BF16 1.0 = 0x3F80: sign=0, exp=127, mant=0
+  assert(opentaalas::fp16_to_bf16(0x3C00).to_int() == 0x3F80);
+
+  // FP16 -1.0 = 0xBC00 → BF16 -1.0 = 0xBF80
+  assert(opentaalas::fp16_to_bf16(0xBC00).to_int() == 0xBF80);
+
+  // FP16 0.5 = 0x3800: sign=0, exp=14, mant=0
+  // BF16: exp=14+112=126, mant=0 → 0x3F00
+  assert(opentaalas::fp16_to_bf16(0x3800).to_int() == 0x3F00);
+
+  // FP16 subnormal → FTZ to 0
+  assert(opentaalas::fp16_to_bf16(0x0001).to_int() == 0x0000);
+
+  // FP16 negative subnormal → FTZ to -0
+  assert(opentaalas::fp16_to_bf16(0x8001).to_int() == 0x8000);
+
+  std::puts("[PASS] fp16_to_bf16 conversion");
+}
+
 int main() {
   test_roundtrip();
   test_add();
@@ -77,6 +98,7 @@ int main() {
   test_rsqrt();
   test_div();
   test_gt();
+  test_fp16_to_bf16();
   std::puts("\nAll bf16_math tests passed.");
   return 0;
 }

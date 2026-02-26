@@ -17,6 +17,10 @@ namespace opentaalas {
   using uint30 = ac_int<30, false>;
   using uint32 = ac_int<32, false>;
   using int8   = ac_int<8, true>;
+  using uint1  = ac_int<1, false>;
+  using uint9  = ac_int<9, false>;
+  using int24  = ac_int<24, true>;
+  using uint24 = ac_int<24, false>;
   using int32  = ac_int<32, true>;
   using bf16_t = ac_int<16, false>;
   using fp32_t = ac_int<32, false>;
