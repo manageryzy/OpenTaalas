@@ -15,6 +15,8 @@ endif()
 
 find_package(verilator QUIET)
 if(verilator_FOUND)
+  find_program(VERILATOR_BIN NAMES verilator_bin verilator
+    HINTS "${VERILATOR_ROOT}/bin")
   set(VERILATOR_FOUND TRUE CACHE BOOL "Verilator found" FORCE)
   message(STATUS "Found Verilator: ${VERILATOR_BIN}")
 else()

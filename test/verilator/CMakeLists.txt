@@ -59,8 +59,8 @@ function(add_verilator_cosim_test)
   set(_types_sv "${_gen_dir}/${ARG_NAME}${ARG_TOP}_types.sv")
   set(_top_sv   "${_gen_dir}/${ARG_NAME}${ARG_TOP}.sv")
 
-  if(NOT EXISTS "${_top_sv}")
-    message(STATUS "Skipping verilator_cosim_${ARG_NAME}: ${_top_sv} not found")
+  if(NOT EXISTS "${_top_sv}" OR NOT EXISTS "${_types_sv}")
+    message(STATUS "Skipping verilator_cosim_${ARG_NAME}: generated SV not found")
     return()
   endif()
 
