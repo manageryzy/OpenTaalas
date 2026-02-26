@@ -23,6 +23,7 @@ if(LLAMA_FOUND)
   target_include_directories(gguf_converter_lib PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}"
     "${_llama_src}/ggml/include"
+    "${_llama_src}/ggml/src"
     "${_llama_src}/include")
   target_link_libraries(gguf_converter_lib PUBLIC ggml)
 

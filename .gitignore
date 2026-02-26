@@ -52,3 +52,5 @@ __pycache__/
 # Keep git keep for rtl/generated
 rtl/generated/*
 !.gitkeep
+models/
+*.gguf

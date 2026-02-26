@@ -1,6 +1,7 @@
 #include "gguf_converter.h"
 #include "ggml.h"
 #include "gguf.h"
+#include "ggml-quants.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -182,6 +183,21 @@ std::vector<ConvertedTensor> convert_gguf(const std::string& gguf_path) {
         if (type == GGML_TYPE_Q3_K) {
             result.push_back(convert_q3k_tensor(name, tensor->data, n_elements, ne0, ne1));
             std::fprintf(stderr, "  [%ld] %s: Q3_K [%ld x %ld] → converted\n",
+                         (long)i, name, (long)ne1, (long)ne0);
+        } else if (type == GGML_TYPE_Q6_K) {
+            // Dequantize Q6_K to float (used for output/LM head weight)
+            ConvertedTensor ct;
+            ct.name = name;
+            ct.rows = ne1;
+            ct.cols = ne0;
+            ct.is_quantized = false;
+            ct.tensor_scale = 0.0f;
+            ct.float_data.resize(n_elements);
+            dequantize_row_q6_K(
+                reinterpret_cast<const block_q6_K*>(tensor->data),
+                ct.float_data.data(), n_elements);
+            result.push_back(std::move(ct));
+            std::fprintf(stderr, "  [%ld] %s: Q6_K [%ld x %ld] → dequantized to F32\n",
                          (long)i, name, (long)ne1, (long)ne0);
         } else {
             // Non-quantized tensor (norms, embeddings in F32/F16)
