@@ -13,12 +13,6 @@ include(FindChiselTools)
 include(FindKanagawaCompiler)
 include(FindORFS)
 
-# --- Verilator (optional, for lint tests) ---
-find_program(VERILATOR_BIN verilator)
-if(VERILATOR_BIN)
-  message(STATUS "Found Verilator: ${VERILATOR_BIN}")
-endif()
-
 # --- SystemC + ac_types (for reference models) ---
 include(FindACTypes)
 if(AC_TYPES_FOUND)
@@ -27,6 +21,11 @@ if(AC_TYPES_FOUND)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
   include(FindSystemC)
 endif()
+
+# --- Verilator (optional, for lint + co-sim tests) ---
+# Must come after SystemC block so CXX is likely already enabled.
+# FindVerilator.cmake enables CXX itself if needed (verilator-config.cmake requires it).
+include(FindVerilator)
 
 # --- Subdirectories ---
 enable_testing()

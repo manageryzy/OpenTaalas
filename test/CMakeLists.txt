@@ -115,3 +115,8 @@ endif()
 if(SYSTEMC_FOUND AND AC_TYPES_FOUND)
   add_subdirectory(systemc)
 endif()
+
+# =============================================================================
+# Verilator co-simulation tests
+# =============================================================================
+add_subdirectory(verilator)
