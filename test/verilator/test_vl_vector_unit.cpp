@@ -1,9 +1,9 @@
 // test_vl_vector_unit.cpp — Verilator co-simulation tests for vector_unit
 // Mirrors test/systemc/test_vector_unit.cpp against the Kanagawa-generated RTL.
 //
-// STUB BEHAVIOR (matches Kanagawa source):
-//   - swiglu_compute: reads sigmoid LUT but returns gate_bf16 unchanged
-//   - residual_add: returns a_bf16 unchanged
+// Tests real BF16 arithmetic:
+//   - swiglu_compute: sigmoid_lut[gate>>8] * gate * up
+//   - residual_add: BF16 add(a, b)
 
 #include "kanagawa_harness.h"
 #include "Vvector_unit.h"
@@ -311,39 +311,43 @@ static void test_rope_tables() {
   std::puts("[PASS] rope_tables: set/get cos+sin at (0,0) and (31,63), overwrite");
 }
 
-static void test_swiglu_stub() {
+static void test_swiglu() {
   Harness h;
   h.reset();
 
-  // Fill sigmoid LUT (required — swiglu reads it internally)
+  // Fill sigmoid LUT with 0x3F00 (BF16 0.5) — sigmoid(x) = 0.5 for all x
   for (int i = 0; i < 256; ++i)
     call_set_sigmoid_lut(h, static_cast<uint8_t>(i), 0x3F00);
 
-  // Stub returns gate_bf16 unchanged regardless of up_bf16
+  // swiglu(gate, up) = gate * sigmoid(gate) * up = gate * 0.5 * up
+  // gate=2.0(0x4000), up=3.0(0x4040): 2.0*0.5*3.0 = 3.0 = 0x4040
   uint16_t r1 = call_swiglu_compute(h, 0x4000, 0x4040);
-  assert(r1 == 0x4000);
+  assert(r1 == 0x4040);
 
+  // gate=4.0(0x4080), up=0.5(0x3F00): 4.0*0.5*0.5 = 1.0 = 0x3F80
   uint16_t r2 = call_swiglu_compute(h, 0x4080, 0x3F00);
-  assert(r2 == 0x4080);
+  assert(r2 == 0x3F80);
 
-  std::puts("[PASS] swiglu_compute (stub: returns gate_bf16)");
+  std::puts("[PASS] swiglu_compute (real: gate*sigmoid*up)");
 }
 
-static void test_residual_add_stub() {
+static void test_residual_add() {
   Harness h;
   h.reset();
 
-  // Stub returns a_bf16 unchanged regardless of b_bf16
+  // add(1.0, 2.0) = 3.0: 0x3F80 + 0x4000 = 0x4040
   uint16_t r1 = call_residual_add(h, 0x3F80, 0x4000);
-  assert(r1 == 0x3F80);
+  assert(r1 == 0x4040);
 
+  // add(4.0, 0.5) = 4.5: 0x4080 + 0x3F00 = 0x4090
   uint16_t r2 = call_residual_add(h, 0x4080, 0x3F00);
-  assert(r2 == 0x4080);
+  assert(r2 == 0x4090);
 
+  // add(0.0, x) = x: zero exponent returns b_bf16
   uint16_t r3 = call_residual_add(h, 0x0000, 0xBEEF);
-  assert(r3 == 0x0000);
+  assert(r3 == 0xBEEF);
 
-  std::puts("[PASS] residual_add (stub: returns a_bf16)");
+  std::puts("[PASS] residual_add (real: BF16 add)");
 }
 
 int main() {
@@ -352,8 +356,8 @@ int main() {
   test_gamma_pre_mlp();
   test_rsqrt_lut();
   test_rope_tables();
-  test_swiglu_stub();
-  test_residual_add_stub();
+  test_swiglu();
+  test_residual_add();
   std::puts("\nAll vector_unit Verilator co-sim tests passed.");
   return 0;
 }

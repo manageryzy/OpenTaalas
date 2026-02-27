@@ -623,13 +623,13 @@ static uint32_t vpu_rmsnorm_get_sum(LayerHarness& h) {
       d->vpu_rmsnorm_get_sum_empty_out, d->vpu_rmsnorm_get_sum_result_out);
 }
 
-static uint16_t vpu_dequantize(LayerHarness& h, uint32_t accum,
-                                uint8_t bank_scale, uint32_t tensor_scale) {
+static uint16_t vpu_dequantize(LayerHarness& h, int32_t accum,
+                                uint16_t super_scale_bf16, uint8_t sub_scale) {
   auto* d = h.dut.get();
   h.wait_ready(d->vpu_dequantize_rdy_out);
-  d->vpu_dequantize_accum_in = accum;
-  d->vpu_dequantize_bank_scale_in = bank_scale;
-  d->vpu_dequantize_tensor_scale_in = tensor_scale;
+  d->vpu_dequantize_accum_in = static_cast<uint32_t>(accum) & 0xFFFFFF;
+  d->vpu_dequantize_super_scale_bf16_in = super_scale_bf16;
+  d->vpu_dequantize_sub_scale_in = sub_scale & 0xF;
   d->vpu_dequantize_valid_in = 1; h.tick();
   d->vpu_dequantize_valid_in = 0;
   return h.read_fifo(d->vpu_dequantize_rden_in,

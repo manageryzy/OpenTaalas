@@ -534,13 +534,13 @@ static uint16_t vpu_rope_get_sin(LayerHarness& h, uint16_t pos, uint8_t freq) {
       d->vpu_rope_get_sin_empty_out, d->vpu_rope_get_sin_result_out);
 }
 
-static uint16_t vpu_dequantize(LayerHarness& h, uint32_t accum,
-                                uint8_t bank_scale, uint32_t tensor_scale) {
+static uint16_t vpu_dequantize(LayerHarness& h, int32_t accum,
+                                uint16_t super_scale_bf16, uint8_t sub_scale) {
   auto* d = h.dut.get();
   h.wait_ready(d->vpu_dequantize_rdy_out);
-  d->vpu_dequantize_accum_in = accum;
-  d->vpu_dequantize_bank_scale_in = bank_scale;
-  d->vpu_dequantize_tensor_scale_in = tensor_scale;
+  d->vpu_dequantize_accum_in = static_cast<uint32_t>(accum) & 0xFFFFFF;
+  d->vpu_dequantize_super_scale_bf16_in = super_scale_bf16;
+  d->vpu_dequantize_sub_scale_in = sub_scale & 0xF;
   d->vpu_dequantize_valid_in = 1; h.tick();
   d->vpu_dequantize_valid_in = 0;
   return h.read_fifo(d->vpu_dequantize_rden_in,
@@ -1201,9 +1201,7 @@ static void test_phase1_manual_forward_pass() {
     std::vector<uint16_t> residual1(DIM);
     for (int i = 0; i < DIM; i++) {
       uint16_t rtl_r = vpu_residual_add(h, input[i], o_vec_bf16[i]);
-      // RTL residual_add is a STUB: returns a_bf16 unchanged (no addition).
-      // Match stub behavior for comparison.
-      uint16_t ref_r_val = input[i];
+      uint16_t ref_r_val = ref.vpu.residual_add(input[i], o_vec_bf16[i]);
       residual1[i] = rtl_r;
       char lbl[64];
       std::snprintf(lbl, sizeof(lbl), "residual1[%d]", i);
@@ -1292,8 +1290,7 @@ static void test_phase1_manual_forward_pass() {
         uint16_t up_bf16 = norm_pre_mlp[(i + 1) % DIM];
 
         uint16_t rtl_sw = vpu_swiglu_compute(h, gate_bf16, up_bf16);
-        // RTL swiglu_compute is a STUB: returns gate_bf16 unchanged.
-        uint16_t ref_sw_val = gate_bf16;
+        uint16_t ref_sw_val = ref.vpu.swiglu_compute(gate_bf16, up_bf16);
         swiglu_out[i] = rtl_sw;
         char lbl[64];
         std::snprintf(lbl, sizeof(lbl), "swiglu[%d]", i);
@@ -1334,8 +1331,7 @@ static void test_phase1_manual_forward_pass() {
         // Use residual1 + norm_pre_mlp as proxy for residual1 + down_vec
         for (int i = 0; i < DIM; i++) {
           uint16_t rtl_r2 = vpu_residual_add(h, residual1[i], norm_pre_mlp[i]);
-          // RTL residual_add is a STUB: returns a_bf16 unchanged.
-          uint16_t ref_r2_val = residual1[i];
+          uint16_t ref_r2_val = ref.vpu.residual_add(residual1[i], norm_pre_mlp[i]);
           char lbl[64];
           std::snprintf(lbl, sizeof(lbl), "residual2[%d]", i);
           if (!check_bf16(lbl, rtl_r2, ref_r2_val))
