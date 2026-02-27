@@ -201,3 +201,38 @@ if(_layer_all_found AND EXISTS "${_wrapper_sv}")
     TIMEOUT 120
   )
 endif()
+
+# =============================================================================
+# Phase 7: End-to-End Layer Verification (RTL vs SystemC lockstep)
+# Requires both Verilator and SystemC/ac_types for dual-model comparison.
+# =============================================================================
+if(_layer_all_found AND EXISTS "${_wrapper_sv}" AND SYSTEMC_FOUND AND AC_TYPES_FOUND)
+  set(_e2e_target test_vl_layer_e2e)
+
+  add_executable(${_e2e_target} test_vl_layer_e2e.cpp)
+  target_include_directories(${_e2e_target} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/tools
+  )
+  target_link_libraries(${_e2e_target} PRIVATE opentaalas_model)
+
+  verilate(${_e2e_target}
+    PREFIX Vtransformer_layer_wrapper
+    TOP_MODULE transformer_layer_wrapper
+    SOURCES
+      ${_layer_sv_sources}
+      ${KANAGAWA_RUNTIME_SV}
+      ${_wrapper_sv}
+    VERILATOR_ARGS
+      -Wno-lint -Wno-UNOPTFLAT -Wno-TIMESCALEMOD -Wno-WIDTHCONCAT -DSIMULATION
+  )
+
+  add_test(
+    NAME verilator_cosim_layer_e2e
+    COMMAND ${_e2e_target}
+  )
+  set_tests_properties(verilator_cosim_layer_e2e PROPERTIES
+    LABELS "verilator;e2e"
+    TIMEOUT 300
+  )
+endif()
