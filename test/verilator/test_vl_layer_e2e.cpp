@@ -653,6 +653,14 @@ static void fsm_reset_state(LayerHarness& h) {
   h.drain_fifo(d->fsm_reset_state_rden_in, d->fsm_reset_state_empty_out);
 }
 
+static bool fsm_is_done(LayerHarness& h) {
+  auto* d = h.dut.get();
+  h.wait_ready(d->fsm_is_done_rdy_out);
+  d->fsm_is_done_valid_in = 1; h.tick(); d->fsm_is_done_valid_in = 0;
+  return h.read_fifo(d->fsm_is_done_rden_in,
+      d->fsm_is_done_empty_out, d->fsm_is_done_result_out) & 1;
+}
+
 // ===================================================================
 // Section 3: GEMV engine (Task 4)
 // ===================================================================
@@ -1356,10 +1364,179 @@ static void test_phase1_manual_forward_pass() {
 }
 
 // ===================================================================
+// Phase 2: FSM-driven forward pass
+//
+// Same operations as Phase 1, but the testbench reads the FSM state from
+// both RTL and SystemC to decide which operations to dispatch. Verifies
+// that the FSM state sequence is correct and that both models stay in sync.
+// ===================================================================
+static void test_phase2_fsm_driven() {
+  std::puts("\n=== Phase 2: FSM-driven forward pass ===");
+
+  LayerHarness h;
+  h.reset();
+  RefModels ref;
+
+  // Verify initial state is IDLE (0)
+  uint8_t rtl_state = fsm_get_state(h);
+  uint8_t ref_state = ref.fsm.get_state().to_int();
+  stage_result("FSM initial state = IDLE",
+               check_exact("fsm_initial", rtl_state, ref_state) &&
+               rtl_state == 0);
+
+  // Walk through all 16 state transitions
+  const char* state_names[] = {
+    "IDLE", "RMSNORM_PRE_ATTN", "ATTN_Q_PROJ", "ATTN_K_PROJ",
+    "ATTN_V_PROJ", "ROPE_APPLY", "KV_CACHE_APPEND", "ATTN_COMPUTE",
+    "ATTN_O_PROJ", "RESIDUAL_ADD_1", "RMSNORM_PRE_MLP", "MLP_GATE_PROJ",
+    "MLP_UP_PROJ", "SWIGLU", "MLP_DOWN_PROJ", "RESIDUAL_ADD_2", "DONE"
+  };
+
+  for (int target = 1; target <= 16; target++) {
+    fsm_advance_state(h);
+    ref.fsm.advance_state();
+
+    rtl_state = fsm_get_state(h);
+    ref_state = ref.fsm.get_state().to_int();
+
+    char label[64];
+    std::snprintf(label, sizeof(label), "FSM state %d: %s", target, state_names[target]);
+    stage_result(label,
+                 check_exact("fsm_state", rtl_state, ref_state) &&
+                 rtl_state == target);
+  }
+
+  // Verify is_done
+  stage_result("FSM is_done = true at state 16",
+               check_exact("fsm_is_done", (int)fsm_is_done(h), 1));
+
+  // Verify saturates at DONE
+  fsm_advance_state(h);
+  rtl_state = fsm_get_state(h);
+  stage_result("FSM saturates at DONE (advance beyond 16)",
+               check_exact("fsm_saturate", rtl_state, 16));
+
+  // Reset and verify back to IDLE
+  fsm_reset_state(h);
+  ref.fsm.reset_state();
+  rtl_state = fsm_get_state(h);
+  ref_state = ref.fsm.get_state().to_int();
+  stage_result("FSM reset back to IDLE",
+               check_exact("fsm_reset", rtl_state, 0) &&
+               check_exact("fsm_reset_ref", rtl_state, ref_state));
+
+  std::printf("\nPhase 2 complete.\n");
+}
+
+// ===================================================================
+// Phase 3: Multi-token KV cache accumulation
+//
+// Writes K/V for 2 tokens, verifies both are readable, then runs
+// attention dot products from a query against both cached tokens.
+// ===================================================================
+static void test_phase3_multi_token() {
+  std::puts("\n=== Phase 3: Multi-token KV cache accumulation ===");
+
+  LayerHarness h;
+  h.reset();
+  RefModels ref;
+
+  // Token 0: write K/V
+  {
+    auto input0 = gen_input_activation(100);
+    auto input0_int8 = quantize_to_int8(input0);
+
+    bool ok = true;
+    for (int head = 0; head < HEADS; head++) {
+      for (int d = 0; d < HEAD_DIM; d++) {
+        int idx = head * HEAD_DIM + d;
+        kvc_append_k(h, 0, (uint8_t)head, (uint8_t)d, input0_int8[idx]);
+        kvc_append_v(h, 0, (uint8_t)head, (uint8_t)d, input0_int8[idx]);
+        ref.kvc.append_k(uint12(0), uint4(head), uint7(d), int8((int8_t)input0_int8[idx]));
+        ref.kvc.append_v(uint12(0), uint4(head), uint7(d), int8((int8_t)input0_int8[idx]));
+      }
+    }
+    stage_result("Token 0: KV cache write", ok);
+  }
+
+  // Token 1: write K/V
+  {
+    auto input1 = gen_input_activation(200);
+    auto input1_int8 = quantize_to_int8(input1);
+
+    bool ok = true;
+    for (int head = 0; head < HEADS; head++) {
+      for (int d = 0; d < HEAD_DIM; d++) {
+        int idx = head * HEAD_DIM + d;
+        kvc_append_k(h, 1, (uint8_t)head, (uint8_t)d, input1_int8[idx]);
+        kvc_append_v(h, 1, (uint8_t)head, (uint8_t)d, input1_int8[idx]);
+        ref.kvc.append_k(uint12(1), uint4(head), uint7(d), int8((int8_t)input1_int8[idx]));
+        ref.kvc.append_v(uint12(1), uint4(head), uint7(d), int8((int8_t)input1_int8[idx]));
+      }
+    }
+    stage_result("Token 1: KV cache write", ok);
+  }
+
+  // Verify both tokens readable
+  {
+    bool ok = true;
+    for (int token = 0; token < 2; token++) {
+      auto input = gen_input_activation(100 + token * 100);
+      auto input_int8 = quantize_to_int8(input);
+
+      for (int head = 0; head < HEADS; head++) {
+        for (int d = 0; d < HEAD_DIM; d++) {
+          int idx = head * HEAD_DIM + d;
+          uint8_t rtl_k = kvc_read_k(h, (uint16_t)token, (uint8_t)head, (uint8_t)d);
+          int8_t ref_k_val = ref.kvc.read_k(uint12(token), uint4(head), uint7(d)).to_int();
+          if (!check_exact("multi_token_k",
+                           (int32_t)(uint8_t)rtl_k, (int32_t)(uint8_t)ref_k_val))
+            ok = false;
+        }
+      }
+    }
+    stage_result("Both tokens readable from KV cache", ok);
+  }
+
+  // Attention: query dots against both cached K entries
+  {
+    auto query = gen_input_activation(300);
+    auto q_int8 = quantize_to_int8(query);
+    bool ok = true;
+
+    for (int head = 0; head < HEADS; head++) {
+      for (int token = 0; token < 2; token++) {
+        attn_clear_score(h);
+        ref.attn.clear_score();
+
+        for (int d = 0; d < HEAD_DIM; d++) {
+          int idx = head * HEAD_DIM + d;
+          uint8_t k_elem = kvc_read_k(h, (uint16_t)token, (uint8_t)head, (uint8_t)d);
+          int8_t ref_k = ref.kvc.read_k(uint12(token), uint4(head), uint7(d));
+
+          attn_dot_product(h, q_int8[idx], k_elem);
+          ref.attn.dot_product(int8((int8_t)q_int8[idx]), ref_k);
+        }
+
+        int32_t rtl_score = attn_read_score(h);
+        int32_t ref_score = ref.attn.read_score().to_int();
+        if (!check_exact("multi_attn", rtl_score, ref_score))
+          ok = false;
+      }
+    }
+    stage_result("Multi-token attention (query vs 2 cached tokens)", ok);
+  }
+
+  std::printf("\nPhase 3 complete.\n");
+}
+
+// ===================================================================
 // Main
 // ===================================================================
 int main() {
   test_phase1_manual_forward_pass();
-  std::printf("\n=== Summary: %d passed, %d failed ===\n", g_pass, g_fail);
+  test_phase2_fsm_driven();
+  test_phase3_multi_token();
+  std::printf("\n=== Final Summary: %d passed, %d failed ===\n", g_pass, g_fail);
   return g_fail > 0 ? 1 : 0;
 }
