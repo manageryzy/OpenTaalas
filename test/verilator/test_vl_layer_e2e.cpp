@@ -832,9 +832,534 @@ static bool run_gemv(LayerHarness& h, const MacFns& fns,
 }
 
 // ===================================================================
-// Placeholder main (Tasks 5-7 will add test functions)
+// Section 4: Phase 1 — manual-sequenced forward pass (Task 5)
+// ===================================================================
+
+// ---------------------------------------------------------------------------
+// RefModels — all SystemC reference models for one transformer layer
+// ---------------------------------------------------------------------------
+struct RefModels {
+  MacArray mac_q, mac_k, mac_v, mac_o, mac_gate, mac_up, mac_down;
+  vector_unit<512> vpu;   // RopeTableSize = SEQ_LEN(8) * 64 = 512
+  KvCache<8, 4, 16> kvc;  // SEQ_LEN=8, HEADS=4, HEAD_DIM=16
+  AttentionUnit attn;
+  layer_tile fsm;
+};
+
+// ---------------------------------------------------------------------------
+// program_all_weights — programs weights into both RTL and SystemC
+// ---------------------------------------------------------------------------
+static void program_all_weights(LayerHarness& h, RefModels& ref,
+                                 const LayerWeights& w) {
+  std::printf("  Programming 7 MAC arrays...\n");
+  program_mac(h, mac_q_fns,    ref.mac_q,    w.q_rom,    w.q_grid);
+  program_mac(h, mac_k_fns,    ref.mac_k,    w.k_rom,    w.k_grid);
+  program_mac(h, mac_v_fns,    ref.mac_v,    w.v_rom,    w.v_grid);
+  program_mac(h, mac_o_fns,    ref.mac_o,    w.o_rom,    w.o_grid);
+  program_mac(h, mac_gate_fns, ref.mac_gate, w.gate_rom, w.gate_grid);
+  program_mac(h, mac_up_fns,   ref.mac_up,   w.up_rom,   w.up_grid);
+  program_mac(h, mac_down_fns, ref.mac_down, w.down_rom, w.down_grid);
+
+  std::printf("  Programming VPU gamma tables (%d entries each)...\n", DIM);
+  for (int i = 0; i < DIM; i++) {
+    vpu_set_gamma_pre_attn(h, (uint16_t)i, w.gamma_pre_attn[i]);
+    ref.vpu.set_gamma_pre_attn(opentaalas::uint16(i),
+                                opentaalas::uint16(w.gamma_pre_attn[i]));
+    vpu_set_gamma_pre_mlp(h, (uint16_t)i, w.gamma_pre_mlp[i]);
+    ref.vpu.set_gamma_pre_mlp(opentaalas::uint16(i),
+                               opentaalas::uint16(w.gamma_pre_mlp[i]));
+  }
+
+  std::printf("  Programming rsqrt LUT (256 entries)...\n");
+  for (int i = 0; i < 256; i++) {
+    vpu_set_rsqrt_lut(h, (::uint8_t)i, w.rsqrt_lut[i]);
+    ref.vpu.set_rsqrt_lut(opentaalas::uint8(i),
+                           opentaalas::uint16(w.rsqrt_lut[i]));
+  }
+
+  std::printf("  Programming sigmoid LUT (256 entries)...\n");
+  for (int i = 0; i < 256; i++) {
+    vpu_set_sigmoid_lut(h, (::uint8_t)i, w.sigmoid_lut[i]);
+    ref.vpu.set_sigmoid_lut(opentaalas::uint8(i),
+                             opentaalas::uint16(w.sigmoid_lut[i]));
+  }
+
+  int half_dim = HEAD_DIM / 2;
+  std::printf("  Programming RoPE tables (%d positions x %d freqs)...\n",
+              SEQ_LEN, half_dim);
+  for (int pos = 0; pos < SEQ_LEN; pos++) {
+    for (int k = 0; k < half_dim; k++) {
+      uint16_t cv = w.cos_table[pos * half_dim + k];
+      uint16_t sv = w.sin_table[pos * half_dim + k];
+      vpu_rope_set_cos(h, (uint16_t)pos, (::uint8_t)k, cv);
+      vpu_rope_set_sin(h, (uint16_t)pos, (::uint8_t)k, sv);
+      ref.vpu.rope_set_cos(opentaalas::uint12(pos), opentaalas::uint6(k),
+                            opentaalas::uint16(cv));
+      ref.vpu.rope_set_sin(opentaalas::uint12(pos), opentaalas::uint6(k),
+                            opentaalas::uint16(sv));
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// gen_input_activation — random BF16 input vector (kDim elements)
+// ---------------------------------------------------------------------------
+static std::vector<uint16_t> gen_input_activation(::uint32_t seed) {
+  std::mt19937 rng(seed);
+  std::uniform_real_distribution<float> dist(-1.0f, 1.0f);
+  std::vector<uint16_t> input(DIM);
+  for (auto& x : input)
+    x = tobf16(dist(rng));
+  return input;
+}
+
+// ---------------------------------------------------------------------------
+// quantize_to_int8 — BF16 vector -> INT8 (scale by 64, clamp [-128,127])
+// ---------------------------------------------------------------------------
+static std::vector<::int8_t> quantize_to_int8(
+    const std::vector<uint16_t>& bf16_vec) {
+  std::vector<::int8_t> result(bf16_vec.size());
+  for (size_t i = 0; i < bf16_vec.size(); i++) {
+    float f = bf16f(bf16_vec[i]);
+    int val = (int)std::round(f * 64.0f);
+    if (val > 127) val = 127;
+    if (val < -128) val = -128;
+    result[i] = (::int8_t)val;
+  }
+  return result;
+}
+
+// ---------------------------------------------------------------------------
+// test_phase1_manual_forward_pass — walks all 17 FSM states
+// ---------------------------------------------------------------------------
+static void test_phase1_manual_forward_pass() {
+  std::printf("\n=== Phase 1: Manual-sequenced forward pass ===\n");
+
+  LayerHarness h;
+  RefModels ref;
+  LayerWeights w = generate_deterministic_weights(42);
+
+  std::printf("Resetting DUT...\n");
+  h.reset();
+
+  // Verify FSM starts at state 0
+  {
+    ::uint8_t st = fsm_get_state(h);
+    int ref_st = ref.fsm.get_state().to_int();
+    stage_result("State 0 (IDLE): FSM initial state",
+                 check_exact("fsm_state", st, ref_st));
+  }
+
+  // ---------------------------------------------------------------
+  // State 0: IDLE — program all weights
+  // ---------------------------------------------------------------
+  std::printf("\n--- State 0: IDLE — programming weights ---\n");
+  program_all_weights(h, ref, w);
+  stage_result("State 0: weight programming complete", true);
+
+  // Advance FSM: 0 -> 1
+  fsm_advance_state(h);
+  ref.fsm.advance_state();
+
+  // ---------------------------------------------------------------
+  // State 1: RMSNORM_PRE_ATTN
+  // ---------------------------------------------------------------
+  std::printf("\n--- State 1: RMSNORM_PRE_ATTN ---\n");
+  std::vector<uint16_t> input = gen_input_activation(123);
+
+  // Reset RMSNorm on both
+  vpu_rmsnorm_reset(h);
+  ref.vpu.rmsnorm_reset();
+
+  // Accumulate all DIM input BF16 values
+  for (int i = 0; i < DIM; i++) {
+    vpu_rmsnorm_accumulate(h, input[i]);
+    ref.vpu.rmsnorm_accumulate(opentaalas::uint16(input[i]));
+  }
+
+  // Compare sum (exact)
+  ::uint32_t rtl_sum = vpu_rmsnorm_get_sum(h);
+  ::uint32_t ref_sum = ref.vpu.rmsnorm_get_sum().to_uint64();
+  stage_result("State 1: RMSNorm sum",
+               check_exact("rmsnorm_sum", (::int32_t)rtl_sum, (::int32_t)ref_sum));
+
+  // Lookup rsqrt from LUT — use top 8 bits of sum as index
+  ::uint8_t rsqrt_idx = (::uint8_t)((rtl_sum >> 8) & 0xFF);
+  if (rsqrt_idx == 0) rsqrt_idx = 1;  // avoid edge case
+  uint16_t rtl_rsqrt = vpu_lookup_rsqrt(h, rsqrt_idx);
+  opentaalas::uint16 ref_rsqrt = ref.vpu.lookup_rsqrt(opentaalas::uint8(rsqrt_idx));
+  stage_result("State 1: rsqrt LUT lookup",
+               check_bf16("rsqrt", rtl_rsqrt, (uint16_t)ref_rsqrt.to_uint64()));
+
+  // Compute normalized output in C++ for later stages
+  float rsqrt_f = bf16f(rtl_rsqrt);
+  std::vector<uint16_t> norm_pre_attn(DIM);
+  for (int i = 0; i < DIM; i++) {
+    float x = bf16f(input[i]);
+    float gamma = bf16f(w.gamma_pre_attn[i]);
+    norm_pre_attn[i] = tobf16(x * rsqrt_f * gamma);
+  }
+
+  // Advance FSM: 1 -> 2
+  fsm_advance_state(h);
+  ref.fsm.advance_state();
+
+  // ---------------------------------------------------------------
+  // States 2-4: Q/K/V projections (GEMV on PE 0)
+  // ---------------------------------------------------------------
+  std::printf("\n--- States 2-4: Q/K/V projections ---\n");
+  std::vector<::int8_t> act_qkv = quantize_to_int8(norm_pre_attn);
+
+  // State 2: Q projection
+  {
+    bool ok = run_gemv(h, mac_q_fns, ref.mac_q, 0, DIM, act_qkv);
+    stage_result("State 2: Q projection GEMV PE0", ok);
+    fsm_advance_state(h);
+    ref.fsm.advance_state();
+  }
+
+  // State 3: K projection
+  {
+    bool ok = run_gemv(h, mac_k_fns, ref.mac_k, 0, DIM, act_qkv);
+    stage_result("State 3: K projection GEMV PE0", ok);
+    fsm_advance_state(h);
+    ref.fsm.advance_state();
+  }
+
+  // State 4: V projection
+  {
+    bool ok = run_gemv(h, mac_v_fns, ref.mac_v, 0, DIM, act_qkv);
+    stage_result("State 4: V projection GEMV PE0", ok);
+    fsm_advance_state(h);
+    ref.fsm.advance_state();
+  }
+
+  // For subsequent stages, use quantized input as proxy vectors
+  // (real hardware would use dequantized projection outputs)
+  std::vector<::int8_t> q_vec = act_qkv;
+  std::vector<::int8_t> k_vec = act_qkv;
+  std::vector<::int8_t> v_vec = act_qkv;
+
+  // ---------------------------------------------------------------
+  // State 5: ROPE_APPLY — compare cos/sin lookups
+  // ---------------------------------------------------------------
+  std::printf("\n--- State 5: ROPE_APPLY ---\n");
+  {
+    bool all_ok = true;
+    int pos = 0;  // token position 0
+    int half = HEAD_DIM / 2;
+    for (int head = 0; head < HEADS && all_ok; head++) {
+      for (int k = 0; k < half; k++) {
+        uint16_t rtl_cos = vpu_rope_get_cos(h, (uint16_t)pos, (::uint8_t)k);
+        uint16_t rtl_sin = vpu_rope_get_sin(h, (uint16_t)pos, (::uint8_t)k);
+        opentaalas::uint16 ref_cos = ref.vpu.rope_get_cos(
+            opentaalas::uint12(pos), opentaalas::uint6(k));
+        opentaalas::uint16 ref_sin = ref.vpu.rope_get_sin(
+            opentaalas::uint12(pos), opentaalas::uint6(k));
+        char lbl[64];
+        std::snprintf(lbl, sizeof(lbl), "rope_cos[h%d][%d]", head, k);
+        if (!check_bf16(lbl, rtl_cos, (uint16_t)ref_cos.to_uint64()))
+          all_ok = false;
+        std::snprintf(lbl, sizeof(lbl), "rope_sin[h%d][%d]", head, k);
+        if (!check_bf16(lbl, rtl_sin, (uint16_t)ref_sin.to_uint64()))
+          all_ok = false;
+      }
+    }
+    stage_result("State 5: RoPE cos/sin table lookups", all_ok);
+
+    // Apply rotation in C++ (for use by later stages)
+    // q_rot[k] = q[k]*cos - q[k+half]*sin
+    // q_rot[k+half] = q[k]*sin + q[k+half]*cos
+    // (operating on INT8 proxy values — just verifying the table lookups match)
+  }
+  fsm_advance_state(h);
+  ref.fsm.advance_state();
+
+  // ---------------------------------------------------------------
+  // State 6: KV_CACHE_APPEND — write and readback
+  // ---------------------------------------------------------------
+  std::printf("\n--- State 6: KV_CACHE_APPEND ---\n");
+  {
+    bool all_ok = true;
+    int token_pos = 0;
+    for (int head = 0; head < HEADS; head++) {
+      for (int d = 0; d < HEAD_DIM; d++) {
+        int idx = head * HEAD_DIM + d;
+        ::uint8_t kval = (::uint8_t)k_vec[idx];
+        ::uint8_t vval = (::uint8_t)v_vec[idx];
+
+        // Append to RTL
+        kvc_append_k(h, (uint16_t)token_pos, (::uint8_t)head, (::uint8_t)d, kval);
+        kvc_append_v(h, (uint16_t)token_pos, (::uint8_t)head, (::uint8_t)d, vval);
+
+        // Append to SystemC
+        ref.kvc.append_k(opentaalas::uint12(token_pos),
+                          opentaalas::uint4(head),
+                          opentaalas::uint7(d),
+                          opentaalas::int8((::int8_t)kval));
+        ref.kvc.append_v(opentaalas::uint12(token_pos),
+                          opentaalas::uint4(head),
+                          opentaalas::uint7(d),
+                          opentaalas::int8((::int8_t)vval));
+      }
+    }
+
+    // Read back and compare (exact)
+    for (int head = 0; head < HEADS && all_ok; head++) {
+      for (int d = 0; d < HEAD_DIM; d++) {
+        ::uint8_t rtl_k = kvc_read_k(h, (uint16_t)token_pos,
+                                       (::uint8_t)head, (::uint8_t)d);
+        ::int8_t ref_k = ref.kvc.read_k(opentaalas::uint12(token_pos),
+                                          opentaalas::uint4(head),
+                                          opentaalas::uint7(d)).to_int();
+        char lbl[64];
+        std::snprintf(lbl, sizeof(lbl), "kvc_k[h%d][%d]", head, d);
+        if (!check_exact(lbl, (::int8_t)rtl_k, ref_k))
+          all_ok = false;
+
+        ::uint8_t rtl_v = kvc_read_v(h, (uint16_t)token_pos,
+                                       (::uint8_t)head, (::uint8_t)d);
+        ::int8_t ref_v = ref.kvc.read_v(opentaalas::uint12(token_pos),
+                                          opentaalas::uint4(head),
+                                          opentaalas::uint7(d)).to_int();
+        std::snprintf(lbl, sizeof(lbl), "kvc_v[h%d][%d]", head, d);
+        if (!check_exact(lbl, (::int8_t)rtl_v, ref_v))
+          all_ok = false;
+      }
+    }
+    stage_result("State 6: KV cache append + readback", all_ok);
+  }
+  fsm_advance_state(h);
+  ref.fsm.advance_state();
+
+  // ---------------------------------------------------------------
+  // State 7: ATTN_COMPUTE — dot product q against cached k
+  // ---------------------------------------------------------------
+  std::printf("\n--- State 7: ATTN_COMPUTE ---\n");
+  {
+    bool all_ok = true;
+    for (int head = 0; head < HEADS; head++) {
+      // Clear score on both
+      attn_clear_score(h);
+      ref.attn.clear_score();
+
+      // Dot product q[head] against cached k[head] at position 0
+      for (int d = 0; d < HEAD_DIM; d++) {
+        int idx = head * HEAD_DIM + d;
+        ::uint8_t q_elem = (::uint8_t)q_vec[idx];
+        ::uint8_t k_elem = kvc_read_k(h, 0, (::uint8_t)head, (::uint8_t)d);
+
+        attn_dot_product(h, q_elem, k_elem);
+        opentaalas::int8 ref_k = ref.kvc.read_k(opentaalas::uint12(0),
+                                                  opentaalas::uint4(head),
+                                                  opentaalas::uint7(d));
+        ref.attn.dot_product(opentaalas::int8((::int8_t)q_elem), ref_k);
+      }
+
+      // Compare final score
+      ::int32_t rtl_score = attn_read_score(h);
+      ::int32_t ref_score = ref.attn.read_score().to_int();
+      char lbl[64];
+      std::snprintf(lbl, sizeof(lbl), "attn_score[h%d]", head);
+      if (!check_exact(lbl, rtl_score, ref_score))
+        all_ok = false;
+    }
+    stage_result("State 7: Attention dot product scores", all_ok);
+  }
+  fsm_advance_state(h);
+  ref.fsm.advance_state();
+
+  // ---------------------------------------------------------------
+  // State 8: ATTN_O_PROJ — use q_vec as proxy for attention output
+  // ---------------------------------------------------------------
+  std::printf("\n--- State 8: ATTN_O_PROJ ---\n");
+  {
+    bool ok = run_gemv(h, mac_o_fns, ref.mac_o, 0, DIM, act_qkv);
+    stage_result("State 8: O projection GEMV PE0", ok);
+  }
+  fsm_advance_state(h);
+  ref.fsm.advance_state();
+
+  // For residual add, use input as both operands (simplified proxy)
+  // In real hardware, o_vec would be the dequantized O projection output
+  std::vector<uint16_t> o_vec_bf16 = norm_pre_attn;  // proxy
+
+  // ---------------------------------------------------------------
+  // State 9: RESIDUAL_ADD_1
+  // ---------------------------------------------------------------
+  std::printf("\n--- State 9: RESIDUAL_ADD_1 ---\n");
+  {
+    bool all_ok = true;
+    std::vector<uint16_t> residual1(DIM);
+    for (int i = 0; i < DIM; i++) {
+      uint16_t rtl_r = vpu_residual_add(h, input[i], o_vec_bf16[i]);
+      opentaalas::uint16 ref_r = ref.vpu.residual_add(
+          opentaalas::uint16(input[i]), opentaalas::uint16(o_vec_bf16[i]));
+      residual1[i] = rtl_r;
+      char lbl[64];
+      std::snprintf(lbl, sizeof(lbl), "residual1[%d]", i);
+      if (!check_bf16(lbl, rtl_r, (uint16_t)ref_r.to_uint64()))
+        all_ok = false;
+    }
+    stage_result("State 9: Residual add 1", all_ok);
+
+    // Advance FSM: 9 -> 10
+    fsm_advance_state(h);
+    ref.fsm.advance_state();
+
+    // ---------------------------------------------------------------
+    // State 10: RMSNORM_PRE_MLP
+    // ---------------------------------------------------------------
+    std::printf("\n--- State 10: RMSNORM_PRE_MLP ---\n");
+    vpu_rmsnorm_reset(h);
+    ref.vpu.rmsnorm_reset();
+
+    for (int i = 0; i < DIM; i++) {
+      vpu_rmsnorm_accumulate(h, residual1[i]);
+      ref.vpu.rmsnorm_accumulate(opentaalas::uint16(residual1[i]));
+    }
+
+    ::uint32_t rtl_sum2 = vpu_rmsnorm_get_sum(h);
+    ::uint32_t ref_sum2 = ref.vpu.rmsnorm_get_sum().to_uint64();
+    stage_result("State 10: RMSNorm pre-MLP sum",
+                 check_exact("rmsnorm_mlp_sum", (::int32_t)rtl_sum2,
+                             (::int32_t)ref_sum2));
+
+    ::uint8_t rsqrt_idx2 = (::uint8_t)((rtl_sum2 >> 8) & 0xFF);
+    if (rsqrt_idx2 == 0) rsqrt_idx2 = 1;
+    uint16_t rtl_rsqrt2 = vpu_lookup_rsqrt(h, rsqrt_idx2);
+    opentaalas::uint16 ref_rsqrt2 = ref.vpu.lookup_rsqrt(
+        opentaalas::uint8(rsqrt_idx2));
+    stage_result("State 10: rsqrt LUT lookup (MLP)",
+                 check_bf16("rsqrt_mlp", rtl_rsqrt2,
+                            (uint16_t)ref_rsqrt2.to_uint64()));
+
+    // Compute normalized MLP input
+    float rsqrt_f2 = bf16f(rtl_rsqrt2);
+    std::vector<uint16_t> norm_pre_mlp(DIM);
+    for (int i = 0; i < DIM; i++) {
+      float x = bf16f(residual1[i]);
+      float gamma = bf16f(w.gamma_pre_mlp[i]);
+      norm_pre_mlp[i] = tobf16(x * rsqrt_f2 * gamma);
+    }
+
+    fsm_advance_state(h);
+    ref.fsm.advance_state();
+
+    // ---------------------------------------------------------------
+    // States 11-12: GATE/UP projections
+    // ---------------------------------------------------------------
+    std::printf("\n--- States 11-12: GATE/UP projections ---\n");
+    std::vector<::int8_t> act_mlp = quantize_to_int8(norm_pre_mlp);
+
+    // State 11: Gate projection
+    {
+      bool ok2 = run_gemv(h, mac_gate_fns, ref.mac_gate, 0, DIM, act_mlp);
+      stage_result("State 11: Gate projection GEMV PE0", ok2);
+      fsm_advance_state(h);
+      ref.fsm.advance_state();
+    }
+
+    // State 12: Up projection
+    {
+      bool ok2 = run_gemv(h, mac_up_fns, ref.mac_up, 0, DIM, act_mlp);
+      stage_result("State 12: Up projection GEMV PE0", ok2);
+      fsm_advance_state(h);
+      ref.fsm.advance_state();
+    }
+
+    // ---------------------------------------------------------------
+    // State 13: SWIGLU
+    // ---------------------------------------------------------------
+    std::printf("\n--- State 13: SWIGLU ---\n");
+    {
+      // Use small proxy BF16 vectors for gate/up outputs
+      // (real hardware would dequantize the projection accumulators)
+      bool swiglu_ok = true;
+      int swiglu_count = std::min(FFN_DIM, DIM);  // limited by proxy size
+      std::vector<uint16_t> swiglu_out(swiglu_count);
+      for (int i = 0; i < swiglu_count; i++) {
+        uint16_t gate_bf16 = norm_pre_mlp[i];
+        uint16_t up_bf16 = norm_pre_mlp[(i + 1) % DIM];
+
+        uint16_t rtl_sw = vpu_swiglu_compute(h, gate_bf16, up_bf16);
+        opentaalas::uint16 ref_sw = ref.vpu.swiglu_compute(
+            opentaalas::uint16(gate_bf16), opentaalas::uint16(up_bf16));
+        swiglu_out[i] = rtl_sw;
+        char lbl[64];
+        std::snprintf(lbl, sizeof(lbl), "swiglu[%d]", i);
+        if (!check_bf16(lbl, rtl_sw, (uint16_t)ref_sw.to_uint64()))
+          swiglu_ok = false;
+      }
+      stage_result("State 13: SwiGLU compute", swiglu_ok);
+
+      fsm_advance_state(h);
+      ref.fsm.advance_state();
+
+      // ---------------------------------------------------------------
+      // State 14: MLP_DOWN_PROJ
+      // ---------------------------------------------------------------
+      std::printf("\n--- State 14: MLP_DOWN_PROJ ---\n");
+      {
+        // Quantize SwiGLU output to INT8 for down projection
+        // Down proj input is FFN_DIM, but we only have swiglu_count proxy values
+        // Pad with zeros for the remaining
+        std::vector<::int8_t> act_down(DIM, 0);
+        std::vector<uint16_t> swiglu_for_quant(DIM);
+        for (int i = 0; i < std::min(swiglu_count, DIM); i++)
+          swiglu_for_quant[i] = swiglu_out[i];
+        act_down = quantize_to_int8(swiglu_for_quant);
+
+        bool ok2 = run_gemv(h, mac_down_fns, ref.mac_down, 0, DIM, act_down);
+        stage_result("State 14: Down projection GEMV PE0", ok2);
+      }
+      fsm_advance_state(h);
+      ref.fsm.advance_state();
+
+      // ---------------------------------------------------------------
+      // State 15: RESIDUAL_ADD_2
+      // ---------------------------------------------------------------
+      std::printf("\n--- State 15: RESIDUAL_ADD_2 ---\n");
+      {
+        bool res2_ok = true;
+        // Use residual1 + norm_pre_mlp as proxy for residual1 + down_vec
+        for (int i = 0; i < DIM; i++) {
+          uint16_t rtl_r2 = vpu_residual_add(h, residual1[i], norm_pre_mlp[i]);
+          opentaalas::uint16 ref_r2 = ref.vpu.residual_add(
+              opentaalas::uint16(residual1[i]),
+              opentaalas::uint16(norm_pre_mlp[i]));
+          char lbl[64];
+          std::snprintf(lbl, sizeof(lbl), "residual2[%d]", i);
+          if (!check_bf16(lbl, rtl_r2, (uint16_t)ref_r2.to_uint64()))
+            res2_ok = false;
+        }
+        stage_result("State 15: Residual add 2", res2_ok);
+      }
+      fsm_advance_state(h);
+      ref.fsm.advance_state();
+
+      // ---------------------------------------------------------------
+      // State 16: DONE
+      // ---------------------------------------------------------------
+      std::printf("\n--- State 16: DONE ---\n");
+      {
+        ::uint8_t final_st = fsm_get_state(h);
+        int ref_final = ref.fsm.get_state().to_int();
+        stage_result("State 16: FSM reached DONE",
+                     check_exact("fsm_done", final_st, ref_final) &&
+                     final_st == 16);
+      }
+    }
+  }
+
+  std::printf("\nPhase 1 complete.\n");
+}
+
+// ===================================================================
+// Main
 // ===================================================================
 int main() {
-  std::puts("test_vl_layer_e2e: scaffold OK");
-  return 0;
+  test_phase1_manual_forward_pass();
+  std::printf("\n=== Summary: %d passed, %d failed ===\n", g_pass, g_fail);
+  return g_fail > 0 ? 1 : 0;
 }
