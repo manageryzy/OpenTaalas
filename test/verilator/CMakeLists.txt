@@ -42,6 +42,18 @@ set(KANAGAWA_RUNTIME_SV
   ${_rt}/sim/string_table.sv
 )
 
+# Sparse-RAM variant: replaces mock HAL dual-port RAM with associative-array
+# implementation so modules with huge address spaces (embed_rom, lm_head) can
+# simulate without allocating gigabytes of flat arrays.
+set(_sparse_hal "${CMAKE_CURRENT_SOURCE_DIR}/hal_sparse_ram.sv")
+list(REMOVE_ITEM KANAGAWA_RUNTIME_SV "${_rt}/hal/mock/hal_dual_port_ram.sv")
+set(KANAGAWA_RUNTIME_SV_SPARSE
+  ${KANAGAWA_RUNTIME_SV}
+  ${_sparse_hal}
+)
+# Restore the original list (REMOVE_ITEM modified it in-place)
+list(APPEND KANAGAWA_RUNTIME_SV "${_rt}/hal/mock/hal_dual_port_ram.sv")
+
 # =============================================================================
 # Helper: add_verilator_cosim_test(NAME <name> TOP <top_module> TEST <test.cpp>)
 #
@@ -50,7 +62,7 @@ set(KANAGAWA_RUNTIME_SV
 #   ${_gen_dir}/${NAME}${TOP}.sv
 # =============================================================================
 function(add_verilator_cosim_test)
-  cmake_parse_arguments(ARG "" "NAME;TOP;TEST" "" ${ARGN})
+  cmake_parse_arguments(ARG "SPARSE_RAM" "NAME;TOP;TEST" "" ${ARGN})
 
   if(NOT ARG_NAME OR NOT ARG_TOP OR NOT ARG_TEST)
     message(FATAL_ERROR "add_verilator_cosim_test requires NAME, TOP, and TEST")
@@ -69,12 +81,18 @@ function(add_verilator_cosim_test)
   add_executable(${_target} ${ARG_TEST})
   target_include_directories(${_target} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
+  if(ARG_SPARSE_RAM)
+    set(_runtime_sv ${KANAGAWA_RUNTIME_SV_SPARSE})
+  else()
+    set(_runtime_sv ${KANAGAWA_RUNTIME_SV})
+  endif()
+
   verilate(${_target}
     PREFIX V${ARG_TOP}
     TOP_MODULE ${ARG_TOP}
     SOURCES
       ${_types_sv}
-      ${KANAGAWA_RUNTIME_SV}
+      ${_runtime_sv}
       ${_top_sv}
     VERILATOR_ARGS
       -Wno-lint -Wno-UNOPTFLAT -Wno-TIMESCALEMOD -Wno-WIDTHCONCAT -DSIMULATION
@@ -127,9 +145,59 @@ add_verilator_cosim_test(NAME layer_tile  TOP layer_tile  TEST test_vl_layer_til
 # =============================================================================
 # Phase 5: Top-Level
 # =============================================================================
-# NOTE: embed_rom and lm_head have huge memories (4M and 525M entries) that
-# exceed Verilator's mock HAL limits. Skipped until memory-stubbing support.
-# add_verilator_cosim_test(NAME embed_rom         TOP embed_rom         TEST test_vl_embed_rom.cpp)
-# add_verilator_cosim_test(NAME lm_head           TOP lm_head           TEST test_vl_lm_head.cpp)
+add_verilator_cosim_test(NAME embed_rom         TOP embed_rom         TEST test_vl_embed_rom.cpp SPARSE_RAM)
+add_verilator_cosim_test(NAME lm_head           TOP lm_head           TEST test_vl_lm_head.cpp  SPARSE_RAM)
 add_verilator_cosim_test(NAME global_controller TOP global_controller TEST test_vl_global_controller.cpp)
 add_verilator_cosim_test(NAME llama_chip        TOP llama_chip        TEST test_vl_llama_chip.cpp)
+
+# =============================================================================
+# Phase 6: Transformer Layer (structural wrapper composing all sub-modules)
+# =============================================================================
+set(_wrapper_sv "${CMAKE_SOURCE_DIR}/rtl/sv/transformer_layer_wrapper.sv")
+set(_layer_sub_modules
+  mac_array vector_unit kv_cache attention_unit layer_tile
+)
+
+# Check that all sub-module SV files exist
+set(_layer_sv_sources "")
+set(_layer_all_found TRUE)
+foreach(_mod ${_layer_sub_modules})
+  set(_t "${_gen_dir}/${_mod}${_mod}_types.sv")
+  set(_s "${_gen_dir}/${_mod}${_mod}.sv")
+  if(NOT EXISTS "${_t}" OR NOT EXISTS "${_s}")
+    message(STATUS "Skipping verilator_cosim_transformer_layer: ${_mod} SV not found")
+    set(_layer_all_found FALSE)
+    break()
+  endif()
+  list(APPEND _layer_sv_sources "${_t}" "${_s}")
+endforeach()
+
+if(_layer_all_found AND EXISTS "${_wrapper_sv}")
+  set(_tl_target test_vl_transformer_layer)
+
+  add_executable(${_tl_target} test_vl_transformer_layer.cpp)
+  target_include_directories(${_tl_target} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/tools
+  )
+
+  verilate(${_tl_target}
+    PREFIX Vtransformer_layer_wrapper
+    TOP_MODULE transformer_layer_wrapper
+    SOURCES
+      ${_layer_sv_sources}
+      ${KANAGAWA_RUNTIME_SV}
+      ${_wrapper_sv}
+    VERILATOR_ARGS
+      -Wno-lint -Wno-UNOPTFLAT -Wno-TIMESCALEMOD -Wno-WIDTHCONCAT -DSIMULATION
+  )
+
+  add_test(
+    NAME verilator_cosim_transformer_layer
+    COMMAND ${_tl_target}
+  )
+  set_tests_properties(verilator_cosim_transformer_layer PROPERTIES
+    LABELS "verilator"
+    TIMEOUT 120
+  )
+endif()

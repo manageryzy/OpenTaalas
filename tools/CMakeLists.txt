@@ -60,8 +60,21 @@ if(LLAMA_FOUND)
     "${_llama_src}/ggml/src"
     "${CMAKE_CURRENT_SOURCE_DIR}")
   target_link_libraries(llama_quantized_forward PRIVATE ggml)
+
+  # --- IQ3_S Forward Pass (codebook + BF16 scales, hardware compute path) ---
+  add_executable(llama_iq3s_forward llama_iq3s_forward.cpp)
+  target_include_directories(llama_iq3s_forward PRIVATE
+    "${_llama_src}/include"
+    "${_llama_src}/ggml/include"
+    "${_llama_src}/ggml/src"
+    "${CMAKE_CURRENT_SOURCE_DIR}")
+  target_link_libraries(llama_iq3s_forward PRIVATE ggml)
 endif()
 
 # --- Tensor Comparison Tool (standalone, no dependencies) ---
 add_executable(compare_tensors compare_tensors.cpp)
 target_link_libraries(compare_tensors PRIVATE m)
+
+# --- Layer ROM Generator (standalone, no dependencies) ---
+add_executable(generate_layer_roms generate_layer_roms.cpp)
+target_include_directories(generate_layer_roms PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
