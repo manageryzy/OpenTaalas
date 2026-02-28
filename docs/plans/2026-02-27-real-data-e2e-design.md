@@ -1,20 +1,22 @@
 # Real-Data End-to-End Layer Verification Design
 
+> **Status: COMPLETE** — All 16 checks pass. See `docs/verilator-testing.md` for results.
+
 ## Goal
 
 Fix RTL stubs and run one complete transformer layer (layer 0) at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, HEAD_DIM=128) using real Q3_K_S weights, comparing against both SystemC lockstep and golden reference tensors.
 
-## Part 1: Fix 3 RTL Stubs
+## Part 1: Fix 3 RTL Stubs (DONE)
 
-In `rtl/kanagawa/vector_unit.k`:
+All stubs have been replaced with real implementations in `rtl/kanagawa/vector_unit.k`:
 
-| Operation | Current (stub) | Fix |
-|-----------|---------------|-----|
-| `residual_add` | returns `a_bf16` | BF16 add: unpack to FP32, add, repack |
-| `swiglu_compute` | returns `gate_bf16` | `sigmoid_lut[gate>>8] × gate × up` |
-| `dequantize` | broken FP8 expansion | `accum × (1+2×sub_scale) × super_scale` |
+| Operation | Implementation |
+|-----------|---------------|
+| `residual_add` | BF16 add with exponent alignment, 4 guard bits, leading-1 normalization |
+| `swiglu_compute` | `sigmoid_lut[gate>>8] × gate × up` — two BF16 shift-and-add multiplies |
+| `dequantize` | FP8 E4M3 → BF16 conversion with proper exponent/mantissa extraction |
 
-After fixing, regenerate RTL and update existing e2e test to compare against real math.
+RTL regenerated and all e2e tests updated.
 
 ## Part 2: Real-Data Test
 
