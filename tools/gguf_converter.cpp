@@ -146,6 +146,45 @@ static ConvertedTensor convert_q3k_tensor(
     }
 
     ct.tensor_scale = max_scale;
+
+    // --- Normalize bank scales by tensor_scale before FP8 encoding ---
+    // Without normalization, small scales (like V projection's ~0.02) underflow
+    // to zero in FP8 E4M3 (min normal ≈ 0.016). Normalizing puts values in
+    // [-1, +1] range; the GEMV multiplies back by tensor_scale at inference.
+    if (max_scale > 0) {
+        float inv_max = 1.0f / max_scale;
+
+        // Recompute FP8 bank scales with normalization
+        for (int bi = 0; bi < n_blocks; bi++) {
+            const uint8_t* block = blocks + bi * BLOCK_SIZE;
+            const uint8_t* sc = block + 96;
+            uint16_t d_fp16;
+            std::memcpy(&d_fp16, block + 108, 2);
+            float d_all = fp16_to_float(d_fp16);
+
+            int8_t ssc[16];
+            decode_q3k_scales(sc, ssc);
+
+            for (int s = 0; s < 16; s++) {
+                float dl = d_all * (ssc[s] - 32) * inv_max;
+                float dl_abs = std::fabs(dl);
+
+                // float → fp16 → fp8
+                uint32_t dl_bits;
+                std::memcpy(&dl_bits, &dl_abs, 4);
+                int dl_exp = ((dl_bits >> 23) & 0xFF) - 127 + 15;
+                uint16_t dl_mant = (dl_bits >> 13) & 0x3FF;
+                uint16_t dl_sign = (dl < 0) ? 0x8000 : 0;
+                uint16_t dl_fp16;
+                if (dl_exp <= 0) dl_fp16 = 0;
+                else if (dl_exp >= 31) dl_fp16 = dl_sign | 0x7C00;
+                else dl_fp16 = dl_sign | (dl_exp << 10) | dl_mant;
+
+                ct.bank_scales[bi * 16 + s] = fp16_to_fp8_e4m3(dl_fp16);
+            }
+        }
+    }
+
     return ct;
 }
 
