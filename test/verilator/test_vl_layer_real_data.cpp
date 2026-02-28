@@ -5,9 +5,10 @@
 // Runs layer 0 forward pass at full LLaMA 3.1 8B dimensions:
 //   DIM=4096, HEADS=32, HEAD_DIM=128, KV_HEADS=8, FFN_DIM=14336
 //
-// GEMV computed in software (Q3_K format). VPU operations (rmsnorm,
-// dequantize, residual_add, swiglu) run on RTL and compared against
-// SystemC reference and golden FP32 vectors.
+// GEMV computed in software (Q3_K format). Single-token attention at
+// position 0 with GQA broadcast (softmax=1.0 → output=V).
+// VPU operations (rmsnorm, residual_add, swiglu) run on RTL and
+// compared against SystemC reference and golden FP32 vectors.
 //
 // Tier 1: RTL vs SystemC lockstep (exact INT24, ±1 ULP BF16)
 // Tier 2: RTL vs golden FP32 vectors (relative tolerance ~1e-2)
@@ -579,16 +580,66 @@ static void test_real_data_forward() {
   std::vector<float> v_out = software_gemv_q3k(w_v, norm_pre_attn);
   std::printf("  V projection: %zu outputs\n", v_out.size());
 
-  // Simplified attention: skip RoPE and actual attention computation,
-  // use Q output as proxy for attention output (tests VPU operations)
-  std::vector<float> attn_out(DIM, 0.0f);
-  for (int i = 0; i < DIM; i++)
-    attn_out[i] = q_out[i];  // proxy
+  // Report projection magnitudes
+  {
+    auto vec_norm = [](const std::vector<float>& v) {
+      double s = 0; for (auto x : v) s += (double)x * x; return (float)std::sqrt(s);
+    };
+    std::printf("  Projection norms: Q=%.4e K=%.4e V=%.4e\n",
+                vec_norm(q_out), vec_norm(k_out), vec_norm(v_out));
+  }
 
-  // O projection
+  stage_result("Software Q/K/V projections computed", true);
+
+  // =====================================================================
+  // Stage 2b: Single-token attention (position 0)
+  //
+  // For a single token at position 0 with causal masking:
+  //   - Q, K, V are reshaped into heads
+  //   - RoPE applied to Q and K (but at pos 0: cos=1, sin=0 → identity)
+  //   - score = Q·K^T / sqrt(HEAD_DIM) → single scalar per head
+  //   - softmax over 1 element = 1.0
+  //   - attention output = V (with GQA broadcast: each KV head serves 4 Q heads)
+  //   - Concatenate heads → O projection
+  // =====================================================================
+  std::printf("\n--- Stage 2b: Single-token attention ---\n");
+
+  // GQA: 32 Q heads, 8 KV heads → 4 Q heads per KV head
+  static constexpr int GQA_RATIO = HEADS / KV_HEADS;  // 4
+  std::printf("  GQA ratio: %d Q heads per KV head\n", GQA_RATIO);
+
+  // Reshape V into [KV_HEADS, HEAD_DIM] and broadcast to [HEADS, HEAD_DIM]
+  // V output is [KV_HEADS * HEAD_DIM = 1024], need to map to [HEADS * HEAD_DIM = 4096]
+  std::vector<float> attn_out(DIM, 0.0f);
+  for (int qh = 0; qh < HEADS; qh++) {
+    int kv_head = qh / GQA_RATIO;  // which KV head this Q head uses
+    for (int d = 0; d < HEAD_DIM; d++) {
+      attn_out[qh * HEAD_DIM + d] = v_out[kv_head * HEAD_DIM + d];
+    }
+  }
+
+  // Verify: compute Q·K^T/sqrt(128) for diagnostics (should be single value per head)
+  {
+    float min_score = 1e9f, max_score = -1e9f;
+    float scale = 1.0f / std::sqrt((float)HEAD_DIM);
+    for (int qh = 0; qh < HEADS; qh++) {
+      int kv_head = qh / GQA_RATIO;
+      float score = 0.0f;
+      for (int d = 0; d < HEAD_DIM; d++)
+        score += q_out[qh * HEAD_DIM + d] * k_out[kv_head * HEAD_DIM + d];
+      score *= scale;
+      if (score < min_score) min_score = score;
+      if (score > max_score) max_score = score;
+    }
+    std::printf("  Attention scores (QK^T/sqrt(128)): min=%.4f max=%.4f\n",
+                min_score, max_score);
+    std::printf("  (Single token → softmax=1.0 → output=V with GQA broadcast)\n");
+  }
+
+  // O projection on the attention output
   std::vector<float> o_out = software_gemv_q3k(w_o, attn_out);
   std::printf("  O projection: %zu outputs\n", o_out.size());
-  stage_result("Software Q/K/V/O projections computed", true);
+  stage_result("Single-token attention + O projection computed", true);
 
   // =====================================================================
   // Stage 3: Residual add — post-attention (RTL vs SystemC)
@@ -719,8 +770,7 @@ static void test_real_data_forward() {
   // =====================================================================
   // Stage 8: Cosine similarity diagnostics
   // Reports cosine sim at each pipeline stage vs golden FP32 vectors.
-  // NOTE: Attention is skipped (Q used as proxy), so post-attn cosine
-  // sim will be low. This is a test methodology gap, not a hardware bug.
+  // Full single-token attention (pos 0) with GQA is now computed.
   // =====================================================================
   std::printf("\n--- Stage 8: Cosine similarity diagnostics ---\n");
 
@@ -732,18 +782,28 @@ static void test_real_data_forward() {
     std::printf("  Input BF16 vs golden FP32:  %.6f (sanity)\n", cos_inp);
   }
 
-  // Software GEMV Q projection vs golden post-attn (partial signal)
+  // Relative magnitude analysis: how much does each stage contribute?
   {
-    float cos_q = cosine_sim(q_out, golden_post_attn);
-    std::printf("  Q projection vs golden post-attn: %.6f (expect low: attn skipped)\n", cos_q);
+    float inp_norm = 0, o_norm = 0, down_norm = 0;
+    for (int i = 0; i < DIM; i++) {
+      inp_norm  += golden_input[i] * golden_input[i];
+      o_norm    += o_out[i] * o_out[i];
+      down_norm += down_out[i] * down_out[i];
+    }
+    inp_norm  = std::sqrt(inp_norm);
+    o_norm    = std::sqrt(o_norm);
+    down_norm = std::sqrt(down_norm);
+    std::printf("  Vector norms — input: %.4f  O_proj: %.4e  down_proj: %.4e\n",
+                inp_norm, o_norm, down_norm);
+    std::printf("  Attn/residual ratio: %.4e  MLP/residual ratio: %.4e\n",
+                o_norm / inp_norm, down_norm / inp_norm);
   }
 
-  // Post-attention
+  // Post-attention (residual + O proj)
   if (golden_post_attn.size() == (size_t)DIM) {
     float cos_attn = cosine_sim_bf16_fp32(post_attn_rtl, golden_post_attn);
     std::printf("  Post-attn RTL vs golden:    %.6f\n", cos_attn);
-    // Informational — low value expected due to skipped attention
-    stage_result("Post-attn cosine sim reported (informational)", true);
+    stage_result("Post-attn cosine sim > 0.95", cos_attn > 0.95f);
   } else {
     ++g_skip;
   }
@@ -752,7 +812,7 @@ static void test_real_data_forward() {
   if (golden_post_mlp.size() == (size_t)DIM) {
     float cos_mlp = cosine_sim_bf16_fp32(post_mlp_rtl, golden_post_mlp);
     std::printf("  Post-MLP RTL vs golden:     %.6f\n", cos_mlp);
-    stage_result("Post-MLP cosine sim reported (informational)", true);
+    stage_result("Post-MLP cosine sim > 0.90", cos_mlp > 0.90f);
   } else {
     ++g_skip;
   }
