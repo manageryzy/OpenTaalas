@@ -201,8 +201,46 @@ static Q3KWeight load_q3k_weight(const std::string& dir,
 // bank_scales[row * (cols/16) + col/16] is FP8 E4M3 per-16-weight scale.
 // tensor_scale is the overall FP32 scale.
 // ---------------------------------------------------------------------------
-static std::vector<float> software_gemv_q3k(
-    const Q3KWeight& w, const std::vector<float>& activation) {
+
+// INT3 × INT8 shift-and-add (matches MacPE exactly — same as golden generator)
+static inline int32_t mac_pe(uint8_t w3, int8_t activation) {
+  int32_t a = activation;
+  switch (w3) {
+    case 0: return 0;
+    case 1: return a;
+    case 2: return a << 1;
+    case 3: return (a << 1) + a;
+    case 4: return -(a << 2);
+    case 5: return -((a << 1) + a);
+    case 6: return -(a << 1);
+    case 7: return -a;
+    default: return 0;
+  }
+}
+
+// Quantize float activation to INT8 (symmetric, per-tensor)
+static void quantize_to_int8(const float* input, int8_t* output, int n,
+                              float* out_scale) {
+  float amax = 0;
+  for (int i = 0; i < n; i++) {
+    float a = std::fabs(input[i]);
+    if (a > amax) amax = a;
+  }
+  float scale = amax / 127.0f;
+  if (scale == 0) scale = 1.0f;
+  *out_scale = scale;
+  for (int i = 0; i < n; i++) {
+    int v = (int)std::round(input[i] / scale);
+    if (v > 127) v = 127;
+    if (v < -128) v = -128;
+    output[i] = (int8_t)v;
+  }
+}
+
+// Quantized GEMV: INT3 weights × INT8 activations → float output
+// (matches golden generator's qmatvec() exactly)
+static std::vector<float> qmatvec_q3k(
+    const Q3KWeight& w, const int8_t* x_q, float x_scale) {
   int rows = (int)w.rows;
   int cols = (int)w.cols;
   int banks_per_row = (cols + 15) / 16;
@@ -211,18 +249,16 @@ static std::vector<float> software_gemv_q3k(
   for (int r = 0; r < rows; r++) {
     float row_sum = 0.0f;
     for (int bank = 0; bank < banks_per_row; bank++) {
-      float bs = fp8_e4m3_to_float(w.bank_scales[r * banks_per_row + bank]);
-      float bank_sum = 0.0f;
+      int32_t accum = 0;
       int col_start = bank * 16;
       int col_end = std::min(col_start + 16, cols);
       for (int c = col_start; c < col_end; c++) {
-        int w_enc = (int)w.weights[r * cols + c];
-        float wf = (float)((w_enc <= 3) ? w_enc : w_enc - 8);
-        bank_sum += wf * activation[c];
+        accum += mac_pe(w.weights[r * cols + c], x_q[c]);
       }
-      row_sum += bank_sum * bs * w.tensor_scale;
+      float bank_scale = fp8_e4m3_to_float(w.bank_scales[r * banks_per_row + bank]);
+      row_sum += (float)accum * bank_scale;
     }
-    output[r] = row_sum;
+    output[r] = row_sum * x_scale * w.tensor_scale;
   }
   return output;
 }
@@ -430,8 +466,14 @@ static std::vector<uint16_t> gen_rsqrt_lut() {
 static std::vector<uint16_t> gen_sigmoid_lut() {
   std::vector<uint16_t> lut(256);
   for (int i = 0; i < 256; i++) {
-    float x = -8.0f + 16.0f * (float)i / 255.0f;
-    lut[i] = tobf16(1.0f / (1.0f + std::exp(-x)));
+    // RTL indexes with gate_bf16 >> 8 (upper byte of BF16 bit pattern).
+    // Reconstruct the representative float for this upper-byte bin.
+    uint16_t bf16_val = (uint16_t)i << 8;
+    float x = bf16f(bf16_val);
+    if (std::isnan(x) || std::isinf(x))
+      lut[i] = tobf16(x > 0 ? 1.0f : 0.0f);
+    else
+      lut[i] = tobf16(1.0f / (1.0f + std::exp(-x)));
   }
   return lut;
 }
@@ -569,17 +611,25 @@ static void test_real_data_forward() {
     norm_pre_attn[i] = golden_input[i] * rsqrt_val * attn_norm[i];
 
   // =====================================================================
-  // Stage 2: Software GEMV — Q/K/V/O projections
+  // Stage 2: Quantized GEMV — Q/K/V/O projections
+  //          (INT8 activation quantization + INT3×INT8 MAC, matching golden)
   // =====================================================================
-  std::printf("\n--- Stage 2: Software Q/K/V/O projections ---\n");
+  std::printf("\n--- Stage 2: Quantized Q/K/V/O projections (INT8×INT3 MAC) ---\n");
 
-  std::vector<float> q_out = software_gemv_q3k(w_q, norm_pre_attn);
+  // Quantize normed activations to INT8 (same as golden generator)
+  std::vector<int8_t> x_q(std::max({DIM, KV_HEADS * HEAD_DIM, FFN_DIM}));
+  float x_scale;
+  quantize_to_int8(norm_pre_attn.data(), x_q.data(), DIM, &x_scale);
+  std::printf("  INT8 quantization: x_scale=%.6e  (amax=%.4f)\n",
+              x_scale, x_scale * 127.0f);
+
+  std::vector<float> q_out = qmatvec_q3k(w_q, x_q.data(), x_scale);
   std::printf("  Q projection: %zu outputs\n", q_out.size());
 
-  std::vector<float> k_out = software_gemv_q3k(w_k, norm_pre_attn);
+  std::vector<float> k_out = qmatvec_q3k(w_k, x_q.data(), x_scale);
   std::printf("  K projection: %zu outputs\n", k_out.size());
 
-  std::vector<float> v_out = software_gemv_q3k(w_v, norm_pre_attn);
+  std::vector<float> v_out = qmatvec_q3k(w_v, x_q.data(), x_scale);
   std::printf("  V projection: %zu outputs\n", v_out.size());
 
   // Report projection magnitudes
@@ -638,8 +688,9 @@ static void test_real_data_forward() {
     std::printf("  (Single token → softmax=1.0 → output=V with GQA broadcast)\n");
   }
 
-  // O projection on the attention output
-  std::vector<float> o_out = software_gemv_q3k(w_o, attn_out);
+  // O projection on the attention output (quantized, matching golden)
+  quantize_to_int8(attn_out.data(), x_q.data(), DIM, &x_scale);
+  std::vector<float> o_out = qmatvec_q3k(w_o, x_q.data(), x_scale);
   std::printf("  O projection: %zu outputs\n", o_out.size());
   stage_result("Single-token attention + O projection computed", true);
 
@@ -701,14 +752,17 @@ static void test_real_data_forward() {
     norm_pre_mlp[i] = post_attn_f[i] * rsqrt_val_mlp * ffn_norm[i];
 
   // =====================================================================
-  // Stage 5: Software GEMV — gate/up/down MLP projections
+  // Stage 5: Quantized GEMV — gate/up/down MLP projections
   // =====================================================================
-  std::printf("\n--- Stage 5: Software gate/up/down projections ---\n");
+  std::printf("\n--- Stage 5: Quantized gate/up/down projections (INT8×INT3 MAC) ---\n");
 
-  std::vector<float> gate_out = software_gemv_q3k(w_gate, norm_pre_mlp);
+  quantize_to_int8(norm_pre_mlp.data(), x_q.data(), DIM, &x_scale);
+  std::printf("  INT8 quantization pre-MLP: x_scale=%.6e\n", x_scale);
+
+  std::vector<float> gate_out = qmatvec_q3k(w_gate, x_q.data(), x_scale);
   std::printf("  gate projection: %zu outputs\n", gate_out.size());
 
-  std::vector<float> up_out = software_gemv_q3k(w_up, norm_pre_mlp);
+  std::vector<float> up_out = qmatvec_q3k(w_up, x_q.data(), x_scale);
   std::printf("  up projection: %zu outputs\n", up_out.size());
 
   stage_result("Software gate/up projections computed", true);
@@ -747,10 +801,19 @@ static void test_real_data_forward() {
 
   // =====================================================================
   // Stage 7: Down projection + residual add → post-MLP
+  //          Note: golden uses FP32 silu(gate)*up then INT8 quantization
+  //          before down GEMV. Our test uses RTL BF16 SwiGLU (stub) then
+  //          INT8 quantization. This is an expected divergence point.
   // =====================================================================
   std::printf("\n--- Stage 7: Down projection + residual add ---\n");
 
-  std::vector<float> down_out = software_gemv_q3k(w_down, swiglu_out);
+  // Quantize SwiGLU output to INT8 before down projection (matching golden)
+  std::vector<int8_t> swiglu_q(FFN_DIM);
+  float swiglu_scale;
+  quantize_to_int8(swiglu_out.data(), swiglu_q.data(), FFN_DIM, &swiglu_scale);
+  std::printf("  INT8 quantization pre-down: x_scale=%.6e\n", swiglu_scale);
+
+  std::vector<float> down_out = qmatvec_q3k(w_down, swiglu_q.data(), swiglu_scale);
   std::printf("  down projection: %zu outputs\n", down_out.size());
 
   std::vector<uint16_t> post_mlp_rtl(DIM);
@@ -773,11 +836,11 @@ static void test_real_data_forward() {
                resid_mlp_pct >= 99.0f);
 
   // =====================================================================
-  // Stage 8: Cosine similarity diagnostics
-  // Reports cosine sim at each pipeline stage vs golden FP32 vectors.
-  // Full single-token attention (pos 0) with GQA is now computed.
+  // Stage 8: Per-stage cosine similarity diagnostics
+  // Loads intermediate golden vectors to identify exactly where error
+  // accumulates in the pipeline.
   // =====================================================================
-  std::printf("\n--- Stage 8: Cosine similarity diagnostics ---\n");
+  std::printf("\n--- Stage 8: Per-stage cosine similarity diagnostics ---\n");
 
   // Input sanity check (should be ~1.0)
   {
@@ -785,6 +848,59 @@ static void test_real_data_forward() {
     for (int i = 0; i < DIM; i++) inp_f[i] = bf16f(input_bf16[i]);
     float cos_inp = cosine_sim(inp_f, golden_input);
     std::printf("  Input BF16 vs golden FP32:  %.6f (sanity)\n", cos_inp);
+  }
+
+  // Per-stage golden intermediate comparisons
+  auto load_golden = [&](const std::string& name) -> std::vector<float> {
+    return load_fp32_bin(gdir + "/layer0_" + name + ".bin");
+  };
+
+  // RMSNorm pre-attention
+  {
+    auto golden_norm = load_golden("norm_pre_attn");
+    if (!golden_norm.empty()) {
+      float cos = cosine_sim(norm_pre_attn, golden_norm);
+      std::printf("  norm_pre_attn vs golden:    %.6f\n", cos);
+      stage_result("norm_pre_attn cosine > 0.999", cos > 0.999f);
+    } else {
+      std::printf("  norm_pre_attn:              (no golden)\n");
+    }
+  }
+
+  // Q/K/V projections
+  {
+    auto golden_q = load_golden("q_proj");
+    auto golden_k = load_golden("k_proj");
+    auto golden_v = load_golden("v_proj");
+    if (!golden_q.empty()) {
+      float cos_q = cosine_sim(q_out, golden_q);
+      float cos_k = cosine_sim(k_out, golden_k);
+      float cos_v = cosine_sim(v_out, golden_v);
+      std::printf("  Q proj vs golden:           %.6f\n", cos_q);
+      std::printf("  K proj vs golden:           %.6f\n", cos_k);
+      std::printf("  V proj vs golden:           %.6f\n", cos_v);
+      stage_result("Q proj cosine > 0.999", cos_q > 0.999f);
+      stage_result("K proj cosine > 0.999", cos_k > 0.999f);
+      stage_result("V proj cosine > 0.999", cos_v > 0.999f);
+    } else {
+      std::printf("  Q/K/V proj:                 (no golden)\n");
+    }
+  }
+
+  // Attention output + O projection
+  {
+    auto golden_attn = load_golden("attn_out");
+    auto golden_o = load_golden("o_proj");
+    if (!golden_attn.empty()) {
+      float cos_attn = cosine_sim(attn_out, golden_attn);
+      float cos_o = cosine_sim(o_out, golden_o);
+      std::printf("  attn_out vs golden:         %.6f\n", cos_attn);
+      std::printf("  O proj vs golden:           %.6f\n", cos_o);
+      stage_result("attn_out cosine > 0.99", cos_attn > 0.99f);
+      stage_result("O proj cosine > 0.99", cos_o > 0.99f);
+    } else {
+      std::printf("  attn_out/O proj:            (no golden)\n");
+    }
   }
 
   // Relative magnitude analysis: how much does each stage contribute?
@@ -804,13 +920,51 @@ static void test_real_data_forward() {
                 o_norm / inp_norm, down_norm / inp_norm);
   }
 
-  // Post-attention (residual + O proj)
+  // Post-attention (residual + O proj) — BF16 residual vs golden FP32 residual
   if (golden_post_attn.size() == (size_t)DIM) {
     float cos_attn = cosine_sim_bf16_fp32(post_attn_rtl, golden_post_attn);
     std::printf("  Post-attn RTL vs golden:    %.6f\n", cos_attn);
     stage_result("Post-attn cosine sim > 0.95", cos_attn > 0.95f);
+
+    // Also show FP32 residual add for comparison
+    std::vector<float> post_attn_fp32(DIM);
+    for (int i = 0; i < DIM; i++)
+      post_attn_fp32[i] = golden_input[i] + o_out[i];
+    float cos_fp32 = cosine_sim(post_attn_fp32, golden_post_attn);
+    std::printf("  Post-attn FP32 vs golden:   %.6f (no BF16 residual)\n", cos_fp32);
   } else {
     ++g_skip;
+  }
+
+  // MLP intermediates
+  {
+    auto golden_norm_mlp = load_golden("norm_pre_mlp");
+    if (!golden_norm_mlp.empty()) {
+      float cos = cosine_sim(norm_pre_mlp, golden_norm_mlp);
+      std::printf("  norm_pre_mlp vs golden:     %.6f\n", cos);
+    }
+
+    auto golden_gate = load_golden("gate_proj");
+    auto golden_up = load_golden("up_proj");
+    if (!golden_gate.empty()) {
+      float cos_gate = cosine_sim(gate_out, golden_gate);
+      float cos_up = cosine_sim(up_out, golden_up);
+      std::printf("  gate proj vs golden:        %.6f\n", cos_gate);
+      std::printf("  up proj vs golden:          %.6f\n", cos_up);
+    }
+
+    auto golden_swiglu = load_golden("swiglu_out");
+    if (!golden_swiglu.empty()) {
+      // Compare our SwiGLU output (RTL BF16 stub) against golden (FP32 silu*up)
+      float cos_sw = cosine_sim(swiglu_out, golden_swiglu);
+      std::printf("  swiglu out vs golden:       %.6f (RTL stub vs FP32 silu)\n", cos_sw);
+    }
+
+    auto golden_down = load_golden("down_proj");
+    if (!golden_down.empty()) {
+      float cos_down = cosine_sim(down_out, golden_down);
+      std::printf("  down proj vs golden:        %.6f\n", cos_down);
+    }
   }
 
   // Post-MLP
@@ -818,6 +972,13 @@ static void test_real_data_forward() {
     float cos_mlp = cosine_sim_bf16_fp32(post_mlp_rtl, golden_post_mlp);
     std::printf("  Post-MLP RTL vs golden:     %.6f\n", cos_mlp);
     stage_result("Post-MLP cosine sim > 0.90", cos_mlp > 0.90f);
+
+    // Also show FP32 residual add for comparison
+    std::vector<float> post_mlp_fp32(DIM);
+    for (int i = 0; i < DIM; i++)
+      post_mlp_fp32[i] = bf16f(post_attn_rtl[i]) + down_out[i];
+    float cos_fp32 = cosine_sim(post_mlp_fp32, golden_post_mlp);
+    std::printf("  Post-MLP FP32 vs golden:    %.6f (no BF16 residual)\n", cos_fp32);
   } else {
     ++g_skip;
   }

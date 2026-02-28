@@ -516,14 +516,25 @@ static std::vector<float> forward(const QModelWeights& m, int token, int pos,
 
     // --- Attention ---
     rmsnorm(normed.data(), hidden.data(), lw.attn_norm.data(), c.dim, c.norm_eps);
+    if (dump) opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_norm_pre_attn", normed);
 
     // Quantize normed to INT8
     quantize_to_int8(normed.data(), x_q.data(), c.dim, &x_scale);
+    if (dump) {
+      // Dump x_scale and x_q for INT8 quantization diagnostics
+      opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_x_scale_pre_attn",
+                              &x_scale, 1);
+    }
 
     // Q, K, V projections (quantized)
     qmatvec(q.data(), lw.wq, x_q.data(), x_scale, c.dim, c.dim);
     qmatvec(k.data(), lw.wk, x_q.data(), x_scale, kv_dim, c.dim);
     qmatvec(v.data(), lw.wv, x_q.data(), x_scale, kv_dim, c.dim);
+    if (dump) {
+      opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_q_proj", q);
+      opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_k_proj", k);
+      opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_v_proj", v);
+    }
 
     // RoPE
     for (int h = 0; h < c.n_heads; h++)
@@ -559,23 +570,34 @@ static std::vector<float> forward(const QModelWeights& m, int token, int pos,
     quantize_to_int8(attn_out.data(), x_q.data(), c.dim, &x_scale);
     std::vector<float> o_proj(c.dim);
     qmatvec(o_proj.data(), lw.wo, x_q.data(), x_scale, c.dim, c.dim);
+    if (dump) {
+      opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_attn_out", attn_out);
+      opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_o_proj", o_proj);
+    }
 
     for (int i = 0; i < c.dim; i++) hidden[i] += o_proj[i];
     if (dump) opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_post_attn", hidden);
 
     // --- MLP ---
     rmsnorm(normed.data(), hidden.data(), lw.ffn_norm.data(), c.dim, c.norm_eps);
+    if (dump) opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_norm_pre_mlp", normed);
     quantize_to_int8(normed.data(), x_q.data(), c.dim, &x_scale);
 
     qmatvec(gate.data(), lw.w_gate, x_q.data(), x_scale, c.ffn_dim, c.dim);
     qmatvec(up.data(), lw.w_up, x_q.data(), x_scale, c.ffn_dim, c.dim);
+    if (dump) {
+      opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_gate_proj", gate);
+      opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_up_proj", up);
+    }
 
     for (int i = 0; i < c.ffn_dim; i++)
       gate[i] = silu(gate[i]) * up[i];
+    if (dump) opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_swiglu_out", gate);
 
     // Down projection: quantize ffn_dim-wide vector
     quantize_to_int8(gate.data(), x_q.data(), c.ffn_dim, &x_scale);
     qmatvec(down.data(), lw.w_down, x_q.data(), x_scale, c.dim, c.ffn_dim);
+    if (dump) opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_down_proj", down);
 
     for (int i = 0; i < c.dim; i++) hidden[i] += down[i];
     if (dump) opentaalas::dump_tensor(dump_dir, "layer" + std::to_string(l) + "_post_mlp", hidden);

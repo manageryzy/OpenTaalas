@@ -169,13 +169,19 @@ inline void gen_rope_tables(std::vector<uint16_t>& cos_tbl,
     }
 }
 
-// Generate sigmoid LUT: sigmoid for 256 BF16 input bins
+// Generate sigmoid LUT: sigmoid for 256 BF16 upper-byte bins.
+// RTL indexes with gate_bf16 >> 8 (upper byte of BF16 bit pattern),
+// so entry i = sigmoid(bf16_to_float(i << 8)).
 inline std::vector<uint16_t> gen_sigmoid_lut() {
     std::vector<uint16_t> lut(256);
     for (int i = 0; i < 256; i++) {
-        // Map bin to range [-8, 8] for useful sigmoid coverage
-        float x = -8.0f + 16.0f * static_cast<float>(i) / 255.0f;
-        float val = 1.0f / (1.0f + std::exp(-x));
+        uint16_t bf16_val = static_cast<uint16_t>(i) << 8;
+        float x = bf16_to_float(bf16_val);
+        float val;
+        if (std::isnan(x) || std::isinf(x))
+            val = x > 0 ? 1.0f : 0.0f;
+        else
+            val = 1.0f / (1.0f + std::exp(-x));
         lut[i] = float_to_bf16(val);
     }
     return lut;

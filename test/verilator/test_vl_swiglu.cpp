@@ -98,39 +98,43 @@ static void test_sigmoid_lut_round_trip() {
 }
 
 static void test_compute_silu() {
-  // NOTE: Kanagawa compute_silu is a stub — reads sigmoid LUT but returns
-  // gate_bf16 unchanged. Full BF16 multiply deferred to VPU integration.
+  // compute_silu(gate) = gate * sigmoid_lut[gate >> 8]
+  // Program all LUT entries to BF16(0.5) = 0x3F00
   Harness h;
   h.reset();
 
   for (int i = 0; i < 256; ++i)
-    call_set_sigmoid_lut(h, i, 0x3F00);
+    call_set_sigmoid_lut(h, i, 0x3F00);  // sigmoid = 0.5
 
-  // Stub returns gate_bf16 unchanged
-  uint16_t r1 = call_compute_silu(h, 0x4000);  // bf16(2.0)
-  assert(r1 == 0x4000);  // returns gate unchanged
+  // gate=2.0(0x4000): silu = 2.0 * 0.5 = 1.0 = 0x3F80
+  uint16_t r1 = call_compute_silu(h, 0x4000);
+  assert_bf16_near(r1, 1.0f, 0.01f, "silu(2.0) with sig=0.5");
 
-  uint16_t r2 = call_compute_silu(h, 0x4080);  // bf16(4.0)
-  assert(r2 == 0x4080);  // returns gate unchanged
-  std::puts("[PASS] compute_silu (stub: returns gate_bf16)");
+  // gate=4.0(0x4080): silu = 4.0 * 0.5 = 2.0 = 0x4000
+  uint16_t r2 = call_compute_silu(h, 0x4080);
+  assert_bf16_near(r2, 2.0f, 0.01f, "silu(4.0) with sig=0.5");
+
+  std::puts("[PASS] compute_silu (gate * sigmoid LUT)");
 }
 
 static void test_compute_swiglu() {
-  // NOTE: Kanagawa compute_swiglu is a stub — reads sigmoid LUT but returns
-  // gate_bf16 unchanged. Full BF16 multiply deferred to VPU integration.
+  // compute_swiglu(gate, up) = gate * sigmoid_lut[gate >> 8] * up
+  // Program all LUT entries to BF16(0.5) = 0x3F00
   Harness h;
   h.reset();
 
   for (int i = 0; i < 256; ++i)
-    call_set_sigmoid_lut(h, i, 0x3F00);
+    call_set_sigmoid_lut(h, i, 0x3F00);  // sigmoid = 0.5
 
-  // Stub returns gate_bf16 unchanged
+  // gate=2.0(0x4000), up=3.0(0x4040): 2.0*0.5*3.0 = 3.0 = 0x4040
   uint16_t r1 = call_compute_swiglu(h, 0x4000, 0x4040);
-  assert(r1 == 0x4000);  // returns gate unchanged
+  assert_bf16_near(r1, 3.0f, 0.05f, "swiglu(2.0, 3.0) with sig=0.5");
 
+  // gate=4.0(0x4080), up=0.5(0x3F00): 4.0*0.5*0.5 = 1.0 = 0x3F80
   uint16_t r2 = call_compute_swiglu(h, 0x4080, 0x3F00);
-  assert(r2 == 0x4080);  // returns gate unchanged
-  std::puts("[PASS] compute_swiglu (stub: returns gate_bf16)");
+  assert_bf16_near(r2, 1.0f, 0.05f, "swiglu(4.0, 0.5) with sig=0.5");
+
+  std::puts("[PASS] compute_swiglu (gate * sigmoid * up)");
 }
 
 int main() {
