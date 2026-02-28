@@ -183,9 +183,17 @@ static Q3KWeight load_q3k_weight(const std::string& dir,
     if (s.rfind("rows=", 0) == 0) w.rows = std::atol(s.c_str() + 5);
     else if (s.rfind("cols=", 0) == 0) w.cols = std::atol(s.c_str() + 5);
     else if (s.rfind("tensor_scale=", 0) == 0)
-      w.tensor_scale = std::atof(s.c_str() + 13);
+      w.tensor_scale = std::atof(s.c_str() + 13);  // fallback from text
   }
   std::fclose(f);
+
+  // Load tensor_scale from binary file (full FP32 precision) if available
+  std::string tspath = dir + "/" + safe + ".tensor_scale.bin";
+  f = std::fopen(tspath.c_str(), "rb");
+  if (f) {
+    std::fread(&w.tensor_scale, sizeof(float), 1, f);
+    std::fclose(f);
+  }
 
   w.weights = load_bytes(dir + "/" + safe + ".weights.bin");
   w.bank_scales = load_bytes(dir + "/" + safe + ".scales.bin");

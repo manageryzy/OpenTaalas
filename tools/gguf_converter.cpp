@@ -77,22 +77,20 @@ static ConvertedTensor convert_q3k_tensor(
             int shift = 0;
             for (int j = 0; j < 4; j++) {
                 float dl = d_all * (sub_scales[is] - 32);
+                bool neg_scale = (dl < 0);
                 float abs_dl = std::fabs(dl);
                 if (abs_dl > max_scale) max_scale = abs_dl;
 
-                // Convert sub-block scale to FP8 E4M3
-                // We store the absolute scale; sign is baked into weight encoding
+                // Convert sub-block scale to unsigned FP8 E4M3
+                // Sign is absorbed into weight encoding (matching golden generator + hardware)
                 uint16_t dl_fp16;
-                float dl_abs = abs_dl;
-                // float → fp16 (simple truncation)
                 uint32_t dl_bits;
-                std::memcpy(&dl_bits, &dl_abs, 4);
+                std::memcpy(&dl_bits, &abs_dl, 4);
                 int dl_exp = ((dl_bits >> 23) & 0xFF) - 127 + 15;
                 uint16_t dl_mant = (dl_bits >> 13) & 0x3FF;
-                uint16_t dl_sign = (dl < 0) ? 0x8000 : 0;
                 if (dl_exp <= 0) dl_fp16 = 0;
-                else if (dl_exp >= 31) dl_fp16 = dl_sign | 0x7C00;
-                else dl_fp16 = dl_sign | (dl_exp << 10) | dl_mant;
+                else if (dl_exp >= 31) dl_fp16 = 0x7C00;
+                else dl_fp16 = (dl_exp << 10) | dl_mant;
 
                 ct.bank_scales[i * 16 + is] = fp16_to_fp8_e4m3(dl_fp16);
                 is++;
@@ -101,9 +99,10 @@ static ConvertedTensor convert_q3k_tensor(
                     int idx = i * 256 + n + j * 32 + l;
                     int low2 = (q[l] >> shift) & 3;
                     int high = (hmask[l + (n/128)*32] & m) ? 0 : 4;
-                    // Q3_K weight = low2 - high, giving range -4..+3
-                    // Our encoding: 0-3 → 0..+3, 4-7 → -4..-1
                     int signed_w = low2 - high; // -4..+3
+                    if (neg_scale) signed_w = -signed_w;
+                    if (signed_w > 3) signed_w = 3;
+                    if (signed_w < -4) signed_w = -4;
                     uint8_t our_w;
                     if (signed_w >= 0) our_w = (uint8_t)signed_w;       // 0..3
                     else               our_w = (uint8_t)(8 + signed_w); // 4..7
@@ -112,17 +111,16 @@ static ConvertedTensor convert_q3k_tensor(
 
                 // Second half of sub-block
                 dl = d_all * (sub_scales[is] - 32);
+                neg_scale = (dl < 0);
                 abs_dl = std::fabs(dl);
                 if (abs_dl > max_scale) max_scale = abs_dl;
 
-                dl_abs = abs_dl;
-                std::memcpy(&dl_bits, &dl_abs, 4);
+                std::memcpy(&dl_bits, &abs_dl, 4);
                 dl_exp = ((dl_bits >> 23) & 0xFF) - 127 + 15;
                 dl_mant = (dl_bits >> 13) & 0x3FF;
-                dl_sign = (dl < 0) ? 0x8000 : 0;
                 if (dl_exp <= 0) dl_fp16 = 0;
-                else if (dl_exp >= 31) dl_fp16 = dl_sign | 0x7C00;
-                else dl_fp16 = dl_sign | (dl_exp << 10) | dl_mant;
+                else if (dl_exp >= 31) dl_fp16 = 0x7C00;
+                else dl_fp16 = (dl_exp << 10) | dl_mant;
 
                 ct.bank_scales[i * 16 + is] = fp16_to_fp8_e4m3(dl_fp16);
                 is++;
@@ -132,6 +130,9 @@ static ConvertedTensor convert_q3k_tensor(
                     int low2 = (q[l + 16] >> shift) & 3;
                     int high = (hmask[l + 16 + (n/128)*32] & m) ? 0 : 4;
                     int signed_w = low2 - high;
+                    if (neg_scale) signed_w = -signed_w;
+                    if (signed_w > 3) signed_w = 3;
+                    if (signed_w < -4) signed_w = -4;
                     uint8_t our_w;
                     if (signed_w >= 0) our_w = (uint8_t)signed_w;
                     else               our_w = (uint8_t)(8 + signed_w);
@@ -166,19 +167,17 @@ static ConvertedTensor convert_q3k_tensor(
             decode_q3k_scales(sc, ssc);
 
             for (int s = 0; s < 16; s++) {
-                float dl = d_all * (ssc[s] - 32) * inv_max;
-                float dl_abs = std::fabs(dl);
+                float dl_abs = std::fabs(d_all * (ssc[s] - 32)) * inv_max;
 
-                // float → fp16 → fp8
+                // float → fp16 → fp8 (unsigned — sign already in weights)
                 uint32_t dl_bits;
                 std::memcpy(&dl_bits, &dl_abs, 4);
                 int dl_exp = ((dl_bits >> 23) & 0xFF) - 127 + 15;
                 uint16_t dl_mant = (dl_bits >> 13) & 0x3FF;
-                uint16_t dl_sign = (dl < 0) ? 0x8000 : 0;
                 uint16_t dl_fp16;
                 if (dl_exp <= 0) dl_fp16 = 0;
-                else if (dl_exp >= 31) dl_fp16 = dl_sign | 0x7C00;
-                else dl_fp16 = dl_sign | (dl_exp << 10) | dl_mant;
+                else if (dl_exp >= 31) dl_fp16 = 0x7C00;
+                else dl_fp16 = (dl_exp << 10) | dl_mant;
 
                 ct.bank_scales[bi * 16 + s] = fp16_to_fp8_e4m3(dl_fp16);
             }
