@@ -209,21 +209,15 @@ static std::vector<float> software_gemv_q3k(
   for (int r = 0; r < rows; r++) {
     float row_sum = 0.0f;
     for (int bank = 0; bank < banks_per_row; bank++) {
-      // Accumulate INT products within this 16-weight bank
-      int32_t bank_accum = 0;
+      float bs = fp8_e4m3_to_float(w.bank_scales[r * banks_per_row + bank]);
+      float bank_sum = 0.0f;
       int col_start = bank * 16;
       int col_end = std::min(col_start + 16, cols);
       for (int c = col_start; c < col_end; c++) {
-        int wval = (int)w.weights[r * cols + c] - 4;  // center: [-4, +3]
-        // Quantize activation to INT8 (scale by 64, clamp)
-        int act_i8 = (int)std::round(activation[c] * 64.0f);
-        if (act_i8 > 127) act_i8 = 127;
-        if (act_i8 < -128) act_i8 = -128;
-        bank_accum += wval * act_i8;
+        float wf = (float)((int)w.weights[r * cols + c] - 4);
+        bank_sum += wf * activation[c];
       }
-      // Dequantize: bank_accum * bank_scale_float * tensor_scale
-      float bs = fp8_e4m3_to_float(w.bank_scales[r * banks_per_row + bank]);
-      row_sum += (float)bank_accum * bs * w.tensor_scale;
+      row_sum += bank_sum * bs * w.tensor_scale;
     }
     output[r] = row_sum;
   }
