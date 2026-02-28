@@ -127,8 +127,8 @@ static void qmatvec(float* out, const QWeight& W, const int8_t* x_q, float x_sca
       float bank_scale = fp8_e4m3_to_float_hw(scales[c / 16]);
       row_sum += (float)accum * bank_scale;
     }
-    // Apply activation scale
-    out[r] = row_sum * x_scale;
+    // Apply activation scale and tensor scale
+    out[r] = row_sum * x_scale * W.tensor_scale;
   }
 }
 
@@ -241,6 +241,7 @@ static QWeight load_qweight(struct ggml_context* ctx, const char* name, int rows
     static constexpr int BLOCK_SIZE = 110; // 32 + 64 + 12 + 2
     int n_blocks = n / QK;
     const uint8_t* raw = reinterpret_cast<const uint8_t*>(t->data);
+    float max_abs_dl = 0;
 
     for (int i = 0; i < n_blocks; i++) {
       const uint8_t* block = raw + i * BLOCK_SIZE;
@@ -267,6 +268,7 @@ static QWeight load_qweight(struct ggml_context* ctx, const char* name, int rows
           // negate the weights and use |dl| as scale
           bool neg_scale = (dl < 0);
           float abs_dl = std::fabs(dl);
+          if (abs_dl > max_abs_dl) max_abs_dl = abs_dl;
           // Convert to FP8 E4M3 via FP16
           uint32_t dl_bits;
           std::memcpy(&dl_bits, &abs_dl, 4);
@@ -295,6 +297,7 @@ static QWeight load_qweight(struct ggml_context* ctx, const char* name, int rows
           dl = d_all * (sub_scales[is] - 32);
           neg_scale = (dl < 0);
           abs_dl = std::fabs(dl);
+          if (abs_dl > max_abs_dl) max_abs_dl = abs_dl;
           std::memcpy(&dl_bits, &abs_dl, 4);
           dl_exp = ((dl_bits >> 23) & 0xFF) - 127 + 15;
           dl_mant = (dl_bits >> 13) & 0x3FF;
@@ -320,6 +323,34 @@ static QWeight load_qweight(struct ggml_context* ctx, const char* name, int rows
           m <<= 1;
         }
         q += 32;
+      }
+    }
+
+    // Normalize bank_scales by max_abs_dl to prevent FP8 E4M3 underflow
+    // (same fix as gguf_converter.cpp — V projection scales ~0.001-0.02 underflow otherwise)
+    qw.tensor_scale = max_abs_dl;
+    if (max_abs_dl > 0) {
+      float inv_max = 1.0f / max_abs_dl;
+      for (int i = 0; i < n_blocks; i++) {
+        const uint8_t* block = raw + i * BLOCK_SIZE;
+        const uint8_t* sc = block + 96;
+        uint16_t d_fp16;
+        std::memcpy(&d_fp16, block + 108, 2);
+        float d_all = opentaalas::fp16_to_float(d_fp16);
+        int8_t ssc[16];
+        decode_q3k_scales(sc, ssc);
+        for (int s = 0; s < 16; s++) {
+          float dl_abs = std::fabs(d_all * (ssc[s] - 32)) * inv_max;
+          uint32_t dl_bits;
+          std::memcpy(&dl_bits, &dl_abs, 4);
+          int dl_exp = ((dl_bits >> 23) & 0xFF) - 127 + 15;
+          uint16_t dl_mant = (dl_bits >> 13) & 0x3FF;
+          uint16_t dl_fp16;
+          if (dl_exp <= 0) dl_fp16 = 0;
+          else if (dl_exp >= 31) dl_fp16 = 0x7C00;
+          else dl_fp16 = (dl_exp << 10) | dl_mant;
+          qw.bank_scales[i * 16 + s] = opentaalas::fp16_to_fp8_e4m3(dl_fp16);
+        }
       }
     }
   } else {
@@ -465,7 +496,7 @@ static std::vector<float> forward(const QModelWeights& m, int token, int pos,
         uint8_t w = emb.w3[offset + b * 16 + j];
         // Decode INT3 to signed: 0-3 → 0..3, 4-7 → -4..-1
         int sw = (w <= 3) ? (int)w : (int)w - 8;
-        hidden[b * 16 + j] = (float)sw * bank_scale;
+        hidden[b * 16 + j] = (float)sw * bank_scale * emb.tensor_scale;
       }
     }
   }

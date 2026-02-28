@@ -193,10 +193,11 @@ static Q3KWeight load_q3k_weight(const std::string& dir,
 }
 
 // ---------------------------------------------------------------------------
-// Software Q3_K GEMV: output[row] = sum_col((w[row,col]-4) * act[col]) * scale
+// Software Q3_K GEMV: output[row] = sum_col(decode(w[row,col]) * act[col]) * scale
 //
 // Returns FP32 output vector (rows elements).
-// Each weight is 3-bit (0-7), centered at 4 → value = weight - 4.
+// Each weight is 3-bit (0-7), encoded as: 0-3 → 0..+3, 4-7 → -4..-1
+// (matches hardware MAC PE: case 0→0, case 1→+a, ..., case 4→-4a, ..., case 7→-a)
 // bank_scales[row * (cols/16) + col/16] is FP8 E4M3 per-16-weight scale.
 // tensor_scale is the overall FP32 scale.
 // ---------------------------------------------------------------------------
@@ -215,7 +216,8 @@ static std::vector<float> software_gemv_q3k(
       int col_start = bank * 16;
       int col_end = std::min(col_start + 16, cols);
       for (int c = col_start; c < col_end; c++) {
-        float wf = (float)((int)w.weights[r * cols + c] - 4);
+        int w_enc = (int)w.weights[r * cols + c];
+        float wf = (float)((w_enc <= 3) ? w_enc : w_enc - 8);
         bank_sum += wf * activation[c];
       }
       row_sum += bank_sum * bs * w.tensor_scale;
@@ -555,12 +557,12 @@ static void test_real_data_forward() {
   if (!sum_ok)
     std::printf("    rtl_sum=%u ref_sum=%u\n", rtl_sum, ref_sum);
 
-  // Compute normalized input in software (for GEMV activation)
-  // RMSNorm: x_norm[i] = x[i] * rsqrt(mean(x^2)) * gamma[i]
-  // We use the LUT-based rsqrt from the sum
-  uint8_t rsqrt_idx = (uint8_t)((rtl_sum >> 8) & 0xFF);
-  if (rsqrt_idx == 0) rsqrt_idx = 1;
-  float rsqrt_val = bf16f(rsqrt_lut[rsqrt_idx]);
+  // Compute normalized input using float-precision RMSNorm (matches golden)
+  // The RTL's integer-sum-of-BF16-bit-patterns accumulator is a hardware
+  // approximation; for Tier-2 golden comparison we use exact float math.
+  float ss = 0;
+  for (int i = 0; i < DIM; i++) ss += golden_input[i] * golden_input[i];
+  float rsqrt_val = 1.0f / std::sqrt(ss / DIM + 1e-5f);
 
   std::vector<float> norm_pre_attn(DIM);
   for (int i = 0; i < DIM; i++)
@@ -686,14 +688,17 @@ static void test_real_data_forward() {
   if (!sum_mlp_ok)
     std::printf("    rtl_sum=%u ref_sum=%u\n", rtl_sum_mlp, ref_sum_mlp);
 
-  // Compute normalized pre-MLP activation in software
-  uint8_t rsqrt_idx_mlp = (uint8_t)((rtl_sum_mlp >> 8) & 0xFF);
-  if (rsqrt_idx_mlp == 0) rsqrt_idx_mlp = 1;
-  float rsqrt_val_mlp = bf16f(rsqrt_lut[rsqrt_idx_mlp]);
+  // Compute normalized pre-MLP activation using float-precision RMSNorm
+  // (matches golden generator for Tier-2 comparison)
+  std::vector<float> post_attn_f(DIM);
+  for (int i = 0; i < DIM; i++) post_attn_f[i] = bf16f(post_attn_rtl[i]);
+  float ss_mlp = 0;
+  for (int i = 0; i < DIM; i++) ss_mlp += post_attn_f[i] * post_attn_f[i];
+  float rsqrt_val_mlp = 1.0f / std::sqrt(ss_mlp / DIM + 1e-5f);
 
   std::vector<float> norm_pre_mlp(DIM);
   for (int i = 0; i < DIM; i++)
-    norm_pre_mlp[i] = bf16f(post_attn_rtl[i]) * rsqrt_val_mlp * ffn_norm[i];
+    norm_pre_mlp[i] = post_attn_f[i] * rsqrt_val_mlp * ffn_norm[i];
 
   // =====================================================================
   // Stage 5: Software GEMV — gate/up/down MLP projections
