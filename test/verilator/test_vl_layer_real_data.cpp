@@ -475,13 +475,21 @@ static std::vector<uint16_t> gen_sigmoid_lut() {
   std::vector<uint16_t> lut(256);
   for (int i = 0; i < 256; i++) {
     // RTL indexes with gate_bf16 >> 8 (upper byte of BF16 bit pattern).
-    // Reconstruct the representative float for this upper-byte bin.
-    uint16_t bf16_val = (uint16_t)i << 8;
-    float x = bf16f(bf16_val);
-    if (std::isnan(x) || std::isinf(x))
-      lut[i] = tobf16(x > 0 ? 1.0f : 0.0f);
+    // Each bin covers 256 BF16 values (lower byte 0x00..0xFF).
+    // Use bin-average sigmoid to minimize RMSE across the bin.
+    double sum_sig = 0;
+    int valid = 0;
+    for (int lower = 0; lower < 256; lower++) {
+      uint16_t bf16_val = (uint16_t)((i << 8) | lower);
+      float x = bf16f(bf16_val);
+      if (std::isnan(x) || std::isinf(x)) continue;
+      sum_sig += 1.0 / (1.0 + std::exp(-(double)x));
+      valid++;
+    }
+    if (valid > 0)
+      lut[i] = tobf16((float)(sum_sig / valid));
     else
-      lut[i] = tobf16(1.0f / (1.0f + std::exp(-x)));
+      lut[i] = tobf16(i < 128 ? 1.0f : 0.0f);  // NaN/Inf bins
   }
   return lut;
 }
@@ -800,18 +808,16 @@ static void test_real_data_forward() {
   float swiglu_pct = 100.0f * swiglu_match / FFN_DIM;
   std::printf("  RTL vs SystemC exact match: %d/%d (%.1f%%)\n",
               swiglu_match, FFN_DIM, swiglu_pct);
-  // NOTE: RTL BF16 multiply truncates mantissa; SystemC uses FP32 with
-  // round-to-nearest-even. Two chained multiplies (gate*sigmoid, silu*up)
-  // compound the rounding difference. 90% exact match is expected; fixing
-  // requires adding rounding to the RTL shift-and-add multiplier.
+  // NOTE: RTL BF16 multiply truncates mantissa; SystemC matches RTL exactly.
+  // The 256-entry sigmoid LUT is the dominant error source vs FP32 golden.
   stage_result("SwiGLU compute (RTL==SystemC >= 85%)",
                swiglu_pct >= 85.0f);
 
   // =====================================================================
   // Stage 7: Down projection + residual add → post-MLP
-  //          Note: golden uses FP32 silu(gate)*up then INT8 quantization
-  //          before down GEMV. Our test uses RTL BF16 SwiGLU (stub) then
-  //          INT8 quantization. This is an expected divergence point.
+  //          Golden uses FP32 silu(gate)*up then INT8 quantization.
+  //          Our test uses RTL BF16 SwiGLU then INT8 quantization.
+  //          Expected divergence from sigmoid LUT quantization.
   // =====================================================================
   std::printf("\n--- Stage 7: Down projection + residual add ---\n");
 
@@ -963,9 +969,8 @@ static void test_real_data_forward() {
 
     auto golden_swiglu = load_golden("swiglu_out");
     if (!golden_swiglu.empty()) {
-      // Compare our SwiGLU output (RTL BF16 stub) against golden (FP32 silu*up)
       float cos_sw = cosine_sim(swiglu_out, golden_swiglu);
-      std::printf("  swiglu out vs golden:       %.6f (RTL stub vs FP32 silu)\n", cos_sw);
+      std::printf("  swiglu out vs golden:       %.6f\n", cos_sw);
     }
 
     auto golden_down = load_golden("down_proj");

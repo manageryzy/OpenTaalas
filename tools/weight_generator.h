@@ -170,19 +170,25 @@ inline void gen_rope_tables(std::vector<uint16_t>& cos_tbl,
 }
 
 // Generate sigmoid LUT: sigmoid for 256 BF16 upper-byte bins.
-// RTL indexes with gate_bf16 >> 8 (upper byte of BF16 bit pattern),
-// so entry i = sigmoid(bf16_to_float(i << 8)).
+// RTL indexes with gate_bf16 >> 8 (upper byte of BF16 bit pattern).
+// Uses bin-average sigmoid to minimize RMSE across each bin, since each
+// upper-byte bin covers 256 consecutive BF16 values with varying lower bytes.
 inline std::vector<uint16_t> gen_sigmoid_lut() {
     std::vector<uint16_t> lut(256);
     for (int i = 0; i < 256; i++) {
-        uint16_t bf16_val = static_cast<uint16_t>(i) << 8;
-        float x = bf16_to_float(bf16_val);
-        float val;
-        if (std::isnan(x) || std::isinf(x))
-            val = x > 0 ? 1.0f : 0.0f;
+        double sum_sig = 0;
+        int valid = 0;
+        for (int lower = 0; lower < 256; lower++) {
+            uint16_t bf16_val = static_cast<uint16_t>((i << 8) | lower);
+            float x = bf16_to_float(bf16_val);
+            if (std::isnan(x) || std::isinf(x)) continue;
+            sum_sig += 1.0 / (1.0 + std::exp(-(double)x));
+            valid++;
+        }
+        if (valid > 0)
+            lut[i] = float_to_bf16(static_cast<float>(sum_sig / valid));
         else
-            val = 1.0f / (1.0f + std::exp(-x));
-        lut[i] = float_to_bf16(val);
+            lut[i] = float_to_bf16(i < 128 ? 1.0f : 0.0f);
     }
     return lut;
 }
