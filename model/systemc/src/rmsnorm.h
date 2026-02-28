@@ -1,5 +1,6 @@
 #pragma once
 #include <opentaalas/types.h>
+#include <bf16_math.h>
 #include <array>
 
 namespace opentaalas {
@@ -12,7 +13,8 @@ class RmsnormUnit {
 
 public:
   void accumulate_sq(uint16 x) {
-    _sum_sq = _sum_sq + uint32(x);
+    uint16 x_sq = bf16_mul(x, x);
+    _sum_sq = _sum_sq + uint32(x_sq);
     _count = _count + 1;
   }
 

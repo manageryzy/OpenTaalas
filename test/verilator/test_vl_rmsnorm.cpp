@@ -96,32 +96,36 @@ static void test_accumulate_and_read() {
   Harness h;
   h.reset();
 
-  call_accumulate_sq(h, 10);
-  assert(call_get_sum_sq(h) == 10);
+  // BF16(1.0)=0x3F80, squared=BF16(1.0)=0x3F80
+  call_accumulate_sq(h, 0x3F80);
+  assert(call_get_sum_sq(h) == 0x3F80);
 
-  call_accumulate_sq(h, 20);
-  assert(call_get_sum_sq(h) == 30);
+  // BF16(2.0)=0x4000, squared=BF16(4.0)=0x4080
+  call_accumulate_sq(h, 0x4000);
+  assert(call_get_sum_sq(h) == 0x3F80 + 0x4080);
 
-  call_accumulate_sq(h, 100);
-  assert(call_get_sum_sq(h) == 130);
-  std::puts("[PASS] accumulate_sq: 10 -> 30 -> 130");
+  // BF16(0.5)=0x3F00, squared=BF16(0.25)=0x3E80
+  call_accumulate_sq(h, 0x3F00);
+  assert(call_get_sum_sq(h) == 0x3F80 + 0x4080 + 0x3E80);
+  std::puts("[PASS] accumulate_sq: BF16 1.0+2.0+0.5 squared and summed");
 }
 
 static void test_reset_accum() {
   Harness h;
   h.reset();
 
-  call_accumulate_sq(h, 10);
-  call_accumulate_sq(h, 20);
-  call_accumulate_sq(h, 100);
-  assert(call_get_sum_sq(h) == 130);
+  call_accumulate_sq(h, 0x3F80);
+  call_accumulate_sq(h, 0x4000);
+  call_accumulate_sq(h, 0x3F00);
+  assert(call_get_sum_sq(h) == 0x3F80 + 0x4080 + 0x3E80);
 
   call_reset_accum(h);
   assert(call_get_sum_sq(h) == 0);
 
-  call_accumulate_sq(h, 50);
-  assert(call_get_sum_sq(h) == 50);
-  std::puts("[PASS] reset_accum: 130 -> 0, then 50");
+  // BF16(3.0)=0x4040, squared=BF16(9.0)=0x4110
+  call_accumulate_sq(h, 0x4040);
+  assert(call_get_sum_sq(h) == 0x4110);
+  std::puts("[PASS] reset_accum: sum -> 0, then 3.0^2 = 0x4110");
 }
 
 static void test_gamma_round_trip() {

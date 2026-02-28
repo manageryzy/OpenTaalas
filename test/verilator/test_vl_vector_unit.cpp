@@ -232,18 +232,23 @@ static void test_rmsnorm() {
   Harness h;
   h.reset();
 
-  call_rmsnorm_accumulate(h, 10);
-  call_rmsnorm_accumulate(h, 20);
-  call_rmsnorm_accumulate(h, 30);
-  assert(call_rmsnorm_get_sum(h) == 60);
+  // BF16(1.0)=0x3F80, squared=BF16(1.0)=0x3F80
+  call_rmsnorm_accumulate(h, 0x3F80);
+  // BF16(2.0)=0x4000, squared=BF16(4.0)=0x4080
+  call_rmsnorm_accumulate(h, 0x4000);
+  // BF16(0.5)=0x3F00, squared=BF16(0.25)=0x3E80
+  call_rmsnorm_accumulate(h, 0x3F00);
+  // sum = 0x3F80 + 0x4080 + 0x3E80 = 0xBE80
+  assert(call_rmsnorm_get_sum(h) == 0x3F80 + 0x4080 + 0x3E80);
 
   call_rmsnorm_reset(h);
   assert(call_rmsnorm_get_sum(h) == 0);
 
-  call_rmsnorm_accumulate(h, 42);
-  assert(call_rmsnorm_get_sum(h) == 42);
+  // BF16(3.0)=0x4040, squared=BF16(9.0)=0x4110
+  call_rmsnorm_accumulate(h, 0x4040);
+  assert(call_rmsnorm_get_sum(h) == 0x4110);
 
-  std::puts("[PASS] rmsnorm: accumulate 10+20+30=60, reset->0, 42->42");
+  std::puts("[PASS] rmsnorm: BF16 squaring, accumulate, reset");
 }
 
 static void test_gamma_pre_attn() {

@@ -27,8 +27,8 @@ class vector_unit {
   // --- RMSNorm ---
 
   void rmsnorm_accumulate(uint16 x_bf16) {
-    uint32 x32 = x_bf16;
-    _sum_sq = _sum_sq + x32;
+    uint16 x_sq = bf16_mul(x_bf16, x_bf16);
+    _sum_sq = _sum_sq + uint32(x_sq);
     _count = _count + 1;
   }
 

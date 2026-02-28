@@ -13,21 +13,24 @@ using small_vpu = vector_unit<2048>;
 static void test_rmsnorm() {
   small_vpu vpu;
 
-  // Accumulate a few values
-  vpu.rmsnorm_accumulate(uint16(10));
-  vpu.rmsnorm_accumulate(uint16(20));
-  vpu.rmsnorm_accumulate(uint16(30));
+  // Accumulate BF16 values — model squares before accumulating
+  // BF16(1.0)=0x3F80, squared=BF16(1.0)=0x3F80
+  vpu.rmsnorm_accumulate(uint16(0x3F80));
+  // BF16(2.0)=0x4000, squared=BF16(4.0)=0x4080
+  vpu.rmsnorm_accumulate(uint16(0x4000));
+  // BF16(0.5)=0x3F00, squared=BF16(0.25)=0x3E80
+  vpu.rmsnorm_accumulate(uint16(0x3F00));
 
-  // sum_sq should be 10+20+30 = 60 (model adds x, not x*x)
-  assert(vpu.rmsnorm_get_sum() == 60);
+  // sum = 0x3F80 + 0x4080 + 0x3E80 = 0xBE80
+  assert(vpu.rmsnorm_get_sum() == 0x3F80 + 0x4080 + 0x3E80);
 
   // Reset clears accumulator
   vpu.rmsnorm_reset();
   assert(vpu.rmsnorm_get_sum() == 0);
 
-  // Accumulate after reset
-  vpu.rmsnorm_accumulate(uint16(42));
-  assert(vpu.rmsnorm_get_sum() == 42);
+  // Accumulate after reset: BF16(3.0)=0x4040, squared=BF16(9.0)=0x4110
+  vpu.rmsnorm_accumulate(uint16(0x4040));
+  assert(vpu.rmsnorm_get_sum() == 0x4110);
 
   std::puts("  rmsnorm: PASS");
 }
