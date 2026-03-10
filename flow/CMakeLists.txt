@@ -45,14 +45,27 @@ function(add_orfs_design)
 endfunction()
 
 # --- Register designs ---
+
+# Smoke test
 add_orfs_design(
   NAME       smoke_adder
   PLATFORM   ${PLATFORM}
   CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/smoke_adder"
 )
 
+# Tier 1: Leaf modules
+add_orfs_design(NAME mac_pe            PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/mac_pe")
+add_orfs_design(NAME dequant           PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/dequant")
+add_orfs_design(NAME codebook_decoder  PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/codebook_decoder")
+add_orfs_design(NAME lut_interp        PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/lut_interp")
+
 # --- Aggregate target ---
 add_custom_target(backend_all
-  DEPENDS gds_smoke_adder
+  DEPENDS
+    gds_smoke_adder
+    gds_mac_pe
+    gds_dequant
+    gds_codebook_decoder
+    gds_lut_interp
   COMMENT "Building all backend GDS targets"
 )
