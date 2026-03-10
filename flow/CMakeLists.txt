@@ -59,6 +59,29 @@ add_orfs_design(NAME dequant           PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_
 add_orfs_design(NAME codebook_decoder  PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/codebook_decoder")
 add_orfs_design(NAME lut_interp        PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/lut_interp")
 
+# CDC: Async FIFO
+add_orfs_design(NAME async_fifo        PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/async_fifo")
+
+# Tier 2: Medium modules
+add_orfs_design(NAME rom_bank          PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/rom_bank")
+add_orfs_design(NAME scale_store       PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/scale_store")
+add_orfs_design(NAME rmsnorm           PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/rmsnorm")
+add_orfs_design(NAME swiglu            PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/swiglu")
+add_orfs_design(NAME rope              PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/rope")
+add_orfs_design(NAME attention_unit    PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/attention_unit")
+
+# Tier 3: Composite modules
+add_orfs_design(NAME mac_array         PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/mac_array")
+add_orfs_design(NAME kv_cache          PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/kv_cache")
+add_orfs_design(NAME vector_unit       PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/vector_unit")
+
+# Tier 4: Controllers and top-level
+add_orfs_design(NAME layer_tile        PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/layer_tile")
+add_orfs_design(NAME embed_rom         PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/embed_rom")
+add_orfs_design(NAME lm_head           PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/lm_head")
+add_orfs_design(NAME global_controller PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/global_controller")
+add_orfs_design(NAME llama_chip        PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/llama_chip")
+
 # --- Aggregate target ---
 add_custom_target(backend_all
   DEPENDS
@@ -67,5 +90,20 @@ add_custom_target(backend_all
     gds_dequant
     gds_codebook_decoder
     gds_lut_interp
+    gds_async_fifo
+    gds_rom_bank
+    gds_scale_store
+    gds_rmsnorm
+    gds_swiglu
+    gds_rope
+    gds_attention_unit
+    gds_mac_array
+    gds_kv_cache
+    gds_vector_unit
+    gds_layer_tile
+    gds_embed_rom
+    gds_lm_head
+    gds_global_controller
+    gds_llama_chip
   COMMENT "Building all backend GDS targets"
 )
