@@ -86,9 +86,17 @@ PREDEFINED = [
 ]
 
 
+MFG_GRID = 0.005  # µm (5nm manufacturing grid for sky130)
+
+
 def snap_to_grid(val: float, grid: float) -> float:
     """Snap dimension to manufacturing grid."""
     return math.ceil(val / grid) * grid
+
+
+def snap_mfg(val: float) -> float:
+    """Snap to manufacturing grid (5nm)."""
+    return round(round(val / MFG_GRID) * MFG_GRID, 3)
 
 
 def generate_liberty(spec: RomSpec) -> str:
@@ -257,17 +265,17 @@ def generate_lef(spec: RomSpec) -> str:
     pin_pitch = max(METAL_PITCH * 2, 1.0)  # 2x pitch for bus pins
 
     # Clock pin (left edge, bottom)
-    y_pos = GUARD_RING + 1.0
+    y_pos = snap_mfg(GUARD_RING + 1.0)
     lines.append(f'  PIN clk')
     lines.append(f'    DIRECTION INPUT ;')
     lines.append(f'    USE CLOCK ;')
     lines.append(f'    PORT')
     lines.append(f'      LAYER met3 ;')
-    lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
+    lines.append(f'        RECT {snap_mfg(-pin_ext):.3f} {y_pos:.3f} {snap_mfg(pin_ext):.3f} {snap_mfg(y_pos + pin_w):.3f} ;')
     lines.append(f'    END')
     lines.append(f'  END clk')
     lines.append(f'')
-    y_pos += pin_pitch
+    y_pos = snap_mfg(y_pos + pin_pitch)
 
     # CE pin
     lines.append(f'  PIN ce')
@@ -275,11 +283,11 @@ def generate_lef(spec: RomSpec) -> str:
     lines.append(f'    USE SIGNAL ;')
     lines.append(f'    PORT')
     lines.append(f'      LAYER met3 ;')
-    lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
+    lines.append(f'        RECT {snap_mfg(-pin_ext):.3f} {y_pos:.3f} {snap_mfg(pin_ext):.3f} {snap_mfg(y_pos + pin_w):.3f} ;')
     lines.append(f'    END')
     lines.append(f'  END ce')
     lines.append(f'')
-    y_pos += pin_pitch
+    y_pos = snap_mfg(y_pos + pin_pitch)
 
     # Address pins (left edge)
     for i in range(addr_w):
@@ -288,24 +296,24 @@ def generate_lef(spec: RomSpec) -> str:
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
         lines.append(f'      LAYER met3 ;')
-        lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
+        lines.append(f'        RECT {snap_mfg(-pin_ext):.3f} {y_pos:.3f} {snap_mfg(pin_ext):.3f} {snap_mfg(y_pos + pin_w):.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END addr[{i}]')
         lines.append(f'')
-        y_pos += pin_pitch
+        y_pos = snap_mfg(y_pos + pin_pitch)
 
     # Data output pins (right edge) — distribute evenly along height
-    dout_pitch = max(pin_w + 0.200, (h - 2 * GUARD_RING - 2.0) / max(spec.cols, 1))
-    y_pos = GUARD_RING + 1.0
+    dout_pitch = snap_mfg(max(pin_w + 0.200, (h - 2 * GUARD_RING - 2.0) / max(spec.cols, 1)))
+    y_pos = snap_mfg(GUARD_RING + 1.0)
     for i in range(spec.cols):
         lines.append(f'  PIN dout[{i}]')
         lines.append(f'    DIRECTION OUTPUT ;')
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
         lines.append(f'      LAYER met3 ;')
-        pin_y = y_pos + i * dout_pitch
-        pin_y = min(pin_y, h - 1.0)
-        lines.append(f'        RECT {w - pin_ext:.3f} {pin_y:.3f} {w + pin_ext:.3f} {pin_y + pin_w:.3f} ;')
+        pin_y = snap_mfg(y_pos + i * dout_pitch)
+        pin_y = snap_mfg(min(pin_y, h - 1.0))
+        lines.append(f'        RECT {snap_mfg(w - pin_ext):.3f} {pin_y:.3f} {snap_mfg(w + pin_ext):.3f} {snap_mfg(pin_y + pin_w):.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END dout[{i}]')
         lines.append(f'')

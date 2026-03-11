@@ -75,6 +75,14 @@ class SramSpec:
         return self.bits / 1024 * LEAKAGE_PER_KBIT
 
 
+MFG_GRID = 0.005  # µm (5nm manufacturing grid)
+
+
+def snap_mfg(val: float) -> float:
+    """Snap to manufacturing grid (5nm)."""
+    return round(round(val / MFG_GRID) * MFG_GRID, 3)
+
+
 def snap_to_grid(val: float, grid: float) -> float:
     return math.ceil(val / grid) * grid
 
@@ -258,7 +266,7 @@ def generate_lef(spec: SramSpec) -> str:
     pin_w = 0.280  # met3 min width
     pin_ext = 0.500  # extension beyond boundary
     pin_pitch = 1.0
-    y_pos = GUARD_RING + 1.0
+    y_pos = snap_mfg(GUARD_RING + 1.0)
 
     # clk, ce, we on left edge
     for name, use in [('clk', 'CLOCK'), ('ce', 'SIGNAL'), ('we', 'SIGNAL')]:
@@ -267,11 +275,11 @@ def generate_lef(spec: SramSpec) -> str:
         lines.append(f'    USE {use} ;')
         lines.append(f'    PORT')
         lines.append(f'      LAYER met3 ;')
-        lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
+        lines.append(f'        RECT {snap_mfg(-pin_ext):.3f} {y_pos:.3f} {snap_mfg(pin_ext):.3f} {snap_mfg(y_pos + pin_w):.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END {name}')
         lines.append(f'')
-        y_pos += pin_pitch
+        y_pos = snap_mfg(y_pos + pin_pitch)
 
     # Address pins
     for i in range(addr_w):
@@ -280,11 +288,11 @@ def generate_lef(spec: SramSpec) -> str:
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
         lines.append(f'      LAYER met3 ;')
-        lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
+        lines.append(f'        RECT {snap_mfg(-pin_ext):.3f} {y_pos:.3f} {snap_mfg(pin_ext):.3f} {snap_mfg(y_pos + pin_w):.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END addr[{i}]')
         lines.append(f'')
-        y_pos += pin_pitch
+        y_pos = snap_mfg(y_pos + pin_pitch)
 
     # Din pins
     for i in range(spec.width):
@@ -293,25 +301,25 @@ def generate_lef(spec: SramSpec) -> str:
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
         lines.append(f'      LAYER met3 ;')
-        lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
+        lines.append(f'        RECT {snap_mfg(-pin_ext):.3f} {y_pos:.3f} {snap_mfg(pin_ext):.3f} {snap_mfg(y_pos + pin_w):.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END din[{i}]')
         lines.append(f'')
-        y_pos += pin_pitch
+        y_pos = snap_mfg(y_pos + pin_pitch)
 
     # Dout pins on right edge
-    y_pos = GUARD_RING + 1.0
+    y_pos = snap_mfg(GUARD_RING + 1.0)
     for i in range(spec.width):
         lines.append(f'  PIN dout[{i}]')
         lines.append(f'    DIRECTION OUTPUT ;')
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
         lines.append(f'      LAYER met3 ;')
-        lines.append(f'        RECT {w - pin_ext:.3f} {y_pos:.3f} {w + pin_ext:.3f} {y_pos + pin_w:.3f} ;')
+        lines.append(f'        RECT {snap_mfg(w - pin_ext):.3f} {y_pos:.3f} {snap_mfg(w + pin_ext):.3f} {snap_mfg(y_pos + pin_w):.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END dout[{i}]')
         lines.append(f'')
-        y_pos += pin_pitch
+        y_pos = snap_mfg(y_pos + pin_pitch)
 
     # Power
     lines.append(f'  PIN VDD')
