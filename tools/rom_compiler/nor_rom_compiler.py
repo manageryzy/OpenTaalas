@@ -260,12 +260,16 @@ def generate_lef(spec: RomSpec) -> str:
 
     # Pin placement along edges — pins on met3 with 0.28um width,
     # extending 0.5um beyond boundary for router access
-    pin_w = 0.280  # met3 min width in sky130
+    pin_w = 0.340  # > met3 min width (0.3) + margin, ensures track crossing in sky130
     pin_ext = 0.500  # extension beyond boundary for access
-    pin_pitch = max(METAL_PITCH * 2, 1.0)  # 2x pitch for bus pins
+    pin_pitch = 0.680  # met3 track pitch for on-track pin placement
 
-    # Clock pin (left edge, bottom)
-    y_pos = snap_mfg(GUARD_RING + 1.0)
+    # Clock pin (left edge, bottom) — align first pin to met3 track
+    # met3 tracks at y = 0.34 + n * 0.68; find first track above guard ring
+    met3_offset = 0.340
+    met3_pitch = 0.680
+    first_track = met3_offset + met3_pitch * math.ceil((GUARD_RING + 0.5 - met3_offset) / met3_pitch)
+    y_pos = snap_mfg(first_track - pin_w / 2)  # center pin on track
     lines.append(f'  PIN clk')
     lines.append(f'    DIRECTION INPUT ;')
     lines.append(f'    USE CLOCK ;')
@@ -302,9 +306,9 @@ def generate_lef(spec: RomSpec) -> str:
         lines.append(f'')
         y_pos = snap_mfg(y_pos + pin_pitch)
 
-    # Data output pins (right edge) — distribute evenly along height
-    dout_pitch = snap_mfg(max(pin_w + 0.200, (h - 2 * GUARD_RING - 2.0) / max(spec.cols, 1)))
-    y_pos = snap_mfg(GUARD_RING + 1.0)
+    # Data output pins (right edge) — at met3 track pitch
+    dout_pitch = snap_mfg(max(met3_pitch, (h - 2 * GUARD_RING - 2.0) / max(spec.cols, 1)))
+    y_pos = snap_mfg(first_track - pin_w / 2)
     for i in range(spec.cols):
         lines.append(f'  PIN dout[{i}]')
         lines.append(f'    DIRECTION OUTPUT ;')

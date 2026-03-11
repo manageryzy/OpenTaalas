@@ -263,10 +263,14 @@ def generate_lef(spec: SramSpec) -> str:
     lines.append(f'  SYMMETRY X Y ;')
     lines.append(f'')
 
-    pin_w = 0.280  # met3 min width
+    pin_w = 0.340  # > met3 min width (0.3) + margin, ensures track crossing
     pin_ext = 0.500  # extension beyond boundary
-    pin_pitch = 1.0
-    y_pos = snap_mfg(GUARD_RING + 1.0)
+    # Align pins to met3 tracks: y = 0.34 + n * 0.68
+    met3_offset = 0.340
+    met3_pitch = 0.680
+    pin_pitch = met3_pitch
+    first_track = met3_offset + met3_pitch * math.ceil((GUARD_RING + 0.5 - met3_offset) / met3_pitch)
+    y_pos = snap_mfg(first_track - pin_w / 2)
 
     # clk, ce, we on left edge
     for name, use in [('clk', 'CLOCK'), ('ce', 'SIGNAL'), ('we', 'SIGNAL')]:
@@ -307,8 +311,8 @@ def generate_lef(spec: SramSpec) -> str:
         lines.append(f'')
         y_pos = snap_mfg(y_pos + pin_pitch)
 
-    # Dout pins on right edge
-    y_pos = snap_mfg(GUARD_RING + 1.0)
+    # Dout pins on right edge — aligned to met3 tracks
+    y_pos = snap_mfg(first_track - pin_w / 2)
     for i in range(spec.width):
         lines.append(f'  PIN dout[{i}]')
         lines.append(f'    DIRECTION OUTPUT ;')
