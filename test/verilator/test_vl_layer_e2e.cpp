@@ -38,6 +38,71 @@ using namespace opentaalas;
 static constexpr int TIMEOUT = 20000;
 
 // ---------------------------------------------------------------------------
+// 880-bit ROM block helpers (VlWide<28> = 28 × 32-bit words)
+// ---------------------------------------------------------------------------
+static void pack_rom_block(VlWide<28>& out, const uint8_t* bytes) {
+    std::memset(&out, 0, sizeof(out));
+    for (int i = 0; i < 110; i++) {
+        int word = i / 4;
+        int shift = (i % 4) * 8;
+        out[word] |= ((uint32_t)bytes[i]) << shift;
+    }
+}
+
+static uint8_t extract_rom_byte(const VlWide<28>& block, int byte_idx) {
+    int word = byte_idx / 4;
+    int shift = (byte_idx % 4) * 8;
+    return (block[word] >> shift) & 0xFF;
+}
+
+static uint16_t extract_super_scale(const VlWide<28>& block) {
+    return extract_rom_byte(block, 0) | ((uint16_t)extract_rom_byte(block, 1) << 8);
+}
+
+static uint16_t extract_codebook_index(const VlWide<28>& block, int group) {
+    uint8_t qs_byte = extract_rom_byte(block, 2 + group);
+    uint8_t qh_byte = extract_rom_byte(block, 66 + group / 8);
+    int bit_in_byte = group % 8;
+    uint16_t hi_bit = (qh_byte >> bit_in_byte) & 1;
+    return (hi_bit << 8) | qs_byte;
+}
+
+static uint8_t extract_sign_bit(const VlWide<28>& block, int weight_in_block) {
+    int byte_idx = 74 + weight_in_block / 8;
+    int bit_idx = weight_in_block % 8;
+    return (extract_rom_byte(block, byte_idx) >> bit_idx) & 1;
+}
+
+static uint8_t extract_sub_scale_from_block(const VlWide<28>& block, int sub_block_idx) {
+    int byte_idx = 106 + sub_block_idx / 2;
+    uint8_t byte_val = extract_rom_byte(block, byte_idx);
+    if (sub_block_idx % 2 == 0) return byte_val & 0xF;
+    return (byte_val >> 4) & 0xF;
+}
+
+static uint8_t extract_magnitude(uint32_t grid_entry, int which) {
+    return (grid_entry >> (which * 8)) & 0xFF;
+}
+
+// ---------------------------------------------------------------------------
+// 1024-bit RoPE row helpers (VlWide<32> = 32 × 32-bit words)
+// ---------------------------------------------------------------------------
+static void pack_rope_row(VlWide<32>& out, const uint16_t* freqs, int count) {
+    std::memset(&out, 0, sizeof(out));
+    for (int i = 0; i < count && i < 64; i++) {
+        int word = i / 2;
+        int shift = (i % 2) * 16;
+        out[word] |= ((uint32_t)freqs[i]) << shift;
+    }
+}
+
+static uint16_t extract_rope_freq(const VlWide<32>& row, int freq_idx) {
+    int word = freq_idx / 2;
+    int shift = (freq_idx % 2) * 16;
+    return (row[word] >> shift) & 0xFFFF;
+}
+
+// ---------------------------------------------------------------------------
 // Global pass/fail counters
 // ---------------------------------------------------------------------------
 static int g_pass = 0;
@@ -272,113 +337,51 @@ static float PREFIX##_read_fp32(LayerHarness& h, uint8_t pe) {                 \
       d->PREFIX##_read_fp32_accum_result_out));                                \
 }                                                                              \
                                                                                \
-static void PREFIX##_write_grid_entry(LayerHarness& h, uint16_t index,         \
-                                       uint32_t value) {                       \
+static void PREFIX##_write_grid(LayerHarness& h, uint16_t index,               \
+                                 uint32_t value) {                             \
   auto* d = h.dut.get();                                                       \
-  h.wait_ready(d->PREFIX##_write_grid_entry_rdy_out);                          \
-  d->PREFIX##_write_grid_entry_index_in = index;                               \
-  d->PREFIX##_write_grid_entry_value_in = value;                               \
-  d->PREFIX##_write_grid_entry_valid_in = 1; h.tick();                         \
-  d->PREFIX##_write_grid_entry_valid_in = 0;                                   \
-  h.drain_fifo(d->PREFIX##_write_grid_entry_rden_in,                           \
-               d->PREFIX##_write_grid_entry_empty_out);                        \
+  h.wait_ready(d->PREFIX##_write_grid_rdy_out);                                \
+  d->PREFIX##_write_grid_index_in = index;                                     \
+  d->PREFIX##_write_grid_value_in = value;                                     \
+  d->PREFIX##_write_grid_valid_in = 1; h.tick();                               \
+  d->PREFIX##_write_grid_valid_in = 0;                                         \
+  h.drain_fifo(d->PREFIX##_write_grid_rden_in,                                 \
+               d->PREFIX##_write_grid_empty_out);                              \
 }                                                                              \
                                                                                \
-static void PREFIX##_write_rom_byte(LayerHarness& h, uint16_t block_addr,      \
-                                     uint8_t byte_off, uint8_t value) {        \
+static uint32_t PREFIX##_read_grid(LayerHarness& h, uint16_t index) {          \
   auto* d = h.dut.get();                                                       \
-  h.wait_ready(d->PREFIX##_write_rom_byte_rdy_out);                            \
-  d->PREFIX##_write_rom_byte_block_addr_in = block_addr;                       \
-  d->PREFIX##_write_rom_byte_byte_offset_in = byte_off;                        \
-  d->PREFIX##_write_rom_byte_value_in = value;                                 \
-  d->PREFIX##_write_rom_byte_valid_in = 1; h.tick();                           \
-  d->PREFIX##_write_rom_byte_valid_in = 0;                                     \
-  h.drain_fifo(d->PREFIX##_write_rom_byte_rden_in,                             \
-               d->PREFIX##_write_rom_byte_empty_out);                          \
+  h.wait_ready(d->PREFIX##_read_grid_rdy_out);                                 \
+  d->PREFIX##_read_grid_index_in = index;                                      \
+  d->PREFIX##_read_grid_valid_in = 1; h.tick();                                \
+  d->PREFIX##_read_grid_valid_in = 0;                                          \
+  return h.read_fifo(d->PREFIX##_read_grid_rden_in,                            \
+      d->PREFIX##_read_grid_empty_out, d->PREFIX##_read_grid_result_out);      \
 }                                                                              \
                                                                                \
-static uint16_t PREFIX##_read_scale(LayerHarness& h, uint16_t ba) {            \
+static void PREFIX##_write_rom_block(LayerHarness& h, uint16_t block_addr,     \
+                                      const VlWide<28>& value) {               \
   auto* d = h.dut.get();                                                       \
-  h.wait_ready(d->PREFIX##_get_super_scale_rdy_out);                           \
-  d->PREFIX##_get_super_scale_block_addr_in = ba;                              \
-  d->PREFIX##_get_super_scale_valid_in = 1; h.tick();                          \
-  d->PREFIX##_get_super_scale_valid_in = 0;                                    \
-  return h.read_fifo(d->PREFIX##_get_super_scale_rden_in,                      \
-      d->PREFIX##_get_super_scale_empty_out,                                   \
-      d->PREFIX##_get_super_scale_result_out);                                 \
+  h.wait_ready(d->PREFIX##_write_rom_block_rdy_out);                           \
+  d->PREFIX##_write_rom_block_block_addr_in = block_addr;                      \
+  std::memcpy(&d->PREFIX##_write_rom_block_value_in, &value,                   \
+              sizeof(VlWide<28>));                                             \
+  d->PREFIX##_write_rom_block_valid_in = 1; h.tick();                          \
+  d->PREFIX##_write_rom_block_valid_in = 0;                                    \
+  h.drain_fifo(d->PREFIX##_write_rom_block_rden_in,                            \
+               d->PREFIX##_write_rom_block_empty_out);                         \
 }                                                                              \
                                                                                \
-static uint16_t PREFIX##_get_codebook_index(LayerHarness& h,                   \
-    uint16_t ba, uint8_t gib) {                                                \
+static VlWide<28> PREFIX##_read_rom_block(LayerHarness& h,                     \
+                                           uint16_t block_addr) {              \
   auto* d = h.dut.get();                                                       \
-  h.wait_ready(d->PREFIX##_get_codebook_index_rdy_out);                        \
-  d->PREFIX##_get_codebook_index_block_addr_in = ba;                           \
-  d->PREFIX##_get_codebook_index_group_in_block_in = gib;                      \
-  d->PREFIX##_get_codebook_index_valid_in = 1; h.tick();                       \
-  d->PREFIX##_get_codebook_index_valid_in = 0;                                 \
-  return h.read_fifo(d->PREFIX##_get_codebook_index_rden_in,                   \
-      d->PREFIX##_get_codebook_index_empty_out,                                \
-      d->PREFIX##_get_codebook_index_result_out);                              \
-}                                                                              \
-                                                                               \
-static uint8_t PREFIX##_get_sign(LayerHarness& h,                              \
-    uint16_t ba, uint8_t wib) {                                                \
-  auto* d = h.dut.get();                                                       \
-  h.wait_ready(d->PREFIX##_get_sign_rdy_out);                                  \
-  d->PREFIX##_get_sign_block_addr_in = ba;                                     \
-  d->PREFIX##_get_sign_weight_in_block_in = wib;                               \
-  d->PREFIX##_get_sign_valid_in = 1; h.tick();                                 \
-  d->PREFIX##_get_sign_valid_in = 0;                                           \
-  return h.read_fifo(d->PREFIX##_get_sign_rden_in,                             \
-      d->PREFIX##_get_sign_empty_out, d->PREFIX##_get_sign_result_out);        \
-}                                                                              \
-                                                                               \
-static uint8_t PREFIX##_get_sub_scale(LayerHarness& h,                         \
-    uint16_t ba, uint8_t sbi) {                                                \
-  auto* d = h.dut.get();                                                       \
-  h.wait_ready(d->PREFIX##_get_sub_scale_rdy_out);                             \
-  d->PREFIX##_get_sub_scale_block_addr_in = ba;                                \
-  d->PREFIX##_get_sub_scale_sub_block_idx_in = sbi;                            \
-  d->PREFIX##_get_sub_scale_valid_in = 1; h.tick();                            \
-  d->PREFIX##_get_sub_scale_valid_in = 0;                                      \
-  return h.read_fifo(d->PREFIX##_get_sub_scale_rden_in,                        \
-      d->PREFIX##_get_sub_scale_empty_out,                                     \
-      d->PREFIX##_get_sub_scale_result_out);                                   \
-}                                                                              \
-                                                                               \
-static uint8_t PREFIX##_decode(LayerHarness& h, uint16_t idx, int which) {     \
-  auto* d = h.dut.get();                                                       \
-  uint8_t result = 0;                                                          \
-  if (which == 0) {                                                            \
-    h.wait_ready(d->PREFIX##_decode_m0_rdy_out);                               \
-    d->PREFIX##_decode_m0_index_in = idx;                                      \
-    d->PREFIX##_decode_m0_valid_in = 1; h.tick();                              \
-    d->PREFIX##_decode_m0_valid_in = 0;                                        \
-    result = h.read_fifo(d->PREFIX##_decode_m0_rden_in,                        \
-        d->PREFIX##_decode_m0_empty_out, d->PREFIX##_decode_m0_result_out);    \
-  } else if (which == 1) {                                                     \
-    h.wait_ready(d->PREFIX##_decode_m1_rdy_out);                               \
-    d->PREFIX##_decode_m1_index_in = idx;                                      \
-    d->PREFIX##_decode_m1_valid_in = 1; h.tick();                              \
-    d->PREFIX##_decode_m1_valid_in = 0;                                        \
-    result = h.read_fifo(d->PREFIX##_decode_m1_rden_in,                        \
-        d->PREFIX##_decode_m1_empty_out, d->PREFIX##_decode_m1_result_out);    \
-  } else if (which == 2) {                                                     \
-    h.wait_ready(d->PREFIX##_decode_m2_rdy_out);                               \
-    d->PREFIX##_decode_m2_index_in = idx;                                      \
-    d->PREFIX##_decode_m2_valid_in = 1; h.tick();                              \
-    d->PREFIX##_decode_m2_valid_in = 0;                                        \
-    result = h.read_fifo(d->PREFIX##_decode_m2_rden_in,                        \
-        d->PREFIX##_decode_m2_empty_out, d->PREFIX##_decode_m2_result_out);    \
-  } else {                                                                     \
-    h.wait_ready(d->PREFIX##_decode_m3_rdy_out);                               \
-    d->PREFIX##_decode_m3_index_in = idx;                                      \
-    d->PREFIX##_decode_m3_valid_in = 1; h.tick();                              \
-    d->PREFIX##_decode_m3_valid_in = 0;                                        \
-    result = h.read_fifo(d->PREFIX##_decode_m3_rden_in,                        \
-        d->PREFIX##_decode_m3_empty_out, d->PREFIX##_decode_m3_result_out);    \
-  }                                                                            \
-  return result;                                                               \
+  h.wait_ready(d->PREFIX##_read_rom_block_rdy_out);                            \
+  d->PREFIX##_read_rom_block_block_addr_in = block_addr;                       \
+  d->PREFIX##_read_rom_block_valid_in = 1; h.tick();                           \
+  d->PREFIX##_read_rom_block_valid_in = 0;                                     \
+  return h.read_fifo(d->PREFIX##_read_rom_block_rden_in,                       \
+      d->PREFIX##_read_rom_block_empty_out,                                    \
+      d->PREFIX##_read_rom_block_result_out);                                  \
 }
 
 // Instantiate MAC helpers for all 7 arrays
@@ -490,48 +493,50 @@ static uint16_t vpu_swiglu_compute(LayerHarness& h, uint16_t gate, uint16_t up) 
       d->vpu_swiglu_compute_empty_out, d->vpu_swiglu_compute_result_out);
 }
 
-static void vpu_rope_set_cos(LayerHarness& h, uint16_t pos, uint8_t freq, uint16_t val) {
+static void vpu_rope_write_cos_row(LayerHarness& h, uint16_t pos,
+                                    const VlWide<32>& value) {
   auto* d = h.dut.get();
-  h.wait_ready(d->vpu_rope_set_cos_rdy_out);
-  d->vpu_rope_set_cos_position_in = pos;
-  d->vpu_rope_set_cos_freq_idx_in = freq;
-  d->vpu_rope_set_cos_value_in = val;
-  d->vpu_rope_set_cos_valid_in = 1; h.tick();
-  d->vpu_rope_set_cos_valid_in = 0;
-  h.drain_fifo(d->vpu_rope_set_cos_rden_in, d->vpu_rope_set_cos_empty_out);
+  h.wait_ready(d->vpu_rope_write_cos_row_rdy_out);
+  d->vpu_rope_write_cos_row_position_in = pos;
+  std::memcpy(&d->vpu_rope_write_cos_row_value_in, &value, sizeof(VlWide<32>));
+  d->vpu_rope_write_cos_row_valid_in = 1; h.tick();
+  d->vpu_rope_write_cos_row_valid_in = 0;
+  h.drain_fifo(d->vpu_rope_write_cos_row_rden_in,
+               d->vpu_rope_write_cos_row_empty_out);
 }
 
-static void vpu_rope_set_sin(LayerHarness& h, uint16_t pos, uint8_t freq, uint16_t val) {
+static void vpu_rope_write_sin_row(LayerHarness& h, uint16_t pos,
+                                    const VlWide<32>& value) {
   auto* d = h.dut.get();
-  h.wait_ready(d->vpu_rope_set_sin_rdy_out);
-  d->vpu_rope_set_sin_position_in = pos;
-  d->vpu_rope_set_sin_freq_idx_in = freq;
-  d->vpu_rope_set_sin_value_in = val;
-  d->vpu_rope_set_sin_valid_in = 1; h.tick();
-  d->vpu_rope_set_sin_valid_in = 0;
-  h.drain_fifo(d->vpu_rope_set_sin_rden_in, d->vpu_rope_set_sin_empty_out);
+  h.wait_ready(d->vpu_rope_write_sin_row_rdy_out);
+  d->vpu_rope_write_sin_row_position_in = pos;
+  std::memcpy(&d->vpu_rope_write_sin_row_value_in, &value, sizeof(VlWide<32>));
+  d->vpu_rope_write_sin_row_valid_in = 1; h.tick();
+  d->vpu_rope_write_sin_row_valid_in = 0;
+  h.drain_fifo(d->vpu_rope_write_sin_row_rden_in,
+               d->vpu_rope_write_sin_row_empty_out);
 }
 
-static uint16_t vpu_rope_get_cos(LayerHarness& h, uint16_t pos, uint8_t freq) {
+static VlWide<32> vpu_rope_read_cos_row(LayerHarness& h, uint16_t pos) {
   auto* d = h.dut.get();
-  h.wait_ready(d->vpu_rope_get_cos_rdy_out);
-  d->vpu_rope_get_cos_position_in = pos;
-  d->vpu_rope_get_cos_freq_idx_in = freq;
-  d->vpu_rope_get_cos_valid_in = 1; h.tick();
-  d->vpu_rope_get_cos_valid_in = 0;
-  return h.read_fifo(d->vpu_rope_get_cos_rden_in,
-      d->vpu_rope_get_cos_empty_out, d->vpu_rope_get_cos_result_out);
+  h.wait_ready(d->vpu_rope_read_cos_row_rdy_out);
+  d->vpu_rope_read_cos_row_position_in = pos;
+  d->vpu_rope_read_cos_row_valid_in = 1; h.tick();
+  d->vpu_rope_read_cos_row_valid_in = 0;
+  return h.read_fifo(d->vpu_rope_read_cos_row_rden_in,
+      d->vpu_rope_read_cos_row_empty_out,
+      d->vpu_rope_read_cos_row_result_out);
 }
 
-static uint16_t vpu_rope_get_sin(LayerHarness& h, uint16_t pos, uint8_t freq) {
+static VlWide<32> vpu_rope_read_sin_row(LayerHarness& h, uint16_t pos) {
   auto* d = h.dut.get();
-  h.wait_ready(d->vpu_rope_get_sin_rdy_out);
-  d->vpu_rope_get_sin_position_in = pos;
-  d->vpu_rope_get_sin_freq_idx_in = freq;
-  d->vpu_rope_get_sin_valid_in = 1; h.tick();
-  d->vpu_rope_get_sin_valid_in = 0;
-  return h.read_fifo(d->vpu_rope_get_sin_rden_in,
-      d->vpu_rope_get_sin_empty_out, d->vpu_rope_get_sin_result_out);
+  h.wait_ready(d->vpu_rope_read_sin_row_rdy_out);
+  d->vpu_rope_read_sin_row_position_in = pos;
+  d->vpu_rope_read_sin_row_valid_in = 1; h.tick();
+  d->vpu_rope_read_sin_row_valid_in = 0;
+  return h.read_fifo(d->vpu_rope_read_sin_row_rden_in,
+      d->vpu_rope_read_sin_row_empty_out,
+      d->vpu_rope_read_sin_row_result_out);
 }
 
 static uint16_t vpu_dequantize(LayerHarness& h, int32_t accum,
@@ -674,57 +679,47 @@ struct MacFns {
   int32_t (*read_accum)(LayerHarness&, uint8_t pe);
   void (*set_fp32)(LayerHarness&, uint8_t pe, float val);
   float (*read_fp32)(LayerHarness&, uint8_t pe);
-  void (*write_grid_entry)(LayerHarness&, uint16_t index, uint32_t value);
-  void (*write_rom_byte)(LayerHarness&, uint16_t block_addr, uint8_t byte_off, uint8_t value);
-  uint16_t (*read_scale)(LayerHarness&, uint16_t ba);
-  uint16_t (*get_codebook_index)(LayerHarness&, uint16_t ba, uint8_t gib);
-  uint8_t (*get_sign)(LayerHarness&, uint16_t ba, uint8_t wib);
-  uint8_t (*get_sub_scale)(LayerHarness&, uint16_t ba, uint8_t sbi);
-  uint8_t (*decode)(LayerHarness&, uint16_t idx, int which);
+  void (*write_grid)(LayerHarness&, uint16_t index, uint32_t value);
+  uint32_t (*read_grid)(LayerHarness&, uint16_t index);
+  void (*write_rom_block)(LayerHarness&, uint16_t block_addr, const VlWide<28>& value);
+  VlWide<28> (*read_rom_block)(LayerHarness&, uint16_t block_addr);
 };
 
 // Static MacFns instances for all 7 arrays
 static const MacFns mac_q_fns = {
   mac_q_clear_all, mac_q_mac_step, mac_q_read_accum,
-  mac_q_set_fp32, mac_q_read_fp32, mac_q_write_grid_entry,
-  mac_q_write_rom_byte, mac_q_read_scale, mac_q_get_codebook_index,
-  mac_q_get_sign, mac_q_get_sub_scale, mac_q_decode
+  mac_q_set_fp32, mac_q_read_fp32, mac_q_write_grid,
+  mac_q_read_grid, mac_q_write_rom_block, mac_q_read_rom_block
 };
 static const MacFns mac_k_fns = {
   mac_k_clear_all, mac_k_mac_step, mac_k_read_accum,
-  mac_k_set_fp32, mac_k_read_fp32, mac_k_write_grid_entry,
-  mac_k_write_rom_byte, mac_k_read_scale, mac_k_get_codebook_index,
-  mac_k_get_sign, mac_k_get_sub_scale, mac_k_decode
+  mac_k_set_fp32, mac_k_read_fp32, mac_k_write_grid,
+  mac_k_read_grid, mac_k_write_rom_block, mac_k_read_rom_block
 };
 static const MacFns mac_v_fns = {
   mac_v_clear_all, mac_v_mac_step, mac_v_read_accum,
-  mac_v_set_fp32, mac_v_read_fp32, mac_v_write_grid_entry,
-  mac_v_write_rom_byte, mac_v_read_scale, mac_v_get_codebook_index,
-  mac_v_get_sign, mac_v_get_sub_scale, mac_v_decode
+  mac_v_set_fp32, mac_v_read_fp32, mac_v_write_grid,
+  mac_v_read_grid, mac_v_write_rom_block, mac_v_read_rom_block
 };
 static const MacFns mac_o_fns = {
   mac_o_clear_all, mac_o_mac_step, mac_o_read_accum,
-  mac_o_set_fp32, mac_o_read_fp32, mac_o_write_grid_entry,
-  mac_o_write_rom_byte, mac_o_read_scale, mac_o_get_codebook_index,
-  mac_o_get_sign, mac_o_get_sub_scale, mac_o_decode
+  mac_o_set_fp32, mac_o_read_fp32, mac_o_write_grid,
+  mac_o_read_grid, mac_o_write_rom_block, mac_o_read_rom_block
 };
 static const MacFns mac_gate_fns = {
   mac_gate_clear_all, mac_gate_mac_step, mac_gate_read_accum,
-  mac_gate_set_fp32, mac_gate_read_fp32, mac_gate_write_grid_entry,
-  mac_gate_write_rom_byte, mac_gate_read_scale, mac_gate_get_codebook_index,
-  mac_gate_get_sign, mac_gate_get_sub_scale, mac_gate_decode
+  mac_gate_set_fp32, mac_gate_read_fp32, mac_gate_write_grid,
+  mac_gate_read_grid, mac_gate_write_rom_block, mac_gate_read_rom_block
 };
 static const MacFns mac_up_fns = {
   mac_up_clear_all, mac_up_mac_step, mac_up_read_accum,
-  mac_up_set_fp32, mac_up_read_fp32, mac_up_write_grid_entry,
-  mac_up_write_rom_byte, mac_up_read_scale, mac_up_get_codebook_index,
-  mac_up_get_sign, mac_up_get_sub_scale, mac_up_decode
+  mac_up_set_fp32, mac_up_read_fp32, mac_up_write_grid,
+  mac_up_read_grid, mac_up_write_rom_block, mac_up_read_rom_block
 };
 static const MacFns mac_down_fns = {
   mac_down_clear_all, mac_down_mac_step, mac_down_read_accum,
-  mac_down_set_fp32, mac_down_read_fp32, mac_down_write_grid_entry,
-  mac_down_write_rom_byte, mac_down_read_scale, mac_down_get_codebook_index,
-  mac_down_get_sign, mac_down_get_sub_scale, mac_down_decode
+  mac_down_set_fp32, mac_down_read_fp32, mac_down_write_grid,
+  mac_down_read_grid, mac_down_write_rom_block, mac_down_read_rom_block
 };
 
 // ---------------------------------------------------------------------------
@@ -755,15 +750,15 @@ static void program_mac(LayerHarness& h, const MacFns& fns,
                          const std::vector<uint32_t>& grid) {
   // Program codebook into RTL (512 entries)
   for (int i = 0; i < (int)grid.size(); i++)
-    fns.write_grid_entry(h, (uint16_t)i, grid[i]);
+    fns.write_grid(h, (uint16_t)i, grid[i]);
 
-  // Program ROM bytes into RTL and parse IQ3SBlocks into SystemC
+  // Program ROM blocks into RTL (880-bit wide words) and SystemC
   int num_blocks = (int)rom.size() / BLOCK_BYTES;
   for (int b = 0; b < num_blocks; b++) {
-    // RTL: byte-by-byte
-    for (int off = 0; off < BLOCK_BYTES; off++)
-      fns.write_rom_byte(h, (uint16_t)b, (uint8_t)off,
-                         rom[b * BLOCK_BYTES + off]);
+    // RTL: pack 110 bytes into VlWide<28> and write as one block
+    VlWide<28> packed;
+    pack_rom_block(packed, rom.data() + b * BLOCK_BYTES);
+    fns.write_rom_block(h, (uint16_t)b, packed);
     // SystemC: parse and write block
     IQ3SBlock blk = parse_iq3s_block(rom, b);
     ref.write_block(b, blk);
@@ -789,21 +784,21 @@ static bool run_gemv(LayerHarness& h, const MacFns& fns,
   bool all_ok = true;
 
   for (int b = 0; b < num_blocks; b++) {
+    // Read the entire 880-bit ROM block from RTL
+    VlWide<28> rom_block = fns.read_rom_block(h, (uint16_t)b);
+
     int weights_in_block = std::min(BLOCK_SIZE, num_weights - b * BLOCK_SIZE);
     int groups_in_block = (weights_in_block + 3) / 4;
 
     for (int g = 0; g < groups_in_block; g++) {
-      // Get 9-bit codebook index from SystemC RomBank (reference)
-      uint9 sc_idx = ref.read_block(b).qs[0]; // placeholder — use RomBank directly
-      // Actually, we need to use the RTL's get_codebook_index since the
-      // SystemC MacArray doesn't expose RomBank::get_codebook_index directly.
-      // Instead, decode magnitudes from RTL (which has the programmed codebook).
-      uint16_t rtl_idx = fns.get_codebook_index(h, (uint16_t)b, (uint8_t)g);
+      // Extract 9-bit codebook index from ROM block (host-side)
+      uint16_t rtl_idx = extract_codebook_index(rom_block, g);
 
-      // Decode 4 magnitudes from RTL codebook
+      // Read 32-bit codebook entry from RTL and extract 4 magnitudes
+      uint32_t grid_entry = fns.read_grid(h, rtl_idx);
       uint8_t mags[4];
       for (int w = 0; w < 4; w++)
-        mags[w] = fns.decode(h, rtl_idx, w);
+        mags[w] = extract_magnitude(grid_entry, w);
 
       // Process each weight in the group
       int weights_in_group = std::min(4, weights_in_block - g * 4);
@@ -812,8 +807,8 @@ static bool run_gemv(LayerHarness& h, const MacFns& fns,
         int global_weight = b * BLOCK_SIZE + weight_in_block;
         if (global_weight >= num_weights) break;
 
-        // Get sign bit from RTL
-        uint8_t sign = fns.get_sign(h, (uint16_t)b, (uint8_t)weight_in_block);
+        // Extract sign bit from ROM block (host-side)
+        uint8_t sign = extract_sign_bit(rom_block, weight_in_block);
 
         // Activation for this weight
         uint8_t act = (uint8_t)(int8_t)activations[global_weight];
@@ -893,19 +888,30 @@ static void program_all_weights(LayerHarness& h, RefModels& ref,
   }
 
   int half_dim = HEAD_DIM / 2;
-  std::printf("  Programming RoPE tables (%d positions x %d freqs)...\n",
+  std::printf("  Programming RoPE tables (%d positions x %d freqs, row-level)...\n",
               SEQ_LEN, half_dim);
   for (int pos = 0; pos < SEQ_LEN; pos++) {
+    // Build row of cos/sin values for this position
+    uint16_t cos_vals[64] = {};
+    uint16_t sin_vals[64] = {};
     for (int k = 0; k < half_dim; k++) {
-      uint16_t cv = w.cos_table[pos * half_dim + k];
-      uint16_t sv = w.sin_table[pos * half_dim + k];
-      vpu_rope_set_cos(h, (uint16_t)pos, (::uint8_t)k, cv);
-      vpu_rope_set_sin(h, (uint16_t)pos, (::uint8_t)k, sv);
-      ref.vpu.rope_set_cos(opentaalas::uint12(pos), opentaalas::uint6(k),
-                            opentaalas::uint16(cv));
-      ref.vpu.rope_set_sin(opentaalas::uint12(pos), opentaalas::uint6(k),
-                            opentaalas::uint16(sv));
+      cos_vals[k] = w.cos_table[pos * half_dim + k];
+      sin_vals[k] = w.sin_table[pos * half_dim + k];
     }
+    // Pack into VlWide<32> and write to RTL
+    VlWide<32> cos_row, sin_row;
+    pack_rope_row(cos_row, cos_vals, 64);
+    pack_rope_row(sin_row, sin_vals, 64);
+    vpu_rope_write_cos_row(h, (uint16_t)pos, cos_row);
+    vpu_rope_write_sin_row(h, (uint16_t)pos, sin_row);
+    // SystemC: use row-level API
+    std::array<uint16_t, 64> cos_arr{}, sin_arr{};
+    for (int k = 0; k < half_dim; k++) {
+      cos_arr[k] = cos_vals[k];
+      sin_arr[k] = sin_vals[k];
+    }
+    ref.vpu.rope_write_cos_row(pos, cos_arr);
+    ref.vpu.rope_write_sin_row(pos, sin_arr);
   }
 }
 
@@ -1056,29 +1062,27 @@ static void test_phase1_manual_forward_pass() {
     bool all_ok = true;
     int pos = 0;  // token position 0
     int half = HEAD_DIM / 2;
+    // Read entire cos/sin rows from RTL and SystemC
+    VlWide<32> rtl_cos_row = vpu_rope_read_cos_row(h, (uint16_t)pos);
+    VlWide<32> rtl_sin_row = vpu_rope_read_sin_row(h, (uint16_t)pos);
+    auto ref_cos_row = ref.vpu.rope_read_cos_row(pos);
+    auto ref_sin_row = ref.vpu.rope_read_sin_row(pos);
     for (int head = 0; head < HEADS && all_ok; head++) {
       for (int k = 0; k < half; k++) {
-        uint16_t rtl_cos = vpu_rope_get_cos(h, (uint16_t)pos, (::uint8_t)k);
-        uint16_t rtl_sin = vpu_rope_get_sin(h, (uint16_t)pos, (::uint8_t)k);
-        opentaalas::uint16 ref_cos = ref.vpu.rope_get_cos(
-            opentaalas::uint12(pos), opentaalas::uint6(k));
-        opentaalas::uint16 ref_sin = ref.vpu.rope_get_sin(
-            opentaalas::uint12(pos), opentaalas::uint6(k));
+        uint16_t rtl_cos = extract_rope_freq(rtl_cos_row, k);
+        uint16_t rtl_sin = extract_rope_freq(rtl_sin_row, k);
+        uint16_t ref_cos = ref_cos_row[k];
+        uint16_t ref_sin = ref_sin_row[k];
         char lbl[64];
         std::snprintf(lbl, sizeof(lbl), "rope_cos[h%d][%d]", head, k);
-        if (!check_bf16(lbl, rtl_cos, (uint16_t)ref_cos.to_uint64()))
+        if (!check_bf16(lbl, rtl_cos, ref_cos))
           all_ok = false;
         std::snprintf(lbl, sizeof(lbl), "rope_sin[h%d][%d]", head, k);
-        if (!check_bf16(lbl, rtl_sin, (uint16_t)ref_sin.to_uint64()))
+        if (!check_bf16(lbl, rtl_sin, ref_sin))
           all_ok = false;
       }
     }
     stage_result("State 5: RoPE cos/sin table lookups", all_ok);
-
-    // Apply rotation in C++ (for use by later stages)
-    // q_rot[k] = q[k]*cos - q[k+half]*sin
-    // q_rot[k+half] = q[k]*sin + q[k+half]*cos
-    // (operating on INT8 proxy values — just verifying the table lookups match)
   }
   fsm_advance_state(h);
   ref.fsm.advance_state();
