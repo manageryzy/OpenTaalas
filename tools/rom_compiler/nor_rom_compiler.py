@@ -82,6 +82,7 @@ class RomSpec:
 PREDEFINED = [
     RomSpec("nor_rom_1024x880", 1024, 880),
     RomSpec("nor_rom_4096x1024", 4096, 1024),
+    RomSpec("nor_rom_4096x192", 4096, 192),
     RomSpec("nor_rom_65536x192", 65536, 192),
 ]
 
@@ -258,18 +259,24 @@ def generate_lef(spec: RomSpec) -> str:
     lines.append(f'  SYMMETRY X Y ;')
     lines.append(f'')
 
-    # Pin placement along edges — pins on met3 with 0.28um width,
-    # extending 0.5um beyond boundary for router access
-    pin_w = 0.340  # > met3 min width (0.3) + margin, ensures track crossing in sky130
+    # Pin placement along edges — pins on met3, aligned to routing tracks,
+    # extending beyond boundary for router access
+    pin_w = 0.340  # > met3 min width (0.3) + margin
     pin_ext = 0.500  # extension beyond boundary for access
-    pin_pitch = 0.680  # met3 track pitch for on-track pin placement
 
-    # Clock pin (left edge, bottom) — align first pin to met3 track
-    # met3 tracks at y = 0.34 + n * 0.68; find first track above guard ring
+    # met3 routing grid parameters
     met3_offset = 0.340
     met3_pitch = 0.680
     first_track = met3_offset + met3_pitch * math.ceil((GUARD_RING + 0.5 - met3_offset) / met3_pitch)
-    y_pos = snap_mfg(first_track - pin_w / 2)  # center pin on track
+
+    # Calculate available tracks per edge
+    max_pin_y = h - 1.0 - pin_w  # last pin bottom Y
+    tracks_per_edge = int((max_pin_y - (first_track - pin_w / 2)) / met3_pitch) + 1
+
+    # Input pins (left edge, bottom): clk, ce, addr[0:N-1]
+    num_inputs = 2 + addr_w  # clk + ce + addr
+    y_pos = snap_mfg(first_track - pin_w / 2)
+
     lines.append(f'  PIN clk')
     lines.append(f'    DIRECTION INPUT ;')
     lines.append(f'    USE CLOCK ;')
@@ -279,9 +286,8 @@ def generate_lef(spec: RomSpec) -> str:
     lines.append(f'    END')
     lines.append(f'  END clk')
     lines.append(f'')
-    y_pos = snap_mfg(y_pos + pin_pitch)
+    y_pos = snap_mfg(y_pos + met3_pitch)
 
-    # CE pin
     lines.append(f'  PIN ce')
     lines.append(f'    DIRECTION INPUT ;')
     lines.append(f'    USE SIGNAL ;')
@@ -291,9 +297,8 @@ def generate_lef(spec: RomSpec) -> str:
     lines.append(f'    END')
     lines.append(f'  END ce')
     lines.append(f'')
-    y_pos = snap_mfg(y_pos + pin_pitch)
+    y_pos = snap_mfg(y_pos + met3_pitch)
 
-    # Address pins (left edge)
     for i in range(addr_w):
         lines.append(f'  PIN addr[{i}]')
         lines.append(f'    DIRECTION INPUT ;')
@@ -304,49 +309,103 @@ def generate_lef(spec: RomSpec) -> str:
         lines.append(f'    END')
         lines.append(f'  END addr[{i}]')
         lines.append(f'')
-        y_pos = snap_mfg(y_pos + pin_pitch)
+        y_pos = snap_mfg(y_pos + met3_pitch)
 
-    # Data output pins (right edge) — at met3 track pitch
-    dout_pitch = snap_mfg(max(met3_pitch, (h - 2 * GUARD_RING - 2.0) / max(spec.cols, 1)))
+    left_input_end_track = num_inputs  # tracks used by inputs on left edge
+
+    # Data output pins — distribute across right edge, overflow to left edge above inputs
+    right_count = min(spec.cols, tracks_per_edge)
+    left_count = spec.cols - right_count
+    # If overflow needed, also check left edge has room above inputs
+    left_avail = tracks_per_edge - left_input_end_track
+    if left_count > left_avail:
+        # Not enough room even with both edges; increase macro height would be needed
+        # For now, warn and pack (shouldn't happen with current specs)
+        left_count = left_avail
+
+    # Right edge: dout[0 : right_count-1]
     y_pos = snap_mfg(first_track - pin_w / 2)
-    for i in range(spec.cols):
+    for i in range(right_count):
+        pin_y = snap_mfg(y_pos + i * met3_pitch)
         lines.append(f'  PIN dout[{i}]')
         lines.append(f'    DIRECTION OUTPUT ;')
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
         lines.append(f'      LAYER met3 ;')
-        pin_y = snap_mfg(y_pos + i * dout_pitch)
-        pin_y = snap_mfg(min(pin_y, h - 1.0))
         lines.append(f'        RECT {snap_mfg(w - pin_ext):.3f} {pin_y:.3f} {snap_mfg(w + pin_ext):.3f} {snap_mfg(pin_y + pin_w):.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END dout[{i}]')
         lines.append(f'')
 
-    # Power pins
+    # Left edge overflow: dout[right_count : right_count+left_count-1] above inputs
+    if left_count > 0:
+        y_pos = snap_mfg(first_track - pin_w / 2 + left_input_end_track * met3_pitch)
+        for j in range(left_count):
+            i = right_count + j
+            pin_y = snap_mfg(y_pos + j * met3_pitch)
+            lines.append(f'  PIN dout[{i}]')
+            lines.append(f'    DIRECTION OUTPUT ;')
+            lines.append(f'    USE SIGNAL ;')
+            lines.append(f'    PORT')
+            lines.append(f'      LAYER met3 ;')
+            lines.append(f'        RECT {snap_mfg(-pin_ext):.3f} {pin_y:.3f} {snap_mfg(pin_ext):.3f} {snap_mfg(pin_y + pin_w):.3f} ;')
+            lines.append(f'    END')
+            lines.append(f'  END dout[{i}]')
+            lines.append(f'')
+
+    # Power pins — vertical met4 stripes matching PDN grid pitch (27.14µm)
+    # so PDN can place met4↔met5 vias at overlap points
+    pdn_met4_pitch = 27.140
+    pdn_met4_offset = 13.570
+    pdn_met4_width = 1.600
+
     lines.append(f'  PIN VDD')
     lines.append(f'    DIRECTION INOUT ;')
     lines.append(f'    USE POWER ;')
     lines.append(f'    PORT')
     lines.append(f'      LAYER met4 ;')
-    lines.append(f'        RECT 0.000 {h - 1.000:.3f} {w:.3f} {h:.3f} ;')
+    # VDD stripes at even multiples of pitch (offset + 0, 2*pitch, 4*pitch, ...)
+    x = pdn_met4_offset
+    stripe_idx = 0
+    while x + pdn_met4_width / 2 < w:
+        if stripe_idx % 2 == 0:  # even = VDD
+            x1 = snap_mfg(x - pdn_met4_width / 2)
+            x2 = snap_mfg(x + pdn_met4_width / 2)
+            if x1 >= 0 and x2 <= w:
+                lines.append(f'        RECT {x1:.3f} 0.000 {x2:.3f} {h:.3f} ;')
+        x += pdn_met4_pitch
+        stripe_idx += 1
     lines.append(f'    END')
     lines.append(f'  END VDD')
     lines.append(f'')
+
     lines.append(f'  PIN VSS')
     lines.append(f'    DIRECTION INOUT ;')
     lines.append(f'    USE GROUND ;')
     lines.append(f'    PORT')
     lines.append(f'      LAYER met4 ;')
-    lines.append(f'        RECT 0.000 0.000 {w:.3f} 1.000 ;')
+    # VSS stripes at odd multiples of pitch
+    x = pdn_met4_offset
+    stripe_idx = 0
+    while x + pdn_met4_width / 2 < w:
+        if stripe_idx % 2 == 1:  # odd = VSS
+            x1 = snap_mfg(x - pdn_met4_width / 2)
+            x2 = snap_mfg(x + pdn_met4_width / 2)
+            if x1 >= 0 and x2 <= w:
+                lines.append(f'        RECT {x1:.3f} 0.000 {x2:.3f} {h:.3f} ;')
+        x += pdn_met4_pitch
+        stripe_idx += 1
     lines.append(f'    END')
     lines.append(f'  END VSS')
     lines.append(f'')
 
-    # Obstruction (met1+met2 only; met3 left open for pin access and routing)
+    # Obstruction (met1+met2 internal routing; met4 except power stripes)
     lines.append(f'  OBS')
     lines.append(f'    LAYER met1 ;')
     lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
     lines.append(f'    LAYER met2 ;')
+    lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
+    lines.append(f'    LAYER met4 ;')
     lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
     lines.append(f'  END')
     lines.append(f'')

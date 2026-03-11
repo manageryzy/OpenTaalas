@@ -325,31 +325,56 @@ def generate_lef(spec: SramSpec) -> str:
         lines.append(f'')
         y_pos = snap_mfg(y_pos + pin_pitch)
 
-    # Power
+    # Power pins — vertical met4 stripes matching PDN grid pitch (27.14µm)
+    pdn_met4_pitch = 27.140
+    pdn_met4_offset = 13.570
+    pdn_met4_width = 1.600
+
     lines.append(f'  PIN VDD')
     lines.append(f'    DIRECTION INOUT ;')
     lines.append(f'    USE POWER ;')
     lines.append(f'    PORT')
     lines.append(f'      LAYER met4 ;')
-    lines.append(f'        RECT 0.000 {h - 1.000:.3f} {w:.3f} {h:.3f} ;')
+    x = pdn_met4_offset
+    stripe_idx = 0
+    while x + pdn_met4_width / 2 < w:
+        if stripe_idx % 2 == 0:
+            x1 = snap_mfg(x - pdn_met4_width / 2)
+            x2 = snap_mfg(x + pdn_met4_width / 2)
+            if x1 >= 0 and x2 <= w:
+                lines.append(f'        RECT {x1:.3f} 0.000 {x2:.3f} {h:.3f} ;')
+        x += pdn_met4_pitch
+        stripe_idx += 1
     lines.append(f'    END')
     lines.append(f'  END VDD')
     lines.append(f'')
+
     lines.append(f'  PIN VSS')
     lines.append(f'    DIRECTION INOUT ;')
     lines.append(f'    USE GROUND ;')
     lines.append(f'    PORT')
     lines.append(f'      LAYER met4 ;')
-    lines.append(f'        RECT 0.000 0.000 {w:.3f} 1.000 ;')
+    x = pdn_met4_offset
+    stripe_idx = 0
+    while x + pdn_met4_width / 2 < w:
+        if stripe_idx % 2 == 1:
+            x1 = snap_mfg(x - pdn_met4_width / 2)
+            x2 = snap_mfg(x + pdn_met4_width / 2)
+            if x1 >= 0 and x2 <= w:
+                lines.append(f'        RECT {x1:.3f} 0.000 {x2:.3f} {h:.3f} ;')
+        x += pdn_met4_pitch
+        stripe_idx += 1
     lines.append(f'    END')
     lines.append(f'  END VSS')
     lines.append(f'')
 
-    # Obstruction (met1+met2 only; met3 left open for pin access)
+    # Obstruction (met1+met2 internal routing; met4 except power stripes)
     lines.append(f'  OBS')
     lines.append(f'    LAYER met1 ;')
     lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
     lines.append(f'    LAYER met2 ;')
+    lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
+    lines.append(f'    LAYER met4 ;')
     lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
     lines.append(f'  END')
     lines.append(f'')

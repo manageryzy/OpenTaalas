@@ -7555,7 +7555,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.570 419.560 564.910 ;
+        RECT -0.500 11.050 0.500 11.390 ;
     END
   END dout[826]
 
@@ -7564,7 +7564,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 11.730 0.500 12.070 ;
     END
   END dout[827]
 
@@ -7573,7 +7573,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 12.410 0.500 12.750 ;
     END
   END dout[828]
 
@@ -7582,7 +7582,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 13.090 0.500 13.430 ;
     END
   END dout[829]
 
@@ -7591,7 +7591,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 13.770 0.500 14.110 ;
     END
   END dout[830]
 
@@ -7600,7 +7600,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 14.450 0.500 14.790 ;
     END
   END dout[831]
 
@@ -7609,7 +7609,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 15.130 0.500 15.470 ;
     END
   END dout[832]
 
@@ -7618,7 +7618,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 15.810 0.500 16.150 ;
     END
   END dout[833]
 
@@ -7627,7 +7627,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 16.490 0.500 16.830 ;
     END
   END dout[834]
 
@@ -7636,7 +7636,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 17.170 0.500 17.510 ;
     END
   END dout[835]
 
@@ -7645,7 +7645,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 17.850 0.500 18.190 ;
     END
   END dout[836]
 
@@ -7654,7 +7654,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 18.530 0.500 18.870 ;
     END
   END dout[837]
 
@@ -7663,7 +7663,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 19.210 0.500 19.550 ;
     END
   END dout[838]
 
@@ -7672,7 +7672,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 19.890 0.500 20.230 ;
     END
   END dout[839]
 
@@ -7681,7 +7681,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 20.570 0.500 20.910 ;
     END
   END dout[840]
 
@@ -7690,7 +7690,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 21.250 0.500 21.590 ;
     END
   END dout[841]
 
@@ -7699,7 +7699,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 21.930 0.500 22.270 ;
     END
   END dout[842]
 
@@ -7708,7 +7708,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 22.610 0.500 22.950 ;
     END
   END dout[843]
 
@@ -7717,7 +7717,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 23.290 0.500 23.630 ;
     END
   END dout[844]
 
@@ -7726,7 +7726,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 23.970 0.500 24.310 ;
     END
   END dout[845]
 
@@ -7735,7 +7735,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 24.650 0.500 24.990 ;
     END
   END dout[846]
 
@@ -7744,7 +7744,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 25.330 0.500 25.670 ;
     END
   END dout[847]
 
@@ -7753,7 +7753,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 26.010 0.500 26.350 ;
     END
   END dout[848]
 
@@ -7762,7 +7762,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 26.690 0.500 27.030 ;
     END
   END dout[849]
 
@@ -7771,7 +7771,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 27.370 0.500 27.710 ;
     END
   END dout[850]
 
@@ -7780,7 +7780,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 28.050 0.500 28.390 ;
     END
   END dout[851]
 
@@ -7789,7 +7789,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 28.730 0.500 29.070 ;
     END
   END dout[852]
 
@@ -7798,7 +7798,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 29.410 0.500 29.750 ;
     END
   END dout[853]
 
@@ -7807,7 +7807,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 30.090 0.500 30.430 ;
     END
   END dout[854]
 
@@ -7816,7 +7816,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 30.770 0.500 31.110 ;
     END
   END dout[855]
 
@@ -7825,7 +7825,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 31.450 0.500 31.790 ;
     END
   END dout[856]
 
@@ -7834,7 +7834,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 32.130 0.500 32.470 ;
     END
   END dout[857]
 
@@ -7843,7 +7843,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 32.810 0.500 33.150 ;
     END
   END dout[858]
 
@@ -7852,7 +7852,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 33.490 0.500 33.830 ;
     END
   END dout[859]
 
@@ -7861,7 +7861,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 34.170 0.500 34.510 ;
     END
   END dout[860]
 
@@ -7870,7 +7870,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 34.850 0.500 35.190 ;
     END
   END dout[861]
 
@@ -7879,7 +7879,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 35.530 0.500 35.870 ;
     END
   END dout[862]
 
@@ -7888,7 +7888,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 36.210 0.500 36.550 ;
     END
   END dout[863]
 
@@ -7897,7 +7897,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 36.890 0.500 37.230 ;
     END
   END dout[864]
 
@@ -7906,7 +7906,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 37.570 0.500 37.910 ;
     END
   END dout[865]
 
@@ -7915,7 +7915,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 38.250 0.500 38.590 ;
     END
   END dout[866]
 
@@ -7924,7 +7924,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 38.930 0.500 39.270 ;
     END
   END dout[867]
 
@@ -7933,7 +7933,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 39.610 0.500 39.950 ;
     END
   END dout[868]
 
@@ -7942,7 +7942,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 40.290 0.500 40.630 ;
     END
   END dout[869]
 
@@ -7951,7 +7951,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 40.970 0.500 41.310 ;
     END
   END dout[870]
 
@@ -7960,7 +7960,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 41.650 0.500 41.990 ;
     END
   END dout[871]
 
@@ -7969,7 +7969,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 42.330 0.500 42.670 ;
     END
   END dout[872]
 
@@ -7978,7 +7978,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 43.010 0.500 43.350 ;
     END
   END dout[873]
 
@@ -7987,7 +7987,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 43.690 0.500 44.030 ;
     END
   END dout[874]
 
@@ -7996,7 +7996,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 44.370 0.500 44.710 ;
     END
   END dout[875]
 
@@ -8005,7 +8005,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 45.050 0.500 45.390 ;
     END
   END dout[876]
 
@@ -8014,7 +8014,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 45.730 0.500 46.070 ;
     END
   END dout[877]
 
@@ -8023,7 +8023,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 46.410 0.500 46.750 ;
     END
   END dout[878]
 
@@ -8032,7 +8032,7 @@ MACRO nor_rom_1024x880
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 418.560 564.760 419.560 565.100 ;
+        RECT -0.500 47.090 0.500 47.430 ;
     END
   END dout[879]
 
@@ -8041,7 +8041,14 @@ MACRO nor_rom_1024x880
     USE POWER ;
     PORT
       LAYER met4 ;
-        RECT 0.000 564.760 419.060 565.760 ;
+        RECT 12.770 0.000 14.370 565.760 ;
+        RECT 67.050 0.000 68.650 565.760 ;
+        RECT 121.330 0.000 122.930 565.760 ;
+        RECT 175.610 0.000 177.210 565.760 ;
+        RECT 229.890 0.000 231.490 565.760 ;
+        RECT 284.170 0.000 285.770 565.760 ;
+        RECT 338.450 0.000 340.050 565.760 ;
+        RECT 392.730 0.000 394.330 565.760 ;
     END
   END VDD
 
@@ -8050,7 +8057,13 @@ MACRO nor_rom_1024x880
     USE GROUND ;
     PORT
       LAYER met4 ;
-        RECT 0.000 0.000 419.060 1.000 ;
+        RECT 39.910 0.000 41.510 565.760 ;
+        RECT 94.190 0.000 95.790 565.760 ;
+        RECT 148.470 0.000 150.070 565.760 ;
+        RECT 202.750 0.000 204.350 565.760 ;
+        RECT 257.030 0.000 258.630 565.760 ;
+        RECT 311.310 0.000 312.910 565.760 ;
+        RECT 365.590 0.000 367.190 565.760 ;
     END
   END VSS
 
@@ -8058,6 +8071,8 @@ MACRO nor_rom_1024x880
     LAYER met1 ;
       RECT 2.000 2.000 417.060 563.760 ;
     LAYER met2 ;
+      RECT 2.000 2.000 417.060 563.760 ;
+    LAYER met4 ;
       RECT 2.000 2.000 417.060 563.760 ;
   END
 

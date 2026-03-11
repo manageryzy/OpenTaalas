@@ -292,7 +292,7 @@ MACRO sram_4096x8
     USE POWER ;
     PORT
       LAYER met4 ;
-        RECT 0.000 4440.760 26.680 4441.760 ;
+        RECT 12.770 0.000 14.370 4441.760 ;
     END
   END VDD
 
@@ -301,7 +301,6 @@ MACRO sram_4096x8
     USE GROUND ;
     PORT
       LAYER met4 ;
-        RECT 0.000 0.000 26.680 1.000 ;
     END
   END VSS
 
@@ -309,6 +308,8 @@ MACRO sram_4096x8
     LAYER met1 ;
       RECT 2.000 2.000 24.680 4439.760 ;
     LAYER met2 ;
+      RECT 2.000 2.000 24.680 4439.760 ;
+    LAYER met4 ;
       RECT 2.000 2.000 24.680 4439.760 ;
   END
 
