@@ -15,6 +15,7 @@ export VERILOG_DEFINES = $(KANAGAWA_VERILOG_DEFINES)
 export SDC_FILE        = $(_this_dir)/constraint.sdc
 
 export SYNTH_HDL_FRONTEND = slang
+export SYNTH_HIERARCHICAL = 1
 export DIE_AREA  = 0 0 1200 9500
 export CORE_AREA = 10 10 1190 9490
 export PLACE_DENSITY_LB_ADDON = 0.05
