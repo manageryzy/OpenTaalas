@@ -21,40 +21,45 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 | Down projection | 0.995683 |
 | Post-MLP residual | 0.999701 |
 
-### Backend PnR: 12/18 COMPLETE, 7 BLOCKED
+### Backend PnR: 12 GDS + 2–3 GRT + 4 BLOCKED
 
-All 18 Kanagawa modules have ORFS configs for sky130hd at 250 MHz (4ns clock). 12 modules completed full PnR; 7 are blocked on SRAM macro integration.
+19 designs configured for ORFS sky130hd at 250 MHz (4ns clock). NOR ROM and SRAM macro collateral integrated via sky130 HAL layer.
 
-#### Completed Modules
+#### Completed to GDS (12 logic-only modules)
 
-| Module | Tier | Area (um²) | fmax (MHz) | Power (mW) | Timing |
-|--------|------|-----------|-----------|-----------|--------|
-| async_fifo | CDC | 3,794 | 326 | 2.9 | **MET** |
-| layer_tile | 4 | 63,481 | 254 | 29.5 | **MET** |
-| llama_chip | 4 | 76,899 | 252 | 35.3 | **MET** |
-| global_controller | 4 | 95,816 | 244 | 44.2 | -0.09ns |
-| scale_store | 2 | 88,127 | 243 | 43.3 | -0.11ns |
-| lut_interp | 1 | 317,621 | 227 | 136.9 | -0.41ns |
-| codebook_decoder | 1 | 936,451 | 215 | 426.3 | -0.66ns |
-| dequant | 1 | 138,904 | 214 | 80.2 | -0.67ns |
-| mac_pe | 1 | 84,186 | 138 | 41.4 | -3.23ns |
-| attention_unit | 2 | 167,055 | 76 | 93.1 | -9.15ns |
-| rmsnorm | 2 | 3,223,470 | 77 | 1586.9 | -9.02ns |
-| swiglu | 2 | 368,319 | 47 | 227.5 | -17.5ns |
+| Module | Area (um²) | fmax (MHz) | Timing |
+|--------|-----------|-----------|--------|
+| async_fifo | 3,794 | 326 | **MET** |
+| layer_tile | 63,481 | 254 | **MET** |
+| llama_chip | 76,899 | 252 | **MET** |
+| global_controller | 95,816 | 244 | -0.09ns |
+| scale_store | 88,127 | 243 | -0.11ns |
+| lut_interp | 317,621 | 227 | -0.41ns |
+| codebook_decoder | 936,451 | 215 | -0.66ns |
+| dequant | 138,904 | 214 | -0.67ns |
+| mac_pe | 84,186 | 138 | -3.23ns |
+| attention_unit | 167,055 | 76 | -9.15ns |
+| rmsnorm | 3,223,470 | 77 | -9.02ns |
+| swiglu | 368,319 | 47 | -17.5ns |
 
-#### Blocked Modules (Need SRAM Macros)
+#### Macro-Bearing Designs (NOR ROM integrated)
 
-| Module | Memory | Size |
-|--------|--------|------|
-| rom_bank | `uint8[112640] _data` | 110 KB |
-| mac_array | `uint8[112640] _rom` + `uint32[512] _grid` | 112 KB |
-| rope | `uint16[262144] _cos/sin_table` x2 | 1 MB |
-| vector_unit | rope tables inherited | 1 MB |
-| embed_rom | `uint3[4194304] _embeddings` | 1.5 MB |
-| kv_cache | `int8[4194304] _k/v_store` x2 | 8 MB |
-| lm_head | `uint3[525336576] _weights` | 189 MB |
+| Module | Macro(s) | Stage Reached | Blocker |
+|--------|----------|---------------|---------|
+| mac_array | 1× nor\_rom\_1024x880 | GRT | 880-pin output congestion |
+| rom_bank | 1× nor\_rom\_1024x880 | GRT | 880-pin output congestion |
+| embed_rom | 16× nor\_rom\_4096x192 | GRT (running) | Congestion TBD |
+| rope | 2× nor\_rom\_4096x1024 | Placement | 101K net resizer timeout |
 
-These modules contain large behavioral memory arrays (`[[memory]]` annotation in Kanagawa) that Yosys cannot flatten into gates. They need OpenRAM SRAM macros or efabless sky130_sram_macros to replace behavioral RAMs with physical macro instances.
+#### Physically Blocked
+
+| Module | Blocker |
+|--------|---------|
+| vector_unit | 307K line RTL, 101K nets — flat PnR impractical |
+| kv_cache | 2048 SRAM tiles — impractical for flat PnR |
+| lm_head | 188 MB ROM — physically impossible at sky130 |
+
+See [backend-metrics.md](backend-metrics.md) for full metrics, timing analysis, and lessons learned.
 
 ### Test Suite
 - **44 E2E checks** at CI dimensions — all passing
@@ -80,9 +85,10 @@ Further improvement requires more LUT entries or piecewise-linear interpolation 
 
 ## Next Steps
 
-1. **OpenRAM SRAM macro integration** — generate sky130hd SRAM macros, create wrapper modules, update ORFS configs
-2. **Timing closure** — pipeline insertion for modules with negative slack (mac_pe, attention_unit, rmsnorm, swiglu)
-3. **lm_head architecture** — 189 MB weight store likely needs external DRAM interface rather than on-die SRAM
+1. **Timing closure** — pipeline insertion for modules with severe negative slack (swiglu -17.5ns, rmsnorm -9.0ns, attention_unit -9.2ns)
+2. **Pin multiplexing** — serialize 880-pin NOR ROM output to reduce routing congestion for mac_array/rom_bank
+3. **Hierarchical PnR** — partition vector_unit for tractable place-and-route
+4. **lm_head architecture** — 188 MB weight store needs external DRAM interface, not on-die ROM
 
 ## Architecture
 
