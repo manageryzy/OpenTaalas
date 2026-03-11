@@ -250,17 +250,20 @@ def generate_lef(spec: RomSpec) -> str:
     lines.append(f'  SYMMETRY X Y ;')
     lines.append(f'')
 
-    # Pin placement along edges
+    # Pin placement along edges — pins on met3 with 0.28um width,
+    # extending 0.5um beyond boundary for router access
+    pin_w = 0.280  # met3 min width in sky130
+    pin_ext = 0.500  # extension beyond boundary for access
     pin_pitch = max(METAL_PITCH * 2, 1.0)  # 2x pitch for bus pins
 
     # Clock pin (left edge, bottom)
-    y_pos = GUARD_RING
+    y_pos = GUARD_RING + 1.0
     lines.append(f'  PIN clk')
     lines.append(f'    DIRECTION INPUT ;')
     lines.append(f'    USE CLOCK ;')
     lines.append(f'    PORT')
-    lines.append(f'      LAYER met2 ;')
-    lines.append(f'        RECT 0.000 {y_pos:.3f} 0.100 {y_pos + 0.100:.3f} ;')
+    lines.append(f'      LAYER met3 ;')
+    lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
     lines.append(f'    END')
     lines.append(f'  END clk')
     lines.append(f'')
@@ -271,8 +274,8 @@ def generate_lef(spec: RomSpec) -> str:
     lines.append(f'    DIRECTION INPUT ;')
     lines.append(f'    USE SIGNAL ;')
     lines.append(f'    PORT')
-    lines.append(f'      LAYER met2 ;')
-    lines.append(f'        RECT 0.000 {y_pos:.3f} 0.100 {y_pos + 0.100:.3f} ;')
+    lines.append(f'      LAYER met3 ;')
+    lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
     lines.append(f'    END')
     lines.append(f'  END ce')
     lines.append(f'')
@@ -284,24 +287,25 @@ def generate_lef(spec: RomSpec) -> str:
         lines.append(f'    DIRECTION INPUT ;')
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
-        lines.append(f'      LAYER met2 ;')
-        lines.append(f'        RECT 0.000 {y_pos:.3f} 0.100 {y_pos + 0.100:.3f} ;')
+        lines.append(f'      LAYER met3 ;')
+        lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END addr[{i}]')
         lines.append(f'')
         y_pos += pin_pitch
 
-    # Data output pins (right edge)
-    y_pos = GUARD_RING
+    # Data output pins (right edge) — distribute evenly along height
+    dout_pitch = max(pin_w + 0.200, (h - 2 * GUARD_RING - 2.0) / max(spec.cols, 1))
+    y_pos = GUARD_RING + 1.0
     for i in range(spec.cols):
         lines.append(f'  PIN dout[{i}]')
         lines.append(f'    DIRECTION OUTPUT ;')
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
-        lines.append(f'      LAYER met2 ;')
-        pin_y = y_pos + i * (BITCELL_HEIGHT if spec.cols <= 1024 else 0.1)
-        pin_y_snapped = min(pin_y, h - 0.2)
-        lines.append(f'        RECT {w - 0.100:.3f} {pin_y_snapped:.3f} {w:.3f} {pin_y_snapped + 0.100:.3f} ;')
+        lines.append(f'      LAYER met3 ;')
+        pin_y = y_pos + i * dout_pitch
+        pin_y = min(pin_y, h - 1.0)
+        lines.append(f'        RECT {w - pin_ext:.3f} {pin_y:.3f} {w + pin_ext:.3f} {pin_y + pin_w:.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END dout[{i}]')
         lines.append(f'')
@@ -326,13 +330,11 @@ def generate_lef(spec: RomSpec) -> str:
     lines.append(f'  END VSS')
     lines.append(f'')
 
-    # Obstruction (entire macro area on lower metals)
+    # Obstruction (met1+met2 only; met3 left open for pin access and routing)
     lines.append(f'  OBS')
     lines.append(f'    LAYER met1 ;')
     lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
     lines.append(f'    LAYER met2 ;')
-    lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
-    lines.append(f'    LAYER met3 ;')
     lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
     lines.append(f'  END')
     lines.append(f'')

@@ -12,8 +12,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE CLOCK ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 2.000 0.100 2.100 ;
+      LAYER met3 ;
+        RECT -0.500 3.000 0.500 3.280 ;
     END
   END clk
 
@@ -21,8 +21,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 3.000 0.100 3.100 ;
+      LAYER met3 ;
+        RECT -0.500 4.000 0.500 4.280 ;
     END
   END ce
 
@@ -30,8 +30,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 4.000 0.100 4.100 ;
+      LAYER met3 ;
+        RECT -0.500 5.000 0.500 5.280 ;
     END
   END addr[0]
 
@@ -39,8 +39,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 5.000 0.100 5.100 ;
+      LAYER met3 ;
+        RECT -0.500 6.000 0.500 6.280 ;
     END
   END addr[1]
 
@@ -48,8 +48,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 6.000 0.100 6.100 ;
+      LAYER met3 ;
+        RECT -0.500 7.000 0.500 7.280 ;
     END
   END addr[2]
 
@@ -57,8 +57,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 7.000 0.100 7.100 ;
+      LAYER met3 ;
+        RECT -0.500 8.000 0.500 8.280 ;
     END
   END addr[3]
 
@@ -66,8 +66,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 8.000 0.100 8.100 ;
+      LAYER met3 ;
+        RECT -0.500 9.000 0.500 9.280 ;
     END
   END addr[4]
 
@@ -75,8 +75,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 9.000 0.100 9.100 ;
+      LAYER met3 ;
+        RECT -0.500 10.000 0.500 10.280 ;
     END
   END addr[5]
 
@@ -84,8 +84,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 10.000 0.100 10.100 ;
+      LAYER met3 ;
+        RECT -0.500 11.000 0.500 11.280 ;
     END
   END addr[6]
 
@@ -93,8 +93,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 11.000 0.100 11.100 ;
+      LAYER met3 ;
+        RECT -0.500 12.000 0.500 12.280 ;
     END
   END addr[7]
 
@@ -102,8 +102,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 12.000 0.100 12.100 ;
+      LAYER met3 ;
+        RECT -0.500 13.000 0.500 13.280 ;
     END
   END addr[8]
 
@@ -111,8 +111,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 13.000 0.100 13.100 ;
+      LAYER met3 ;
+        RECT -0.500 14.000 0.500 14.280 ;
     END
   END addr[9]
 
@@ -120,8 +120,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 14.000 0.100 14.100 ;
+      LAYER met3 ;
+        RECT -0.500 15.000 0.500 15.280 ;
     END
   END addr[10]
 
@@ -129,8 +129,8 @@ MACRO nor_rom_4096x192
     DIRECTION INPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 0.000 15.000 0.100 15.100 ;
+      LAYER met3 ;
+        RECT -0.500 16.000 0.500 16.280 ;
     END
   END addr[11]
 
@@ -138,8 +138,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 2.000 102.580 2.100 ;
+      LAYER met3 ;
+        RECT 102.080 3.000 103.080 3.280 ;
     END
   END dout[0]
 
@@ -147,8 +147,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 2.540 102.580 2.640 ;
+      LAYER met3 ;
+        RECT 102.080 14.557 103.080 14.837 ;
     END
   END dout[1]
 
@@ -156,8 +156,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 3.080 102.580 3.180 ;
+      LAYER met3 ;
+        RECT 102.080 26.114 103.080 26.394 ;
     END
   END dout[2]
 
@@ -165,8 +165,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 3.620 102.580 3.720 ;
+      LAYER met3 ;
+        RECT 102.080 37.671 103.080 37.951 ;
     END
   END dout[3]
 
@@ -174,8 +174,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 4.160 102.580 4.260 ;
+      LAYER met3 ;
+        RECT 102.080 49.228 103.080 49.508 ;
     END
   END dout[4]
 
@@ -183,8 +183,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 4.700 102.580 4.800 ;
+      LAYER met3 ;
+        RECT 102.080 60.785 103.080 61.065 ;
     END
   END dout[5]
 
@@ -192,8 +192,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 5.240 102.580 5.340 ;
+      LAYER met3 ;
+        RECT 102.080 72.343 103.080 72.623 ;
     END
   END dout[6]
 
@@ -201,8 +201,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 5.780 102.580 5.880 ;
+      LAYER met3 ;
+        RECT 102.080 83.900 103.080 84.180 ;
     END
   END dout[7]
 
@@ -210,8 +210,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 6.320 102.580 6.420 ;
+      LAYER met3 ;
+        RECT 102.080 95.457 103.080 95.737 ;
     END
   END dout[8]
 
@@ -219,8 +219,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 6.860 102.580 6.960 ;
+      LAYER met3 ;
+        RECT 102.080 107.014 103.080 107.294 ;
     END
   END dout[9]
 
@@ -228,8 +228,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 7.400 102.580 7.500 ;
+      LAYER met3 ;
+        RECT 102.080 118.571 103.080 118.851 ;
     END
   END dout[10]
 
@@ -237,8 +237,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 7.940 102.580 8.040 ;
+      LAYER met3 ;
+        RECT 102.080 130.128 103.080 130.408 ;
     END
   END dout[11]
 
@@ -246,8 +246,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 8.480 102.580 8.580 ;
+      LAYER met3 ;
+        RECT 102.080 141.685 103.080 141.965 ;
     END
   END dout[12]
 
@@ -255,8 +255,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 9.020 102.580 9.120 ;
+      LAYER met3 ;
+        RECT 102.080 153.242 103.080 153.522 ;
     END
   END dout[13]
 
@@ -264,8 +264,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 9.560 102.580 9.660 ;
+      LAYER met3 ;
+        RECT 102.080 164.799 103.080 165.079 ;
     END
   END dout[14]
 
@@ -273,8 +273,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 10.100 102.580 10.200 ;
+      LAYER met3 ;
+        RECT 102.080 176.356 103.080 176.636 ;
     END
   END dout[15]
 
@@ -282,8 +282,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 10.640 102.580 10.740 ;
+      LAYER met3 ;
+        RECT 102.080 187.913 103.080 188.193 ;
     END
   END dout[16]
 
@@ -291,8 +291,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 11.180 102.580 11.280 ;
+      LAYER met3 ;
+        RECT 102.080 199.470 103.080 199.750 ;
     END
   END dout[17]
 
@@ -300,8 +300,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 11.720 102.580 11.820 ;
+      LAYER met3 ;
+        RECT 102.080 211.028 103.080 211.308 ;
     END
   END dout[18]
 
@@ -309,8 +309,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 12.260 102.580 12.360 ;
+      LAYER met3 ;
+        RECT 102.080 222.585 103.080 222.865 ;
     END
   END dout[19]
 
@@ -318,8 +318,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 12.800 102.580 12.900 ;
+      LAYER met3 ;
+        RECT 102.080 234.142 103.080 234.422 ;
     END
   END dout[20]
 
@@ -327,8 +327,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 13.340 102.580 13.440 ;
+      LAYER met3 ;
+        RECT 102.080 245.699 103.080 245.979 ;
     END
   END dout[21]
 
@@ -336,8 +336,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 13.880 102.580 13.980 ;
+      LAYER met3 ;
+        RECT 102.080 257.256 103.080 257.536 ;
     END
   END dout[22]
 
@@ -345,8 +345,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 14.420 102.580 14.520 ;
+      LAYER met3 ;
+        RECT 102.080 268.813 103.080 269.093 ;
     END
   END dout[23]
 
@@ -354,8 +354,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 14.960 102.580 15.060 ;
+      LAYER met3 ;
+        RECT 102.080 280.370 103.080 280.650 ;
     END
   END dout[24]
 
@@ -363,8 +363,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 15.500 102.580 15.600 ;
+      LAYER met3 ;
+        RECT 102.080 291.927 103.080 292.207 ;
     END
   END dout[25]
 
@@ -372,8 +372,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 16.040 102.580 16.140 ;
+      LAYER met3 ;
+        RECT 102.080 303.484 103.080 303.764 ;
     END
   END dout[26]
 
@@ -381,8 +381,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 16.580 102.580 16.680 ;
+      LAYER met3 ;
+        RECT 102.080 315.041 103.080 315.321 ;
     END
   END dout[27]
 
@@ -390,8 +390,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 17.120 102.580 17.220 ;
+      LAYER met3 ;
+        RECT 102.080 326.598 103.080 326.878 ;
     END
   END dout[28]
 
@@ -399,8 +399,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 17.660 102.580 17.760 ;
+      LAYER met3 ;
+        RECT 102.080 338.155 103.080 338.435 ;
     END
   END dout[29]
 
@@ -408,8 +408,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 18.200 102.580 18.300 ;
+      LAYER met3 ;
+        RECT 102.080 349.712 103.080 349.992 ;
     END
   END dout[30]
 
@@ -417,8 +417,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 18.740 102.580 18.840 ;
+      LAYER met3 ;
+        RECT 102.080 361.270 103.080 361.550 ;
     END
   END dout[31]
 
@@ -426,8 +426,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 19.280 102.580 19.380 ;
+      LAYER met3 ;
+        RECT 102.080 372.827 103.080 373.107 ;
     END
   END dout[32]
 
@@ -435,8 +435,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 19.820 102.580 19.920 ;
+      LAYER met3 ;
+        RECT 102.080 384.384 103.080 384.664 ;
     END
   END dout[33]
 
@@ -444,8 +444,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 20.360 102.580 20.460 ;
+      LAYER met3 ;
+        RECT 102.080 395.941 103.080 396.221 ;
     END
   END dout[34]
 
@@ -453,8 +453,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 20.900 102.580 21.000 ;
+      LAYER met3 ;
+        RECT 102.080 407.498 103.080 407.778 ;
     END
   END dout[35]
 
@@ -462,8 +462,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 21.440 102.580 21.540 ;
+      LAYER met3 ;
+        RECT 102.080 419.055 103.080 419.335 ;
     END
   END dout[36]
 
@@ -471,8 +471,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 21.980 102.580 22.080 ;
+      LAYER met3 ;
+        RECT 102.080 430.612 103.080 430.892 ;
     END
   END dout[37]
 
@@ -480,8 +480,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 22.520 102.580 22.620 ;
+      LAYER met3 ;
+        RECT 102.080 442.169 103.080 442.449 ;
     END
   END dout[38]
 
@@ -489,8 +489,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 23.060 102.580 23.160 ;
+      LAYER met3 ;
+        RECT 102.080 453.726 103.080 454.006 ;
     END
   END dout[39]
 
@@ -498,8 +498,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 23.600 102.580 23.700 ;
+      LAYER met3 ;
+        RECT 102.080 465.283 103.080 465.563 ;
     END
   END dout[40]
 
@@ -507,8 +507,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 24.140 102.580 24.240 ;
+      LAYER met3 ;
+        RECT 102.080 476.840 103.080 477.120 ;
     END
   END dout[41]
 
@@ -516,8 +516,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 24.680 102.580 24.780 ;
+      LAYER met3 ;
+        RECT 102.080 488.397 103.080 488.677 ;
     END
   END dout[42]
 
@@ -525,8 +525,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 25.220 102.580 25.320 ;
+      LAYER met3 ;
+        RECT 102.080 499.955 103.080 500.235 ;
     END
   END dout[43]
 
@@ -534,8 +534,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 25.760 102.580 25.860 ;
+      LAYER met3 ;
+        RECT 102.080 511.512 103.080 511.792 ;
     END
   END dout[44]
 
@@ -543,8 +543,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 26.300 102.580 26.400 ;
+      LAYER met3 ;
+        RECT 102.080 523.069 103.080 523.349 ;
     END
   END dout[45]
 
@@ -552,8 +552,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 26.840 102.580 26.940 ;
+      LAYER met3 ;
+        RECT 102.080 534.626 103.080 534.906 ;
     END
   END dout[46]
 
@@ -561,8 +561,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 27.380 102.580 27.480 ;
+      LAYER met3 ;
+        RECT 102.080 546.183 103.080 546.463 ;
     END
   END dout[47]
 
@@ -570,8 +570,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 27.920 102.580 28.020 ;
+      LAYER met3 ;
+        RECT 102.080 557.740 103.080 558.020 ;
     END
   END dout[48]
 
@@ -579,8 +579,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 28.460 102.580 28.560 ;
+      LAYER met3 ;
+        RECT 102.080 569.297 103.080 569.577 ;
     END
   END dout[49]
 
@@ -588,8 +588,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 29.000 102.580 29.100 ;
+      LAYER met3 ;
+        RECT 102.080 580.854 103.080 581.134 ;
     END
   END dout[50]
 
@@ -597,8 +597,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 29.540 102.580 29.640 ;
+      LAYER met3 ;
+        RECT 102.080 592.411 103.080 592.691 ;
     END
   END dout[51]
 
@@ -606,8 +606,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 30.080 102.580 30.180 ;
+      LAYER met3 ;
+        RECT 102.080 603.968 103.080 604.248 ;
     END
   END dout[52]
 
@@ -615,8 +615,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 30.620 102.580 30.720 ;
+      LAYER met3 ;
+        RECT 102.080 615.525 103.080 615.805 ;
     END
   END dout[53]
 
@@ -624,8 +624,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 31.160 102.580 31.260 ;
+      LAYER met3 ;
+        RECT 102.080 627.082 103.080 627.362 ;
     END
   END dout[54]
 
@@ -633,8 +633,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 31.700 102.580 31.800 ;
+      LAYER met3 ;
+        RECT 102.080 638.640 103.080 638.920 ;
     END
   END dout[55]
 
@@ -642,8 +642,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 32.240 102.580 32.340 ;
+      LAYER met3 ;
+        RECT 102.080 650.197 103.080 650.477 ;
     END
   END dout[56]
 
@@ -651,8 +651,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 32.780 102.580 32.880 ;
+      LAYER met3 ;
+        RECT 102.080 661.754 103.080 662.034 ;
     END
   END dout[57]
 
@@ -660,8 +660,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 33.320 102.580 33.420 ;
+      LAYER met3 ;
+        RECT 102.080 673.311 103.080 673.591 ;
     END
   END dout[58]
 
@@ -669,8 +669,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 33.860 102.580 33.960 ;
+      LAYER met3 ;
+        RECT 102.080 684.868 103.080 685.148 ;
     END
   END dout[59]
 
@@ -678,8 +678,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 34.400 102.580 34.500 ;
+      LAYER met3 ;
+        RECT 102.080 696.425 103.080 696.705 ;
     END
   END dout[60]
 
@@ -687,8 +687,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 34.940 102.580 35.040 ;
+      LAYER met3 ;
+        RECT 102.080 707.982 103.080 708.262 ;
     END
   END dout[61]
 
@@ -696,8 +696,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 35.480 102.580 35.580 ;
+      LAYER met3 ;
+        RECT 102.080 719.539 103.080 719.819 ;
     END
   END dout[62]
 
@@ -705,8 +705,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 36.020 102.580 36.120 ;
+      LAYER met3 ;
+        RECT 102.080 731.096 103.080 731.376 ;
     END
   END dout[63]
 
@@ -714,8 +714,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 36.560 102.580 36.660 ;
+      LAYER met3 ;
+        RECT 102.080 742.653 103.080 742.933 ;
     END
   END dout[64]
 
@@ -723,8 +723,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 37.100 102.580 37.200 ;
+      LAYER met3 ;
+        RECT 102.080 754.210 103.080 754.490 ;
     END
   END dout[65]
 
@@ -732,8 +732,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 37.640 102.580 37.740 ;
+      LAYER met3 ;
+        RECT 102.080 765.767 103.080 766.047 ;
     END
   END dout[66]
 
@@ -741,8 +741,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 38.180 102.580 38.280 ;
+      LAYER met3 ;
+        RECT 102.080 777.325 103.080 777.605 ;
     END
   END dout[67]
 
@@ -750,8 +750,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 38.720 102.580 38.820 ;
+      LAYER met3 ;
+        RECT 102.080 788.882 103.080 789.162 ;
     END
   END dout[68]
 
@@ -759,8 +759,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 39.260 102.580 39.360 ;
+      LAYER met3 ;
+        RECT 102.080 800.439 103.080 800.719 ;
     END
   END dout[69]
 
@@ -768,8 +768,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 39.800 102.580 39.900 ;
+      LAYER met3 ;
+        RECT 102.080 811.996 103.080 812.276 ;
     END
   END dout[70]
 
@@ -777,8 +777,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 40.340 102.580 40.440 ;
+      LAYER met3 ;
+        RECT 102.080 823.553 103.080 823.833 ;
     END
   END dout[71]
 
@@ -786,8 +786,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 40.880 102.580 40.980 ;
+      LAYER met3 ;
+        RECT 102.080 835.110 103.080 835.390 ;
     END
   END dout[72]
 
@@ -795,8 +795,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 41.420 102.580 41.520 ;
+      LAYER met3 ;
+        RECT 102.080 846.667 103.080 846.947 ;
     END
   END dout[73]
 
@@ -804,8 +804,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 41.960 102.580 42.060 ;
+      LAYER met3 ;
+        RECT 102.080 858.224 103.080 858.504 ;
     END
   END dout[74]
 
@@ -813,8 +813,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 42.500 102.580 42.600 ;
+      LAYER met3 ;
+        RECT 102.080 869.781 103.080 870.061 ;
     END
   END dout[75]
 
@@ -822,8 +822,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 43.040 102.580 43.140 ;
+      LAYER met3 ;
+        RECT 102.080 881.338 103.080 881.618 ;
     END
   END dout[76]
 
@@ -831,8 +831,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 43.580 102.580 43.680 ;
+      LAYER met3 ;
+        RECT 102.080 892.895 103.080 893.175 ;
     END
   END dout[77]
 
@@ -840,8 +840,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 44.120 102.580 44.220 ;
+      LAYER met3 ;
+        RECT 102.080 904.452 103.080 904.732 ;
     END
   END dout[78]
 
@@ -849,8 +849,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 44.660 102.580 44.760 ;
+      LAYER met3 ;
+        RECT 102.080 916.010 103.080 916.290 ;
     END
   END dout[79]
 
@@ -858,8 +858,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 45.200 102.580 45.300 ;
+      LAYER met3 ;
+        RECT 102.080 927.567 103.080 927.847 ;
     END
   END dout[80]
 
@@ -867,8 +867,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 45.740 102.580 45.840 ;
+      LAYER met3 ;
+        RECT 102.080 939.124 103.080 939.404 ;
     END
   END dout[81]
 
@@ -876,8 +876,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 46.280 102.580 46.380 ;
+      LAYER met3 ;
+        RECT 102.080 950.681 103.080 950.961 ;
     END
   END dout[82]
 
@@ -885,8 +885,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 46.820 102.580 46.920 ;
+      LAYER met3 ;
+        RECT 102.080 962.238 103.080 962.518 ;
     END
   END dout[83]
 
@@ -894,8 +894,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 47.360 102.580 47.460 ;
+      LAYER met3 ;
+        RECT 102.080 973.795 103.080 974.075 ;
     END
   END dout[84]
 
@@ -903,8 +903,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 47.900 102.580 48.000 ;
+      LAYER met3 ;
+        RECT 102.080 985.352 103.080 985.632 ;
     END
   END dout[85]
 
@@ -912,8 +912,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 48.440 102.580 48.540 ;
+      LAYER met3 ;
+        RECT 102.080 996.909 103.080 997.189 ;
     END
   END dout[86]
 
@@ -921,8 +921,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 48.980 102.580 49.080 ;
+      LAYER met3 ;
+        RECT 102.080 1008.466 103.080 1008.746 ;
     END
   END dout[87]
 
@@ -930,8 +930,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 49.520 102.580 49.620 ;
+      LAYER met3 ;
+        RECT 102.080 1020.023 103.080 1020.303 ;
     END
   END dout[88]
 
@@ -939,8 +939,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 50.060 102.580 50.160 ;
+      LAYER met3 ;
+        RECT 102.080 1031.580 103.080 1031.860 ;
     END
   END dout[89]
 
@@ -948,8 +948,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 50.600 102.580 50.700 ;
+      LAYER met3 ;
+        RECT 102.080 1043.138 103.080 1043.418 ;
     END
   END dout[90]
 
@@ -957,8 +957,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 51.140 102.580 51.240 ;
+      LAYER met3 ;
+        RECT 102.080 1054.695 103.080 1054.975 ;
     END
   END dout[91]
 
@@ -966,8 +966,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 51.680 102.580 51.780 ;
+      LAYER met3 ;
+        RECT 102.080 1066.252 103.080 1066.532 ;
     END
   END dout[92]
 
@@ -975,8 +975,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 52.220 102.580 52.320 ;
+      LAYER met3 ;
+        RECT 102.080 1077.809 103.080 1078.089 ;
     END
   END dout[93]
 
@@ -984,8 +984,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 52.760 102.580 52.860 ;
+      LAYER met3 ;
+        RECT 102.080 1089.366 103.080 1089.646 ;
     END
   END dout[94]
 
@@ -993,8 +993,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 53.300 102.580 53.400 ;
+      LAYER met3 ;
+        RECT 102.080 1100.923 103.080 1101.203 ;
     END
   END dout[95]
 
@@ -1002,8 +1002,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 53.840 102.580 53.940 ;
+      LAYER met3 ;
+        RECT 102.080 1112.480 103.080 1112.760 ;
     END
   END dout[96]
 
@@ -1011,8 +1011,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 54.380 102.580 54.480 ;
+      LAYER met3 ;
+        RECT 102.080 1124.037 103.080 1124.317 ;
     END
   END dout[97]
 
@@ -1020,8 +1020,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 54.920 102.580 55.020 ;
+      LAYER met3 ;
+        RECT 102.080 1135.594 103.080 1135.874 ;
     END
   END dout[98]
 
@@ -1029,8 +1029,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 55.460 102.580 55.560 ;
+      LAYER met3 ;
+        RECT 102.080 1147.151 103.080 1147.431 ;
     END
   END dout[99]
 
@@ -1038,8 +1038,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 56.000 102.580 56.100 ;
+      LAYER met3 ;
+        RECT 102.080 1158.708 103.080 1158.988 ;
     END
   END dout[100]
 
@@ -1047,8 +1047,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 56.540 102.580 56.640 ;
+      LAYER met3 ;
+        RECT 102.080 1170.265 103.080 1170.545 ;
     END
   END dout[101]
 
@@ -1056,8 +1056,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 57.080 102.580 57.180 ;
+      LAYER met3 ;
+        RECT 102.080 1181.822 103.080 1182.102 ;
     END
   END dout[102]
 
@@ -1065,8 +1065,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 57.620 102.580 57.720 ;
+      LAYER met3 ;
+        RECT 102.080 1193.380 103.080 1193.660 ;
     END
   END dout[103]
 
@@ -1074,8 +1074,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 58.160 102.580 58.260 ;
+      LAYER met3 ;
+        RECT 102.080 1204.937 103.080 1205.217 ;
     END
   END dout[104]
 
@@ -1083,8 +1083,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 58.700 102.580 58.800 ;
+      LAYER met3 ;
+        RECT 102.080 1216.494 103.080 1216.774 ;
     END
   END dout[105]
 
@@ -1092,8 +1092,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 59.240 102.580 59.340 ;
+      LAYER met3 ;
+        RECT 102.080 1228.051 103.080 1228.331 ;
     END
   END dout[106]
 
@@ -1101,8 +1101,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 59.780 102.580 59.880 ;
+      LAYER met3 ;
+        RECT 102.080 1239.608 103.080 1239.888 ;
     END
   END dout[107]
 
@@ -1110,8 +1110,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 60.320 102.580 60.420 ;
+      LAYER met3 ;
+        RECT 102.080 1251.165 103.080 1251.445 ;
     END
   END dout[108]
 
@@ -1119,8 +1119,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 60.860 102.580 60.960 ;
+      LAYER met3 ;
+        RECT 102.080 1262.722 103.080 1263.002 ;
     END
   END dout[109]
 
@@ -1128,8 +1128,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 61.400 102.580 61.500 ;
+      LAYER met3 ;
+        RECT 102.080 1274.279 103.080 1274.559 ;
     END
   END dout[110]
 
@@ -1137,8 +1137,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 61.940 102.580 62.040 ;
+      LAYER met3 ;
+        RECT 102.080 1285.836 103.080 1286.116 ;
     END
   END dout[111]
 
@@ -1146,8 +1146,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 62.480 102.580 62.580 ;
+      LAYER met3 ;
+        RECT 102.080 1297.393 103.080 1297.673 ;
     END
   END dout[112]
 
@@ -1155,8 +1155,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 63.020 102.580 63.120 ;
+      LAYER met3 ;
+        RECT 102.080 1308.950 103.080 1309.230 ;
     END
   END dout[113]
 
@@ -1164,8 +1164,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 63.560 102.580 63.660 ;
+      LAYER met3 ;
+        RECT 102.080 1320.507 103.080 1320.787 ;
     END
   END dout[114]
 
@@ -1173,8 +1173,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 64.100 102.580 64.200 ;
+      LAYER met3 ;
+        RECT 102.080 1332.065 103.080 1332.345 ;
     END
   END dout[115]
 
@@ -1182,8 +1182,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 64.640 102.580 64.740 ;
+      LAYER met3 ;
+        RECT 102.080 1343.622 103.080 1343.902 ;
     END
   END dout[116]
 
@@ -1191,8 +1191,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 65.180 102.580 65.280 ;
+      LAYER met3 ;
+        RECT 102.080 1355.179 103.080 1355.459 ;
     END
   END dout[117]
 
@@ -1200,8 +1200,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 65.720 102.580 65.820 ;
+      LAYER met3 ;
+        RECT 102.080 1366.736 103.080 1367.016 ;
     END
   END dout[118]
 
@@ -1209,8 +1209,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 66.260 102.580 66.360 ;
+      LAYER met3 ;
+        RECT 102.080 1378.293 103.080 1378.573 ;
     END
   END dout[119]
 
@@ -1218,8 +1218,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 66.800 102.580 66.900 ;
+      LAYER met3 ;
+        RECT 102.080 1389.850 103.080 1390.130 ;
     END
   END dout[120]
 
@@ -1227,8 +1227,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 67.340 102.580 67.440 ;
+      LAYER met3 ;
+        RECT 102.080 1401.407 103.080 1401.687 ;
     END
   END dout[121]
 
@@ -1236,8 +1236,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 67.880 102.580 67.980 ;
+      LAYER met3 ;
+        RECT 102.080 1412.964 103.080 1413.244 ;
     END
   END dout[122]
 
@@ -1245,8 +1245,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 68.420 102.580 68.520 ;
+      LAYER met3 ;
+        RECT 102.080 1424.521 103.080 1424.801 ;
     END
   END dout[123]
 
@@ -1254,8 +1254,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 68.960 102.580 69.060 ;
+      LAYER met3 ;
+        RECT 102.080 1436.078 103.080 1436.358 ;
     END
   END dout[124]
 
@@ -1263,8 +1263,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 69.500 102.580 69.600 ;
+      LAYER met3 ;
+        RECT 102.080 1447.635 103.080 1447.915 ;
     END
   END dout[125]
 
@@ -1272,8 +1272,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 70.040 102.580 70.140 ;
+      LAYER met3 ;
+        RECT 102.080 1459.192 103.080 1459.472 ;
     END
   END dout[126]
 
@@ -1281,8 +1281,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 70.580 102.580 70.680 ;
+      LAYER met3 ;
+        RECT 102.080 1470.750 103.080 1471.030 ;
     END
   END dout[127]
 
@@ -1290,8 +1290,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 71.120 102.580 71.220 ;
+      LAYER met3 ;
+        RECT 102.080 1482.307 103.080 1482.587 ;
     END
   END dout[128]
 
@@ -1299,8 +1299,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 71.660 102.580 71.760 ;
+      LAYER met3 ;
+        RECT 102.080 1493.864 103.080 1494.144 ;
     END
   END dout[129]
 
@@ -1308,8 +1308,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 72.200 102.580 72.300 ;
+      LAYER met3 ;
+        RECT 102.080 1505.421 103.080 1505.701 ;
     END
   END dout[130]
 
@@ -1317,8 +1317,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 72.740 102.580 72.840 ;
+      LAYER met3 ;
+        RECT 102.080 1516.978 103.080 1517.258 ;
     END
   END dout[131]
 
@@ -1326,8 +1326,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 73.280 102.580 73.380 ;
+      LAYER met3 ;
+        RECT 102.080 1528.535 103.080 1528.815 ;
     END
   END dout[132]
 
@@ -1335,8 +1335,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 73.820 102.580 73.920 ;
+      LAYER met3 ;
+        RECT 102.080 1540.092 103.080 1540.372 ;
     END
   END dout[133]
 
@@ -1344,8 +1344,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 74.360 102.580 74.460 ;
+      LAYER met3 ;
+        RECT 102.080 1551.649 103.080 1551.929 ;
     END
   END dout[134]
 
@@ -1353,8 +1353,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 74.900 102.580 75.000 ;
+      LAYER met3 ;
+        RECT 102.080 1563.206 103.080 1563.486 ;
     END
   END dout[135]
 
@@ -1362,8 +1362,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 75.440 102.580 75.540 ;
+      LAYER met3 ;
+        RECT 102.080 1574.763 103.080 1575.043 ;
     END
   END dout[136]
 
@@ -1371,8 +1371,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 75.980 102.580 76.080 ;
+      LAYER met3 ;
+        RECT 102.080 1586.320 103.080 1586.600 ;
     END
   END dout[137]
 
@@ -1380,8 +1380,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 76.520 102.580 76.620 ;
+      LAYER met3 ;
+        RECT 102.080 1597.878 103.080 1598.158 ;
     END
   END dout[138]
 
@@ -1389,8 +1389,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 77.060 102.580 77.160 ;
+      LAYER met3 ;
+        RECT 102.080 1609.435 103.080 1609.715 ;
     END
   END dout[139]
 
@@ -1398,8 +1398,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 77.600 102.580 77.700 ;
+      LAYER met3 ;
+        RECT 102.080 1620.992 103.080 1621.272 ;
     END
   END dout[140]
 
@@ -1407,8 +1407,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 78.140 102.580 78.240 ;
+      LAYER met3 ;
+        RECT 102.080 1632.549 103.080 1632.829 ;
     END
   END dout[141]
 
@@ -1416,8 +1416,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 78.680 102.580 78.780 ;
+      LAYER met3 ;
+        RECT 102.080 1644.106 103.080 1644.386 ;
     END
   END dout[142]
 
@@ -1425,8 +1425,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 79.220 102.580 79.320 ;
+      LAYER met3 ;
+        RECT 102.080 1655.663 103.080 1655.943 ;
     END
   END dout[143]
 
@@ -1434,8 +1434,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 79.760 102.580 79.860 ;
+      LAYER met3 ;
+        RECT 102.080 1667.220 103.080 1667.500 ;
     END
   END dout[144]
 
@@ -1443,8 +1443,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 80.300 102.580 80.400 ;
+      LAYER met3 ;
+        RECT 102.080 1678.777 103.080 1679.057 ;
     END
   END dout[145]
 
@@ -1452,8 +1452,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 80.840 102.580 80.940 ;
+      LAYER met3 ;
+        RECT 102.080 1690.334 103.080 1690.614 ;
     END
   END dout[146]
 
@@ -1461,8 +1461,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 81.380 102.580 81.480 ;
+      LAYER met3 ;
+        RECT 102.080 1701.891 103.080 1702.171 ;
     END
   END dout[147]
 
@@ -1470,8 +1470,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 81.920 102.580 82.020 ;
+      LAYER met3 ;
+        RECT 102.080 1713.448 103.080 1713.728 ;
     END
   END dout[148]
 
@@ -1479,8 +1479,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 82.460 102.580 82.560 ;
+      LAYER met3 ;
+        RECT 102.080 1725.005 103.080 1725.285 ;
     END
   END dout[149]
 
@@ -1488,8 +1488,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 83.000 102.580 83.100 ;
+      LAYER met3 ;
+        RECT 102.080 1736.562 103.080 1736.842 ;
     END
   END dout[150]
 
@@ -1497,8 +1497,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 83.540 102.580 83.640 ;
+      LAYER met3 ;
+        RECT 102.080 1748.120 103.080 1748.400 ;
     END
   END dout[151]
 
@@ -1506,8 +1506,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 84.080 102.580 84.180 ;
+      LAYER met3 ;
+        RECT 102.080 1759.677 103.080 1759.957 ;
     END
   END dout[152]
 
@@ -1515,8 +1515,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 84.620 102.580 84.720 ;
+      LAYER met3 ;
+        RECT 102.080 1771.234 103.080 1771.514 ;
     END
   END dout[153]
 
@@ -1524,8 +1524,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 85.160 102.580 85.260 ;
+      LAYER met3 ;
+        RECT 102.080 1782.791 103.080 1783.071 ;
     END
   END dout[154]
 
@@ -1533,8 +1533,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 85.700 102.580 85.800 ;
+      LAYER met3 ;
+        RECT 102.080 1794.348 103.080 1794.628 ;
     END
   END dout[155]
 
@@ -1542,8 +1542,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 86.240 102.580 86.340 ;
+      LAYER met3 ;
+        RECT 102.080 1805.905 103.080 1806.185 ;
     END
   END dout[156]
 
@@ -1551,8 +1551,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 86.780 102.580 86.880 ;
+      LAYER met3 ;
+        RECT 102.080 1817.462 103.080 1817.742 ;
     END
   END dout[157]
 
@@ -1560,8 +1560,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 87.320 102.580 87.420 ;
+      LAYER met3 ;
+        RECT 102.080 1829.019 103.080 1829.299 ;
     END
   END dout[158]
 
@@ -1569,8 +1569,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 87.860 102.580 87.960 ;
+      LAYER met3 ;
+        RECT 102.080 1840.576 103.080 1840.856 ;
     END
   END dout[159]
 
@@ -1578,8 +1578,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 88.400 102.580 88.500 ;
+      LAYER met3 ;
+        RECT 102.080 1852.133 103.080 1852.413 ;
     END
   END dout[160]
 
@@ -1587,8 +1587,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 88.940 102.580 89.040 ;
+      LAYER met3 ;
+        RECT 102.080 1863.690 103.080 1863.970 ;
     END
   END dout[161]
 
@@ -1596,8 +1596,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 89.480 102.580 89.580 ;
+      LAYER met3 ;
+        RECT 102.080 1875.247 103.080 1875.527 ;
     END
   END dout[162]
 
@@ -1605,8 +1605,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 90.020 102.580 90.120 ;
+      LAYER met3 ;
+        RECT 102.080 1886.805 103.080 1887.085 ;
     END
   END dout[163]
 
@@ -1614,8 +1614,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 90.560 102.580 90.660 ;
+      LAYER met3 ;
+        RECT 102.080 1898.362 103.080 1898.642 ;
     END
   END dout[164]
 
@@ -1623,8 +1623,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 91.100 102.580 91.200 ;
+      LAYER met3 ;
+        RECT 102.080 1909.919 103.080 1910.199 ;
     END
   END dout[165]
 
@@ -1632,8 +1632,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 91.640 102.580 91.740 ;
+      LAYER met3 ;
+        RECT 102.080 1921.476 103.080 1921.756 ;
     END
   END dout[166]
 
@@ -1641,8 +1641,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 92.180 102.580 92.280 ;
+      LAYER met3 ;
+        RECT 102.080 1933.033 103.080 1933.313 ;
     END
   END dout[167]
 
@@ -1650,8 +1650,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 92.720 102.580 92.820 ;
+      LAYER met3 ;
+        RECT 102.080 1944.590 103.080 1944.870 ;
     END
   END dout[168]
 
@@ -1659,8 +1659,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 93.260 102.580 93.360 ;
+      LAYER met3 ;
+        RECT 102.080 1956.147 103.080 1956.427 ;
     END
   END dout[169]
 
@@ -1668,8 +1668,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 93.800 102.580 93.900 ;
+      LAYER met3 ;
+        RECT 102.080 1967.704 103.080 1967.984 ;
     END
   END dout[170]
 
@@ -1677,8 +1677,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 94.340 102.580 94.440 ;
+      LAYER met3 ;
+        RECT 102.080 1979.261 103.080 1979.541 ;
     END
   END dout[171]
 
@@ -1686,8 +1686,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 94.880 102.580 94.980 ;
+      LAYER met3 ;
+        RECT 102.080 1990.818 103.080 1991.098 ;
     END
   END dout[172]
 
@@ -1695,8 +1695,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 95.420 102.580 95.520 ;
+      LAYER met3 ;
+        RECT 102.080 2002.375 103.080 2002.655 ;
     END
   END dout[173]
 
@@ -1704,8 +1704,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 95.960 102.580 96.060 ;
+      LAYER met3 ;
+        RECT 102.080 2013.932 103.080 2014.212 ;
     END
   END dout[174]
 
@@ -1713,8 +1713,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 96.500 102.580 96.600 ;
+      LAYER met3 ;
+        RECT 102.080 2025.490 103.080 2025.770 ;
     END
   END dout[175]
 
@@ -1722,8 +1722,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 97.040 102.580 97.140 ;
+      LAYER met3 ;
+        RECT 102.080 2037.047 103.080 2037.327 ;
     END
   END dout[176]
 
@@ -1731,8 +1731,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 97.580 102.580 97.680 ;
+      LAYER met3 ;
+        RECT 102.080 2048.604 103.080 2048.884 ;
     END
   END dout[177]
 
@@ -1740,8 +1740,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 98.120 102.580 98.220 ;
+      LAYER met3 ;
+        RECT 102.080 2060.161 103.080 2060.441 ;
     END
   END dout[178]
 
@@ -1749,8 +1749,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 98.660 102.580 98.760 ;
+      LAYER met3 ;
+        RECT 102.080 2071.718 103.080 2071.998 ;
     END
   END dout[179]
 
@@ -1758,8 +1758,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 99.200 102.580 99.300 ;
+      LAYER met3 ;
+        RECT 102.080 2083.275 103.080 2083.555 ;
     END
   END dout[180]
 
@@ -1767,8 +1767,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 99.740 102.580 99.840 ;
+      LAYER met3 ;
+        RECT 102.080 2094.832 103.080 2095.112 ;
     END
   END dout[181]
 
@@ -1776,8 +1776,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 100.280 102.580 100.380 ;
+      LAYER met3 ;
+        RECT 102.080 2106.389 103.080 2106.669 ;
     END
   END dout[182]
 
@@ -1785,8 +1785,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 100.820 102.580 100.920 ;
+      LAYER met3 ;
+        RECT 102.080 2117.946 103.080 2118.226 ;
     END
   END dout[183]
 
@@ -1794,8 +1794,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 101.360 102.580 101.460 ;
+      LAYER met3 ;
+        RECT 102.080 2129.503 103.080 2129.783 ;
     END
   END dout[184]
 
@@ -1803,8 +1803,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 101.900 102.580 102.000 ;
+      LAYER met3 ;
+        RECT 102.080 2141.060 103.080 2141.340 ;
     END
   END dout[185]
 
@@ -1812,8 +1812,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 102.440 102.580 102.540 ;
+      LAYER met3 ;
+        RECT 102.080 2152.617 103.080 2152.898 ;
     END
   END dout[186]
 
@@ -1821,8 +1821,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 102.980 102.580 103.080 ;
+      LAYER met3 ;
+        RECT 102.080 2164.175 103.080 2164.455 ;
     END
   END dout[187]
 
@@ -1830,8 +1830,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 103.520 102.580 103.620 ;
+      LAYER met3 ;
+        RECT 102.080 2175.732 103.080 2176.012 ;
     END
   END dout[188]
 
@@ -1839,8 +1839,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 104.060 102.580 104.160 ;
+      LAYER met3 ;
+        RECT 102.080 2187.289 103.080 2187.569 ;
     END
   END dout[189]
 
@@ -1848,8 +1848,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 104.600 102.580 104.700 ;
+      LAYER met3 ;
+        RECT 102.080 2198.846 103.080 2199.126 ;
     END
   END dout[190]
 
@@ -1857,8 +1857,8 @@ MACRO nor_rom_4096x192
     DIRECTION OUTPUT ;
     USE SIGNAL ;
     PORT
-      LAYER met2 ;
-        RECT 102.480 105.140 102.580 105.240 ;
+      LAYER met3 ;
+        RECT 102.080 2210.403 103.080 2210.683 ;
     END
   END dout[191]
 
@@ -1884,8 +1884,6 @@ MACRO nor_rom_4096x192
     LAYER met1 ;
       RECT 2.000 2.000 100.580 2222.960 ;
     LAYER met2 ;
-      RECT 2.000 2.000 100.580 2222.960 ;
-    LAYER met3 ;
       RECT 2.000 2.000 100.580 2222.960 ;
   END
 

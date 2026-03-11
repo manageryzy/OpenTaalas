@@ -255,8 +255,10 @@ def generate_lef(spec: SramSpec) -> str:
     lines.append(f'  SYMMETRY X Y ;')
     lines.append(f'')
 
+    pin_w = 0.280  # met3 min width
+    pin_ext = 0.500  # extension beyond boundary
     pin_pitch = 1.0
-    y_pos = GUARD_RING
+    y_pos = GUARD_RING + 1.0
 
     # clk, ce, we on left edge
     for name, use in [('clk', 'CLOCK'), ('ce', 'SIGNAL'), ('we', 'SIGNAL')]:
@@ -264,8 +266,8 @@ def generate_lef(spec: SramSpec) -> str:
         lines.append(f'    DIRECTION INPUT ;')
         lines.append(f'    USE {use} ;')
         lines.append(f'    PORT')
-        lines.append(f'      LAYER met2 ;')
-        lines.append(f'        RECT 0.000 {y_pos:.3f} 0.100 {y_pos + 0.100:.3f} ;')
+        lines.append(f'      LAYER met3 ;')
+        lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END {name}')
         lines.append(f'')
@@ -277,8 +279,8 @@ def generate_lef(spec: SramSpec) -> str:
         lines.append(f'    DIRECTION INPUT ;')
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
-        lines.append(f'      LAYER met2 ;')
-        lines.append(f'        RECT 0.000 {y_pos:.3f} 0.100 {y_pos + 0.100:.3f} ;')
+        lines.append(f'      LAYER met3 ;')
+        lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END addr[{i}]')
         lines.append(f'')
@@ -290,22 +292,22 @@ def generate_lef(spec: SramSpec) -> str:
         lines.append(f'    DIRECTION INPUT ;')
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
-        lines.append(f'      LAYER met2 ;')
-        lines.append(f'        RECT 0.000 {y_pos:.3f} 0.100 {y_pos + 0.100:.3f} ;')
+        lines.append(f'      LAYER met3 ;')
+        lines.append(f'        RECT {-pin_ext:.3f} {y_pos:.3f} {pin_ext:.3f} {y_pos + pin_w:.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END din[{i}]')
         lines.append(f'')
         y_pos += pin_pitch
 
     # Dout pins on right edge
-    y_pos = GUARD_RING
+    y_pos = GUARD_RING + 1.0
     for i in range(spec.width):
         lines.append(f'  PIN dout[{i}]')
         lines.append(f'    DIRECTION OUTPUT ;')
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
-        lines.append(f'      LAYER met2 ;')
-        lines.append(f'        RECT {w - 0.100:.3f} {y_pos:.3f} {w:.3f} {y_pos + 0.100:.3f} ;')
+        lines.append(f'      LAYER met3 ;')
+        lines.append(f'        RECT {w - pin_ext:.3f} {y_pos:.3f} {w + pin_ext:.3f} {y_pos + pin_w:.3f} ;')
         lines.append(f'    END')
         lines.append(f'  END dout[{i}]')
         lines.append(f'')
@@ -331,13 +333,11 @@ def generate_lef(spec: SramSpec) -> str:
     lines.append(f'  END VSS')
     lines.append(f'')
 
-    # Obstruction
+    # Obstruction (met1+met2 only; met3 left open for pin access)
     lines.append(f'  OBS')
     lines.append(f'    LAYER met1 ;')
     lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
     lines.append(f'    LAYER met2 ;')
-    lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
-    lines.append(f'    LAYER met3 ;')
     lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
     lines.append(f'  END')
     lines.append(f'')
