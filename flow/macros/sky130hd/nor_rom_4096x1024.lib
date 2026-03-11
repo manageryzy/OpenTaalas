@@ -1,0 +1,120 @@
+library (nor_rom_4096x1024) {
+  comment : "NOR ROM macro 4096x1024 for sky130hd";
+  technology (cmos);
+  delay_model : table_lookup;
+  time_unit : "1ns";
+  voltage_unit : "1V";
+  current_unit : "1mA";
+  pulling_resistance_unit : "1kohm";
+  leakage_power_unit : "1nW";
+  capacitive_load_unit (1, pf);
+
+  nom_process : 1;
+  nom_voltage : 1.8;
+  nom_temperature : 25;
+
+  input_threshold_pct_rise : 50;
+  input_threshold_pct_fall : 50;
+  output_threshold_pct_rise : 50;
+  output_threshold_pct_fall : 50;
+  slew_lower_threshold_pct_rise : 20;
+  slew_upper_threshold_pct_rise : 80;
+  slew_lower_threshold_pct_fall : 20;
+  slew_upper_threshold_pct_fall : 80;
+
+  default_cell_leakage_power : 409600.0;
+  default_fanout_load : 1;
+  default_max_transition : 1.0;
+  default_output_pin_cap : 0.0;
+
+  type (bus12) {
+    base_type : array;
+    data_type : bit;
+    bit_width : 12;
+    bit_from : 11;
+    bit_to : 0;
+    downto : true;
+  }
+
+  type (bus1024) {
+    base_type : array;
+    data_type : bit;
+    bit_width : 1024;
+    bit_from : 1023;
+    bit_to : 0;
+    downto : true;
+  }
+
+  cell (nor_rom_4096x1024) {
+    area : 1078651.4;
+    cell_leakage_power : 409600.0;
+    dont_touch : true;
+    dont_use : true;
+
+    pin (clk) {
+      direction : input;
+      capacitance : 0.005;
+      clock : true;
+      min_pulse_width_low : 1.0;
+      min_pulse_width_high : 1.0;
+    }
+
+    pin (ce) {
+      direction : input;
+      capacitance : 0.005;
+    }
+
+    bus (addr) {
+      bus_type : bus12;
+      direction : input;
+      pin (addr[11:0]) {
+        capacitance : 0.005;
+        timing () {
+          related_pin : "clk";
+          timing_type : setup_rising;
+          rise_constraint (scalar) {
+            values ("0.5");
+          }
+          fall_constraint (scalar) {
+            values ("0.5");
+          }
+        }
+        timing () {
+          related_pin : "clk";
+          timing_type : hold_rising;
+          rise_constraint (scalar) {
+            values ("0.1");
+          }
+          fall_constraint (scalar) {
+            values ("0.1");
+          }
+        }
+      }
+    }
+
+    bus (dout) {
+      bus_type : bus1024;
+      direction : output;
+      pin (dout[1023:0]) {
+        max_capacitance : 0.01;
+        timing () {
+          related_pin : "clk";
+          timing_type : rising_edge;
+          timing_sense : non_unate;
+          cell_rise (scalar) {
+            values ("2.0");
+          }
+          cell_fall (scalar) {
+            values ("2.0");
+          }
+          rise_transition (scalar) {
+            values ("0.1");
+          }
+          fall_transition (scalar) {
+            values ("0.1");
+          }
+        }
+      }
+    }
+  }
+}
