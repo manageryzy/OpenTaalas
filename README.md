@@ -167,25 +167,31 @@ cmake --build build --target backend_all
 
 ### PnR Status (sky130hd @ 250 MHz)
 
-12 of 18 modules completed full PnR. 3 meet timing at 250 MHz; 9 achieve 47-244 MHz. 7 modules are blocked pending SRAM macro integration (OpenRAM) — their behavioral memory arrays are too large for gate-level synthesis.
+19 designs configured. 12 logic-only modules completed to GDS. 2–3 macro-bearing modules reached global routing with NOR ROM macros integrated. 4 designs are physically blocked.
 
-| Module | Tier | fmax (MHz) | Status |
-|--------|------|-----------|--------|
-| async_fifo | CDC | 326 | MET |
-| layer_tile | 4 | 254 | MET |
-| llama_chip | 4 | 252 | MET |
-| global_controller | 4 | 244 | -0.09ns |
-| scale_store | 2 | 243 | -0.11ns |
-| lut_interp | 1 | 227 | -0.41ns |
-| codebook_decoder | 1 | 215 | -0.66ns |
-| dequant | 1 | 214 | -0.67ns |
-| mac_pe | 1 | 138 | -3.23ns |
-| attention_unit | 2 | 76 | -9.15ns |
-| rmsnorm | 2 | 77 | -9.02ns |
-| swiglu | 2 | 47 | -17.5ns |
-| rom_bank, rope, mac_array, kv_cache, vector_unit, embed_rom, lm_head | 1-4 | — | Blocked (SRAM) |
+| Module | fmax (MHz) | Status |
+|--------|-----------|--------|
+| async_fifo | 326 | GDS |
+| layer_tile | 254 | GDS |
+| llama_chip | 252 | GDS |
+| global_controller | 244 | GDS |
+| scale_store | 243 | GDS |
+| lut_interp | 227 | GDS |
+| codebook_decoder | 215 | GDS |
+| dequant | 214 | GDS |
+| mac_pe | 138 | GDS |
+| attention_unit | 76 | GDS |
+| rmsnorm | 77 | GDS |
+| swiglu | 47 | GDS |
+| mac_array | — | GRT (880-pin congestion) |
+| rom_bank | — | GRT (880-pin congestion) |
+| embed_rom | — | GRT (in progress) |
+| rope | — | Placement timeout |
+| vector_unit | — | Blocked (101K nets) |
+| kv_cache | — | Blocked (2048 SRAM tiles) |
+| lm_head | — | Blocked (188 MB ROM) |
 
-See [docs/project-status.md](docs/project-status.md) for full details and memory requirements.
+See [docs/backend-metrics.md](docs/backend-metrics.md) for full metrics, timing analysis, and lessons learned.
 
 ## Inspired By
 
