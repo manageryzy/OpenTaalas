@@ -30,8 +30,10 @@ KANAGAWA_RUNTIME_SV = \
   $(_kanagawa_rtl)/hal/mock/hal_simple_dual_port_ram_tile.sv \
   $(_project)/rtl/hal/sky130/hal_dual_port_ram.sv
 
-# No SIMULATION define — sky130 HAL works in both simulation and synthesis
-KANAGAWA_VERILOG_DEFINES =
+# Mock HAL files (registers, FIFOs) require SIMULATION define to bypass `error guards.
+# Only hal_dual_port_ram is replaced by the sky130 HAL; other mock HAL modules are
+# behavioral RTL that synthesizes correctly.
+KANAGAWA_VERILOG_DEFINES = -DSIMULATION
 
 # Physical macro collateral
 MACRO_LEFS = $(wildcard $(_macros_dir)/*.lef)
