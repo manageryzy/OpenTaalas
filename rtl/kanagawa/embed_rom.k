@@ -1,7 +1,7 @@
-// OpenTaalas - Token embedding ROM for LLaMA 3.1
-// 128256 vocabulary x 4096 dimensions x 3-bit weights
-// Full size: 525,336,576 entries (using 4,194,304 test size below)
-// Address: token_id * 4096 + dim_idx = (token_id << 12) | dim_idx
+// OpenTaalas - Token embedding ROM (Wide-Word, Chunked)
+// 1024 tokens x 4096 dims x 3-bit weights
+// Stored as 192-bit chunks: 64 dims per chunk, 64 chunks per token
+// Address: (token_id << 6) | chunk_idx
 
 module opentaalas.embed_rom
     { embed_rom
@@ -10,46 +10,33 @@ module opentaalas.embed_rom
 class embed_rom
 {
 private:
-    // Full size would be uint3[525336576] (128256 * 4096)
-    // Using reduced test size: 1024 * 4096 = 4,194,304
-    [[memory]] uint3[4194304] _embeddings;
-
+    [[memory]] uint<192>[65536] _embeddings;
     uint8 _bank_scale = 0;
     uint32 _tensor_scale = 0;
 
 public:
-    uint3 read_weight(uint17 token_id, uint12 dim_idx)
+    // Read 192-bit chunk (64 x 3-bit weights)
+    uint<192> read_chunk(uint<16> addr)
     {
-        uint3 result;
-        atomic
-        {
-            result = _embeddings[(cast<uint30>(token_id) << 12) | cast<uint30>(dim_idx)];
-        }
+        uint<192> result;
+        atomic { result = _embeddings[addr]; }
         return result;
     }
 
-    void write_weight(uint17 token_id, uint12 dim_idx, uint3 value)
+    // Write 192-bit chunk
+    void write_chunk(uint<16> addr, uint<192> value)
     {
-        atomic
-        {
-            _embeddings[(cast<uint30>(token_id) << 12) | cast<uint30>(dim_idx)] = value;
-        }
+        atomic { _embeddings[addr] = value; }
     }
 
     void set_bank_scale(uint8 value)
     {
-        atomic
-        {
-            _bank_scale = value;
-        }
+        atomic { _bank_scale = value; }
     }
 
     void set_tensor_scale(uint32 value)
     {
-        atomic
-        {
-            _tensor_scale = value;
-        }
+        atomic { _tensor_scale = value; }
     }
 
     uint8 get_bank_scale()

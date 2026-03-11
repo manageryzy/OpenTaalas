@@ -1,7 +1,8 @@
 #pragma once
 #include <opentaalas/types.h>
-#include <bf16_math.h>
 #include <array>
+#include <bf16_math.h>
+#include <cstdint>
 #include <cstring>
 
 namespace opentaalas {
@@ -60,8 +61,34 @@ class vector_unit {
     return _rsqrt_lut[index.to_uint64()];
   }
 
-  // --- RoPE ---
+  // --- RoPE (wide-word row access) ---
 
+  std::array<uint16_t, 64> rope_read_cos_row(int position) {
+    std::array<uint16_t, 64> row;
+    std::size_t base = static_cast<std::size_t>(position) * 64;
+    for (int f = 0; f < 64; f++)
+      row[f] = _cos_table[base + f].to_uint64();
+    return row;
+  }
+  std::array<uint16_t, 64> rope_read_sin_row(int position) {
+    std::array<uint16_t, 64> row;
+    std::size_t base = static_cast<std::size_t>(position) * 64;
+    for (int f = 0; f < 64; f++)
+      row[f] = _sin_table[base + f].to_uint64();
+    return row;
+  }
+  void rope_write_cos_row(int position, const std::array<uint16_t, 64>& row) {
+    std::size_t base = static_cast<std::size_t>(position) * 64;
+    for (int f = 0; f < 64; f++)
+      _cos_table[base + f] = uint16(row[f]);
+  }
+  void rope_write_sin_row(int position, const std::array<uint16_t, 64>& row) {
+    std::size_t base = static_cast<std::size_t>(position) * 64;
+    for (int f = 0; f < 64; f++)
+      _sin_table[base + f] = uint16(row[f]);
+  }
+
+  // Per-element accessors kept for backward compatibility
   uint16 rope_get_cos(uint12 position, uint6 freq_idx) {
     std::size_t idx = (position.to_uint64() << 6) | freq_idx.to_uint64();
     return _cos_table[idx];

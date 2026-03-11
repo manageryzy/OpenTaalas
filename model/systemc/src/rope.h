@@ -1,5 +1,6 @@
 #pragma once
 #include <opentaalas/types.h>
+#include <array>
 #include <bf16_math.h>
 #include <vector>
 
@@ -29,6 +30,28 @@ public:
   }
   uint16 get_sin(uint12 position, uint6 freq_idx) const {
     return _sin_table[addr(position, freq_idx)];
+  }
+
+  // Wide-word row access (matches RTL 1024-bit interface)
+  std::array<uint16_t, 64> read_cos_row(int position) const {
+    std::array<uint16_t, 64> row;
+    for (int f = 0; f < FREQ_PAIRS; f++)
+      row[f] = _cos_table[position * FREQ_PAIRS + f].to_uint64();
+    return row;
+  }
+  std::array<uint16_t, 64> read_sin_row(int position) const {
+    std::array<uint16_t, 64> row;
+    for (int f = 0; f < FREQ_PAIRS; f++)
+      row[f] = _sin_table[position * FREQ_PAIRS + f].to_uint64();
+    return row;
+  }
+  void write_cos_row(int position, const std::array<uint16_t, 64>& row) {
+    for (int f = 0; f < FREQ_PAIRS; f++)
+      _cos_table[position * FREQ_PAIRS + f] = uint16(row[f]);
+  }
+  void write_sin_row(int position, const std::array<uint16_t, 64>& row) {
+    for (int f = 0; f < FREQ_PAIRS; f++)
+      _sin_table[position * FREQ_PAIRS + f] = uint16(row[f]);
   }
 
   uint16 rotate_pair(uint16 x_even, uint16 x_odd, uint16 cos_val, uint16 sin_val) {

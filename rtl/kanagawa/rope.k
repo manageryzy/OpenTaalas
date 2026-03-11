@@ -1,6 +1,6 @@
-// OpenTaalas - Rotary Position Embedding (RoPE) unit
-// Precomputed sin/cos tables for 4096 positions x 64 frequency pairs (head_dim=128).
-// Full BF16 rotation arithmetic deferred to VPU integration.
+// OpenTaalas - Rotary Position Embedding (RoPE) unit (Wide-Word)
+// Precomputed sin/cos tables: 4096 positions x 64 freq pairs.
+// Each row = 1024 bits (64 x 16-bit BF16 values).
 
 module opentaalas.rope
     { rope_unit
@@ -9,49 +9,39 @@ module opentaalas.rope
 class rope_unit
 {
 private:
-    // 4096 positions x 64 freq pairs = 262144 entries, BF16 stored as uint16
-    [[memory]] uint16[262144] _cos_table;
-    [[memory]] uint16[262144] _sin_table;
+    [[memory]] uint<1024>[4096] _cos_table;
+    [[memory]] uint<1024>[4096] _sin_table;
 
 public:
-    void set_cos(uint12 position, uint<6> freq_idx, uint16 value)
+    // Read full cos row for a position (all 64 freq pairs)
+    uint<1024> read_cos_row(uint12 position)
     {
-        atomic
-        {
-            _cos_table[(cast<uint18>(position) << 6) | cast<uint18>(freq_idx)] = value;
-        }
-    }
-
-    void set_sin(uint12 position, uint<6> freq_idx, uint16 value)
-    {
-        atomic
-        {
-            _sin_table[(cast<uint18>(position) << 6) | cast<uint18>(freq_idx)] = value;
-        }
-    }
-
-    uint16 get_cos(uint12 position, uint<6> freq_idx)
-    {
-        uint16 result;
-        atomic
-        {
-            result = _cos_table[(cast<uint18>(position) << 6) | cast<uint18>(freq_idx)];
-        }
+        uint<1024> result;
+        atomic { result = _cos_table[position]; }
         return result;
     }
 
-    uint16 get_sin(uint12 position, uint<6> freq_idx)
+    // Read full sin row for a position
+    uint<1024> read_sin_row(uint12 position)
     {
-        uint16 result;
-        atomic
-        {
-            result = _sin_table[(cast<uint18>(position) << 6) | cast<uint18>(freq_idx)];
-        }
+        uint<1024> result;
+        atomic { result = _sin_table[position]; }
         return result;
     }
 
-    // Apply rotation to one dimension pair (simplified stub)
-    // Full BF16 rotation: x_even*cos - x_odd*sin, added during VPU integration
+    // Write full cos row
+    void write_cos_row(uint12 position, uint<1024> value)
+    {
+        atomic { _cos_table[position] = value; }
+    }
+
+    // Write full sin row
+    void write_sin_row(uint12 position, uint<1024> value)
+    {
+        atomic { _sin_table[position] = value; }
+    }
+
+    // Rotation stub (unchanged — full rotation done in VPU)
     uint16 rotate_pair(uint16 x_even, uint16 x_odd, uint16 cos_val, uint16 sin_val)
     {
         return x_even;

@@ -8,9 +8,11 @@
 #include "kanagawa_harness.h"
 #include "Vvector_unit.h"
 
+#include <array>
 #include <cassert>
 #include <cstdint>
 #include <cstdio>
+#include <cstring>
 
 using Harness = KanagawaHarness<Vvector_unit>;
 
@@ -128,58 +130,77 @@ static uint16_t call_lookup_rsqrt(Harness& h, uint8_t index) {
                      d->lookup_rsqrt_result_out);
 }
 
-// --- rope_set_cos: position_in[11:0], freq_idx_in[5:0], value_in[15:0] → void ---
-static void call_rope_set_cos(Harness& h, uint16_t pos, uint8_t freq,
-                               uint16_t value) {
-  auto* d = h.dut();
-  h.wait_ready(d->rope_set_cos_rdy_out);
-  d->rope_set_cos_valid_in = 1;
-  d->rope_set_cos_position_in = pos & 0xFFF;
-  d->rope_set_cos_freq_idx_in = freq & 0x3F;
-  d->rope_set_cos_value_in = value;
-  h.tick();
-  d->rope_set_cos_valid_in = 0;
-  h.drain_fifo(d->rope_set_cos_rden_in, d->rope_set_cos_empty_out);
+// ---------- 1024-bit packing helpers ----------
+
+static void pack_rope_row(VlWide<32>& out, const std::array<uint16_t, 64>& values) {
+    memset(&out, 0, sizeof(out));
+    for (int i = 0; i < 64; i++) {
+        int bit_offset = i * 16;
+        int word = bit_offset / 32;
+        int shift = bit_offset % 32;
+        out[word] |= ((uint32_t)values[i]) << shift;
+    }
 }
 
-// --- rope_set_sin: position_in[11:0], freq_idx_in[5:0], value_in[15:0] → void ---
-static void call_rope_set_sin(Harness& h, uint16_t pos, uint8_t freq,
-                               uint16_t value) {
-  auto* d = h.dut();
-  h.wait_ready(d->rope_set_sin_rdy_out);
-  d->rope_set_sin_valid_in = 1;
-  d->rope_set_sin_position_in = pos & 0xFFF;
-  d->rope_set_sin_freq_idx_in = freq & 0x3F;
-  d->rope_set_sin_value_in = value;
-  h.tick();
-  d->rope_set_sin_valid_in = 0;
-  h.drain_fifo(d->rope_set_sin_rden_in, d->rope_set_sin_empty_out);
+static uint16_t extract_rope_freq(const VlWide<32>& row, int freq_idx) {
+    int bit_offset = freq_idx * 16;
+    int word = bit_offset / 32;
+    int shift = bit_offset % 32;
+    return (row[word] >> shift) & 0xFFFF;
 }
 
-// --- rope_get_cos: position_in[11:0], freq_idx_in[5:0] → result_out[15:0] ---
-static uint16_t call_rope_get_cos(Harness& h, uint16_t pos, uint8_t freq) {
-  auto* d = h.dut();
-  h.wait_ready(d->rope_get_cos_rdy_out);
-  d->rope_get_cos_valid_in = 1;
-  d->rope_get_cos_position_in = pos & 0xFFF;
-  d->rope_get_cos_freq_idx_in = freq & 0x3F;
-  h.tick();
-  d->rope_get_cos_valid_in = 0;
-  return h.read_fifo(d->rope_get_cos_rden_in, d->rope_get_cos_empty_out,
-                     d->rope_get_cos_result_out);
+// --- rope_write_cos_row: position_in[11:0], value_in[1023:0] → void ---
+static void call_rope_write_cos_row(Harness& h, uint16_t pos,
+                                     const VlWide<32>& value) {
+    auto* d = h.dut();
+    h.wait_ready(d->rope_write_cos_row_rdy_out);
+    d->rope_write_cos_row_valid_in = 1;
+    d->rope_write_cos_row_position_in = pos & 0xFFF;
+    memcpy(&d->rope_write_cos_row_value_in, &value, sizeof(VlWide<32>));
+    h.tick();
+    d->rope_write_cos_row_valid_in = 0;
+    h.drain_fifo(d->rope_write_cos_row_rden_in, d->rope_write_cos_row_empty_out);
 }
 
-// --- rope_get_sin: position_in[11:0], freq_idx_in[5:0] → result_out[15:0] ---
-static uint16_t call_rope_get_sin(Harness& h, uint16_t pos, uint8_t freq) {
-  auto* d = h.dut();
-  h.wait_ready(d->rope_get_sin_rdy_out);
-  d->rope_get_sin_valid_in = 1;
-  d->rope_get_sin_position_in = pos & 0xFFF;
-  d->rope_get_sin_freq_idx_in = freq & 0x3F;
-  h.tick();
-  d->rope_get_sin_valid_in = 0;
-  return h.read_fifo(d->rope_get_sin_rden_in, d->rope_get_sin_empty_out,
-                     d->rope_get_sin_result_out);
+// --- rope_write_sin_row: position_in[11:0], value_in[1023:0] → void ---
+static void call_rope_write_sin_row(Harness& h, uint16_t pos,
+                                     const VlWide<32>& value) {
+    auto* d = h.dut();
+    h.wait_ready(d->rope_write_sin_row_rdy_out);
+    d->rope_write_sin_row_valid_in = 1;
+    d->rope_write_sin_row_position_in = pos & 0xFFF;
+    memcpy(&d->rope_write_sin_row_value_in, &value, sizeof(VlWide<32>));
+    h.tick();
+    d->rope_write_sin_row_valid_in = 0;
+    h.drain_fifo(d->rope_write_sin_row_rden_in, d->rope_write_sin_row_empty_out);
+}
+
+// --- rope_read_cos_row: position_in[11:0] → result_out[1023:0] ---
+static void call_rope_read_cos_row(Harness& h, uint16_t pos, VlWide<32>& result) {
+    auto* d = h.dut();
+    h.wait_ready(d->rope_read_cos_row_rdy_out);
+    d->rope_read_cos_row_valid_in = 1;
+    d->rope_read_cos_row_position_in = pos & 0xFFF;
+    h.tick();
+    d->rope_read_cos_row_valid_in = 0;
+    h.wait_fifo(d->rope_read_cos_row_rden_in, d->rope_read_cos_row_empty_out);
+    memcpy(&result, &d->rope_read_cos_row_result_out, sizeof(VlWide<32>));
+    d->rope_read_cos_row_rden_in = 0;
+    h.tick();
+}
+
+// --- rope_read_sin_row: position_in[11:0] → result_out[1023:0] ---
+static void call_rope_read_sin_row(Harness& h, uint16_t pos, VlWide<32>& result) {
+    auto* d = h.dut();
+    h.wait_ready(d->rope_read_sin_row_rdy_out);
+    d->rope_read_sin_row_valid_in = 1;
+    d->rope_read_sin_row_position_in = pos & 0xFFF;
+    h.tick();
+    d->rope_read_sin_row_valid_in = 0;
+    h.wait_fifo(d->rope_read_sin_row_rden_in, d->rope_read_sin_row_empty_out);
+    memcpy(&result, &d->rope_read_sin_row_result_out, sizeof(VlWide<32>));
+    d->rope_read_sin_row_rden_in = 0;
+    h.tick();
 }
 
 // --- set_sigmoid_lut: index_in[7:0], value_in[15:0] → void ---
@@ -299,21 +320,49 @@ static void test_rope_tables() {
   Harness h;
   h.reset();
 
-  call_rope_set_cos(h, 0, 0, 0x3C00);
-  call_rope_set_sin(h, 0, 0, 0x0000);
-  call_rope_set_cos(h, 31, 63, 0x1111);
-  call_rope_set_sin(h, 31, 63, 0x2222);
+  // Write cos/sin rows at position 0
+  std::array<uint16_t, 64> cos_vals{};
+  std::array<uint16_t, 64> sin_vals{};
+  cos_vals[0] = 0x3C00;
+  sin_vals[0] = 0x0000;
+  cos_vals[63] = 0x1111;
+  sin_vals[63] = 0x2222;
 
-  assert(call_rope_get_cos(h, 0, 0) == 0x3C00);
-  assert(call_rope_get_sin(h, 0, 0) == 0x0000);
-  assert(call_rope_get_cos(h, 31, 63) == 0x1111);
-  assert(call_rope_get_sin(h, 31, 63) == 0x2222);
+  VlWide<32> cos_packed, sin_packed;
+  pack_rope_row(cos_packed, cos_vals);
+  pack_rope_row(sin_packed, sin_vals);
 
-  // Overwrite
-  call_rope_set_cos(h, 0, 0, 0xFFFF);
-  assert(call_rope_get_cos(h, 0, 0) == 0xFFFF);
+  call_rope_write_cos_row(h, 0, cos_packed);
+  call_rope_write_sin_row(h, 0, sin_packed);
 
-  std::puts("[PASS] rope_tables: set/get cos+sin at (0,0) and (31,63), overwrite");
+  VlWide<32> cos_read, sin_read;
+  call_rope_read_cos_row(h, 0, cos_read);
+  call_rope_read_sin_row(h, 0, sin_read);
+
+  assert(extract_rope_freq(cos_read, 0) == 0x3C00);
+  assert(extract_rope_freq(sin_read, 0) == 0x0000);
+  assert(extract_rope_freq(cos_read, 63) == 0x1111);
+  assert(extract_rope_freq(sin_read, 63) == 0x2222);
+
+  // Write at position 31
+  std::array<uint16_t, 64> cos_vals31{};
+  cos_vals31[0] = 0xFFFF;
+  cos_vals31[63] = 0xAAAA;
+  VlWide<32> cos_packed31;
+  pack_rope_row(cos_packed31, cos_vals31);
+  call_rope_write_cos_row(h, 31, cos_packed31);
+
+  VlWide<32> cos_read31;
+  call_rope_read_cos_row(h, 31, cos_read31);
+  assert(extract_rope_freq(cos_read31, 0) == 0xFFFF);
+  assert(extract_rope_freq(cos_read31, 63) == 0xAAAA);
+
+  // Verify pos=0 unchanged
+  VlWide<32> cos_recheck;
+  call_rope_read_cos_row(h, 0, cos_recheck);
+  assert(extract_rope_freq(cos_recheck, 0) == 0x3C00);
+
+  std::puts("[PASS] rope_tables: row-level cos+sin write/read, non-interference");
 }
 
 static void test_swiglu() {

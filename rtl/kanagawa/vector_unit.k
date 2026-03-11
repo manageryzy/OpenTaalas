@@ -19,9 +19,9 @@ private:
     // SwiGLU state
     uint16[256] _sigmoid_lut;
 
-    // RoPE state — 4096 positions x 64 freq pairs = 262144 entries
-    [[memory]] uint16[262144] _cos_table;
-    [[memory]] uint16[262144] _sin_table;
+    // RoPE state — 4096 positions, each row = 64 freq pairs × 16 bits = 1024 bits
+    [[memory]] uint<1024>[4096] _cos_table;
+    [[memory]] uint<1024>[4096] _sin_table;
 
 public:
     // --- RMSNorm ---
@@ -145,42 +145,30 @@ public:
         return result;
     }
 
-    // --- RoPE ---
+    // --- RoPE (wide-word row access) ---
 
-    uint16 rope_get_cos(uint12 position, uint<6> freq_idx)
+    uint<1024> rope_read_cos_row(uint12 position)
     {
-        uint16 result;
-        atomic
-        {
-            result = _cos_table[(cast<uint18>(position) << 6) | cast<uint18>(freq_idx)];
-        }
+        uint<1024> result;
+        atomic { result = _cos_table[position]; }
         return result;
     }
 
-    uint16 rope_get_sin(uint12 position, uint<6> freq_idx)
+    uint<1024> rope_read_sin_row(uint12 position)
     {
-        uint16 result;
-        atomic
-        {
-            result = _sin_table[(cast<uint18>(position) << 6) | cast<uint18>(freq_idx)];
-        }
+        uint<1024> result;
+        atomic { result = _sin_table[position]; }
         return result;
     }
 
-    void rope_set_cos(uint12 position, uint<6> freq_idx, uint16 value)
+    void rope_write_cos_row(uint12 position, uint<1024> value)
     {
-        atomic
-        {
-            _cos_table[(cast<uint18>(position) << 6) | cast<uint18>(freq_idx)] = value;
-        }
+        atomic { _cos_table[position] = value; }
     }
 
-    void rope_set_sin(uint12 position, uint<6> freq_idx, uint16 value)
+    void rope_write_sin_row(uint12 position, uint<1024> value)
     {
-        atomic
-        {
-            _sin_table[(cast<uint18>(position) << 6) | cast<uint18>(freq_idx)] = value;
-        }
+        atomic { _sin_table[position] = value; }
     }
 
     // --- SwiGLU ---
