@@ -26,8 +26,19 @@
 - `tools/gguf_converter.h` — FP8 E4M3/FP16/BF16 conversion utilities
 - `tools/llama_quantized_forward.cpp` — Golden reference: quantized forward pass generating FP32 intermediate vectors
 
+## Backend Flow
+- `flow/CMakeLists.txt` — Backend synthesis/PnR/GDS targets (18 modules + smoke_adder)
+- `flow/scripts/run_orfs.sh` — ORFS invocation wrapper (requires absolute paths)
+- `flow/designs/kanagawa_runtime.mk` — Shared Kanagawa runtime include for ORFS configs
+- `flow/designs/sky130hd/<module>/config.mk` — Per-module ORFS config
+- `flow/designs/sky130hd/<module>/constraint.sdc` — Per-module timing constraints
+- `rtl/sv/async_fifo.sv` — Gray-code dual-clock async FIFO for CDC
+
 ## Docs
+- `docs/project-status.md` — Project status with backend PnR results
 - `docs/verilator-testing.md` — Test descriptions and current results
 - `docs/plans/2026-02-27-real-data-e2e-design.md` — Real-data test design
 - `docs/plans/2026-02-27-layer-e2e-verification-design.md` — E2E design doc
 - `docs/plans/2026-02-27-layer-e2e-verification-plan.md` — Implementation plan (8 tasks)
+- `docs/superpowers/specs/2026-03-10-backend-pnr-design.md` — Backend PnR spec
+- `docs/superpowers/plans/2026-03-10-backend-pnr.md` — Backend PnR implementation plan (10 tasks)

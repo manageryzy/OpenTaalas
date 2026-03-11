@@ -109,7 +109,9 @@ tools/
   gguf_converter.cpp   GGUF Q3_K → binary weight converter
   weight_generator.h   Deterministic weights/LUTs for CI
   llama_quantized_forward.cpp   Golden FP32 forward pass
-flow/                  OpenROAD backend (sky130hd)
+flow/                  OpenROAD backend (sky130hd, 18 module configs)
+  designs/sky130hd/    Per-module config.mk + constraint.sdc
+  scripts/             ORFS invocation wrapper
 third-party/
   kanagawa/            Kanagawa compiler (git submodule)
   ac_types/            Algorithmic C datatypes (git submodule)
@@ -150,15 +152,40 @@ Without the container, you'll need:
 
 ## Backend Flow
 
-Physical design uses OpenROAD Flow Scripts for synthesis, place-and-route, and GDS generation:
+Physical design uses OpenROAD Flow Scripts for synthesis, place-and-route, and GDS generation on sky130hd at 250 MHz:
 
 ```bash
 # Generate RTL
 cmake --build build --target rtl_all
 
-# Run full backend (requires OpenROAD + sky130hd PDK)
+# Run full backend for a single module
 cmake --build build --target gds_smoke_adder
+
+# Run all backend targets
+cmake --build build --target backend_all
 ```
+
+### PnR Status (sky130hd @ 250 MHz)
+
+12 of 18 modules completed full PnR. 3 meet timing at 250 MHz; 9 achieve 47-244 MHz. 7 modules are blocked pending SRAM macro integration (OpenRAM) — their behavioral memory arrays are too large for gate-level synthesis.
+
+| Module | Tier | fmax (MHz) | Status |
+|--------|------|-----------|--------|
+| async_fifo | CDC | 326 | MET |
+| layer_tile | 4 | 254 | MET |
+| llama_chip | 4 | 252 | MET |
+| global_controller | 4 | 244 | -0.09ns |
+| scale_store | 2 | 243 | -0.11ns |
+| lut_interp | 1 | 227 | -0.41ns |
+| codebook_decoder | 1 | 215 | -0.66ns |
+| dequant | 1 | 214 | -0.67ns |
+| mac_pe | 1 | 138 | -3.23ns |
+| attention_unit | 2 | 76 | -9.15ns |
+| rmsnorm | 2 | 77 | -9.02ns |
+| swiglu | 2 | 47 | -17.5ns |
+| rom_bank, rope, mac_array, kv_cache, vector_unit, embed_rom, lm_head | 1-4 | — | Blocked (SRAM) |
+
+See [docs/project-status.md](docs/project-status.md) for full details and memory requirements.
 
 ## Inspired By
 
