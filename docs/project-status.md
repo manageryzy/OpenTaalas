@@ -48,7 +48,7 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 |--------|----------|---------------|---------|
 | mac_array | 1× nor\_rom\_1024x880 | GRT | 880-pin output congestion |
 | rom_bank | 1× nor\_rom\_1024x880 | GRT | 880-pin output congestion |
-| embed_rom | 16× nor\_rom\_4096x192 | GRT (running) | Congestion TBD |
+| embed_rom | 16× nor\_rom\_4096x192 | GRT | 206K overflow, met2 69% |
 | rope | 2× nor\_rom\_4096x1024 | Placement | 101K net resizer timeout |
 
 #### Physically Blocked
