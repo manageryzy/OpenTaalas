@@ -99,17 +99,35 @@ module KanagawaHALDualPortRAM
             end
 
         // ---------------------------------------------------------------
-        // NOR ROM: 65536 × 192 (embed_rom)
+        // NOR ROM: 65536 × 192 (embed_rom) — tiled as 16 × nor_rom_4096x192
         // ---------------------------------------------------------------
         end else if (DATA_WIDTH == 192 && DEPTH == 65536) begin : gen_rom_65536x192
 
-            wire [191:0] rom_dout;
-            nor_rom_65536x192 u_rom (
-                .clk  (clk),
-                .ce   (rden_in[1]),
-                .addr (addr_in[1][15:0]),
-                .dout (rom_dout)
-            );
+            localparam TILE_DEPTH = 4096;
+            localparam NUM_TILES  = DEPTH / TILE_DEPTH;  // 16
+            localparam TILE_ADDR  = 12;  // log2(4096)
+            localparam SEL_BITS   = ADDR_WIDTH - TILE_ADDR;  // 4
+
+            wire [SEL_BITS-1:0] rd_sel = addr_in[1][ADDR_WIDTH-1:TILE_ADDR];
+            wire [TILE_ADDR-1:0] rd_addr = addr_in[1][TILE_ADDR-1:0];
+
+            wire [191:0] tile_dout [0:NUM_TILES-1];
+
+            genvar t;
+            for (t = 0; t < NUM_TILES; t = t + 1) begin : gen_tile
+                wire tile_ce = rden_in[1] && rd_sel == t;
+                nor_rom_4096x192 u_rom (
+                    .clk  (clk),
+                    .ce   (tile_ce),
+                    .addr (rd_addr),
+                    .dout (tile_dout[t])
+                );
+            end
+
+            reg [SEL_BITS-1:0] rd_sel_r;
+            always_ff @(posedge clk) rd_sel_r <= rd_sel;
+
+            wire [191:0] rom_dout = tile_dout[rd_sel_r];
 
             if (USE_OUTPUT_REG) begin : gen_oreg
                 always_ff @(posedge clk) begin

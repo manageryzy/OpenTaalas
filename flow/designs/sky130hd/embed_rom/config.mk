@@ -15,8 +15,10 @@ export VERILOG_DEFINES = $(KANAGAWA_VERILOG_DEFINES)
 export SDC_FILE        = $(_this_dir)/constraint.sdc
 
 export SYNTH_HDL_FRONTEND = slang
-export CORE_UTILIZATION = 50
+export DIE_AREA  = 0 0 900 9500
+export CORE_AREA = 10 10 890 9490
 export PLACE_DENSITY_LB_ADDON = 0.20
+export MACRO_PLACEMENT_TCL = $(_this_dir)/macro_place.tcl
 export SYNTH_MEMORY_MAX_BITS = 65536
 export REMOVE_ABC_BUFFERS = 1
 

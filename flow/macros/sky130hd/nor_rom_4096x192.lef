@@ -1,0 +1,1894 @@
+VERSION 5.8 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+
+MACRO nor_rom_4096x192
+  CLASS BLOCK ;
+  ORIGIN 0 0 ;
+  SIZE 102.580 BY 2224.960 ;
+  SYMMETRY X Y ;
+
+  PIN clk
+    DIRECTION INPUT ;
+    USE CLOCK ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 2.000 0.100 2.100 ;
+    END
+  END clk
+
+  PIN ce
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 3.000 0.100 3.100 ;
+    END
+  END ce
+
+  PIN addr[0]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 4.000 0.100 4.100 ;
+    END
+  END addr[0]
+
+  PIN addr[1]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 5.000 0.100 5.100 ;
+    END
+  END addr[1]
+
+  PIN addr[2]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 6.000 0.100 6.100 ;
+    END
+  END addr[2]
+
+  PIN addr[3]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 7.000 0.100 7.100 ;
+    END
+  END addr[3]
+
+  PIN addr[4]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 8.000 0.100 8.100 ;
+    END
+  END addr[4]
+
+  PIN addr[5]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 9.000 0.100 9.100 ;
+    END
+  END addr[5]
+
+  PIN addr[6]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 10.000 0.100 10.100 ;
+    END
+  END addr[6]
+
+  PIN addr[7]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 11.000 0.100 11.100 ;
+    END
+  END addr[7]
+
+  PIN addr[8]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 12.000 0.100 12.100 ;
+    END
+  END addr[8]
+
+  PIN addr[9]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 13.000 0.100 13.100 ;
+    END
+  END addr[9]
+
+  PIN addr[10]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 14.000 0.100 14.100 ;
+    END
+  END addr[10]
+
+  PIN addr[11]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 0.000 15.000 0.100 15.100 ;
+    END
+  END addr[11]
+
+  PIN dout[0]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 2.000 102.580 2.100 ;
+    END
+  END dout[0]
+
+  PIN dout[1]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 2.540 102.580 2.640 ;
+    END
+  END dout[1]
+
+  PIN dout[2]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 3.080 102.580 3.180 ;
+    END
+  END dout[2]
+
+  PIN dout[3]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 3.620 102.580 3.720 ;
+    END
+  END dout[3]
+
+  PIN dout[4]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 4.160 102.580 4.260 ;
+    END
+  END dout[4]
+
+  PIN dout[5]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 4.700 102.580 4.800 ;
+    END
+  END dout[5]
+
+  PIN dout[6]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 5.240 102.580 5.340 ;
+    END
+  END dout[6]
+
+  PIN dout[7]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 5.780 102.580 5.880 ;
+    END
+  END dout[7]
+
+  PIN dout[8]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 6.320 102.580 6.420 ;
+    END
+  END dout[8]
+
+  PIN dout[9]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 6.860 102.580 6.960 ;
+    END
+  END dout[9]
+
+  PIN dout[10]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 7.400 102.580 7.500 ;
+    END
+  END dout[10]
+
+  PIN dout[11]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 7.940 102.580 8.040 ;
+    END
+  END dout[11]
+
+  PIN dout[12]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 8.480 102.580 8.580 ;
+    END
+  END dout[12]
+
+  PIN dout[13]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 9.020 102.580 9.120 ;
+    END
+  END dout[13]
+
+  PIN dout[14]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 9.560 102.580 9.660 ;
+    END
+  END dout[14]
+
+  PIN dout[15]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 10.100 102.580 10.200 ;
+    END
+  END dout[15]
+
+  PIN dout[16]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 10.640 102.580 10.740 ;
+    END
+  END dout[16]
+
+  PIN dout[17]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 11.180 102.580 11.280 ;
+    END
+  END dout[17]
+
+  PIN dout[18]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 11.720 102.580 11.820 ;
+    END
+  END dout[18]
+
+  PIN dout[19]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 12.260 102.580 12.360 ;
+    END
+  END dout[19]
+
+  PIN dout[20]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 12.800 102.580 12.900 ;
+    END
+  END dout[20]
+
+  PIN dout[21]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 13.340 102.580 13.440 ;
+    END
+  END dout[21]
+
+  PIN dout[22]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 13.880 102.580 13.980 ;
+    END
+  END dout[22]
+
+  PIN dout[23]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 14.420 102.580 14.520 ;
+    END
+  END dout[23]
+
+  PIN dout[24]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 14.960 102.580 15.060 ;
+    END
+  END dout[24]
+
+  PIN dout[25]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 15.500 102.580 15.600 ;
+    END
+  END dout[25]
+
+  PIN dout[26]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 16.040 102.580 16.140 ;
+    END
+  END dout[26]
+
+  PIN dout[27]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 16.580 102.580 16.680 ;
+    END
+  END dout[27]
+
+  PIN dout[28]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 17.120 102.580 17.220 ;
+    END
+  END dout[28]
+
+  PIN dout[29]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 17.660 102.580 17.760 ;
+    END
+  END dout[29]
+
+  PIN dout[30]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 18.200 102.580 18.300 ;
+    END
+  END dout[30]
+
+  PIN dout[31]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 18.740 102.580 18.840 ;
+    END
+  END dout[31]
+
+  PIN dout[32]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 19.280 102.580 19.380 ;
+    END
+  END dout[32]
+
+  PIN dout[33]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 19.820 102.580 19.920 ;
+    END
+  END dout[33]
+
+  PIN dout[34]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 20.360 102.580 20.460 ;
+    END
+  END dout[34]
+
+  PIN dout[35]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 20.900 102.580 21.000 ;
+    END
+  END dout[35]
+
+  PIN dout[36]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 21.440 102.580 21.540 ;
+    END
+  END dout[36]
+
+  PIN dout[37]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 21.980 102.580 22.080 ;
+    END
+  END dout[37]
+
+  PIN dout[38]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 22.520 102.580 22.620 ;
+    END
+  END dout[38]
+
+  PIN dout[39]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 23.060 102.580 23.160 ;
+    END
+  END dout[39]
+
+  PIN dout[40]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 23.600 102.580 23.700 ;
+    END
+  END dout[40]
+
+  PIN dout[41]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 24.140 102.580 24.240 ;
+    END
+  END dout[41]
+
+  PIN dout[42]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 24.680 102.580 24.780 ;
+    END
+  END dout[42]
+
+  PIN dout[43]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 25.220 102.580 25.320 ;
+    END
+  END dout[43]
+
+  PIN dout[44]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 25.760 102.580 25.860 ;
+    END
+  END dout[44]
+
+  PIN dout[45]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 26.300 102.580 26.400 ;
+    END
+  END dout[45]
+
+  PIN dout[46]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 26.840 102.580 26.940 ;
+    END
+  END dout[46]
+
+  PIN dout[47]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 27.380 102.580 27.480 ;
+    END
+  END dout[47]
+
+  PIN dout[48]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 27.920 102.580 28.020 ;
+    END
+  END dout[48]
+
+  PIN dout[49]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 28.460 102.580 28.560 ;
+    END
+  END dout[49]
+
+  PIN dout[50]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 29.000 102.580 29.100 ;
+    END
+  END dout[50]
+
+  PIN dout[51]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 29.540 102.580 29.640 ;
+    END
+  END dout[51]
+
+  PIN dout[52]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 30.080 102.580 30.180 ;
+    END
+  END dout[52]
+
+  PIN dout[53]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 30.620 102.580 30.720 ;
+    END
+  END dout[53]
+
+  PIN dout[54]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 31.160 102.580 31.260 ;
+    END
+  END dout[54]
+
+  PIN dout[55]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 31.700 102.580 31.800 ;
+    END
+  END dout[55]
+
+  PIN dout[56]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 32.240 102.580 32.340 ;
+    END
+  END dout[56]
+
+  PIN dout[57]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 32.780 102.580 32.880 ;
+    END
+  END dout[57]
+
+  PIN dout[58]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 33.320 102.580 33.420 ;
+    END
+  END dout[58]
+
+  PIN dout[59]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 33.860 102.580 33.960 ;
+    END
+  END dout[59]
+
+  PIN dout[60]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 34.400 102.580 34.500 ;
+    END
+  END dout[60]
+
+  PIN dout[61]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 34.940 102.580 35.040 ;
+    END
+  END dout[61]
+
+  PIN dout[62]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 35.480 102.580 35.580 ;
+    END
+  END dout[62]
+
+  PIN dout[63]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 36.020 102.580 36.120 ;
+    END
+  END dout[63]
+
+  PIN dout[64]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 36.560 102.580 36.660 ;
+    END
+  END dout[64]
+
+  PIN dout[65]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 37.100 102.580 37.200 ;
+    END
+  END dout[65]
+
+  PIN dout[66]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 37.640 102.580 37.740 ;
+    END
+  END dout[66]
+
+  PIN dout[67]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 38.180 102.580 38.280 ;
+    END
+  END dout[67]
+
+  PIN dout[68]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 38.720 102.580 38.820 ;
+    END
+  END dout[68]
+
+  PIN dout[69]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 39.260 102.580 39.360 ;
+    END
+  END dout[69]
+
+  PIN dout[70]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 39.800 102.580 39.900 ;
+    END
+  END dout[70]
+
+  PIN dout[71]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 40.340 102.580 40.440 ;
+    END
+  END dout[71]
+
+  PIN dout[72]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 40.880 102.580 40.980 ;
+    END
+  END dout[72]
+
+  PIN dout[73]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 41.420 102.580 41.520 ;
+    END
+  END dout[73]
+
+  PIN dout[74]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 41.960 102.580 42.060 ;
+    END
+  END dout[74]
+
+  PIN dout[75]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 42.500 102.580 42.600 ;
+    END
+  END dout[75]
+
+  PIN dout[76]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 43.040 102.580 43.140 ;
+    END
+  END dout[76]
+
+  PIN dout[77]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 43.580 102.580 43.680 ;
+    END
+  END dout[77]
+
+  PIN dout[78]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 44.120 102.580 44.220 ;
+    END
+  END dout[78]
+
+  PIN dout[79]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 44.660 102.580 44.760 ;
+    END
+  END dout[79]
+
+  PIN dout[80]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 45.200 102.580 45.300 ;
+    END
+  END dout[80]
+
+  PIN dout[81]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 45.740 102.580 45.840 ;
+    END
+  END dout[81]
+
+  PIN dout[82]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 46.280 102.580 46.380 ;
+    END
+  END dout[82]
+
+  PIN dout[83]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 46.820 102.580 46.920 ;
+    END
+  END dout[83]
+
+  PIN dout[84]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 47.360 102.580 47.460 ;
+    END
+  END dout[84]
+
+  PIN dout[85]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 47.900 102.580 48.000 ;
+    END
+  END dout[85]
+
+  PIN dout[86]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 48.440 102.580 48.540 ;
+    END
+  END dout[86]
+
+  PIN dout[87]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 48.980 102.580 49.080 ;
+    END
+  END dout[87]
+
+  PIN dout[88]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 49.520 102.580 49.620 ;
+    END
+  END dout[88]
+
+  PIN dout[89]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 50.060 102.580 50.160 ;
+    END
+  END dout[89]
+
+  PIN dout[90]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 50.600 102.580 50.700 ;
+    END
+  END dout[90]
+
+  PIN dout[91]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 51.140 102.580 51.240 ;
+    END
+  END dout[91]
+
+  PIN dout[92]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 51.680 102.580 51.780 ;
+    END
+  END dout[92]
+
+  PIN dout[93]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 52.220 102.580 52.320 ;
+    END
+  END dout[93]
+
+  PIN dout[94]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 52.760 102.580 52.860 ;
+    END
+  END dout[94]
+
+  PIN dout[95]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 53.300 102.580 53.400 ;
+    END
+  END dout[95]
+
+  PIN dout[96]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 53.840 102.580 53.940 ;
+    END
+  END dout[96]
+
+  PIN dout[97]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 54.380 102.580 54.480 ;
+    END
+  END dout[97]
+
+  PIN dout[98]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 54.920 102.580 55.020 ;
+    END
+  END dout[98]
+
+  PIN dout[99]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 55.460 102.580 55.560 ;
+    END
+  END dout[99]
+
+  PIN dout[100]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 56.000 102.580 56.100 ;
+    END
+  END dout[100]
+
+  PIN dout[101]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 56.540 102.580 56.640 ;
+    END
+  END dout[101]
+
+  PIN dout[102]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 57.080 102.580 57.180 ;
+    END
+  END dout[102]
+
+  PIN dout[103]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 57.620 102.580 57.720 ;
+    END
+  END dout[103]
+
+  PIN dout[104]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 58.160 102.580 58.260 ;
+    END
+  END dout[104]
+
+  PIN dout[105]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 58.700 102.580 58.800 ;
+    END
+  END dout[105]
+
+  PIN dout[106]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 59.240 102.580 59.340 ;
+    END
+  END dout[106]
+
+  PIN dout[107]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 59.780 102.580 59.880 ;
+    END
+  END dout[107]
+
+  PIN dout[108]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 60.320 102.580 60.420 ;
+    END
+  END dout[108]
+
+  PIN dout[109]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 60.860 102.580 60.960 ;
+    END
+  END dout[109]
+
+  PIN dout[110]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 61.400 102.580 61.500 ;
+    END
+  END dout[110]
+
+  PIN dout[111]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 61.940 102.580 62.040 ;
+    END
+  END dout[111]
+
+  PIN dout[112]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 62.480 102.580 62.580 ;
+    END
+  END dout[112]
+
+  PIN dout[113]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 63.020 102.580 63.120 ;
+    END
+  END dout[113]
+
+  PIN dout[114]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 63.560 102.580 63.660 ;
+    END
+  END dout[114]
+
+  PIN dout[115]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 64.100 102.580 64.200 ;
+    END
+  END dout[115]
+
+  PIN dout[116]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 64.640 102.580 64.740 ;
+    END
+  END dout[116]
+
+  PIN dout[117]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 65.180 102.580 65.280 ;
+    END
+  END dout[117]
+
+  PIN dout[118]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 65.720 102.580 65.820 ;
+    END
+  END dout[118]
+
+  PIN dout[119]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 66.260 102.580 66.360 ;
+    END
+  END dout[119]
+
+  PIN dout[120]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 66.800 102.580 66.900 ;
+    END
+  END dout[120]
+
+  PIN dout[121]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 67.340 102.580 67.440 ;
+    END
+  END dout[121]
+
+  PIN dout[122]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 67.880 102.580 67.980 ;
+    END
+  END dout[122]
+
+  PIN dout[123]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 68.420 102.580 68.520 ;
+    END
+  END dout[123]
+
+  PIN dout[124]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 68.960 102.580 69.060 ;
+    END
+  END dout[124]
+
+  PIN dout[125]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 69.500 102.580 69.600 ;
+    END
+  END dout[125]
+
+  PIN dout[126]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 70.040 102.580 70.140 ;
+    END
+  END dout[126]
+
+  PIN dout[127]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 70.580 102.580 70.680 ;
+    END
+  END dout[127]
+
+  PIN dout[128]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 71.120 102.580 71.220 ;
+    END
+  END dout[128]
+
+  PIN dout[129]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 71.660 102.580 71.760 ;
+    END
+  END dout[129]
+
+  PIN dout[130]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 72.200 102.580 72.300 ;
+    END
+  END dout[130]
+
+  PIN dout[131]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 72.740 102.580 72.840 ;
+    END
+  END dout[131]
+
+  PIN dout[132]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 73.280 102.580 73.380 ;
+    END
+  END dout[132]
+
+  PIN dout[133]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 73.820 102.580 73.920 ;
+    END
+  END dout[133]
+
+  PIN dout[134]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 74.360 102.580 74.460 ;
+    END
+  END dout[134]
+
+  PIN dout[135]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 74.900 102.580 75.000 ;
+    END
+  END dout[135]
+
+  PIN dout[136]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 75.440 102.580 75.540 ;
+    END
+  END dout[136]
+
+  PIN dout[137]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 75.980 102.580 76.080 ;
+    END
+  END dout[137]
+
+  PIN dout[138]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 76.520 102.580 76.620 ;
+    END
+  END dout[138]
+
+  PIN dout[139]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 77.060 102.580 77.160 ;
+    END
+  END dout[139]
+
+  PIN dout[140]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 77.600 102.580 77.700 ;
+    END
+  END dout[140]
+
+  PIN dout[141]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 78.140 102.580 78.240 ;
+    END
+  END dout[141]
+
+  PIN dout[142]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 78.680 102.580 78.780 ;
+    END
+  END dout[142]
+
+  PIN dout[143]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 79.220 102.580 79.320 ;
+    END
+  END dout[143]
+
+  PIN dout[144]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 79.760 102.580 79.860 ;
+    END
+  END dout[144]
+
+  PIN dout[145]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 80.300 102.580 80.400 ;
+    END
+  END dout[145]
+
+  PIN dout[146]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 80.840 102.580 80.940 ;
+    END
+  END dout[146]
+
+  PIN dout[147]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 81.380 102.580 81.480 ;
+    END
+  END dout[147]
+
+  PIN dout[148]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 81.920 102.580 82.020 ;
+    END
+  END dout[148]
+
+  PIN dout[149]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 82.460 102.580 82.560 ;
+    END
+  END dout[149]
+
+  PIN dout[150]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 83.000 102.580 83.100 ;
+    END
+  END dout[150]
+
+  PIN dout[151]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 83.540 102.580 83.640 ;
+    END
+  END dout[151]
+
+  PIN dout[152]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 84.080 102.580 84.180 ;
+    END
+  END dout[152]
+
+  PIN dout[153]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 84.620 102.580 84.720 ;
+    END
+  END dout[153]
+
+  PIN dout[154]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 85.160 102.580 85.260 ;
+    END
+  END dout[154]
+
+  PIN dout[155]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 85.700 102.580 85.800 ;
+    END
+  END dout[155]
+
+  PIN dout[156]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 86.240 102.580 86.340 ;
+    END
+  END dout[156]
+
+  PIN dout[157]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 86.780 102.580 86.880 ;
+    END
+  END dout[157]
+
+  PIN dout[158]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 87.320 102.580 87.420 ;
+    END
+  END dout[158]
+
+  PIN dout[159]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 87.860 102.580 87.960 ;
+    END
+  END dout[159]
+
+  PIN dout[160]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 88.400 102.580 88.500 ;
+    END
+  END dout[160]
+
+  PIN dout[161]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 88.940 102.580 89.040 ;
+    END
+  END dout[161]
+
+  PIN dout[162]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 89.480 102.580 89.580 ;
+    END
+  END dout[162]
+
+  PIN dout[163]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 90.020 102.580 90.120 ;
+    END
+  END dout[163]
+
+  PIN dout[164]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 90.560 102.580 90.660 ;
+    END
+  END dout[164]
+
+  PIN dout[165]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 91.100 102.580 91.200 ;
+    END
+  END dout[165]
+
+  PIN dout[166]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 91.640 102.580 91.740 ;
+    END
+  END dout[166]
+
+  PIN dout[167]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 92.180 102.580 92.280 ;
+    END
+  END dout[167]
+
+  PIN dout[168]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 92.720 102.580 92.820 ;
+    END
+  END dout[168]
+
+  PIN dout[169]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 93.260 102.580 93.360 ;
+    END
+  END dout[169]
+
+  PIN dout[170]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 93.800 102.580 93.900 ;
+    END
+  END dout[170]
+
+  PIN dout[171]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 94.340 102.580 94.440 ;
+    END
+  END dout[171]
+
+  PIN dout[172]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 94.880 102.580 94.980 ;
+    END
+  END dout[172]
+
+  PIN dout[173]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 95.420 102.580 95.520 ;
+    END
+  END dout[173]
+
+  PIN dout[174]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 95.960 102.580 96.060 ;
+    END
+  END dout[174]
+
+  PIN dout[175]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 96.500 102.580 96.600 ;
+    END
+  END dout[175]
+
+  PIN dout[176]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 97.040 102.580 97.140 ;
+    END
+  END dout[176]
+
+  PIN dout[177]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 97.580 102.580 97.680 ;
+    END
+  END dout[177]
+
+  PIN dout[178]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 98.120 102.580 98.220 ;
+    END
+  END dout[178]
+
+  PIN dout[179]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 98.660 102.580 98.760 ;
+    END
+  END dout[179]
+
+  PIN dout[180]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 99.200 102.580 99.300 ;
+    END
+  END dout[180]
+
+  PIN dout[181]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 99.740 102.580 99.840 ;
+    END
+  END dout[181]
+
+  PIN dout[182]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 100.280 102.580 100.380 ;
+    END
+  END dout[182]
+
+  PIN dout[183]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 100.820 102.580 100.920 ;
+    END
+  END dout[183]
+
+  PIN dout[184]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 101.360 102.580 101.460 ;
+    END
+  END dout[184]
+
+  PIN dout[185]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 101.900 102.580 102.000 ;
+    END
+  END dout[185]
+
+  PIN dout[186]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 102.440 102.580 102.540 ;
+    END
+  END dout[186]
+
+  PIN dout[187]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 102.980 102.580 103.080 ;
+    END
+  END dout[187]
+
+  PIN dout[188]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 103.520 102.580 103.620 ;
+    END
+  END dout[188]
+
+  PIN dout[189]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 104.060 102.580 104.160 ;
+    END
+  END dout[189]
+
+  PIN dout[190]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 104.600 102.580 104.700 ;
+    END
+  END dout[190]
+
+  PIN dout[191]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT 102.480 105.140 102.580 105.240 ;
+    END
+  END dout[191]
+
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER met4 ;
+        RECT 0.000 2223.960 102.580 2224.960 ;
+    END
+  END VDD
+
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER met4 ;
+        RECT 0.000 0.000 102.580 1.000 ;
+    END
+  END VSS
+
+  OBS
+    LAYER met1 ;
+      RECT 2.000 2.000 100.580 2222.960 ;
+    LAYER met2 ;
+      RECT 2.000 2.000 100.580 2222.960 ;
+    LAYER met3 ;
+      RECT 2.000 2.000 100.580 2222.960 ;
+  END
+
+END nor_rom_4096x192
+
+END LIBRARY
