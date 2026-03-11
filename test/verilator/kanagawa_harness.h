@@ -95,6 +95,18 @@ class KanagawaHarness {
     return val;
   }
 
+  // Wait for FIFO non-empty without consuming (caller reads result + pulses rden).
+  void wait_fifo(const uint8_t& rden, const uint8_t& empty) {
+    int waited = 0;
+    while (empty) {
+      tick();
+      if (++waited > _timeout) {
+        std::fprintf(stderr, "TIMEOUT: FIFO empty never deasserted (wait)\n");
+        std::abort();
+      }
+    }
+  }
+
   // Drain a void-return FIFO (e.g. clear): wait non-empty, pulse rden.
   void drain_fifo(uint8_t& rden, const uint8_t& empty) {
     int waited = 0;

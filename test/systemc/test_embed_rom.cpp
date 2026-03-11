@@ -1,48 +1,77 @@
-// test_embed_rom.cpp — EmbedRom reference model tests
+// test_embed_rom.cpp — EmbedRom reference model tests (chunk-based API)
 #include "embed_rom.h"
 #include <cassert>
 #include <cstdio>
 
 using namespace opentaalas;
 
-static void test_write_read_roundtrip() {
-  EmbedRom<64, 32> rom;
-  rom.write_weight(uint17(3), uint12(7), uint16(0x3F80));
-  assert(rom.read_weight(uint17(3), uint12(7)) == 0x3F80);
-  assert(rom.read_weight(uint17(3), uint12(8)) == 0);
-  std::printf("  PASS write_read_roundtrip\n");
+// Pack 64 3-bit weights into 24 bytes
+static std::array<uint8_t, 24> pack_weights(const uint8_t* weights, int count) {
+  std::array<uint8_t, 24> bytes{};
+  for (int i = 0; i < count && i < 64; i++) {
+    int bit_offset = i * 3;
+    int byte_idx = bit_offset / 8;
+    int bit_idx = bit_offset % 8;
+    bytes[byte_idx] |= (weights[i] & 0x7) << bit_idx;
+    if (bit_idx > 5 && byte_idx + 1 < 24)
+      bytes[byte_idx + 1] |= (weights[i] & 0x7) >> (8 - bit_idx);
+  }
+  return bytes;
 }
 
-static void test_bf16_values() {
-  EmbedRom<64, 32> rom;
-  // Store various BF16 values
-  rom.write_weight(uint17(0), uint12(0), uint16(0x3F80));  // 1.0
-  rom.write_weight(uint17(0), uint12(1), uint16(0x4000));  // 2.0
-  rom.write_weight(uint17(0), uint12(2), uint16(0xBF80));  // -1.0
-  rom.write_weight(uint17(0), uint12(3), uint16(0x0000));  // 0.0
+static void test_chunk_roundtrip() {
+  EmbedRom<64, 64> rom;  // 64 tokens, 64 dims (1 chunk per token)
 
-  assert(rom.read_weight(uint17(0), uint12(0)) == 0x3F80);
-  assert(rom.read_weight(uint17(0), uint12(1)) == 0x4000);
-  assert(rom.read_weight(uint17(0), uint12(2)) == 0xBF80);
-  assert(rom.read_weight(uint17(0), uint12(3)) == 0x0000);
-  std::printf("  PASS bf16_values\n");
+  uint8_t weights[64];
+  for (int i = 0; i < 64; i++) weights[i] = i % 8;
+  auto chunk = pack_weights(weights, 64);
+
+  // token 3, chunk 0 → addr = 3
+  rom.write_chunk_bytes(3, chunk);
+  auto readback = rom.read_chunk_bytes(3);
+  for (int i = 0; i < 64; i++) {
+    uint8_t got = EmbedRom<64, 64>::extract_weight(readback, i);
+    assert(got == (uint8_t)(i % 8));
+  }
+  std::printf("  PASS chunk_roundtrip\n");
+}
+
+static void test_per_element_read() {
+  EmbedRom<64, 64> rom;
+
+  uint8_t weights[64];
+  for (int i = 0; i < 64; i++) weights[i] = (i + 3) % 8;
+  auto chunk = pack_weights(weights, 64);
+  rom.write_chunk_bytes(5, chunk);  // token 5
+
+  for (int i = 0; i < 64; i++) {
+    assert(rom.read_weight(5, i) == (uint8_t)((i + 3) % 8));
+  }
+  std::printf("  PASS per_element_read\n");
 }
 
 static void test_different_tokens() {
-  EmbedRom<64, 32> rom;
-  rom.write_weight(uint17(0), uint12(0), uint16(0x0001));
-  rom.write_weight(uint17(1), uint12(0), uint16(0x0002));
-  rom.write_weight(uint17(63), uint12(0), uint16(0xFFFF));
-  assert(rom.read_weight(uint17(0), uint12(0)) == 0x0001);
-  assert(rom.read_weight(uint17(1), uint12(0)) == 0x0002);
-  assert(rom.read_weight(uint17(63), uint12(0)) == 0xFFFF);
+  EmbedRom<64, 64> rom;
+
+  for (int tok = 0; tok < 4; tok++) {
+    uint8_t weights[64];
+    for (int i = 0; i < 64; i++) weights[i] = (tok + i) % 8;
+    auto chunk = pack_weights(weights, 64);
+    rom.write_chunk_bytes(tok, chunk);
+  }
+
+  for (int tok = 0; tok < 4; tok++) {
+    for (int i = 0; i < 64; i++) {
+      assert(rom.read_weight(tok, i) == (uint8_t)((tok + i) % 8));
+    }
+  }
   std::printf("  PASS different_tokens\n");
 }
 
 int main() {
   std::printf("test_embed_rom\n");
-  test_write_read_roundtrip();
-  test_bf16_values();
+  test_chunk_roundtrip();
+  test_per_element_read();
   test_different_tokens();
   std::printf("All embed_rom tests passed.\n");
   return 0;
