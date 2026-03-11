@@ -1,244 +1,246 @@
 // test_vl_rom_bank.cpp — Verilator co-simulation tests for rom_bank
-// Mirrors test/systemc/test_rom_bank.cpp against the Kanagawa-generated RTL.
+// Tests wide-word ROM interface: write_block/read_block with 880-bit words.
 //
-// The RTL exposes byte-level access (write_byte/read_byte) rather than the
-// block-level API used in the SystemC model.  We write individual bytes to
-// construct IQ3SBlock data, then verify the accessor methods.
-//
-// IQ3SBlock layout (32 bytes per block, little-endian):
-//   [0..1]   d_bf16       (super-scale)
-//   [2..17]  qs[16]       (codebook indices, low 8 bits)
-//   [18..19] qh[2]        (codebook index high bits)
-//   [20..23] signs[4]
-//   [24..25] scales[2]    (sub-scales, packed nibbles)
-//   [26..31] padding
+// IQ3SBlock layout in 880-bit word (110 bytes, little-endian):
+//   bits [15:0]     d_bf16       (super-scale)
+//   bits [527:16]   qs[64]       (codebook indices, low 8 bits)
+//   bits [591:528]  qh[8]        (codebook index high bits)
+//   bits [847:592]  signs[32]    (256 sign bits)
+//   bits [879:848]  scales[4]    (sub-scales, packed nibbles)
 
 #include "kanagawa_harness.h"
 #include "Vrom_bank.h"
 
+#include <array>
 #include <cassert>
 #include <cstdint>
 #include <cstdio>
+#include <cstring>
 
 using Harness = KanagawaHarness<Vrom_bank>;
 
-// ---------- low-level helpers ----------
+// ---------- 880-bit packing helpers ----------
+// VlWide<28> = 28 × 32-bit words = 896 bits (upper 16 bits unused)
 
-static void call_write_byte(Harness& h, uint16_t block_addr,
-                            uint8_t byte_offset, uint8_t value) {
-  auto* d = h.dut();
-  h.wait_ready(d->write_byte_rdy_out);
-  d->write_byte_valid_in = 1;
-  d->write_byte_block_addr_in = block_addr;
-  d->write_byte_byte_offset_in = byte_offset;
-  d->write_byte_value_in = value;
-  h.tick();
-  d->write_byte_valid_in = 0;
-  h.drain_fifo(d->write_byte_rden_in, d->write_byte_empty_out);
+static void pack_block(VlWide<28>& out, const std::array<uint8_t, 110>& bytes) {
+    memset(&out, 0, sizeof(out));
+    for (int i = 0; i < 110; i++) {
+        int bit_offset = i * 8;
+        int word = bit_offset / 32;
+        int shift = bit_offset % 32;
+        out[word] |= ((uint32_t)bytes[i]) << shift;
+        if (shift > 24) {
+            out[word + 1] |= ((uint32_t)bytes[i]) >> (32 - shift);
+        }
+    }
 }
 
-static uint8_t call_read_byte(Harness& h, uint16_t block_addr,
-                              uint8_t byte_offset) {
-  auto* d = h.dut();
-  h.wait_ready(d->read_byte_rdy_out);
-  d->read_byte_valid_in = 1;
-  d->read_byte_block_addr_in = block_addr;
-  d->read_byte_byte_offset_in = byte_offset;
-  h.tick();
-  d->read_byte_valid_in = 0;
-  return h.read_fifo(d->read_byte_rden_in, d->read_byte_empty_out,
-                     d->read_byte_result_out);
+static uint16_t extract_super_scale(const VlWide<28>& block) {
+    return block[0] & 0xFFFF;  // bits [15:0]
 }
 
-static uint16_t call_get_super_scale(Harness& h, uint16_t block_addr) {
-  auto* d = h.dut();
-  h.wait_ready(d->get_super_scale_rdy_out);
-  d->get_super_scale_valid_in = 1;
-  d->get_super_scale_block_addr_in = block_addr;
-  h.tick();
-  d->get_super_scale_valid_in = 0;
-  return h.read_fifo(d->get_super_scale_rden_in, d->get_super_scale_empty_out,
-                     d->get_super_scale_result_out);
+static uint8_t extract_qs(const VlWide<28>& block, int idx) {
+    // bits [527:16], byte idx in range 0..63
+    int bit_offset = 16 + idx * 8;
+    int word = bit_offset / 32;
+    int shift = bit_offset % 32;
+    uint8_t val = (block[word] >> shift) & 0xFF;
+    if (shift > 24) {
+        val |= (block[word + 1] << (32 - shift)) & 0xFF;
+    }
+    return val;
 }
 
-static uint16_t call_get_codebook_index(Harness& h, uint16_t block_addr,
-                                        uint8_t group_in_block) {
-  auto* d = h.dut();
-  h.wait_ready(d->get_codebook_index_rdy_out);
-  d->get_codebook_index_valid_in = 1;
-  d->get_codebook_index_block_addr_in = block_addr;
-  d->get_codebook_index_group_in_block_in = group_in_block;
-  h.tick();
-  d->get_codebook_index_valid_in = 0;
-  return h.read_fifo(d->get_codebook_index_rden_in,
-                     d->get_codebook_index_empty_out,
-                     d->get_codebook_index_result_out);
+static uint8_t extract_qh(const VlWide<28>& block, int idx) {
+    // bits [591:528], byte idx in range 0..7
+    int bit_offset = 528 + idx * 8;
+    int word = bit_offset / 32;
+    int shift = bit_offset % 32;
+    uint8_t val = (block[word] >> shift) & 0xFF;
+    if (shift > 24) {
+        val |= (block[word + 1] << (32 - shift)) & 0xFF;
+    }
+    return val;
 }
 
-static uint8_t call_get_sign(Harness& h, uint16_t block_addr,
-                             uint8_t weight_in_block) {
-  auto* d = h.dut();
-  h.wait_ready(d->get_sign_rdy_out);
-  d->get_sign_valid_in = 1;
-  d->get_sign_block_addr_in = block_addr;
-  d->get_sign_weight_in_block_in = weight_in_block;
-  h.tick();
-  d->get_sign_valid_in = 0;
-  return h.read_fifo(d->get_sign_rden_in, d->get_sign_empty_out,
-                     d->get_sign_result_out);
+static uint8_t extract_sign_byte(const VlWide<28>& block, int idx) {
+    // bits [847:592], byte idx in range 0..31
+    int bit_offset = 592 + idx * 8;
+    int word = bit_offset / 32;
+    int shift = bit_offset % 32;
+    uint8_t val = (block[word] >> shift) & 0xFF;
+    if (shift > 24) {
+        val |= (block[word + 1] << (32 - shift)) & 0xFF;
+    }
+    return val;
 }
 
-static uint8_t call_get_sub_scale(Harness& h, uint16_t block_addr,
-                                  uint8_t sub_block_idx) {
-  auto* d = h.dut();
-  h.wait_ready(d->get_sub_scale_rdy_out);
-  d->get_sub_scale_valid_in = 1;
-  d->get_sub_scale_block_addr_in = block_addr;
-  d->get_sub_scale_sub_block_idx_in = sub_block_idx;
-  h.tick();
-  d->get_sub_scale_valid_in = 0;
-  return h.read_fifo(d->get_sub_scale_rden_in, d->get_sub_scale_empty_out,
-                     d->get_sub_scale_result_out);
+static uint8_t extract_scale_byte(const VlWide<28>& block, int idx) {
+    // bits [879:848], byte idx in range 0..3
+    int bit_offset = 848 + idx * 8;
+    int word = bit_offset / 32;
+    int shift = bit_offset % 32;
+    uint8_t val = (block[word] >> shift) & 0xFF;
+    if (shift > 24) {
+        val |= (block[word + 1] << (32 - shift)) & 0xFF;
+    }
+    return val;
 }
 
-// ---------- block-level write helper ----------
+// ---------- RTL method wrappers ----------
 
-// Write a minimal IQ3SBlock via byte-level writes.
+static void call_write_block(Harness& h, uint16_t block_addr,
+                              const VlWide<28>& value) {
+    auto* d = h.dut();
+    h.wait_ready(d->write_block_rdy_out);
+    d->write_block_valid_in = 1;
+    d->write_block_block_addr_in = block_addr;
+    memcpy(&d->write_block_value_in, &value, sizeof(VlWide<28>));
+    h.tick();
+    d->write_block_valid_in = 0;
+    h.drain_fifo(d->write_block_rden_in, d->write_block_empty_out);
+}
+
+static void call_read_block(Harness& h, uint16_t block_addr,
+                             VlWide<28>& result) {
+    auto* d = h.dut();
+    h.wait_ready(d->read_block_rdy_out);
+    d->read_block_valid_in = 1;
+    d->read_block_block_addr_in = block_addr;
+    h.tick();
+    d->read_block_valid_in = 0;
+    h.wait_fifo(d->read_block_rden_in, d->read_block_empty_out);
+    memcpy(&result, &d->read_block_result_out, sizeof(VlWide<28>));
+    d->read_block_rden_in = 0;
+    h.tick();
+}
+
+// ---------- Test helpers ----------
+
 struct IQ3SBlock {
-  uint16_t d_bf16 = 0;
-  uint8_t  qs[16] = {};
-  uint8_t  qh[2]  = {};
-  uint8_t  signs[4] = {};
-  uint8_t  scales[2] = {};
+    uint16_t d_bf16 = 0;
+    uint8_t  qs[64] = {};
+    uint8_t  qh[8]  = {};
+    uint8_t  signs[32] = {};
+    uint8_t  scales[4] = {};
 };
 
-static void write_block(Harness& h, uint16_t addr, const IQ3SBlock& blk) {
-  // d_bf16: bytes 0-1 (little-endian)
-  call_write_byte(h, addr, 0, blk.d_bf16 & 0xFF);
-  call_write_byte(h, addr, 1, (blk.d_bf16 >> 8) & 0xFF);
-  // qs[16]: bytes 2-17
-  for (int i = 0; i < 16; ++i)
-    call_write_byte(h, addr, 2 + i, blk.qs[i]);
-  // qh[2]: bytes 18-19
-  call_write_byte(h, addr, 18, blk.qh[0]);
-  call_write_byte(h, addr, 19, blk.qh[1]);
-  // signs[4]: bytes 20-23
-  for (int i = 0; i < 4; ++i)
-    call_write_byte(h, addr, 20 + i, blk.signs[i]);
-  // scales[2]: bytes 24-25
-  call_write_byte(h, addr, 24, blk.scales[0]);
-  call_write_byte(h, addr, 25, blk.scales[1]);
+static std::array<uint8_t, 110> block_to_bytes(const IQ3SBlock& blk) {
+    std::array<uint8_t, 110> bytes{};
+    bytes[0] = blk.d_bf16 & 0xFF;
+    bytes[1] = (blk.d_bf16 >> 8) & 0xFF;
+    memcpy(&bytes[2], blk.qs, 64);
+    memcpy(&bytes[66], blk.qh, 8);
+    memcpy(&bytes[74], blk.signs, 32);
+    memcpy(&bytes[106], blk.scales, 4);
+    return bytes;
 }
 
 // ---- Tests ----
 
 static void test_write_read_round_trip() {
-  Harness h;
-  h.reset();
+    Harness h;
+    h.reset();
 
-  IQ3SBlock blk;
-  blk.d_bf16 = 0x3F80;
-  blk.qs[0] = 0x42;
-  blk.qh[0] = 0x01;
-  blk.signs[0] = 0xA5;
-  blk.scales[0] = 0x73;
-  write_block(h, 0, blk);
+    IQ3SBlock blk;
+    blk.d_bf16 = 0x3F80;
+    blk.qs[0] = 0x42;
+    blk.qs[63] = 0xEE;
+    blk.qh[0] = 0x01;
+    blk.qh[7] = 0xAA;
+    blk.signs[0] = 0xA5;
+    blk.signs[31] = 0x5A;
+    blk.scales[0] = 0x73;
+    blk.scales[3] = 0xBF;
 
-  // Read back every written byte
-  assert(call_read_byte(h, 0, 0) == 0x80);   // d_bf16 low
-  assert(call_read_byte(h, 0, 1) == 0x3F);   // d_bf16 high
-  assert(call_read_byte(h, 0, 2) == 0x42);   // qs[0]
-  assert(call_read_byte(h, 0, 18) == 0x01);  // qh[0]
-  assert(call_read_byte(h, 0, 20) == 0xA5);  // signs[0]
-  assert(call_read_byte(h, 0, 24) == 0x73);  // scales[0]
-  std::puts("[PASS] write/read byte round-trip");
-}
+    auto bytes = block_to_bytes(blk);
+    VlWide<28> packed;
+    pack_block(packed, bytes);
+    call_write_block(h, 0, packed);
 
-static void test_get_codebook_index() {
-  Harness h;
-  h.reset();
+    VlWide<28> readback;
+    call_read_block(h, 0, readback);
 
-  IQ3SBlock blk;
-  blk.qs[0] = 0xAB;
-  blk.qs[1] = 0xCD;
-  blk.qh[0] = 0x02;  // bit 1 set
-  write_block(h, 0, blk);
-
-  // Group 0: index = qs[0] | ((qh[0] << 8) & 256) = 0xAB | 0 = 0xAB = 171
-  assert(call_get_codebook_index(h, 0, 0) == 0xAB);
-  // Group 1: index = qs[1] | ((qh[0] << 7) & 256) = 0xCD | 0x100 = 0x1CD = 461
-  assert(call_get_codebook_index(h, 0, 1) == 461);
-  std::puts("[PASS] get_codebook_index");
-}
-
-static void test_get_sign() {
-  Harness h;
-  h.reset();
-
-  IQ3SBlock blk;
-  blk.signs[0] = 0xA5;  // 10100101
-  write_block(h, 0, blk);
-
-  assert(call_get_sign(h, 0, 0) == 1);  // bit 0
-  assert(call_get_sign(h, 0, 1) == 0);  // bit 1
-  assert(call_get_sign(h, 0, 2) == 1);  // bit 2
-  assert(call_get_sign(h, 0, 5) == 1);  // bit 5
-  assert(call_get_sign(h, 0, 7) == 1);  // bit 7
-  std::puts("[PASS] get_sign");
-}
-
-static void test_get_sub_scale() {
-  Harness h;
-  h.reset();
-
-  IQ3SBlock blk;
-  blk.scales[0] = 0x73;  // low=3, high=7
-  blk.scales[1] = 0xBF;  // low=15, high=11
-  write_block(h, 0, blk);
-
-  assert(call_get_sub_scale(h, 0, 0) == 3);
-  assert(call_get_sub_scale(h, 0, 1) == 7);
-  assert(call_get_sub_scale(h, 0, 2) == 15);
-  assert(call_get_sub_scale(h, 0, 3) == 11);
-  std::puts("[PASS] get_sub_scale");
-}
-
-static void test_get_super_scale() {
-  Harness h;
-  h.reset();
-
-  IQ3SBlock blk;
-  blk.d_bf16 = 0x4000;  // BF16(2.0)
-  write_block(h, 0, blk);
-
-  assert(call_get_super_scale(h, 0) == 0x4000);
-  std::puts("[PASS] get_super_scale");
+    assert(extract_super_scale(readback) == 0x3F80);
+    assert(extract_qs(readback, 0) == 0x42);
+    assert(extract_qs(readback, 63) == 0xEE);
+    assert(extract_qh(readback, 0) == 0x01);
+    assert(extract_qh(readback, 7) == 0xAA);
+    assert(extract_sign_byte(readback, 0) == 0xA5);
+    assert(extract_sign_byte(readback, 31) == 0x5A);
+    assert(extract_scale_byte(readback, 0) == 0x73);
+    assert(extract_scale_byte(readback, 3) == 0xBF);
+    std::puts("[PASS] write/read 880-bit block round-trip");
 }
 
 static void test_multiple_blocks() {
-  Harness h;
-  h.reset();
+    Harness h;
+    h.reset();
 
-  for (int i = 0; i < 4; ++i) {
-    IQ3SBlock blk;
-    blk.d_bf16 = 0x3F80 + i;
-    blk.qs[0] = i * 10;
-    write_block(h, i, blk);
-  }
-  for (int i = 0; i < 4; ++i) {
-    assert(call_get_super_scale(h, i) == (uint16_t)(0x3F80 + i));
-    assert(call_read_byte(h, i, 2) == (uint8_t)(i * 10));  // qs[0]
-  }
-  std::puts("[PASS] multiple blocks");
+    for (int i = 0; i < 4; ++i) {
+        IQ3SBlock blk;
+        blk.d_bf16 = 0x3F80 + i;
+        blk.qs[0] = i * 10;
+        blk.signs[0] = i * 30;
+        auto bytes = block_to_bytes(blk);
+        VlWide<28> packed;
+        pack_block(packed, bytes);
+        call_write_block(h, i, packed);
+    }
+
+    for (int i = 0; i < 4; ++i) {
+        VlWide<28> readback;
+        call_read_block(h, i, readback);
+        assert(extract_super_scale(readback) == (uint16_t)(0x3F80 + i));
+        assert(extract_qs(readback, 0) == (uint8_t)(i * 10));
+        assert(extract_sign_byte(readback, 0) == (uint8_t)(i * 30));
+    }
+    std::puts("[PASS] multiple blocks");
+}
+
+static void test_full_byte_coverage() {
+    // Write all 110 bytes of a block and verify each one reads back correctly
+    Harness h;
+    h.reset();
+
+    std::array<uint8_t, 110> bytes;
+    for (int i = 0; i < 110; i++)
+        bytes[i] = (uint8_t)((i * 7 + 13) & 0xFF);
+
+    VlWide<28> packed;
+    pack_block(packed, bytes);
+    call_write_block(h, 5, packed);
+
+    VlWide<28> readback;
+    call_read_block(h, 5, readback);
+
+    // Verify d_bf16
+    uint16_t d = bytes[0] | ((uint16_t)bytes[1] << 8);
+    assert(extract_super_scale(readback) == d);
+
+    // Verify all qs[64]
+    for (int i = 0; i < 64; i++)
+        assert(extract_qs(readback, i) == bytes[2 + i]);
+
+    // Verify all qh[8]
+    for (int i = 0; i < 8; i++)
+        assert(extract_qh(readback, i) == bytes[66 + i]);
+
+    // Verify all signs[32]
+    for (int i = 0; i < 32; i++)
+        assert(extract_sign_byte(readback, i) == bytes[74 + i]);
+
+    // Verify all scales[4]
+    for (int i = 0; i < 4; i++)
+        assert(extract_scale_byte(readback, i) == bytes[106 + i]);
+
+    std::puts("[PASS] full 110-byte coverage");
 }
 
 int main() {
-  test_write_read_round_trip();
-  test_get_codebook_index();
-  test_get_sign();
-  test_get_sub_scale();
-  test_get_super_scale();
-  test_multiple_blocks();
-  std::puts("\nAll rom_bank Verilator co-sim tests passed.");
-  return 0;
+    test_write_read_round_trip();
+    test_multiple_blocks();
+    test_full_byte_coverage();
+    std::puts("\nAll rom_bank Verilator co-sim tests passed.");
+    return 0;
 }

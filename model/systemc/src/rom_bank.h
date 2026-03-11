@@ -1,5 +1,6 @@
 #pragma once
 #include <opentaalas/types.h>
+#include <array>
 #include <cstdint>
 #include <cstring>
 #include <vector>
@@ -76,6 +77,28 @@ class RomBank {
   // Get BF16 super-scale for a block
   uint16 get_super_scale(int block_addr) const {
     return uint16(_blocks[block_addr].d_bf16);
+  }
+
+  // Pack IQ3SBlock into 110-byte array matching RTL 880-bit word layout:
+  // bits [15:0]     d_bf16
+  // bits [527:16]   qs[64]
+  // bits [591:528]  qh[8]
+  // bits [847:592]  signs[32]
+  // bits [879:848]  scales[4]
+  static std::array<uint8_t, 110> pack_block_bytes(const IQ3SBlock& blk) {
+    std::array<uint8_t, 110> bytes{};
+    bytes[0] = blk.d_bf16 & 0xFF;
+    bytes[1] = (blk.d_bf16 >> 8) & 0xFF;
+    std::memcpy(&bytes[2], blk.qs, 64);
+    std::memcpy(&bytes[66], blk.qh, 8);
+    std::memcpy(&bytes[74], blk.signs, 32);
+    std::memcpy(&bytes[106], blk.scales, 4);
+    return bytes;
+  }
+
+  // Read a block as 110-byte packed representation (matches RTL 880-bit word)
+  std::array<uint8_t, 110> read_block_bytes(int block_addr) const {
+    return pack_block_bytes(_blocks[block_addr]);
   }
 
  private:

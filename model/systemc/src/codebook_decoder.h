@@ -18,6 +18,8 @@ class CodebookDecoder {
     m3 = uint4((entry >> 24) & 0xFF);
   }
 
+  uint32_t read_raw(int index) const { return _grid[index]; }
+
  private:
   // Copied from ggml-common.h iq3s_grid[512]
   static constexpr uint32_t _grid[512] = {

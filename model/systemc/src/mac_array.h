@@ -1,5 +1,6 @@
 #pragma once
 #include <opentaalas/types.h>
+#include <array>
 #include <mac_pe.h>
 #include <dequant.h>
 #include <rom_bank.h>
@@ -50,6 +51,16 @@ class MacArray {
   // --- Codebook decode ---
   void decode_codebook(uint9 index, uint4& m0, uint4& m1, uint4& m2, uint4& m3) const {
     _codebook.decode(index, m0, m1, m2, m3);
+  }
+
+  // Wide-word ROM access (matches RTL 880-bit interface)
+  std::array<uint8_t, 110> read_rom_block_bytes(int block_addr) const {
+    return _rom.read_block_bytes(block_addr);
+  }
+
+  // Raw codebook grid read (matches RTL read_grid)
+  uint32_t read_grid_raw(int index) const {
+    return _codebook.read_raw(index);
   }
 
   // --- Control ---
