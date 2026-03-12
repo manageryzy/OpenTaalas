@@ -3,8 +3,9 @@
 ## Summary
 
 **19 designs configured** for ORFS sky130hd PnR flow.
-**13 designs completed** through GDS (12 logic-only + 1 smoke test).
-**3 designs reached GRT** with congestion artifacts (mac_array, rom_bank, embed_rom).
+**13 designs completed** through DRT or GDS (12 logic-only + 1 macro-bearing).
+**1 design reached clean GRT** (mac_array — DRT in progress).
+**2 designs at GRT with congestion** (embed_rom, rope).
 **3 designs blocked** by physical constraints.
 
 ## Completed Designs (GDS)
@@ -30,18 +31,24 @@
 - async_fifo is smallest: 270 cells, 6,400 µm² die
 - All logic-only (no macros)
 
-## Macro-Bearing Designs (GRT stage, congestion-limited)
+## Macro-Bearing Designs
 
-| Design | Std Cells | Macro(s) | Die (µm) | Reached | Blocker |
-|--------|-----------|----------|----------|---------|---------|
-| mac_array | 163,941 | 1× nor_rom_1024x880 | 2000×2000 | GRT | 880-pin output congestion |
-| rom_bank | 138,272 | 1× nor_rom_1024x880 | 2400×2400 | GRT | 880-pin output congestion |
-| embed_rom | 117,050 | 16× nor_rom_4096x192 | 1200×9500 | GRT | 206K overflow, met2 69% usage |
-| rope | ~96K est. | 2× nor_rom_4096x1024 | 1600×3500 | Placement | 101K net resizer timeout |
+| Design | Std Cells | Macro(s) | Die (µm) | GRT Overflow | Reached | WNS (ns) |
+|--------|-----------|----------|----------|-------------|---------|----------|
+| rom_bank | 138,272 | 1× nor_rom_1024x880 | 2400×2400 | **0** | DRT complete | -2.35 |
+| mac_array | 163,941 | 1× nor_rom_1024x880 | 3000×3000 | **0** | GRT clean | -4.67 |
+| embed_rom | 117,050 | 16× nor_rom_4096x192 | 1200×9500 | 206K | GRT | — |
+| rope | ~96K est. | 2× nor_rom_4096x1024 | 1600×3500 | — | Placement | — |
+
+**Floorplan breakthroughs (rom_bank, mac_array):**
+- 2-edge balanced pin distribution: ~440 dout pins per left/right edge (met3 only), replacing original 826/54 split
+- 4-edge met4 pins (top/bottom) INCREASED congestion — met4→met1/met2 layer changes add routing pressure
+- Centered macro placement: equal routing space on all sides (was corner-placed at 30,30)
+- Die sizing: mac_array needed 3000×3000 (2800→9 overflow, 3000→0)
 
 **Key findings:**
 - `SYNTH_HIERARCHICAL = 1` reduced synthesis from 15+ hours to < 10 seconds
-- 880-pin NOR ROM macros create structural routing congestion (GRT-0116)
+- Pin distribution dominates routability more than die area — balanced 2-edge beats larger die with skewed pins
 - ORFS `recover_power_helper` incremental GRT lacks `-allow_congestion`, causing crash even when initial GRT passes
 - Workaround: `GENERATE_ARTIFACTS_ON_FAILURE = 1` + let initial GRT fail → writes ODB and skips recover_power
 
