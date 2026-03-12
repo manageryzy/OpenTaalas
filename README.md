@@ -167,7 +167,7 @@ cmake --build build --target backend_all
 
 ### PnR Status (sky130hd @ 250 MHz)
 
-19 designs configured. 13 modules completed through detailed routing (12 logic-only + 1 macro-bearing). 1 macro-bearing module at clean GRT. 3 designs are physically blocked.
+19 designs configured. 14 modules completed through detailed routing (12 logic-only + 2 macro-bearing). 3 designs are physically blocked.
 
 | Module | fmax (MHz) | Status |
 |--------|-----------|--------|
@@ -184,7 +184,7 @@ cmake --build build --target backend_all
 | attention_unit | 76 | GDS |
 | rmsnorm | 77 | GDS |
 | swiglu | 47 | GDS |
-| mac_array | 122 | GRT clean (macro) |
+| mac_array | 120 | DRT (macro) |
 | embed_rom | — | GRT (congestion) |
 | rope | — | Placement timeout |
 | vector_unit | — | Blocked (101K nets) |

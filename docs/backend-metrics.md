@@ -3,8 +3,7 @@
 ## Summary
 
 **19 designs configured** for ORFS sky130hd PnR flow.
-**13 designs completed** through DRT or GDS (12 logic-only + 1 macro-bearing).
-**1 design reached clean GRT** (mac_array — DRT in progress).
+**14 designs completed** through DRT or GDS (12 logic-only + 2 macro-bearing).
 **2 designs at GRT with congestion** (embed_rom, rope).
 **3 designs blocked** by physical constraints.
 
@@ -36,7 +35,7 @@
 | Design | Std Cells | Macro(s) | Die (µm) | GRT Overflow | Reached | WNS (ns) |
 |--------|-----------|----------|----------|-------------|---------|----------|
 | rom_bank | 138,272 | 1× nor_rom_1024x880 | 2400×2400 | **0** | DRT complete | -2.35 |
-| mac_array | 163,941 | 1× nor_rom_1024x880 | 3000×3000 | **0** | GRT clean | -4.67 |
+| mac_array | 163,941 | 1× nor_rom_1024x880 | 3000×3000 | **0** | DRT complete | -4.33 |
 | embed_rom | 117,050 | 16× nor_rom_4096x192 | 1200×9500 | 206K | GRT | — |
 | rope | ~96K est. | 2× nor_rom_4096x1024 | 1600×3500 | — | Placement | — |
 

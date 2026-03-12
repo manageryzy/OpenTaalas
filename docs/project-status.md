@@ -21,11 +21,11 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 | Down projection | 0.995683 |
 | Post-MLP residual | 0.999701 |
 
-### Backend PnR: 13 routed + 2 GRT + 4 BLOCKED
+### Backend PnR: 14 routed + 2 GRT + 3 BLOCKED
 
 19 designs configured for ORFS sky130hd at 250 MHz (4ns clock). NOR ROM and SRAM macro collateral integrated via sky130 HAL layer.
 
-#### Completed through DRT (12 logic-only + 1 macro-bearing)
+#### Completed through DRT (12 logic-only + 2 macro-bearing)
 
 | Module | Area (um²) | fmax (MHz) | Timing |
 |--------|-----------|-----------|--------|
@@ -42,13 +42,14 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 | rmsnorm | 3,223,470 | 77 | -9.02ns |
 | swiglu | 368,319 | 47 | -17.5ns |
 | **rom_bank** | **1,556,943** | **157** | **-2.35ns** |
+| **mac_array** | **2,515,993** | **120** | **-4.33ns** |
 
 #### Macro-Bearing Designs (NOR ROM integrated)
 
 | Module | Macro(s) | Stage Reached | GRT Overflow |
 |--------|----------|---------------|-------------|
 | rom_bank | 1× nor\_rom\_1024x880 | **DRT complete** | **0** |
-| mac_array | 1× nor\_rom\_1024x880 | GRT clean | **0** |
+| mac_array | 1× nor\_rom\_1024x880 | **DRT complete** | **0** |
 | embed_rom | 16× nor\_rom\_4096x192 | GRT | 206K |
 | rope | 2× nor\_rom\_4096x1024 | Placement | — |
 
