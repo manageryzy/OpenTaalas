@@ -10,7 +10,9 @@ foreach inst [$block getInsts] {
 puts "Found [llength $macros] macros:"
 foreach m $macros { puts "  '$m'" }
 
-# Place macro at bottom-left with margin
+# Center macro in die — gives equal routing space for pins on both edges
+# Die: 2400x2400, Macro: ~419x566
+# Center: (2400-419)/2 ≈ 990, (2400-566)/2 ≈ 917
 foreach inst_name $macros {
-    place_macro -macro_name $inst_name -location "30 30" -orientation R0
+    place_macro -macro_name $inst_name -location "990 917" -orientation R0
 }
