@@ -11,9 +11,9 @@ puts "Found [llength $macros] macros:"
 foreach m $macros { puts "  '$m'" }
 
 # Center macro in die — gives equal routing space for pins on both edges
-# Die: 2000x2000, Macro: ~419x566
-# Center: (2000-419)/2 ≈ 790, (2000-566)/2 ≈ 717
+# Die: 3000x3000, Macro: ~419x566
+# Center: (3000-419)/2 ≈ 1290, (3000-566)/2 ≈ 1217
 set macros [lsort $macros]
 foreach inst_name $macros {
-    place_macro -macro_name $inst_name -location "790 717" -orientation R0
+    place_macro -macro_name $inst_name -location "1290 1217" -orientation R0
 }
