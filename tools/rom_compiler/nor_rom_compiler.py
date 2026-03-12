@@ -259,23 +259,30 @@ def generate_lef(spec: RomSpec) -> str:
     lines.append(f'  SYMMETRY X Y ;')
     lines.append(f'')
 
-    # Pin placement along edges — pins on met3, aligned to routing tracks,
-    # extending beyond boundary for router access
+    # Pin placement — distribute across all 4 edges for balanced routing
     pin_w = 0.340  # > met3 min width (0.3) + margin
     pin_ext = 0.500  # extension beyond boundary for access
 
-    # met3 routing grid parameters
+    # met3 routing grid parameters (horizontal layer — used for left/right edge pins)
     met3_offset = 0.340
     met3_pitch = 0.680
-    first_track = met3_offset + met3_pitch * math.ceil((GUARD_RING + 0.5 - met3_offset) / met3_pitch)
 
-    # Calculate available tracks per edge
-    max_pin_y = h - 1.0 - pin_w  # last pin bottom Y
-    tracks_per_edge = int((max_pin_y - (first_track - pin_w / 2)) / met3_pitch) + 1
+    # met4 routing grid parameters (vertical layer — used for top/bottom edge pins)
+    met4_offset = 0.460
+    met4_pitch = 0.920
+
+    first_track_y = met3_offset + met3_pitch * math.ceil((GUARD_RING + 0.5 - met3_offset) / met3_pitch)
+    first_track_x = met4_offset + met4_pitch * math.ceil((GUARD_RING + 0.5 - met4_offset) / met4_pitch)
+
+    # Calculate available pin slots per edge
+    max_pin_y = h - 1.0 - pin_w
+    tracks_left_right = int((max_pin_y - (first_track_y - pin_w / 2)) / met3_pitch) + 1
+    max_pin_x = w - 1.0 - pin_w
+    tracks_top_bottom = int((max_pin_x - (first_track_x - pin_w / 2)) / met4_pitch) + 1
 
     # Input pins (left edge, bottom): clk, ce, addr[0:N-1]
     num_inputs = 2 + addr_w  # clk + ce + addr
-    y_pos = snap_mfg(first_track - pin_w / 2)
+    y_pos = snap_mfg(first_track_y - pin_w / 2)
 
     lines.append(f'  PIN clk')
     lines.append(f'    DIRECTION INPUT ;')
@@ -311,47 +318,97 @@ def generate_lef(spec: RomSpec) -> str:
         lines.append(f'')
         y_pos = snap_mfg(y_pos + met3_pitch)
 
-    left_input_end_track = num_inputs  # tracks used by inputs on left edge
+    # Distribute dout pins across all 4 edges proportional to edge length
+    left_avail = tracks_left_right - num_inputs  # left edge minus input pins
+    right_avail = tracks_left_right
+    top_avail = tracks_top_bottom
+    bottom_avail = tracks_top_bottom
+    total_avail = left_avail + right_avail + top_avail + bottom_avail
 
-    # Data output pins — distribute across right edge, overflow to left edge above inputs
-    right_count = min(spec.cols, tracks_per_edge)
-    left_count = spec.cols - right_count
-    # If overflow needed, also check left edge has room above inputs
-    left_avail = tracks_per_edge - left_input_end_track
-    if left_count > left_avail:
-        # Not enough room even with both edges; increase macro height would be needed
-        # For now, warn and pack (shouldn't happen with current specs)
-        left_count = left_avail
+    # Balanced distribution: proportional to available slots
+    n_right = min(right_avail, round(spec.cols * right_avail / total_avail))
+    n_left = min(left_avail, round(spec.cols * left_avail / total_avail))
+    n_top = min(top_avail, round(spec.cols * top_avail / total_avail))
+    n_bottom = spec.cols - n_right - n_left - n_top
+    if n_bottom > bottom_avail:
+        # Redistribute excess back to larger edges
+        excess = n_bottom - bottom_avail
+        n_bottom = bottom_avail
+        n_right = min(right_avail, n_right + excess)
 
-    # Right edge: dout[0 : right_count-1]
-    y_pos = snap_mfg(first_track - pin_w / 2)
-    for i in range(right_count):
-        pin_y = snap_mfg(y_pos + i * met3_pitch)
-        lines.append(f'  PIN dout[{i}]')
+    pin_idx = 0
+
+    # Right edge: met3 pins (horizontal layer, perpendicular to vertical edge)
+    y_start = snap_mfg(first_track_y - pin_w / 2)
+    right_pitch = (max_pin_y - y_start) / max(n_right - 1, 1) if n_right > 1 else met3_pitch
+    right_pitch = max(right_pitch, met3_pitch)  # don't pack tighter than track pitch
+    # Snap to met3 grid
+    right_pitch = met3_pitch * max(1, round(right_pitch / met3_pitch))
+    for i in range(n_right):
+        pin_y = snap_mfg(y_start + i * right_pitch)
+        lines.append(f'  PIN dout[{pin_idx}]')
         lines.append(f'    DIRECTION OUTPUT ;')
         lines.append(f'    USE SIGNAL ;')
         lines.append(f'    PORT')
         lines.append(f'      LAYER met3 ;')
         lines.append(f'        RECT {snap_mfg(w - pin_ext):.3f} {pin_y:.3f} {snap_mfg(w + pin_ext):.3f} {snap_mfg(pin_y + pin_w):.3f} ;')
         lines.append(f'    END')
-        lines.append(f'  END dout[{i}]')
+        lines.append(f'  END dout[{pin_idx}]')
         lines.append(f'')
+        pin_idx += 1
 
-    # Left edge overflow: dout[right_count : right_count+left_count-1] above inputs
-    if left_count > 0:
-        y_pos = snap_mfg(first_track - pin_w / 2 + left_input_end_track * met3_pitch)
-        for j in range(left_count):
-            i = right_count + j
-            pin_y = snap_mfg(y_pos + j * met3_pitch)
-            lines.append(f'  PIN dout[{i}]')
-            lines.append(f'    DIRECTION OUTPUT ;')
-            lines.append(f'    USE SIGNAL ;')
-            lines.append(f'    PORT')
-            lines.append(f'      LAYER met3 ;')
-            lines.append(f'        RECT {snap_mfg(-pin_ext):.3f} {pin_y:.3f} {snap_mfg(pin_ext):.3f} {snap_mfg(pin_y + pin_w):.3f} ;')
-            lines.append(f'    END')
-            lines.append(f'  END dout[{i}]')
-            lines.append(f'')
+    # Top edge: met4 pins (vertical layer, perpendicular to horizontal edge)
+    x_start = snap_mfg(first_track_x - pin_w / 2)
+    top_pitch = (max_pin_x - x_start) / max(n_top - 1, 1) if n_top > 1 else met4_pitch
+    top_pitch = max(top_pitch, met4_pitch)
+    top_pitch = met4_pitch * max(1, round(top_pitch / met4_pitch))
+    for i in range(n_top):
+        pin_x = snap_mfg(x_start + i * top_pitch)
+        lines.append(f'  PIN dout[{pin_idx}]')
+        lines.append(f'    DIRECTION OUTPUT ;')
+        lines.append(f'    USE SIGNAL ;')
+        lines.append(f'    PORT')
+        lines.append(f'      LAYER met4 ;')
+        lines.append(f'        RECT {pin_x:.3f} {snap_mfg(h - pin_ext):.3f} {snap_mfg(pin_x + pin_w):.3f} {snap_mfg(h + pin_ext):.3f} ;')
+        lines.append(f'    END')
+        lines.append(f'  END dout[{pin_idx}]')
+        lines.append(f'')
+        pin_idx += 1
+
+    # Left edge: met3 pins above input pins
+    left_y_start = snap_mfg(first_track_y - pin_w / 2 + num_inputs * met3_pitch)
+    left_pitch = (max_pin_y - left_y_start) / max(n_left - 1, 1) if n_left > 1 else met3_pitch
+    left_pitch = max(left_pitch, met3_pitch)
+    left_pitch = met3_pitch * max(1, round(left_pitch / met3_pitch))
+    for i in range(n_left):
+        pin_y = snap_mfg(left_y_start + i * left_pitch)
+        lines.append(f'  PIN dout[{pin_idx}]')
+        lines.append(f'    DIRECTION OUTPUT ;')
+        lines.append(f'    USE SIGNAL ;')
+        lines.append(f'    PORT')
+        lines.append(f'      LAYER met3 ;')
+        lines.append(f'        RECT {snap_mfg(-pin_ext):.3f} {pin_y:.3f} {snap_mfg(pin_ext):.3f} {snap_mfg(pin_y + pin_w):.3f} ;')
+        lines.append(f'    END')
+        lines.append(f'  END dout[{pin_idx}]')
+        lines.append(f'')
+        pin_idx += 1
+
+    # Bottom edge: met4 pins (vertical layer)
+    bottom_pitch = (max_pin_x - x_start) / max(n_bottom - 1, 1) if n_bottom > 1 else met4_pitch
+    bottom_pitch = max(bottom_pitch, met4_pitch)
+    bottom_pitch = met4_pitch * max(1, round(bottom_pitch / met4_pitch))
+    for i in range(n_bottom):
+        pin_x = snap_mfg(x_start + i * bottom_pitch)
+        lines.append(f'  PIN dout[{pin_idx}]')
+        lines.append(f'    DIRECTION OUTPUT ;')
+        lines.append(f'    USE SIGNAL ;')
+        lines.append(f'    PORT')
+        lines.append(f'      LAYER met4 ;')
+        lines.append(f'        RECT {pin_x:.3f} {snap_mfg(-pin_ext):.3f} {snap_mfg(pin_x + pin_w):.3f} {snap_mfg(pin_ext):.3f} ;')
+        lines.append(f'    END')
+        lines.append(f'  END dout[{pin_idx}]')
+        lines.append(f'')
+        pin_idx += 1
 
     # Power pins — vertical met4 stripes matching PDN grid pitch (27.14µm)
     # so PDN can place met4↔met5 vias at overlap points
@@ -399,14 +456,16 @@ def generate_lef(spec: RomSpec) -> str:
     lines.append(f'  END VSS')
     lines.append(f'')
 
-    # Obstruction (met1+met2 internal routing; met4 except power stripes)
+    # Obstruction (met1+met2 internal routing; met4 interior only, leaving
+    # pin access regions clear at top/bottom edges)
+    pin_access_margin = 2.0  # µm clearance for pin access at edges
     lines.append(f'  OBS')
     lines.append(f'    LAYER met1 ;')
     lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
     lines.append(f'    LAYER met2 ;')
     lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
     lines.append(f'    LAYER met4 ;')
-    lines.append(f'      RECT {GUARD_RING:.3f} {GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - GUARD_RING:.3f} ;')
+    lines.append(f'      RECT {GUARD_RING:.3f} {pin_access_margin + GUARD_RING:.3f} {w - GUARD_RING:.3f} {h - pin_access_margin - GUARD_RING:.3f} ;')
     lines.append(f'  END')
     lines.append(f'')
     lines.append(f'END {spec.name}')
