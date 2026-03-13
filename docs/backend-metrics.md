@@ -3,8 +3,8 @@
 ## Summary
 
 **19 designs configured** for ORFS sky130hd PnR flow.
-**14 designs completed** through DRT or GDS (12 logic-only + 2 macro-bearing).
-**2 designs at GRT with congestion** (embed_rom, rope).
+**15 designs completed** through DRT or GDS (12 logic-only + 3 macro-bearing).
+**1 design at GRT with congestion** (embed_rom).
 **3 designs blocked** by physical constraints.
 
 ## Completed Designs (GDS)
@@ -36,8 +36,8 @@
 |--------|-----------|----------|----------|-------------|---------|----------|
 | rom_bank | 138,272 | 1× nor_rom_1024x880 | 2400×2400 | **0** | DRT complete | -2.35 |
 | mac_array | 163,941 | 1× nor_rom_1024x880 | 3000×3000 | **0** | DRT complete | -4.33 |
-| embed_rom | 117,050 | 16× nor_rom_4096x192 | 1200×9500 | 206K | GRT | — |
-| rope | ~96K est. | 2× nor_rom_4096x1024 | 1600×3500 | — | Placement | — |
+| rope | 70,349 | 2× nor_rom_4096x1024 | 5000×5000 | 808 | **DRT complete** | -8.78 |
+| embed_rom | 117,050 | 16× nor_rom_4096x192 | 5000×9800 | 18K | GRT (stuck) | — |
 
 **Floorplan breakthroughs (rom_bank, mac_array):**
 - 2-edge balanced pin distribution: ~440 dout pins per left/right edge (met3 only), replacing original 826/54 split

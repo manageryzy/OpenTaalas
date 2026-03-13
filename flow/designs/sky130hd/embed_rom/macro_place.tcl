@@ -12,13 +12,14 @@ foreach m $macros { puts "  '$m'" }
 
 set macros [lsort $macros]
 
-# Place in 4 columns x 4 rows with PDN-compatible spacing
+# Place in 4 columns x 4 rows, centered in 5000x9800 die
+# Grid: 4×103 + 3×300 = 1312µm wide, 4×2225 + 3×120 = 9260µm tall
 set tile_w 103.0
 set tile_h 2225.0
-set x_gap 60.0
-set y_gap 60.0
-set x_start 50.0
-set y_start 50.0
+set x_gap 300.0
+set y_gap 120.0
+set x_start 1844.0
+set y_start 270.0
 
 set idx 0
 foreach inst_name $macros {
