@@ -1,4 +1,6 @@
-# Place all macro instances for embed_rom (16x nor_rom_4096x192, each ~103x2225µm)
+# Place monolithic nor_rom_65536x192 macro (~103x35404µm)
+# Pins are at bottom 80µm of macro — place with bottom near die bottom
+# Die: 600x36000, macro at left edge, cells in right strip
 set block [ord::get_db_block]
 set macros {}
 foreach inst [$block getInsts] {
@@ -10,23 +12,18 @@ foreach inst [$block getInsts] {
 puts "Found [llength $macros] macros:"
 foreach m $macros { puts "  '$m'" }
 
-set macros [lsort $macros]
-
-# Place in 4 columns x 4 rows, centered in 5000x9800 die
-# Grid: 4×103 + 3×300 = 1312µm wide, 4×2225 + 3×120 = 9260µm tall
-set tile_w 103.0
-set tile_h 2225.0
-set x_gap 300.0
-set y_gap 120.0
-set x_start 1844.0
-set y_start 270.0
-
-set idx 0
-foreach inst_name $macros {
-    set col [expr {$idx / 4}]
-    set row [expr {$idx % 4}]
-    set x [expr {$x_start + $col * ($tile_w + $x_gap)}]
-    set y [expr {$y_start + $row * ($tile_h + $y_gap)}]
-    place_macro -macro_name $inst_name -location "$x $y" -orientation R0
-    incr idx
+if {[llength $macros] != 1} {
+    puts "ERROR: Expected 1 macro, found [llength $macros]"
+    return
 }
+
+# Place macro at left side, bottom-aligned
+# Macro is 102.58 wide, die is 600 wide → 497µm for cells on the right
+# Leave 10µm margin from core edge
+set inst_name [lindex $macros 0]
+# Core: (10.12, 10.88) to (589.72, 35988.32)
+# Macro: 102.58 × 35403.52
+# Place at left of core, vertically centered
+# Center Y: (10.88 + 35988.32)/2 = 17999.6, macro half-height = 17701.76
+# Y = 17999.6 - 17701.76 = 297.84
+place_macro -macro_name $inst_name -location "11 298" -orientation R0
