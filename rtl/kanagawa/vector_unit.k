@@ -12,12 +12,12 @@ private:
     // RMSNorm state
     uint32 _sum_sq = 0;
     uint16 _count = 0;
-    uint16[4096] _gamma_pre_attn;
-    uint16[4096] _gamma_pre_mlp;
-    uint16[256] _rsqrt_lut;
+    [[memory]] uint16[4096] _gamma_pre_attn;
+    [[memory]] uint16[4096] _gamma_pre_mlp;
+    [[memory]] uint16[256] _rsqrt_lut;
 
     // SwiGLU state
-    uint16[256] _sigmoid_lut;
+    [[memory]] uint16[256] _sigmoid_lut;
 
     // RoPE state — 4096 positions, each row = 64 freq pairs × 16 bits = 1024 bits
     [[memory]] uint<1024>[4096] _cos_table;
