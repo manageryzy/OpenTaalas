@@ -40,6 +40,30 @@
 | embed_rom | 244,741 | 1× nor_rom_65536x192 | 600×36000 | 2,924 | **0** | -5.86 | 101 | 194 |
 | vector_unit | 790,947 | 2× nor_rom_4096x1024 | 5000×5000 | 54,540 | 782 | -19.30 | 43 | 5,045 |
 
+### Rendered Floorplans
+
+| rom_bank (2.4×2.4 mm) | mac_array (3×3 mm) | rope (5×5 mm) |
+|:---:|:---:|:---:|
+| ![rom_bank](images/rom_bank_final.png) | ![mac_array](images/mac_array_final.png) | ![rope](images/rope_final.png) |
+| 1× NOR ROM centered | 1× NOR ROM centered | 2× NOR ROM side-by-side |
+
+| vector_unit (5×5 mm) | kv_cache_demo (1.2×5 mm) |
+|:---:|:---:|
+| ![vector_unit](images/vector_unit_final.png) | ![kv_cache_demo](images/kv_cache_demo_final.png) |
+| 2× NOR ROM, 50% util | 8× SRAM in 2 groups of 4 |
+
+| embed_rom (0.6×36 mm, rotated 90°) |
+|:---:|
+| ![embed_rom](images/embed_rom_final_rotated.png) |
+| Monolithic nor_rom_65536x192, cells at left end |
+
+| lm_head_demo (0.6×36 mm, rotated 90°) |
+|:---:|
+| ![lm_head_demo](images/lm_head_demo_final_rotated.png) |
+| Same macro as embed_rom, weight projection + argmax |
+
+**Color key:** Green = routed standard cells, Grey/blue rectangles = macros (ROM/SRAM), Cyan vertical line = clock tree trunk, Red/pink = metal routing layers, Yellow-green edges = I/O pins.
+
 **Floorplan breakthroughs (rom_bank, mac_array):**
 - 2-edge balanced pin distribution: ~440 dout pins per left/right edge (met3 only), replacing original 826/54 split
 - 4-edge met4 pins (top/bottom) INCREASED congestion — met4→met1/met2 layer changes add routing pressure
@@ -238,3 +262,8 @@ Academic demo target:
   - lm_head: 1024 vocab (1 NOR ROM macro, proves argmax pipeline)
   - Fits sky130 shuttle reticle (~25 mm²)
 ```
+
+## Related Documents
+
+- [Per-Design P&R Reports](pnr-reports.md) — detailed floorplan, routing, timing, and power analysis for each macro-bearing design
+- [TSMC 3nm Projection](tsmc-3nm-projection.md) — area, frequency, power, and memory scaling analysis for a hypothetical N3E port
