@@ -4,7 +4,8 @@
 //   880 × 1024   → nor_rom_1024x880    (rom_bank, mac_array ROM)
 //   1024 × 4096  → nor_rom_4096x1024   (rope tables)
 //   192 × 65536  → nor_rom_65536x192   (embed_rom)
-//   8 × 4194304  → sram_4096x8 × 1024  (kv_cache, tiled)
+//   8 × 16384    → sram_4096x8 × 4     (kv_cache_demo, tiled)
+//   8 × 4194304  → sram_4096x8 × 1024  (kv_cache full-scale, tiled)
 //   32 × 512     → synthesized (mac_array grid, small enough for gates)
 //
 // ROM macros: write port is ignored (weights baked at tapeout).
@@ -120,6 +121,46 @@ module KanagawaHALDualPortRAM
                 assign data_out[1] = rom_dout;
                 assign data_out[0] = '0;
             end
+
+        // ---------------------------------------------------------------
+        // SRAM: 8 × 16384 (kv_cache_demo) — tiled as 4 × sram_4096x8
+        // ---------------------------------------------------------------
+        end else if (DATA_WIDTH == 8 && DEPTH == 16384) begin : gen_sram_kv_demo
+
+            localparam TILE_DEPTH = 4096;
+            localparam NUM_TILES  = DEPTH / TILE_DEPTH;  // 4
+            localparam TILE_ADDR  = 12;  // log2(4096)
+            localparam SEL_BITS   = ADDR_WIDTH - TILE_ADDR;  // 2
+
+            wire [SEL_BITS-1:0] wr_sel = addr_in[0][ADDR_WIDTH-1:TILE_ADDR];
+            wire [TILE_ADDR-1:0] wr_addr = addr_in[0][TILE_ADDR-1:0];
+            wire [SEL_BITS-1:0] rd_sel = addr_in[1][ADDR_WIDTH-1:TILE_ADDR];
+            wire [TILE_ADDR-1:0] rd_addr = addr_in[1][TILE_ADDR-1:0];
+
+            wire [7:0] tile_dout [0:NUM_TILES-1];
+
+            genvar t;
+            for (t = 0; t < NUM_TILES; t = t + 1) begin : gen_tile
+                wire tile_ce = (rden_in[1] && rd_sel == t) ||
+                               (wren_in[0] && wr_sel == t);
+                wire tile_we = wren_in[0] && wr_sel == t;
+                wire [TILE_ADDR-1:0] tile_addr = tile_we ? wr_addr : rd_addr;
+
+                sram_4096x8 u_sram (
+                    .clk  (clk),
+                    .ce   (tile_ce),
+                    .we   (tile_we),
+                    .addr (tile_addr),
+                    .din  (data_in[0][7:0]),
+                    .dout (tile_dout[t])
+                );
+            end
+
+            reg [SEL_BITS-1:0] rd_sel_r;
+            always_ff @(posedge clk) rd_sel_r <= rd_sel;
+
+            assign data_out[1] = {{(DATA_WIDTH-8){1'b0}}, tile_dout[rd_sel_r]};
+            assign data_out[0] = '0;
 
         // ---------------------------------------------------------------
         // SRAM: 8 × 4194304 (kv_cache) — tiled as 1024 × sram_4096x8
