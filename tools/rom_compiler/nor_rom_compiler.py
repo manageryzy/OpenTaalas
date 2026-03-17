@@ -50,6 +50,21 @@ class RomSpec:
     name: str
     rows: int
     cols: int
+    fold: int = 1
+
+    @property
+    def phys_rows(self) -> int:
+        return self.rows // self.fold
+
+    @property
+    def phys_cols(self) -> int:
+        return self.cols * self.fold
+
+    @property
+    def phys_name(self) -> str:
+        if self.fold > 1:
+            return f"{self.name}_phys"
+        return self.name
 
     @property
     def bits(self) -> int:
@@ -60,13 +75,21 @@ class RomSpec:
         return max(1, math.ceil(math.log2(self.rows)))
 
     @property
+    def phys_addr_width(self) -> int:
+        return max(1, math.ceil(math.log2(self.phys_rows)))
+
+    @property
+    def fold_sel_bits(self) -> int:
+        return max(1, math.ceil(math.log2(self.fold))) if self.fold > 1 else 0
+
+    @property
     def width_um(self) -> float:
-        core = self.cols * BITCELL_WIDTH
+        core = self.phys_cols * BITCELL_WIDTH
         return core + ROW_DECODER_WIDTH + 2 * GUARD_RING
 
     @property
     def height_um(self) -> float:
-        core = self.rows * BITCELL_HEIGHT
+        core = self.phys_rows * BITCELL_HEIGHT
         return core + COL_MUX_HEIGHT + 2 * GUARD_RING
 
     @property
@@ -82,8 +105,8 @@ class RomSpec:
 PREDEFINED = [
     RomSpec("nor_rom_1024x880", 1024, 880),
     RomSpec("nor_rom_4096x1024", 4096, 1024),
-    RomSpec("nor_rom_4096x192", 4096, 192),
-    RomSpec("nor_rom_65536x192", 65536, 192),
+    RomSpec("nor_rom_4096x192", 4096, 192, fold=2),
+    RomSpec("nor_rom_65536x192", 65536, 192, fold=16),
 ]
 
 
@@ -535,31 +558,115 @@ def generate_verilog_blackbox(spec: RomSpec) -> str:
     return '\n'.join(lines) + '\n'
 
 
+def generate_folded_wrapper(spec: RomSpec) -> str:
+    """Generate wrapper module that instantiates folded physical ROM + column mux.
+
+    Wrapper keeps the original interface (addr_width, cols) but internally reads
+    a wider physical ROM and muxes the correct slice.
+    """
+    if spec.fold <= 1:
+        return ""
+
+    addr_w = spec.addr_width
+    phys_addr_w = spec.phys_addr_width
+    sel_bits = spec.fold_sel_bits
+    phys_cols = spec.phys_cols
+
+    lines = []
+    lines.append(f'// Folded wrapper for {spec.name}')
+    lines.append(f'// Logical: {spec.rows} rows x {spec.cols} cols')
+    lines.append(f'// Physical: {spec.phys_rows} rows x {phys_cols} cols (fold={spec.fold})')
+    lines.append(f'// addr[{addr_w-1}:{phys_addr_w}] selects fold bank, addr[{phys_addr_w-1}:0] selects row')
+    lines.append(f'module {spec.name} (')
+    lines.append(f'  input  wire              clk,')
+    lines.append(f'  input  wire              ce,')
+    lines.append(f'  input  wire [{addr_w-1:>3d}:0] addr,')
+    lines.append(f'  output wire [{spec.cols-1:>3d}:0] dout')
+    lines.append(f');')
+    lines.append(f'')
+    lines.append(f'  // Split address: upper bits select fold bank, lower bits select physical row')
+    lines.append(f'  wire [{phys_addr_w-1}:0] phys_addr = addr[{phys_addr_w-1}:0];')
+    lines.append(f'  wire [{sel_bits-1}:0] fold_sel = addr[{addr_w-1}:{phys_addr_w}];')
+    lines.append(f'')
+    lines.append(f'  // Physical ROM read — full width')
+    lines.append(f'  wire [{phys_cols-1}:0] phys_dout;')
+    lines.append(f'  {spec.phys_name} u_phys_rom (')
+    lines.append(f'    .clk  (clk),')
+    lines.append(f'    .ce   (ce),')
+    lines.append(f'    .addr (phys_addr),')
+    lines.append(f'    .dout (phys_dout)')
+    lines.append(f'  );')
+    lines.append(f'')
+    lines.append(f'  // Register fold_sel to align with ROM output (1-cycle read latency)')
+    lines.append(f'  reg [{sel_bits-1}:0] fold_sel_r;')
+    lines.append(f'  always @(posedge clk) begin')
+    lines.append(f'    if (ce)')
+    lines.append(f'      fold_sel_r <= fold_sel;')
+    lines.append(f'  end')
+    lines.append(f'')
+    lines.append(f'  // Column mux: select the correct {spec.cols}-bit slice')
+    lines.append(f'  assign dout = phys_dout[fold_sel_r * {spec.cols} +: {spec.cols}];')
+    lines.append(f'')
+    lines.append(f'endmodule')
+    return '\n'.join(lines) + '\n'
+
+
 def generate_all(spec: RomSpec, output_dir: str):
     """Generate all collateral for a ROM macro."""
     os.makedirs(output_dir, exist_ok=True)
 
-    lib_path = os.path.join(output_dir, f'{spec.name}.lib')
-    lef_path = os.path.join(output_dir, f'{spec.name}.lef')
-    gds_path = os.path.join(output_dir, f'{spec.name}.gds')
-    bb_path = os.path.join(output_dir, f'{spec.name}.bb.v')
+    if spec.fold > 1:
+        # Generate physical macro collateral (wider, shorter array)
+        phys_spec = RomSpec(spec.phys_name, spec.phys_rows, spec.phys_cols)
+        lib_path = os.path.join(output_dir, f'{phys_spec.name}.lib')
+        lef_path = os.path.join(output_dir, f'{phys_spec.name}.lef')
+        gds_path = os.path.join(output_dir, f'{phys_spec.name}.gds')
+        bb_path = os.path.join(output_dir, f'{phys_spec.name}.bb.v')
 
-    with open(lib_path, 'w') as f:
-        f.write(generate_liberty(spec))
+        with open(lib_path, 'w') as f:
+            f.write(generate_liberty(phys_spec))
+        with open(lef_path, 'w') as f:
+            f.write(generate_lef(phys_spec))
+        generate_gds(phys_spec, gds_path)
+        with open(bb_path, 'w') as f:
+            f.write(generate_verilog_blackbox(phys_spec))
 
-    with open(lef_path, 'w') as f:
-        f.write(generate_lef(spec))
+        # Generate wrapper (same logical interface, instantiates physical ROM)
+        wrapper_path = os.path.join(output_dir, f'{spec.name}.v')
+        with open(wrapper_path, 'w') as f:
+            f.write(generate_folded_wrapper(spec))
 
-    generate_gds(spec, gds_path)
+        # Remove old unfolded collateral if it exists
+        for ext in ['.lib', '.lef', '.gds', '.bb.v']:
+            old = os.path.join(output_dir, f'{spec.name}{ext}')
+            if os.path.exists(old):
+                os.remove(old)
+                print(f"    Removed old: {old}")
 
-    with open(bb_path, 'w') as f:
-        f.write(generate_verilog_blackbox(spec))
+        print(f"  {spec.name} (folded {spec.fold}x):")
+        print(f"    Logical: {spec.rows}x{spec.cols}  Physical: {spec.phys_rows}x{spec.phys_cols}")
+        print(f"    Phys size: {phys_spec.width_um:.1f} x {phys_spec.height_um:.1f} µm")
+        print(f"    Ratio: {phys_spec.height_um/phys_spec.width_um:.1f}:1")
+        print(f"    Files: {lib_path} {lef_path} {gds_path} {bb_path} {wrapper_path}")
+    else:
+        lib_path = os.path.join(output_dir, f'{spec.name}.lib')
+        lef_path = os.path.join(output_dir, f'{spec.name}.lef')
+        gds_path = os.path.join(output_dir, f'{spec.name}.gds')
+        bb_path = os.path.join(output_dir, f'{spec.name}.bb.v')
 
-    print(f"  {spec.name}:")
-    print(f"    Rows={spec.rows}  Cols={spec.cols}  Bits={spec.bits/1024:.1f}K")
-    print(f"    Addr={spec.addr_width}b  Area={spec.area_mm2:.3f} mm²")
-    print(f"    Size={spec.width_um:.1f} x {spec.height_um:.1f} µm")
-    print(f"    Files: {lib_path} {lef_path} {gds_path} {bb_path}")
+        with open(lib_path, 'w') as f:
+            f.write(generate_liberty(spec))
+        with open(lef_path, 'w') as f:
+            f.write(generate_lef(spec))
+        generate_gds(spec, gds_path)
+        with open(bb_path, 'w') as f:
+            f.write(generate_verilog_blackbox(spec))
+
+        print(f"  {spec.name}:")
+        print(f"    Rows={spec.rows}  Cols={spec.cols}  Bits={spec.bits/1024:.1f}K")
+        print(f"    Addr={spec.addr_width}b  Area={spec.area_mm2:.3f} mm²")
+        print(f"    Size={spec.width_um:.1f} x {spec.height_um:.1f} µm")
+        print(f"    Files: {lib_path} {lef_path} {gds_path} {bb_path}")
 
 
 def main():
@@ -567,6 +674,7 @@ def main():
     parser.add_argument('--name', help='Macro name')
     parser.add_argument('--rows', type=int, help='Number of rows')
     parser.add_argument('--cols', type=int, help='Number of columns (data width)')
+    parser.add_argument('--fold', type=int, default=1, help='Fold factor (default: 1)')
     parser.add_argument('--all', action='store_true', help='Generate all predefined macros')
     parser.add_argument('--output-dir', default='flow/macros/sky130hd',
                         help='Output directory for generated files')
@@ -578,7 +686,7 @@ def main():
             generate_all(spec, args.output_dir)
         print(f"\nGenerated {len(PREDEFINED)} macros in {args.output_dir}/")
     elif args.name and args.rows and args.cols:
-        spec = RomSpec(args.name, args.rows, args.cols)
+        spec = RomSpec(args.name, args.rows, args.cols, fold=args.fold)
         generate_all(spec, args.output_dir)
     else:
         parser.print_help()

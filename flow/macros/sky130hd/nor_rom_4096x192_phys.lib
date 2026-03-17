@@ -1,5 +1,5 @@
-library (nor_rom_4096x192) {
-  comment : "NOR ROM macro 4096x192 for sky130hd";
+library (nor_rom_4096x192_phys) {
+  comment : "NOR ROM macro 2048x384 for sky130hd";
   technology (cmos);
   delay_model : table_lookup;
   time_unit : "1ns";
@@ -27,26 +27,26 @@ library (nor_rom_4096x192) {
   default_max_transition : 1.0;
   default_output_pin_cap : 0.0;
 
-  type (bus12) {
+  type (bus11) {
     base_type : array;
     data_type : bit;
-    bit_width : 12;
-    bit_from : 11;
+    bit_width : 11;
+    bit_from : 10;
     bit_to : 0;
     downto : true;
   }
 
-  type (bus192) {
+  type (bus384) {
     base_type : array;
     data_type : bit;
-    bit_width : 192;
-    bit_from : 191;
+    bit_width : 384;
+    bit_from : 383;
     bit_to : 0;
     downto : true;
   }
 
-  cell (nor_rom_4096x192) {
-    area : 227543.3;
+  cell (nor_rom_4096x192_phys) {
+    area : 213120.3;
     cell_leakage_power : 76800.0;
     dont_touch : true;
     dont_use : true;
@@ -65,9 +65,9 @@ library (nor_rom_4096x192) {
     }
 
     bus (addr) {
-      bus_type : bus12;
+      bus_type : bus11;
       direction : input;
-      pin (addr[11:0]) {
+      pin (addr[10:0]) {
         capacitance : 0.005;
         timing () {
           related_pin : "clk";
@@ -93,9 +93,9 @@ library (nor_rom_4096x192) {
     }
 
     bus (dout) {
-      bus_type : bus192;
+      bus_type : bus384;
       direction : output;
-      pin (dout[191:0]) {
+      pin (dout[383:0]) {
         max_capacitance : 0.01;
         timing () {
           related_pin : "clk";

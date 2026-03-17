@@ -28,7 +28,8 @@ KANAGAWA_RUNTIME_SV = \
   $(_kanagawa_rtl)/hal/mock/hal_show_ahead_fifo.sv \
   $(_kanagawa_rtl)/hal/mock/hal_ready_valid_fifo.sv \
   $(_kanagawa_rtl)/hal/mock/hal_simple_dual_port_ram_tile.sv \
-  $(_project)/rtl/hal/sky130/hal_dual_port_ram.sv
+  $(_project)/rtl/hal/sky130/hal_dual_port_ram.sv \
+  $(MACRO_WRAPPERS)
 
 # Mock HAL files (registers, FIFOs) require SIMULATION define to bypass `error guards.
 # Only hal_dual_port_ram is replaced by the sky130 HAL; other mock HAL modules are
@@ -40,3 +41,5 @@ MACRO_LEFS = $(wildcard $(_macros_dir)/*.lef)
 MACRO_LIBS = $(wildcard $(_macros_dir)/*.lib)
 MACRO_GDS  = $(wildcard $(_macros_dir)/*.gds)
 MACRO_BB   = $(wildcard $(_macros_dir)/*.bb.v)
+# Folded ROM wrapper modules (synthesizable, not blackbox)
+MACRO_WRAPPERS = $(filter-out %.bb.v,$(wildcard $(_macros_dir)/*.v))
