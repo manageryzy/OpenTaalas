@@ -32,35 +32,32 @@
 
 ## Completed Designs — Macro-Bearing (DRT)
 
-| Design | Std Cells | Macro(s) | Die (µm) | GRT Overflow | DRC | WNS (ns) | fmax (MHz) | Power (mW) |
-|--------|-----------|----------|----------|-------------|-----|----------|-----------|-----------|
-| rom_bank | 136,629 | 1× nor_rom_1024x880 | 2400×2400 | **0** | **0** | -2.35 | 157 | 650 |
-| mac_array | 233,861 | 1× nor_rom_1024x880 | 3000×3000 | **0** | **0** | -4.33 | 120 | 1,137 |
-| rope | 478,014 | 2× nor_rom_4096x1024 | 5000×5000 | 858 | 9 | -8.78 | 78 | 1,622 |
-| embed_rom | 244,741 | 1× nor_rom_65536x192 | 600×36000 | 2,924 | **0** | -5.86 | 101 | 194 |
-| vector_unit | 790,947 | 2× nor_rom_4096x1024 | 5000×5000 | 54,540 | 782 | -19.30 | 43 | 5,045 |
+| Design | Std Cells | Macro(s) | Die (µm) | Util | DRC | WNS (ns) | fmax (MHz) |
+|--------|-----------|----------|----------|------|-----|----------|-----------|
+| rom_bank | 136,629 | 1× nor_rom_1024x880 | 2400×2400 | 60% | **0** | -2.35 | 157 |
+| mac_array | 233,861 | 1× nor_rom_1024x880 | 2500×3000 | 35% | 641 | -3.88 | 127 |
+| rope | 478,014 | 2× nor_rom_4096x1024 | 2000×3500 | 76% | 1,029 | -4.56 | 69 |
+| embed_rom | 244,741 | 1× nor_rom_65536x192_phys | 3200×3200 | 38% | 103 | -9.06 | 77 |
+| vector_unit | 790,947 | 2× nor_rom_4096x1024 | 4000×5500 | 55% | 488 | -17.68 | 43 |
+
+**Density improvement (v2):** Die resizing reduced total macro-bearing area from 96.6 mm² to 57.0 mm² (**41% reduction**). NOR ROM folding (nor_rom_65536x192 from 344:1 to 1.6:1 aspect ratio) enabled embed_rom/lm_head_demo to use a square die instead of the original 600×36000 strip.
 
 ### Rendered Floorplans
 
-| rom_bank (2.4×2.4 mm) | mac_array (3×3 mm) | rope (5×5 mm) |
+| rom_bank (2.4×2.4 mm) | mac_array (2.5×3 mm) | rope (2×3.5 mm) |
 |:---:|:---:|:---:|
 | ![rom_bank](images/rom_bank_final.png) | ![mac_array](images/mac_array_final.png) | ![rope](images/rope_final.png) |
 | 1× NOR ROM centered | 1× NOR ROM centered | 2× NOR ROM side-by-side |
 
-| vector_unit (5×5 mm) | kv_cache_demo (1.2×5 mm) |
+| vector_unit (4×5.5 mm) | kv_cache_demo (1.2×5 mm) |
 |:---:|:---:|
 | ![vector_unit](images/vector_unit_final.png) | ![kv_cache_demo](images/kv_cache_demo_final.png) |
-| 2× NOR ROM, 50% util | 8× SRAM in 2 groups of 4 |
+| 2× NOR ROM, 55% util | 8× SRAM in 2 groups of 4 |
 
-| embed_rom (0.6×36 mm, rotated 90°) |
-|:---:|
-| ![embed_rom](images/embed_rom_final_rotated.png) |
-| Monolithic nor_rom_65536x192, cells at left end |
-
-| lm_head_demo (0.6×36 mm, rotated 90°) |
-|:---:|
-| ![lm_head_demo](images/lm_head_demo_final_rotated.png) |
-| Same macro as embed_rom, weight projection + argmax |
+| embed_rom (3.2×3.2 mm) | lm_head_demo (3.2×3.2 mm) |
+|:---:|:---:|
+| ![embed_rom](images/embed_rom_final.png) | ![lm_head_demo](images/lm_head_demo_final.png) |
+| Folded nor_rom_65536x192_phys centered | Same folded macro, weight projection + argmax |
 
 **Color key:** Green = routed standard cells, Grey/blue rectangles = macros (ROM/SRAM), Cyan vertical line = clock tree trunk, Red/pink = metal routing layers, Yellow-green edges = I/O pins.
 
@@ -83,11 +80,11 @@ Reduced-scale designs that validate full architecture on a sky130 shuttle (~25 m
 | Design | Std Cells | Macro(s) | Die (µm) | GRT Overflow | DRC | WNS (ns) | fmax (MHz) | Power (mW) |
 |--------|-----------|----------|----------|-------------|-----|----------|-----------|-----------|
 | kv_cache_demo | 63,825 | 8× sram_4096x8 | 1200×5000 | **0** | **0** | -0.25 | 235 | 25 |
-| lm_head_demo | 243,724 | 1× nor_rom_65536x192 | 600×36000 | 2,570 | **0** | -5.40 | 106 | 170 |
+| lm_head_demo | 243,724 | 1× nor_rom_65536x192_phys | 3200×3200 | **0** | **0** | -9.80 | 61 | — |
 
 **kv_cache_demo** — 16 tokens × 8 heads × 128 dims (full scale: 4096 tokens). Proves circular buffer K/V store architecture with 8 SRAM tiles. Timing-clean internally (reg-to-reg slack +1.29ns), WNS is output-port only. 18% utilization, 25 mW.
 
-**lm_head_demo** — 1024 vocab × 4096 dims as 192-bit weight chunks (full scale: 128,256 vocab). Proves weight projection + argmax pipeline using same nor_rom_65536x192 as embed_rom. RMSNorm normalization handled by vector_unit in the real architecture — not included here. 19% utilization, 170 mW.
+**lm_head_demo** — 1024 vocab × 4096 dims as 192-bit weight chunks (full scale: 128,256 vocab). Proves weight projection + argmax pipeline using folded nor_rom_65536x192_phys (same as embed_rom). RMSNorm normalization handled by vector_unit in the real architecture — not included here. 39% utilization at 3200×3200 die (53% area reduction from original 600×36000 strip).
 
 **Design note:** Initial lm_head_demo included `_gamma[4096]` and `_rsqrt_lut[256]` behavioral RAMs (RMSNorm parameters). These synthesized to ~111K flip-flops (125K total instances), causing GRT to loop in NDR retries for 21+ hours in the narrow 600µm die. Removing them (RMSNorm belongs in vector_unit) reduced to 12.9K instances and completed PnR in ~40 minutes.
 
