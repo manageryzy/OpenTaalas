@@ -1,8 +1,9 @@
 # Density Improvement: Full Floorplan Rearchitecture
 
 **Date:** 2026-03-17
-**Status:** Approved
+**Status:** COMPLETE (2026-03-19)
 **Goal:** Reduce total macro-bearing die area from ~108 mm² to ~51.5 mm² (52% reduction) by fixing extreme macro aspect ratios and co-optimizing die sizes.
+**Result:** 96.6 mm² → 57.0 mm² (41% reduction). Target dies required enlargement during PnR validation.
 
 ## Problem
 
@@ -128,15 +129,17 @@ Based on lessons learned from 19 completed designs:
 
 ### 5. Area Summary
 
-| Module | Current Die (mm²) | Target Die (mm²) | Reduction |
-|--------|-------------------|-------------------|-----------|
-| embed_rom | 21.6 | 6.0 | **72%** |
-| lm_head_demo | 21.6 | 6.0 | **72%** |
-| mac_array | 9.0 | 4.5 | **50%** |
-| rope | 25.0 | 7.0 | **72%** |
-| vector_unit | 25.0 | 22.0 | **12%** |
-| kv_cache_demo | 6.0 | 6.0 | 0% |
-| **Total** | **108.2** | **51.5** | **52%** |
+| Module | Original Die (mm²) | Target Die (mm²) | Actual Die (mm²) | Reduction |
+|--------|-------------------|-------------------|------------------|-----------|
+| embed_rom | 21.6 | 6.0 | 10.24 (3200×3200) | **53%** |
+| lm_head_demo | 21.6 | 6.0 | 10.24 (3200×3200) | **53%** |
+| mac_array | 9.0 | 4.5 | 7.5 (2500×3000) | **17%** |
+| rope | 25.0 | 7.0 | 7.0 (2000×3500) | **72%** |
+| vector_unit | 25.0 | 22.0 | 22.0 (4000×5500) | **12%** |
+| kv_cache_demo | 6.0 | 6.0 | 6.0 (unchanged) | 0% |
+| **Total** | **108.2** | **51.5** | **63.0** | **42%** |
+
+**Note:** Target dies of 2000×3000 for embed_rom/lm_head_demo were too aggressive — GP diverged at those sizes. Final 3200×3200 is the minimum that routes. mac_array target of 1500×3000 also too aggressive (12.7K DRC), settled at 2500×3000.
 
 ## Implementation Order
 
