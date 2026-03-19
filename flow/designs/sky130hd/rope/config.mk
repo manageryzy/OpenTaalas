@@ -24,6 +24,7 @@ export GLOBAL_ROUTE_ARGS = -congestion_iterations 30 -congestion_report_iter_ste
 export SKIP_INCREMENTAL_REPAIR = 1
 export RECOVER_POWER = 0
 export SKIP_ANTENNA_REPAIR = 1
+export SKIP_ANTENNA_REPAIR_POST_DRT = 1
 export MACRO_PLACEMENT_TCL = $(_this_dir)/macro_place.tcl
 export SYNTH_MEMORY_MAX_BITS = 65536
 export REMOVE_ABC_BUFFERS = 1
