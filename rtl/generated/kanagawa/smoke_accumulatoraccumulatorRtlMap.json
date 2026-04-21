@@ -1,0 +1,409 @@
+{
+    "basic_blocks": [
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "add_BasicBlock_0Impl",
+            "module": "accumulator_add_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "global_in__value_3",
+                    "width": 8
+                },
+                {
+                    "name": "global_out__value_3_0_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__value_3_0",
+                    "width": 8
+                },
+                {
+                    "name": "fifo_data_out_0",
+                    "width": 8
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "data_in_2",
+                    "width": 8
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        },
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "get_BasicBlock_0Impl",
+            "module": "accumulator_get_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "global_in__value_3",
+                    "width": 8
+                },
+                {
+                    "name": "fifo_data_out_0",
+                    "width": 8
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        }
+    ],
+    "constant_signals": [],
+    "debug_signals": [
+        {
+            "container": "fifo_data_0",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_0",
+            "name": "underflow"
+        },
+        {
+            "container": "fifo_data_1",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_1",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_2",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_3",
+            "name": "underflow"
+        }
+    ],
+    "fifos": [
+        {
+            "instance": "fifo_0_add_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "data",
+                    "width": 8
+                },
+                {
+                    "name": "q",
+                    "width": 8
+                },
+                {
+                    "name": "q_internal",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.data_delayed",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.fifo.data",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.fifo.q",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.fifo.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.data",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.q",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_0.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.wren",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.data_in",
+                    "width": 8
+                },
+                {
+                    "name": "fifo_data_0.data_out",
+                    "width": 8
+                }
+            ]
+        },
+        {
+            "instance": "fifo_1_get_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "data",
+                    "width": 8
+                },
+                {
+                    "name": "q",
+                    "width": 8
+                },
+                {
+                    "name": "q_internal",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.data_delayed",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.fifo.data",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.fifo.q",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.fifo.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.data",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.q",
+                    "width": 8
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_1.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.wren",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.data_in",
+                    "width": 8
+                },
+                {
+                    "name": "fifo_data_1.data_out",
+                    "width": 8
+                }
+            ]
+        }
+    ],
+    "global_variables": [],
+    "loop_generators": []
+}

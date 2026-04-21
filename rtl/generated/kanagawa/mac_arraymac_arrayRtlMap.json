@@ -1,0 +1,2042 @@
+{
+    "basic_blocks": [
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "mac_step_BasicBlock_0Impl",
+            "module": "mac_array_mac_step_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "global_in__accum_element_0_21",
+                    "width": 24
+                },
+                {
+                    "name": "global_in__accum_element_1_22",
+                    "width": 24
+                },
+                {
+                    "name": "global_in__accum_element_2_23",
+                    "width": 24
+                },
+                {
+                    "name": "global_in__accum_element_3_24",
+                    "width": 24
+                },
+                {
+                    "name": "global_out__accum_element_0_21_0_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__accum_element_0_21_0",
+                    "width": 24
+                },
+                {
+                    "name": "global_out__accum_element_1_22_0_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__accum_element_1_22_0",
+                    "width": 24
+                },
+                {
+                    "name": "global_out__accum_element_2_23_0_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__accum_element_2_23_0",
+                    "width": 24
+                },
+                {
+                    "name": "global_out__accum_element_3_24_0_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__accum_element_3_24_0",
+                    "width": 24
+                },
+                {
+                    "name": "fifo_data_out_0",
+                    "width": 24
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "data_in_11",
+                    "width": 15
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        },
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "read_accum_BasicBlock_0Impl",
+            "module": "mac_array_read_accum_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "global_in__accum_element_0_21",
+                    "width": 24
+                },
+                {
+                    "name": "global_in__accum_element_1_22",
+                    "width": 24
+                },
+                {
+                    "name": "global_in__accum_element_2_23",
+                    "width": 24
+                },
+                {
+                    "name": "global_in__accum_element_3_24",
+                    "width": 24
+                },
+                {
+                    "name": "fifo_data_out_0",
+                    "width": 24
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "data_in_12",
+                    "width": 2
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        },
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "read_rom_block_BasicBlock_0Impl",
+            "module": "mac_array_read_rom_block_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "memory_read_data_in_29_0",
+                    "width": 880
+                },
+                {
+                    "name": "memory_read_addr_out_29_0",
+                    "width": 10
+                },
+                {
+                    "name": "memory_rden_out_29_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_out_0",
+                    "width": 880
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "data_in_13",
+                    "width": 16
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        },
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "write_rom_block_BasicBlock_0Impl",
+            "module": "mac_array_write_rom_block_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "memory_write_data_out_29_0",
+                    "width": 880
+                },
+                {
+                    "name": "memory_write_addr_out_29_0",
+                    "width": 10
+                },
+                {
+                    "name": "memory_wren_29_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "data_in_14",
+                    "width": 896
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        },
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "read_grid_BasicBlock_0Impl",
+            "module": "mac_array_read_grid_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "memory_read_data_in_30_0",
+                    "width": 32
+                },
+                {
+                    "name": "memory_read_addr_out_30_0",
+                    "width": 9
+                },
+                {
+                    "name": "memory_rden_out_30_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_out_0",
+                    "width": 32
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "data_in_15",
+                    "width": 9
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        },
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "write_grid_BasicBlock_0Impl",
+            "module": "mac_array_write_grid_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "memory_write_data_out_30_0",
+                    "width": 32
+                },
+                {
+                    "name": "memory_write_addr_out_30_0",
+                    "width": 9
+                },
+                {
+                    "name": "memory_wren_30_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "data_in_16",
+                    "width": 41
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        },
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "set_fp32_accum_BasicBlock_0Impl",
+            "module": "mac_array_set_fp32_accum_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "global_out__fp32_accum_element_0_25_0_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__fp32_accum_element_0_25_0",
+                    "width": 32
+                },
+                {
+                    "name": "global_out__fp32_accum_element_1_26_0_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__fp32_accum_element_1_26_0",
+                    "width": 32
+                },
+                {
+                    "name": "global_out__fp32_accum_element_2_27_0_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__fp32_accum_element_2_27_0",
+                    "width": 32
+                },
+                {
+                    "name": "global_out__fp32_accum_element_3_28_0_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__fp32_accum_element_3_28_0",
+                    "width": 32
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "data_in_17",
+                    "width": 34
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        },
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "read_fp32_accum_BasicBlock_0Impl",
+            "module": "mac_array_read_fp32_accum_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "global_in__fp32_accum_element_0_25",
+                    "width": 32
+                },
+                {
+                    "name": "global_in__fp32_accum_element_1_26",
+                    "width": 32
+                },
+                {
+                    "name": "global_in__fp32_accum_element_2_27",
+                    "width": 32
+                },
+                {
+                    "name": "global_in__fp32_accum_element_3_28",
+                    "width": 32
+                },
+                {
+                    "name": "fifo_data_out_0",
+                    "width": 32
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "data_in_18",
+                    "width": 2
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        },
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "clear_pe_BasicBlock_0Impl",
+            "module": "mac_array_clear_pe_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "global_out__accum_element_0_21_1_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__accum_element_1_22_1_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__accum_element_2_23_1_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__accum_element_3_24_1_valid",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "data_in_19",
+                    "width": 2
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        },
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "clear_fp32_BasicBlock_0Impl",
+            "module": "mac_array_clear_fp32_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "global_out__fp32_accum_element_0_25_1_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__fp32_accum_element_1_26_1_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__fp32_accum_element_2_27_1_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__fp32_accum_element_3_28_1_valid",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "data_in_20",
+                    "width": 2
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        },
+        {
+            "constant_signals": [],
+            "debug_instances": [],
+            "debug_signals": [
+                {
+                    "name": "fifo_overflow_in_0"
+                },
+                {
+                    "name": "input_fifo_underflow_0"
+                },
+                {
+                    "name": "control_state_out"
+                }
+            ],
+            "instance": "clear_all_BasicBlock_0Impl",
+            "module": "mac_array_clear_all_BasicBlock_0",
+            "ports": [
+                {
+                    "name": "global_out__accum_element_0_21_2_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__accum_element_1_22_2_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__accum_element_2_23_2_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__accum_element_3_24_2_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__fp32_accum_element_0_25_2_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__fp32_accum_element_1_26_2_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__fp32_accum_element_2_27_2_valid",
+                    "width": 1
+                },
+                {
+                    "name": "global_out__fp32_accum_element_3_28_2_valid",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_wren_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_almost_full_in_raw_0",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_overflow_in_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_fifo_underflow_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_rdy_0",
+                    "width": 1
+                },
+                {
+                    "name": "input_valid_0",
+                    "width": 1
+                },
+                {
+                    "name": "control_state_out",
+                    "width": 8
+                }
+            ],
+            "unused_signals": []
+        }
+    ],
+    "constant_signals": [],
+    "debug_signals": [
+        {
+            "container": "fifo_data_0",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_0",
+            "name": "underflow"
+        },
+        {
+            "container": "fifo_data_1",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_1",
+            "name": "underflow"
+        },
+        {
+            "container": "fifo_data_2",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_2",
+            "name": "underflow"
+        },
+        {
+            "container": "fifo_data_3",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_3",
+            "name": "underflow"
+        },
+        {
+            "container": "fifo_data_4",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_4",
+            "name": "underflow"
+        },
+        {
+            "container": "fifo_data_5",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_5",
+            "name": "underflow"
+        },
+        {
+            "container": "fifo_data_6",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_6",
+            "name": "underflow"
+        },
+        {
+            "container": "fifo_data_7",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_7",
+            "name": "underflow"
+        },
+        {
+            "container": "fifo_data_8",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_8",
+            "name": "underflow"
+        },
+        {
+            "container": "fifo_data_9",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_9",
+            "name": "underflow"
+        },
+        {
+            "container": "fifo_data_10",
+            "name": "overflow"
+        },
+        {
+            "container": "fifo_data_10",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_11",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_12",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_13",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_14",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_15",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_16",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_17",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_18",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_19",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_20",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_21",
+            "name": "underflow"
+        }
+    ],
+    "fifos": [
+        {
+            "instance": "fifo_0_mac_step_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "data",
+                    "width": 24
+                },
+                {
+                    "name": "q",
+                    "width": 24
+                },
+                {
+                    "name": "q_internal",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.data_delayed",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.fifo.data",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.fifo.q",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.fifo.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.data",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.q",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_0.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.wren",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_0.data_in",
+                    "width": 24
+                },
+                {
+                    "name": "fifo_data_0.data_out",
+                    "width": 24
+                }
+            ]
+        },
+        {
+            "instance": "fifo_1_read_accum_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "data",
+                    "width": 24
+                },
+                {
+                    "name": "q",
+                    "width": 24
+                },
+                {
+                    "name": "q_internal",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.data_delayed",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.fifo.data",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.fifo.q",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.fifo.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.data",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.q",
+                    "width": 24
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_1.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.wren",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_1.data_in",
+                    "width": 24
+                },
+                {
+                    "name": "fifo_data_1.data_out",
+                    "width": 24
+                }
+            ]
+        },
+        {
+            "instance": "fifo_2_read_rom_block_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "data",
+                    "width": 880
+                },
+                {
+                    "name": "q",
+                    "width": 880
+                },
+                {
+                    "name": "q_internal",
+                    "width": 880
+                },
+                {
+                    "name": "genblk1.data_delayed",
+                    "width": 880
+                },
+                {
+                    "name": "genblk1.fifo.data",
+                    "width": 880
+                },
+                {
+                    "name": "genblk1.fifo.q",
+                    "width": 880
+                },
+                {
+                    "name": "genblk1.fifo.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.data",
+                    "width": 880
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.q",
+                    "width": 880
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_2.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_2.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_2.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_2.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_2.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_2.wren",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_2.data_in",
+                    "width": 880
+                },
+                {
+                    "name": "fifo_data_2.data_out",
+                    "width": 880
+                }
+            ]
+        },
+        {
+            "instance": "fifo_3_write_rom_block_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_3.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_3.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_3.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_3.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_3.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_3.wren",
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "instance": "fifo_4_read_grid_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "data",
+                    "width": 32
+                },
+                {
+                    "name": "q",
+                    "width": 32
+                },
+                {
+                    "name": "q_internal",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.data_delayed",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.fifo.data",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.fifo.q",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.fifo.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.data",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.q",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_4.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_4.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_4.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_4.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_4.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_4.wren",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_4.data_in",
+                    "width": 32
+                },
+                {
+                    "name": "fifo_data_4.data_out",
+                    "width": 32
+                }
+            ]
+        },
+        {
+            "instance": "fifo_5_write_grid_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_5.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_5.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_5.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_5.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_5.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_5.wren",
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "instance": "fifo_6_set_fp32_accum_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_6.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_6.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_6.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_6.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_6.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_6.wren",
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "instance": "fifo_7_read_fp32_accum_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "data",
+                    "width": 32
+                },
+                {
+                    "name": "q",
+                    "width": 32
+                },
+                {
+                    "name": "q_internal",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.data_delayed",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.fifo.data",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.fifo.q",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.fifo.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.data",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.q",
+                    "width": 32
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.usedw",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_7.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_7.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_7.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_7.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_7.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_7.wren",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_7.data_in",
+                    "width": 32
+                },
+                {
+                    "name": "fifo_data_7.data_out",
+                    "width": 32
+                }
+            ]
+        },
+        {
+            "instance": "fifo_8_clear_pe_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_8.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_8.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_8.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_8.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_8.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_8.wren",
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "instance": "fifo_9_clear_fp32_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_9.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_9.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_9.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_9.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_9.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_9.wren",
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "instance": "fifo_10_clear_all_Return",
+            "module": "KanagawaWriteDelayFifo",
+            "named_ranges": [],
+            "nets": [
+                {
+                    "name": "wrreq",
+                    "width": 1
+                },
+                {
+                    "name": "full",
+                    "width": 1
+                },
+                {
+                    "name": "overflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "rdreq",
+                    "width": 1
+                },
+                {
+                    "name": "empty",
+                    "width": 1
+                },
+                {
+                    "name": "underflow_out",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.almost_full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.full_nxt",
+                    "width": 1
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_ff",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_nxt",
+                    "width": 6
+                },
+                {
+                    "name": "genblk1.fifo_ptrs.usedw_out",
+                    "width": 6
+                }
+            ],
+            "top_level_signals": [
+                {
+                    "name": "fifo_data_10.overflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_10.underflow",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_10.empty",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_10.rden",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_10.almost_full",
+                    "width": 1
+                },
+                {
+                    "name": "fifo_data_10.wren",
+                    "width": 1
+                }
+            ]
+        }
+    ],
+    "global_variables": [],
+    "loop_generators": []
+}

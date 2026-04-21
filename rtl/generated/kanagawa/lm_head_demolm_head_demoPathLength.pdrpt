@@ -1,0 +1,1134 @@
+{
+    "availableResources": [
+        {
+            "name": "Op_Depth",
+            "unitOfMeasurement": "level"
+        },
+        {
+            "name": "Path_Depth",
+            "unitOfMeasurement": "level"
+        }
+    ],
+    "data": [
+        [
+            "path0",
+            "path1",
+            "path2",
+            "path3",
+            "path4",
+            "relativePath",
+            "rangeStartLine",
+            "rangeStartCharacter",
+            "rangeEndLine",
+            "rangeEndCharacter",
+            "Op_Depth",
+            "Path_Depth"
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_weight_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_weight_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            29,
+            1,
+            30,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_weight_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_weight_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_loadmemory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            32,
+            1,
+            33,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_weight_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_weight_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            29,
+            1,
+            30,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_weight_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_weight_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            29,
+            1,
+            30,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_weight_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_weight_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            40,
+            1,
+            41,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_weight_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_weight_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_storememory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            39,
+            1,
+            40,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_weight_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_weight_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            40,
+            1,
+            41,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_weight_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_weight_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            40,
+            1,
+            41,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            46,
+            1,
+            47,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            46,
+            1,
+            47,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            46,
+            1,
+            47,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            52,
+            1,
+            53,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            52,
+            1,
+            53,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            52,
+            1,
+            53,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            65,
+            1,
+            66,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            65,
+            1,
+            66,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_gt",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            59,
+            1,
+            60,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_writeglobal",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            57,
+            1,
+            58,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "4_writeglobal",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            57,
+            1,
+            58,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "update_argmax_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            65,
+            1,
+            66,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "get_best_token",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "get_best_token_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            68,
+            1,
+            69,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "get_best_token",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "get_best_token_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            68,
+            1,
+            69,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "get_best_token",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "get_best_token_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            68,
+            1,
+            69,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "reset_argmax",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "reset_argmax_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            83,
+            1,
+            84,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "reset_argmax",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "reset_argmax_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_writeglobal",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            78,
+            1,
+            79,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "reset_argmax",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "reset_argmax_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_writeglobal",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            78,
+            1,
+            79,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "reset_argmax",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "reset_argmax_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            83,
+            1,
+            84,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "reset_argmax",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "reset_argmax_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/lm_head_demo.k",
+            83,
+            1,
+            84,
+            1,
+            1,
+            1
+        ]
+    ],
+    "projections": [
+        {
+            "aggregationRules": {
+                "Op_Depth": "max",
+                "Path_Depth": "max"
+            },
+            "includeColumns": [
+                "Op_Depth",
+                "Path_Depth"
+            ],
+            "name": "Default View",
+            "pathRule": "path0\/path1\/path2\/path3\/path4"
+        }
+    ]
+}

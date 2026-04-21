@@ -51,7 +51,7 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 | rope | 2× nor_rom_4096x1024 | 2000×3500 | 76% | 1,029 | -4.56 | 69 |
 | embed_rom | 1× nor_rom_65536x192_phys | 3200×3200 | 38% | 103 | -9.06 | 77 |
 | vector_unit | 2× nor_rom_4096x1024 | 4000×5500 | 55% | 488 | -17.68 | 43 |
-| kv_cache_demo | 8× sram_4096x8 | 1200×5000 | 18% | **0** | -0.25 | 235 |
+| kv_cache_demo | 4× sram_8192x8 (col_mux=32) | 595×705 | 87% | **0** | -0.34 | 230 |
 | lm_head_demo | 1× nor_rom_65536x192_phys | 3200×3200 | 39% | **0** | -9.80 | 61 |
 
 See [backend-metrics.md](backend-metrics.md) for full metrics, timing analysis, and lessons learned.

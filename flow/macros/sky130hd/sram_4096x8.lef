@@ -5,7 +5,7 @@ DIVIDERCHAR "/" ;
 MACRO sram_4096x8
   CLASS BLOCK ;
   ORIGIN 0 0 ;
-  SIZE 26.680 BY 4441.760 ;
+  SIZE 137.080 BY 293.760 ;
   SYMMETRY X Y ;
 
   PIN clk
@@ -220,7 +220,7 @@ MACRO sram_4096x8
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 26.180 2.890 27.180 3.230 ;
+        RECT 136.580 2.890 137.580 3.230 ;
     END
   END dout[0]
 
@@ -229,7 +229,7 @@ MACRO sram_4096x8
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 26.180 3.570 27.180 3.910 ;
+        RECT 136.580 3.570 137.580 3.910 ;
     END
   END dout[1]
 
@@ -238,7 +238,7 @@ MACRO sram_4096x8
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 26.180 4.250 27.180 4.590 ;
+        RECT 136.580 4.250 137.580 4.590 ;
     END
   END dout[2]
 
@@ -247,7 +247,7 @@ MACRO sram_4096x8
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 26.180 4.930 27.180 5.270 ;
+        RECT 136.580 4.930 137.580 5.270 ;
     END
   END dout[3]
 
@@ -256,7 +256,7 @@ MACRO sram_4096x8
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 26.180 5.610 27.180 5.950 ;
+        RECT 136.580 5.610 137.580 5.950 ;
     END
   END dout[4]
 
@@ -265,7 +265,7 @@ MACRO sram_4096x8
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 26.180 6.290 27.180 6.630 ;
+        RECT 136.580 6.290 137.580 6.630 ;
     END
   END dout[5]
 
@@ -274,7 +274,7 @@ MACRO sram_4096x8
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 26.180 6.970 27.180 7.310 ;
+        RECT 136.580 6.970 137.580 7.310 ;
     END
   END dout[6]
 
@@ -283,7 +283,7 @@ MACRO sram_4096x8
     USE SIGNAL ;
     PORT
       LAYER met3 ;
-        RECT 26.180 7.650 27.180 7.990 ;
+        RECT 136.580 7.650 137.580 7.990 ;
     END
   END dout[7]
 
@@ -292,7 +292,9 @@ MACRO sram_4096x8
     USE POWER ;
     PORT
       LAYER met4 ;
-        RECT 12.770 0.000 14.370 4441.760 ;
+        RECT 12.770 0.000 14.370 293.760 ;
+        RECT 67.050 0.000 68.650 293.760 ;
+        RECT 121.330 0.000 122.930 293.760 ;
     END
   END VDD
 
@@ -301,16 +303,18 @@ MACRO sram_4096x8
     USE GROUND ;
     PORT
       LAYER met4 ;
+        RECT 39.910 0.000 41.510 293.760 ;
+        RECT 94.190 0.000 95.790 293.760 ;
     END
   END VSS
 
   OBS
     LAYER met1 ;
-      RECT 2.000 2.000 24.680 4439.760 ;
+      RECT 2.000 2.000 135.080 291.760 ;
     LAYER met2 ;
-      RECT 2.000 2.000 24.680 4439.760 ;
+      RECT 2.000 2.000 135.080 291.760 ;
     LAYER met4 ;
-      RECT 2.000 2.000 24.680 4439.760 ;
+      RECT 2.000 2.000 135.080 291.760 ;
   END
 
 END sram_4096x8

@@ -52,7 +52,7 @@ For macro-bearing designs, we separate logic and memory scaling:
 | rope | 478,014 | ~7.0 | 0.023 |
 | embed\_rom | 244,741 | ~3.6 | 0.012 |
 | vector\_unit | 790,947 | ~12.0 | 0.040 |
-| kv\_cache\_demo | 63,825 | ~1.0 | 0.003 |
+| kv\_cache\_demo | 3,628 | ~0.043 | 0.0001 |
 | lm\_head\_demo | 243,724 | ~3.6 | 0.012 |
 
 **Memory component** (scaled by memory-specific ratios):
@@ -63,7 +63,7 @@ For macro-bearing designs, we separate logic and memory scaling:
 | mac\_array | 1x nor\_rom\_1024x880 (0.45 Mbit) | NOR ROM | 75x | 0.003 |
 | rope | 2x nor\_rom\_4096x1024 (8.4 Mbit) | NOR ROM | 75x | 0.056 |
 | embed\_rom | 1x nor\_rom\_65536x192 (12.6 Mbit) | NOR ROM | 75x | 0.084 |
-| kv\_cache\_demo | 8x sram\_4096x8 (0.26 Mbit) | SRAM | 75x | 0.0003 |
+| kv\_cache\_demo | 4x sram\_8192x8 (0.26 Mbit) | SRAM | 75x | 0.0003 |
 | lm\_head\_demo | 1x nor\_rom\_65536x192 (12.6 Mbit) | NOR ROM | 75x | 0.084 |
 
 ### 2.4 Full-Scale Designs That Were Impossible at sky130
@@ -105,7 +105,7 @@ Transistor switching speed improves approximately 10--15x from 130nm to 3nm, dri
 | attention\_unit | 76 | 10x | **760** | Dot product + max |
 | swiglu | 47 | 10x | **470** | Sigmoid LUT + chained multiply |
 | vector\_unit | 43 | 10x | **430** | Unified VPU (widest datapath) |
-| kv\_cache\_demo | 235 | 11x | **2,585** | SRAM-access dominated |
+| kv\_cache\_demo | 230 | 11x | **2,530** | SRAM-access dominated |
 | lm\_head\_demo | 106 | 10x | **1,060** | ROM + argmax |
 
 ### 3.3 Analysis

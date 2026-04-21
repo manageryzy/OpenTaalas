@@ -1,0 +1,2226 @@
+{
+    "availableResources": [
+        {
+            "name": "Op_Depth",
+            "unitOfMeasurement": "level"
+        },
+        {
+            "name": "Path_Depth",
+            "unitOfMeasurement": "level"
+        }
+    ],
+    "data": [
+        [
+            "path0",
+            "path1",
+            "path2",
+            "path3",
+            "path4",
+            "relativePath",
+            "rangeStartLine",
+            "rangeStartCharacter",
+            "rangeEndLine",
+            "rangeEndCharacter",
+            "Op_Depth",
+            "Path_Depth"
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            14,
+            1,
+            15,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            14,
+            1,
+            15,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            23,
+            1,
+            24,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            23,
+            1,
+            24,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            24,
+            1,
+            25,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            24,
+            1,
+            25,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            25,
+            1,
+            26,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            25,
+            1,
+            26,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            26,
+            1,
+            27,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            26,
+            1,
+            27,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage5",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_sub",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            34,
+            1,
+            35,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage5",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            31,
+            1,
+            32,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage6",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            47,
+            1,
+            48,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage6",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            47,
+            1,
+            48,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage7",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            47,
+            1,
+            48,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage7",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            48,
+            1,
+            49,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage8",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            48,
+            1,
+            49,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage8",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            48,
+            1,
+            49,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage9",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            49,
+            1,
+            50,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage9",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            49,
+            1,
+            50,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage10",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            47,
+            1,
+            48,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage10",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            53,
+            1,
+            54,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage10",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_sub",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            59,
+            1,
+            60,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage10",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_sub",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            64,
+            1,
+            65,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage11",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            42,
+            1,
+            43,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage11",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_shr",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            59,
+            1,
+            60,
+            1,
+            3,
+            3
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage11",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            65,
+            1,
+            66,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage11",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            42,
+            1,
+            43,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage11",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "4_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            67,
+            1,
+            68,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage12",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_sub",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            57,
+            1,
+            58,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage12",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            61,
+            1,
+            62,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage12",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            31,
+            1,
+            32,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage13",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            101,
+            1,
+            102,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage13",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            102,
+            1,
+            103,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage14",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            102,
+            1,
+            103,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage14",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            103,
+            1,
+            104,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage15",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            103,
+            1,
+            104,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage15",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            104,
+            1,
+            105,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage16",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            104,
+            1,
+            105,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage16",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            105,
+            1,
+            106,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage17",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            105,
+            1,
+            106,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage17",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            106,
+            1,
+            107,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage18",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            106,
+            1,
+            107,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage18",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            84,
+            1,
+            85,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage18",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            84,
+            1,
+            85,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage18",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            87,
+            1,
+            88,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage18",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "4_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            107,
+            1,
+            108,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage18",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "5_sub",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            87,
+            1,
+            88,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage19",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            107,
+            1,
+            108,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage19",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            121,
+            1,
+            122,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage19",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_sub",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            121,
+            1,
+            122,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage19",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            108,
+            1,
+            109,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage19",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "4_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            121,
+            1,
+            122,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage20",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            86,
+            1,
+            87,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage20",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            84,
+            1,
+            85,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dequantize_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage21",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/dequant.k",
+            14,
+            1,
+            15,
+            1,
+            1,
+            1
+        ]
+    ],
+    "projections": [
+        {
+            "aggregationRules": {
+                "Op_Depth": "max",
+                "Path_Depth": "max"
+            },
+            "includeColumns": [
+                "Op_Depth",
+                "Path_Depth"
+            ],
+            "name": "Default View",
+            "pathRule": "path0\/path1\/path2\/path3\/path4"
+        }
+    ]
+}

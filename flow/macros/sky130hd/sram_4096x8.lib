@@ -46,7 +46,7 @@ library (sram_4096x8) {
   }
 
   cell (sram_4096x8) {
-    area : 117030.0;
+    area : 39999.6;
     cell_leakage_power : 16000.0;
     dont_touch : true;
     dont_use : true;

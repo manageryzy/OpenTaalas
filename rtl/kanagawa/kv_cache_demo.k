@@ -1,6 +1,6 @@
 // OpenTaalas - Reduced-scale KV cache for sky130 academic demo
 // 16 tokens x 8 heads x 128 dim = 16,384 INT8 entries per K/V store
-// Proves circular buffer architecture with 8x sram_4096x8 tiles.
+// Maps via the sky130 HAL to 4x sram_8192x8 tiles (2 per K/V store).
 // Full-scale (4096 tokens) requires off-chip DRAM — same as every production AI chip.
 
 module opentaalas.kv_cache_demo

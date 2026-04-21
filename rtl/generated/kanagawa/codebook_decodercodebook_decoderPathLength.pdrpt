@@ -1,0 +1,978 @@
+{
+    "availableResources": [
+        {
+            "name": "Op_Depth",
+            "unitOfMeasurement": "level"
+        },
+        {
+            "name": "Path_Depth",
+            "unitOfMeasurement": "level"
+        }
+    ],
+    "data": [
+        [
+            "path0",
+            "path1",
+            "path2",
+            "path3",
+            "path4",
+            "relativePath",
+            "rangeStartLine",
+            "rangeStartCharacter",
+            "rangeEndLine",
+            "rangeEndCharacter",
+            "Op_Depth",
+            "Path_Depth"
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m0",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m0_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            16,
+            1,
+            17,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m0",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m0_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_loadmemory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            16,
+            1,
+            17,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m0",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m0_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            16,
+            1,
+            17,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m0",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m0_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            16,
+            1,
+            17,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m1",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m1_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            17,
+            1,
+            18,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m1",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m1_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_loadmemory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            17,
+            1,
+            18,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m1",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m1_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            17,
+            1,
+            18,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m1",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m1_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            17,
+            1,
+            18,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m2",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m2_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            18,
+            1,
+            19,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m2",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m2_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_loadmemory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            18,
+            1,
+            19,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m2",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m2_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            18,
+            1,
+            19,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m2",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m2_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            18,
+            1,
+            19,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m3",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m3_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            19,
+            1,
+            20,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m3",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m3_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_loadmemory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            19,
+            1,
+            20,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m3",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m3_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            19,
+            1,
+            20,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m3",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_m3_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            19,
+            1,
+            20,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_entry",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_entry_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            25,
+            1,
+            26,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_entry",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_entry_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_storememory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            24,
+            1,
+            25,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_entry",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_entry_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            25,
+            1,
+            26,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_entry",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_entry_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            25,
+            1,
+            26,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_entry",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_entry_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            27,
+            1,
+            28,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_entry",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_entry_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_loadmemory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            29,
+            1,
+            30,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_entry",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_entry_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            27,
+            1,
+            28,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_entry",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_entry_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/codebook_decoder.k",
+            27,
+            1,
+            28,
+            1,
+            1,
+            1
+        ]
+    ],
+    "projections": [
+        {
+            "aggregationRules": {
+                "Op_Depth": "max",
+                "Path_Depth": "max"
+            },
+            "includeColumns": [
+                "Op_Depth",
+                "Path_Depth"
+            ],
+            "name": "Default View",
+            "pathRule": "path0\/path1\/path2\/path3\/path4"
+        }
+    ]
+}

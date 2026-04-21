@@ -4,7 +4,7 @@
 //   880 × 1024   → nor_rom_1024x880    (rom_bank, mac_array ROM)
 //   1024 × 4096  → nor_rom_4096x1024   (rope tables)
 //   192 × 65536  → nor_rom_65536x192   (embed_rom)
-//   8 × 16384    → sram_4096x8 × 4     (kv_cache_demo, tiled)
+//   8 × 16384    → sram_8192x8 × 2     (kv_cache_demo, tiled; 254×293µm col_mux=32)
 //   8 × 4194304  → sram_4096x8 × 1024  (kv_cache full-scale, tiled)
 //   32 × 512     → synthesized (mac_array grid, small enough for gates)
 //
@@ -123,14 +123,14 @@ module KanagawaHALDualPortRAM
             end
 
         // ---------------------------------------------------------------
-        // SRAM: 8 × 16384 (kv_cache_demo) — tiled as 4 × sram_4096x8
+        // SRAM: 8 × 16384 (kv_cache_demo) — tiled as 2 × sram_8192x8
         // ---------------------------------------------------------------
         end else if (DATA_WIDTH == 8 && DEPTH == 16384) begin : gen_sram_kv_demo
 
-            localparam TILE_DEPTH = 4096;
-            localparam NUM_TILES  = DEPTH / TILE_DEPTH;  // 4
-            localparam TILE_ADDR  = 12;  // log2(4096)
-            localparam SEL_BITS   = ADDR_WIDTH - TILE_ADDR;  // 2
+            localparam TILE_DEPTH = 8192;
+            localparam NUM_TILES  = DEPTH / TILE_DEPTH;  // 2
+            localparam TILE_ADDR  = 13;  // log2(8192)
+            localparam SEL_BITS   = ADDR_WIDTH - TILE_ADDR;  // 1
 
             wire [SEL_BITS-1:0] wr_sel = addr_in[0][ADDR_WIDTH-1:TILE_ADDR];
             wire [TILE_ADDR-1:0] wr_addr = addr_in[0][TILE_ADDR-1:0];
@@ -146,7 +146,7 @@ module KanagawaHALDualPortRAM
                 wire tile_we = wren_in[0] && wr_sel == t;
                 wire [TILE_ADDR-1:0] tile_addr = tile_we ? wr_addr : rd_addr;
 
-                sram_4096x8 u_sram (
+                sram_8192x8 u_sram (
                     .clk  (clk),
                     .ce   (tile_ce),
                     .we   (tile_we),

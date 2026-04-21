@@ -47,6 +47,7 @@ class SramSpec:
     name: str
     width: int   # data width in bits
     depth: int   # number of rows
+    col_mux: int = 1  # column-mux ratio: bit columns = width × col_mux, rows = depth ÷ col_mux
 
     @property
     def bits(self) -> int:
@@ -57,13 +58,23 @@ class SramSpec:
         return max(1, math.ceil(math.log2(self.depth)))
 
     @property
+    def bit_columns(self) -> int:
+        return self.width * self.col_mux
+
+    @property
+    def bit_rows(self) -> int:
+        assert self.depth % self.col_mux == 0, \
+            f"depth {self.depth} must be divisible by col_mux {self.col_mux}"
+        return self.depth // self.col_mux
+
+    @property
     def width_um(self) -> float:
-        core = self.width * BITCELL_WIDTH
+        core = self.bit_columns * BITCELL_WIDTH
         return core + ROW_DECODER_WIDTH + 2 * GUARD_RING
 
     @property
     def height_um(self) -> float:
-        core = self.depth * BITCELL_HEIGHT
+        core = self.bit_rows * BITCELL_HEIGHT
         return core + COL_MUX_HEIGHT + 2 * GUARD_RING
 
     @property
@@ -90,8 +101,15 @@ def snap_to_grid(val: float, grid: float) -> float:
 # KV cache: 2 × 8-bit × 4M deep is too large for a single macro.
 # Use 4096-deep tiles (4096 × 8 = 32 Kbit each).
 # External address decode selects tiles.
+#
+# col_mux=16 reshapes the bit array into a 128-wide × 256-tall grid, giving
+# a ~137 × 293 µm macro (aspect 1:2.14) instead of a 27 × 4442 µm strip.
+# Real SRAMs use 4–16 col_mux for bitline length / energy tradeoffs.
 PREDEFINED = [
-    SramSpec("sram_4096x8", 8, 4096),
+    SramSpec("sram_4096x8", 8, 4096, col_mux=16),
+    # Wider variant for kv_cache_demo: 2 tiles per array instead of 4.
+    # col_mux=32 makes it nearly square (254×293 µm, 1:1.15 aspect).
+    SramSpec("sram_8192x8", 8, 8192, col_mux=32),
 ]
 
 
@@ -469,9 +487,10 @@ def generate_all(spec: SramSpec, output_dir: str):
         f.write(generate_verilog_blackbox(spec))
 
     print(f"  {spec.name}:")
-    print(f"    Depth={spec.depth}  Width={spec.width}  Bits={spec.bits/1024:.1f}K")
+    print(f"    Depth={spec.depth}  Width={spec.width}  Bits={spec.bits/1024:.1f}K  col_mux={spec.col_mux}")
+    print(f"    Bit array={spec.bit_columns}c × {spec.bit_rows}r")
     print(f"    Addr={spec.addr_width}b  Area={spec.area_mm2:.4f} mm²")
-    print(f"    Size={spec.width_um:.1f} x {spec.height_um:.1f} µm")
+    print(f"    Size={spec.width_um:.1f} x {spec.height_um:.1f} µm  (aspect 1:{spec.height_um/spec.width_um:.2f})")
 
 
 def main():
@@ -480,6 +499,8 @@ def main():
     parser.add_argument('--name')
     parser.add_argument('--width', type=int)
     parser.add_argument('--depth', type=int)
+    parser.add_argument('--col-mux', type=int, default=1,
+                        help='column-mux ratio (reshapes bit array)')
     parser.add_argument('--output-dir', default='flow/macros/sky130hd')
     args = parser.parse_args()
 
@@ -488,7 +509,7 @@ def main():
         for spec in PREDEFINED:
             generate_all(spec, args.output_dir)
     elif args.name and args.width and args.depth:
-        spec = SramSpec(args.name, args.width, args.depth)
+        spec = SramSpec(args.name, args.width, args.depth, col_mux=args.col_mux)
         generate_all(spec, args.output_dir)
     else:
         parser.print_help()

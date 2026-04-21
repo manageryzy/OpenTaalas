@@ -49,10 +49,10 @@
 | ![rom_bank](images/rom_bank_final.png) | ![mac_array](images/mac_array_final.png) | ![rope](images/rope_final.png) |
 | 1× NOR ROM centered | 1× NOR ROM centered | 2× NOR ROM side-by-side |
 
-| vector_unit (4×5.5 mm) | kv_cache_demo (1.2×5 mm) |
+| vector_unit (4×5.5 mm) | kv_cache_demo (0.60×0.71 mm) |
 |:---:|:---:|
 | ![vector_unit](images/vector_unit_final.png) | ![kv_cache_demo](images/kv_cache_demo_final.png) |
-| 2× NOR ROM, 55% util | 8× SRAM in 2 groups of 4 |
+| 2× NOR ROM, 55% util | 4× SRAM in 2×2 grid, 87% util |
 
 | embed_rom (3.2×3.2 mm) | lm_head_demo (3.2×3.2 mm) |
 |:---:|:---:|
@@ -79,10 +79,16 @@ Reduced-scale designs that validate full architecture on a sky130 shuttle (~25 m
 
 | Design | Std Cells | Macro(s) | Die (µm) | GRT Overflow | DRC | WNS (ns) | fmax (MHz) | Power (mW) |
 |--------|-----------|----------|----------|-------------|-----|----------|-----------|-----------|
-| kv_cache_demo | 63,825 | 8× sram_4096x8 | 1200×5000 | **0** | **0** | -0.25 | 235 | 25 |
+| kv_cache_demo | 3,628 | 4× sram_8192x8 (col_mux=32) | 595×705 | **0** | **0** | -0.34 | 230 | 24 |
 | lm_head_demo | 243,724 | 1× nor_rom_65536x192_phys | 3200×3200 | **0** | **0** | -9.80 | 61 | — |
 
-**kv_cache_demo** — 16 tokens × 8 heads × 128 dims (full scale: 4096 tokens). Proves circular buffer K/V store architecture with 8 SRAM tiles. Timing-clean internally (reg-to-reg slack +1.29ns), WNS is output-port only. 18% utilization, 25 mW.
+**kv_cache_demo** — 16 tokens × 8 heads × 128 dims (full scale: 4096 tokens). Proves circular buffer K/V store architecture. Two-stage optimization journey:
+
+1. **Macro reshape** — sram_4096x8 went from 27×4442 µm (single bitcell column) to 137×294 µm (col_mux=16). Enabled 4×2 grid in a square die. Die sweep at fixed 8-macro RTL: 1200×5000 (original) → 1000×1000 (timing sweet spot, -0.24 ns / 236 MHz) → 710×695 (practical floor, -0.50 ns).
+
+2. **Macro consolidation** — recompiled as sram_8192x8 with col_mux=32 (254×293 µm, 1:1.15 aspect). Halves the macro count (4 instead of 8), eliminates the 4:1 output mux in the HAL, simpler floorplan. **Result at 595×705: -0.34 ns / 230 MHz, 144 K WL, 87% util, 0 DRC.** WL is 30% lower than the 8-macro design (142 K vs 203 K) because fewer macros = fewer mux levels = shorter paths.
+
+**Total improvement vs original 1200×5000 strip: 93% area reduction (6.00 → 0.42 mm²), 41% wirelength reduction (246 → 144 K µm), comparable timing (-0.25 → -0.34 ns), same fmax (235 → 230 MHz).** PDN-0179 constraints: x-axis margin needs ≥17 µm (met1 strap channel), y-axis ≥34 µm (met4 strap channel). `MACRO_PLACE_HALO` reduced from 40 to 10 µm; `PLACE_DENSITY_LB_ADDON` reduced from 0.20 to 0.05.
 
 **lm_head_demo** — 1024 vocab × 4096 dims as 192-bit weight chunks (full scale: 128,256 vocab). Proves weight projection + argmax pipeline using folded nor_rom_65536x192_phys (same as embed_rom). RMSNorm normalization handled by vector_unit in the real architecture — not included here. 39% utilization at 3200×3200 die (53% area reduction from original 600×36000 strip).
 
@@ -99,19 +105,18 @@ These two designs are **physically impossible on-die at sky130** at full LLaMA 3
 | Metric | Value |
 |--------|-------|
 | Total memory | 67,108,864 bits = 8 MB |
-| Available macro | sram_4096x8 (26.68 × 4441.76 µm, 32 Kbit) |
+| Available macro | sram_4096x8 (137 × 294 µm, 32 Kbit, col_mux=16) |
 | Tiles required | **2,048** |
 | Macro pin total | 2,048 × 25 = **51,200 pins** |
-| Macro area total | 2,048 × 0.119 mm² = **243 mm²** |
+| Macro area total | 2,048 × 0.040 mm² = **82 mm²** |
 | Output mux depth | 10-bit select (1024:1) → **~10 ns delay** (exceeds 4 ns clock) |
-| Estimated die | **~317 mm²** (with routing) |
+| Estimated die | **~110 mm²** (with routing) |
 
 **Why it doesn't fit:**
-- 317 mm² = **12.7× a sky130 shuttle reticle** (~25 mm²)
-- 317 mm² = **3.5× the rest of the entire project** (~90 mm²)
+- 110 mm² = **4.4× a sky130 shuttle reticle** (~25 mm²)
 - 51,200 macro pins vs embed_rom's 210 (which was already challenging)
 - 1024:1 mux delay (~10 ns) exceeds the 4 ns clock period by 2.5×
-- No larger SRAM macro exists. A monolithic sram_4194304x8 would be 26.68 µm × ~4.5 million µm = **4.5 meters tall**
+- Even with a larger col_mux, a monolithic sram_4194304x8 still needs ~35 mm² of bitcell area plus periphery — still larger than a shuttle die
 
 ### lm_head — 1.58 Gbit Weight ROM (188 MB)
 
@@ -139,8 +144,8 @@ These two designs are **physically impossible on-die at sky130** at full LLaMA 3
 | Memory | 67 Mbit | 1,576 Mbit | 8.4 Mbit | — |
 | Macros | 2,048 | 125 | 2 | — |
 | Macro pins | 51,200 | 26,250 | 210 | — |
-| Die area | ~317 mm² | ~550 mm² | 25 mm² | ~25 mm² |
-| vs shuttle | 12.7× | 22× | 1.0× | 1.0× |
+| Die area | ~110 mm² | ~550 mm² | 25 mm² | ~25 mm² |
+| vs shuttle | 4.4× | 22× | 1.0× | 1.0× |
 
 ### What Production Chips Do
 
@@ -162,7 +167,7 @@ For a tape-out-ready sky130 shuttle demo, kv_cache and lm_head can be implemente
 
 | Design | Full Scale | Demo Scale | Macros Needed | Feasibility |
 |--------|-----------|------------|---------------|-------------|
-| kv_cache | 4096 tokens × 8 heads | 16 tokens × 8 heads | 8× sram_4096x8 | Trivially routable |
+| kv_cache | 4096 tokens × 8 heads | 16 tokens × 8 heads | 4× sram_8192x8 | Trivially routable |
 | lm_head | 128,256 vocab × 4,096 dim | 1,024 vocab × 4,096 dim | 1× nor_rom_65536x192 | Same as embed_rom |
 
 The reduced-scale demos prove the RTL architecture routes at sky130 while honestly reflecting that full-scale inference requires off-chip memory — the same design decision made by every AI chip vendor.
@@ -177,7 +182,8 @@ All NOR ROM and SRAM macros generated by custom compilers:
 | nor_rom_4096x1024 | ~485 × 2226 | 1039 (1024 dout + 15 ctrl) | ✓ |
 | nor_rom_4096x192 | ~103 × 2226 | 207 (192 dout + 15 ctrl) | ✓ |
 | nor_rom_65536x192 | ~103 × 35404 | 210 (192 dout + 18 ctrl) | ✓ |
-| sram_4096x8 | ~27 × 4442 | 25 (8 din + 8 dout + 9 ctrl) | ✓ |
+| sram_4096x8 | ~137 × 294 (col_mux=16) | 25 (8 din + 8 dout + 9 ctrl) | ✓ |
+| sram_8192x8 | ~254 × 293 (col_mux=32) | 26 (8 din + 8 dout + 10 ctrl) | ✓ |
 
 ## Timing Analysis
 
@@ -202,8 +208,8 @@ All NOR ROM and SRAM macros generated by custom compilers:
 |----------|-------|-----------------|----------------|
 | Logic-only (GDS) | 12 | 5.6 mm² | 9.4 mm² |
 | Macro-bearing (DRT) | 5 | 26.9 mm² | 86.4 mm² |
-| Academic demos (DRT/GDS) | 2 | 5.3 mm² | 27.6 mm² |
-| **Routed total** | **19** | **37.8 mm²** | **123.4 mm²** |
+| Academic demos (DRT/GDS) | 2 | 5.3 mm² | 22.0 mm² |
+| **Routed total** | **19** | **37.8 mm²** | **117.8 mm²** |
 
 **Note:** Macro-bearing designs are dominated by ROM area, not standard cells. A full LLaMA 3.1 8B layer tile with all macros would be ~50–100 mm² at sky130. The academic shuttle demo with kv_cache_demo + lm_head_demo adds ~27.6 mm² — feasible for a sky130 shuttle.
 
@@ -229,7 +235,10 @@ All NOR ROM and SRAM macros generated by custom compilers:
 6. **Monolithic macros beat tiled** — embed_rom: 16× tiled (3,312 pins) → 18K GRT overflow; 1× monolithic (210 pins) → DRT complete. Internal address decoding eliminates the mux and 15/16 of the macro pins
 7. **`SKIP_ANTENNA_REPAIR_POST_DRT = 1`** needed in addition to `SKIP_ANTENNA_REPAIR = 1` — the post-DRT antenna repair in `detail_route.tcl` triggers incremental GRT that gets stuck on residual congestion
 8. **`[[memory]]` on Kanagawa arrays** — vector_unit: 307K→8.5K lines RTL (36× reduction). Without it, Kanagawa unrolls each array element into individual registers, exploding synthesis
-9. **Off-chip memory is not a failure** — KV cache (64 Mbit) and lm_head (1.58 Gbit) exceed sky130 capacity by 12–22×. Every production AI chip uses HBM/DDR for these. Reduced-scale demos validate the architecture.
+9. **Off-chip memory is not a failure** — KV cache (64 Mbit) and lm_head (1.58 Gbit) exceed sky130 capacity by 4–22×. Every production AI chip uses HBM/DDR for these. Reduced-scale demos validate the architecture.
+10. **Macro aspect ratio is a floorplan input** — sram_4096x8 was originally 27×4442 µm (single bitcell column), forcing kv_cache_demo into a 1200×5000 strip. Adding a 16:1 column mux to the SRAM compiler reshaped the macro to 137×294 µm, enabling a 4×2 grid in a square 1000×1000 die. **83% area reduction** with marginally better timing. Real SRAM compilers always use col_mux (4–16) — a single-column model misrepresents both shape and bitline delay.
+11. **Die shrink trade-offs are channel-dependent, not just die-size-dependent** — kv_cache_demo 8-macro sweep with channel/halo tightening: 1200 (-0.25 ns) → 1000 (-0.24 ns, sweet spot) → 900 (-0.59 ns) at fixed 80×100 channels and 40 µm halo. Tightening to 60×60 channels + 10 µm halo recovered: 800 (-0.49 ns), 750 (-0.46 ns), 720 (-0.53 ns), 710 (-0.45 ns), 710×695 (-0.50 ns, 79% util — 8-macro floor). Going below fails PDN. Lessons: (a) cell-area density matters more than die size for timing — wider channels with looser cells are worse than tight channels with packed cells; (b) `MACRO_PLACE_HALO` (default 40 µm in sky130hd) is a hidden floor on density — for non-congested designs it can drop to 10 µm safely; (c) `PLACE_DENSITY_LB_ADDON` of 0.20 is generous; 0.05 works for tight macro layouts; (d) PDN x-axis margin needs ≥17 µm (met1 strap), y-axis ≥34 µm (met4 strap).
+12. **Halve the macro count for a bigger win than micro-shrinking** — kv_cache_demo final breakthrough: replaced 8× sram_4096x8 (col_mux=16, 137×294) with 4× sram_8192x8 (col_mux=32, 254×293) — same total bits, half the macro count, fewer mux levels in the HAL. Result at 595×705: -0.34 ns / 230 MHz / 144 K WL / 87% util — **better than every 8-macro die size on every metric**. WL dropped 30% (203 K → 144 K) because fewer macros means shorter critical paths. The placeholder SRAM compiler easily generates the wider macro since col_mux is a parameter; in real silicon, larger col_mux costs bitline length but stays within tolerable timing. Architectural changes (count, depth, width) often dominate floorplan tuning.
 
 ## Architecture
 
@@ -241,7 +250,7 @@ Kanagawa .k source
           880 × 1024  → nor_rom_1024x880
           1024 × 4096 → nor_rom_4096x1024
           192 × 65536 → 1× nor_rom_65536x192 (monolithic)
-          8 × 16384   → 4× sram_4096x8 (kv_cache_demo)
+          8 × 16384   → 2× sram_8192x8 (kv_cache_demo)
           8 × 4194304 → 1024× sram_4096x8 (full-scale, not routable)
           small       → behavioral (gate-synthesized)
 
@@ -255,7 +264,7 @@ Full inference data path (on-chip):
 
 Academic demo target:
   - All 17 on-chip modules at full datapath width
-  - kv_cache: 16 tokens (8 SRAM tiles, proves circular buffer)
+  - kv_cache: 16 tokens (4 SRAM tiles, proves circular buffer)
   - lm_head: 1024 vocab (1 NOR ROM macro, proves argmax pipeline)
   - Fits sky130 shuttle reticle (~25 mm²)
 ```

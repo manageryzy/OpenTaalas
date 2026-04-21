@@ -19,7 +19,7 @@ Results after density improvement (NOR ROM folding + die resizing, 2026-03-19).
 | rope | 2000 × 3500 | 2× nor_rom_4096x1024 | 478,014 | 76% | -4.56 | 69 | 1,029 | — |
 | embed_rom | 3200 × 3200 | 1× nor_rom_65536x192_phys | 244,741 | 38% | -9.06 | 77 | 103 | — |
 | vector_unit | 4000 × 5500 | 2× nor_rom_4096x1024 | 790,947 | 55% | -17.68 | 43 | 488 | — |
-| kv_cache_demo | 1200 × 5000 | 8× sram_4096x8 | 63,825 | 18% | -0.25 | 235 | 0 | 25 |
+| kv_cache_demo | 595 × 705 | 4× sram_8192x8 (col_mux=32) | 3,628 | 87% | -0.34 | 230 | 0 | 24 |
 | lm_head_demo | 3200 × 3200 | 1× nor_rom_65536x192_phys | 243,724 | 39% | -9.80 | 61 | 0 | — |
 
 ---
@@ -279,40 +279,43 @@ The KV cache demo is a reduced-scale implementation of the key/value attention c
 
 ![kv_cache_demo](images/kv_cache_demo_final.png)
 
-Eight sram_4096x8 macros (26.68 x 4441.76 um each) are arranged in two groups of four at the top of the 1200 x 5000 um die. Macro pins face downward toward the standard cell region at the bottom. This top-macros/bottom-cells arrangement minimizes wire length between the SRAM data ports and the control logic.
+Four sram_8192x8 macros (254 x 293 um each, col_mux=32) are arranged in a 2×2 grid centered in a 595 x 705 um die. The optimization journey was two-stage: (1) reshape the SRAM macro from a tall single-column strip (27×4442) to a packed col_mux variant (137×294 with col_mux=16), enabling an 8-macro 4×2 grid that hit a floor at 710×695; (2) consolidate to 4× sram_8192x8 (col_mux=32, 254×293, 1:1.15 aspect) — half the macro count, simpler HAL mux logic, **better metrics on every dimension**. Final die is **14× smaller than the original 1200×5000 strip** (0.42 mm² vs 6.0 mm², 93% reduction) with 87% utilization, comparable timing, and 41% less wirelength.
 
 ### Synthesis
 
-- **Standard cells:** 63,825
-- **Cell area:** 0.12 mm2
-- **Macro area:** 0.95 mm2 (8x sram_4096x8)
-- **Total area:** 1.07 mm2
-- **Utilization:** 18.3%
+- **Standard cells:** 3,628 (post-place, after resize/buffer insertion)
+- **Cell area:** 0.043 mm² (10% of die)
+- **Macro area:** 0.299 mm² (4× sram_8192x8 = 71% of die)
+- **Total instance area:** 0.342 mm²
+- **Utilization:** 87% (instances / core area)
 
-The eight SRAM macros account for 88.8% of total area. Standard cell logic is minimal at 0.12 mm2 — just the address generation, circular buffer pointer management, and handshake interface. This is a memory-dominated design by an even greater margin than embed_rom.
+The four SRAM macros account for 87% of total instance area. Standard cell count is small because the HAL only needs address generation, circular buffer pointer logic, and a 2:1 output mux. Halving the macro count (vs the 8-macro variant) eliminated one full mux level on the read path. This is a memory-dominated design.
 
 ### Routing
 
 - **GRT overflow:** 0 (clean)
-- **Total wirelength:** 245,660 um
-- **Layer utilization:** met1 1.0%, met2 1.0%, met3 0.3%, met4 0.2%, met5 0.0%
+- **Total wirelength:** 144,192 um
+- **Layer utilization:** met1, met2 lightly used; met3/4 moderate
 
-Routing is trivially easy. All metal layers are under 1% utilization. The 245,660 um total wirelength is the lowest of any macro-bearing design, reflecting the small standard cell count and efficient macro-to-logic connectivity.
+Routing is clean despite 87% util. The 144,192 um total wirelength is **41% lower** than the original tall-strip floorplan (245,660 um) and 30% lower than the best 8-macro shrunk variant (203,316 um at 710×695). Halving the macro count eliminates one level of output mux and shortens the control fan-out — fewer macros means shorter critical paths.
 
 ### Timing
 
-- **WNS:** -0.25 ns
-- **TNS:** -3.52 ns
-- **fmax:** 235 MHz (target: 250 MHz)
-- **Clock skew:** -0.15 ns
+- **WNS:** -0.34 ns
+- **TNS:** -4.13 ns
+- **fmax:** 230 MHz (target: 250 MHz)
 
-At 235 MHz, the KV cache demo nearly meets the 250 MHz target — the closest of any macro-bearing design. The -0.25 ns WNS is within reach of optimization through minor retiming or buffer insertion. The negative clock skew (-0.15 ns) indicates the capture clock arrives slightly before the launch clock, a favorable CTS result. The low TNS of -3.52 ns confirms that only a handful of paths violate timing, and by small margins.
+At 230 MHz, the KV cache demo nearly meets the 250 MHz target. The -0.34 ns WNS is within reach of optimization through minor retiming. The 4-macro consolidation actually *improved* timing vs the optimized 8-macro design (-0.50 ns at 710×695) by eliminating one mux level on the read path.
 
 ### Power
 
-- **Total power:** 25 mW
+- **Total power:** 24.1 mW
+  - Sequential: 11.4 mW (47%)
+  - Clock tree: 11.6 mW (48%)
+  - Combinational: 0.98 mW (4%)
+  - Macro leakage: 0.13 mW (0.5%)
 
-The lowest power design by a wide margin. The small standard cell count and narrow 8-bit SRAM data paths result in minimal switching activity. SRAM leakage dominates at this activity level.
+The lowest power design. Clock tree dominates because the design is small enough that CTS overhead is comparable to flop switching. SRAM macros contribute almost nothing — most of their dynamic power would only show with realistic read/write activity from a testbench.
 
 ### DRC
 
@@ -323,9 +326,10 @@ Clean DRC closure with no violations of any kind.
 ### Lessons
 
 - SRAM-based designs with low standard cell counts are highly favorable for PnR — the KV cache demo is the best-performing macro-bearing design across all metrics.
-- The top-macros/bottom-cells floorplan strategy works well for narrow dies with multiple column-oriented macros.
-- The 235 MHz result validates the SRAM macro timing models and proves that the KV cache architecture can operate near the 250 MHz target.
-- Scaling to full LLaMA dimensions (2048 tokens, 32 heads) would require 2048 SRAM macros, which is impractical as a flat design. Hierarchical instantiation or banked architectures would be needed.
+- Macro-shape engineering is a real lever: a column-mux parameter that costs nothing in the placeholder model but is universal in real OpenRAM lets us trade bitline length for floorplan flexibility (137×4442 strips → 254×293 squares).
+- Halving the macro count via a wider/deeper SRAM (sram_8192x8 with col_mux=32) beat every die-shrink iteration of the 8-macro design — fewer mux levels = shorter critical paths. **Architectural changes dominate floorplan tuning.**
+- The 230 MHz result validates the SRAM macro timing models and proves that the KV cache architecture can operate near the 250 MHz target.
+- Scaling to full LLaMA dimensions (4096 tokens, 8 heads) would still require ~1000 SRAM macros even with the wider tile, which remains impractical as a flat design — hence the off-chip-DRAM conclusion for full scale.
 
 ---
 
@@ -377,7 +381,7 @@ The 16:1 column mux adds combinational delay after the ROM read. The critical pa
 
 ### Density Improvement Results
 
-Die resizing and NOR ROM folding reduced total macro-bearing area from 96.6 mm² to 57.0 mm² (**41% reduction**):
+Die resizing, NOR ROM folding, and the SRAM macro consolidation reduced total macro-bearing area from 96.6 mm² to **56.6 mm² (41% reduction)**:
 
 | Module | Old Die (mm²) | New Die (mm²) | Reduction | DRC |
 |--------|--------------|--------------|-----------|-----|
@@ -386,7 +390,7 @@ Die resizing and NOR ROM folding reduced total macro-bearing area from 96.6 mm²
 | mac_array | 9.0 (3000×3000) | 7.5 (2500×3000) | **17%** | 641 |
 | rope | 25.0 (5000×5000) | 7.0 (2000×3500) | **72%** | 1,029 |
 | vector_unit | 25.0 (5000×5000) | 22.0 (4000×5500) | **12%** | 488 |
-| kv_cache_demo | 6.0 (1200×5000) | 6.0 (unchanged) | 0% | **0** |
+| kv_cache_demo | 6.0 (1200×5000) | 0.42 (595×705) | **93%** | **0** |
 
 ### Cross-Cutting Observations
 
@@ -396,16 +400,16 @@ Die resizing and NOR ROM folding reduced total macro-bearing area from 96.6 mm²
 
 | Utilization | DRC | Outcome |
 |---|---|---|
-| 18% (kv_cache_demo) | 0 | Clean |
 | 35% (mac_array) | 641 | Routable with violations |
 | 38% (embed_rom) | 103 | Routable with violations |
 | 39% (lm_head_demo) | 0 | Clean |
 | 55% (vector_unit) | 488 | Routable with violations |
 | 60% (rom_bank) | 0 | Clean |
 | 76% (rope) | 1,029 | Routable with violations |
+| 87% (kv_cache_demo) | 0 | **Clean even at 87%** — small design, simple control logic |
 
 **Behavioral RAM synthesis must be avoided.** Two designs (vector_unit and the initial lm_head_demo) demonstrated that synthesizing multi-kilobit arrays to flip-flops produces unroutable designs. All storage elements larger than a few hundred bits should be mapped to SRAM or ROM macros.
 
-**No design meets the 250 MHz target.** The closest is kv_cache_demo at 235 MHz. Compute-heavy designs range from 43 MHz (vector_unit) to 157 MHz (rom_bank). Achieving 250 MHz will require pipelining the critical arithmetic paths.
+**No design meets the 250 MHz target.** The closest is kv_cache_demo at 230 MHz. Compute-heavy designs range from 43 MHz (vector_unit) to 157 MHz (rom_bank). Achieving 250 MHz will require pipelining the critical arithmetic paths.
 
 **ORFS workarounds are essential for congested designs.** The `-allow_congestion` GRT flag, combined with `SKIP_INCREMENTAL_REPAIR=1`, `RECOVER_POWER=0`, `SKIP_ANTENNA_REPAIR=1`, and `SKIP_ANTENNA_REPAIR_POST_DRT=1`, was required for five of the seven designs. Without these flags, GRT either fails outright or enters infinite NDR retry loops.

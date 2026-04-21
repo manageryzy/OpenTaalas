@@ -1,0 +1,354 @@
+{
+    "availableResources": [
+        {
+            "name": "Op_Depth",
+            "unitOfMeasurement": "level"
+        },
+        {
+            "name": "Path_Depth",
+            "unitOfMeasurement": "level"
+        }
+    ],
+    "data": [
+        [
+            "path0",
+            "path1",
+            "path2",
+            "path3",
+            "path4",
+            "relativePath",
+            "rangeStartLine",
+            "rangeStartCharacter",
+            "rangeEndLine",
+            "rangeEndCharacter",
+            "Op_Depth",
+            "Path_Depth"
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_block",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_block_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rom_bank.k",
+            21,
+            1,
+            22,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_block",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_block_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_loadmemory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rom_bank.k",
+            26,
+            1,
+            27,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_block",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_block_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rom_bank.k",
+            21,
+            1,
+            22,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_block",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_block_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rom_bank.k",
+            21,
+            1,
+            22,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_block",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_block_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rom_bank.k",
+            38,
+            1,
+            39,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_block",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_block_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_storememory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rom_bank.k",
+            36,
+            1,
+            37,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_block",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_block_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rom_bank.k",
+            38,
+            1,
+            39,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_block",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_block_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rom_bank.k",
+            38,
+            1,
+            39,
+            1,
+            1,
+            1
+        ]
+    ],
+    "projections": [
+        {
+            "aggregationRules": {
+                "Op_Depth": "max",
+                "Path_Depth": "max"
+            },
+            "includeColumns": [
+                "Op_Depth",
+                "Path_Depth"
+            ],
+            "name": "Default View",
+            "pathRule": "path0\/path1\/path2\/path3\/path4"
+        }
+    ]
+}

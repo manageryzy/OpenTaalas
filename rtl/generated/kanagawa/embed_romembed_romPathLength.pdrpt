@@ -1,0 +1,900 @@
+{
+    "availableResources": [
+        {
+            "name": "Op_Depth",
+            "unitOfMeasurement": "level"
+        },
+        {
+            "name": "Path_Depth",
+            "unitOfMeasurement": "level"
+        }
+    ],
+    "data": [
+        [
+            "path0",
+            "path1",
+            "path2",
+            "path3",
+            "path4",
+            "relativePath",
+            "rangeStartLine",
+            "rangeStartCharacter",
+            "rangeEndLine",
+            "rangeEndCharacter",
+            "Op_Depth",
+            "Path_Depth"
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            19,
+            1,
+            20,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_loadmemory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            22,
+            1,
+            23,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            19,
+            1,
+            20,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            19,
+            1,
+            20,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            30,
+            1,
+            31,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_storememory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            29,
+            1,
+            30,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            30,
+            1,
+            31,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_chunk",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_chunk_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            30,
+            1,
+            31,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            35,
+            1,
+            36,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_writeglobal",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            34,
+            1,
+            35,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            35,
+            1,
+            36,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_bank_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            35,
+            1,
+            36,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            40,
+            1,
+            41,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_writeglobal",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            39,
+            1,
+            40,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            40,
+            1,
+            41,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "set_tensor_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            40,
+            1,
+            41,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "get_bank_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "get_bank_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            42,
+            1,
+            43,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "get_bank_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "get_bank_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            42,
+            1,
+            43,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "get_bank_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "get_bank_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            42,
+            1,
+            43,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "get_tensor_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "get_tensor_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            47,
+            1,
+            48,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "get_tensor_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "get_tensor_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            47,
+            1,
+            48,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "get_tensor_scale",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "get_tensor_scale_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/embed_rom.k",
+            47,
+            1,
+            48,
+            1,
+            1,
+            1
+        ]
+    ],
+    "projections": [
+        {
+            "aggregationRules": {
+                "Op_Depth": "max",
+                "Path_Depth": "max"
+            },
+            "includeColumns": [
+                "Op_Depth",
+                "Path_Depth"
+            ],
+            "name": "Default View",
+            "pathRule": "path0\/path1\/path2\/path3\/path4"
+        }
+    ]
+}

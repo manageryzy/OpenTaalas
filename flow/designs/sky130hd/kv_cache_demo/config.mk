@@ -16,9 +16,9 @@ export SDC_FILE        = $(_this_dir)/constraint.sdc
 
 export SYNTH_HDL_FRONTEND = slang
 export SYNTH_HIERARCHICAL = 1
-export DIE_AREA  = 0 0 1200 5000
-export CORE_AREA = 10 10 1190 4990
-export PLACE_DENSITY_LB_ADDON = 0.20
+export DIE_AREA  = 0 0 595 705
+export CORE_AREA = 10 10 585 695
+export PLACE_DENSITY_LB_ADDON = 0.05
 export GENERATE_ARTIFACTS_ON_FAILURE = 1
 export GLOBAL_ROUTE_ARGS = -congestion_iterations 30 -congestion_report_iter_step 5 -verbose -allow_congestion
 export SKIP_INCREMENTAL_REPAIR = 1
@@ -26,6 +26,7 @@ export RECOVER_POWER = 0
 export SKIP_ANTENNA_REPAIR = 1
 export SKIP_ANTENNA_REPAIR_POST_DRT = 1
 export MACRO_PLACEMENT_TCL = $(_this_dir)/macro_place.tcl
+export MACRO_PLACE_HALO = 10 10
 export SYNTH_MEMORY_MAX_BITS = 65536
 export REMOVE_ABC_BUFFERS = 1
 

@@ -54,8 +54,7 @@ __pycache__/
 *.pyc
 .venv/
 
-# Keep git keep for rtl/generated
-rtl/generated/*
 !.gitkeep
 models/
 *.gguf
+.cache
