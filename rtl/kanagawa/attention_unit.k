@@ -19,7 +19,9 @@ public:
     {
         int32 result;
 
-        atomic
+        // [[schedule(3)]] pipelines the 8-term shift-and-add multiplier (~50 levels).
+        // Tried [[schedule(5)]] — slightly worse (-3.30 vs -3.21), more reg overhead.
+        [[schedule(3)]]
         {
             int32 q = cast<int32>(q_elem);
             uint8 k_bits = cast<uint8>(k_elem);

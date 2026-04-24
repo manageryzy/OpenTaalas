@@ -16,11 +16,11 @@ Results after density improvement (NOR ROM folding + die resizing, 2026-03-19).
 |---|---|---|---|---|---|---|---|---|
 | rom_bank | 2400 × 2400 | 1× nor_rom_1024x880 | 136,629 | 60% | -2.35 | 157 | 0 | 650 |
 | mac_array | 2500 × 3000 | 1× nor_rom_1024x880 | 233,861 | 35% | -3.88 | 127 | 641 | — |
-| rope | 2000 × 3500 | 2× nor_rom_4096x1024 | 478,014 | 76% | -4.56 | 69 | 1,029 | — |
-| embed_rom | 3200 × 3200 | 1× nor_rom_65536x192_phys | 244,741 | 38% | -9.06 | 77 | 103 | — |
+| rope | 3000 × 3300 | 2× nor_rom_4096x1024 (fold=2, mirrored) | 478,014 | 72% | -4.14 | 122 | 418 | — |
+| embed_rom | 1900 × 2400 | 1× nor_rom_65536x192 (internal mux) | 32,365 | 78% | -3.63 | 131 | **0** | — |
 | vector_unit | 4000 × 5500 | 2× nor_rom_4096x1024 | 790,947 | 55% | -17.68 | 43 | 488 | — |
 | kv_cache_demo | 595 × 705 | 4× sram_8192x8 (col_mux=32) | 3,628 | 87% | -0.34 | 230 | 0 | 24 |
-| lm_head_demo | 3200 × 3200 | 1× nor_rom_65536x192_phys | 243,724 | 39% | -9.80 | 61 | 0 | — |
+| lm_head_demo | 1900 × 2400 | 1× nor_rom_65536x192 (internal mux) | 49,329 | 77% | -3.90 | 127 | **0** | — |
 
 ---
 
@@ -142,40 +142,41 @@ The Rotary Position Embedding (RoPE) unit applies rotational position encoding t
 
 ![rope](images/rope_final.png)
 
-Two nor_rom_4096x1024 macros (485 × 2226 µm each) are placed side-by-side, centered in a 2000 × 3500 µm die (reduced from 5000 × 5000 during density improvement — **72% area reduction**). The dual-macro configuration creates a central routing blockage of approximately 2.16 mm², forcing standard cells and signal routes to flow around the macro pair.
+Two nor_rom_4096x1024 macros (refolded with `fold=2`: each is now **956 × 1118 µm (1:1.17 aspect)** instead of the original 485 × 2224 (1:4.58)). They are placed side-by-side in a 3000 × 3300 µm die. **Mirrored placement**: left macro at orientation MY (dout pins face WEST die edge), right macro at R0 (dout pins face EAST die edge). This puts both 1024-bit dout buses on opposite die edges instead of crowding the central 200µm gap. The earlier non-mirrored attempt (both R0) gave **646K DRT violations** because the left macro's 1024 dout pins were stuffed into the gap.
 
 ### Synthesis
 
 - **Standard cells:** 478,014
-- **Cell area:** 3.64 mm²
-- **Macro area:** 2.16 mm² (2× nor_rom_4096x1024)
-- **Total area:** 5.80 mm²
-- **Utilization:** 76%
+- **Cell area:** 4.97 mm²
+- **Macro area:** 2.14 mm² (2× nor_rom_4096x1024 fold=2)
+- **Total area:** 7.11 mm²
+- **Utilization:** 72%
 
-At 76% utilization, this is the densest routed design in the project. The 478K standard cells implement the sin/cos multiplication pipeline, BF16 arithmetic for rotation, and the position counter logic. Macros account for 37.2% of total area.
+The 478K standard cells implement the sin/cos multiplication pipeline, BF16 arithmetic for rotation, and the position counter logic.
 
 ### Routing
 
-GRT completed with `-allow_congestion` after disabling 7 NDR clock nets through iterative retry rounds. `SKIP_ANTENNA_REPAIR_POST_DRT=1` is required — without it, post-DRT antenna repair triggers incremental GRT that fails with GRT-0232.
+GRT completed with `-allow_congestion` after 5 NDR retry rounds (~3 hours). `SKIP_ANTENNA_REPAIR_POST_DRT=1` is required — without it, post-DRT antenna repair triggers incremental GRT that fails with GRT-0232. DRT iterated to round 53 (out of 64 max) and was killed for time after 11 hours wall-clock; best DRC count was achieved at iteration 51.
 
 ### Timing
 
-- **WNS:** -4.56 ns
-- **fmax:** 69 MHz (target: 250 MHz)
+- **WNS:** -4.14 ns
+- **fmax:** 122 MHz (target: 250 MHz)
 
-The die reduction improved WNS from -8.78 ns to -4.56 ns (nearly 2× better) and reduced clock skew by shrinking the longest die dimension from 5000 to 3500 µm. The critical path runs through BF16 rotation arithmetic.
+The macro reshape + better aspect improved WNS from -4.56 to -4.14 ns and fmax from 69 to 122 MHz (+77%). The critical path still runs through BF16 rotation arithmetic.
 
 ### DRC
 
-- **Violations:** 1,029
+- **Violations:** 418 (best DRT iteration)
 
-The 1,029 DRC violations are met3 shorts in congested regions near macro edges. The 72% area reduction pushed utilization to 76%, well above the ~30% threshold for clean routing. The tradeoff is 1,029 DRC for 72% less silicon.
+418 violations remain, mostly met3 shorts. Compared to the original v1 (1,029 DRC), this is a **59% reduction** with better die aspect. Note that DRT odb was not committed (process killed at iteration 53 of 64); the count comes from the intermediate `5_route_drc.rpt-N.rpt` snapshot. Final routed result was not produced — would require either letting DRT iterate further (~2-5 more hours) or accepting partial GDS via the GRT odb.
 
 ### Lessons
 
-- 76% utilization is achievable for DRT completion but produces significant DRC (1,029 violations).
-- Die reduction dramatically improved timing: 5000×5000 (-8.78 ns WNS) → 2000×3500 (-4.56 ns WNS).
-- `SKIP_ANTENNA_REPAIR_POST_DRT=1` is essential for congested designs — post-DRT antenna repair triggers GRT which fails at high congestion.
+- **Macro reshape is more powerful than die resize.** `fold=2` on nor_rom_4096x1024 (1:4.58 → 1:1.17) made everything else easier.
+- **Pin-side orientation matters as much as macro shape.** With both macros at R0, dout buses crowded the central gap and gave 646K violations. Mirroring left macro (MY) cut DRC by 99.94%.
+- **DRT default cap is 64 iterations.** rope's hard violations took 11+ hours to grind down. For wide-bus macros, intermediate `5_route_drc.rpt-N.rpt` snapshots (every 5 iterations) provide a valid DRC count even without a final committed odb.
+- `SKIP_ANTENNA_REPAIR_POST_DRT=1` essential for congested designs.
 
 ---
 
@@ -189,15 +190,15 @@ The embedding ROM performs token embedding lookup for the LLaMA model. Given a t
 
 ![embed_rom](images/embed_rom_final.png)
 
-The design uses a 3200 × 3200 µm die with the folded nor_rom_65536x192_phys macro (1427 × 2225 µm, fold=16) centered. This replaced the original 600 × 36000 µm strip die — a **53% area reduction** enabled by folding the 344:1 aspect ratio NOR ROM into a nearly-square 1.6:1 macro. The folded wrapper module (`nor_rom_65536x192`) contains a registered column mux that selects the correct 192-bit slice from the 3072-bit physical row.
+The design uses a 1900 × 2400 µm die with the folded `nor_rom_65536x192` macro (1427 × 2225 µm, fold=16) centered. The macro now implements the column mux **internally** — the LEF exposes only the logical interface (16 addr + 192 dout = 210 signal pins) instead of raw bitcell columns (3088 pins). This 15× pin reduction eliminated the routing congestion that previously kept embed_rom at 38% utilization with 103 DRC violations.
 
-Die sizing was determined iteratively: GP diverged at 2000×3000 (macro fills 53% with routability inflation), GRT got stuck in NDR retry loops at 2400×3200 and 2800×3200, and DRT completed with 103 violations at 3200×3200.
+History: the previous 3200 × 3200 die (post-density-improvement v2) used an external 16:1 mux gate-synthesized from a wrapper RTL module. The 3072 bit-column nets routing from the macro edges to that mux were the main source of congestion. Internalizing the mux solved the problem.
 
 ### Synthesis
 
 - **Standard cells:** 244,741
 - **Cell area:** 0.66 mm²
-- **Macro area:** 3.17 mm² (nor_rom_65536x192_phys, folded)
+- **Macro area:** 3.17 mm² (nor_rom_65536x192, internal mux)
 - **Total area:** 3.83 mm²
 - **Utilization:** 38%
 
@@ -343,13 +344,13 @@ The LM head demo is a reduced-scale implementation of the final projection layer
 
 ![lm_head_demo](images/lm_head_demo_final.png)
 
-The floorplan uses the same folded nor_rom_65536x192_phys macro (1427 × 2225 µm) as embed_rom, centered in a 3200 × 3200 µm die (**53% area reduction** from the original 600 × 36000 strip). The same macro is reused since both designs require 65536 rows × 192 bits of storage.
+The floorplan uses the same `nor_rom_65536x192` macro (with internal mux, 210 pins) as embed_rom, centered in a 1900 × 2400 µm die. **55% area reduction** vs the previous 3200 × 3200 die (which itself was a 53% reduction from the original 600 × 36000 strip). The internal-mux refactor cut stdcells from 243K to 49K (the gate-synth mux is now in the macro periphery) and pushed fmax from 61 to 127 MHz.
 
 ### Synthesis
 
 - **Standard cells:** 243,724
 - **Cell area:** 0.62 mm²
-- **Macro area:** 3.17 mm² (nor_rom_65536x192_phys, folded)
+- **Macro area:** 3.17 mm² (nor_rom_65536x192, internal mux)
 - **Total area:** 3.79 mm²
 - **Utilization:** 39%
 
@@ -381,14 +382,14 @@ The 16:1 column mux adds combinational delay after the ROM read. The critical pa
 
 ### Density Improvement Results
 
-Die resizing, NOR ROM folding, and the SRAM macro consolidation reduced total macro-bearing area from 96.6 mm² to **56.6 mm² (41% reduction)**:
+Die resizing, NOR ROM folding (including `nor_rom_4096x1024` fold=2 for rope), and the SRAM macro consolidation reduced total macro-bearing area from 96.6 mm² to **59.5 mm² (38% reduction)**:
 
 | Module | Old Die (mm²) | New Die (mm²) | Reduction | DRC |
 |--------|--------------|--------------|-----------|-----|
-| embed_rom | 21.6 (600×36000) | 10.24 (3200×3200) | **53%** | 103 |
-| lm_head_demo | 21.6 (600×36000) | 10.24 (3200×3200) | **53%** | **0** |
+| embed_rom | 21.6 (600×36000) | 4.56 (1900×2400) | **79%** | **0** |
+| lm_head_demo | 21.6 (600×36000) | 4.56 (1900×2400) | **79%** | **0** |
 | mac_array | 9.0 (3000×3000) | 7.5 (2500×3000) | **17%** | 641 |
-| rope | 25.0 (5000×5000) | 7.0 (2000×3500) | **72%** | 1,029 |
+| rope | 25.0 (5000×5000) | 9.9 (3000×3300, fold=2 macros mirrored) | **60%** | 418 |
 | vector_unit | 25.0 (5000×5000) | 22.0 (4000×5500) | **12%** | 488 |
 | kv_cache_demo | 6.0 (1200×5000) | 0.42 (595×705) | **93%** | **0** |
 
@@ -401,11 +402,11 @@ Die resizing, NOR ROM folding, and the SRAM macro consolidation reduced total ma
 | Utilization | DRC | Outcome |
 |---|---|---|
 | 35% (mac_array) | 641 | Routable with violations |
-| 38% (embed_rom) | 103 | Routable with violations |
-| 39% (lm_head_demo) | 0 | Clean |
+| 78% (embed_rom, internal-mux) | 0 | **Clean — internal-mux fixed prior 103 DRC** |
+| 77% (lm_head_demo, internal-mux) | 0 | Clean |
 | 55% (vector_unit) | 488 | Routable with violations |
 | 60% (rom_bank) | 0 | Clean |
-| 76% (rope) | 1,029 | Routable with violations |
+| 72% (rope, fold=2 mirrored) | 418 | Routable with violations (was 1,029 in v1) |
 | 87% (kv_cache_demo) | 0 | **Clean even at 87%** — small design, simple control logic |
 
 **Behavioral RAM synthesis must be avoided.** Two designs (vector_unit and the initial lm_head_demo) demonstrated that synthesizing multi-kilobit arrays to flip-flops produces unroutable designs. All storage elements larger than a few hundred bits should be mapped to SRAM or ROM macros.

@@ -31,13 +31,13 @@ The raw transistor density ratio is 600x, but placed-and-routed designs include 
 | lut\_interp | 0.318 | 1.80 | 6,000 | 0.006 |
 | codebook\_decoder | 0.936 | 3.20 | 10,667 | 0.011 |
 | dequant | 0.139 | 0.84 | 2,800 | 0.003 |
-| mac\_pe | 0.084 | 0.55 | 1,833 | 0.002 |
-| rmsnorm | 3.223 | 8.50 | 28,333 | 0.028 |
-| attention\_unit | 0.167 | 1.15 | 3,833 | 0.004 |
-| swiglu | 0.368 | 2.10 | 7,000 | 0.007 |
-| **Total (logic-only)** | **5.563** | **20.42** | -- | **0.069** |
+| mac\_pe | 0.071 | 0.45 | 1,500 | 0.002 |
+| rmsnorm | 2.964 | 7.85 | 26,167 | 0.026 |
+| attention\_unit | 0.148 | 1.05 | 3,500 | 0.004 |
+| swiglu | 0.325 | 1.85 | 6,167 | 0.006 |
+| **Total (logic-only)** | **5.241** | **19.40** | -- | **0.065** |
 
-Using 300x effective shrink, the entire logic-only portfolio -- 12 designs that occupy 20.4 mm² at sky130 -- fits in 0.07 mm² at 3nm. This is roughly 250 um x 280 um, smaller than a single sky130 pad frame.
+Using 300x effective shrink, the entire logic-only portfolio -- 12 designs that occupy 19.4 mm² at sky130 (after Phase 3 HLS retiming reduced cell areas of swiglu/rmsnorm/attention\_unit/mac\_pe by 8-12%) -- fits in 0.065 mm² at 3nm. This is roughly 250 um x 260 um, smaller than a single sky130 pad frame.
 
 ### 2.3 Macro-Bearing Designs
 
@@ -96,15 +96,15 @@ Transistor switching speed improves approximately 10--15x from 130nm to 3nm, dri
 | lut\_interp | 227 | 10x | **2,270** | Memory-limited (LUT access) |
 | codebook\_decoder | 215 | 10x | **2,150** | Combinational decode logic |
 | dequant | 214 | 10x | **2,140** | FP8-to-BF16 datapath |
-| mac\_pe | 138 | 10x | **1,380** | Shift-and-add multiply |
+| mac\_pe | 175 | 10x | **1,750** | Shift-and-add multiply (retimed [[schedule(2)]]) |
 | rom\_bank | 157 | 10x | **1,570** | Memory-access dominated |
-| mac\_array | 120 | 10x | **1,200** | Multi-PE + memory |
-| embed\_rom | 101 | 10x | **1,010** | Large ROM access path |
-| rope | 78 | 10x | **780** | Sin/cos table + multiply |
-| rmsnorm | 77 | 10x | **770** | Sum-of-squares accumulator |
-| attention\_unit | 76 | 10x | **760** | Dot product + max |
-| swiglu | 47 | 10x | **470** | Sigmoid LUT + chained multiply |
-| vector\_unit | 43 | 10x | **430** | Unified VPU (widest datapath) |
+| mac\_array | 127 | 10x | **1,270** | Multi-PE + memory |
+| embed\_rom | 131 | 10x | **1,310** | Large ROM access path |
+| rope | 122 | 10x | **1,220** | Sin/cos table + multiply (fold=2 macros mirrored) |
+| rmsnorm | 166 | 10x | **1,660** | Sum-of-squares accumulator (retimed [[schedule(4)]]) |
+| attention\_unit | 139 | 10x | **1,390** | Dot product + max (retimed [[schedule(3)]]) |
+| swiglu | 184 | 10x | **1,840** | Sigmoid LUT + chained multiply (retimed [[schedule(7)]]) |
+| vector\_unit | 43 | 10x | **430** | Unified VPU (widest datapath, retiming pending hierarchical PnR) |
 | kv\_cache\_demo | 230 | 11x | **2,530** | SRAM-access dominated |
 | lm\_head\_demo | 106 | 10x | **1,060** | ROM + argmax |
 
@@ -114,9 +114,9 @@ Transistor switching speed improves approximately 10--15x from 130nm to 3nm, dri
 
 **Modules exceeding 1 GHz (14 of 19):** All of the above plus codebook\_decoder, dequant, mac\_pe, rom\_bank, mac\_array, embed\_rom, kv\_cache\_demo, lm\_head\_demo.
 
-**Modules below 1 GHz (5 of 19):** rope (780 MHz), rmsnorm (770 MHz), attention\_unit (760 MHz), swiglu (470 MHz), vector\_unit (430 MHz). These are wide-datapath modules where interconnect delay and multi-cycle arithmetic dominate.
+**Modules below 1 GHz (1 of 19):** vector\_unit (430 MHz). After Phase 3 HLS retiming via `[[schedule(N)]]` annotations, swiglu/rmsnorm/attention\_unit all jumped to 1.4-1.8 GHz at 3nm. vector\_unit retiming is blocked by flat ORFS GPL convergence on its 791K cells; it requires hierarchical PnR before retiming can land.
 
-**Practical target frequency:** A production chip would likely target a uniform 1.0--1.5 GHz clock with pipeline insertion in the slower modules (swiglu, vector\_unit, attention\_unit). The Kanagawa HLS compiler's `--register-ratio` flag can automate pipeline register insertion to meet a target frequency.
+**Practical target frequency:** A production chip can now target 1.0-1.5 GHz with most modules already meeting that bound at 3nm. The Kanagawa HLS compiler's `[[schedule(N)]]` attribute (driven by `--register-ratio` flag) provides per-method pipeline depth control; we found each module saturates at a specific N — pushing schedule(N+1) regresses due to register overhead.
 
 **Comparison to production AI chips:**
 
@@ -159,13 +159,13 @@ Dynamic power ratio: (1/100) x 0.174 x 6.7 = **0.0117x** (roughly 85x reduction 
 | lut\_interp | 136.9 | 227 | 1.0 | 4.4x | 1.05 |
 | codebook\_decoder | 426.3 | 215 | 1.0 | 4.7x | 3.47 |
 | dequant | 80.2 | 214 | 1.0 | 4.7x | 0.654 |
-| mac\_pe | 41.4 | 138 | 1.0 | 7.2x | 0.520 |
-| rmsnorm | 1,586.9 | 77 | 1.0 | 13.0x | 35.9 |
-| attention\_unit | 93.1 | 76 | 1.0 | 13.2x | 2.13 |
-| swiglu | 227.5 | 47 | 1.0 | 21.3x | 8.42 |
+| mac\_pe | 34.0 | 175 | 1.0 | 5.7x | 0.337 |
+| rmsnorm | 1,620.0 | 166 | 1.0 | 6.0x | 16.9 |
+| attention\_unit | 92.8 | 139 | 1.0 | 7.2x | 1.16 |
+| swiglu | 171.0 | 184 | 1.0 | 5.4x | 1.61 |
 | rom\_bank | 650 | 157 | 1.0 | 6.4x | 7.21 |
-| mac\_array | 1,137 | 120 | 1.0 | 8.3x | 16.5 |
-| rope | 1,622 | 78 | 1.0 | 12.8x | 36.2 |
+| mac\_array | 1,137 | 127 | 1.0 | 7.9x | 15.6 |
+| rope | 1,440 | 122 | 1.0 | 8.2x | 20.6 |
 | embed\_rom | 194 | 101 | 1.0 | 9.9x | 3.34 |
 | vector\_unit | 5,045 | 43 | 1.0 | 23.3x | 204.1 |
 

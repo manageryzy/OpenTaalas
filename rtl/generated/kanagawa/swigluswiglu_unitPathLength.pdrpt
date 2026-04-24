@@ -20247,7 +20247,7 @@
             ],
             [
                 {
-                    "name": "stage3",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
@@ -20297,9 +20297,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            39,
+            41,
             1,
-            40,
+            42,
             1,
             1,
             1
@@ -20336,9 +20336,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            39,
+            41,
             1,
-            40,
+            42,
             1,
             1,
             1
@@ -20375,9 +20375,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            45,
+            47,
             1,
-            46,
+            48,
             1,
             4,
             4
@@ -20414,9 +20414,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            52,
+            54,
             1,
-            53,
+            55,
             1,
             1,
             1
@@ -20453,9 +20453,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            52,
+            54,
             1,
-            53,
+            55,
             1,
             1,
             5
@@ -20492,9 +20492,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            59,
+            61,
             1,
-            60,
+            62,
             1,
             1,
             5
@@ -20531,9 +20531,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            65,
+            67,
             1,
-            66,
+            68,
             1,
             1,
             5
@@ -20570,9 +20570,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            72,
+            74,
             1,
-            73,
+            75,
             1,
             1,
             5
@@ -20609,9 +20609,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            60,
+            62,
             1,
-            61,
+            63,
             1,
             1,
             6
@@ -20648,9 +20648,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            65,
+            67,
             1,
-            66,
+            68,
             1,
             1,
             6
@@ -20687,9 +20687,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            72,
+            74,
             1,
-            73,
+            75,
             1,
             1,
             6
@@ -20726,9 +20726,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            77,
+            79,
             1,
-            78,
+            80,
             1,
             1,
             6
@@ -20765,9 +20765,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            60,
+            62,
             1,
-            61,
+            63,
             1,
             1,
             7
@@ -20804,9 +20804,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            72,
+            74,
             1,
-            73,
+            75,
             1,
             1,
             7
@@ -20843,9 +20843,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            61,
+            63,
             1,
-            62,
+            64,
             1,
             1,
             8
@@ -20871,130 +20871,13 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "15_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            61,
-            1,
-            62,
-            1,
-            1,
-            9
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "16_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            62,
-            1,
-            63,
-            1,
-            1,
-            10
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "17_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            62,
-            1,
-            63,
-            1,
-            1,
-            11
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "18_add",
+                    "name": "0_lut",
                     "type": "Operation"
                 }
             ],
@@ -21004,7 +20887,7 @@
             64,
             1,
             1,
-            12
+            1
         ],
         [
             [
@@ -21027,52 +20910,13 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "19_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            63,
-            1,
-            64,
-            1,
-            1,
-            13
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "20_add",
+                    "name": "1_add",
                     "type": "Operation"
                 }
             ],
@@ -21082,7 +20926,7 @@
             65,
             1,
             1,
-            14
+            2
         ],
         [
             [
@@ -21105,13 +20949,13 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "21_lut",
+                    "name": "2_lut",
                     "type": "Operation"
                 }
             ],
@@ -21121,7 +20965,7 @@
             65,
             1,
             1,
-            15
+            3
         ],
         [
             [
@@ -21144,13 +20988,13 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "22_add",
+                    "name": "3_add",
                     "type": "Operation"
                 }
             ],
@@ -21160,7 +21004,7 @@
             66,
             1,
             1,
-            16
+            4
         ],
         [
             [
@@ -21183,13 +21027,13 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "23_lut",
+                    "name": "4_lut",
                     "type": "Operation"
                 }
             ],
@@ -21199,7 +21043,7 @@
             66,
             1,
             1,
-            17
+            5
         ],
         [
             [
@@ -21222,13 +21066,13 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "24_add",
+                    "name": "5_add",
                     "type": "Operation"
                 }
             ],
@@ -21238,7 +21082,7 @@
             67,
             1,
             1,
-            18
+            6
         ],
         [
             [
@@ -21261,23 +21105,23 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "25_and",
+                    "name": "6_lut",
                     "type": "Operation"
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            69,
+            66,
             1,
-            70,
+            67,
             1,
             1,
-            19
+            7
         ],
         [
             [
@@ -21300,218 +21144,23 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "26_ne",
+                    "name": "7_add",
                     "type": "Operation"
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            69,
+            67,
             1,
-            70,
-            1,
-            1,
-            20
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "27_select",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            69,
-            1,
-            70,
+            68,
             1,
             1,
-            21
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "28_gt",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            79,
-            1,
-            80,
-            1,
-            1,
-            22
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "29_lt",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            79,
-            1,
-            80,
-            1,
-            1,
-            22
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "30_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            54,
-            1,
-            55,
-            1,
-            1,
-            23
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_silu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "31_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            52,
-            1,
-            53,
-            1,
-            1,
-            24
+            8
         ],
         [
             [
@@ -21540,14 +21189,365 @@
             ],
             [
                 {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            67,
+            1,
+            68,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            68,
+            1,
+            69,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_and",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            71,
+            1,
+            72,
+            1,
+            1,
+            3
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_ne",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            71,
+            1,
+            72,
+            1,
+            1,
+            4
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "4_select",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            71,
+            1,
+            72,
+            1,
+            1,
+            5
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "5_gt",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            81,
+            1,
+            82,
+            1,
+            1,
+            6
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "6_lt",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            81,
+            1,
+            82,
+            1,
+            1,
+            6
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "7_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            56,
+            1,
+            57,
+            1,
+            1,
+            7
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "8_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            54,
+            1,
+            55,
+            1,
+            1,
+            8
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_silu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage5",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
                     "name": "0_enqueue",
                     "type": "Operation"
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            39,
+            41,
             1,
-            40,
+            42,
             1,
             1,
             1
@@ -21584,9 +21584,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            91,
+            97,
             1,
-            92,
+            98,
             1,
             1,
             1
@@ -21623,9 +21623,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            91,
+            97,
             1,
-            92,
+            98,
             1,
             1,
             1
@@ -21662,9 +21662,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            98,
+            104,
             1,
-            99,
+            105,
             1,
             4,
             4
@@ -21701,9 +21701,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            105,
+            111,
             1,
-            106,
+            112,
             1,
             1,
             1
@@ -21740,9 +21740,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            144,
+            150,
             1,
-            145,
+            151,
             1,
             1,
             1
@@ -21779,9 +21779,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            157,
+            163,
             1,
-            158,
+            164,
             1,
             1,
             1
@@ -21818,9 +21818,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            157,
+            163,
             1,
-            158,
+            164,
             1,
             1,
             2
@@ -21857,9 +21857,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            105,
+            111,
             1,
-            106,
+            112,
             1,
             1,
             5
@@ -21896,9 +21896,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            112,
+            118,
             1,
-            113,
+            119,
             1,
             1,
             5
@@ -21935,9 +21935,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            118,
+            124,
             1,
-            119,
+            125,
             1,
             1,
             5
@@ -21974,9 +21974,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            125,
+            131,
             1,
-            126,
+            132,
             1,
             1,
             5
@@ -22013,9 +22013,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            113,
+            119,
             1,
-            114,
+            120,
             1,
             1,
             6
@@ -22052,9 +22052,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            118,
+            124,
             1,
-            119,
+            125,
             1,
             1,
             6
@@ -22091,9 +22091,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            125,
+            131,
             1,
-            126,
+            132,
             1,
             1,
             6
@@ -22130,9 +22130,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            130,
+            136,
             1,
-            131,
+            137,
             1,
             1,
             6
@@ -22169,9 +22169,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            113,
+            119,
             1,
-            114,
+            120,
             1,
             1,
             7
@@ -22208,9 +22208,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            125,
+            131,
             1,
-            126,
+            132,
             1,
             1,
             7
@@ -22247,9 +22247,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            114,
+            120,
             1,
-            115,
+            121,
             1,
             1,
             8
@@ -22275,374 +22275,23 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "18_lut",
+                    "name": "0_lut",
                     "type": "Operation"
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            114,
-            1,
-            115,
-            1,
-            1,
-            9
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "19_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            115,
-            1,
-            116,
-            1,
-            1,
-            10
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "20_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            115,
-            1,
-            116,
-            1,
-            1,
-            11
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "21_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            116,
-            1,
-            117,
-            1,
-            1,
-            12
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "22_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            116,
-            1,
-            117,
-            1,
-            1,
-            13
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "23_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            117,
-            1,
-            118,
-            1,
-            1,
-            14
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "24_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            117,
-            1,
-            118,
-            1,
-            1,
-            15
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "25_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            118,
-            1,
-            119,
-            1,
-            1,
-            16
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "26_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            118,
-            1,
-            119,
-            1,
-            1,
-            17
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "27_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            119,
-            1,
             120,
             1,
+            121,
             1,
-            18
+            1,
+            1
         ],
         [
             [
@@ -22665,13 +22314,91 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "28_and",
+                    "name": "1_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            121,
+            1,
+            122,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            121,
+            1,
+            122,
+            1,
+            1,
+            3
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_add",
                     "type": "Operation"
                 }
             ],
@@ -22681,7 +22408,7 @@
             123,
             1,
             1,
-            19
+            4
         ],
         [
             [
@@ -22704,13 +22431,13 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "29_ne",
+                    "name": "4_lut",
                     "type": "Operation"
                 }
             ],
@@ -22720,7 +22447,7 @@
             123,
             1,
             1,
-            20
+            5
         ],
         [
             [
@@ -22743,23 +22470,23 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "30_select",
+                    "name": "5_add",
                     "type": "Operation"
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            122,
-            1,
             123,
             1,
+            124,
             1,
-            21
+            1,
+            6
         ],
         [
             [
@@ -22782,23 +22509,23 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "31_gt",
+                    "name": "6_lut",
                     "type": "Operation"
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            132,
+            123,
             1,
-            133,
+            124,
             1,
             1,
-            22
+            7
         ],
         [
             [
@@ -22821,1115 +22548,23 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "32_lt",
+                    "name": "7_add",
                     "type": "Operation"
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            132,
+            124,
             1,
-            133,
+            125,
             1,
             1,
-            22
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "33_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            107,
-            1,
-            108,
-            1,
-            1,
-            23
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "34_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            105,
-            1,
-            106,
-            1,
-            1,
-            24
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "35_ne",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            144,
-            1,
-            145,
-            1,
-            1,
-            25
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "36_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            151,
-            1,
-            152,
-            1,
-            1,
-            25
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "37_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            164,
-            1,
-            165,
-            1,
-            1,
-            25
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "38_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            152,
-            1,
-            153,
-            1,
-            1,
-            26
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "39_sub",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            164,
-            1,
-            165,
-            1,
-            1,
-            26
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "40_sub",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            169,
-            1,
-            170,
-            1,
-            1,
-            26
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "41_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            152,
-            1,
-            153,
-            1,
-            1,
-            27
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "42_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            164,
-            1,
-            165,
-            1,
-            1,
-            27
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "43_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            153,
-            1,
-            154,
-            1,
-            1,
-            28
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "44_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            153,
-            1,
-            154,
-            1,
-            1,
-            29
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "45_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            154,
-            1,
-            155,
-            1,
-            1,
-            30
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "46_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            154,
-            1,
-            155,
-            1,
-            1,
-            31
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "47_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            155,
-            1,
-            156,
-            1,
-            1,
-            32
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "48_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            155,
-            1,
-            156,
-            1,
-            1,
-            33
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "49_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            156,
-            1,
-            157,
-            1,
-            1,
-            34
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "50_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            156,
-            1,
-            157,
-            1,
-            1,
-            35
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "51_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            157,
-            1,
-            158,
-            1,
-            1,
-            36
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "52_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            157,
-            1,
-            158,
-            1,
-            1,
-            37
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "53_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            158,
-            1,
-            159,
-            1,
-            1,
-            38
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "54_and",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            161,
-            1,
-            162,
-            1,
-            1,
-            39
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "55_ne",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            161,
-            1,
-            162,
-            1,
-            1,
-            40
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "56_select",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            161,
-            1,
-            162,
-            1,
-            1,
-            41
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "57_gt",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            171,
-            1,
-            172,
-            1,
-            1,
-            42
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "58_lt",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            171,
-            1,
-            172,
-            1,
-            1,
-            42
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "59_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            146,
-            1,
-            147,
-            1,
-            1,
-            43
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "compute_swiglu_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "60_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            144,
-            1,
-            145,
-            1,
-            1,
-            44
+            8
         ],
         [
             [
@@ -23958,14 +22593,1379 @@
             ],
             [
                 {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            124,
+            1,
+            125,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            125,
+            1,
+            126,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_and",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            128,
+            1,
+            129,
+            1,
+            1,
+            3
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_ne",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            128,
+            1,
+            129,
+            1,
+            1,
+            4
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "4_select",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            128,
+            1,
+            129,
+            1,
+            1,
+            5
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "5_gt",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            138,
+            1,
+            139,
+            1,
+            1,
+            6
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "6_lt",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            138,
+            1,
+            139,
+            1,
+            1,
+            6
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "7_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            113,
+            1,
+            114,
+            1,
+            1,
+            7
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "8_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            111,
+            1,
+            112,
+            1,
+            1,
+            8
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_ne",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            150,
+            1,
+            151,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            157,
+            1,
+            158,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            170,
+            1,
+            171,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            158,
+            1,
+            159,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "4_sub",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            170,
+            1,
+            171,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "5_sub",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            175,
+            1,
+            176,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "6_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            158,
+            1,
+            159,
+            1,
+            1,
+            3
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "7_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            170,
+            1,
+            171,
+            1,
+            1,
+            3
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "8_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            159,
+            1,
+            160,
+            1,
+            1,
+            4
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "9_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            159,
+            1,
+            160,
+            1,
+            1,
+            5
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "10_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            160,
+            1,
+            161,
+            1,
+            1,
+            6
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "11_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            160,
+            1,
+            161,
+            1,
+            1,
+            7
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "12_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            161,
+            1,
+            162,
+            1,
+            1,
+            8
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage5",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            161,
+            1,
+            162,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage5",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            162,
+            1,
+            163,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage5",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            162,
+            1,
+            163,
+            1,
+            1,
+            3
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage5",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            163,
+            1,
+            164,
+            1,
+            1,
+            4
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage5",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "4_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            163,
+            1,
+            164,
+            1,
+            1,
+            5
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage5",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "5_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            164,
+            1,
+            165,
+            1,
+            1,
+            6
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage5",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "6_and",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            167,
+            1,
+            168,
+            1,
+            1,
+            7
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage5",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "7_ne",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            167,
+            1,
+            168,
+            1,
+            1,
+            8
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage6",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_select",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            167,
+            1,
+            168,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage6",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_gt",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            177,
+            1,
+            178,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage6",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_lt",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            177,
+            1,
+            178,
+            1,
+            1,
+            2
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage6",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            152,
+            1,
+            153,
+            1,
+            1,
+            3
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage6",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "4_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
+            150,
+            1,
+            151,
+            1,
+            1,
+            4
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "compute_swiglu_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage8",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
                     "name": "0_enqueue",
                     "type": "Operation"
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/swiglu.k",
-            91,
+            97,
             1,
-            92,
+            98,
             1,
             1,
             1

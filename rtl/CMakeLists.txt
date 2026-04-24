@@ -54,6 +54,9 @@ function(add_kanagawa_rtl)
       --import-dir=${KANAGAWA_LIBRARY_DIR}
       --base-library=${KANAGAWA_BASE_LIBRARY}
       --output=${_output_prefix}
+      --frequency=250
+      --register-ratio=8
+      --max-register-ratio=16
       ${_source_file}
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     COMMENT "Kanagawa: generating ${KNG_NAME} RTL"

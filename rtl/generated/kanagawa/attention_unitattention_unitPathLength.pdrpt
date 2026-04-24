@@ -95,9 +95,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            53,
+            55,
             1,
-            54,
+            56,
             1,
             1,
             1
@@ -134,9 +134,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            58,
+            60,
             1,
-            59,
+            61,
             1,
             1,
             1
@@ -212,9 +212,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            29,
+            31,
             1,
-            30,
+            32,
             1,
             1,
             1
@@ -251,9 +251,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            53,
+            55,
             1,
-            54,
+            56,
             1,
             1,
             2
@@ -290,9 +290,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            58,
+            60,
             1,
-            59,
+            61,
             1,
             1,
             2
@@ -329,9 +329,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            35,
+            37,
             1,
-            36,
+            38,
             1,
             1,
             2
@@ -368,9 +368,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            33,
+            35,
             1,
-            34,
+            36,
             1,
             1,
             3
@@ -407,9 +407,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            39,
+            41,
             1,
-            40,
+            42,
             1,
             1,
             4
@@ -446,9 +446,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            37,
+            39,
             1,
-            38,
+            40,
             1,
             1,
             5
@@ -485,9 +485,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            43,
+            45,
             1,
-            44,
+            46,
             1,
             1,
             6
@@ -524,9 +524,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            41,
+            43,
             1,
-            42,
+            44,
             1,
             1,
             7
@@ -563,9 +563,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            47,
+            49,
             1,
-            48,
+            50,
             1,
             1,
             8
@@ -591,23 +591,23 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "14_lut",
+                    "name": "0_lut",
                     "type": "Operation"
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            45,
+            47,
             1,
-            46,
+            48,
             1,
             1,
-            9
+            1
         ],
         [
             [
@@ -630,130 +630,13 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "15_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            51,
-            1,
-            52,
-            1,
-            1,
-            10
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "dot_product",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "dot_product_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "16_lut",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            49,
-            1,
-            50,
-            1,
-            1,
-            11
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "dot_product",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "dot_product_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "17_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            55,
-            1,
-            56,
-            1,
-            1,
-            12
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "dot_product",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "dot_product_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "18_select",
+                    "name": "1_add",
                     "type": "Operation"
                 }
             ],
@@ -763,7 +646,7 @@
             54,
             1,
             1,
-            13
+            2
         ],
         [
             [
@@ -786,13 +669,169 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "19_sub",
+                    "name": "2_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
+            51,
+            1,
+            52,
+            1,
+            1,
+            3
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dot_product",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dot_product_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "3_add",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
+            57,
+            1,
+            58,
+            1,
+            1,
+            4
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dot_product",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dot_product_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "4_select",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
+            55,
+            1,
+            56,
+            1,
+            1,
+            5
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dot_product",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dot_product_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "5_sub",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
+            62,
+            1,
+            63,
+            1,
+            1,
+            6
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dot_product",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dot_product_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "6_select",
                     "type": "Operation"
                 }
             ],
@@ -802,7 +841,7 @@
             61,
             1,
             1,
-            14
+            7
         ],
         [
             [
@@ -825,101 +864,23 @@
             ],
             [
                 {
-                    "name": "stage1",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],
             [
                 {
-                    "name": "20_select",
+                    "name": "7_add",
                     "type": "Operation"
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            58,
+            65,
             1,
-            59,
-            1,
-            1,
-            15
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "dot_product",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "dot_product_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "21_add",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            63,
-            1,
-            64,
+            66,
             1,
             1,
-            16
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "dot_product",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "dot_product_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "22_writeglobal",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            22,
-            1,
-            23,
-            1,
-            1,
-            17
+            8
         ],
         [
             [
@@ -943,6 +904,45 @@
             [
                 {
                     "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_writeglobal",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
+            24,
+            1,
+            25,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "dot_product",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "dot_product_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage4",
                     "type": "Stage"
                 }
             ],
@@ -992,9 +992,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            71,
+            73,
             1,
-            72,
+            74,
             1,
             1,
             1
@@ -1031,9 +1031,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            71,
+            73,
             1,
-            72,
+            74,
             1,
             1,
             1
@@ -1070,9 +1070,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            71,
+            73,
             1,
-            72,
+            74,
             1,
             1,
             1
@@ -1109,9 +1109,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            83,
+            85,
             1,
-            84,
+            86,
             1,
             1,
             1
@@ -1148,9 +1148,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            79,
+            81,
             1,
-            80,
+            82,
             1,
             1,
             1
@@ -1187,9 +1187,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            83,
+            85,
             1,
-            84,
+            86,
             1,
             1,
             1
@@ -1226,9 +1226,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            83,
+            85,
             1,
-            84,
+            86,
             1,
             1,
             1
@@ -1265,9 +1265,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            92,
+            94,
             1,
-            93,
+            95,
             1,
             1,
             1
@@ -1304,9 +1304,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            88,
+            90,
             1,
-            89,
+            91,
             1,
             1,
             1
@@ -1343,9 +1343,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            92,
+            94,
             1,
-            93,
+            95,
             1,
             1,
             1
@@ -1382,9 +1382,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            92,
+            94,
             1,
-            93,
+            95,
             1,
             1,
             1
@@ -1421,9 +1421,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            95,
+            97,
             1,
-            96,
+            98,
             1,
             1,
             1
@@ -1460,9 +1460,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            95,
+            97,
             1,
-            96,
+            98,
             1,
             1,
             1
@@ -1499,9 +1499,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/attention_unit.k",
-            95,
+            97,
             1,
-            96,
+            98,
             1,
             1,
             1

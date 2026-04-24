@@ -5318,7 +5318,7 @@
                     "width": 1
                 },
                 {
-                    "name": "data_in_7",
+                    "name": "data_in_8",
                     "width": 32
                 },
                 {
@@ -5388,7 +5388,7 @@
             "name": "underflow"
         },
         {
-            "container": "passthrough_data_7",
+            "container": "passthrough_data_8",
             "name": "underflow"
         }
     ],

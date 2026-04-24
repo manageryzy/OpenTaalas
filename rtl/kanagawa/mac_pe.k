@@ -16,7 +16,9 @@ public:
     int<24> mac(uint4 magnitude, uint<1> sign_bit, int8 activation)
     {
         int<24> result;
-        atomic
+        // [[schedule(2)]] pipelines the 3-term shift-and-add + sign-flip + accumulator.
+        // atomic gave -3.23 ns; total path ~7 ns wants ~3.5 ns/stage.
+        [[schedule(2)]]
         {
             int<24> a = cast<int<24>>(activation);
             int<24> k_val = cast<int<24>>(magnitude >> 1);

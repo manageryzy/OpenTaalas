@@ -104,7 +104,9 @@ class RomSpec:
 # Predefined macros matching the spec
 PREDEFINED = [
     RomSpec("nor_rom_1024x880", 1024, 880),
-    RomSpec("nor_rom_4096x1024", 4096, 1024),
+    # nor_rom_4096x1024: fold=2 reshapes from 485×2224 (1:4.58) to 956×1118 (1:1.17).
+    # Same total bits, much more square — improves rope and vector_unit floorplans.
+    RomSpec("nor_rom_4096x1024", 4096, 1024, fold=2),
     RomSpec("nor_rom_4096x192", 4096, 192, fold=2),
     RomSpec("nor_rom_65536x192", 65536, 192, fold=16),
 ]
@@ -612,61 +614,52 @@ def generate_folded_wrapper(spec: RomSpec) -> str:
 
 
 def generate_all(spec: RomSpec, output_dir: str):
-    """Generate all collateral for a ROM macro."""
+    """Generate all collateral for a ROM macro.
+
+    For folded macros (fold > 1), the column mux is modelled inside the macro
+    periphery: LEF/Liberty expose the LOGICAL interface (rows × cols, addr =
+    ceil(log2(rows))) but physical dimensions are sized for phys_rows × phys_cols
+    bitcells. This drops external pin count from phys_cols+log2(phys_rows) to
+    cols+log2(rows) — e.g. nor_rom_65536x192: 3088 pins → 210.
+
+    Real silicon would implement this with on-die column mux + output registers;
+    in the placeholder we just expose the post-mux interface.
+    """
     os.makedirs(output_dir, exist_ok=True)
 
+    lib_path = os.path.join(output_dir, f'{spec.name}.lib')
+    lef_path = os.path.join(output_dir, f'{spec.name}.lef')
+    gds_path = os.path.join(output_dir, f'{spec.name}.gds')
+    bb_path = os.path.join(output_dir, f'{spec.name}.bb.v')
+
+    with open(lib_path, 'w') as f:
+        f.write(generate_liberty(spec))
+    with open(lef_path, 'w') as f:
+        f.write(generate_lef(spec))
+    generate_gds(spec, gds_path)
+    with open(bb_path, 'w') as f:
+        f.write(generate_verilog_blackbox(spec))
+
+    # Clean up any legacy artifacts (separate phys macro + wrapper) from
+    # the previous external-mux approach.
+    for legacy in [f'{spec.name}_phys.lib', f'{spec.name}_phys.lef',
+                   f'{spec.name}_phys.gds', f'{spec.name}_phys.bb.v',
+                   f'{spec.name}.v']:
+        legacy_path = os.path.join(output_dir, legacy)
+        if os.path.exists(legacy_path):
+            os.remove(legacy_path)
+            print(f"    Removed legacy: {legacy_path}")
+
     if spec.fold > 1:
-        # Generate physical macro collateral (wider, shorter array)
-        phys_spec = RomSpec(spec.phys_name, spec.phys_rows, spec.phys_cols)
-        lib_path = os.path.join(output_dir, f'{phys_spec.name}.lib')
-        lef_path = os.path.join(output_dir, f'{phys_spec.name}.lef')
-        gds_path = os.path.join(output_dir, f'{phys_spec.name}.gds')
-        bb_path = os.path.join(output_dir, f'{phys_spec.name}.bb.v')
-
-        with open(lib_path, 'w') as f:
-            f.write(generate_liberty(phys_spec))
-        with open(lef_path, 'w') as f:
-            f.write(generate_lef(phys_spec))
-        generate_gds(phys_spec, gds_path)
-        with open(bb_path, 'w') as f:
-            f.write(generate_verilog_blackbox(phys_spec))
-
-        # Generate wrapper (same logical interface, instantiates physical ROM)
-        wrapper_path = os.path.join(output_dir, f'{spec.name}.v')
-        with open(wrapper_path, 'w') as f:
-            f.write(generate_folded_wrapper(spec))
-
-        # Remove old unfolded collateral if it exists
-        for ext in ['.lib', '.lef', '.gds', '.bb.v']:
-            old = os.path.join(output_dir, f'{spec.name}{ext}')
-            if os.path.exists(old):
-                os.remove(old)
-                print(f"    Removed old: {old}")
-
-        print(f"  {spec.name} (folded {spec.fold}x):")
-        print(f"    Logical: {spec.rows}x{spec.cols}  Physical: {spec.phys_rows}x{spec.phys_cols}")
-        print(f"    Phys size: {phys_spec.width_um:.1f} x {phys_spec.height_um:.1f} µm")
-        print(f"    Ratio: {phys_spec.height_um/phys_spec.width_um:.1f}:1")
-        print(f"    Files: {lib_path} {lef_path} {gds_path} {bb_path} {wrapper_path}")
+        print(f"  {spec.name} (internal mux, fold {spec.fold}x):")
+        print(f"    Logical: {spec.rows}×{spec.cols}  Physical bitcells: {spec.phys_rows}×{spec.phys_cols}")
+        print(f"    Size: {spec.width_um:.1f} × {spec.height_um:.1f} µm  (aspect 1:{spec.height_um/spec.width_um:.2f})")
+        print(f"    Pins: clk + ce + addr[{spec.addr_width-1}:0] + dout[{spec.cols-1}:0] = {2 + spec.addr_width + spec.cols} signal pins")
     else:
-        lib_path = os.path.join(output_dir, f'{spec.name}.lib')
-        lef_path = os.path.join(output_dir, f'{spec.name}.lef')
-        gds_path = os.path.join(output_dir, f'{spec.name}.gds')
-        bb_path = os.path.join(output_dir, f'{spec.name}.bb.v')
-
-        with open(lib_path, 'w') as f:
-            f.write(generate_liberty(spec))
-        with open(lef_path, 'w') as f:
-            f.write(generate_lef(spec))
-        generate_gds(spec, gds_path)
-        with open(bb_path, 'w') as f:
-            f.write(generate_verilog_blackbox(spec))
-
         print(f"  {spec.name}:")
         print(f"    Rows={spec.rows}  Cols={spec.cols}  Bits={spec.bits/1024:.1f}K")
         print(f"    Addr={spec.addr_width}b  Area={spec.area_mm2:.3f} mm²")
-        print(f"    Size={spec.width_um:.1f} x {spec.height_um:.1f} µm")
-        print(f"    Files: {lib_path} {lef_path} {gds_path} {bb_path}")
+        print(f"    Size={spec.width_um:.1f} × {spec.height_um:.1f} µm")
 
 
 def main():

@@ -36,10 +36,12 @@ public:
     // Compute SiLU(gate) = gate * sigmoid(gate)
     // Looks up sigmoid from LUT using upper 8 bits of gate BF16,
     // then performs BF16 shift-and-add multiply.
+    // [[schedule(4)]] splits into 4 stages: lookup + 3-deep BF16 multiplier.
+    // The 8-term shift-and-add is ~50 levels of logic — needs ~3 stages at sky130.
     uint16 compute_silu(uint16 gate_bf16)
     {
         uint16 result;
-        atomic
+        [[schedule(4)]]
         {
             uint8 index = cast<uint8>(gate_bf16 >> 8);
             uint16 sig = _sigmoid_lut[index];
@@ -88,10 +90,14 @@ public:
 
     // Compute SwiGLU: SiLU(gate) * up
     // = gate * sigmoid(gate) * up
+    // [[schedule(7)]] gives 7 pipeline stages: lookup + two 3-deep BF16 multipliers.
+    // Without this, all logic is forced into 1 cycle (~17.5 ns crit path at sky130).
+    // Tried [[schedule(9)]] — same WNS (-1.42 vs -1.41), more registers.
+    // Residual WNS is routing/reg overhead, not logic depth.
     uint16 compute_swiglu(uint16 gate_bf16, uint16 up_bf16)
     {
         uint16 result;
-        atomic
+        [[schedule(7)]]
         {
             // Step 1: sigmoid LUT lookup
             uint8 index = cast<uint8>(gate_bf16 >> 8);

@@ -1,6 +1,6 @@
 
 // This file was generated. Do not modify.
-// kanagawa --backend=sv --import-dir=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library --base-library=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library/mini-base.k --output=/home/mana/workspace/OpenTaalas/rtl/generated/kanagawa/mac_pe /home/mana/workspace/OpenTaalas/rtl/kanagawa/mac_pe.k
+// kanagawa --backend=sv --import-dir=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library --base-library=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library/mini-base.k --output=/home/mana/workspace/OpenTaalas/rtl/generated/kanagawa/mac_pe --frequency=250 --register-ratio=8 --max-register-ratio=16 /home/mana/workspace/OpenTaalas/rtl/kanagawa/mac_pe.k
 
 `default_nettype wire
 module mac_peDebugView_macEntry
@@ -50,7 +50,7 @@ endmodule
 `ifndef _TYPESCOPE_CoreModuleTypeScope
 `define _TYPESCOPE_CoreModuleTypeScope
 `endif // _TYPESCOPE_CoreModuleTypeScope
-module mac_pe_clear_BasicBlock_0(	// mac_pe.k:52:9
+module mac_pe_clear_BasicBlock_0(	// mac_pe.k:54:9
   input  wire       clk,
   input  wire       rst,
   output wire       done_out,
@@ -66,44 +66,44 @@ module mac_pe_clear_BasicBlock_0(	// mac_pe.k:52:9
 
   wire        _fifo_overflow_ffc_0_data_out;
   wire        _fifo_almostfull_ffc_0_data_out;
-  logic       done_out_0;	// mac_pe.k:52:9
-  logic       global_out__accum_5_1_valid_0;	// mac_pe.k:52:9
-  logic       fifo_wren_0_0;	// mac_pe.k:52:9
-  logic       input_rdy_0_0;	// mac_pe.k:52:9
-  logic [7:0] control_state_out_0;	// mac_pe.k:52:9
-  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_pe.k:52:9
-  always_comb begin	// mac_pe.k:52:9
-    input_rdy_0_0 = _GEN;	// mac_pe.k:52:9
+  logic       done_out_0;	// mac_pe.k:54:9
+  logic       global_out__accum_5_1_valid_0;	// mac_pe.k:54:9
+  logic       fifo_wren_0_0;	// mac_pe.k:54:9
+  logic       input_rdy_0_0;	// mac_pe.k:54:9
+  logic [7:0] control_state_out_0;	// mac_pe.k:54:9
+  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_pe.k:54:9
+  always_comb begin	// mac_pe.k:54:9
+    input_rdy_0_0 = _GEN;	// mac_pe.k:54:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_pe.k:52:9
+       ~input_valid_0};	// mac_pe.k:54:9
   end // always_comb
-  reg         p0_stage1_enable = 1'h0;	// mac_pe.k:52:9
-  always_comb	// mac_pe.k:52:9
-    global_out__accum_5_1_valid_0 = p0_stage1_enable;	// mac_pe.k:52:9
-  reg         p0_stage2_enable = 1'h0;	// mac_pe.k:52:9
-  always @(posedge clk) begin	// mac_pe.k:52:9
-    if (rst) begin	// mac_pe.k:52:9
-      p0_stage1_enable <= 1'h0;	// mac_pe.k:52:9
-      p0_stage2_enable <= 1'h0;	// mac_pe.k:52:9
+  reg         p0_stage1_enable = 1'h0;	// mac_pe.k:54:9
+  always_comb	// mac_pe.k:54:9
+    global_out__accum_5_1_valid_0 = p0_stage1_enable;	// mac_pe.k:54:9
+  reg         p0_stage2_enable = 1'h0;	// mac_pe.k:54:9
+  always @(posedge clk) begin	// mac_pe.k:54:9
+    if (rst) begin	// mac_pe.k:54:9
+      p0_stage1_enable <= 1'h0;	// mac_pe.k:54:9
+      p0_stage2_enable <= 1'h0;	// mac_pe.k:54:9
     end
-    else begin	// mac_pe.k:52:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// mac_pe.k:52:9
-      p0_stage2_enable <= p0_stage1_enable;	// mac_pe.k:52:9
+    else begin	// mac_pe.k:54:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// mac_pe.k:54:9
+      p0_stage2_enable <= p0_stage1_enable;	// mac_pe.k:54:9
     end
   end // always @(posedge)
-  always_comb	// mac_pe.k:52:9
-    fifo_wren_0_0 = p0_stage2_enable;	// mac_pe.k:52:9, :56:9
+  always_comb	// mac_pe.k:54:9
+    fifo_wren_0_0 = p0_stage2_enable;	// mac_pe.k:54:9, :58:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_pe.k:52:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_pe.k:54:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -111,17 +111,17 @@ module mac_pe_clear_BasicBlock_0(	// mac_pe.k:52:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_pe.k:52:9
+    .data_in  (~fifo_overflow_in_0),	// mac_pe.k:54:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  assign done_out = p0_stage2_enable;	// mac_pe.k:52:9
-  assign global_out__accum_5_1_valid = global_out__accum_5_1_valid_0;	// mac_pe.k:52:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_pe.k:52:9
-  assign input_rdy_0 = input_rdy_0_0;	// mac_pe.k:52:9
-  assign control_state_out = control_state_out_0;	// mac_pe.k:52:9
+  assign done_out = p0_stage2_enable;	// mac_pe.k:54:9
+  assign global_out__accum_5_1_valid = global_out__accum_5_1_valid_0;	// mac_pe.k:54:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_pe.k:54:9
+  assign input_rdy_0 = input_rdy_0_0;	// mac_pe.k:54:9
+  assign control_state_out = control_state_out_0;	// mac_pe.k:54:9
 endmodule
 
-module mac_pe_read_accum_BasicBlock_0(	// mac_pe.k:47:9
+module mac_pe_read_accum_BasicBlock_0(	// mac_pe.k:49:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -138,47 +138,47 @@ module mac_pe_read_accum_BasicBlock_0(	// mac_pe.k:47:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [23:0] global_in__accum_5_0 = global_in__accum_5;	// mac_pe.k:47:9
-  logic        done_out_0;	// mac_pe.k:47:9
-  logic [23:0] fifo_data_out_0_0;	// mac_pe.k:47:9
-  logic        fifo_wren_0_0;	// mac_pe.k:47:9
-  logic        input_rdy_0_0;	// mac_pe.k:47:9
-  logic [7:0]  control_state_out_0;	// mac_pe.k:47:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_pe.k:47:9
-  always_comb begin	// mac_pe.k:47:9
-    input_rdy_0_0 = _GEN;	// mac_pe.k:47:9
+  wire  [23:0] global_in__accum_5_0 = global_in__accum_5;	// mac_pe.k:49:9
+  logic        done_out_0;	// mac_pe.k:49:9
+  logic [23:0] fifo_data_out_0_0;	// mac_pe.k:49:9
+  logic        fifo_wren_0_0;	// mac_pe.k:49:9
+  logic        input_rdy_0_0;	// mac_pe.k:49:9
+  logic [7:0]  control_state_out_0;	// mac_pe.k:49:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_pe.k:49:9
+  always_comb begin	// mac_pe.k:49:9
+    input_rdy_0_0 = _GEN;	// mac_pe.k:49:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_pe.k:47:9
+       ~input_valid_0};	// mac_pe.k:49:9
   end // always_comb
-  reg          p0_stage1_enable = 1'h0;	// mac_pe.k:47:9
-  reg   [23:0] p0_global_in__accum_5;	// mac_pe.k:47:9
-  reg          p0_stage2_enable = 1'h0;	// mac_pe.k:47:9
-  always @(posedge clk) begin	// mac_pe.k:47:9
-    if (rst)	// mac_pe.k:47:9
-      p0_stage1_enable <= 1'h0;	// mac_pe.k:47:9
-    else	// mac_pe.k:47:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// mac_pe.k:47:9
-    p0_global_in__accum_5 <= global_in__accum_5_0;	// mac_pe.k:47:9
-    if (rst)	// mac_pe.k:47:9
-      p0_stage2_enable <= 1'h0;	// mac_pe.k:47:9
-    else	// mac_pe.k:47:9
-      p0_stage2_enable <= p0_stage1_enable;	// mac_pe.k:47:9
+  reg          p0_stage1_enable = 1'h0;	// mac_pe.k:49:9
+  reg   [23:0] p0_global_in__accum_5;	// mac_pe.k:49:9
+  reg          p0_stage2_enable = 1'h0;	// mac_pe.k:49:9
+  always @(posedge clk) begin	// mac_pe.k:49:9
+    if (rst)	// mac_pe.k:49:9
+      p0_stage1_enable <= 1'h0;	// mac_pe.k:49:9
+    else	// mac_pe.k:49:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// mac_pe.k:49:9
+    p0_global_in__accum_5 <= global_in__accum_5_0;	// mac_pe.k:49:9
+    if (rst)	// mac_pe.k:49:9
+      p0_stage2_enable <= 1'h0;	// mac_pe.k:49:9
+    else	// mac_pe.k:49:9
+      p0_stage2_enable <= p0_stage1_enable;	// mac_pe.k:49:9
   end // always @(posedge)
-  always_comb begin	// mac_pe.k:47:9
-    fifo_wren_0_0 = p0_stage2_enable;	// mac_pe.k:45:5, :47:9
-    fifo_data_out_0_0 = p0_global_in__accum_5;	// mac_pe.k:45:5, :47:9
+  always_comb begin	// mac_pe.k:49:9
+    fifo_wren_0_0 = p0_stage2_enable;	// mac_pe.k:47:5, :49:9
+    fifo_data_out_0_0 = p0_global_in__accum_5;	// mac_pe.k:47:5, :49:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_pe.k:47:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_pe.k:49:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -186,20 +186,20 @@ module mac_pe_read_accum_BasicBlock_0(	// mac_pe.k:47:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_pe.k:47:9
+    .data_in  (~fifo_overflow_in_0),	// mac_pe.k:49:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  mac_peDebugView_read_accumExit mac_peDebugView_read_accumExit_instance (	// mac_pe.k:45:5
-    .clk          (clk),	// mac_pe.k:45:5
-    ._ReturnValue (p0_stage1_enable ? global_in__accum_5_0 : 'x),	// mac_pe.k:45:5, :47:9
-    .valid        (p0_stage1_enable),	// mac_pe.k:47:9
+  mac_peDebugView_read_accumExit mac_peDebugView_read_accumExit_instance (	// mac_pe.k:47:5
+    .clk          (clk),	// mac_pe.k:47:5
+    ._ReturnValue (p0_stage1_enable ? global_in__accum_5_0 : 'x),	// mac_pe.k:47:5, :49:9
+    .valid        (p0_stage1_enable),	// mac_pe.k:49:9
     .valid_out    (/* unused */)
-  );	// mac_pe.k:45:5
-  assign done_out = p0_stage2_enable;	// mac_pe.k:47:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_pe.k:47:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_pe.k:47:9
-  assign input_rdy_0 = input_rdy_0_0;	// mac_pe.k:47:9
-  assign control_state_out = control_state_out_0;	// mac_pe.k:47:9
+  );	// mac_pe.k:47:5
+  assign done_out = p0_stage2_enable;	// mac_pe.k:49:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_pe.k:49:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_pe.k:49:9
+  assign input_rdy_0 = input_rdy_0_0;	// mac_pe.k:49:9
+  assign control_state_out = control_state_out_0;	// mac_pe.k:49:9
 endmodule
 
 module mac_pe_mac_BasicBlock_0(	// mac_pe.k:18:9
@@ -245,51 +245,61 @@ module mac_pe_mac_BasicBlock_0(	// mac_pe.k:18:9
   reg          p0_sign_bit;	// mac_pe.k:18:9
   reg   [7:0]  p0_activation;	// mac_pe.k:18:9
   reg          p0_stage1_enable = 1'h0;	// mac_pe.k:18:9
-  wire         ka = p0_activation[7] & p0_magnitude[1];	// mac_pe.k:18:9, :21:25, :22:{29,43}, :26:{13,17}
-  wire         ka_0 = p0_activation[7] & p0_magnitude[1];	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}
-  wire         ka_1 = p0_activation[6] & p0_magnitude[1];	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}
-  wire         ka_2 = p0_activation[5] & p0_magnitude[1];	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}
-  wire         ka_3 = p0_activation[4] & p0_magnitude[1];	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}
-  wire         ka_4 = p0_activation[3] & p0_magnitude[1];	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}
-  wire         ka_5 = p0_activation[2] & p0_magnitude[1];	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}
-  wire         ka_6 = p0_activation[1] & p0_magnitude[1];	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}
-  wire         ka_7 = p0_activation[0] & p0_magnitude[1];	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}
+  reg   [23:0] p0_global_in__accum_5;	// mac_pe.k:18:9
+  reg   [23:0] p0_product;	// mac_pe.k:18:9
+  reg          p0_stage2_enable = 1'h0;	// mac_pe.k:18:9
+  wire  [23:0] _accum_plus_product_ = 24'(p0_global_in__accum_5 + p0_product);	// mac_pe.k:18:9, :41:22
+  always_comb begin	// mac_pe.k:18:9
+    global_out__accum_5_0_0 = _accum_plus_product_;	// mac_pe.k:21:9, :41:22
+    global_out__accum_5_0_valid_0 = p0_stage2_enable;	// mac_pe.k:18:9, :21:9
+  end // always_comb
+  reg   [23:0] p0__accum_plus_product_;	// mac_pe.k:18:9
+  reg          p0_stage3_enable = 1'h0;	// mac_pe.k:18:9
+  wire         ka = p0_activation[7] & p0_magnitude[1];	// mac_pe.k:18:9, :23:25, :24:{29,43}, :28:{13,17}
+  wire         ka_0 = p0_activation[7] & p0_magnitude[1];	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}
+  wire         ka_1 = p0_activation[6] & p0_magnitude[1];	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}
+  wire         ka_2 = p0_activation[5] & p0_magnitude[1];	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}
+  wire         ka_3 = p0_activation[4] & p0_magnitude[1];	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}
+  wire         ka_4 = p0_activation[3] & p0_magnitude[1];	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}
+  wire         ka_5 = p0_activation[2] & p0_magnitude[1];	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}
+  wire         ka_6 = p0_activation[1] & p0_magnitude[1];	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}
+  wire         ka_7 = p0_activation[0] & p0_magnitude[1];	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}
   wire  [22:0] _ka_plus_a_shl_1_ =
     23'({{15{ka}}, ka_0, ka_1, ka_2, ka_3, ka_4, ka_5, ka_6, ka_7}
-        + {{14{p0_activation[7]}}, p0_activation, 1'h0});	// mac_pe.k:18:9, :21:25, :26:{13,17}, :27:{42,47}
-  wire         _GEN_0 = ka | p0_magnitude[2];	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}, :27:{13,17}
-  wire         _GEN_1 = ka & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}, :27:{13,17}
-  wire         ka_8 = _ka_plus_a_shl_1_[22] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_9 = _ka_plus_a_shl_1_[21] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_10 = _ka_plus_a_shl_1_[20] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_11 = _ka_plus_a_shl_1_[19] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_12 = _ka_plus_a_shl_1_[18] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_13 = _ka_plus_a_shl_1_[17] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_14 = _ka_plus_a_shl_1_[16] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_15 = _ka_plus_a_shl_1_[15] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_16 = _ka_plus_a_shl_1_[14] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_17 = _ka_plus_a_shl_1_[13] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_18 = _ka_plus_a_shl_1_[12] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_19 = _ka_plus_a_shl_1_[11] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_20 = _ka_plus_a_shl_1_[10] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_21 = _ka_plus_a_shl_1_[9] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
-  wire         ka_22 = _ka_plus_a_shl_1_[8] ? _GEN_0 : _GEN_1;	// mac_pe.k:27:{13,17,42}
+        + {{14{p0_activation[7]}}, p0_activation, 1'h0});	// mac_pe.k:18:9, :23:25, :28:{13,17}, :29:{42,47}
+  wire         _GEN_0 = ka | p0_magnitude[2];	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}, :29:{13,17}
+  wire         _GEN_1 = ka & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}, :29:{13,17}
+  wire         ka_8 = _ka_plus_a_shl_1_[22] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_9 = _ka_plus_a_shl_1_[21] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_10 = _ka_plus_a_shl_1_[20] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_11 = _ka_plus_a_shl_1_[19] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_12 = _ka_plus_a_shl_1_[18] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_13 = _ka_plus_a_shl_1_[17] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_14 = _ka_plus_a_shl_1_[16] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_15 = _ka_plus_a_shl_1_[15] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_16 = _ka_plus_a_shl_1_[14] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_17 = _ka_plus_a_shl_1_[13] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_18 = _ka_plus_a_shl_1_[12] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_19 = _ka_plus_a_shl_1_[11] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_20 = _ka_plus_a_shl_1_[10] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_21 = _ka_plus_a_shl_1_[9] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
+  wire         ka_22 = _ka_plus_a_shl_1_[8] ? _GEN_0 : _GEN_1;	// mac_pe.k:29:{13,17,42}
   wire         ka_23 =
-    _ka_plus_a_shl_1_[7] ? ka_0 | p0_magnitude[2] : ka_0 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}, :27:{13,17,42}
+    _ka_plus_a_shl_1_[7] ? ka_0 | p0_magnitude[2] : ka_0 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}, :29:{13,17,42}
   wire         ka_24 =
-    _ka_plus_a_shl_1_[6] ? ka_1 | p0_magnitude[2] : ka_1 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}, :27:{13,17,42}
+    _ka_plus_a_shl_1_[6] ? ka_1 | p0_magnitude[2] : ka_1 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}, :29:{13,17,42}
   wire         ka_25 =
-    _ka_plus_a_shl_1_[5] ? ka_2 | p0_magnitude[2] : ka_2 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}, :27:{13,17,42}
+    _ka_plus_a_shl_1_[5] ? ka_2 | p0_magnitude[2] : ka_2 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}, :29:{13,17,42}
   wire         ka_26 =
-    _ka_plus_a_shl_1_[4] ? ka_3 | p0_magnitude[2] : ka_3 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}, :27:{13,17,42}
+    _ka_plus_a_shl_1_[4] ? ka_3 | p0_magnitude[2] : ka_3 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}, :29:{13,17,42}
   wire         ka_27 =
-    _ka_plus_a_shl_1_[3] ? ka_4 | p0_magnitude[2] : ka_4 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}, :27:{13,17,42}
+    _ka_plus_a_shl_1_[3] ? ka_4 | p0_magnitude[2] : ka_4 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}, :29:{13,17,42}
   wire         ka_28 =
-    _ka_plus_a_shl_1_[2] ? ka_5 | p0_magnitude[2] : ka_5 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}, :27:{13,17,42}
+    _ka_plus_a_shl_1_[2] ? ka_5 | p0_magnitude[2] : ka_5 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}, :29:{13,17,42}
   wire         ka_29 =
-    _ka_plus_a_shl_1_[1] ? ka_6 | p0_magnitude[2] : ka_6 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}, :27:{13,17,42}
+    _ka_plus_a_shl_1_[1] ? ka_6 | p0_magnitude[2] : ka_6 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}, :29:{13,17,42}
   wire         ka_30 =
-    _ka_plus_a_shl_1_[0] ? ka_7 | p0_magnitude[2] : ka_7 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :22:{29,43}, :26:{13,17}, :27:{13,17,42}
+    _ka_plus_a_shl_1_[0] ? ka_7 | p0_magnitude[2] : ka_7 & ~(p0_magnitude[2]);	// mac_pe.k:18:9, :24:{29,43}, :28:{13,17}, :29:{13,17,42}
   wire  [22:0] _ka_plus_a_shl_2_ =
     23'({ka_8,
          ka_9,
@@ -313,7 +323,7 @@ module mac_pe_mac_BasicBlock_0(	// mac_pe.k:18:9
          ka_27,
          ka_28,
          ka_29,
-         ka_30} + {{13{p0_activation[7]}}, p0_activation, 2'h0});	// mac_pe.k:18:9, :21:25, :27:{13,17}, :28:{42,47}
+         ka_30} + {{13{p0_activation[7]}}, p0_activation, 2'h0});	// mac_pe.k:18:9, :23:25, :29:{13,17}, :30:{42,47}
   wire  [23:0] _ka_shl_1_plus_a_ =
     24'({_ka_plus_a_shl_2_[22] ? ka_8 | p0_magnitude[3] : ka_8 & ~(p0_magnitude[3]),
          _ka_plus_a_shl_2_[21] ? ka_9 | p0_magnitude[3] : ka_9 & ~(p0_magnitude[3]),
@@ -338,90 +348,8 @@ module mac_pe_mac_BasicBlock_0(	// mac_pe.k:18:9
          _ka_plus_a_shl_2_[2] ? ka_28 | p0_magnitude[3] : ka_28 & ~(p0_magnitude[3]),
          _ka_plus_a_shl_2_[1] ? ka_29 | p0_magnitude[3] : ka_29 & ~(p0_magnitude[3]),
          _ka_plus_a_shl_2_[0] ? ka_30 | p0_magnitude[3] : ka_30 & ~(p0_magnitude[3]),
-         1'h0} + {{16{p0_activation[7]}}, p0_activation});	// mac_pe.k:18:9, :21:25, :22:{29,43}, :27:{13,17}, :28:{13,17,42}, :31:31
-  wire  [23:0] _0_minus_product_ = 24'(24'h0 - _ka_shl_1_plus_a_);	// mac_pe.k:31:31, :36:27
-  wire  [23:0] _accum_plus_product_ =
-    24'(global_in__accum_5_0
-        + {_0_minus_product_[23]
-             ? _ka_shl_1_plus_a_[23] | p0_sign_bit
-             : _ka_shl_1_plus_a_[23] & ~p0_sign_bit,
-           _0_minus_product_[22]
-             ? _ka_shl_1_plus_a_[22] | p0_sign_bit
-             : _ka_shl_1_plus_a_[22] & ~p0_sign_bit,
-           _0_minus_product_[21]
-             ? _ka_shl_1_plus_a_[21] | p0_sign_bit
-             : _ka_shl_1_plus_a_[21] & ~p0_sign_bit,
-           _0_minus_product_[20]
-             ? _ka_shl_1_plus_a_[20] | p0_sign_bit
-             : _ka_shl_1_plus_a_[20] & ~p0_sign_bit,
-           _0_minus_product_[19]
-             ? _ka_shl_1_plus_a_[19] | p0_sign_bit
-             : _ka_shl_1_plus_a_[19] & ~p0_sign_bit,
-           _0_minus_product_[18]
-             ? _ka_shl_1_plus_a_[18] | p0_sign_bit
-             : _ka_shl_1_plus_a_[18] & ~p0_sign_bit,
-           _0_minus_product_[17]
-             ? _ka_shl_1_plus_a_[17] | p0_sign_bit
-             : _ka_shl_1_plus_a_[17] & ~p0_sign_bit,
-           _0_minus_product_[16]
-             ? _ka_shl_1_plus_a_[16] | p0_sign_bit
-             : _ka_shl_1_plus_a_[16] & ~p0_sign_bit,
-           _0_minus_product_[15]
-             ? _ka_shl_1_plus_a_[15] | p0_sign_bit
-             : _ka_shl_1_plus_a_[15] & ~p0_sign_bit,
-           _0_minus_product_[14]
-             ? _ka_shl_1_plus_a_[14] | p0_sign_bit
-             : _ka_shl_1_plus_a_[14] & ~p0_sign_bit,
-           _0_minus_product_[13]
-             ? _ka_shl_1_plus_a_[13] | p0_sign_bit
-             : _ka_shl_1_plus_a_[13] & ~p0_sign_bit,
-           _0_minus_product_[12]
-             ? _ka_shl_1_plus_a_[12] | p0_sign_bit
-             : _ka_shl_1_plus_a_[12] & ~p0_sign_bit,
-           _0_minus_product_[11]
-             ? _ka_shl_1_plus_a_[11] | p0_sign_bit
-             : _ka_shl_1_plus_a_[11] & ~p0_sign_bit,
-           _0_minus_product_[10]
-             ? _ka_shl_1_plus_a_[10] | p0_sign_bit
-             : _ka_shl_1_plus_a_[10] & ~p0_sign_bit,
-           _0_minus_product_[9]
-             ? _ka_shl_1_plus_a_[9] | p0_sign_bit
-             : _ka_shl_1_plus_a_[9] & ~p0_sign_bit,
-           _0_minus_product_[8]
-             ? _ka_shl_1_plus_a_[8] | p0_sign_bit
-             : _ka_shl_1_plus_a_[8] & ~p0_sign_bit,
-           _0_minus_product_[7]
-             ? _ka_shl_1_plus_a_[7] | p0_sign_bit
-             : _ka_shl_1_plus_a_[7] & ~p0_sign_bit,
-           _0_minus_product_[6]
-             ? _ka_shl_1_plus_a_[6] | p0_sign_bit
-             : _ka_shl_1_plus_a_[6] & ~p0_sign_bit,
-           _0_minus_product_[5]
-             ? _ka_shl_1_plus_a_[5] | p0_sign_bit
-             : _ka_shl_1_plus_a_[5] & ~p0_sign_bit,
-           _0_minus_product_[4]
-             ? _ka_shl_1_plus_a_[4] | p0_sign_bit
-             : _ka_shl_1_plus_a_[4] & ~p0_sign_bit,
-           _0_minus_product_[3]
-             ? _ka_shl_1_plus_a_[3] | p0_sign_bit
-             : _ka_shl_1_plus_a_[3] & ~p0_sign_bit,
-           _0_minus_product_[2]
-             ? _ka_shl_1_plus_a_[2] | p0_sign_bit
-             : _ka_shl_1_plus_a_[2] & ~p0_sign_bit,
-           _0_minus_product_[1]
-             ? _ka_shl_1_plus_a_[1] | p0_sign_bit
-             : _ka_shl_1_plus_a_[1] & ~p0_sign_bit,
-           _0_minus_product_[0]
-             ? _ka_shl_1_plus_a_[0] | p0_sign_bit
-             : _ka_shl_1_plus_a_[0] & ~p0_sign_bit});	// mac_pe.k:18:9, :31:31, :34:{13,17}, :36:27, :39:22
-  always_comb begin	// mac_pe.k:18:9
-    global_out__accum_5_0_0 = _accum_plus_product_;	// mac_pe.k:19:9, :39:22
-    global_out__accum_5_0_valid_0 = p0_stage1_enable;	// mac_pe.k:18:9, :19:9
-  end // always_comb
-  reg   [23:0] p0__accum_plus_product_;	// mac_pe.k:18:9
-  reg          p0_stage2_enable = 1'h0;	// mac_pe.k:18:9
-  reg   [23:0] p0__accum_plus_product__0;	// mac_pe.k:18:9
-  reg          p0_stage3_enable = 1'h0;	// mac_pe.k:18:9
+         1'h0} + {{16{p0_activation[7]}}, p0_activation});	// mac_pe.k:18:9, :23:25, :24:{29,43}, :29:{13,17}, :30:{13,17,42}, :33:31
+  wire  [23:0] _0_minus_product_ = 24'(24'h0 - _ka_shl_1_plus_a_);	// mac_pe.k:33:31, :38:27
   always @(posedge clk) begin	// mac_pe.k:18:9
     p0_magnitude <= data_in_3[3:0];	// mac_pe.k:18:9
     p0_sign_bit <= data_in_3[4];	// mac_pe.k:18:9
@@ -430,12 +358,85 @@ module mac_pe_mac_BasicBlock_0(	// mac_pe.k:18:9
       p0_stage1_enable <= 1'h0;	// mac_pe.k:18:9
     else	// mac_pe.k:18:9
       p0_stage1_enable <= _GEN & input_valid_0;	// mac_pe.k:18:9
-    p0__accum_plus_product_ <= _accum_plus_product_;	// mac_pe.k:18:9, :39:22
+    p0_global_in__accum_5 <= global_in__accum_5_0;	// mac_pe.k:18:9
+    p0_product <=
+      {_0_minus_product_[23]
+         ? _ka_shl_1_plus_a_[23] | p0_sign_bit
+         : _ka_shl_1_plus_a_[23] & ~p0_sign_bit,
+       _0_minus_product_[22]
+         ? _ka_shl_1_plus_a_[22] | p0_sign_bit
+         : _ka_shl_1_plus_a_[22] & ~p0_sign_bit,
+       _0_minus_product_[21]
+         ? _ka_shl_1_plus_a_[21] | p0_sign_bit
+         : _ka_shl_1_plus_a_[21] & ~p0_sign_bit,
+       _0_minus_product_[20]
+         ? _ka_shl_1_plus_a_[20] | p0_sign_bit
+         : _ka_shl_1_plus_a_[20] & ~p0_sign_bit,
+       _0_minus_product_[19]
+         ? _ka_shl_1_plus_a_[19] | p0_sign_bit
+         : _ka_shl_1_plus_a_[19] & ~p0_sign_bit,
+       _0_minus_product_[18]
+         ? _ka_shl_1_plus_a_[18] | p0_sign_bit
+         : _ka_shl_1_plus_a_[18] & ~p0_sign_bit,
+       _0_minus_product_[17]
+         ? _ka_shl_1_plus_a_[17] | p0_sign_bit
+         : _ka_shl_1_plus_a_[17] & ~p0_sign_bit,
+       _0_minus_product_[16]
+         ? _ka_shl_1_plus_a_[16] | p0_sign_bit
+         : _ka_shl_1_plus_a_[16] & ~p0_sign_bit,
+       _0_minus_product_[15]
+         ? _ka_shl_1_plus_a_[15] | p0_sign_bit
+         : _ka_shl_1_plus_a_[15] & ~p0_sign_bit,
+       _0_minus_product_[14]
+         ? _ka_shl_1_plus_a_[14] | p0_sign_bit
+         : _ka_shl_1_plus_a_[14] & ~p0_sign_bit,
+       _0_minus_product_[13]
+         ? _ka_shl_1_plus_a_[13] | p0_sign_bit
+         : _ka_shl_1_plus_a_[13] & ~p0_sign_bit,
+       _0_minus_product_[12]
+         ? _ka_shl_1_plus_a_[12] | p0_sign_bit
+         : _ka_shl_1_plus_a_[12] & ~p0_sign_bit,
+       _0_minus_product_[11]
+         ? _ka_shl_1_plus_a_[11] | p0_sign_bit
+         : _ka_shl_1_plus_a_[11] & ~p0_sign_bit,
+       _0_minus_product_[10]
+         ? _ka_shl_1_plus_a_[10] | p0_sign_bit
+         : _ka_shl_1_plus_a_[10] & ~p0_sign_bit,
+       _0_minus_product_[9]
+         ? _ka_shl_1_plus_a_[9] | p0_sign_bit
+         : _ka_shl_1_plus_a_[9] & ~p0_sign_bit,
+       _0_minus_product_[8]
+         ? _ka_shl_1_plus_a_[8] | p0_sign_bit
+         : _ka_shl_1_plus_a_[8] & ~p0_sign_bit,
+       _0_minus_product_[7]
+         ? _ka_shl_1_plus_a_[7] | p0_sign_bit
+         : _ka_shl_1_plus_a_[7] & ~p0_sign_bit,
+       _0_minus_product_[6]
+         ? _ka_shl_1_plus_a_[6] | p0_sign_bit
+         : _ka_shl_1_plus_a_[6] & ~p0_sign_bit,
+       _0_minus_product_[5]
+         ? _ka_shl_1_plus_a_[5] | p0_sign_bit
+         : _ka_shl_1_plus_a_[5] & ~p0_sign_bit,
+       _0_minus_product_[4]
+         ? _ka_shl_1_plus_a_[4] | p0_sign_bit
+         : _ka_shl_1_plus_a_[4] & ~p0_sign_bit,
+       _0_minus_product_[3]
+         ? _ka_shl_1_plus_a_[3] | p0_sign_bit
+         : _ka_shl_1_plus_a_[3] & ~p0_sign_bit,
+       _0_minus_product_[2]
+         ? _ka_shl_1_plus_a_[2] | p0_sign_bit
+         : _ka_shl_1_plus_a_[2] & ~p0_sign_bit,
+       _0_minus_product_[1]
+         ? _ka_shl_1_plus_a_[1] | p0_sign_bit
+         : _ka_shl_1_plus_a_[1] & ~p0_sign_bit,
+       _0_minus_product_[0]
+         ? _ka_shl_1_plus_a_[0] | p0_sign_bit
+         : _ka_shl_1_plus_a_[0] & ~p0_sign_bit};	// mac_pe.k:18:9, :33:31, :36:{13,17}, :38:27
     if (rst)	// mac_pe.k:18:9
       p0_stage2_enable <= 1'h0;	// mac_pe.k:18:9
     else	// mac_pe.k:18:9
       p0_stage2_enable <= p0_stage1_enable;	// mac_pe.k:18:9
-    p0__accum_plus_product__0 <= p0__accum_plus_product_;	// mac_pe.k:18:9
+    p0__accum_plus_product_ <= _accum_plus_product_;	// mac_pe.k:18:9, :41:22
     if (rst)	// mac_pe.k:18:9
       p0_stage3_enable <= 1'h0;	// mac_pe.k:18:9
     else	// mac_pe.k:18:9
@@ -443,7 +444,7 @@ module mac_pe_mac_BasicBlock_0(	// mac_pe.k:18:9
   end // always @(posedge)
   always_comb begin	// mac_pe.k:18:9
     fifo_wren_0_0 = p0_stage3_enable;	// mac_pe.k:16:5, :18:9
-    fifo_data_out_0_0 = p0__accum_plus_product__0;	// mac_pe.k:16:5, :18:9
+    fifo_data_out_0_0 = p0__accum_plus_product_;	// mac_pe.k:16:5, :18:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
@@ -471,7 +472,7 @@ module mac_pe_mac_BasicBlock_0(	// mac_pe.k:18:9
   );	// mac_pe.k:16:5
   mac_peDebugView_macExit mac_peDebugView_macExit_instance (	// mac_pe.k:16:5
     .clk          (clk),	// mac_pe.k:16:5
-    ._ReturnValue (p0_stage2_enable ? p0__accum_plus_product_ : 'x),	// mac_pe.k:16:5, :18:9
+    ._ReturnValue (p0_stage2_enable ? _accum_plus_product_ : 'x),	// mac_pe.k:16:5, :18:9, :41:22
     .valid        (p0_stage2_enable),	// mac_pe.k:18:9
     .valid_out    (/* unused */)
   );	// mac_pe.k:16:5
@@ -529,12 +530,12 @@ module mac_pe(
   output wire        stall_rate_supported_out
 );
 
-  wire        _clear_BasicBlock_0Impl_global_out__accum_5_1_valid;	// mac_pe.k:52:9
-  wire        _clear_BasicBlock_0Impl_fifo_wren_0;	// mac_pe.k:52:9
-  wire        _clear_BasicBlock_0Impl_input_rdy_0;	// mac_pe.k:52:9
-  wire [23:0] _read_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_pe.k:47:9
-  wire        _read_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_pe.k:47:9
-  wire        _read_accum_BasicBlock_0Impl_input_rdy_0;	// mac_pe.k:47:9
+  wire        _clear_BasicBlock_0Impl_global_out__accum_5_1_valid;	// mac_pe.k:54:9
+  wire        _clear_BasicBlock_0Impl_fifo_wren_0;	// mac_pe.k:54:9
+  wire        _clear_BasicBlock_0Impl_input_rdy_0;	// mac_pe.k:54:9
+  wire [23:0] _read_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_pe.k:49:9
+  wire        _read_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_pe.k:49:9
+  wire        _read_accum_BasicBlock_0Impl_input_rdy_0;	// mac_pe.k:49:9
   wire        _mac_BasicBlock_0Impl_global_out__accum_5_0_valid;	// mac_pe.k:18:9
   wire [23:0] _mac_BasicBlock_0Impl_global_out__accum_5_0;	// mac_pe.k:18:9
   wire [23:0] _mac_BasicBlock_0Impl_fifo_data_out_0;	// mac_pe.k:18:9
@@ -690,11 +691,11 @@ module mac_pe(
     fifo_data_0.data_in = _mac_BasicBlock_0Impl_fifo_data_out_0;	// mac_pe.k:18:9
     fifo_data_0.wren = _mac_BasicBlock_0Impl_fifo_wren_0;	// mac_pe.k:18:9
     passthrough_data_3.rdy_int = _mac_BasicBlock_0Impl_input_rdy_0;	// mac_pe.k:18:9
-    fifo_data_1.data_in = _read_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_pe.k:47:9
-    fifo_data_1.wren = _read_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_pe.k:47:9
-    passthrough_data_4.rdy_int = _read_accum_BasicBlock_0Impl_input_rdy_0;	// mac_pe.k:47:9
-    fifo_data_2.wren = _clear_BasicBlock_0Impl_fifo_wren_0;	// mac_pe.k:52:9
-    passthrough_data_5.rdy_int = _clear_BasicBlock_0Impl_input_rdy_0;	// mac_pe.k:52:9
+    fifo_data_1.data_in = _read_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_pe.k:49:9
+    fifo_data_1.wren = _read_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_pe.k:49:9
+    passthrough_data_4.rdy_int = _read_accum_BasicBlock_0Impl_input_rdy_0;	// mac_pe.k:49:9
+    fifo_data_2.wren = _clear_BasicBlock_0Impl_fifo_wren_0;	// mac_pe.k:54:9
+    passthrough_data_5.rdy_int = _clear_BasicBlock_0Impl_input_rdy_0;	// mac_pe.k:54:9
   end // always_comb
 
   assign has_startup_completed_raw = 1'b1;
@@ -720,7 +721,7 @@ module mac_pe(
     .rst           (reg_rst_delayed[0]),	// mac_pe.k:13:5
     .input_valid_0 (_mac_BasicBlock_0Impl_global_out__accum_5_0_valid),	// mac_pe.k:18:9
     .input_0       (_mac_BasicBlock_0Impl_global_out__accum_5_0),	// mac_pe.k:18:9
-    .input_valid_1 (_clear_BasicBlock_0Impl_global_out__accum_5_1_valid),	// mac_pe.k:52:9
+    .input_valid_1 (_clear_BasicBlock_0Impl_global_out__accum_5_1_valid),	// mac_pe.k:54:9
     .value_out     (__accum_value_out)
   );	// mac_pe.k:13:5
   KanagawaFlipFlopChainNoEnable #(
@@ -836,33 +837,33 @@ module mac_pe(
     .input_valid_0               (passthrough_data_3.valid),	// mac_pe.k:18:9
     .control_state_out           (/* unused */)
   );	// mac_pe.k:18:9
-  mac_pe_read_accum_BasicBlock_0 read_accum_BasicBlock_0Impl (	// mac_pe.k:47:9
-    .clk                       (clk),	// mac_pe.k:47:9
-    .rst                       (reg_rst_delayed[5]),	// mac_pe.k:47:9
+  mac_pe_read_accum_BasicBlock_0 read_accum_BasicBlock_0Impl (	// mac_pe.k:49:9
+    .clk                       (clk),	// mac_pe.k:49:9
+    .rst                       (reg_rst_delayed[5]),	// mac_pe.k:49:9
     .done_out                  (/* unused */),
     .global_in__accum_5        (__accum_value_out),	// mac_pe.k:13:5
     .fifo_data_out_0           (_read_accum_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_read_accum_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_1.almost_full),	// mac_pe.k:47:9
-    .fifo_overflow_in_0        (fifo_data_1.overflow),	// mac_pe.k:47:9
-    .input_fifo_underflow_0    (passthrough_data_4.underflow),	// mac_pe.k:47:9
+    .fifo_almost_full_in_raw_0 (fifo_data_1.almost_full),	// mac_pe.k:49:9
+    .fifo_overflow_in_0        (fifo_data_1.overflow),	// mac_pe.k:49:9
+    .input_fifo_underflow_0    (passthrough_data_4.underflow),	// mac_pe.k:49:9
     .input_rdy_0               (_read_accum_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_4.valid),	// mac_pe.k:47:9
+    .input_valid_0             (passthrough_data_4.valid),	// mac_pe.k:49:9
     .control_state_out         (/* unused */)
-  );	// mac_pe.k:47:9
-  mac_pe_clear_BasicBlock_0 clear_BasicBlock_0Impl (	// mac_pe.k:52:9
-    .clk                         (clk),	// mac_pe.k:52:9
-    .rst                         (reg_rst_delayed[6]),	// mac_pe.k:52:9
+  );	// mac_pe.k:49:9
+  mac_pe_clear_BasicBlock_0 clear_BasicBlock_0Impl (	// mac_pe.k:54:9
+    .clk                         (clk),	// mac_pe.k:54:9
+    .rst                         (reg_rst_delayed[6]),	// mac_pe.k:54:9
     .done_out                    (/* unused */),
     .global_out__accum_5_1_valid (_clear_BasicBlock_0Impl_global_out__accum_5_1_valid),
     .fifo_wren_0                 (_clear_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0   (fifo_data_2.almost_full),	// mac_pe.k:52:9
-    .fifo_overflow_in_0          (fifo_data_2.overflow),	// mac_pe.k:52:9
-    .input_fifo_underflow_0      (passthrough_data_5.underflow),	// mac_pe.k:52:9
+    .fifo_almost_full_in_raw_0   (fifo_data_2.almost_full),	// mac_pe.k:54:9
+    .fifo_overflow_in_0          (fifo_data_2.overflow),	// mac_pe.k:54:9
+    .input_fifo_underflow_0      (passthrough_data_5.underflow),	// mac_pe.k:54:9
     .input_rdy_0                 (_clear_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0               (passthrough_data_5.valid),	// mac_pe.k:52:9
+    .input_valid_0               (passthrough_data_5.valid),	// mac_pe.k:54:9
     .control_state_out           (/* unused */)
-  );	// mac_pe.k:52:9
+  );	// mac_pe.k:54:9
   assign rst_and_startup_done_out = rst_and_startup_done_out_net;
   assign mac_rdy_out = mac_rdy_out_net;
   assign mac_empty_out = mac_empty_out_net;

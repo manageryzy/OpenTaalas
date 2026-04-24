@@ -16,9 +16,11 @@ private:
 
 public:
     // Accumulate x^2 into running sum (BF16 input as uint16)
+    // [[schedule(4)]] pipelines the 8-term BF16 square (~50 levels of logic).
+    // Tried [[schedule(5)]] — slightly worse (-2.42 vs -2.03), more reg overhead.
     void accumulate_sq(uint16 x_bf16)
     {
-        atomic
+        [[schedule(4)]]
         {
             // BF16 square: x_sq = x_bf16 * x_bf16
             // Sign is always 0 for x^2.

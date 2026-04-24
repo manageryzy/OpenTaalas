@@ -23,7 +23,7 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 
 ### Backend PnR: 19 routed through DRT (12 logic-only + 7 macro-bearing)
 
-19 designs configured for ORFS sky130hd at 250 MHz (4ns clock). NOR ROM and SRAM macro collateral integrated via sky130 HAL layer. Density improvement via NOR ROM folding reduced total macro-bearing die area from 96.6 mm² to 57.0 mm² (**41% reduction**).
+19 designs configured for ORFS sky130hd at 250 MHz (4ns clock). NOR ROM and SRAM macro collateral integrated via sky130 HAL layer. Three rounds of density work — die resizing (v2, 41%), SRAM col_mux + macro consolidation in kv_cache_demo (-93%), and NOR ROM internal-mux refactor (v3, embed_rom + lm_head_demo each -55%) — reduced total macro-bearing area from 96.6 mm² to 51.8 mm² (**46% reduction**).
 
 #### Completed through DRT — Logic-Only (12 designs)
 
@@ -37,10 +37,12 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 | lut_interp | 317,621 | 227 | -0.41ns |
 | codebook_decoder | 936,451 | 215 | -0.66ns |
 | dequant | 138,904 | 214 | -0.67ns |
-| mac_pe | 84,186 | 138 | -3.23ns |
-| attention_unit | 167,055 | 76 | -9.15ns |
-| rmsnorm | 3,223,470 | 77 | -9.02ns |
-| swiglu | 368,319 | 47 | -17.5ns |
+| mac_pe | 71,462 | 175 | -1.71ns |
+| attention_unit | 147,916 | 139 | -3.21ns |
+| rmsnorm | 2,963,635 | 166 | -2.03ns |
+| swiglu | 325,351 | 184 | -1.42ns |
+
+After Phase 3 HLS retiming via `[[schedule(N)]]` annotations: swiglu (+292% fmax), rmsnorm (+115%), attention_unit (+83%), mac_pe (+27%). Each module hit a retiming floor — pushing schedule(N+1) regressed due to register overhead. embed_rom and lm_head_demo remain at 127–131 MHz (clock skew on the tall folded-ROM die dominates).
 
 #### Completed through DRT — Macro-Bearing (7 designs)
 
@@ -48,11 +50,11 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 |--------|----------|----------|------|-----|----------|-----------|
 | rom_bank | 1× nor_rom_1024x880 | 2400×2400 | 60% | **0** | -2.35 | 157 |
 | mac_array | 1× nor_rom_1024x880 | 2500×3000 | 35% | 641 | -3.88 | 127 |
-| rope | 2× nor_rom_4096x1024 | 2000×3500 | 76% | 1,029 | -4.56 | 69 |
-| embed_rom | 1× nor_rom_65536x192_phys | 3200×3200 | 38% | 103 | -9.06 | 77 |
+| rope | 2× nor_rom_4096x1024 (fold=2, mirrored) | 3000×3300 | 72% | 418 | -4.14 | 122 |
+| embed_rom | 1× nor_rom_65536x192 (internal mux) | 1900×2400 | 78% | **0** | -3.63 | 131 |
 | vector_unit | 2× nor_rom_4096x1024 | 4000×5500 | 55% | 488 | -17.68 | 43 |
 | kv_cache_demo | 4× sram_8192x8 (col_mux=32) | 595×705 | 87% | **0** | -0.34 | 230 |
-| lm_head_demo | 1× nor_rom_65536x192_phys | 3200×3200 | 39% | **0** | -9.80 | 61 |
+| lm_head_demo | 1× nor_rom_65536x192 (internal mux) | 1900×2400 | 77% | **0** | -3.90 | 127 |
 
 See [backend-metrics.md](backend-metrics.md) for full metrics, timing analysis, and lessons learned.
 
@@ -80,9 +82,9 @@ Further improvement requires more LUT entries or piecewise-linear interpolation 
 
 ## Next Steps
 
-1. **Timing closure** — pipeline insertion for modules with severe negative slack (swiglu -17.5ns, vector_unit -17.7ns, rmsnorm -9.0ns, attention_unit -9.2ns)
-2. **DRC cleanup** — rope (1,029), mac_array (641), vector_unit (488), embed_rom (103) have remaining DRT violations
-3. **Hierarchical PnR** — partition vector_unit for tractable routing (791K cells, 488 DRC at 55% util)
+1. **Hierarchical PnR for vector_unit** — currently 791K cells flat; pipelined RTL stalls in ORFS GPL. Partitioning would unblock retiming for the largest design.
+2. **DRC cleanup** — rope (418), mac_array (641), vector_unit (488) have remaining DRT violations
+3. **vector_unit re-route** — macro_place updated for new fold=2 macro shape; needs hierarchical PnR before re-route can land
 4. **lm_head architecture** — 188 MB weight store needs external DRAM interface, not on-die ROM
 
 ## Architecture

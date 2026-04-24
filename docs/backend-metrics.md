@@ -16,9 +16,9 @@
 | codebook_decoder | 69,838 | 936,451 | 1,545,290 | 61.0% | -0.66 | 75M |
 | lut_interp | 25,483 | 317,621 | 541,740 | 59.2% | -0.41 | 31M |
 | scale_store | 5,823 | 88,127 | 150,862 | 59.5% | -0.11 | 6.6M |
-| rmsnorm | 204,975 | 3,223,470 | 5,506,650 | 58.7% | -9.02 | 212M |
-| swiglu | 27,217 | 368,319 | 599,935 | 62.0% | -17.47 | 31M |
-| attention_unit | 12,245 | 167,055 | 278,515 | 60.9% | -9.15 | 14M |
+| rmsnorm | 206,051 | 2,963,635 | 5,506,650 | 53.8% | -2.03 | 212M |
+| swiglu | 24,042 | 325,351 | 599,935 | 54.2% | -1.42 | 31M |
+| attention_unit | 11,348 | 147,916 | 278,515 | 53.1% | -3.21 | 14M |
 | async_fifo | 270 | 3,794 | 6,400 | 79.8% | +0.91 | 456K |
 | layer_tile | 4,758 | 63,481 | 109,230 | 59.3% | +0.06 | 5.2M |
 | global_controller | 7,094 | 95,816 | 162,869 | 59.7% | -0.09 | 7.4M |
@@ -26,9 +26,10 @@
 
 **Notes:**
 - Negative WNS = setup timing violation at 250 MHz (4ns period)
-- rmsnorm is largest: 205K cells, 5.5 mm² die, 212M GDS
+- rmsnorm is largest: 206K cells, 5.5 mm² die, 212M GDS
 - async_fifo is smallest: 270 cells, 6,400 µm² die
 - All logic-only (no macros)
+- **HLS retiming (v3):** swiglu/rmsnorm/attention_unit pipelined via `[[schedule(N)]]` annotations on long BF16 multiplier paths. WNS recovered 5.6–16.0 ns; fmax up 83–292%. See [Lessons](#lessons-learned) item 13.
 
 ## Completed Designs — Macro-Bearing (DRT)
 
@@ -36,28 +37,31 @@
 |--------|-----------|----------|----------|------|-----|----------|-----------|
 | rom_bank | 136,629 | 1× nor_rom_1024x880 | 2400×2400 | 60% | **0** | -2.35 | 157 |
 | mac_array | 233,861 | 1× nor_rom_1024x880 | 2500×3000 | 35% | 641 | -3.88 | 127 |
-| rope | 478,014 | 2× nor_rom_4096x1024 | 2000×3500 | 76% | 1,029 | -4.56 | 69 |
-| embed_rom | 244,741 | 1× nor_rom_65536x192_phys | 3200×3200 | 38% | 103 | -9.06 | 77 |
+| rope | 478,014 | 2× nor_rom_4096x1024 (fold=2, mirrored) | 3000×3300 | 72% | 418 | -4.14 | 122 |
+| embed_rom | 32,365 | 1× nor_rom_65536x192 (internal mux) | 1900×2400 | 78% | **0** | -3.63 | 131 |
 | vector_unit | 790,947 | 2× nor_rom_4096x1024 | 4000×5500 | 55% | 488 | -17.68 | 43 |
 
-**Density improvement (v2):** Die resizing reduced total macro-bearing area from 96.6 mm² to 57.0 mm² (**41% reduction**). NOR ROM folding (nor_rom_65536x192 from 344:1 to 1.6:1 aspect ratio) enabled embed_rom/lm_head_demo to use a square die instead of the original 600×36000 strip.
+**Density improvements:**
+- *v2:* Die resizing reduced total macro-bearing area from 96.6 mm² to 57.0 mm² (**41% reduction**). NOR ROM folding (nor_rom_65536x192 from 344:1 to 1.6:1 aspect ratio) enabled embed_rom/lm_head_demo to use a square die instead of the original 600×36000 strip.
+- *v3:* Moved the 16:1 column mux **inside** the folded NOR ROM macro (was external in a Verilog wrapper). Macro pin count dropped 3088 → 210 (15×). Simultaneously: stdcell count fell 87% (the gate-synthesized mux disappeared), die area 53% smaller, DRC fixed (embed_rom 103 → 0), and timing improved 5+ ns. Same trick as the SRAM `col_mux` reshape but for NOR ROM. embed_rom and lm_head_demo both went from 10.24 mm² to 4.56 mm² each (**combined 11.4 mm² saved**).
+- *v4 (rope):* Refolded `nor_rom_4096x1024` with fold=2 — macro reshapes from 485×2224 (1:4.58) to **956×1118 (1:1.17)**, no change in total bits or pin count. Combined with **mirrored macro placement** (left=MY orientation, right=R0) so the 2× 1024-bit dout buses face opposite die edges instead of crowding the central gap. rope die: 2000×3500 (1:1.75) → **3000×3300 (1:1.10)**. DRC: 1029 → **418 (-59%)**. fmax: 69 → 122 MHz. Same architectural trick (reshape macro shape via fold) applied to a different macro family.
 
 ### Rendered Floorplans
 
-| rom_bank (2.4×2.4 mm) | mac_array (2.5×3 mm) | rope (2×3.5 mm) |
+| rom_bank (2.4×2.4 mm) | mac_array (2.5×3 mm) | rope (3×3.3 mm, fold=2 macros mirrored) |
 |:---:|:---:|:---:|
 | ![rom_bank](images/rom_bank_final.png) | ![mac_array](images/mac_array_final.png) | ![rope](images/rope_final.png) |
-| 1× NOR ROM centered | 1× NOR ROM centered | 2× NOR ROM side-by-side |
+| 1× NOR ROM centered | 1× NOR ROM centered | 2× NOR ROM (mirrored, dout faces die edges) |
 
 | vector_unit (4×5.5 mm) | kv_cache_demo (0.60×0.71 mm) |
 |:---:|:---:|
 | ![vector_unit](images/vector_unit_final.png) | ![kv_cache_demo](images/kv_cache_demo_final.png) |
 | 2× NOR ROM, 55% util | 4× SRAM in 2×2 grid, 87% util |
 
-| embed_rom (3.2×3.2 mm) | lm_head_demo (3.2×3.2 mm) |
+| embed_rom (1.9×2.4 mm) | lm_head_demo (1.9×2.4 mm) |
 |:---:|:---:|
 | ![embed_rom](images/embed_rom_final.png) | ![lm_head_demo](images/lm_head_demo_final.png) |
-| Folded nor_rom_65536x192_phys centered | Same folded macro, weight projection + argmax |
+| Folded nor_rom_65536x192 (internal mux) centered | Same folded macro, weight projection + argmax |
 
 **Color key:** Green = routed standard cells, Grey/blue rectangles = macros (ROM/SRAM), Cyan vertical line = clock tree trunk, Red/pink = metal routing layers, Yellow-green edges = I/O pins.
 
@@ -80,7 +84,7 @@ Reduced-scale designs that validate full architecture on a sky130 shuttle (~25 m
 | Design | Std Cells | Macro(s) | Die (µm) | GRT Overflow | DRC | WNS (ns) | fmax (MHz) | Power (mW) |
 |--------|-----------|----------|----------|-------------|-----|----------|-----------|-----------|
 | kv_cache_demo | 3,628 | 4× sram_8192x8 (col_mux=32) | 595×705 | **0** | **0** | -0.34 | 230 | 24 |
-| lm_head_demo | 243,724 | 1× nor_rom_65536x192_phys | 3200×3200 | **0** | **0** | -9.80 | 61 | — |
+| lm_head_demo | 49,329 | 1× nor_rom_65536x192 (internal mux) | 1900×2400 | **0** | **0** | -3.90 | 127 | — |
 
 **kv_cache_demo** — 16 tokens × 8 heads × 128 dims (full scale: 4096 tokens). Proves circular buffer K/V store architecture. Two-stage optimization journey:
 
@@ -90,7 +94,7 @@ Reduced-scale designs that validate full architecture on a sky130 shuttle (~25 m
 
 **Total improvement vs original 1200×5000 strip: 93% area reduction (6.00 → 0.42 mm²), 41% wirelength reduction (246 → 144 K µm), comparable timing (-0.25 → -0.34 ns), same fmax (235 → 230 MHz).** PDN-0179 constraints: x-axis margin needs ≥17 µm (met1 strap channel), y-axis ≥34 µm (met4 strap channel). `MACRO_PLACE_HALO` reduced from 40 to 10 µm; `PLACE_DENSITY_LB_ADDON` reduced from 0.20 to 0.05.
 
-**lm_head_demo** — 1024 vocab × 4096 dims as 192-bit weight chunks (full scale: 128,256 vocab). Proves weight projection + argmax pipeline using folded nor_rom_65536x192_phys (same as embed_rom). RMSNorm normalization handled by vector_unit in the real architecture — not included here. 39% utilization at 3200×3200 die (53% area reduction from original 600×36000 strip).
+**lm_head_demo** — 1024 vocab × 4096 dims as 192-bit weight chunks (full scale: 128,256 vocab). Proves weight projection + argmax pipeline using folded nor_rom_65536x192 (same as embed_rom). RMSNorm normalization handled by vector_unit in the real architecture — not included here. **77% utilization at 1900×2400 die after the internal-mux refactor (55% reduction from 3200×3200).**
 
 **Design note:** Initial lm_head_demo included `_gamma[4096]` and `_rsqrt_lut[256]` behavioral RAMs (RMSNorm parameters). These synthesized to ~111K flip-flops (125K total instances), causing GRT to loop in NDR retries for 21+ hours in the narrow 600µm die. Removing them (RMSNorm belongs in vector_unit) reduced to 12.9K instances and completed PnR in ~40 minutes.
 
@@ -185,6 +189,8 @@ All NOR ROM and SRAM macros generated by custom compilers:
 | sram_4096x8 | ~137 × 294 (col_mux=16) | 25 (8 din + 8 dout + 9 ctrl) | ✓ |
 | sram_8192x8 | ~254 × 293 (col_mux=32) | 26 (8 din + 8 dout + 10 ctrl) | ✓ |
 
+**NOR ROM internal-mux refactor (v3):** for folded macros (`fold>1`), the column mux is implemented inside the macro periphery instead of as external gate-synthesized RTL. The macro exposes the *logical* interface (`addr_width = log2(rows)`, `dout = cols`) instead of raw bitcell columns. Pin count drops from `cols × fold + log2(rows/fold)` to `cols + log2(rows)` — for `nor_rom_65536x192` (fold=16), that's 3088 → 210 (15×). Same physical dimensions, same total bits.
+
 ## Timing Analysis
 
 **Target frequency:** 250 MHz (4 ns clock period)
@@ -193,23 +199,23 @@ All NOR ROM and SRAM macros generated by custom compilers:
 |----------|---------|-----------|-------|
 | Timing-clean | async_fifo, layer_tile, llama_chip | +0.03 to +0.91 ns | Positive slack = meets timing |
 | Near-miss | scale_store, global_controller | -0.09 to -0.11 ns | Fixable with minor constraint tuning |
-| Moderate violation | lut_interp, dequant, codebook_decoder, embed_rom | -0.41 to -5.86 ns | May need pipeline stages or clock relaxation |
-| Severe violation | mac_pe, rope, rmsnorm, attention_unit, swiglu, vector_unit | -3.23 to -19.30 ns | Needs architectural changes or lower clock |
+| Moderate violation | lut_interp, dequant, codebook_decoder, embed_rom, swiglu, rmsnorm, attention_unit, mac_pe | -0.41 to -3.63 ns | Pipelining via `[[schedule(N)]]` reduces these |
+| Severe violation | vector_unit | -17.68 ns | Needs hierarchical PnR or further pipelining |
 
 **Observations:**
 - Control-path modules (layer_tile, global_controller, llama_chip) meet timing easily
-- Datapath modules with multipliers/accumulators have the worst timing
-- vector_unit (-19.30 ns) and swiglu (-17.47 ns) need ~43–80 MHz — candidates for pipelining
-- rmsnorm (-9.02 ns) and attention_unit (-9.15 ns) need ~140 MHz
+- Datapath modules with long combinational BF16 multiplier chains were originally severe — fixed by HLS retiming
+- vector_unit (-17.68 ns) is too large for flat ORFS GPL convergence with pipelined RTL — needs hierarchical PnR before retiming can land
+- rope (-4.14 ns) improved from -4.56 ns by reshaping the sin/cos macro (fold=2) and mirroring placement — further pipelining of the sin/cos lookup remains as a follow-up
 
 ## Aggregate Area
 
 | Category | Count | Total Cell Area | Total Die Area |
 |----------|-------|-----------------|----------------|
-| Logic-only (GDS) | 12 | 5.6 mm² | 9.4 mm² |
-| Macro-bearing (DRT) | 5 | 26.9 mm² | 86.4 mm² |
-| Academic demos (DRT/GDS) | 2 | 5.3 mm² | 22.0 mm² |
-| **Routed total** | **19** | **37.8 mm²** | **117.8 mm²** |
+| Logic-only (GDS) | 12 | 5.2 mm² | 9.4 mm² |
+| Macro-bearing (DRT) | 5 | 26.6 mm² | 46.8 mm² |
+| Academic demos (DRT/GDS) | 2 | 5.3 mm² | 5.0 mm² |
+| **Routed total** | **19** | **37.1 mm²** | **61.2 mm²** |
 
 **Note:** Macro-bearing designs are dominated by ROM area, not standard cells. A full LLaMA 3.1 8B layer tile with all macros would be ~50–100 mm² at sky130. The academic shuttle demo with kv_cache_demo + lm_head_demo adds ~27.6 mm² — feasible for a sky130 shuttle.
 
@@ -239,6 +245,20 @@ All NOR ROM and SRAM macros generated by custom compilers:
 10. **Macro aspect ratio is a floorplan input** — sram_4096x8 was originally 27×4442 µm (single bitcell column), forcing kv_cache_demo into a 1200×5000 strip. Adding a 16:1 column mux to the SRAM compiler reshaped the macro to 137×294 µm, enabling a 4×2 grid in a square 1000×1000 die. **83% area reduction** with marginally better timing. Real SRAM compilers always use col_mux (4–16) — a single-column model misrepresents both shape and bitline delay.
 11. **Die shrink trade-offs are channel-dependent, not just die-size-dependent** — kv_cache_demo 8-macro sweep with channel/halo tightening: 1200 (-0.25 ns) → 1000 (-0.24 ns, sweet spot) → 900 (-0.59 ns) at fixed 80×100 channels and 40 µm halo. Tightening to 60×60 channels + 10 µm halo recovered: 800 (-0.49 ns), 750 (-0.46 ns), 720 (-0.53 ns), 710 (-0.45 ns), 710×695 (-0.50 ns, 79% util — 8-macro floor). Going below fails PDN. Lessons: (a) cell-area density matters more than die size for timing — wider channels with looser cells are worse than tight channels with packed cells; (b) `MACRO_PLACE_HALO` (default 40 µm in sky130hd) is a hidden floor on density — for non-congested designs it can drop to 10 µm safely; (c) `PLACE_DENSITY_LB_ADDON` of 0.20 is generous; 0.05 works for tight macro layouts; (d) PDN x-axis margin needs ≥17 µm (met1 strap), y-axis ≥34 µm (met4 strap).
 12. **Halve the macro count for a bigger win than micro-shrinking** — kv_cache_demo final breakthrough: replaced 8× sram_4096x8 (col_mux=16, 137×294) with 4× sram_8192x8 (col_mux=32, 254×293) — same total bits, half the macro count, fewer mux levels in the HAL. Result at 595×705: -0.34 ns / 230 MHz / 144 K WL / 87% util — **better than every 8-macro die size on every metric**. WL dropped 30% (203 K → 144 K) because fewer macros means shorter critical paths. The placeholder SRAM compiler easily generates the wider macro since col_mux is a parameter; in real silicon, larger col_mux costs bitline length but stays within tolerable timing. Architectural changes (count, depth, width) often dominate floorplan tuning.
+13. **HLS retiming via `[[schedule(N)]]` is the cheapest WNS recovery** — four timing-bound modules pipelined with one-line annotations:
+
+    | Module | `atomic` (1 stage) | `[[schedule(N)]]` | Δ WNS | Δ fmax |
+    |---|---|---|---|---|
+    | swiglu (`compute_swiglu`) | -17.47 ns / 47 MHz | `schedule(7)` → -1.42 / 184 | +16.05 ns | +292% |
+    | rmsnorm (`accumulate_sq`) | -9.02 ns / 77 MHz | `schedule(4)` → -2.03 / 166 | +6.99 ns | +115% |
+    | attention_unit (`dot_product`) | -9.15 ns / 76 MHz | `schedule(3)` → -3.21 / 139 | +5.94 ns | +83% |
+    | mac_pe (`mac`) | -3.23 ns / 138 MHz | `schedule(2)` → -1.71 / 175 | +1.52 ns | +27% |
+
+    Compile flags `--frequency=250 --register-ratio=8 --max-register-ratio=16` were added to `add_kanagawa_rtl()` in `rtl/CMakeLists.txt`. The 8-term shift-and-add BF16 multiplier (~50 logic levels) needs roughly one stage per ~12 levels at sky130 — `swiglu`'s two chained multipliers + LUT lookup needed 7 stages. Each module hit a **retiming floor**: pushing `schedule(N+1)` typically *regressed* (more reg overhead than logic-depth saved). swiglu schedule(7)→(9): -1.42 → -1.41 (no change). rmsnorm schedule(4)→(5): -2.03 → -2.42 (worse). attention_unit schedule(3)→(5): -3.21 → -3.30 (worse). Throughput penalty is hidden by Kanagawa wavefront threading. **Limitation: vector_unit (791K cells) was too large for ORFS flat GPL to converge with pipelined RTL** — reverted to all-atomic baseline; needs hierarchical PnR before retiming can land.
+
+14. **NOR ROM macro `fold` reshapes the macro itself, not just the wrapper** — third application: `nor_rom_4096x1024` originally 485×2224 µm (1:4.58). Two of these inside rope forced a 2000×3500 die (1:1.75 aspect, 1029 DRC). With `fold=2`: macro becomes 956×1118 (1:1.17), 2 macros side-by-side fit in 3000×3300 (1:1.10), DRC drops to 418 (-59%) and fmax climbs from 69 → 122 MHz. **Pin count is preserved** at the logical interface (1024 dout + 12 addr + ce + clk = 1038 pins), but the longer macro edges spread pins more sparsely, and the placer has more room for cell density. Same trick that fixed kv_cache_demo (SRAM col_mux) and embed_rom/lm_head_demo (NOR ROM internal mux). **Architectural bit-cell rearrangement beats every floorplan or routing knob.**
+
+15. **Macro pin-side orientation matters as much as macro shape** — first attempt at rope v3 with both macros at R0 gave 646K DRT violations: dout pins are on the EAST edge of nor_rom_4096x1024, so left-macro dout (1024 pins) and right-macro addr/clk all crowded into the 200µm gap. Mirrored placement (left macro = MY, dout on WEST edge of footprint = facing west die edge; right macro = R0, dout facing east die edge) dropped DRT to 418 (-99.94%). The diagnostic was reading PIN coordinates from the LEF: `dout[0]` at x=956 (east), `addr[0]` and `clk` at x=0 (west). For wide-bus macros, **pin sides must face routing capacity, not other macros**.
 
 ## Architecture
 

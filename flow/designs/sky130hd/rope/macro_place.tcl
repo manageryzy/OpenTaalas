@@ -1,6 +1,13 @@
-# Place 2× nor_rom_4096x1024 macros in rope
-# Each macro: ~485×2226 µm, die: 2000×3500
-# Side by side with ~200µm gap, ~150µm margin to die edge
+# Place 2× nor_rom_4096x1024 macros in rope.
+# After fold=2 refold: each macro is 956×1118 µm (1:1.17, was 485×2226 1:4.58).
+# Die: 3000×3300, ~72% util.
+#
+# CRITICAL: pins are on EAST/WEST edges of macro:
+#   dout[1023:0] on EAST (x=956)
+#   addr[11:0], ce, clk on WEST (x=0)
+# Mirror left macro (MY) so dout faces west die edge, addr/clk face the gap.
+# Mirror right macro is R0 so dout faces east die edge.
+# Result: both 1024-pin dout buses fan out to opposite die edges.
 set block [ord::get_db_block]
 set macros {}
 foreach inst [$block getInsts] {
@@ -12,15 +19,24 @@ foreach inst [$block getInsts] {
 puts "Found [llength $macros] macros:"
 foreach m $macros { puts "  '$m'" }
 
-# Total macro width: 2×485 + 200 gap = 1170
-# Left X: (2000-1170)/2 ≈ 415, Right X: 415+485+200 = 1100
-# Center Y: (3500-2226)/2 ≈ 637
+# Layout (2× 956×1118 macros side-by-side, vertically centered):
+#   west margin: 200 µm
+#   left macro x=200 (orientation MY, dout faces west)
+#   gap: 200 µm (addr/clk routing)
+#   right macro x=1356 (orientation R0, dout faces east)
+#   east margin: 3000 - (1356 + 956) = 688 µm
+# Vertical center: y_base = (3300 - 1118)/2 = 1091
 set macros [lsort $macros]
-set x_positions {415 1100}
-set base_y 637
+set placements {
+    {200  1091 MY}
+    {1356 1091 R0}
+}
 set idx 0
 foreach inst_name $macros {
-    set x [lindex $x_positions $idx]
-    place_macro -macro_name $inst_name -location "$x $base_y" -orientation R0
+    set p [lindex $placements $idx]
+    set x [lindex $p 0]
+    set y [lindex $p 1]
+    set orient [lindex $p 2]
+    place_macro -macro_name $inst_name -location "$x $y" -orientation $orient
     incr idx
 }

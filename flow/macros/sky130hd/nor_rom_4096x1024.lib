@@ -46,7 +46,7 @@ library (nor_rom_4096x1024) {
   }
 
   cell (nor_rom_4096x1024) {
-    area : 1078651.4;
+    area : 1068821.0;
     cell_leakage_power : 409600.0;
     dont_touch : true;
     dont_use : true;

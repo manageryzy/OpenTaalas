@@ -1,6 +1,6 @@
 
 // This file was generated. Do not modify.
-// kanagawa --backend=sv --import-dir=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library --base-library=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library/mini-base.k --output=/home/mana/workspace/OpenTaalas/rtl/generated/kanagawa/swiglu /home/mana/workspace/OpenTaalas/rtl/kanagawa/swiglu.k
+// kanagawa --backend=sv --import-dir=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library --base-library=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library/mini-base.k --output=/home/mana/workspace/OpenTaalas/rtl/generated/kanagawa/swiglu --frequency=250 --register-ratio=8 --max-register-ratio=16 /home/mana/workspace/OpenTaalas/rtl/kanagawa/swiglu.k
 
 `default_nettype wire
 module swiglu_unitDebugView_set_sigmoid_lutEntry
@@ -106,7 +106,7 @@ endmodule
 `ifndef _TYPESCOPE_CoreModuleTypeScope
 `define _TYPESCOPE_CoreModuleTypeScope
 `endif // _TYPESCOPE_CoreModuleTypeScope
-module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
+module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -370,7 +370,7 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
-  input  wire [31:0] data_in_7,
+  input  wire [31:0] data_in_8,
   input  wire        input_fifo_underflow_0,
   output wire        input_rdy_0,
   input  wire        input_valid_0,
@@ -379,540 +379,616 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [15:0] global_in__sigmoid_lut_element_0_9_0 = global_in__sigmoid_lut_element_0_9;	// swiglu.k:93:9
+  wire  [15:0] global_in__sigmoid_lut_element_0_9_0 = global_in__sigmoid_lut_element_0_9;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_1_10_0 =
-    global_in__sigmoid_lut_element_1_10;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_1_10;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_2_11_0 =
-    global_in__sigmoid_lut_element_2_11;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_2_11;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_3_12_0 =
-    global_in__sigmoid_lut_element_3_12;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_3_12;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_4_13_0 =
-    global_in__sigmoid_lut_element_4_13;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_4_13;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_5_14_0 =
-    global_in__sigmoid_lut_element_5_14;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_5_14;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_6_15_0 =
-    global_in__sigmoid_lut_element_6_15;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_6_15;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_7_16_0 =
-    global_in__sigmoid_lut_element_7_16;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_7_16;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_8_17_0 =
-    global_in__sigmoid_lut_element_8_17;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_8_17;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_9_18_0 =
-    global_in__sigmoid_lut_element_9_18;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_9_18;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_10_19_0 =
-    global_in__sigmoid_lut_element_10_19;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_10_19;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_11_20_0 =
-    global_in__sigmoid_lut_element_11_20;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_11_20;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_12_21_0 =
-    global_in__sigmoid_lut_element_12_21;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_12_21;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_13_22_0 =
-    global_in__sigmoid_lut_element_13_22;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_13_22;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_14_23_0 =
-    global_in__sigmoid_lut_element_14_23;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_14_23;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_15_24_0 =
-    global_in__sigmoid_lut_element_15_24;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_15_24;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_16_25_0 =
-    global_in__sigmoid_lut_element_16_25;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_16_25;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_17_26_0 =
-    global_in__sigmoid_lut_element_17_26;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_17_26;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_18_27_0 =
-    global_in__sigmoid_lut_element_18_27;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_18_27;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_19_28_0 =
-    global_in__sigmoid_lut_element_19_28;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_19_28;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_20_29_0 =
-    global_in__sigmoid_lut_element_20_29;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_20_29;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_21_30_0 =
-    global_in__sigmoid_lut_element_21_30;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_21_30;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_22_31_0 =
-    global_in__sigmoid_lut_element_22_31;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_22_31;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_23_32_0 =
-    global_in__sigmoid_lut_element_23_32;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_23_32;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_24_33_0 =
-    global_in__sigmoid_lut_element_24_33;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_24_33;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_25_34_0 =
-    global_in__sigmoid_lut_element_25_34;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_25_34;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_26_35_0 =
-    global_in__sigmoid_lut_element_26_35;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_26_35;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_27_36_0 =
-    global_in__sigmoid_lut_element_27_36;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_27_36;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_28_37_0 =
-    global_in__sigmoid_lut_element_28_37;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_28_37;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_29_38_0 =
-    global_in__sigmoid_lut_element_29_38;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_29_38;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_30_39_0 =
-    global_in__sigmoid_lut_element_30_39;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_30_39;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_31_40_0 =
-    global_in__sigmoid_lut_element_31_40;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_31_40;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_32_41_0 =
-    global_in__sigmoid_lut_element_32_41;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_32_41;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_33_42_0 =
-    global_in__sigmoid_lut_element_33_42;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_33_42;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_34_43_0 =
-    global_in__sigmoid_lut_element_34_43;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_34_43;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_35_44_0 =
-    global_in__sigmoid_lut_element_35_44;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_35_44;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_36_45_0 =
-    global_in__sigmoid_lut_element_36_45;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_36_45;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_37_46_0 =
-    global_in__sigmoid_lut_element_37_46;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_37_46;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_38_47_0 =
-    global_in__sigmoid_lut_element_38_47;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_38_47;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_39_48_0 =
-    global_in__sigmoid_lut_element_39_48;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_39_48;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_40_49_0 =
-    global_in__sigmoid_lut_element_40_49;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_40_49;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_41_50_0 =
-    global_in__sigmoid_lut_element_41_50;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_41_50;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_42_51_0 =
-    global_in__sigmoid_lut_element_42_51;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_42_51;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_43_52_0 =
-    global_in__sigmoid_lut_element_43_52;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_43_52;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_44_53_0 =
-    global_in__sigmoid_lut_element_44_53;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_44_53;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_45_54_0 =
-    global_in__sigmoid_lut_element_45_54;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_45_54;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_46_55_0 =
-    global_in__sigmoid_lut_element_46_55;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_46_55;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_47_56_0 =
-    global_in__sigmoid_lut_element_47_56;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_47_56;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_48_57_0 =
-    global_in__sigmoid_lut_element_48_57;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_48_57;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_49_58_0 =
-    global_in__sigmoid_lut_element_49_58;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_49_58;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_50_59_0 =
-    global_in__sigmoid_lut_element_50_59;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_50_59;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_51_60_0 =
-    global_in__sigmoid_lut_element_51_60;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_51_60;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_52_61_0 =
-    global_in__sigmoid_lut_element_52_61;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_52_61;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_53_62_0 =
-    global_in__sigmoid_lut_element_53_62;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_53_62;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_54_63_0 =
-    global_in__sigmoid_lut_element_54_63;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_54_63;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_55_64_0 =
-    global_in__sigmoid_lut_element_55_64;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_55_64;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_56_65_0 =
-    global_in__sigmoid_lut_element_56_65;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_56_65;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_57_66_0 =
-    global_in__sigmoid_lut_element_57_66;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_57_66;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_58_67_0 =
-    global_in__sigmoid_lut_element_58_67;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_58_67;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_59_68_0 =
-    global_in__sigmoid_lut_element_59_68;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_59_68;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_60_69_0 =
-    global_in__sigmoid_lut_element_60_69;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_60_69;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_61_70_0 =
-    global_in__sigmoid_lut_element_61_70;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_61_70;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_62_71_0 =
-    global_in__sigmoid_lut_element_62_71;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_62_71;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_63_72_0 =
-    global_in__sigmoid_lut_element_63_72;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_63_72;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_64_73_0 =
-    global_in__sigmoid_lut_element_64_73;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_64_73;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_65_74_0 =
-    global_in__sigmoid_lut_element_65_74;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_65_74;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_66_75_0 =
-    global_in__sigmoid_lut_element_66_75;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_66_75;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_67_76_0 =
-    global_in__sigmoid_lut_element_67_76;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_67_76;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_68_77_0 =
-    global_in__sigmoid_lut_element_68_77;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_68_77;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_69_78_0 =
-    global_in__sigmoid_lut_element_69_78;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_69_78;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_70_79_0 =
-    global_in__sigmoid_lut_element_70_79;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_70_79;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_71_80_0 =
-    global_in__sigmoid_lut_element_71_80;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_71_80;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_72_81_0 =
-    global_in__sigmoid_lut_element_72_81;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_72_81;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_73_82_0 =
-    global_in__sigmoid_lut_element_73_82;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_73_82;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_74_83_0 =
-    global_in__sigmoid_lut_element_74_83;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_74_83;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_75_84_0 =
-    global_in__sigmoid_lut_element_75_84;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_75_84;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_76_85_0 =
-    global_in__sigmoid_lut_element_76_85;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_76_85;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_77_86_0 =
-    global_in__sigmoid_lut_element_77_86;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_77_86;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_78_87_0 =
-    global_in__sigmoid_lut_element_78_87;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_78_87;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_79_88_0 =
-    global_in__sigmoid_lut_element_79_88;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_79_88;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_80_89_0 =
-    global_in__sigmoid_lut_element_80_89;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_80_89;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_81_90_0 =
-    global_in__sigmoid_lut_element_81_90;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_81_90;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_82_91_0 =
-    global_in__sigmoid_lut_element_82_91;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_82_91;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_83_92_0 =
-    global_in__sigmoid_lut_element_83_92;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_83_92;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_84_93_0 =
-    global_in__sigmoid_lut_element_84_93;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_84_93;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_85_94_0 =
-    global_in__sigmoid_lut_element_85_94;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_85_94;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_86_95_0 =
-    global_in__sigmoid_lut_element_86_95;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_86_95;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_87_96_0 =
-    global_in__sigmoid_lut_element_87_96;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_87_96;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_88_97_0 =
-    global_in__sigmoid_lut_element_88_97;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_88_97;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_89_98_0 =
-    global_in__sigmoid_lut_element_89_98;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_89_98;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_90_99_0 =
-    global_in__sigmoid_lut_element_90_99;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_90_99;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_91_100_0 =
-    global_in__sigmoid_lut_element_91_100;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_91_100;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_92_101_0 =
-    global_in__sigmoid_lut_element_92_101;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_92_101;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_93_102_0 =
-    global_in__sigmoid_lut_element_93_102;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_93_102;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_94_103_0 =
-    global_in__sigmoid_lut_element_94_103;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_94_103;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_95_104_0 =
-    global_in__sigmoid_lut_element_95_104;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_95_104;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_96_105_0 =
-    global_in__sigmoid_lut_element_96_105;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_96_105;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_97_106_0 =
-    global_in__sigmoid_lut_element_97_106;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_97_106;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_98_107_0 =
-    global_in__sigmoid_lut_element_98_107;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_98_107;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_99_108_0 =
-    global_in__sigmoid_lut_element_99_108;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_99_108;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_100_109_0 =
-    global_in__sigmoid_lut_element_100_109;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_100_109;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_101_110_0 =
-    global_in__sigmoid_lut_element_101_110;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_101_110;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_102_111_0 =
-    global_in__sigmoid_lut_element_102_111;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_102_111;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_103_112_0 =
-    global_in__sigmoid_lut_element_103_112;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_103_112;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_104_113_0 =
-    global_in__sigmoid_lut_element_104_113;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_104_113;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_105_114_0 =
-    global_in__sigmoid_lut_element_105_114;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_105_114;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_106_115_0 =
-    global_in__sigmoid_lut_element_106_115;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_106_115;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_107_116_0 =
-    global_in__sigmoid_lut_element_107_116;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_107_116;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_108_117_0 =
-    global_in__sigmoid_lut_element_108_117;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_108_117;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_109_118_0 =
-    global_in__sigmoid_lut_element_109_118;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_109_118;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_110_119_0 =
-    global_in__sigmoid_lut_element_110_119;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_110_119;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_111_120_0 =
-    global_in__sigmoid_lut_element_111_120;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_111_120;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_112_121_0 =
-    global_in__sigmoid_lut_element_112_121;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_112_121;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_113_122_0 =
-    global_in__sigmoid_lut_element_113_122;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_113_122;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_114_123_0 =
-    global_in__sigmoid_lut_element_114_123;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_114_123;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_115_124_0 =
-    global_in__sigmoid_lut_element_115_124;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_115_124;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_116_125_0 =
-    global_in__sigmoid_lut_element_116_125;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_116_125;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_117_126_0 =
-    global_in__sigmoid_lut_element_117_126;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_117_126;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_118_127_0 =
-    global_in__sigmoid_lut_element_118_127;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_118_127;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_119_128_0 =
-    global_in__sigmoid_lut_element_119_128;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_119_128;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_120_129_0 =
-    global_in__sigmoid_lut_element_120_129;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_120_129;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_121_130_0 =
-    global_in__sigmoid_lut_element_121_130;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_121_130;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_122_131_0 =
-    global_in__sigmoid_lut_element_122_131;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_122_131;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_123_132_0 =
-    global_in__sigmoid_lut_element_123_132;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_123_132;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_124_133_0 =
-    global_in__sigmoid_lut_element_124_133;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_124_133;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_125_134_0 =
-    global_in__sigmoid_lut_element_125_134;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_125_134;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_126_135_0 =
-    global_in__sigmoid_lut_element_126_135;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_126_135;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_127_136_0 =
-    global_in__sigmoid_lut_element_127_136;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_127_136;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_128_137_0 =
-    global_in__sigmoid_lut_element_128_137;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_128_137;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_129_138_0 =
-    global_in__sigmoid_lut_element_129_138;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_129_138;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_130_139_0 =
-    global_in__sigmoid_lut_element_130_139;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_130_139;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_131_140_0 =
-    global_in__sigmoid_lut_element_131_140;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_131_140;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_132_141_0 =
-    global_in__sigmoid_lut_element_132_141;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_132_141;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_133_142_0 =
-    global_in__sigmoid_lut_element_133_142;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_133_142;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_134_143_0 =
-    global_in__sigmoid_lut_element_134_143;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_134_143;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_135_144_0 =
-    global_in__sigmoid_lut_element_135_144;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_135_144;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_136_145_0 =
-    global_in__sigmoid_lut_element_136_145;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_136_145;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_137_146_0 =
-    global_in__sigmoid_lut_element_137_146;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_137_146;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_138_147_0 =
-    global_in__sigmoid_lut_element_138_147;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_138_147;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_139_148_0 =
-    global_in__sigmoid_lut_element_139_148;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_139_148;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_140_149_0 =
-    global_in__sigmoid_lut_element_140_149;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_140_149;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_141_150_0 =
-    global_in__sigmoid_lut_element_141_150;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_141_150;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_142_151_0 =
-    global_in__sigmoid_lut_element_142_151;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_142_151;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_143_152_0 =
-    global_in__sigmoid_lut_element_143_152;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_143_152;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_144_153_0 =
-    global_in__sigmoid_lut_element_144_153;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_144_153;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_145_154_0 =
-    global_in__sigmoid_lut_element_145_154;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_145_154;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_146_155_0 =
-    global_in__sigmoid_lut_element_146_155;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_146_155;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_147_156_0 =
-    global_in__sigmoid_lut_element_147_156;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_147_156;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_148_157_0 =
-    global_in__sigmoid_lut_element_148_157;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_148_157;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_149_158_0 =
-    global_in__sigmoid_lut_element_149_158;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_149_158;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_150_159_0 =
-    global_in__sigmoid_lut_element_150_159;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_150_159;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_151_160_0 =
-    global_in__sigmoid_lut_element_151_160;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_151_160;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_152_161_0 =
-    global_in__sigmoid_lut_element_152_161;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_152_161;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_153_162_0 =
-    global_in__sigmoid_lut_element_153_162;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_153_162;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_154_163_0 =
-    global_in__sigmoid_lut_element_154_163;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_154_163;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_155_164_0 =
-    global_in__sigmoid_lut_element_155_164;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_155_164;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_156_165_0 =
-    global_in__sigmoid_lut_element_156_165;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_156_165;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_157_166_0 =
-    global_in__sigmoid_lut_element_157_166;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_157_166;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_158_167_0 =
-    global_in__sigmoid_lut_element_158_167;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_158_167;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_159_168_0 =
-    global_in__sigmoid_lut_element_159_168;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_159_168;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_160_169_0 =
-    global_in__sigmoid_lut_element_160_169;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_160_169;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_161_170_0 =
-    global_in__sigmoid_lut_element_161_170;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_161_170;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_162_171_0 =
-    global_in__sigmoid_lut_element_162_171;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_162_171;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_163_172_0 =
-    global_in__sigmoid_lut_element_163_172;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_163_172;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_164_173_0 =
-    global_in__sigmoid_lut_element_164_173;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_164_173;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_165_174_0 =
-    global_in__sigmoid_lut_element_165_174;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_165_174;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_166_175_0 =
-    global_in__sigmoid_lut_element_166_175;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_166_175;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_167_176_0 =
-    global_in__sigmoid_lut_element_167_176;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_167_176;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_168_177_0 =
-    global_in__sigmoid_lut_element_168_177;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_168_177;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_169_178_0 =
-    global_in__sigmoid_lut_element_169_178;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_169_178;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_170_179_0 =
-    global_in__sigmoid_lut_element_170_179;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_170_179;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_171_180_0 =
-    global_in__sigmoid_lut_element_171_180;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_171_180;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_172_181_0 =
-    global_in__sigmoid_lut_element_172_181;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_172_181;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_173_182_0 =
-    global_in__sigmoid_lut_element_173_182;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_173_182;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_174_183_0 =
-    global_in__sigmoid_lut_element_174_183;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_174_183;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_175_184_0 =
-    global_in__sigmoid_lut_element_175_184;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_175_184;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_176_185_0 =
-    global_in__sigmoid_lut_element_176_185;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_176_185;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_177_186_0 =
-    global_in__sigmoid_lut_element_177_186;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_177_186;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_178_187_0 =
-    global_in__sigmoid_lut_element_178_187;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_178_187;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_179_188_0 =
-    global_in__sigmoid_lut_element_179_188;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_179_188;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_180_189_0 =
-    global_in__sigmoid_lut_element_180_189;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_180_189;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_181_190_0 =
-    global_in__sigmoid_lut_element_181_190;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_181_190;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_182_191_0 =
-    global_in__sigmoid_lut_element_182_191;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_182_191;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_183_192_0 =
-    global_in__sigmoid_lut_element_183_192;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_183_192;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_184_193_0 =
-    global_in__sigmoid_lut_element_184_193;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_184_193;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_185_194_0 =
-    global_in__sigmoid_lut_element_185_194;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_185_194;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_186_195_0 =
-    global_in__sigmoid_lut_element_186_195;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_186_195;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_187_196_0 =
-    global_in__sigmoid_lut_element_187_196;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_187_196;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_188_197_0 =
-    global_in__sigmoid_lut_element_188_197;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_188_197;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_189_198_0 =
-    global_in__sigmoid_lut_element_189_198;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_189_198;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_190_199_0 =
-    global_in__sigmoid_lut_element_190_199;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_190_199;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_191_200_0 =
-    global_in__sigmoid_lut_element_191_200;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_191_200;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_192_201_0 =
-    global_in__sigmoid_lut_element_192_201;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_192_201;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_193_202_0 =
-    global_in__sigmoid_lut_element_193_202;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_193_202;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_194_203_0 =
-    global_in__sigmoid_lut_element_194_203;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_194_203;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_195_204_0 =
-    global_in__sigmoid_lut_element_195_204;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_195_204;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_196_205_0 =
-    global_in__sigmoid_lut_element_196_205;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_196_205;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_197_206_0 =
-    global_in__sigmoid_lut_element_197_206;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_197_206;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_198_207_0 =
-    global_in__sigmoid_lut_element_198_207;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_198_207;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_199_208_0 =
-    global_in__sigmoid_lut_element_199_208;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_199_208;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_200_209_0 =
-    global_in__sigmoid_lut_element_200_209;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_200_209;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_201_210_0 =
-    global_in__sigmoid_lut_element_201_210;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_201_210;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_202_211_0 =
-    global_in__sigmoid_lut_element_202_211;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_202_211;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_203_212_0 =
-    global_in__sigmoid_lut_element_203_212;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_203_212;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_204_213_0 =
-    global_in__sigmoid_lut_element_204_213;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_204_213;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_205_214_0 =
-    global_in__sigmoid_lut_element_205_214;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_205_214;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_206_215_0 =
-    global_in__sigmoid_lut_element_206_215;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_206_215;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_207_216_0 =
-    global_in__sigmoid_lut_element_207_216;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_207_216;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_208_217_0 =
-    global_in__sigmoid_lut_element_208_217;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_208_217;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_209_218_0 =
-    global_in__sigmoid_lut_element_209_218;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_209_218;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_210_219_0 =
-    global_in__sigmoid_lut_element_210_219;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_210_219;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_211_220_0 =
-    global_in__sigmoid_lut_element_211_220;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_211_220;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_212_221_0 =
-    global_in__sigmoid_lut_element_212_221;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_212_221;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_213_222_0 =
-    global_in__sigmoid_lut_element_213_222;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_213_222;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_214_223_0 =
-    global_in__sigmoid_lut_element_214_223;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_214_223;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_215_224_0 =
-    global_in__sigmoid_lut_element_215_224;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_215_224;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_216_225_0 =
-    global_in__sigmoid_lut_element_216_225;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_216_225;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_217_226_0 =
-    global_in__sigmoid_lut_element_217_226;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_217_226;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_218_227_0 =
-    global_in__sigmoid_lut_element_218_227;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_218_227;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_219_228_0 =
-    global_in__sigmoid_lut_element_219_228;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_219_228;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_220_229_0 =
-    global_in__sigmoid_lut_element_220_229;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_220_229;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_221_230_0 =
-    global_in__sigmoid_lut_element_221_230;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_221_230;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_222_231_0 =
-    global_in__sigmoid_lut_element_222_231;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_222_231;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_223_232_0 =
-    global_in__sigmoid_lut_element_223_232;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_223_232;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_224_233_0 =
-    global_in__sigmoid_lut_element_224_233;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_224_233;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_225_234_0 =
-    global_in__sigmoid_lut_element_225_234;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_225_234;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_226_235_0 =
-    global_in__sigmoid_lut_element_226_235;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_226_235;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_227_236_0 =
-    global_in__sigmoid_lut_element_227_236;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_227_236;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_228_237_0 =
-    global_in__sigmoid_lut_element_228_237;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_228_237;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_229_238_0 =
-    global_in__sigmoid_lut_element_229_238;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_229_238;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_230_239_0 =
-    global_in__sigmoid_lut_element_230_239;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_230_239;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_231_240_0 =
-    global_in__sigmoid_lut_element_231_240;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_231_240;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_232_241_0 =
-    global_in__sigmoid_lut_element_232_241;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_232_241;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_233_242_0 =
-    global_in__sigmoid_lut_element_233_242;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_233_242;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_234_243_0 =
-    global_in__sigmoid_lut_element_234_243;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_234_243;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_235_244_0 =
-    global_in__sigmoid_lut_element_235_244;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_235_244;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_236_245_0 =
-    global_in__sigmoid_lut_element_236_245;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_236_245;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_237_246_0 =
-    global_in__sigmoid_lut_element_237_246;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_237_246;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_238_247_0 =
-    global_in__sigmoid_lut_element_238_247;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_238_247;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_239_248_0 =
-    global_in__sigmoid_lut_element_239_248;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_239_248;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_240_249_0 =
-    global_in__sigmoid_lut_element_240_249;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_240_249;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_241_250_0 =
-    global_in__sigmoid_lut_element_241_250;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_241_250;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_242_251_0 =
-    global_in__sigmoid_lut_element_242_251;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_242_251;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_243_252_0 =
-    global_in__sigmoid_lut_element_243_252;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_243_252;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_244_253_0 =
-    global_in__sigmoid_lut_element_244_253;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_244_253;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_245_254_0 =
-    global_in__sigmoid_lut_element_245_254;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_245_254;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_246_255_0 =
-    global_in__sigmoid_lut_element_246_255;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_246_255;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_247_256_0 =
-    global_in__sigmoid_lut_element_247_256;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_247_256;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_248_257_0 =
-    global_in__sigmoid_lut_element_248_257;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_248_257;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_249_258_0 =
-    global_in__sigmoid_lut_element_249_258;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_249_258;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_250_259_0 =
-    global_in__sigmoid_lut_element_250_259;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_250_259;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_251_260_0 =
-    global_in__sigmoid_lut_element_251_260;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_251_260;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_252_261_0 =
-    global_in__sigmoid_lut_element_252_261;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_252_261;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_253_262_0 =
-    global_in__sigmoid_lut_element_253_262;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_253_262;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_254_263_0 =
-    global_in__sigmoid_lut_element_254_263;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_254_263;	// swiglu.k:99:9
   wire  [15:0] global_in__sigmoid_lut_element_255_264_0 =
-    global_in__sigmoid_lut_element_255_264;	// swiglu.k:93:9
-  logic        done_out_0;	// swiglu.k:93:9
-  logic [15:0] fifo_data_out_0_0;	// swiglu.k:93:9
-  logic        fifo_wren_0_0;	// swiglu.k:93:9
-  logic        input_rdy_0_0;	// swiglu.k:93:9
-  logic [7:0]  control_state_out_0;	// swiglu.k:93:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// swiglu.k:93:9
-  always_comb begin	// swiglu.k:93:9
-    input_rdy_0_0 = _GEN;	// swiglu.k:93:9
+    global_in__sigmoid_lut_element_255_264;	// swiglu.k:99:9
+  logic [15:0] data_prop_in_7_0;	// swiglu.k:99:9
+  wire  [15:0] data_prop_out_7_0;	// swiglu.k:99:9
+  logic        done_out_0;	// swiglu.k:99:9
+  logic [15:0] fifo_data_out_0_0;	// swiglu.k:99:9
+  logic        fifo_wren_0_0;	// swiglu.k:99:9
+  logic        input_rdy_0_0;	// swiglu.k:99:9
+  logic [7:0]  control_state_out_0;	// swiglu.k:99:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// swiglu.k:99:9
+  always_comb begin	// swiglu.k:99:9
+    input_rdy_0_0 = _GEN;	// swiglu.k:99:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// swiglu.k:93:9
+       ~input_valid_0};	// swiglu.k:99:9
   end // always_comb
-  reg   [15:0] p0_gate_bf16;	// swiglu.k:93:9
-  reg   [15:0] p0_up_bf16;	// swiglu.k:93:9
-  reg          p0_stage1_enable = 1'h0;	// swiglu.k:93:9
-  reg   [15:0] p0_result;	// swiglu.k:93:9
-  reg          p0_stage2_enable = 1'h0;	// swiglu.k:93:9
-  reg   [15:0] p0_result_0;	// swiglu.k:93:9
-  reg          p0_stage3_enable = 1'h0;	// swiglu.k:93:9
+  reg   [15:0] p0_gate_bf16;	// swiglu.k:99:9
+  reg   [15:0] p0_up_bf16;	// swiglu.k:99:9
+  reg          p0_stage1_enable = 1'h0;	// swiglu.k:99:9
+  always_comb	// swiglu.k:99:9
+    data_prop_in_7_0 = p0_up_bf16;	// swiglu.k:99:9
+  reg   [10:0] p0__prod_plus_ma32_shl_2_;	// swiglu.k:99:9
+  reg   [5:0]  p0_mb;	// swiglu.k:99:9
+  reg   [9:0]  p0_prod;	// swiglu.k:99:9
+  reg   [11:0] p0__ma32_shl_3_;	// swiglu.k:99:9
+  reg   [12:0] p0__ma32_shl_4_;	// swiglu.k:99:9
+  reg   [13:0] p0__ma32_shl_5_;	// swiglu.k:99:9
+  reg   [14:0] p0__ma32_shl_6_;	// swiglu.k:99:9
+  reg          p0_mb_0;	// swiglu.k:99:9
+  reg   [15:0] p0__ma32_shl_7_;	// swiglu.k:99:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1_;	// swiglu.k:99:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_;	// swiglu.k:99:9
+  reg   [15:0] p0__sigmoid_lut;	// swiglu.k:99:9
+  reg   [15:0] p0_gate_bf16_0;	// swiglu.k:99:9
+  reg          p0__b_exp_ne_0_;	// swiglu.k:99:9
+  reg          p0__a_exp_ne_0_;	// swiglu.k:99:9
+  reg   [5:0]  p0_mb_1;	// swiglu.k:99:9
+  reg   [15:0] p0_b_exp;	// swiglu.k:99:9
+  reg          p0_mb_2;	// swiglu.k:99:9
+  reg          p0__b_exp_ne_0__0;	// swiglu.k:99:9
+  reg          p0_stage2_enable = 1'h0;	// swiglu.k:99:9
+  reg   [14:0] p0__prod_plus_ma32_shl_6_;	// swiglu.k:99:9
+  reg          p0_mb_3;	// swiglu.k:99:9
+  reg   [13:0] p0_prod_0;	// swiglu.k:99:9
+  reg   [15:0] p0__ma32_shl_7__0;	// swiglu.k:99:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__0;	// swiglu.k:99:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__0;	// swiglu.k:99:9
+  reg   [15:0] p0__sigmoid_lut_0;	// swiglu.k:99:9
+  reg   [15:0] p0_gate_bf16_1;	// swiglu.k:99:9
+  reg          p0__b_exp_ne_0__1;	// swiglu.k:99:9
+  reg          p0__a_exp_ne_0__0;	// swiglu.k:99:9
+  reg   [5:0]  p0_mb_4;	// swiglu.k:99:9
+  reg   [15:0] p0_b_exp_0;	// swiglu.k:99:9
+  reg          p0_mb_5;	// swiglu.k:99:9
+  reg          p0__b_exp_ne_0__2;	// swiglu.k:99:9
+  reg          p0_stage3_enable = 1'h0;	// swiglu.k:99:9
+  reg   [15:0] p0_a_exp;	// swiglu.k:99:9
+  reg   [5:0]  p0_mb_6;	// swiglu.k:99:9
+  reg   [6:0]  p0_cast_lt_uint32_gt_ma_;	// swiglu.k:99:9
+  reg   [15:0] p0_b_exp_1;	// swiglu.k:99:9
+  reg   [9:0]  p0__ma32_shl_1_;	// swiglu.k:99:9
+  reg   [10:0] p0__ma32_shl_2_;	// swiglu.k:99:9
+  reg   [11:0] p0__ma32_shl_3__0;	// swiglu.k:99:9
+  reg   [12:0] p0__ma32_shl_4__0;	// swiglu.k:99:9
+  reg   [13:0] p0__ma32_shl_5__0;	// swiglu.k:99:9
+  reg   [14:0] p0__ma32_shl_6__0;	// swiglu.k:99:9
+  reg          p0_mb_7;	// swiglu.k:99:9
+  reg   [15:0] p0__ma32_shl_7__1;	// swiglu.k:99:9
+  reg   [15:0] p0_silu;	// swiglu.k:99:9
+  reg          p0__b_exp_ne_0__3;	// swiglu.k:99:9
+  reg          p0_stage4_enable = 1'h0;	// swiglu.k:99:9
+  reg   [12:0] p0__prod_plus_ma32_shl_4_;	// swiglu.k:99:9
+  reg   [5:0]  p0_mb_8;	// swiglu.k:99:9
+  reg   [11:0] p0_prod_1;	// swiglu.k:99:9
+  reg   [13:0] p0__ma32_shl_5__1;	// swiglu.k:99:9
+  reg   [14:0] p0__ma32_shl_6__1;	// swiglu.k:99:9
+  reg          p0_mb_9;	// swiglu.k:99:9
+  reg   [15:0] p0__ma32_shl_7__2;	// swiglu.k:99:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__1;	// swiglu.k:99:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__1;	// swiglu.k:99:9
+  reg   [15:0] p0_silu_0;	// swiglu.k:99:9
+  reg          p0__b_exp_ne_0__4;	// swiglu.k:99:9
+  reg          p0__a_exp_ne_0__1;	// swiglu.k:99:9
+  reg          p0_stage5_enable = 1'h0;	// swiglu.k:99:9
+  reg          p0_prod_2;	// swiglu.k:99:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__2;	// swiglu.k:99:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__2;	// swiglu.k:99:9
+  reg   [15:0] p0_up_bf16_0;	// swiglu.k:99:9
+  reg   [15:0] p0_silu_1;	// swiglu.k:99:9
+  reg   [14:0] p0_prod_3;	// swiglu.k:99:9
+  reg          p0__b_exp_ne_0__5;	// swiglu.k:99:9
+  reg          p0__a_exp_ne_0__2;	// swiglu.k:99:9
+  reg          p0_stage6_enable = 1'h0;	// swiglu.k:99:9
+  reg   [15:0] p0_result;	// swiglu.k:99:9
+  reg          p0_stage7_enable = 1'h0;	// swiglu.k:99:9
+  reg   [15:0] p0_result_0;	// swiglu.k:99:9
+  reg          p0_stage8_enable = 1'h0;	// swiglu.k:99:9
   wire  [15:0] _sigmoid_lut =
     p0_gate_bf16[15]
       ? (p0_gate_bf16[14]
@@ -1424,72 +1500,60 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
                                    : global_in__sigmoid_lut_element_2_11_0)
                               : p0_gate_bf16[8]
                                   ? global_in__sigmoid_lut_element_1_10_0
-                                  : global_in__sigmoid_lut_element_0_9_0;	// swiglu.k:93:9, :98:26
-  wire         prod = p0_gate_bf16[6] & _sigmoid_lut[0];	// swiglu.k:93:9, :98:26, :108:{21,33}, :109:{21,33}, :111:35, :112:{21,25}
-  wire         prod_0 = p0_gate_bf16[5] & _sigmoid_lut[0];	// swiglu.k:93:9, :98:26, :108:{21,33}, :109:{21,33}, :111:35, :112:{21,25}
-  wire         prod_1 = p0_gate_bf16[4] & _sigmoid_lut[0];	// swiglu.k:93:9, :98:26, :108:{21,33}, :109:{21,33}, :111:35, :112:{21,25}
-  wire         prod_2 = p0_gate_bf16[3] & _sigmoid_lut[0];	// swiglu.k:93:9, :98:26, :108:{21,33}, :109:{21,33}, :111:35, :112:{21,25}
-  wire         prod_3 = p0_gate_bf16[2] & _sigmoid_lut[0];	// swiglu.k:93:9, :98:26, :108:{21,33}, :109:{21,33}, :111:35, :112:{21,25}
-  wire         prod_4 = p0_gate_bf16[1] & _sigmoid_lut[0];	// swiglu.k:93:9, :98:26, :108:{21,33}, :109:{21,33}, :111:35, :112:{21,25}
-  wire         prod_5 = p0_gate_bf16[0] & _sigmoid_lut[0];	// swiglu.k:93:9, :98:26, :108:{21,33}, :109:{21,33}, :111:35, :112:{21,25}
+                                  : global_in__sigmoid_lut_element_0_9_0;	// swiglu.k:99:9, :104:26
+  wire         prod = p0_gate_bf16[6] & _sigmoid_lut[0];	// swiglu.k:99:9, :104:26, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
+  wire         prod_0 = p0_gate_bf16[5] & _sigmoid_lut[0];	// swiglu.k:99:9, :104:26, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
+  wire         prod_1 = p0_gate_bf16[4] & _sigmoid_lut[0];	// swiglu.k:99:9, :104:26, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
+  wire         prod_2 = p0_gate_bf16[3] & _sigmoid_lut[0];	// swiglu.k:99:9, :104:26, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
+  wire         prod_3 = p0_gate_bf16[2] & _sigmoid_lut[0];	// swiglu.k:99:9, :104:26, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
+  wire         prod_4 = p0_gate_bf16[1] & _sigmoid_lut[0];	// swiglu.k:99:9, :104:26, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
+  wire         prod_5 = p0_gate_bf16[0] & _sigmoid_lut[0];	// swiglu.k:99:9, :104:26, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
   wire  [15:0] _a_exp_plus_b_exp_ =
-    16'({8'h0, p0_gate_bf16[14:7]} + {8'h0, _sigmoid_lut[14:7]});	// swiglu.k:93:9, :98:26, :125:39, :130:39
+    16'({8'h0, p0_gate_bf16[14:7]} + {8'h0, _sigmoid_lut[14:7]});	// swiglu.k:99:9, :104:26, :131:39, :136:39
   wire  [9:0]  _prod_plus_ma32_shl_1_ =
     10'({2'h0, _sigmoid_lut[0], prod, prod_0, prod_1, prod_2, prod_3, prod_4, prod_5}
-        + {2'h1, p0_gate_bf16[6:0], 1'h0});	// swiglu.k:93:9, :98:26, :109:{21,33}, :112:{21,25}, :113:{51,58}
-  wire         prod_6 = _prod_plus_ma32_shl_1_[9] & _sigmoid_lut[1];	// swiglu.k:98:26, :109:{21,33}, :113:{21,25,51}
-  wire         prod_7 = _prod_plus_ma32_shl_1_[8] & _sigmoid_lut[1];	// swiglu.k:98:26, :109:{21,33}, :113:{21,25,51}
+        + {2'h1, p0_gate_bf16[6:0], 1'h0});	// swiglu.k:99:9, :104:26, :115:{21,33}, :118:{21,25}, :119:{51,58}
+  wire         prod_6 = _prod_plus_ma32_shl_1_[9] & _sigmoid_lut[1];	// swiglu.k:104:26, :115:{21,33}, :119:{21,25,51}
+  wire         prod_7 = _prod_plus_ma32_shl_1_[8] & _sigmoid_lut[1];	// swiglu.k:104:26, :115:{21,33}, :119:{21,25,51}
   wire         prod_8 =
     _prod_plus_ma32_shl_1_[7]
       ? _sigmoid_lut[0] | _sigmoid_lut[1]
-      : _sigmoid_lut[0] & ~(_sigmoid_lut[1]);	// swiglu.k:98:26, :109:{21,33}, :113:{21,25,51}
+      : _sigmoid_lut[0] & ~(_sigmoid_lut[1]);	// swiglu.k:104:26, :115:{21,33}, :119:{21,25,51}
   wire         prod_9 =
-    _prod_plus_ma32_shl_1_[6] ? prod | _sigmoid_lut[1] : prod & ~(_sigmoid_lut[1]);	// swiglu.k:98:26, :109:{21,33}, :112:{21,25}, :113:{21,25,51}
+    _prod_plus_ma32_shl_1_[6] ? prod | _sigmoid_lut[1] : prod & ~(_sigmoid_lut[1]);	// swiglu.k:104:26, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
   wire         prod_10 =
-    _prod_plus_ma32_shl_1_[5] ? prod_0 | _sigmoid_lut[1] : prod_0 & ~(_sigmoid_lut[1]);	// swiglu.k:98:26, :109:{21,33}, :112:{21,25}, :113:{21,25,51}
+    _prod_plus_ma32_shl_1_[5] ? prod_0 | _sigmoid_lut[1] : prod_0 & ~(_sigmoid_lut[1]);	// swiglu.k:104:26, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
   wire         prod_11 =
-    _prod_plus_ma32_shl_1_[4] ? prod_1 | _sigmoid_lut[1] : prod_1 & ~(_sigmoid_lut[1]);	// swiglu.k:98:26, :109:{21,33}, :112:{21,25}, :113:{21,25,51}
+    _prod_plus_ma32_shl_1_[4] ? prod_1 | _sigmoid_lut[1] : prod_1 & ~(_sigmoid_lut[1]);	// swiglu.k:104:26, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
   wire         prod_12 =
-    _prod_plus_ma32_shl_1_[3] ? prod_2 | _sigmoid_lut[1] : prod_2 & ~(_sigmoid_lut[1]);	// swiglu.k:98:26, :109:{21,33}, :112:{21,25}, :113:{21,25,51}
+    _prod_plus_ma32_shl_1_[3] ? prod_2 | _sigmoid_lut[1] : prod_2 & ~(_sigmoid_lut[1]);	// swiglu.k:104:26, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
   wire         prod_13 =
-    _prod_plus_ma32_shl_1_[2] ? prod_3 | _sigmoid_lut[1] : prod_3 & ~(_sigmoid_lut[1]);	// swiglu.k:98:26, :109:{21,33}, :112:{21,25}, :113:{21,25,51}
+    _prod_plus_ma32_shl_1_[2] ? prod_3 | _sigmoid_lut[1] : prod_3 & ~(_sigmoid_lut[1]);	// swiglu.k:104:26, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
   wire         prod_14 =
-    _prod_plus_ma32_shl_1_[1] ? prod_4 | _sigmoid_lut[1] : prod_4 & ~(_sigmoid_lut[1]);	// swiglu.k:98:26, :109:{21,33}, :112:{21,25}, :113:{21,25,51}
+    _prod_plus_ma32_shl_1_[1] ? prod_4 | _sigmoid_lut[1] : prod_4 & ~(_sigmoid_lut[1]);	// swiglu.k:104:26, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
   wire         prod_15 =
-    _prod_plus_ma32_shl_1_[0] ? prod_5 | _sigmoid_lut[1] : prod_5 & ~(_sigmoid_lut[1]);	// swiglu.k:98:26, :109:{21,33}, :112:{21,25}, :113:{21,25,51}
-  wire  [10:0] _prod_plus_ma32_shl_2_ =
-    11'({1'h0,
-         prod_6,
-         prod_7,
-         prod_8,
-         prod_9,
-         prod_10,
-         prod_11,
-         prod_12,
-         prod_13,
-         prod_14,
-         prod_15} + {2'h1, p0_gate_bf16[6:0], 2'h0});	// swiglu.k:93:9, :113:{21,25}, :114:{51,58}
-  wire         prod_16 = _prod_plus_ma32_shl_2_[10] & _sigmoid_lut[2];	// swiglu.k:98:26, :109:{21,33}, :114:{21,25,51}
+    _prod_plus_ma32_shl_1_[0] ? prod_5 | _sigmoid_lut[1] : prod_5 & ~(_sigmoid_lut[1]);	// swiglu.k:104:26, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
+  wire         prod_16 = p0__prod_plus_ma32_shl_2_[10] & p0_mb[2];	// swiglu.k:99:9, :120:{21,25}
   wire         prod_17 =
-    _prod_plus_ma32_shl_2_[9] ? prod_6 | _sigmoid_lut[2] : prod_6 & ~(_sigmoid_lut[2]);	// swiglu.k:98:26, :109:{21,33}, :113:{21,25}, :114:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[9] ? p0_prod[9] | p0_mb[2] : p0_prod[9] & ~(p0_mb[2]);	// swiglu.k:99:9, :120:{21,25}
   wire         prod_18 =
-    _prod_plus_ma32_shl_2_[8] ? prod_7 | _sigmoid_lut[2] : prod_7 & ~(_sigmoid_lut[2]);	// swiglu.k:98:26, :109:{21,33}, :113:{21,25}, :114:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[8] ? p0_prod[8] | p0_mb[2] : p0_prod[8] & ~(p0_mb[2]);	// swiglu.k:99:9, :120:{21,25}
   wire         prod_19 =
-    _prod_plus_ma32_shl_2_[7] ? prod_8 | _sigmoid_lut[2] : prod_8 & ~(_sigmoid_lut[2]);	// swiglu.k:98:26, :109:{21,33}, :113:{21,25}, :114:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[7] ? p0_prod[7] | p0_mb[2] : p0_prod[7] & ~(p0_mb[2]);	// swiglu.k:99:9, :120:{21,25}
   wire         prod_20 =
-    _prod_plus_ma32_shl_2_[6] ? prod_9 | _sigmoid_lut[2] : prod_9 & ~(_sigmoid_lut[2]);	// swiglu.k:98:26, :109:{21,33}, :113:{21,25}, :114:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[6] ? p0_prod[6] | p0_mb[2] : p0_prod[6] & ~(p0_mb[2]);	// swiglu.k:99:9, :120:{21,25}
   wire         prod_21 =
-    _prod_plus_ma32_shl_2_[5] ? prod_10 | _sigmoid_lut[2] : prod_10 & ~(_sigmoid_lut[2]);	// swiglu.k:98:26, :109:{21,33}, :113:{21,25}, :114:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[5] ? p0_prod[5] | p0_mb[2] : p0_prod[5] & ~(p0_mb[2]);	// swiglu.k:99:9, :120:{21,25}
   wire         prod_22 =
-    _prod_plus_ma32_shl_2_[4] ? prod_11 | _sigmoid_lut[2] : prod_11 & ~(_sigmoid_lut[2]);	// swiglu.k:98:26, :109:{21,33}, :113:{21,25}, :114:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[4] ? p0_prod[4] | p0_mb[2] : p0_prod[4] & ~(p0_mb[2]);	// swiglu.k:99:9, :120:{21,25}
   wire         prod_23 =
-    _prod_plus_ma32_shl_2_[3] ? prod_12 | _sigmoid_lut[2] : prod_12 & ~(_sigmoid_lut[2]);	// swiglu.k:98:26, :109:{21,33}, :113:{21,25}, :114:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[3] ? p0_prod[3] | p0_mb[2] : p0_prod[3] & ~(p0_mb[2]);	// swiglu.k:99:9, :120:{21,25}
   wire         prod_24 =
-    _prod_plus_ma32_shl_2_[2] ? prod_13 | _sigmoid_lut[2] : prod_13 & ~(_sigmoid_lut[2]);	// swiglu.k:98:26, :109:{21,33}, :113:{21,25}, :114:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[2] ? p0_prod[2] | p0_mb[2] : p0_prod[2] & ~(p0_mb[2]);	// swiglu.k:99:9, :120:{21,25}
   wire         prod_25 =
-    _prod_plus_ma32_shl_2_[1] ? prod_14 | _sigmoid_lut[2] : prod_14 & ~(_sigmoid_lut[2]);	// swiglu.k:98:26, :109:{21,33}, :113:{21,25}, :114:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[1] ? p0_prod[1] | p0_mb[2] : p0_prod[1] & ~(p0_mb[2]);	// swiglu.k:99:9, :120:{21,25}
   wire         prod_26 =
-    _prod_plus_ma32_shl_2_[0] ? prod_15 | _sigmoid_lut[2] : prod_15 & ~(_sigmoid_lut[2]);	// swiglu.k:98:26, :109:{21,33}, :113:{21,25}, :114:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[0] ? p0_prod[0] | p0_mb[2] : p0_prod[0] & ~(p0_mb[2]);	// swiglu.k:99:9, :120:{21,25}
   wire  [11:0] _prod_plus_ma32_shl_3_ =
     12'({1'h0,
          prod_16,
@@ -1502,30 +1566,30 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
          prod_23,
          prod_24,
          prod_25,
-         prod_26} + {2'h1, p0_gate_bf16[6:0], 3'h0});	// swiglu.k:93:9, :114:{21,25}, :115:{51,58}
-  wire         prod_27 = _prod_plus_ma32_shl_3_[11] & _sigmoid_lut[3];	// swiglu.k:98:26, :109:{21,33}, :115:{21,25,51}
+         prod_26} + p0__ma32_shl_3_);	// swiglu.k:99:9, :120:{21,25}, :121:51
+  wire         prod_27 = _prod_plus_ma32_shl_3_[11] & p0_mb[3];	// swiglu.k:99:9, :121:{21,25,51}
   wire         prod_28 =
-    _prod_plus_ma32_shl_3_[10] ? prod_16 | _sigmoid_lut[3] : prod_16 & ~(_sigmoid_lut[3]);	// swiglu.k:98:26, :109:{21,33}, :114:{21,25}, :115:{21,25,51}
+    _prod_plus_ma32_shl_3_[10] ? prod_16 | p0_mb[3] : prod_16 & ~(p0_mb[3]);	// swiglu.k:99:9, :120:{21,25}, :121:{21,25,51}
   wire         prod_29 =
-    _prod_plus_ma32_shl_3_[9] ? prod_17 | _sigmoid_lut[3] : prod_17 & ~(_sigmoid_lut[3]);	// swiglu.k:98:26, :109:{21,33}, :114:{21,25}, :115:{21,25,51}
+    _prod_plus_ma32_shl_3_[9] ? prod_17 | p0_mb[3] : prod_17 & ~(p0_mb[3]);	// swiglu.k:99:9, :120:{21,25}, :121:{21,25,51}
   wire         prod_30 =
-    _prod_plus_ma32_shl_3_[8] ? prod_18 | _sigmoid_lut[3] : prod_18 & ~(_sigmoid_lut[3]);	// swiglu.k:98:26, :109:{21,33}, :114:{21,25}, :115:{21,25,51}
+    _prod_plus_ma32_shl_3_[8] ? prod_18 | p0_mb[3] : prod_18 & ~(p0_mb[3]);	// swiglu.k:99:9, :120:{21,25}, :121:{21,25,51}
   wire         prod_31 =
-    _prod_plus_ma32_shl_3_[7] ? prod_19 | _sigmoid_lut[3] : prod_19 & ~(_sigmoid_lut[3]);	// swiglu.k:98:26, :109:{21,33}, :114:{21,25}, :115:{21,25,51}
+    _prod_plus_ma32_shl_3_[7] ? prod_19 | p0_mb[3] : prod_19 & ~(p0_mb[3]);	// swiglu.k:99:9, :120:{21,25}, :121:{21,25,51}
   wire         prod_32 =
-    _prod_plus_ma32_shl_3_[6] ? prod_20 | _sigmoid_lut[3] : prod_20 & ~(_sigmoid_lut[3]);	// swiglu.k:98:26, :109:{21,33}, :114:{21,25}, :115:{21,25,51}
+    _prod_plus_ma32_shl_3_[6] ? prod_20 | p0_mb[3] : prod_20 & ~(p0_mb[3]);	// swiglu.k:99:9, :120:{21,25}, :121:{21,25,51}
   wire         prod_33 =
-    _prod_plus_ma32_shl_3_[5] ? prod_21 | _sigmoid_lut[3] : prod_21 & ~(_sigmoid_lut[3]);	// swiglu.k:98:26, :109:{21,33}, :114:{21,25}, :115:{21,25,51}
+    _prod_plus_ma32_shl_3_[5] ? prod_21 | p0_mb[3] : prod_21 & ~(p0_mb[3]);	// swiglu.k:99:9, :120:{21,25}, :121:{21,25,51}
   wire         prod_34 =
-    _prod_plus_ma32_shl_3_[4] ? prod_22 | _sigmoid_lut[3] : prod_22 & ~(_sigmoid_lut[3]);	// swiglu.k:98:26, :109:{21,33}, :114:{21,25}, :115:{21,25,51}
+    _prod_plus_ma32_shl_3_[4] ? prod_22 | p0_mb[3] : prod_22 & ~(p0_mb[3]);	// swiglu.k:99:9, :120:{21,25}, :121:{21,25,51}
   wire         prod_35 =
-    _prod_plus_ma32_shl_3_[3] ? prod_23 | _sigmoid_lut[3] : prod_23 & ~(_sigmoid_lut[3]);	// swiglu.k:98:26, :109:{21,33}, :114:{21,25}, :115:{21,25,51}
+    _prod_plus_ma32_shl_3_[3] ? prod_23 | p0_mb[3] : prod_23 & ~(p0_mb[3]);	// swiglu.k:99:9, :120:{21,25}, :121:{21,25,51}
   wire         prod_36 =
-    _prod_plus_ma32_shl_3_[2] ? prod_24 | _sigmoid_lut[3] : prod_24 & ~(_sigmoid_lut[3]);	// swiglu.k:98:26, :109:{21,33}, :114:{21,25}, :115:{21,25,51}
+    _prod_plus_ma32_shl_3_[2] ? prod_24 | p0_mb[3] : prod_24 & ~(p0_mb[3]);	// swiglu.k:99:9, :120:{21,25}, :121:{21,25,51}
   wire         prod_37 =
-    _prod_plus_ma32_shl_3_[1] ? prod_25 | _sigmoid_lut[3] : prod_25 & ~(_sigmoid_lut[3]);	// swiglu.k:98:26, :109:{21,33}, :114:{21,25}, :115:{21,25,51}
+    _prod_plus_ma32_shl_3_[1] ? prod_25 | p0_mb[3] : prod_25 & ~(p0_mb[3]);	// swiglu.k:99:9, :120:{21,25}, :121:{21,25,51}
   wire         prod_38 =
-    _prod_plus_ma32_shl_3_[0] ? prod_26 | _sigmoid_lut[3] : prod_26 & ~(_sigmoid_lut[3]);	// swiglu.k:98:26, :109:{21,33}, :114:{21,25}, :115:{21,25,51}
+    _prod_plus_ma32_shl_3_[0] ? prod_26 | p0_mb[3] : prod_26 & ~(p0_mb[3]);	// swiglu.k:99:9, :120:{21,25}, :121:{21,25,51}
   wire  [12:0] _prod_plus_ma32_shl_4_ =
     13'({1'h0,
          prod_27,
@@ -1539,32 +1603,32 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
          prod_35,
          prod_36,
          prod_37,
-         prod_38} + {2'h1, p0_gate_bf16[6:0], 4'h0});	// swiglu.k:93:9, :115:{21,25}, :116:{51,58}
-  wire         prod_39 = _prod_plus_ma32_shl_4_[12] & _sigmoid_lut[4];	// swiglu.k:98:26, :109:{21,33}, :116:{21,25,51}
+         prod_38} + p0__ma32_shl_4_);	// swiglu.k:99:9, :121:{21,25}, :122:51
+  wire         prod_39 = _prod_plus_ma32_shl_4_[12] & p0_mb[4];	// swiglu.k:99:9, :122:{21,25,51}
   wire         prod_40 =
-    _prod_plus_ma32_shl_4_[11] ? prod_27 | _sigmoid_lut[4] : prod_27 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[11] ? prod_27 | p0_mb[4] : prod_27 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire         prod_41 =
-    _prod_plus_ma32_shl_4_[10] ? prod_28 | _sigmoid_lut[4] : prod_28 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[10] ? prod_28 | p0_mb[4] : prod_28 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire         prod_42 =
-    _prod_plus_ma32_shl_4_[9] ? prod_29 | _sigmoid_lut[4] : prod_29 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[9] ? prod_29 | p0_mb[4] : prod_29 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire         prod_43 =
-    _prod_plus_ma32_shl_4_[8] ? prod_30 | _sigmoid_lut[4] : prod_30 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[8] ? prod_30 | p0_mb[4] : prod_30 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire         prod_44 =
-    _prod_plus_ma32_shl_4_[7] ? prod_31 | _sigmoid_lut[4] : prod_31 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[7] ? prod_31 | p0_mb[4] : prod_31 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire         prod_45 =
-    _prod_plus_ma32_shl_4_[6] ? prod_32 | _sigmoid_lut[4] : prod_32 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[6] ? prod_32 | p0_mb[4] : prod_32 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire         prod_46 =
-    _prod_plus_ma32_shl_4_[5] ? prod_33 | _sigmoid_lut[4] : prod_33 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[5] ? prod_33 | p0_mb[4] : prod_33 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire         prod_47 =
-    _prod_plus_ma32_shl_4_[4] ? prod_34 | _sigmoid_lut[4] : prod_34 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[4] ? prod_34 | p0_mb[4] : prod_34 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire         prod_48 =
-    _prod_plus_ma32_shl_4_[3] ? prod_35 | _sigmoid_lut[4] : prod_35 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[3] ? prod_35 | p0_mb[4] : prod_35 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire         prod_49 =
-    _prod_plus_ma32_shl_4_[2] ? prod_36 | _sigmoid_lut[4] : prod_36 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[2] ? prod_36 | p0_mb[4] : prod_36 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire         prod_50 =
-    _prod_plus_ma32_shl_4_[1] ? prod_37 | _sigmoid_lut[4] : prod_37 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[1] ? prod_37 | p0_mb[4] : prod_37 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire         prod_51 =
-    _prod_plus_ma32_shl_4_[0] ? prod_38 | _sigmoid_lut[4] : prod_38 & ~(_sigmoid_lut[4]);	// swiglu.k:98:26, :109:{21,33}, :115:{21,25}, :116:{21,25,51}
+    _prod_plus_ma32_shl_4_[0] ? prod_38 | p0_mb[4] : prod_38 & ~(p0_mb[4]);	// swiglu.k:99:9, :121:{21,25}, :122:{21,25,51}
   wire  [13:0] _prod_plus_ma32_shl_5_ =
     14'({1'h0,
          prod_39,
@@ -1579,185 +1643,133 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
          prod_48,
          prod_49,
          prod_50,
-         prod_51} + {2'h1, p0_gate_bf16[6:0], 5'h0});	// swiglu.k:93:9, :116:{21,25}, :117:{51,58}
-  wire         prod_52 = _prod_plus_ma32_shl_5_[13] & _sigmoid_lut[5];	// swiglu.k:98:26, :109:{21,33}, :117:{21,25,51}
+         prod_51} + p0__ma32_shl_5_);	// swiglu.k:99:9, :122:{21,25}, :123:51
+  wire         prod_52 = _prod_plus_ma32_shl_5_[13] & p0_mb[5];	// swiglu.k:99:9, :123:{21,25,51}
   wire         prod_53 =
-    _prod_plus_ma32_shl_5_[12] ? prod_39 | _sigmoid_lut[5] : prod_39 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[12] ? prod_39 | p0_mb[5] : prod_39 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_54 =
-    _prod_plus_ma32_shl_5_[11] ? prod_40 | _sigmoid_lut[5] : prod_40 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[11] ? prod_40 | p0_mb[5] : prod_40 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_55 =
-    _prod_plus_ma32_shl_5_[10] ? prod_41 | _sigmoid_lut[5] : prod_41 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[10] ? prod_41 | p0_mb[5] : prod_41 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_56 =
-    _prod_plus_ma32_shl_5_[9] ? prod_42 | _sigmoid_lut[5] : prod_42 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[9] ? prod_42 | p0_mb[5] : prod_42 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_57 =
-    _prod_plus_ma32_shl_5_[8] ? prod_43 | _sigmoid_lut[5] : prod_43 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[8] ? prod_43 | p0_mb[5] : prod_43 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_58 =
-    _prod_plus_ma32_shl_5_[7] ? prod_44 | _sigmoid_lut[5] : prod_44 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[7] ? prod_44 | p0_mb[5] : prod_44 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_59 =
-    _prod_plus_ma32_shl_5_[6] ? prod_45 | _sigmoid_lut[5] : prod_45 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[6] ? prod_45 | p0_mb[5] : prod_45 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_60 =
-    _prod_plus_ma32_shl_5_[5] ? prod_46 | _sigmoid_lut[5] : prod_46 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[5] ? prod_46 | p0_mb[5] : prod_46 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_61 =
-    _prod_plus_ma32_shl_5_[4] ? prod_47 | _sigmoid_lut[5] : prod_47 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[4] ? prod_47 | p0_mb[5] : prod_47 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_62 =
-    _prod_plus_ma32_shl_5_[3] ? prod_48 | _sigmoid_lut[5] : prod_48 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[3] ? prod_48 | p0_mb[5] : prod_48 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_63 =
-    _prod_plus_ma32_shl_5_[2] ? prod_49 | _sigmoid_lut[5] : prod_49 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[2] ? prod_49 | p0_mb[5] : prod_49 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_64 =
-    _prod_plus_ma32_shl_5_[1] ? prod_50 | _sigmoid_lut[5] : prod_50 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
+    _prod_plus_ma32_shl_5_[1] ? prod_50 | p0_mb[5] : prod_50 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire         prod_65 =
-    _prod_plus_ma32_shl_5_[0] ? prod_51 | _sigmoid_lut[5] : prod_51 & ~(_sigmoid_lut[5]);	// swiglu.k:98:26, :109:{21,33}, :116:{21,25}, :117:{21,25,51}
-  wire  [14:0] _prod_plus_ma32_shl_6_ =
-    15'({1'h0,
-         prod_52,
-         prod_53,
-         prod_54,
-         prod_55,
-         prod_56,
-         prod_57,
-         prod_58,
-         prod_59,
-         prod_60,
-         prod_61,
-         prod_62,
-         prod_63,
-         prod_64,
-         prod_65} + {2'h1, p0_gate_bf16[6:0], 6'h0});	// swiglu.k:93:9, :117:{21,25}, :118:{51,58}
+    _prod_plus_ma32_shl_5_[0] ? prod_51 | p0_mb[5] : prod_51 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
   wire  [15:0] _prod_plus_ma32_shl_7_ =
     16'({1'h0,
-         _prod_plus_ma32_shl_6_[14] & _sigmoid_lut[6],
-         _prod_plus_ma32_shl_6_[13]
-           ? prod_52 | _sigmoid_lut[6]
-           : prod_52 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[12]
-           ? prod_53 | _sigmoid_lut[6]
-           : prod_53 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[11]
-           ? prod_54 | _sigmoid_lut[6]
-           : prod_54 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[10]
-           ? prod_55 | _sigmoid_lut[6]
-           : prod_55 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[9]
-           ? prod_56 | _sigmoid_lut[6]
-           : prod_56 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[8]
-           ? prod_57 | _sigmoid_lut[6]
-           : prod_57 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[7]
-           ? prod_58 | _sigmoid_lut[6]
-           : prod_58 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[6]
-           ? prod_59 | _sigmoid_lut[6]
-           : prod_59 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[5]
-           ? prod_60 | _sigmoid_lut[6]
-           : prod_60 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[4]
-           ? prod_61 | _sigmoid_lut[6]
-           : prod_61 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[3]
-           ? prod_62 | _sigmoid_lut[6]
-           : prod_62 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[2]
-           ? prod_63 | _sigmoid_lut[6]
-           : prod_63 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[1]
-           ? prod_64 | _sigmoid_lut[6]
-           : prod_64 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[0]
-           ? prod_65 | _sigmoid_lut[6]
-           : prod_65 & ~(_sigmoid_lut[6])} + {2'h1, p0_gate_bf16[6:0], 7'h0});	// swiglu.k:93:9, :98:26, :109:{21,33}, :117:{21,25}, :118:{21,51}, :119:{51,58}
+         p0__prod_plus_ma32_shl_6_[14] & p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[13]
+           ? p0_prod_0[13] | p0_mb_3
+           : p0_prod_0[13] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[12]
+           ? p0_prod_0[12] | p0_mb_3
+           : p0_prod_0[12] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[11]
+           ? p0_prod_0[11] | p0_mb_3
+           : p0_prod_0[11] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[10]
+           ? p0_prod_0[10] | p0_mb_3
+           : p0_prod_0[10] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[9] ? p0_prod_0[9] | p0_mb_3 : p0_prod_0[9] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[8] ? p0_prod_0[8] | p0_mb_3 : p0_prod_0[8] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[7] ? p0_prod_0[7] | p0_mb_3 : p0_prod_0[7] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[6] ? p0_prod_0[6] | p0_mb_3 : p0_prod_0[6] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[5] ? p0_prod_0[5] | p0_mb_3 : p0_prod_0[5] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[4] ? p0_prod_0[4] | p0_mb_3 : p0_prod_0[4] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[3] ? p0_prod_0[3] | p0_mb_3 : p0_prod_0[3] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[2] ? p0_prod_0[2] | p0_mb_3 : p0_prod_0[2] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[1] ? p0_prod_0[1] | p0_mb_3 : p0_prod_0[1] & ~p0_mb_3,
+         p0__prod_plus_ma32_shl_6_[0] ? p0_prod_0[0] | p0_mb_3 : p0_prod_0[0] & ~p0_mb_3}
+        + p0__ma32_shl_7__0);	// swiglu.k:99:9, :124:21, :125:51
   wire  [15:0] r_exp =
     _prod_plus_ma32_shl_7_[15]
-      ? 16'(_a_exp_plus_b_exp_ - 16'h7E)
-      : 16'(_a_exp_plus_b_exp_ - 16'h7F);	// swiglu.k:119:{21,51}, :122:21, :125:{33,39,47}, :130:{33,39}
-  wire         _GEN_0 = r_exp < 16'hFF & (|r_exp);	// swiglu.k:107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25,31,44}, :134:{32,47,49}
-  wire         _GEN_1 = ~(_prod_plus_ma32_shl_7_[15]) & _GEN_0;	// swiglu.k:107:{21,37,38,58}, :119:{21,51}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         _GEN_2 = (|(_sigmoid_lut[14:7])) & (|(p0_gate_bf16[14:7]));	// swiglu.k:93:9, :98:26, :103:{17,32}, :104:{17,32}, :105:{17,21,27,41}
-  wire         silu =
-    (r_exp[8]
-       ? _GEN_0
-       : _sigmoid_lut[15] ? ~(p0_gate_bf16[15]) & _GEN_0 : p0_gate_bf16[15] & _GEN_0)
-    & _GEN_2;	// swiglu.k:93:9, :98:26, :105:{17,21}, :107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_0 = r_exp[7] & _GEN_0 & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_1 = r_exp[6] & _GEN_0 & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_2 = r_exp[5] & _GEN_0 & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_3 = r_exp[4] & _GEN_0 & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_4 = r_exp[3] & _GEN_0 & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_5 = r_exp[2] & _GEN_0 & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_6 = r_exp[1] & _GEN_0 & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_7 = r_exp[0] & _GEN_0 & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_8 =
+      ? p0__a_exp_plus_b_exp_minus_127_plus_1__0
+      : p0__a_exp_plus_b_exp_minus_127__0;	// swiglu.k:99:9, :125:{21,51}, :128:21
+  wire         _GEN_0 = r_exp < 16'hFF & (|r_exp);	// swiglu.k:113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25,31,44}, :140:{32,47,49}
+  wire         _GEN_1 = ~(_prod_plus_ma32_shl_7_[15]) & _GEN_0;	// swiglu.k:113:{21,37,38,58}, :125:{21,51}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         _GEN_2 = p0__b_exp_ne_0__1 & p0__a_exp_ne_0__0;	// swiglu.k:99:9, :111:{17,21}
+  wire         silu = r_exp[7] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_0 = r_exp[6] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_1 = r_exp[5] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_2 = r_exp[4] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_3 = r_exp[3] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_4 = r_exp[2] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_5 = r_exp[1] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_6 = r_exp[0] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_7 =
     (_prod_plus_ma32_shl_7_[14]
        ? (_prod_plus_ma32_shl_7_[13] | _prod_plus_ma32_shl_7_[15]) & _GEN_0
-       : _prod_plus_ma32_shl_7_[13] & _GEN_1) & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :119:{21,51}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_9 =
+       : _prod_plus_ma32_shl_7_[13] & _GEN_1) & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :125:{21,51}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_8 =
     (_prod_plus_ma32_shl_7_[13]
        ? (_prod_plus_ma32_shl_7_[12] | _prod_plus_ma32_shl_7_[15]) & _GEN_0
-       : _prod_plus_ma32_shl_7_[12] & _GEN_1) & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :119:{21,51}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_10 =
+       : _prod_plus_ma32_shl_7_[12] & _GEN_1) & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :125:{21,51}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_9 =
     (_prod_plus_ma32_shl_7_[12]
        ? (_prod_plus_ma32_shl_7_[11] | _prod_plus_ma32_shl_7_[15]) & _GEN_0
-       : _prod_plus_ma32_shl_7_[11] & _GEN_1) & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :119:{21,51}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_11 =
+       : _prod_plus_ma32_shl_7_[11] & _GEN_1) & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :125:{21,51}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_10 =
     (_prod_plus_ma32_shl_7_[11]
        ? (_prod_plus_ma32_shl_7_[10] | _prod_plus_ma32_shl_7_[15]) & _GEN_0
-       : _prod_plus_ma32_shl_7_[10] & _GEN_1) & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :119:{21,51}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_12 =
+       : _prod_plus_ma32_shl_7_[10] & _GEN_1) & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :125:{21,51}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_11 =
     (_prod_plus_ma32_shl_7_[10]
        ? (_prod_plus_ma32_shl_7_[9] | _prod_plus_ma32_shl_7_[15]) & _GEN_0
-       : _prod_plus_ma32_shl_7_[9] & _GEN_1) & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :119:{21,51}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_13 =
+       : _prod_plus_ma32_shl_7_[9] & _GEN_1) & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :125:{21,51}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_12 =
     (_prod_plus_ma32_shl_7_[9]
        ? (_prod_plus_ma32_shl_7_[8] | _prod_plus_ma32_shl_7_[15]) & _GEN_0
-       : _prod_plus_ma32_shl_7_[8] & _GEN_1) & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :119:{21,51}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         silu_14 =
+       : _prod_plus_ma32_shl_7_[8] & _GEN_1) & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :125:{21,51}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         silu_13 =
     (_prod_plus_ma32_shl_7_[8]
        ? (_prod_plus_ma32_shl_7_[7] | _prod_plus_ma32_shl_7_[15]) & _GEN_0
-       : _prod_plus_ma32_shl_7_[7] & _GEN_1) & _GEN_2;	// swiglu.k:105:{17,21}, :107:{21,37,38,58}, :119:{21,51}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}
-  wire         prod_66 = silu_8 & p0_up_bf16[0];	// swiglu.k:93:9, :105:{17,21}, :148:{21,33}, :151:{21,25}
-  wire         prod_67 = silu_9 & p0_up_bf16[0];	// swiglu.k:93:9, :105:{17,21}, :148:{21,33}, :151:{21,25}
-  wire         prod_68 = silu_10 & p0_up_bf16[0];	// swiglu.k:93:9, :105:{17,21}, :148:{21,33}, :151:{21,25}
-  wire         prod_69 = silu_11 & p0_up_bf16[0];	// swiglu.k:93:9, :105:{17,21}, :148:{21,33}, :151:{21,25}
-  wire         prod_70 = silu_12 & p0_up_bf16[0];	// swiglu.k:93:9, :105:{17,21}, :148:{21,33}, :151:{21,25}
-  wire         prod_71 = silu_13 & p0_up_bf16[0];	// swiglu.k:93:9, :105:{17,21}, :148:{21,33}, :151:{21,25}
-  wire         prod_72 = silu_14 & p0_up_bf16[0];	// swiglu.k:93:9, :105:{17,21}, :148:{21,33}, :151:{21,25}
-  wire  [15:0] _a_exp_plus_b_exp__0 =
-    16'({8'h0, silu_0, silu_1, silu_2, silu_3, silu_4, silu_5, silu_6, silu_7}
-        + {8'h0, p0_up_bf16[14:7]});	// swiglu.k:93:9, :105:{17,21}, :107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}, :164:39, :169:39
+       : _prod_plus_ma32_shl_7_[7] & _GEN_1) & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :125:{21,51}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+  wire         prod_66 = p0_cast_lt_uint32_gt_ma_[6] & p0_mb_6[0];	// swiglu.k:99:9, :157:{21,25}
+  wire         prod_67 = p0_cast_lt_uint32_gt_ma_[5] & p0_mb_6[0];	// swiglu.k:99:9, :157:{21,25}
+  wire         prod_68 = p0_cast_lt_uint32_gt_ma_[4] & p0_mb_6[0];	// swiglu.k:99:9, :157:{21,25}
+  wire         prod_69 = p0_cast_lt_uint32_gt_ma_[3] & p0_mb_6[0];	// swiglu.k:99:9, :157:{21,25}
+  wire         prod_70 = p0_cast_lt_uint32_gt_ma_[2] & p0_mb_6[0];	// swiglu.k:99:9, :157:{21,25}
+  wire         prod_71 = p0_cast_lt_uint32_gt_ma_[1] & p0_mb_6[0];	// swiglu.k:99:9, :157:{21,25}
+  wire         prod_72 = p0_cast_lt_uint32_gt_ma_[0] & p0_mb_6[0];	// swiglu.k:99:9, :157:{21,25}
+  wire  [15:0] _a_exp_plus_b_exp__0 = 16'(p0_a_exp + p0_b_exp_1);	// swiglu.k:99:9, :170:39, :175:39
   wire  [9:0]  _prod_plus_ma32_shl_1__0 =
-    10'({2'h0,
-         p0_up_bf16[0],
-         prod_66,
-         prod_67,
-         prod_68,
-         prod_69,
-         prod_70,
-         prod_71,
-         prod_72}
-        + {2'h1, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, silu_14, 1'h0});	// swiglu.k:93:9, :105:{17,21}, :148:{21,33}, :151:{21,25}, :152:{51,58}
-  wire         prod_73 = _prod_plus_ma32_shl_1__0[9] & p0_up_bf16[1];	// swiglu.k:93:9, :148:{21,33}, :152:{21,25,51}
-  wire         prod_74 = _prod_plus_ma32_shl_1__0[8] & p0_up_bf16[1];	// swiglu.k:93:9, :148:{21,33}, :152:{21,25,51}
+    10'({2'h0, p0_mb_6[0], prod_66, prod_67, prod_68, prod_69, prod_70, prod_71, prod_72}
+        + p0__ma32_shl_1_);	// swiglu.k:99:9, :157:{21,25}, :158:51
+  wire         prod_73 = _prod_plus_ma32_shl_1__0[9] & p0_mb_6[1];	// swiglu.k:99:9, :158:{21,25,51}
+  wire         prod_74 = _prod_plus_ma32_shl_1__0[8] & p0_mb_6[1];	// swiglu.k:99:9, :158:{21,25,51}
   wire         prod_75 =
-    _prod_plus_ma32_shl_1__0[7]
-      ? p0_up_bf16[0] | p0_up_bf16[1]
-      : p0_up_bf16[0] & ~(p0_up_bf16[1]);	// swiglu.k:93:9, :148:{21,33}, :152:{21,25,51}
+    _prod_plus_ma32_shl_1__0[7] ? p0_mb_6[0] | p0_mb_6[1] : p0_mb_6[0] & ~(p0_mb_6[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
   wire         prod_76 =
-    _prod_plus_ma32_shl_1__0[6] ? prod_66 | p0_up_bf16[1] : prod_66 & ~(p0_up_bf16[1]);	// swiglu.k:93:9, :148:{21,33}, :151:{21,25}, :152:{21,25,51}
+    _prod_plus_ma32_shl_1__0[6] ? prod_66 | p0_mb_6[1] : prod_66 & ~(p0_mb_6[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
   wire         prod_77 =
-    _prod_plus_ma32_shl_1__0[5] ? prod_67 | p0_up_bf16[1] : prod_67 & ~(p0_up_bf16[1]);	// swiglu.k:93:9, :148:{21,33}, :151:{21,25}, :152:{21,25,51}
+    _prod_plus_ma32_shl_1__0[5] ? prod_67 | p0_mb_6[1] : prod_67 & ~(p0_mb_6[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
   wire         prod_78 =
-    _prod_plus_ma32_shl_1__0[4] ? prod_68 | p0_up_bf16[1] : prod_68 & ~(p0_up_bf16[1]);	// swiglu.k:93:9, :148:{21,33}, :151:{21,25}, :152:{21,25,51}
+    _prod_plus_ma32_shl_1__0[4] ? prod_68 | p0_mb_6[1] : prod_68 & ~(p0_mb_6[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
   wire         prod_79 =
-    _prod_plus_ma32_shl_1__0[3] ? prod_69 | p0_up_bf16[1] : prod_69 & ~(p0_up_bf16[1]);	// swiglu.k:93:9, :148:{21,33}, :151:{21,25}, :152:{21,25,51}
+    _prod_plus_ma32_shl_1__0[3] ? prod_69 | p0_mb_6[1] : prod_69 & ~(p0_mb_6[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
   wire         prod_80 =
-    _prod_plus_ma32_shl_1__0[2] ? prod_70 | p0_up_bf16[1] : prod_70 & ~(p0_up_bf16[1]);	// swiglu.k:93:9, :148:{21,33}, :151:{21,25}, :152:{21,25,51}
+    _prod_plus_ma32_shl_1__0[2] ? prod_70 | p0_mb_6[1] : prod_70 & ~(p0_mb_6[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
   wire         prod_81 =
-    _prod_plus_ma32_shl_1__0[1] ? prod_71 | p0_up_bf16[1] : prod_71 & ~(p0_up_bf16[1]);	// swiglu.k:93:9, :148:{21,33}, :151:{21,25}, :152:{21,25,51}
+    _prod_plus_ma32_shl_1__0[1] ? prod_71 | p0_mb_6[1] : prod_71 & ~(p0_mb_6[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
   wire         prod_82 =
-    _prod_plus_ma32_shl_1__0[0] ? prod_72 | p0_up_bf16[1] : prod_72 & ~(p0_up_bf16[1]);	// swiglu.k:93:9, :148:{21,33}, :151:{21,25}, :152:{21,25,51}
-  wire  [10:0] _prod_plus_ma32_shl_2__0 =
+    _prod_plus_ma32_shl_1__0[0] ? prod_72 | p0_mb_6[1] : prod_72 & ~(p0_mb_6[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
+  wire  [10:0] _prod_plus_ma32_shl_2_ =
     11'({1'h0,
          prod_73,
          prod_74,
@@ -1768,29 +1780,28 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
          prod_79,
          prod_80,
          prod_81,
-         prod_82}
-        + {2'h1, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, silu_14, 2'h0});	// swiglu.k:105:{17,21}, :152:{21,25}, :153:{51,58}
-  wire         prod_83 = _prod_plus_ma32_shl_2__0[10] & p0_up_bf16[2];	// swiglu.k:93:9, :148:{21,33}, :153:{21,25,51}
+         prod_82} + p0__ma32_shl_2_);	// swiglu.k:99:9, :158:{21,25}, :159:51
+  wire         prod_83 = _prod_plus_ma32_shl_2_[10] & p0_mb_6[2];	// swiglu.k:99:9, :159:{21,25,51}
   wire         prod_84 =
-    _prod_plus_ma32_shl_2__0[9] ? prod_73 | p0_up_bf16[2] : prod_73 & ~(p0_up_bf16[2]);	// swiglu.k:93:9, :148:{21,33}, :152:{21,25}, :153:{21,25,51}
+    _prod_plus_ma32_shl_2_[9] ? prod_73 | p0_mb_6[2] : prod_73 & ~(p0_mb_6[2]);	// swiglu.k:99:9, :158:{21,25}, :159:{21,25,51}
   wire         prod_85 =
-    _prod_plus_ma32_shl_2__0[8] ? prod_74 | p0_up_bf16[2] : prod_74 & ~(p0_up_bf16[2]);	// swiglu.k:93:9, :148:{21,33}, :152:{21,25}, :153:{21,25,51}
+    _prod_plus_ma32_shl_2_[8] ? prod_74 | p0_mb_6[2] : prod_74 & ~(p0_mb_6[2]);	// swiglu.k:99:9, :158:{21,25}, :159:{21,25,51}
   wire         prod_86 =
-    _prod_plus_ma32_shl_2__0[7] ? prod_75 | p0_up_bf16[2] : prod_75 & ~(p0_up_bf16[2]);	// swiglu.k:93:9, :148:{21,33}, :152:{21,25}, :153:{21,25,51}
+    _prod_plus_ma32_shl_2_[7] ? prod_75 | p0_mb_6[2] : prod_75 & ~(p0_mb_6[2]);	// swiglu.k:99:9, :158:{21,25}, :159:{21,25,51}
   wire         prod_87 =
-    _prod_plus_ma32_shl_2__0[6] ? prod_76 | p0_up_bf16[2] : prod_76 & ~(p0_up_bf16[2]);	// swiglu.k:93:9, :148:{21,33}, :152:{21,25}, :153:{21,25,51}
+    _prod_plus_ma32_shl_2_[6] ? prod_76 | p0_mb_6[2] : prod_76 & ~(p0_mb_6[2]);	// swiglu.k:99:9, :158:{21,25}, :159:{21,25,51}
   wire         prod_88 =
-    _prod_plus_ma32_shl_2__0[5] ? prod_77 | p0_up_bf16[2] : prod_77 & ~(p0_up_bf16[2]);	// swiglu.k:93:9, :148:{21,33}, :152:{21,25}, :153:{21,25,51}
+    _prod_plus_ma32_shl_2_[5] ? prod_77 | p0_mb_6[2] : prod_77 & ~(p0_mb_6[2]);	// swiglu.k:99:9, :158:{21,25}, :159:{21,25,51}
   wire         prod_89 =
-    _prod_plus_ma32_shl_2__0[4] ? prod_78 | p0_up_bf16[2] : prod_78 & ~(p0_up_bf16[2]);	// swiglu.k:93:9, :148:{21,33}, :152:{21,25}, :153:{21,25,51}
+    _prod_plus_ma32_shl_2_[4] ? prod_78 | p0_mb_6[2] : prod_78 & ~(p0_mb_6[2]);	// swiglu.k:99:9, :158:{21,25}, :159:{21,25,51}
   wire         prod_90 =
-    _prod_plus_ma32_shl_2__0[3] ? prod_79 | p0_up_bf16[2] : prod_79 & ~(p0_up_bf16[2]);	// swiglu.k:93:9, :148:{21,33}, :152:{21,25}, :153:{21,25,51}
+    _prod_plus_ma32_shl_2_[3] ? prod_79 | p0_mb_6[2] : prod_79 & ~(p0_mb_6[2]);	// swiglu.k:99:9, :158:{21,25}, :159:{21,25,51}
   wire         prod_91 =
-    _prod_plus_ma32_shl_2__0[2] ? prod_80 | p0_up_bf16[2] : prod_80 & ~(p0_up_bf16[2]);	// swiglu.k:93:9, :148:{21,33}, :152:{21,25}, :153:{21,25,51}
+    _prod_plus_ma32_shl_2_[2] ? prod_80 | p0_mb_6[2] : prod_80 & ~(p0_mb_6[2]);	// swiglu.k:99:9, :158:{21,25}, :159:{21,25,51}
   wire         prod_92 =
-    _prod_plus_ma32_shl_2__0[1] ? prod_81 | p0_up_bf16[2] : prod_81 & ~(p0_up_bf16[2]);	// swiglu.k:93:9, :148:{21,33}, :152:{21,25}, :153:{21,25,51}
+    _prod_plus_ma32_shl_2_[1] ? prod_81 | p0_mb_6[2] : prod_81 & ~(p0_mb_6[2]);	// swiglu.k:99:9, :158:{21,25}, :159:{21,25,51}
   wire         prod_93 =
-    _prod_plus_ma32_shl_2__0[0] ? prod_82 | p0_up_bf16[2] : prod_82 & ~(p0_up_bf16[2]);	// swiglu.k:93:9, :148:{21,33}, :152:{21,25}, :153:{21,25,51}
+    _prod_plus_ma32_shl_2_[0] ? prod_82 | p0_mb_6[2] : prod_82 & ~(p0_mb_6[2]);	// swiglu.k:99:9, :158:{21,25}, :159:{21,25,51}
   wire  [11:0] _prod_plus_ma32_shl_3__0 =
     12'({1'h0,
          prod_83,
@@ -1803,71 +1814,79 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
          prod_90,
          prod_91,
          prod_92,
-         prod_93}
-        + {2'h1, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, silu_14, 3'h0});	// swiglu.k:105:{17,21}, :153:{21,25}, :154:{51,58}
-  wire         prod_94 = _prod_plus_ma32_shl_3__0[11] & p0_up_bf16[3];	// swiglu.k:93:9, :148:{21,33}, :154:{21,25,51}
+         prod_93} + p0__ma32_shl_3__0);	// swiglu.k:99:9, :159:{21,25}, :160:51
+  wire         prod_94 = _prod_plus_ma32_shl_3__0[11] & p0_mb_6[3];	// swiglu.k:99:9, :160:{21,25,51}
   wire         prod_95 =
-    _prod_plus_ma32_shl_3__0[10] ? prod_83 | p0_up_bf16[3] : prod_83 & ~(p0_up_bf16[3]);	// swiglu.k:93:9, :148:{21,33}, :153:{21,25}, :154:{21,25,51}
+    _prod_plus_ma32_shl_3__0[10] ? prod_83 | p0_mb_6[3] : prod_83 & ~(p0_mb_6[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_96 =
-    _prod_plus_ma32_shl_3__0[9] ? prod_84 | p0_up_bf16[3] : prod_84 & ~(p0_up_bf16[3]);	// swiglu.k:93:9, :148:{21,33}, :153:{21,25}, :154:{21,25,51}
+    _prod_plus_ma32_shl_3__0[9] ? prod_84 | p0_mb_6[3] : prod_84 & ~(p0_mb_6[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_97 =
-    _prod_plus_ma32_shl_3__0[8] ? prod_85 | p0_up_bf16[3] : prod_85 & ~(p0_up_bf16[3]);	// swiglu.k:93:9, :148:{21,33}, :153:{21,25}, :154:{21,25,51}
+    _prod_plus_ma32_shl_3__0[8] ? prod_85 | p0_mb_6[3] : prod_85 & ~(p0_mb_6[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_98 =
-    _prod_plus_ma32_shl_3__0[7] ? prod_86 | p0_up_bf16[3] : prod_86 & ~(p0_up_bf16[3]);	// swiglu.k:93:9, :148:{21,33}, :153:{21,25}, :154:{21,25,51}
+    _prod_plus_ma32_shl_3__0[7] ? prod_86 | p0_mb_6[3] : prod_86 & ~(p0_mb_6[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_99 =
-    _prod_plus_ma32_shl_3__0[6] ? prod_87 | p0_up_bf16[3] : prod_87 & ~(p0_up_bf16[3]);	// swiglu.k:93:9, :148:{21,33}, :153:{21,25}, :154:{21,25,51}
+    _prod_plus_ma32_shl_3__0[6] ? prod_87 | p0_mb_6[3] : prod_87 & ~(p0_mb_6[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_100 =
-    _prod_plus_ma32_shl_3__0[5] ? prod_88 | p0_up_bf16[3] : prod_88 & ~(p0_up_bf16[3]);	// swiglu.k:93:9, :148:{21,33}, :153:{21,25}, :154:{21,25,51}
+    _prod_plus_ma32_shl_3__0[5] ? prod_88 | p0_mb_6[3] : prod_88 & ~(p0_mb_6[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_101 =
-    _prod_plus_ma32_shl_3__0[4] ? prod_89 | p0_up_bf16[3] : prod_89 & ~(p0_up_bf16[3]);	// swiglu.k:93:9, :148:{21,33}, :153:{21,25}, :154:{21,25,51}
+    _prod_plus_ma32_shl_3__0[4] ? prod_89 | p0_mb_6[3] : prod_89 & ~(p0_mb_6[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_102 =
-    _prod_plus_ma32_shl_3__0[3] ? prod_90 | p0_up_bf16[3] : prod_90 & ~(p0_up_bf16[3]);	// swiglu.k:93:9, :148:{21,33}, :153:{21,25}, :154:{21,25,51}
+    _prod_plus_ma32_shl_3__0[3] ? prod_90 | p0_mb_6[3] : prod_90 & ~(p0_mb_6[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_103 =
-    _prod_plus_ma32_shl_3__0[2] ? prod_91 | p0_up_bf16[3] : prod_91 & ~(p0_up_bf16[3]);	// swiglu.k:93:9, :148:{21,33}, :153:{21,25}, :154:{21,25,51}
+    _prod_plus_ma32_shl_3__0[2] ? prod_91 | p0_mb_6[3] : prod_91 & ~(p0_mb_6[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_104 =
-    _prod_plus_ma32_shl_3__0[1] ? prod_92 | p0_up_bf16[3] : prod_92 & ~(p0_up_bf16[3]);	// swiglu.k:93:9, :148:{21,33}, :153:{21,25}, :154:{21,25,51}
+    _prod_plus_ma32_shl_3__0[1] ? prod_92 | p0_mb_6[3] : prod_92 & ~(p0_mb_6[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_105 =
-    _prod_plus_ma32_shl_3__0[0] ? prod_93 | p0_up_bf16[3] : prod_93 & ~(p0_up_bf16[3]);	// swiglu.k:93:9, :148:{21,33}, :153:{21,25}, :154:{21,25,51}
-  wire  [12:0] _prod_plus_ma32_shl_4__0 =
-    13'({1'h0,
-         prod_94,
-         prod_95,
-         prod_96,
-         prod_97,
-         prod_98,
-         prod_99,
-         prod_100,
-         prod_101,
-         prod_102,
-         prod_103,
-         prod_104,
-         prod_105}
-        + {2'h1, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, silu_14, 4'h0});	// swiglu.k:105:{17,21}, :154:{21,25}, :155:{51,58}
-  wire         prod_106 = _prod_plus_ma32_shl_4__0[12] & p0_up_bf16[4];	// swiglu.k:93:9, :148:{21,33}, :155:{21,25,51}
+    _prod_plus_ma32_shl_3__0[0] ? prod_93 | p0_mb_6[3] : prod_93 & ~(p0_mb_6[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+  wire         prod_106 = p0__prod_plus_ma32_shl_4_[12] & p0_mb_8[4];	// swiglu.k:99:9, :161:{21,25}
   wire         prod_107 =
-    _prod_plus_ma32_shl_4__0[11] ? prod_94 | p0_up_bf16[4] : prod_94 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[11]
+      ? p0_prod_1[11] | p0_mb_8[4]
+      : p0_prod_1[11] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire         prod_108 =
-    _prod_plus_ma32_shl_4__0[10] ? prod_95 | p0_up_bf16[4] : prod_95 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[10]
+      ? p0_prod_1[10] | p0_mb_8[4]
+      : p0_prod_1[10] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire         prod_109 =
-    _prod_plus_ma32_shl_4__0[9] ? prod_96 | p0_up_bf16[4] : prod_96 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[9]
+      ? p0_prod_1[9] | p0_mb_8[4]
+      : p0_prod_1[9] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire         prod_110 =
-    _prod_plus_ma32_shl_4__0[8] ? prod_97 | p0_up_bf16[4] : prod_97 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[8]
+      ? p0_prod_1[8] | p0_mb_8[4]
+      : p0_prod_1[8] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire         prod_111 =
-    _prod_plus_ma32_shl_4__0[7] ? prod_98 | p0_up_bf16[4] : prod_98 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[7]
+      ? p0_prod_1[7] | p0_mb_8[4]
+      : p0_prod_1[7] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire         prod_112 =
-    _prod_plus_ma32_shl_4__0[6] ? prod_99 | p0_up_bf16[4] : prod_99 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[6]
+      ? p0_prod_1[6] | p0_mb_8[4]
+      : p0_prod_1[6] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire         prod_113 =
-    _prod_plus_ma32_shl_4__0[5] ? prod_100 | p0_up_bf16[4] : prod_100 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[5]
+      ? p0_prod_1[5] | p0_mb_8[4]
+      : p0_prod_1[5] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire         prod_114 =
-    _prod_plus_ma32_shl_4__0[4] ? prod_101 | p0_up_bf16[4] : prod_101 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[4]
+      ? p0_prod_1[4] | p0_mb_8[4]
+      : p0_prod_1[4] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire         prod_115 =
-    _prod_plus_ma32_shl_4__0[3] ? prod_102 | p0_up_bf16[4] : prod_102 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[3]
+      ? p0_prod_1[3] | p0_mb_8[4]
+      : p0_prod_1[3] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire         prod_116 =
-    _prod_plus_ma32_shl_4__0[2] ? prod_103 | p0_up_bf16[4] : prod_103 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[2]
+      ? p0_prod_1[2] | p0_mb_8[4]
+      : p0_prod_1[2] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire         prod_117 =
-    _prod_plus_ma32_shl_4__0[1] ? prod_104 | p0_up_bf16[4] : prod_104 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[1]
+      ? p0_prod_1[1] | p0_mb_8[4]
+      : p0_prod_1[1] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire         prod_118 =
-    _prod_plus_ma32_shl_4__0[0] ? prod_105 | p0_up_bf16[4] : prod_105 & ~(p0_up_bf16[4]);	// swiglu.k:93:9, :148:{21,33}, :154:{21,25}, :155:{21,25,51}
+    p0__prod_plus_ma32_shl_4_[0]
+      ? p0_prod_1[0] | p0_mb_8[4]
+      : p0_prod_1[0] & ~(p0_mb_8[4]);	// swiglu.k:99:9, :161:{21,25}
   wire  [13:0] _prod_plus_ma32_shl_5__0 =
     14'({1'h0,
          prod_106,
@@ -1882,36 +1901,35 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
          prod_115,
          prod_116,
          prod_117,
-         prod_118}
-        + {2'h1, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, silu_14, 5'h0});	// swiglu.k:105:{17,21}, :155:{21,25}, :156:{51,58}
-  wire         prod_119 = _prod_plus_ma32_shl_5__0[13] & p0_up_bf16[5];	// swiglu.k:93:9, :148:{21,33}, :156:{21,25,51}
+         prod_118} + p0__ma32_shl_5__1);	// swiglu.k:99:9, :161:{21,25}, :162:51
+  wire         prod_119 = _prod_plus_ma32_shl_5__0[13] & p0_mb_8[5];	// swiglu.k:99:9, :162:{21,25,51}
   wire         prod_120 =
-    _prod_plus_ma32_shl_5__0[12] ? prod_106 | p0_up_bf16[5] : prod_106 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[12] ? prod_106 | p0_mb_8[5] : prod_106 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_121 =
-    _prod_plus_ma32_shl_5__0[11] ? prod_107 | p0_up_bf16[5] : prod_107 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[11] ? prod_107 | p0_mb_8[5] : prod_107 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_122 =
-    _prod_plus_ma32_shl_5__0[10] ? prod_108 | p0_up_bf16[5] : prod_108 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[10] ? prod_108 | p0_mb_8[5] : prod_108 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_123 =
-    _prod_plus_ma32_shl_5__0[9] ? prod_109 | p0_up_bf16[5] : prod_109 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[9] ? prod_109 | p0_mb_8[5] : prod_109 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_124 =
-    _prod_plus_ma32_shl_5__0[8] ? prod_110 | p0_up_bf16[5] : prod_110 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[8] ? prod_110 | p0_mb_8[5] : prod_110 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_125 =
-    _prod_plus_ma32_shl_5__0[7] ? prod_111 | p0_up_bf16[5] : prod_111 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[7] ? prod_111 | p0_mb_8[5] : prod_111 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_126 =
-    _prod_plus_ma32_shl_5__0[6] ? prod_112 | p0_up_bf16[5] : prod_112 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[6] ? prod_112 | p0_mb_8[5] : prod_112 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_127 =
-    _prod_plus_ma32_shl_5__0[5] ? prod_113 | p0_up_bf16[5] : prod_113 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[5] ? prod_113 | p0_mb_8[5] : prod_113 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_128 =
-    _prod_plus_ma32_shl_5__0[4] ? prod_114 | p0_up_bf16[5] : prod_114 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[4] ? prod_114 | p0_mb_8[5] : prod_114 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_129 =
-    _prod_plus_ma32_shl_5__0[3] ? prod_115 | p0_up_bf16[5] : prod_115 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[3] ? prod_115 | p0_mb_8[5] : prod_115 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_130 =
-    _prod_plus_ma32_shl_5__0[2] ? prod_116 | p0_up_bf16[5] : prod_116 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[2] ? prod_116 | p0_mb_8[5] : prod_116 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_131 =
-    _prod_plus_ma32_shl_5__0[1] ? prod_117 | p0_up_bf16[5] : prod_117 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
+    _prod_plus_ma32_shl_5__0[1] ? prod_117 | p0_mb_8[5] : prod_117 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_132 =
-    _prod_plus_ma32_shl_5__0[0] ? prod_118 | p0_up_bf16[5] : prod_118 & ~(p0_up_bf16[5]);	// swiglu.k:93:9, :148:{21,33}, :155:{21,25}, :156:{21,25,51}
-  wire  [14:0] _prod_plus_ma32_shl_6__0 =
+    _prod_plus_ma32_shl_5__0[0] ? prod_118 | p0_mb_8[5] : prod_118 & ~(p0_mb_8[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+  wire  [14:0] _prod_plus_ma32_shl_6_ =
     15'({1'h0,
          prod_119,
          prod_120,
@@ -1926,72 +1944,234 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
          prod_129,
          prod_130,
          prod_131,
-         prod_132}
-        + {2'h1, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, silu_14, 6'h0});	// swiglu.k:105:{17,21}, :156:{21,25}, :157:{51,58}
+         prod_132} + p0__ma32_shl_6__1);	// swiglu.k:99:9, :162:{21,25}, :163:51
   wire  [15:0] _prod_plus_ma32_shl_7__0 =
     16'({1'h0,
-         _prod_plus_ma32_shl_6__0[14] & p0_up_bf16[6],
-         _prod_plus_ma32_shl_6__0[13]
-           ? prod_119 | p0_up_bf16[6]
-           : prod_119 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[12]
-           ? prod_120 | p0_up_bf16[6]
-           : prod_120 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[11]
-           ? prod_121 | p0_up_bf16[6]
-           : prod_121 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[10]
-           ? prod_122 | p0_up_bf16[6]
-           : prod_122 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[9]
-           ? prod_123 | p0_up_bf16[6]
-           : prod_123 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[8]
-           ? prod_124 | p0_up_bf16[6]
-           : prod_124 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[7]
-           ? prod_125 | p0_up_bf16[6]
-           : prod_125 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[6]
-           ? prod_126 | p0_up_bf16[6]
-           : prod_126 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[5]
-           ? prod_127 | p0_up_bf16[6]
-           : prod_127 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[4]
-           ? prod_128 | p0_up_bf16[6]
-           : prod_128 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[3]
-           ? prod_129 | p0_up_bf16[6]
-           : prod_129 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[2]
-           ? prod_130 | p0_up_bf16[6]
-           : prod_130 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[1]
-           ? prod_131 | p0_up_bf16[6]
-           : prod_131 & ~(p0_up_bf16[6]),
-         _prod_plus_ma32_shl_6__0[0]
-           ? prod_132 | p0_up_bf16[6]
-           : prod_132 & ~(p0_up_bf16[6])}
-        + {2'h1, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, silu_14, 7'h0});	// swiglu.k:93:9, :105:{17,21}, :148:{21,33}, :156:{21,25}, :157:{21,51}, :158:{51,58}
+         _prod_plus_ma32_shl_6_[14] & p0_mb_9,
+         _prod_plus_ma32_shl_6_[13] ? prod_119 | p0_mb_9 : prod_119 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[12] ? prod_120 | p0_mb_9 : prod_120 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[11] ? prod_121 | p0_mb_9 : prod_121 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[10] ? prod_122 | p0_mb_9 : prod_122 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[9] ? prod_123 | p0_mb_9 : prod_123 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[8] ? prod_124 | p0_mb_9 : prod_124 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[7] ? prod_125 | p0_mb_9 : prod_125 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[6] ? prod_126 | p0_mb_9 : prod_126 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[5] ? prod_127 | p0_mb_9 : prod_127 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[4] ? prod_128 | p0_mb_9 : prod_128 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[3] ? prod_129 | p0_mb_9 : prod_129 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[2] ? prod_130 | p0_mb_9 : prod_130 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[1] ? prod_131 | p0_mb_9 : prod_131 & ~p0_mb_9,
+         _prod_plus_ma32_shl_6_[0] ? prod_132 | p0_mb_9 : prod_132 & ~p0_mb_9}
+        + p0__ma32_shl_7__2);	// swiglu.k:99:9, :162:{21,25}, :163:{21,51}, :164:51
   wire  [15:0] r_exp_0 =
-    _prod_plus_ma32_shl_7__0[15]
-      ? 16'(_a_exp_plus_b_exp__0 - 16'h7E)
-      : 16'(_a_exp_plus_b_exp__0 - 16'h7F);	// swiglu.k:158:{21,51}, :161:21, :164:{33,39,47}, :169:{33,39}
-  wire         _GEN_3 = r_exp_0 < 16'hFF & (|r_exp_0);	// swiglu.k:146:{21,37,38,53}, :161:21, :163:{34,47}, :168:{34,47}, :171:{21,25,31,44}, :173:{34,49,51}
-  wire         _GEN_4 = ~(_prod_plus_ma32_shl_7__0[15]) & _GEN_3;	// swiglu.k:146:{21,37,38,53}, :158:{21,51}, :161:21, :163:{34,47}, :168:{34,47}, :171:{21,25}, :173:{34,49,51}
-  wire         _GEN_5 =
-    (|(p0_up_bf16[14:7]))
-    & (|{silu_0, silu_1, silu_2, silu_3, silu_4, silu_5, silu_6, silu_7});	// swiglu.k:93:9, :105:{17,21}, :107:{21,37,38,58}, :122:21, :124:{34,47}, :129:{34,47}, :132:{21,25}, :134:{32,47,49}, :142:{17,32}, :143:{17,32}, :144:{17,21,27,41}
-  always @(posedge clk) begin	// swiglu.k:93:9
-    p0_gate_bf16 <= data_in_7[15:0];	// swiglu.k:93:9
-    p0_up_bf16 <= data_in_7[31:16];	// swiglu.k:93:9
-    if (rst)	// swiglu.k:93:9
-      p0_stage1_enable <= 1'h0;	// swiglu.k:93:9
-    else	// swiglu.k:93:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// swiglu.k:93:9
+    p0_prod_2
+      ? p0__a_exp_plus_b_exp_minus_127_plus_1__2
+      : p0__a_exp_plus_b_exp_minus_127__2;	// swiglu.k:99:9, :167:21
+  wire         _GEN_3 = r_exp_0 < 16'hFF & (|r_exp_0);	// swiglu.k:152:{21,37,38,53}, :167:21, :169:{34,47}, :174:{34,47}, :177:{21,25,31,44}, :179:{34,49,51}
+  wire         _GEN_4 = ~p0_prod_2 & _GEN_3;	// swiglu.k:99:9, :152:{21,37,38,53}, :167:21, :169:{34,47}, :174:{34,47}, :177:{21,25}, :179:{34,49,51}
+  wire         _GEN_5 = p0__b_exp_ne_0__5 & p0__a_exp_ne_0__2;	// swiglu.k:99:9, :150:{17,21}
+  always @(posedge clk) begin	// swiglu.k:99:9
+    p0_gate_bf16 <= data_in_8[15:0];	// swiglu.k:99:9
+    p0_up_bf16 <= data_in_8[31:16];	// swiglu.k:99:9
+    if (rst)	// swiglu.k:99:9
+      p0_stage1_enable <= 1'h0;	// swiglu.k:99:9
+    else	// swiglu.k:99:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// swiglu.k:99:9
+    p0__prod_plus_ma32_shl_2_ <=
+      11'({1'h0,
+           prod_6,
+           prod_7,
+           prod_8,
+           prod_9,
+           prod_10,
+           prod_11,
+           prod_12,
+           prod_13,
+           prod_14,
+           prod_15} + {2'h1, p0_gate_bf16[6:0], 2'h0});	// swiglu.k:99:9, :119:{21,25}, :120:{51,58}
+    p0_mb <= _sigmoid_lut[5:0];	// swiglu.k:99:9, :104:26
+    p0_prod <=
+      {prod_6,
+       prod_7,
+       prod_8,
+       prod_9,
+       prod_10,
+       prod_11,
+       prod_12,
+       prod_13,
+       prod_14,
+       prod_15};	// swiglu.k:99:9, :119:{21,25}
+    p0__ma32_shl_3_ <= {2'h1, p0_gate_bf16[6:0], 3'h0};	// swiglu.k:99:9, :121:58
+    p0__ma32_shl_4_ <= {2'h1, p0_gate_bf16[6:0], 4'h0};	// swiglu.k:99:9, :122:58
+    p0__ma32_shl_5_ <= {2'h1, p0_gate_bf16[6:0], 5'h0};	// swiglu.k:99:9, :123:58
+    p0__ma32_shl_6_ <= {2'h1, p0_gate_bf16[6:0], 6'h0};	// swiglu.k:99:9, :124:58
+    p0_mb_0 <= _sigmoid_lut[6];	// swiglu.k:99:9, :104:26, :115:{21,33}
+    p0__ma32_shl_7_ <= {2'h1, p0_gate_bf16[6:0], 7'h0};	// swiglu.k:99:9, :125:58
+    p0__a_exp_plus_b_exp_minus_127_plus_1_ <= 16'(_a_exp_plus_b_exp_ - 16'h7E);	// swiglu.k:99:9, :131:{33,39,47}, :136:39
+    p0__a_exp_plus_b_exp_minus_127_ <= 16'(_a_exp_plus_b_exp_ - 16'h7F);	// swiglu.k:99:9, :131:39, :136:{33,39}
+    p0__sigmoid_lut <= _sigmoid_lut;	// swiglu.k:99:9, :104:26
+    p0_gate_bf16_0 <= p0_gate_bf16;	// swiglu.k:99:9
+    p0__b_exp_ne_0_ <= |(_sigmoid_lut[14:7]);	// swiglu.k:99:9, :104:26, :110:{17,32}, :111:41
+    p0__a_exp_ne_0_ <= |(p0_gate_bf16[14:7]);	// swiglu.k:99:9, :109:{17,32}, :111:27
+    p0_mb_1 <= p0_up_bf16[5:0];	// swiglu.k:99:9
+    p0_b_exp <= {8'h0, p0_up_bf16[14:7]};	// swiglu.k:99:9, :149:{17,32}
+    p0_mb_2 <= p0_up_bf16[6];	// swiglu.k:99:9, :154:{21,33}
+    p0__b_exp_ne_0__0 <= |(p0_up_bf16[14:7]);	// swiglu.k:99:9, :149:{17,32}, :150:41
+    if (rst)	// swiglu.k:99:9
+      p0_stage2_enable <= 1'h0;	// swiglu.k:99:9
+    else	// swiglu.k:99:9
+      p0_stage2_enable <= p0_stage1_enable;	// swiglu.k:99:9
+    p0__prod_plus_ma32_shl_6_ <=
+      15'({1'h0,
+           prod_52,
+           prod_53,
+           prod_54,
+           prod_55,
+           prod_56,
+           prod_57,
+           prod_58,
+           prod_59,
+           prod_60,
+           prod_61,
+           prod_62,
+           prod_63,
+           prod_64,
+           prod_65} + p0__ma32_shl_6_);	// swiglu.k:99:9, :123:{21,25}, :124:51
+    p0_mb_3 <= p0_mb_0;	// swiglu.k:99:9
+    p0_prod_0 <=
+      {prod_52,
+       prod_53,
+       prod_54,
+       prod_55,
+       prod_56,
+       prod_57,
+       prod_58,
+       prod_59,
+       prod_60,
+       prod_61,
+       prod_62,
+       prod_63,
+       prod_64,
+       prod_65};	// swiglu.k:99:9, :123:{21,25}
+    p0__ma32_shl_7__0 <= p0__ma32_shl_7_;	// swiglu.k:99:9
+    p0__a_exp_plus_b_exp_minus_127_plus_1__0 <= p0__a_exp_plus_b_exp_minus_127_plus_1_;	// swiglu.k:99:9
+    p0__a_exp_plus_b_exp_minus_127__0 <= p0__a_exp_plus_b_exp_minus_127_;	// swiglu.k:99:9
+    p0__sigmoid_lut_0 <= p0__sigmoid_lut;	// swiglu.k:99:9
+    p0_gate_bf16_1 <= p0_gate_bf16_0;	// swiglu.k:99:9
+    p0__b_exp_ne_0__1 <= p0__b_exp_ne_0_;	// swiglu.k:99:9
+    p0__a_exp_ne_0__0 <= p0__a_exp_ne_0_;	// swiglu.k:99:9
+    p0_mb_4 <= p0_mb_1;	// swiglu.k:99:9
+    p0_b_exp_0 <= p0_b_exp;	// swiglu.k:99:9
+    p0_mb_5 <= p0_mb_2;	// swiglu.k:99:9
+    p0__b_exp_ne_0__2 <= p0__b_exp_ne_0__0;	// swiglu.k:99:9
+    if (rst)	// swiglu.k:99:9
+      p0_stage3_enable <= 1'h0;	// swiglu.k:99:9
+    else	// swiglu.k:99:9
+      p0_stage3_enable <= p0_stage2_enable;	// swiglu.k:99:9
+    p0_a_exp <= {8'h0, silu, silu_0, silu_1, silu_2, silu_3, silu_4, silu_5, silu_6};	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}, :148:{17,32}
+    p0_mb_6 <= p0_mb_4;	// swiglu.k:99:9
+    p0_cast_lt_uint32_gt_ma_ <=
+      {silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13};	// swiglu.k:99:9, :111:{17,21}, :153:{21,33}, :156:35
+    p0_b_exp_1 <= p0_b_exp_0;	// swiglu.k:99:9
+    p0__ma32_shl_1_ <=
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 1'h0};	// swiglu.k:99:9, :111:{17,21}, :158:58
+    p0__ma32_shl_2_ <=
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 2'h0};	// swiglu.k:99:9, :111:{17,21}, :159:58
+    p0__ma32_shl_3__0 <=
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 3'h0};	// swiglu.k:99:9, :111:{17,21}, :160:58
+    p0__ma32_shl_4__0 <=
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 4'h0};	// swiglu.k:99:9, :111:{17,21}, :161:58
+    p0__ma32_shl_5__0 <=
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 5'h0};	// swiglu.k:99:9, :111:{17,21}, :162:58
+    p0__ma32_shl_6__0 <=
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 6'h0};	// swiglu.k:99:9, :111:{17,21}, :163:58
+    p0_mb_7 <= p0_mb_5;	// swiglu.k:99:9
+    p0__ma32_shl_7__1 <=
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 7'h0};	// swiglu.k:99:9, :111:{17,21}, :164:58
+    p0_silu <=
+      {(r_exp[8]
+          ? _GEN_0
+          : p0__sigmoid_lut_0[15]
+              ? ~(p0_gate_bf16_1[15]) & _GEN_0
+              : p0_gate_bf16_1[15] & _GEN_0) & _GEN_2,
+       silu,
+       silu_0,
+       silu_1,
+       silu_2,
+       silu_3,
+       silu_4,
+       silu_5,
+       silu_6,
+       silu_7,
+       silu_8,
+       silu_9,
+       silu_10,
+       silu_11,
+       silu_12,
+       silu_13};	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+    p0__b_exp_ne_0__3 <= p0__b_exp_ne_0__2;	// swiglu.k:99:9
+    if (rst)	// swiglu.k:99:9
+      p0_stage4_enable <= 1'h0;	// swiglu.k:99:9
+    else	// swiglu.k:99:9
+      p0_stage4_enable <= p0_stage3_enable;	// swiglu.k:99:9
+    p0__prod_plus_ma32_shl_4_ <=
+      13'({1'h0,
+           prod_94,
+           prod_95,
+           prod_96,
+           prod_97,
+           prod_98,
+           prod_99,
+           prod_100,
+           prod_101,
+           prod_102,
+           prod_103,
+           prod_104,
+           prod_105} + p0__ma32_shl_4__0);	// swiglu.k:99:9, :160:{21,25}, :161:51
+    p0_mb_8 <= p0_mb_6;	// swiglu.k:99:9
+    p0_prod_1 <=
+      {prod_94,
+       prod_95,
+       prod_96,
+       prod_97,
+       prod_98,
+       prod_99,
+       prod_100,
+       prod_101,
+       prod_102,
+       prod_103,
+       prod_104,
+       prod_105};	// swiglu.k:99:9, :160:{21,25}
+    p0__ma32_shl_5__1 <= p0__ma32_shl_5__0;	// swiglu.k:99:9
+    p0__ma32_shl_6__1 <= p0__ma32_shl_6__0;	// swiglu.k:99:9
+    p0_mb_9 <= p0_mb_7;	// swiglu.k:99:9
+    p0__ma32_shl_7__2 <= p0__ma32_shl_7__1;	// swiglu.k:99:9
+    p0__a_exp_plus_b_exp_minus_127_plus_1__1 <= 16'(_a_exp_plus_b_exp__0 - 16'h7E);	// swiglu.k:99:9, :170:{33,39,47}, :175:39
+    p0__a_exp_plus_b_exp_minus_127__1 <= 16'(_a_exp_plus_b_exp__0 - 16'h7F);	// swiglu.k:99:9, :170:39, :175:{33,39}
+    p0_silu_0 <= p0_silu;	// swiglu.k:99:9
+    p0__b_exp_ne_0__4 <= p0__b_exp_ne_0__3;	// swiglu.k:99:9
+    p0__a_exp_ne_0__1 <= |p0_a_exp;	// swiglu.k:99:9, :150:27
+    if (rst)	// swiglu.k:99:9
+      p0_stage5_enable <= 1'h0;	// swiglu.k:99:9
+    else	// swiglu.k:99:9
+      p0_stage5_enable <= p0_stage4_enable;	// swiglu.k:99:9
+    p0_prod_2 <= _prod_plus_ma32_shl_7__0[15];	// swiglu.k:99:9, :164:{21,51}
+    p0__a_exp_plus_b_exp_minus_127_plus_1__2 <= p0__a_exp_plus_b_exp_minus_127_plus_1__1;	// swiglu.k:99:9
+    p0__a_exp_plus_b_exp_minus_127__2 <= p0__a_exp_plus_b_exp_minus_127__1;	// swiglu.k:99:9
+    p0_up_bf16_0 <= data_prop_out_7_0;	// swiglu.k:99:9
+    p0_silu_1 <= p0_silu_0;	// swiglu.k:99:9
+    p0_prod_3 <= _prod_plus_ma32_shl_7__0[14:0];	// swiglu.k:99:9, :164:51
+    p0__b_exp_ne_0__5 <= p0__b_exp_ne_0__4;	// swiglu.k:99:9
+    p0__a_exp_ne_0__2 <= p0__a_exp_ne_0__1;	// swiglu.k:99:9
+    if (rst)	// swiglu.k:99:9
+      p0_stage6_enable <= 1'h0;	// swiglu.k:99:9
+    else	// swiglu.k:99:9
+      p0_stage6_enable <= p0_stage5_enable;	// swiglu.k:99:9
     p0_result <=
-      {(r_exp_0[8] ? _GEN_3 : p0_up_bf16[15] ? ~silu & _GEN_3 : silu & _GEN_3) & _GEN_5,
+      {(r_exp_0[8]
+          ? _GEN_3
+          : p0_up_bf16_0[15] ? ~(p0_silu_1[15]) & _GEN_3 : p0_silu_1[15] & _GEN_3)
+         & _GEN_5,
        r_exp_0[7] & _GEN_3 & _GEN_5,
        r_exp_0[6] & _GEN_3 & _GEN_5,
        r_exp_0[5] & _GEN_3 & _GEN_5,
@@ -2000,47 +2180,52 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
        r_exp_0[2] & _GEN_3 & _GEN_5,
        r_exp_0[1] & _GEN_3 & _GEN_5,
        r_exp_0[0] & _GEN_3 & _GEN_5,
-       (_prod_plus_ma32_shl_7__0[14]
-          ? (_prod_plus_ma32_shl_7__0[13] | _prod_plus_ma32_shl_7__0[15]) & _GEN_3
-          : _prod_plus_ma32_shl_7__0[13] & _GEN_4) & _GEN_5,
-       (_prod_plus_ma32_shl_7__0[13]
-          ? (_prod_plus_ma32_shl_7__0[12] | _prod_plus_ma32_shl_7__0[15]) & _GEN_3
-          : _prod_plus_ma32_shl_7__0[12] & _GEN_4) & _GEN_5,
-       (_prod_plus_ma32_shl_7__0[12]
-          ? (_prod_plus_ma32_shl_7__0[11] | _prod_plus_ma32_shl_7__0[15]) & _GEN_3
-          : _prod_plus_ma32_shl_7__0[11] & _GEN_4) & _GEN_5,
-       (_prod_plus_ma32_shl_7__0[11]
-          ? (_prod_plus_ma32_shl_7__0[10] | _prod_plus_ma32_shl_7__0[15]) & _GEN_3
-          : _prod_plus_ma32_shl_7__0[10] & _GEN_4) & _GEN_5,
-       (_prod_plus_ma32_shl_7__0[10]
-          ? (_prod_plus_ma32_shl_7__0[9] | _prod_plus_ma32_shl_7__0[15]) & _GEN_3
-          : _prod_plus_ma32_shl_7__0[9] & _GEN_4) & _GEN_5,
-       (_prod_plus_ma32_shl_7__0[9]
-          ? (_prod_plus_ma32_shl_7__0[8] | _prod_plus_ma32_shl_7__0[15]) & _GEN_3
-          : _prod_plus_ma32_shl_7__0[8] & _GEN_4) & _GEN_5,
-       (_prod_plus_ma32_shl_7__0[8]
-          ? (_prod_plus_ma32_shl_7__0[7] | _prod_plus_ma32_shl_7__0[15]) & _GEN_3
-          : _prod_plus_ma32_shl_7__0[7] & _GEN_4) & _GEN_5};	// swiglu.k:93:9, :105:{17,21}, :144:{17,21}, :146:{21,37,38,53}, :158:{21,51}, :161:21, :163:{34,47}, :168:{34,47}, :171:{21,25}, :173:{34,49,51}
-    if (rst)	// swiglu.k:93:9
-      p0_stage2_enable <= 1'h0;	// swiglu.k:93:9
-    else	// swiglu.k:93:9
-      p0_stage2_enable <= p0_stage1_enable;	// swiglu.k:93:9
-    p0_result_0 <= p0_result;	// swiglu.k:93:9
-    if (rst)	// swiglu.k:93:9
-      p0_stage3_enable <= 1'h0;	// swiglu.k:93:9
-    else	// swiglu.k:93:9
-      p0_stage3_enable <= p0_stage2_enable;	// swiglu.k:93:9
+       (p0_prod_3[14] ? (p0_prod_3[13] | p0_prod_2) & _GEN_3 : p0_prod_3[13] & _GEN_4)
+         & _GEN_5,
+       (p0_prod_3[13] ? (p0_prod_3[12] | p0_prod_2) & _GEN_3 : p0_prod_3[12] & _GEN_4)
+         & _GEN_5,
+       (p0_prod_3[12] ? (p0_prod_3[11] | p0_prod_2) & _GEN_3 : p0_prod_3[11] & _GEN_4)
+         & _GEN_5,
+       (p0_prod_3[11] ? (p0_prod_3[10] | p0_prod_2) & _GEN_3 : p0_prod_3[10] & _GEN_4)
+         & _GEN_5,
+       (p0_prod_3[10] ? (p0_prod_3[9] | p0_prod_2) & _GEN_3 : p0_prod_3[9] & _GEN_4)
+         & _GEN_5,
+       (p0_prod_3[9] ? (p0_prod_3[8] | p0_prod_2) & _GEN_3 : p0_prod_3[8] & _GEN_4)
+         & _GEN_5,
+       (p0_prod_3[8] ? (p0_prod_3[7] | p0_prod_2) & _GEN_3 : p0_prod_3[7] & _GEN_4)
+         & _GEN_5};	// swiglu.k:99:9, :150:{17,21}, :152:{21,37,38,53}, :167:21, :169:{34,47}, :174:{34,47}, :177:{21,25}, :179:{34,49,51}
+    if (rst)	// swiglu.k:99:9
+      p0_stage7_enable <= 1'h0;	// swiglu.k:99:9
+    else	// swiglu.k:99:9
+      p0_stage7_enable <= p0_stage6_enable;	// swiglu.k:99:9
+    p0_result_0 <= p0_result;	// swiglu.k:99:9
+    if (rst)	// swiglu.k:99:9
+      p0_stage8_enable <= 1'h0;	// swiglu.k:99:9
+    else	// swiglu.k:99:9
+      p0_stage8_enable <= p0_stage7_enable;	// swiglu.k:99:9
   end // always @(posedge)
-  always_comb begin	// swiglu.k:93:9
-    fifo_wren_0_0 = p0_stage3_enable;	// swiglu.k:91:5, :93:9
-    fifo_data_out_0_0 = p0_result_0;	// swiglu.k:91:5, :93:9
+  always_comb begin	// swiglu.k:99:9
+    fifo_wren_0_0 = p0_stage8_enable;	// swiglu.k:97:5, :99:9
+    fifo_data_out_0_0 = p0_result_0;	// swiglu.k:97:5, :99:9
   end // always_comb
+  KanagawaFixedDelayFifo #(
+    .WIDTH(16),
+    .DELAY(3),
+    .USE_LUTRAM(1),
+    .DEVICE_FAMILY("mock"),
+    .USE_DSP(0)
+  ) delay_fifo_7_compute_swiglu_Propagation (	// swiglu.k:99:9
+    .clk      (clk),	// swiglu.k:99:9
+    .rst      (rst),	// swiglu.k:99:9
+    .data_in  (data_prop_in_7_0),	// swiglu.k:99:9
+    .data_out (data_prop_out_7_0)
+  );	// swiglu.k:99:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// swiglu.k:93:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// swiglu.k:99:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -2048,30 +2233,30 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:93:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// swiglu.k:93:9
+    .data_in  (~fifo_overflow_in_0),	// swiglu.k:99:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  swiglu_unitDebugView_compute_swigluEntry swiglu_unitDebugView_compute_swigluEntry_instance (	// swiglu.k:91:5
-    .clk        (clk),	// swiglu.k:91:5
-    ._gate_bf16 (p0_stage1_enable ? p0_gate_bf16 : 'x),	// swiglu.k:91:5, :93:9
-    ._up_bf16   (p0_stage1_enable ? p0_up_bf16 : 'x),	// swiglu.k:91:5, :93:9
-    .valid      (p0_stage1_enable),	// swiglu.k:93:9
+  swiglu_unitDebugView_compute_swigluEntry swiglu_unitDebugView_compute_swigluEntry_instance (	// swiglu.k:97:5
+    .clk        (clk),	// swiglu.k:97:5
+    ._gate_bf16 (p0_stage1_enable ? p0_gate_bf16 : 'x),	// swiglu.k:97:5, :99:9
+    ._up_bf16   (p0_stage1_enable ? p0_up_bf16 : 'x),	// swiglu.k:97:5, :99:9
+    .valid      (p0_stage1_enable),	// swiglu.k:99:9
     .valid_out  (/* unused */)
-  );	// swiglu.k:91:5
-  swiglu_unitDebugView_compute_swigluExit swiglu_unitDebugView_compute_swigluExit_instance (	// swiglu.k:91:5
-    .clk          (clk),	// swiglu.k:91:5
-    ._ReturnValue (p0_stage2_enable ? p0_result : 'x),	// swiglu.k:91:5, :93:9
-    .valid        (p0_stage2_enable),	// swiglu.k:93:9
+  );	// swiglu.k:97:5
+  swiglu_unitDebugView_compute_swigluExit swiglu_unitDebugView_compute_swigluExit_instance (	// swiglu.k:97:5
+    .clk          (clk),	// swiglu.k:97:5
+    ._ReturnValue (p0_stage7_enable ? p0_result : 'x),	// swiglu.k:97:5, :99:9
+    .valid        (p0_stage7_enable),	// swiglu.k:99:9
     .valid_out    (/* unused */)
-  );	// swiglu.k:91:5
-  assign done_out = p0_stage3_enable;	// swiglu.k:93:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// swiglu.k:93:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// swiglu.k:93:9
-  assign input_rdy_0 = input_rdy_0_0;	// swiglu.k:93:9
-  assign control_state_out = control_state_out_0;	// swiglu.k:93:9
+  );	// swiglu.k:97:5
+  assign done_out = p0_stage8_enable;	// swiglu.k:99:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// swiglu.k:99:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// swiglu.k:99:9
+  assign input_rdy_0 = input_rdy_0_0;	// swiglu.k:99:9
+  assign control_state_out = control_state_out_0;	// swiglu.k:99:9
 endmodule
 
-module swiglu_unit_compute_silu_BasicBlock_0(	// swiglu.k:41:9
+module swiglu_unit_compute_silu_BasicBlock_0(	// swiglu.k:43:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -2344,539 +2529,566 @@ module swiglu_unit_compute_silu_BasicBlock_0(	// swiglu.k:41:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [15:0] global_in__sigmoid_lut_element_0_9_0 = global_in__sigmoid_lut_element_0_9;	// swiglu.k:41:9
+  wire  [15:0] global_in__sigmoid_lut_element_0_9_0 = global_in__sigmoid_lut_element_0_9;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_1_10_0 =
-    global_in__sigmoid_lut_element_1_10;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_1_10;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_2_11_0 =
-    global_in__sigmoid_lut_element_2_11;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_2_11;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_3_12_0 =
-    global_in__sigmoid_lut_element_3_12;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_3_12;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_4_13_0 =
-    global_in__sigmoid_lut_element_4_13;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_4_13;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_5_14_0 =
-    global_in__sigmoid_lut_element_5_14;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_5_14;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_6_15_0 =
-    global_in__sigmoid_lut_element_6_15;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_6_15;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_7_16_0 =
-    global_in__sigmoid_lut_element_7_16;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_7_16;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_8_17_0 =
-    global_in__sigmoid_lut_element_8_17;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_8_17;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_9_18_0 =
-    global_in__sigmoid_lut_element_9_18;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_9_18;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_10_19_0 =
-    global_in__sigmoid_lut_element_10_19;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_10_19;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_11_20_0 =
-    global_in__sigmoid_lut_element_11_20;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_11_20;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_12_21_0 =
-    global_in__sigmoid_lut_element_12_21;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_12_21;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_13_22_0 =
-    global_in__sigmoid_lut_element_13_22;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_13_22;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_14_23_0 =
-    global_in__sigmoid_lut_element_14_23;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_14_23;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_15_24_0 =
-    global_in__sigmoid_lut_element_15_24;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_15_24;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_16_25_0 =
-    global_in__sigmoid_lut_element_16_25;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_16_25;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_17_26_0 =
-    global_in__sigmoid_lut_element_17_26;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_17_26;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_18_27_0 =
-    global_in__sigmoid_lut_element_18_27;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_18_27;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_19_28_0 =
-    global_in__sigmoid_lut_element_19_28;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_19_28;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_20_29_0 =
-    global_in__sigmoid_lut_element_20_29;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_20_29;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_21_30_0 =
-    global_in__sigmoid_lut_element_21_30;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_21_30;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_22_31_0 =
-    global_in__sigmoid_lut_element_22_31;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_22_31;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_23_32_0 =
-    global_in__sigmoid_lut_element_23_32;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_23_32;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_24_33_0 =
-    global_in__sigmoid_lut_element_24_33;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_24_33;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_25_34_0 =
-    global_in__sigmoid_lut_element_25_34;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_25_34;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_26_35_0 =
-    global_in__sigmoid_lut_element_26_35;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_26_35;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_27_36_0 =
-    global_in__sigmoid_lut_element_27_36;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_27_36;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_28_37_0 =
-    global_in__sigmoid_lut_element_28_37;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_28_37;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_29_38_0 =
-    global_in__sigmoid_lut_element_29_38;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_29_38;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_30_39_0 =
-    global_in__sigmoid_lut_element_30_39;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_30_39;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_31_40_0 =
-    global_in__sigmoid_lut_element_31_40;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_31_40;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_32_41_0 =
-    global_in__sigmoid_lut_element_32_41;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_32_41;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_33_42_0 =
-    global_in__sigmoid_lut_element_33_42;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_33_42;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_34_43_0 =
-    global_in__sigmoid_lut_element_34_43;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_34_43;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_35_44_0 =
-    global_in__sigmoid_lut_element_35_44;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_35_44;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_36_45_0 =
-    global_in__sigmoid_lut_element_36_45;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_36_45;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_37_46_0 =
-    global_in__sigmoid_lut_element_37_46;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_37_46;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_38_47_0 =
-    global_in__sigmoid_lut_element_38_47;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_38_47;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_39_48_0 =
-    global_in__sigmoid_lut_element_39_48;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_39_48;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_40_49_0 =
-    global_in__sigmoid_lut_element_40_49;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_40_49;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_41_50_0 =
-    global_in__sigmoid_lut_element_41_50;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_41_50;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_42_51_0 =
-    global_in__sigmoid_lut_element_42_51;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_42_51;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_43_52_0 =
-    global_in__sigmoid_lut_element_43_52;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_43_52;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_44_53_0 =
-    global_in__sigmoid_lut_element_44_53;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_44_53;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_45_54_0 =
-    global_in__sigmoid_lut_element_45_54;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_45_54;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_46_55_0 =
-    global_in__sigmoid_lut_element_46_55;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_46_55;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_47_56_0 =
-    global_in__sigmoid_lut_element_47_56;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_47_56;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_48_57_0 =
-    global_in__sigmoid_lut_element_48_57;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_48_57;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_49_58_0 =
-    global_in__sigmoid_lut_element_49_58;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_49_58;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_50_59_0 =
-    global_in__sigmoid_lut_element_50_59;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_50_59;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_51_60_0 =
-    global_in__sigmoid_lut_element_51_60;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_51_60;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_52_61_0 =
-    global_in__sigmoid_lut_element_52_61;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_52_61;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_53_62_0 =
-    global_in__sigmoid_lut_element_53_62;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_53_62;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_54_63_0 =
-    global_in__sigmoid_lut_element_54_63;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_54_63;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_55_64_0 =
-    global_in__sigmoid_lut_element_55_64;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_55_64;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_56_65_0 =
-    global_in__sigmoid_lut_element_56_65;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_56_65;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_57_66_0 =
-    global_in__sigmoid_lut_element_57_66;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_57_66;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_58_67_0 =
-    global_in__sigmoid_lut_element_58_67;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_58_67;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_59_68_0 =
-    global_in__sigmoid_lut_element_59_68;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_59_68;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_60_69_0 =
-    global_in__sigmoid_lut_element_60_69;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_60_69;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_61_70_0 =
-    global_in__sigmoid_lut_element_61_70;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_61_70;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_62_71_0 =
-    global_in__sigmoid_lut_element_62_71;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_62_71;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_63_72_0 =
-    global_in__sigmoid_lut_element_63_72;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_63_72;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_64_73_0 =
-    global_in__sigmoid_lut_element_64_73;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_64_73;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_65_74_0 =
-    global_in__sigmoid_lut_element_65_74;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_65_74;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_66_75_0 =
-    global_in__sigmoid_lut_element_66_75;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_66_75;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_67_76_0 =
-    global_in__sigmoid_lut_element_67_76;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_67_76;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_68_77_0 =
-    global_in__sigmoid_lut_element_68_77;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_68_77;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_69_78_0 =
-    global_in__sigmoid_lut_element_69_78;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_69_78;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_70_79_0 =
-    global_in__sigmoid_lut_element_70_79;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_70_79;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_71_80_0 =
-    global_in__sigmoid_lut_element_71_80;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_71_80;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_72_81_0 =
-    global_in__sigmoid_lut_element_72_81;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_72_81;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_73_82_0 =
-    global_in__sigmoid_lut_element_73_82;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_73_82;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_74_83_0 =
-    global_in__sigmoid_lut_element_74_83;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_74_83;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_75_84_0 =
-    global_in__sigmoid_lut_element_75_84;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_75_84;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_76_85_0 =
-    global_in__sigmoid_lut_element_76_85;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_76_85;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_77_86_0 =
-    global_in__sigmoid_lut_element_77_86;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_77_86;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_78_87_0 =
-    global_in__sigmoid_lut_element_78_87;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_78_87;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_79_88_0 =
-    global_in__sigmoid_lut_element_79_88;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_79_88;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_80_89_0 =
-    global_in__sigmoid_lut_element_80_89;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_80_89;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_81_90_0 =
-    global_in__sigmoid_lut_element_81_90;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_81_90;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_82_91_0 =
-    global_in__sigmoid_lut_element_82_91;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_82_91;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_83_92_0 =
-    global_in__sigmoid_lut_element_83_92;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_83_92;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_84_93_0 =
-    global_in__sigmoid_lut_element_84_93;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_84_93;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_85_94_0 =
-    global_in__sigmoid_lut_element_85_94;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_85_94;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_86_95_0 =
-    global_in__sigmoid_lut_element_86_95;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_86_95;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_87_96_0 =
-    global_in__sigmoid_lut_element_87_96;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_87_96;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_88_97_0 =
-    global_in__sigmoid_lut_element_88_97;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_88_97;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_89_98_0 =
-    global_in__sigmoid_lut_element_89_98;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_89_98;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_90_99_0 =
-    global_in__sigmoid_lut_element_90_99;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_90_99;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_91_100_0 =
-    global_in__sigmoid_lut_element_91_100;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_91_100;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_92_101_0 =
-    global_in__sigmoid_lut_element_92_101;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_92_101;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_93_102_0 =
-    global_in__sigmoid_lut_element_93_102;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_93_102;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_94_103_0 =
-    global_in__sigmoid_lut_element_94_103;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_94_103;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_95_104_0 =
-    global_in__sigmoid_lut_element_95_104;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_95_104;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_96_105_0 =
-    global_in__sigmoid_lut_element_96_105;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_96_105;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_97_106_0 =
-    global_in__sigmoid_lut_element_97_106;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_97_106;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_98_107_0 =
-    global_in__sigmoid_lut_element_98_107;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_98_107;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_99_108_0 =
-    global_in__sigmoid_lut_element_99_108;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_99_108;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_100_109_0 =
-    global_in__sigmoid_lut_element_100_109;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_100_109;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_101_110_0 =
-    global_in__sigmoid_lut_element_101_110;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_101_110;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_102_111_0 =
-    global_in__sigmoid_lut_element_102_111;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_102_111;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_103_112_0 =
-    global_in__sigmoid_lut_element_103_112;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_103_112;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_104_113_0 =
-    global_in__sigmoid_lut_element_104_113;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_104_113;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_105_114_0 =
-    global_in__sigmoid_lut_element_105_114;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_105_114;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_106_115_0 =
-    global_in__sigmoid_lut_element_106_115;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_106_115;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_107_116_0 =
-    global_in__sigmoid_lut_element_107_116;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_107_116;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_108_117_0 =
-    global_in__sigmoid_lut_element_108_117;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_108_117;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_109_118_0 =
-    global_in__sigmoid_lut_element_109_118;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_109_118;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_110_119_0 =
-    global_in__sigmoid_lut_element_110_119;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_110_119;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_111_120_0 =
-    global_in__sigmoid_lut_element_111_120;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_111_120;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_112_121_0 =
-    global_in__sigmoid_lut_element_112_121;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_112_121;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_113_122_0 =
-    global_in__sigmoid_lut_element_113_122;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_113_122;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_114_123_0 =
-    global_in__sigmoid_lut_element_114_123;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_114_123;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_115_124_0 =
-    global_in__sigmoid_lut_element_115_124;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_115_124;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_116_125_0 =
-    global_in__sigmoid_lut_element_116_125;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_116_125;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_117_126_0 =
-    global_in__sigmoid_lut_element_117_126;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_117_126;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_118_127_0 =
-    global_in__sigmoid_lut_element_118_127;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_118_127;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_119_128_0 =
-    global_in__sigmoid_lut_element_119_128;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_119_128;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_120_129_0 =
-    global_in__sigmoid_lut_element_120_129;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_120_129;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_121_130_0 =
-    global_in__sigmoid_lut_element_121_130;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_121_130;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_122_131_0 =
-    global_in__sigmoid_lut_element_122_131;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_122_131;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_123_132_0 =
-    global_in__sigmoid_lut_element_123_132;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_123_132;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_124_133_0 =
-    global_in__sigmoid_lut_element_124_133;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_124_133;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_125_134_0 =
-    global_in__sigmoid_lut_element_125_134;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_125_134;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_126_135_0 =
-    global_in__sigmoid_lut_element_126_135;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_126_135;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_127_136_0 =
-    global_in__sigmoid_lut_element_127_136;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_127_136;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_128_137_0 =
-    global_in__sigmoid_lut_element_128_137;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_128_137;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_129_138_0 =
-    global_in__sigmoid_lut_element_129_138;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_129_138;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_130_139_0 =
-    global_in__sigmoid_lut_element_130_139;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_130_139;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_131_140_0 =
-    global_in__sigmoid_lut_element_131_140;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_131_140;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_132_141_0 =
-    global_in__sigmoid_lut_element_132_141;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_132_141;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_133_142_0 =
-    global_in__sigmoid_lut_element_133_142;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_133_142;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_134_143_0 =
-    global_in__sigmoid_lut_element_134_143;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_134_143;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_135_144_0 =
-    global_in__sigmoid_lut_element_135_144;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_135_144;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_136_145_0 =
-    global_in__sigmoid_lut_element_136_145;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_136_145;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_137_146_0 =
-    global_in__sigmoid_lut_element_137_146;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_137_146;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_138_147_0 =
-    global_in__sigmoid_lut_element_138_147;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_138_147;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_139_148_0 =
-    global_in__sigmoid_lut_element_139_148;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_139_148;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_140_149_0 =
-    global_in__sigmoid_lut_element_140_149;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_140_149;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_141_150_0 =
-    global_in__sigmoid_lut_element_141_150;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_141_150;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_142_151_0 =
-    global_in__sigmoid_lut_element_142_151;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_142_151;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_143_152_0 =
-    global_in__sigmoid_lut_element_143_152;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_143_152;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_144_153_0 =
-    global_in__sigmoid_lut_element_144_153;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_144_153;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_145_154_0 =
-    global_in__sigmoid_lut_element_145_154;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_145_154;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_146_155_0 =
-    global_in__sigmoid_lut_element_146_155;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_146_155;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_147_156_0 =
-    global_in__sigmoid_lut_element_147_156;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_147_156;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_148_157_0 =
-    global_in__sigmoid_lut_element_148_157;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_148_157;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_149_158_0 =
-    global_in__sigmoid_lut_element_149_158;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_149_158;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_150_159_0 =
-    global_in__sigmoid_lut_element_150_159;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_150_159;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_151_160_0 =
-    global_in__sigmoid_lut_element_151_160;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_151_160;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_152_161_0 =
-    global_in__sigmoid_lut_element_152_161;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_152_161;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_153_162_0 =
-    global_in__sigmoid_lut_element_153_162;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_153_162;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_154_163_0 =
-    global_in__sigmoid_lut_element_154_163;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_154_163;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_155_164_0 =
-    global_in__sigmoid_lut_element_155_164;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_155_164;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_156_165_0 =
-    global_in__sigmoid_lut_element_156_165;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_156_165;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_157_166_0 =
-    global_in__sigmoid_lut_element_157_166;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_157_166;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_158_167_0 =
-    global_in__sigmoid_lut_element_158_167;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_158_167;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_159_168_0 =
-    global_in__sigmoid_lut_element_159_168;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_159_168;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_160_169_0 =
-    global_in__sigmoid_lut_element_160_169;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_160_169;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_161_170_0 =
-    global_in__sigmoid_lut_element_161_170;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_161_170;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_162_171_0 =
-    global_in__sigmoid_lut_element_162_171;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_162_171;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_163_172_0 =
-    global_in__sigmoid_lut_element_163_172;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_163_172;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_164_173_0 =
-    global_in__sigmoid_lut_element_164_173;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_164_173;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_165_174_0 =
-    global_in__sigmoid_lut_element_165_174;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_165_174;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_166_175_0 =
-    global_in__sigmoid_lut_element_166_175;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_166_175;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_167_176_0 =
-    global_in__sigmoid_lut_element_167_176;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_167_176;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_168_177_0 =
-    global_in__sigmoid_lut_element_168_177;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_168_177;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_169_178_0 =
-    global_in__sigmoid_lut_element_169_178;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_169_178;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_170_179_0 =
-    global_in__sigmoid_lut_element_170_179;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_170_179;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_171_180_0 =
-    global_in__sigmoid_lut_element_171_180;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_171_180;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_172_181_0 =
-    global_in__sigmoid_lut_element_172_181;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_172_181;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_173_182_0 =
-    global_in__sigmoid_lut_element_173_182;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_173_182;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_174_183_0 =
-    global_in__sigmoid_lut_element_174_183;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_174_183;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_175_184_0 =
-    global_in__sigmoid_lut_element_175_184;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_175_184;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_176_185_0 =
-    global_in__sigmoid_lut_element_176_185;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_176_185;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_177_186_0 =
-    global_in__sigmoid_lut_element_177_186;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_177_186;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_178_187_0 =
-    global_in__sigmoid_lut_element_178_187;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_178_187;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_179_188_0 =
-    global_in__sigmoid_lut_element_179_188;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_179_188;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_180_189_0 =
-    global_in__sigmoid_lut_element_180_189;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_180_189;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_181_190_0 =
-    global_in__sigmoid_lut_element_181_190;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_181_190;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_182_191_0 =
-    global_in__sigmoid_lut_element_182_191;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_182_191;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_183_192_0 =
-    global_in__sigmoid_lut_element_183_192;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_183_192;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_184_193_0 =
-    global_in__sigmoid_lut_element_184_193;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_184_193;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_185_194_0 =
-    global_in__sigmoid_lut_element_185_194;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_185_194;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_186_195_0 =
-    global_in__sigmoid_lut_element_186_195;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_186_195;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_187_196_0 =
-    global_in__sigmoid_lut_element_187_196;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_187_196;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_188_197_0 =
-    global_in__sigmoid_lut_element_188_197;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_188_197;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_189_198_0 =
-    global_in__sigmoid_lut_element_189_198;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_189_198;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_190_199_0 =
-    global_in__sigmoid_lut_element_190_199;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_190_199;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_191_200_0 =
-    global_in__sigmoid_lut_element_191_200;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_191_200;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_192_201_0 =
-    global_in__sigmoid_lut_element_192_201;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_192_201;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_193_202_0 =
-    global_in__sigmoid_lut_element_193_202;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_193_202;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_194_203_0 =
-    global_in__sigmoid_lut_element_194_203;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_194_203;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_195_204_0 =
-    global_in__sigmoid_lut_element_195_204;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_195_204;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_196_205_0 =
-    global_in__sigmoid_lut_element_196_205;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_196_205;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_197_206_0 =
-    global_in__sigmoid_lut_element_197_206;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_197_206;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_198_207_0 =
-    global_in__sigmoid_lut_element_198_207;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_198_207;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_199_208_0 =
-    global_in__sigmoid_lut_element_199_208;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_199_208;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_200_209_0 =
-    global_in__sigmoid_lut_element_200_209;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_200_209;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_201_210_0 =
-    global_in__sigmoid_lut_element_201_210;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_201_210;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_202_211_0 =
-    global_in__sigmoid_lut_element_202_211;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_202_211;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_203_212_0 =
-    global_in__sigmoid_lut_element_203_212;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_203_212;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_204_213_0 =
-    global_in__sigmoid_lut_element_204_213;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_204_213;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_205_214_0 =
-    global_in__sigmoid_lut_element_205_214;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_205_214;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_206_215_0 =
-    global_in__sigmoid_lut_element_206_215;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_206_215;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_207_216_0 =
-    global_in__sigmoid_lut_element_207_216;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_207_216;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_208_217_0 =
-    global_in__sigmoid_lut_element_208_217;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_208_217;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_209_218_0 =
-    global_in__sigmoid_lut_element_209_218;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_209_218;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_210_219_0 =
-    global_in__sigmoid_lut_element_210_219;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_210_219;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_211_220_0 =
-    global_in__sigmoid_lut_element_211_220;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_211_220;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_212_221_0 =
-    global_in__sigmoid_lut_element_212_221;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_212_221;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_213_222_0 =
-    global_in__sigmoid_lut_element_213_222;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_213_222;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_214_223_0 =
-    global_in__sigmoid_lut_element_214_223;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_214_223;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_215_224_0 =
-    global_in__sigmoid_lut_element_215_224;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_215_224;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_216_225_0 =
-    global_in__sigmoid_lut_element_216_225;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_216_225;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_217_226_0 =
-    global_in__sigmoid_lut_element_217_226;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_217_226;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_218_227_0 =
-    global_in__sigmoid_lut_element_218_227;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_218_227;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_219_228_0 =
-    global_in__sigmoid_lut_element_219_228;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_219_228;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_220_229_0 =
-    global_in__sigmoid_lut_element_220_229;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_220_229;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_221_230_0 =
-    global_in__sigmoid_lut_element_221_230;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_221_230;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_222_231_0 =
-    global_in__sigmoid_lut_element_222_231;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_222_231;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_223_232_0 =
-    global_in__sigmoid_lut_element_223_232;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_223_232;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_224_233_0 =
-    global_in__sigmoid_lut_element_224_233;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_224_233;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_225_234_0 =
-    global_in__sigmoid_lut_element_225_234;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_225_234;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_226_235_0 =
-    global_in__sigmoid_lut_element_226_235;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_226_235;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_227_236_0 =
-    global_in__sigmoid_lut_element_227_236;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_227_236;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_228_237_0 =
-    global_in__sigmoid_lut_element_228_237;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_228_237;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_229_238_0 =
-    global_in__sigmoid_lut_element_229_238;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_229_238;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_230_239_0 =
-    global_in__sigmoid_lut_element_230_239;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_230_239;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_231_240_0 =
-    global_in__sigmoid_lut_element_231_240;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_231_240;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_232_241_0 =
-    global_in__sigmoid_lut_element_232_241;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_232_241;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_233_242_0 =
-    global_in__sigmoid_lut_element_233_242;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_233_242;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_234_243_0 =
-    global_in__sigmoid_lut_element_234_243;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_234_243;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_235_244_0 =
-    global_in__sigmoid_lut_element_235_244;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_235_244;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_236_245_0 =
-    global_in__sigmoid_lut_element_236_245;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_236_245;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_237_246_0 =
-    global_in__sigmoid_lut_element_237_246;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_237_246;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_238_247_0 =
-    global_in__sigmoid_lut_element_238_247;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_238_247;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_239_248_0 =
-    global_in__sigmoid_lut_element_239_248;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_239_248;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_240_249_0 =
-    global_in__sigmoid_lut_element_240_249;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_240_249;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_241_250_0 =
-    global_in__sigmoid_lut_element_241_250;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_241_250;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_242_251_0 =
-    global_in__sigmoid_lut_element_242_251;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_242_251;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_243_252_0 =
-    global_in__sigmoid_lut_element_243_252;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_243_252;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_244_253_0 =
-    global_in__sigmoid_lut_element_244_253;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_244_253;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_245_254_0 =
-    global_in__sigmoid_lut_element_245_254;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_245_254;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_246_255_0 =
-    global_in__sigmoid_lut_element_246_255;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_246_255;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_247_256_0 =
-    global_in__sigmoid_lut_element_247_256;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_247_256;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_248_257_0 =
-    global_in__sigmoid_lut_element_248_257;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_248_257;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_249_258_0 =
-    global_in__sigmoid_lut_element_249_258;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_249_258;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_250_259_0 =
-    global_in__sigmoid_lut_element_250_259;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_250_259;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_251_260_0 =
-    global_in__sigmoid_lut_element_251_260;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_251_260;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_252_261_0 =
-    global_in__sigmoid_lut_element_252_261;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_252_261;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_253_262_0 =
-    global_in__sigmoid_lut_element_253_262;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_253_262;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_254_263_0 =
-    global_in__sigmoid_lut_element_254_263;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_254_263;	// swiglu.k:43:9
   wire  [15:0] global_in__sigmoid_lut_element_255_264_0 =
-    global_in__sigmoid_lut_element_255_264;	// swiglu.k:41:9
-  logic        done_out_0;	// swiglu.k:41:9
-  logic [15:0] fifo_data_out_0_0;	// swiglu.k:41:9
-  logic        fifo_wren_0_0;	// swiglu.k:41:9
-  logic        input_rdy_0_0;	// swiglu.k:41:9
-  logic [7:0]  control_state_out_0;	// swiglu.k:41:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// swiglu.k:41:9
-  always_comb begin	// swiglu.k:41:9
-    input_rdy_0_0 = _GEN;	// swiglu.k:41:9
+    global_in__sigmoid_lut_element_255_264;	// swiglu.k:43:9
+  logic        done_out_0;	// swiglu.k:43:9
+  logic [15:0] fifo_data_out_0_0;	// swiglu.k:43:9
+  logic        fifo_wren_0_0;	// swiglu.k:43:9
+  logic        input_rdy_0_0;	// swiglu.k:43:9
+  logic [7:0]  control_state_out_0;	// swiglu.k:43:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// swiglu.k:43:9
+  always_comb begin	// swiglu.k:43:9
+    input_rdy_0_0 = _GEN;	// swiglu.k:43:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// swiglu.k:41:9
+       ~input_valid_0};	// swiglu.k:43:9
   end // always_comb
-  reg   [15:0] p0_data_in_6;	// swiglu.k:41:9
-  reg          p0_stage1_enable = 1'h0;	// swiglu.k:41:9
-  reg   [15:0] p0_result;	// swiglu.k:41:9
-  reg          p0_stage2_enable = 1'h0;	// swiglu.k:41:9
-  reg   [15:0] p0_result_0;	// swiglu.k:41:9
-  reg          p0_stage3_enable = 1'h0;	// swiglu.k:41:9
+  reg   [15:0] p0_data_in_6;	// swiglu.k:43:9
+  reg          p0_stage1_enable = 1'h0;	// swiglu.k:43:9
+  reg   [10:0] p0__prod_plus_ma32_shl_2_;	// swiglu.k:43:9
+  reg   [5:0]  p0_mb;	// swiglu.k:43:9
+  reg   [9:0]  p0_prod;	// swiglu.k:43:9
+  reg   [11:0] p0__ma32_shl_3_;	// swiglu.k:43:9
+  reg   [12:0] p0__ma32_shl_4_;	// swiglu.k:43:9
+  reg   [13:0] p0__ma32_shl_5_;	// swiglu.k:43:9
+  reg   [14:0] p0__ma32_shl_6_;	// swiglu.k:43:9
+  reg          p0_mb_0;	// swiglu.k:43:9
+  reg   [15:0] p0__ma32_shl_7_;	// swiglu.k:43:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1_;	// swiglu.k:43:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_;	// swiglu.k:43:9
+  reg   [15:0] p0__sigmoid_lut;	// swiglu.k:43:9
+  reg   [15:0] p0_data_in_6_0;	// swiglu.k:43:9
+  reg          p0__b_exp_ne_0_;	// swiglu.k:43:9
+  reg          p0__a_exp_ne_0_;	// swiglu.k:43:9
+  reg          p0_stage2_enable = 1'h0;	// swiglu.k:43:9
+  reg   [14:0] p0__prod_plus_ma32_shl_6_;	// swiglu.k:43:9
+  reg          p0_mb_1;	// swiglu.k:43:9
+  reg   [13:0] p0_prod_0;	// swiglu.k:43:9
+  reg   [15:0] p0__ma32_shl_7__0;	// swiglu.k:43:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__0;	// swiglu.k:43:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__0;	// swiglu.k:43:9
+  reg   [15:0] p0__sigmoid_lut_0;	// swiglu.k:43:9
+  reg   [15:0] p0_data_in_6_1;	// swiglu.k:43:9
+  reg          p0__b_exp_ne_0__0;	// swiglu.k:43:9
+  reg          p0__a_exp_ne_0__0;	// swiglu.k:43:9
+  reg          p0_stage3_enable = 1'h0;	// swiglu.k:43:9
+  reg   [15:0] p0_result;	// swiglu.k:43:9
+  reg          p0_stage4_enable = 1'h0;	// swiglu.k:43:9
+  reg   [15:0] p0_result_0;	// swiglu.k:43:9
+  reg          p0_stage5_enable = 1'h0;	// swiglu.k:43:9
   wire  [15:0] _sigmoid_lut =
     p0_data_in_6[15]
       ? (p0_data_in_6[14]
@@ -3388,72 +3600,60 @@ module swiglu_unit_compute_silu_BasicBlock_0(	// swiglu.k:41:9
                                    : global_in__sigmoid_lut_element_2_11_0)
                               : p0_data_in_6[8]
                                   ? global_in__sigmoid_lut_element_1_10_0
-                                  : global_in__sigmoid_lut_element_0_9_0;	// swiglu.k:41:9, :45:26
-  wire         prod = p0_data_in_6[6] & _sigmoid_lut[0];	// swiglu.k:41:9, :45:26, :55:{21,33}, :56:{21,33}, :58:35, :59:{21,25}
-  wire         prod_0 = p0_data_in_6[5] & _sigmoid_lut[0];	// swiglu.k:41:9, :45:26, :55:{21,33}, :56:{21,33}, :58:35, :59:{21,25}
-  wire         prod_1 = p0_data_in_6[4] & _sigmoid_lut[0];	// swiglu.k:41:9, :45:26, :55:{21,33}, :56:{21,33}, :58:35, :59:{21,25}
-  wire         prod_2 = p0_data_in_6[3] & _sigmoid_lut[0];	// swiglu.k:41:9, :45:26, :55:{21,33}, :56:{21,33}, :58:35, :59:{21,25}
-  wire         prod_3 = p0_data_in_6[2] & _sigmoid_lut[0];	// swiglu.k:41:9, :45:26, :55:{21,33}, :56:{21,33}, :58:35, :59:{21,25}
-  wire         prod_4 = p0_data_in_6[1] & _sigmoid_lut[0];	// swiglu.k:41:9, :45:26, :55:{21,33}, :56:{21,33}, :58:35, :59:{21,25}
-  wire         prod_5 = p0_data_in_6[0] & _sigmoid_lut[0];	// swiglu.k:41:9, :45:26, :55:{21,33}, :56:{21,33}, :58:35, :59:{21,25}
+                                  : global_in__sigmoid_lut_element_0_9_0;	// swiglu.k:43:9, :47:26
+  wire         prod = p0_data_in_6[6] & _sigmoid_lut[0];	// swiglu.k:43:9, :47:26, :57:{21,33}, :58:{21,33}, :60:35, :61:{21,25}
+  wire         prod_0 = p0_data_in_6[5] & _sigmoid_lut[0];	// swiglu.k:43:9, :47:26, :57:{21,33}, :58:{21,33}, :60:35, :61:{21,25}
+  wire         prod_1 = p0_data_in_6[4] & _sigmoid_lut[0];	// swiglu.k:43:9, :47:26, :57:{21,33}, :58:{21,33}, :60:35, :61:{21,25}
+  wire         prod_2 = p0_data_in_6[3] & _sigmoid_lut[0];	// swiglu.k:43:9, :47:26, :57:{21,33}, :58:{21,33}, :60:35, :61:{21,25}
+  wire         prod_3 = p0_data_in_6[2] & _sigmoid_lut[0];	// swiglu.k:43:9, :47:26, :57:{21,33}, :58:{21,33}, :60:35, :61:{21,25}
+  wire         prod_4 = p0_data_in_6[1] & _sigmoid_lut[0];	// swiglu.k:43:9, :47:26, :57:{21,33}, :58:{21,33}, :60:35, :61:{21,25}
+  wire         prod_5 = p0_data_in_6[0] & _sigmoid_lut[0];	// swiglu.k:43:9, :47:26, :57:{21,33}, :58:{21,33}, :60:35, :61:{21,25}
   wire  [15:0] _a_exp_plus_b_exp_ =
-    16'({8'h0, p0_data_in_6[14:7]} + {8'h0, _sigmoid_lut[14:7]});	// swiglu.k:41:9, :45:26, :72:39, :77:39
+    16'({8'h0, p0_data_in_6[14:7]} + {8'h0, _sigmoid_lut[14:7]});	// swiglu.k:43:9, :47:26, :74:39, :79:39
   wire  [9:0]  _prod_plus_ma32_shl_1_ =
     10'({2'h0, _sigmoid_lut[0], prod, prod_0, prod_1, prod_2, prod_3, prod_4, prod_5}
-        + {2'h1, p0_data_in_6[6:0], 1'h0});	// swiglu.k:41:9, :45:26, :56:{21,33}, :59:{21,25}, :60:{51,58}
-  wire         prod_6 = _prod_plus_ma32_shl_1_[9] & _sigmoid_lut[1];	// swiglu.k:45:26, :56:{21,33}, :60:{21,25,51}
-  wire         prod_7 = _prod_plus_ma32_shl_1_[8] & _sigmoid_lut[1];	// swiglu.k:45:26, :56:{21,33}, :60:{21,25,51}
+        + {2'h1, p0_data_in_6[6:0], 1'h0});	// swiglu.k:43:9, :47:26, :58:{21,33}, :61:{21,25}, :62:{51,58}
+  wire         prod_6 = _prod_plus_ma32_shl_1_[9] & _sigmoid_lut[1];	// swiglu.k:47:26, :58:{21,33}, :62:{21,25,51}
+  wire         prod_7 = _prod_plus_ma32_shl_1_[8] & _sigmoid_lut[1];	// swiglu.k:47:26, :58:{21,33}, :62:{21,25,51}
   wire         prod_8 =
     _prod_plus_ma32_shl_1_[7]
       ? _sigmoid_lut[0] | _sigmoid_lut[1]
-      : _sigmoid_lut[0] & ~(_sigmoid_lut[1]);	// swiglu.k:45:26, :56:{21,33}, :60:{21,25,51}
+      : _sigmoid_lut[0] & ~(_sigmoid_lut[1]);	// swiglu.k:47:26, :58:{21,33}, :62:{21,25,51}
   wire         prod_9 =
-    _prod_plus_ma32_shl_1_[6] ? prod | _sigmoid_lut[1] : prod & ~(_sigmoid_lut[1]);	// swiglu.k:45:26, :56:{21,33}, :59:{21,25}, :60:{21,25,51}
+    _prod_plus_ma32_shl_1_[6] ? prod | _sigmoid_lut[1] : prod & ~(_sigmoid_lut[1]);	// swiglu.k:47:26, :58:{21,33}, :61:{21,25}, :62:{21,25,51}
   wire         prod_10 =
-    _prod_plus_ma32_shl_1_[5] ? prod_0 | _sigmoid_lut[1] : prod_0 & ~(_sigmoid_lut[1]);	// swiglu.k:45:26, :56:{21,33}, :59:{21,25}, :60:{21,25,51}
+    _prod_plus_ma32_shl_1_[5] ? prod_0 | _sigmoid_lut[1] : prod_0 & ~(_sigmoid_lut[1]);	// swiglu.k:47:26, :58:{21,33}, :61:{21,25}, :62:{21,25,51}
   wire         prod_11 =
-    _prod_plus_ma32_shl_1_[4] ? prod_1 | _sigmoid_lut[1] : prod_1 & ~(_sigmoid_lut[1]);	// swiglu.k:45:26, :56:{21,33}, :59:{21,25}, :60:{21,25,51}
+    _prod_plus_ma32_shl_1_[4] ? prod_1 | _sigmoid_lut[1] : prod_1 & ~(_sigmoid_lut[1]);	// swiglu.k:47:26, :58:{21,33}, :61:{21,25}, :62:{21,25,51}
   wire         prod_12 =
-    _prod_plus_ma32_shl_1_[3] ? prod_2 | _sigmoid_lut[1] : prod_2 & ~(_sigmoid_lut[1]);	// swiglu.k:45:26, :56:{21,33}, :59:{21,25}, :60:{21,25,51}
+    _prod_plus_ma32_shl_1_[3] ? prod_2 | _sigmoid_lut[1] : prod_2 & ~(_sigmoid_lut[1]);	// swiglu.k:47:26, :58:{21,33}, :61:{21,25}, :62:{21,25,51}
   wire         prod_13 =
-    _prod_plus_ma32_shl_1_[2] ? prod_3 | _sigmoid_lut[1] : prod_3 & ~(_sigmoid_lut[1]);	// swiglu.k:45:26, :56:{21,33}, :59:{21,25}, :60:{21,25,51}
+    _prod_plus_ma32_shl_1_[2] ? prod_3 | _sigmoid_lut[1] : prod_3 & ~(_sigmoid_lut[1]);	// swiglu.k:47:26, :58:{21,33}, :61:{21,25}, :62:{21,25,51}
   wire         prod_14 =
-    _prod_plus_ma32_shl_1_[1] ? prod_4 | _sigmoid_lut[1] : prod_4 & ~(_sigmoid_lut[1]);	// swiglu.k:45:26, :56:{21,33}, :59:{21,25}, :60:{21,25,51}
+    _prod_plus_ma32_shl_1_[1] ? prod_4 | _sigmoid_lut[1] : prod_4 & ~(_sigmoid_lut[1]);	// swiglu.k:47:26, :58:{21,33}, :61:{21,25}, :62:{21,25,51}
   wire         prod_15 =
-    _prod_plus_ma32_shl_1_[0] ? prod_5 | _sigmoid_lut[1] : prod_5 & ~(_sigmoid_lut[1]);	// swiglu.k:45:26, :56:{21,33}, :59:{21,25}, :60:{21,25,51}
-  wire  [10:0] _prod_plus_ma32_shl_2_ =
-    11'({1'h0,
-         prod_6,
-         prod_7,
-         prod_8,
-         prod_9,
-         prod_10,
-         prod_11,
-         prod_12,
-         prod_13,
-         prod_14,
-         prod_15} + {2'h1, p0_data_in_6[6:0], 2'h0});	// swiglu.k:41:9, :60:{21,25}, :61:{51,58}
-  wire         prod_16 = _prod_plus_ma32_shl_2_[10] & _sigmoid_lut[2];	// swiglu.k:45:26, :56:{21,33}, :61:{21,25,51}
+    _prod_plus_ma32_shl_1_[0] ? prod_5 | _sigmoid_lut[1] : prod_5 & ~(_sigmoid_lut[1]);	// swiglu.k:47:26, :58:{21,33}, :61:{21,25}, :62:{21,25,51}
+  wire         prod_16 = p0__prod_plus_ma32_shl_2_[10] & p0_mb[2];	// swiglu.k:43:9, :63:{21,25}
   wire         prod_17 =
-    _prod_plus_ma32_shl_2_[9] ? prod_6 | _sigmoid_lut[2] : prod_6 & ~(_sigmoid_lut[2]);	// swiglu.k:45:26, :56:{21,33}, :60:{21,25}, :61:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[9] ? p0_prod[9] | p0_mb[2] : p0_prod[9] & ~(p0_mb[2]);	// swiglu.k:43:9, :63:{21,25}
   wire         prod_18 =
-    _prod_plus_ma32_shl_2_[8] ? prod_7 | _sigmoid_lut[2] : prod_7 & ~(_sigmoid_lut[2]);	// swiglu.k:45:26, :56:{21,33}, :60:{21,25}, :61:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[8] ? p0_prod[8] | p0_mb[2] : p0_prod[8] & ~(p0_mb[2]);	// swiglu.k:43:9, :63:{21,25}
   wire         prod_19 =
-    _prod_plus_ma32_shl_2_[7] ? prod_8 | _sigmoid_lut[2] : prod_8 & ~(_sigmoid_lut[2]);	// swiglu.k:45:26, :56:{21,33}, :60:{21,25}, :61:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[7] ? p0_prod[7] | p0_mb[2] : p0_prod[7] & ~(p0_mb[2]);	// swiglu.k:43:9, :63:{21,25}
   wire         prod_20 =
-    _prod_plus_ma32_shl_2_[6] ? prod_9 | _sigmoid_lut[2] : prod_9 & ~(_sigmoid_lut[2]);	// swiglu.k:45:26, :56:{21,33}, :60:{21,25}, :61:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[6] ? p0_prod[6] | p0_mb[2] : p0_prod[6] & ~(p0_mb[2]);	// swiglu.k:43:9, :63:{21,25}
   wire         prod_21 =
-    _prod_plus_ma32_shl_2_[5] ? prod_10 | _sigmoid_lut[2] : prod_10 & ~(_sigmoid_lut[2]);	// swiglu.k:45:26, :56:{21,33}, :60:{21,25}, :61:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[5] ? p0_prod[5] | p0_mb[2] : p0_prod[5] & ~(p0_mb[2]);	// swiglu.k:43:9, :63:{21,25}
   wire         prod_22 =
-    _prod_plus_ma32_shl_2_[4] ? prod_11 | _sigmoid_lut[2] : prod_11 & ~(_sigmoid_lut[2]);	// swiglu.k:45:26, :56:{21,33}, :60:{21,25}, :61:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[4] ? p0_prod[4] | p0_mb[2] : p0_prod[4] & ~(p0_mb[2]);	// swiglu.k:43:9, :63:{21,25}
   wire         prod_23 =
-    _prod_plus_ma32_shl_2_[3] ? prod_12 | _sigmoid_lut[2] : prod_12 & ~(_sigmoid_lut[2]);	// swiglu.k:45:26, :56:{21,33}, :60:{21,25}, :61:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[3] ? p0_prod[3] | p0_mb[2] : p0_prod[3] & ~(p0_mb[2]);	// swiglu.k:43:9, :63:{21,25}
   wire         prod_24 =
-    _prod_plus_ma32_shl_2_[2] ? prod_13 | _sigmoid_lut[2] : prod_13 & ~(_sigmoid_lut[2]);	// swiglu.k:45:26, :56:{21,33}, :60:{21,25}, :61:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[2] ? p0_prod[2] | p0_mb[2] : p0_prod[2] & ~(p0_mb[2]);	// swiglu.k:43:9, :63:{21,25}
   wire         prod_25 =
-    _prod_plus_ma32_shl_2_[1] ? prod_14 | _sigmoid_lut[2] : prod_14 & ~(_sigmoid_lut[2]);	// swiglu.k:45:26, :56:{21,33}, :60:{21,25}, :61:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[1] ? p0_prod[1] | p0_mb[2] : p0_prod[1] & ~(p0_mb[2]);	// swiglu.k:43:9, :63:{21,25}
   wire         prod_26 =
-    _prod_plus_ma32_shl_2_[0] ? prod_15 | _sigmoid_lut[2] : prod_15 & ~(_sigmoid_lut[2]);	// swiglu.k:45:26, :56:{21,33}, :60:{21,25}, :61:{21,25,51}
+    p0__prod_plus_ma32_shl_2_[0] ? p0_prod[0] | p0_mb[2] : p0_prod[0] & ~(p0_mb[2]);	// swiglu.k:43:9, :63:{21,25}
   wire  [11:0] _prod_plus_ma32_shl_3_ =
     12'({1'h0,
          prod_16,
@@ -3466,30 +3666,30 @@ module swiglu_unit_compute_silu_BasicBlock_0(	// swiglu.k:41:9
          prod_23,
          prod_24,
          prod_25,
-         prod_26} + {2'h1, p0_data_in_6[6:0], 3'h0});	// swiglu.k:41:9, :61:{21,25}, :62:{51,58}
-  wire         prod_27 = _prod_plus_ma32_shl_3_[11] & _sigmoid_lut[3];	// swiglu.k:45:26, :56:{21,33}, :62:{21,25,51}
+         prod_26} + p0__ma32_shl_3_);	// swiglu.k:43:9, :63:{21,25}, :64:51
+  wire         prod_27 = _prod_plus_ma32_shl_3_[11] & p0_mb[3];	// swiglu.k:43:9, :64:{21,25,51}
   wire         prod_28 =
-    _prod_plus_ma32_shl_3_[10] ? prod_16 | _sigmoid_lut[3] : prod_16 & ~(_sigmoid_lut[3]);	// swiglu.k:45:26, :56:{21,33}, :61:{21,25}, :62:{21,25,51}
+    _prod_plus_ma32_shl_3_[10] ? prod_16 | p0_mb[3] : prod_16 & ~(p0_mb[3]);	// swiglu.k:43:9, :63:{21,25}, :64:{21,25,51}
   wire         prod_29 =
-    _prod_plus_ma32_shl_3_[9] ? prod_17 | _sigmoid_lut[3] : prod_17 & ~(_sigmoid_lut[3]);	// swiglu.k:45:26, :56:{21,33}, :61:{21,25}, :62:{21,25,51}
+    _prod_plus_ma32_shl_3_[9] ? prod_17 | p0_mb[3] : prod_17 & ~(p0_mb[3]);	// swiglu.k:43:9, :63:{21,25}, :64:{21,25,51}
   wire         prod_30 =
-    _prod_plus_ma32_shl_3_[8] ? prod_18 | _sigmoid_lut[3] : prod_18 & ~(_sigmoid_lut[3]);	// swiglu.k:45:26, :56:{21,33}, :61:{21,25}, :62:{21,25,51}
+    _prod_plus_ma32_shl_3_[8] ? prod_18 | p0_mb[3] : prod_18 & ~(p0_mb[3]);	// swiglu.k:43:9, :63:{21,25}, :64:{21,25,51}
   wire         prod_31 =
-    _prod_plus_ma32_shl_3_[7] ? prod_19 | _sigmoid_lut[3] : prod_19 & ~(_sigmoid_lut[3]);	// swiglu.k:45:26, :56:{21,33}, :61:{21,25}, :62:{21,25,51}
+    _prod_plus_ma32_shl_3_[7] ? prod_19 | p0_mb[3] : prod_19 & ~(p0_mb[3]);	// swiglu.k:43:9, :63:{21,25}, :64:{21,25,51}
   wire         prod_32 =
-    _prod_plus_ma32_shl_3_[6] ? prod_20 | _sigmoid_lut[3] : prod_20 & ~(_sigmoid_lut[3]);	// swiglu.k:45:26, :56:{21,33}, :61:{21,25}, :62:{21,25,51}
+    _prod_plus_ma32_shl_3_[6] ? prod_20 | p0_mb[3] : prod_20 & ~(p0_mb[3]);	// swiglu.k:43:9, :63:{21,25}, :64:{21,25,51}
   wire         prod_33 =
-    _prod_plus_ma32_shl_3_[5] ? prod_21 | _sigmoid_lut[3] : prod_21 & ~(_sigmoid_lut[3]);	// swiglu.k:45:26, :56:{21,33}, :61:{21,25}, :62:{21,25,51}
+    _prod_plus_ma32_shl_3_[5] ? prod_21 | p0_mb[3] : prod_21 & ~(p0_mb[3]);	// swiglu.k:43:9, :63:{21,25}, :64:{21,25,51}
   wire         prod_34 =
-    _prod_plus_ma32_shl_3_[4] ? prod_22 | _sigmoid_lut[3] : prod_22 & ~(_sigmoid_lut[3]);	// swiglu.k:45:26, :56:{21,33}, :61:{21,25}, :62:{21,25,51}
+    _prod_plus_ma32_shl_3_[4] ? prod_22 | p0_mb[3] : prod_22 & ~(p0_mb[3]);	// swiglu.k:43:9, :63:{21,25}, :64:{21,25,51}
   wire         prod_35 =
-    _prod_plus_ma32_shl_3_[3] ? prod_23 | _sigmoid_lut[3] : prod_23 & ~(_sigmoid_lut[3]);	// swiglu.k:45:26, :56:{21,33}, :61:{21,25}, :62:{21,25,51}
+    _prod_plus_ma32_shl_3_[3] ? prod_23 | p0_mb[3] : prod_23 & ~(p0_mb[3]);	// swiglu.k:43:9, :63:{21,25}, :64:{21,25,51}
   wire         prod_36 =
-    _prod_plus_ma32_shl_3_[2] ? prod_24 | _sigmoid_lut[3] : prod_24 & ~(_sigmoid_lut[3]);	// swiglu.k:45:26, :56:{21,33}, :61:{21,25}, :62:{21,25,51}
+    _prod_plus_ma32_shl_3_[2] ? prod_24 | p0_mb[3] : prod_24 & ~(p0_mb[3]);	// swiglu.k:43:9, :63:{21,25}, :64:{21,25,51}
   wire         prod_37 =
-    _prod_plus_ma32_shl_3_[1] ? prod_25 | _sigmoid_lut[3] : prod_25 & ~(_sigmoid_lut[3]);	// swiglu.k:45:26, :56:{21,33}, :61:{21,25}, :62:{21,25,51}
+    _prod_plus_ma32_shl_3_[1] ? prod_25 | p0_mb[3] : prod_25 & ~(p0_mb[3]);	// swiglu.k:43:9, :63:{21,25}, :64:{21,25,51}
   wire         prod_38 =
-    _prod_plus_ma32_shl_3_[0] ? prod_26 | _sigmoid_lut[3] : prod_26 & ~(_sigmoid_lut[3]);	// swiglu.k:45:26, :56:{21,33}, :61:{21,25}, :62:{21,25,51}
+    _prod_plus_ma32_shl_3_[0] ? prod_26 | p0_mb[3] : prod_26 & ~(p0_mb[3]);	// swiglu.k:43:9, :63:{21,25}, :64:{21,25,51}
   wire  [12:0] _prod_plus_ma32_shl_4_ =
     13'({1'h0,
          prod_27,
@@ -3503,32 +3703,32 @@ module swiglu_unit_compute_silu_BasicBlock_0(	// swiglu.k:41:9
          prod_35,
          prod_36,
          prod_37,
-         prod_38} + {2'h1, p0_data_in_6[6:0], 4'h0});	// swiglu.k:41:9, :62:{21,25}, :63:{51,58}
-  wire         prod_39 = _prod_plus_ma32_shl_4_[12] & _sigmoid_lut[4];	// swiglu.k:45:26, :56:{21,33}, :63:{21,25,51}
+         prod_38} + p0__ma32_shl_4_);	// swiglu.k:43:9, :64:{21,25}, :65:51
+  wire         prod_39 = _prod_plus_ma32_shl_4_[12] & p0_mb[4];	// swiglu.k:43:9, :65:{21,25,51}
   wire         prod_40 =
-    _prod_plus_ma32_shl_4_[11] ? prod_27 | _sigmoid_lut[4] : prod_27 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[11] ? prod_27 | p0_mb[4] : prod_27 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire         prod_41 =
-    _prod_plus_ma32_shl_4_[10] ? prod_28 | _sigmoid_lut[4] : prod_28 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[10] ? prod_28 | p0_mb[4] : prod_28 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire         prod_42 =
-    _prod_plus_ma32_shl_4_[9] ? prod_29 | _sigmoid_lut[4] : prod_29 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[9] ? prod_29 | p0_mb[4] : prod_29 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire         prod_43 =
-    _prod_plus_ma32_shl_4_[8] ? prod_30 | _sigmoid_lut[4] : prod_30 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[8] ? prod_30 | p0_mb[4] : prod_30 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire         prod_44 =
-    _prod_plus_ma32_shl_4_[7] ? prod_31 | _sigmoid_lut[4] : prod_31 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[7] ? prod_31 | p0_mb[4] : prod_31 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire         prod_45 =
-    _prod_plus_ma32_shl_4_[6] ? prod_32 | _sigmoid_lut[4] : prod_32 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[6] ? prod_32 | p0_mb[4] : prod_32 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire         prod_46 =
-    _prod_plus_ma32_shl_4_[5] ? prod_33 | _sigmoid_lut[4] : prod_33 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[5] ? prod_33 | p0_mb[4] : prod_33 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire         prod_47 =
-    _prod_plus_ma32_shl_4_[4] ? prod_34 | _sigmoid_lut[4] : prod_34 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[4] ? prod_34 | p0_mb[4] : prod_34 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire         prod_48 =
-    _prod_plus_ma32_shl_4_[3] ? prod_35 | _sigmoid_lut[4] : prod_35 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[3] ? prod_35 | p0_mb[4] : prod_35 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire         prod_49 =
-    _prod_plus_ma32_shl_4_[2] ? prod_36 | _sigmoid_lut[4] : prod_36 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[2] ? prod_36 | p0_mb[4] : prod_36 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire         prod_50 =
-    _prod_plus_ma32_shl_4_[1] ? prod_37 | _sigmoid_lut[4] : prod_37 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[1] ? prod_37 | p0_mb[4] : prod_37 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire         prod_51 =
-    _prod_plus_ma32_shl_4_[0] ? prod_38 | _sigmoid_lut[4] : prod_38 & ~(_sigmoid_lut[4]);	// swiglu.k:45:26, :56:{21,33}, :62:{21,25}, :63:{21,25,51}
+    _prod_plus_ma32_shl_4_[0] ? prod_38 | p0_mb[4] : prod_38 & ~(p0_mb[4]);	// swiglu.k:43:9, :64:{21,25}, :65:{21,25,51}
   wire  [13:0] _prod_plus_ma32_shl_5_ =
     14'({1'h0,
          prod_39,
@@ -3543,113 +3743,162 @@ module swiglu_unit_compute_silu_BasicBlock_0(	// swiglu.k:41:9
          prod_48,
          prod_49,
          prod_50,
-         prod_51} + {2'h1, p0_data_in_6[6:0], 5'h0});	// swiglu.k:41:9, :63:{21,25}, :64:{51,58}
-  wire         prod_52 = _prod_plus_ma32_shl_5_[13] & _sigmoid_lut[5];	// swiglu.k:45:26, :56:{21,33}, :64:{21,25,51}
+         prod_51} + p0__ma32_shl_5_);	// swiglu.k:43:9, :65:{21,25}, :66:51
+  wire         prod_52 = _prod_plus_ma32_shl_5_[13] & p0_mb[5];	// swiglu.k:43:9, :66:{21,25,51}
   wire         prod_53 =
-    _prod_plus_ma32_shl_5_[12] ? prod_39 | _sigmoid_lut[5] : prod_39 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[12] ? prod_39 | p0_mb[5] : prod_39 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_54 =
-    _prod_plus_ma32_shl_5_[11] ? prod_40 | _sigmoid_lut[5] : prod_40 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[11] ? prod_40 | p0_mb[5] : prod_40 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_55 =
-    _prod_plus_ma32_shl_5_[10] ? prod_41 | _sigmoid_lut[5] : prod_41 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[10] ? prod_41 | p0_mb[5] : prod_41 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_56 =
-    _prod_plus_ma32_shl_5_[9] ? prod_42 | _sigmoid_lut[5] : prod_42 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[9] ? prod_42 | p0_mb[5] : prod_42 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_57 =
-    _prod_plus_ma32_shl_5_[8] ? prod_43 | _sigmoid_lut[5] : prod_43 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[8] ? prod_43 | p0_mb[5] : prod_43 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_58 =
-    _prod_plus_ma32_shl_5_[7] ? prod_44 | _sigmoid_lut[5] : prod_44 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[7] ? prod_44 | p0_mb[5] : prod_44 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_59 =
-    _prod_plus_ma32_shl_5_[6] ? prod_45 | _sigmoid_lut[5] : prod_45 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[6] ? prod_45 | p0_mb[5] : prod_45 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_60 =
-    _prod_plus_ma32_shl_5_[5] ? prod_46 | _sigmoid_lut[5] : prod_46 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[5] ? prod_46 | p0_mb[5] : prod_46 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_61 =
-    _prod_plus_ma32_shl_5_[4] ? prod_47 | _sigmoid_lut[5] : prod_47 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[4] ? prod_47 | p0_mb[5] : prod_47 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_62 =
-    _prod_plus_ma32_shl_5_[3] ? prod_48 | _sigmoid_lut[5] : prod_48 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[3] ? prod_48 | p0_mb[5] : prod_48 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_63 =
-    _prod_plus_ma32_shl_5_[2] ? prod_49 | _sigmoid_lut[5] : prod_49 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[2] ? prod_49 | p0_mb[5] : prod_49 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_64 =
-    _prod_plus_ma32_shl_5_[1] ? prod_50 | _sigmoid_lut[5] : prod_50 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
+    _prod_plus_ma32_shl_5_[1] ? prod_50 | p0_mb[5] : prod_50 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire         prod_65 =
-    _prod_plus_ma32_shl_5_[0] ? prod_51 | _sigmoid_lut[5] : prod_51 & ~(_sigmoid_lut[5]);	// swiglu.k:45:26, :56:{21,33}, :63:{21,25}, :64:{21,25,51}
-  wire  [14:0] _prod_plus_ma32_shl_6_ =
-    15'({1'h0,
-         prod_52,
-         prod_53,
-         prod_54,
-         prod_55,
-         prod_56,
-         prod_57,
-         prod_58,
-         prod_59,
-         prod_60,
-         prod_61,
-         prod_62,
-         prod_63,
-         prod_64,
-         prod_65} + {2'h1, p0_data_in_6[6:0], 6'h0});	// swiglu.k:41:9, :64:{21,25}, :65:{51,58}
+    _prod_plus_ma32_shl_5_[0] ? prod_51 | p0_mb[5] : prod_51 & ~(p0_mb[5]);	// swiglu.k:43:9, :65:{21,25}, :66:{21,25,51}
   wire  [15:0] _prod_plus_ma32_shl_7_ =
     16'({1'h0,
-         _prod_plus_ma32_shl_6_[14] & _sigmoid_lut[6],
-         _prod_plus_ma32_shl_6_[13]
-           ? prod_52 | _sigmoid_lut[6]
-           : prod_52 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[12]
-           ? prod_53 | _sigmoid_lut[6]
-           : prod_53 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[11]
-           ? prod_54 | _sigmoid_lut[6]
-           : prod_54 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[10]
-           ? prod_55 | _sigmoid_lut[6]
-           : prod_55 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[9]
-           ? prod_56 | _sigmoid_lut[6]
-           : prod_56 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[8]
-           ? prod_57 | _sigmoid_lut[6]
-           : prod_57 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[7]
-           ? prod_58 | _sigmoid_lut[6]
-           : prod_58 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[6]
-           ? prod_59 | _sigmoid_lut[6]
-           : prod_59 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[5]
-           ? prod_60 | _sigmoid_lut[6]
-           : prod_60 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[4]
-           ? prod_61 | _sigmoid_lut[6]
-           : prod_61 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[3]
-           ? prod_62 | _sigmoid_lut[6]
-           : prod_62 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[2]
-           ? prod_63 | _sigmoid_lut[6]
-           : prod_63 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[1]
-           ? prod_64 | _sigmoid_lut[6]
-           : prod_64 & ~(_sigmoid_lut[6]),
-         _prod_plus_ma32_shl_6_[0]
-           ? prod_65 | _sigmoid_lut[6]
-           : prod_65 & ~(_sigmoid_lut[6])} + {2'h1, p0_data_in_6[6:0], 7'h0});	// swiglu.k:41:9, :45:26, :56:{21,33}, :64:{21,25}, :65:{21,51}, :66:{51,58}
+         p0__prod_plus_ma32_shl_6_[14] & p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[13]
+           ? p0_prod_0[13] | p0_mb_1
+           : p0_prod_0[13] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[12]
+           ? p0_prod_0[12] | p0_mb_1
+           : p0_prod_0[12] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[11]
+           ? p0_prod_0[11] | p0_mb_1
+           : p0_prod_0[11] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[10]
+           ? p0_prod_0[10] | p0_mb_1
+           : p0_prod_0[10] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[9] ? p0_prod_0[9] | p0_mb_1 : p0_prod_0[9] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[8] ? p0_prod_0[8] | p0_mb_1 : p0_prod_0[8] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[7] ? p0_prod_0[7] | p0_mb_1 : p0_prod_0[7] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[6] ? p0_prod_0[6] | p0_mb_1 : p0_prod_0[6] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[5] ? p0_prod_0[5] | p0_mb_1 : p0_prod_0[5] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[4] ? p0_prod_0[4] | p0_mb_1 : p0_prod_0[4] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[3] ? p0_prod_0[3] | p0_mb_1 : p0_prod_0[3] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[2] ? p0_prod_0[2] | p0_mb_1 : p0_prod_0[2] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[1] ? p0_prod_0[1] | p0_mb_1 : p0_prod_0[1] & ~p0_mb_1,
+         p0__prod_plus_ma32_shl_6_[0] ? p0_prod_0[0] | p0_mb_1 : p0_prod_0[0] & ~p0_mb_1}
+        + p0__ma32_shl_7__0);	// swiglu.k:43:9, :67:21, :68:51
   wire  [15:0] r_exp =
     _prod_plus_ma32_shl_7_[15]
-      ? 16'(_a_exp_plus_b_exp_ - 16'h7E)
-      : 16'(_a_exp_plus_b_exp_ - 16'h7F);	// swiglu.k:66:{21,51}, :69:21, :72:{33,39,47}, :77:{33,39}
-  wire         _GEN_0 = r_exp < 16'hFF & (|r_exp);	// swiglu.k:54:{21,37,38,58}, :69:21, :71:{34,47}, :76:{34,47}, :79:{21,25,31,44}, :81:{34,49,51}
-  wire         _GEN_1 = ~(_prod_plus_ma32_shl_7_[15]) & _GEN_0;	// swiglu.k:54:{21,37,38,58}, :66:{21,51}, :69:21, :71:{34,47}, :76:{34,47}, :79:{21,25}, :81:{34,49,51}
-  wire         _GEN_2 = (|(_sigmoid_lut[14:7])) & (|(p0_data_in_6[14:7]));	// swiglu.k:41:9, :45:26, :50:{17,32}, :51:{17,32}, :52:{17,21,27,41}
-  always @(posedge clk) begin	// swiglu.k:41:9
-    p0_data_in_6 <= data_in_6;	// swiglu.k:41:9
-    if (rst)	// swiglu.k:41:9
-      p0_stage1_enable <= 1'h0;	// swiglu.k:41:9
-    else	// swiglu.k:41:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// swiglu.k:41:9
+      ? p0__a_exp_plus_b_exp_minus_127_plus_1__0
+      : p0__a_exp_plus_b_exp_minus_127__0;	// swiglu.k:43:9, :68:{21,51}, :71:21
+  wire         _GEN_0 = r_exp < 16'hFF & (|r_exp);	// swiglu.k:56:{21,37,38,58}, :71:21, :73:{34,47}, :78:{34,47}, :81:{21,25,31,44}, :83:{34,49,51}
+  wire         _GEN_1 = ~(_prod_plus_ma32_shl_7_[15]) & _GEN_0;	// swiglu.k:56:{21,37,38,58}, :68:{21,51}, :71:21, :73:{34,47}, :78:{34,47}, :81:{21,25}, :83:{34,49,51}
+  wire         _GEN_2 = p0__b_exp_ne_0__0 & p0__a_exp_ne_0__0;	// swiglu.k:43:9, :54:{17,21}
+  always @(posedge clk) begin	// swiglu.k:43:9
+    p0_data_in_6 <= data_in_6;	// swiglu.k:43:9
+    if (rst)	// swiglu.k:43:9
+      p0_stage1_enable <= 1'h0;	// swiglu.k:43:9
+    else	// swiglu.k:43:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// swiglu.k:43:9
+    p0__prod_plus_ma32_shl_2_ <=
+      11'({1'h0,
+           prod_6,
+           prod_7,
+           prod_8,
+           prod_9,
+           prod_10,
+           prod_11,
+           prod_12,
+           prod_13,
+           prod_14,
+           prod_15} + {2'h1, p0_data_in_6[6:0], 2'h0});	// swiglu.k:43:9, :62:{21,25}, :63:{51,58}
+    p0_mb <= _sigmoid_lut[5:0];	// swiglu.k:43:9, :47:26
+    p0_prod <=
+      {prod_6,
+       prod_7,
+       prod_8,
+       prod_9,
+       prod_10,
+       prod_11,
+       prod_12,
+       prod_13,
+       prod_14,
+       prod_15};	// swiglu.k:43:9, :62:{21,25}
+    p0__ma32_shl_3_ <= {2'h1, p0_data_in_6[6:0], 3'h0};	// swiglu.k:43:9, :64:58
+    p0__ma32_shl_4_ <= {2'h1, p0_data_in_6[6:0], 4'h0};	// swiglu.k:43:9, :65:58
+    p0__ma32_shl_5_ <= {2'h1, p0_data_in_6[6:0], 5'h0};	// swiglu.k:43:9, :66:58
+    p0__ma32_shl_6_ <= {2'h1, p0_data_in_6[6:0], 6'h0};	// swiglu.k:43:9, :67:58
+    p0_mb_0 <= _sigmoid_lut[6];	// swiglu.k:43:9, :47:26, :58:{21,33}
+    p0__ma32_shl_7_ <= {2'h1, p0_data_in_6[6:0], 7'h0};	// swiglu.k:43:9, :68:58
+    p0__a_exp_plus_b_exp_minus_127_plus_1_ <= 16'(_a_exp_plus_b_exp_ - 16'h7E);	// swiglu.k:43:9, :74:{33,39,47}, :79:39
+    p0__a_exp_plus_b_exp_minus_127_ <= 16'(_a_exp_plus_b_exp_ - 16'h7F);	// swiglu.k:43:9, :74:39, :79:{33,39}
+    p0__sigmoid_lut <= _sigmoid_lut;	// swiglu.k:43:9, :47:26
+    p0_data_in_6_0 <= p0_data_in_6;	// swiglu.k:43:9
+    p0__b_exp_ne_0_ <= |(_sigmoid_lut[14:7]);	// swiglu.k:43:9, :47:26, :53:{17,32}, :54:41
+    p0__a_exp_ne_0_ <= |(p0_data_in_6[14:7]);	// swiglu.k:43:9, :52:{17,32}, :54:27
+    if (rst)	// swiglu.k:43:9
+      p0_stage2_enable <= 1'h0;	// swiglu.k:43:9
+    else	// swiglu.k:43:9
+      p0_stage2_enable <= p0_stage1_enable;	// swiglu.k:43:9
+    p0__prod_plus_ma32_shl_6_ <=
+      15'({1'h0,
+           prod_52,
+           prod_53,
+           prod_54,
+           prod_55,
+           prod_56,
+           prod_57,
+           prod_58,
+           prod_59,
+           prod_60,
+           prod_61,
+           prod_62,
+           prod_63,
+           prod_64,
+           prod_65} + p0__ma32_shl_6_);	// swiglu.k:43:9, :66:{21,25}, :67:51
+    p0_mb_1 <= p0_mb_0;	// swiglu.k:43:9
+    p0_prod_0 <=
+      {prod_52,
+       prod_53,
+       prod_54,
+       prod_55,
+       prod_56,
+       prod_57,
+       prod_58,
+       prod_59,
+       prod_60,
+       prod_61,
+       prod_62,
+       prod_63,
+       prod_64,
+       prod_65};	// swiglu.k:43:9, :66:{21,25}
+    p0__ma32_shl_7__0 <= p0__ma32_shl_7_;	// swiglu.k:43:9
+    p0__a_exp_plus_b_exp_minus_127_plus_1__0 <= p0__a_exp_plus_b_exp_minus_127_plus_1_;	// swiglu.k:43:9
+    p0__a_exp_plus_b_exp_minus_127__0 <= p0__a_exp_plus_b_exp_minus_127_;	// swiglu.k:43:9
+    p0__sigmoid_lut_0 <= p0__sigmoid_lut;	// swiglu.k:43:9
+    p0_data_in_6_1 <= p0_data_in_6_0;	// swiglu.k:43:9
+    p0__b_exp_ne_0__0 <= p0__b_exp_ne_0_;	// swiglu.k:43:9
+    p0__a_exp_ne_0__0 <= p0__a_exp_ne_0_;	// swiglu.k:43:9
+    if (rst)	// swiglu.k:43:9
+      p0_stage3_enable <= 1'h0;	// swiglu.k:43:9
+    else	// swiglu.k:43:9
+      p0_stage3_enable <= p0_stage2_enable;	// swiglu.k:43:9
     p0_result <=
       {(r_exp[8]
           ? _GEN_0
-          : _sigmoid_lut[15] ? ~(p0_data_in_6[15]) & _GEN_0 : p0_data_in_6[15] & _GEN_0)
-         & _GEN_2,
+          : p0__sigmoid_lut_0[15]
+              ? ~(p0_data_in_6_1[15]) & _GEN_0
+              : p0_data_in_6_1[15] & _GEN_0) & _GEN_2,
        r_exp[7] & _GEN_0 & _GEN_2,
        r_exp[6] & _GEN_0 & _GEN_2,
        r_exp[5] & _GEN_0 & _GEN_2,
@@ -3678,27 +3927,27 @@ module swiglu_unit_compute_silu_BasicBlock_0(	// swiglu.k:41:9
           : _prod_plus_ma32_shl_7_[8] & _GEN_1) & _GEN_2,
        (_prod_plus_ma32_shl_7_[8]
           ? (_prod_plus_ma32_shl_7_[7] | _prod_plus_ma32_shl_7_[15]) & _GEN_0
-          : _prod_plus_ma32_shl_7_[7] & _GEN_1) & _GEN_2};	// swiglu.k:41:9, :45:26, :52:{17,21}, :54:{21,37,38,58}, :66:{21,51}, :69:21, :71:{34,47}, :76:{34,47}, :79:{21,25}, :81:{34,49,51}
-    if (rst)	// swiglu.k:41:9
-      p0_stage2_enable <= 1'h0;	// swiglu.k:41:9
-    else	// swiglu.k:41:9
-      p0_stage2_enable <= p0_stage1_enable;	// swiglu.k:41:9
-    p0_result_0 <= p0_result;	// swiglu.k:41:9
-    if (rst)	// swiglu.k:41:9
-      p0_stage3_enable <= 1'h0;	// swiglu.k:41:9
-    else	// swiglu.k:41:9
-      p0_stage3_enable <= p0_stage2_enable;	// swiglu.k:41:9
+          : _prod_plus_ma32_shl_7_[7] & _GEN_1) & _GEN_2};	// swiglu.k:43:9, :54:{17,21}, :56:{21,37,38,58}, :68:{21,51}, :71:21, :73:{34,47}, :78:{34,47}, :81:{21,25}, :83:{34,49,51}
+    if (rst)	// swiglu.k:43:9
+      p0_stage4_enable <= 1'h0;	// swiglu.k:43:9
+    else	// swiglu.k:43:9
+      p0_stage4_enable <= p0_stage3_enable;	// swiglu.k:43:9
+    p0_result_0 <= p0_result;	// swiglu.k:43:9
+    if (rst)	// swiglu.k:43:9
+      p0_stage5_enable <= 1'h0;	// swiglu.k:43:9
+    else	// swiglu.k:43:9
+      p0_stage5_enable <= p0_stage4_enable;	// swiglu.k:43:9
   end // always @(posedge)
-  always_comb begin	// swiglu.k:41:9
-    fifo_wren_0_0 = p0_stage3_enable;	// swiglu.k:39:5, :41:9
-    fifo_data_out_0_0 = p0_result_0;	// swiglu.k:39:5, :41:9
+  always_comb begin	// swiglu.k:43:9
+    fifo_wren_0_0 = p0_stage5_enable;	// swiglu.k:41:5, :43:9
+    fifo_data_out_0_0 = p0_result_0;	// swiglu.k:41:5, :43:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// swiglu.k:41:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// swiglu.k:43:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -3706,26 +3955,26 @@ module swiglu_unit_compute_silu_BasicBlock_0(	// swiglu.k:41:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// swiglu.k:41:9
+    .data_in  (~fifo_overflow_in_0),	// swiglu.k:43:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  swiglu_unitDebugView_compute_siluEntry swiglu_unitDebugView_compute_siluEntry_instance (	// swiglu.k:39:5
-    .clk        (clk),	// swiglu.k:39:5
-    ._gate_bf16 (p0_stage1_enable ? p0_data_in_6 : 'x),	// swiglu.k:39:5, :41:9
-    .valid      (p0_stage1_enable),	// swiglu.k:41:9
+  swiglu_unitDebugView_compute_siluEntry swiglu_unitDebugView_compute_siluEntry_instance (	// swiglu.k:41:5
+    .clk        (clk),	// swiglu.k:41:5
+    ._gate_bf16 (p0_stage1_enable ? p0_data_in_6 : 'x),	// swiglu.k:41:5, :43:9
+    .valid      (p0_stage1_enable),	// swiglu.k:43:9
     .valid_out  (/* unused */)
-  );	// swiglu.k:39:5
-  swiglu_unitDebugView_compute_siluExit swiglu_unitDebugView_compute_siluExit_instance (	// swiglu.k:39:5
-    .clk          (clk),	// swiglu.k:39:5
-    ._ReturnValue (p0_stage2_enable ? p0_result : 'x),	// swiglu.k:39:5, :41:9
-    .valid        (p0_stage2_enable),	// swiglu.k:41:9
+  );	// swiglu.k:41:5
+  swiglu_unitDebugView_compute_siluExit swiglu_unitDebugView_compute_siluExit_instance (	// swiglu.k:41:5
+    .clk          (clk),	// swiglu.k:41:5
+    ._ReturnValue (p0_stage4_enable ? p0_result : 'x),	// swiglu.k:41:5, :43:9
+    .valid        (p0_stage4_enable),	// swiglu.k:43:9
     .valid_out    (/* unused */)
-  );	// swiglu.k:39:5
-  assign done_out = p0_stage3_enable;	// swiglu.k:41:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// swiglu.k:41:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// swiglu.k:41:9
-  assign input_rdy_0 = input_rdy_0_0;	// swiglu.k:41:9
-  assign control_state_out = control_state_out_0;	// swiglu.k:41:9
+  );	// swiglu.k:41:5
+  assign done_out = p0_stage5_enable;	// swiglu.k:43:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// swiglu.k:43:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// swiglu.k:43:9
+  assign input_rdy_0 = input_rdy_0_0;	// swiglu.k:43:9
+  assign control_state_out = control_state_out_0;	// swiglu.k:43:9
 endmodule
 
 module swiglu_unit_lookup_sigmoid_BasicBlock_0(	// swiglu.k:28:9
@@ -4530,10 +4779,6 @@ module swiglu_unit_lookup_sigmoid_BasicBlock_0(	// swiglu.k:28:9
   end // always_comb
   reg   [7:0]  p0_data_in_5;	// swiglu.k:28:9
   reg          p0_stage1_enable = 1'h0;	// swiglu.k:28:9
-  reg   [15:0] p0__sigmoid_lut;	// swiglu.k:28:9
-  reg          p0_stage2_enable = 1'h0;	// swiglu.k:28:9
-  reg   [15:0] p0__sigmoid_lut_0;	// swiglu.k:28:9
-  reg          p0_stage3_enable = 1'h0;	// swiglu.k:28:9
   wire  [15:0] _sigmoid_lut =
     p0_data_in_5[7]
       ? (p0_data_in_5[6]
@@ -5046,6 +5291,8 @@ module swiglu_unit_lookup_sigmoid_BasicBlock_0(	// swiglu.k:28:9
                               : p0_data_in_5[0]
                                   ? global_in__sigmoid_lut_element_1_10_0
                                   : global_in__sigmoid_lut_element_0_9_0;	// swiglu.k:28:9, :31:22
+  reg   [15:0] p0__sigmoid_lut;	// swiglu.k:28:9
+  reg          p0_stage2_enable = 1'h0;	// swiglu.k:28:9
   always @(posedge clk) begin	// swiglu.k:28:9
     p0_data_in_5 <= data_in_5;	// swiglu.k:28:9
     if (rst)	// swiglu.k:28:9
@@ -5057,15 +5304,10 @@ module swiglu_unit_lookup_sigmoid_BasicBlock_0(	// swiglu.k:28:9
       p0_stage2_enable <= 1'h0;	// swiglu.k:28:9
     else	// swiglu.k:28:9
       p0_stage2_enable <= p0_stage1_enable;	// swiglu.k:28:9
-    p0__sigmoid_lut_0 <= p0__sigmoid_lut;	// swiglu.k:28:9
-    if (rst)	// swiglu.k:28:9
-      p0_stage3_enable <= 1'h0;	// swiglu.k:28:9
-    else	// swiglu.k:28:9
-      p0_stage3_enable <= p0_stage2_enable;	// swiglu.k:28:9
   end // always @(posedge)
   always_comb begin	// swiglu.k:28:9
-    fifo_wren_0_0 = p0_stage3_enable;	// swiglu.k:26:5, :28:9
-    fifo_data_out_0_0 = p0__sigmoid_lut_0;	// swiglu.k:26:5, :28:9
+    fifo_wren_0_0 = p0_stage2_enable;	// swiglu.k:26:5, :28:9
+    fifo_data_out_0_0 = p0__sigmoid_lut;	// swiglu.k:26:5, :28:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
@@ -5091,11 +5333,11 @@ module swiglu_unit_lookup_sigmoid_BasicBlock_0(	// swiglu.k:28:9
   );	// swiglu.k:26:5
   swiglu_unitDebugView_lookup_sigmoidExit swiglu_unitDebugView_lookup_sigmoidExit_instance (	// swiglu.k:26:5
     .clk          (clk),	// swiglu.k:26:5
-    ._ReturnValue (p0_stage2_enable ? p0__sigmoid_lut : 'x),	// swiglu.k:26:5, :28:9
-    .valid        (p0_stage2_enable),	// swiglu.k:28:9
+    ._ReturnValue (p0_stage1_enable ? _sigmoid_lut : 'x),	// swiglu.k:26:5, :28:9, :31:22
+    .valid        (p0_stage1_enable),	// swiglu.k:28:9
     .valid_out    (/* unused */)
   );	// swiglu.k:26:5
-  assign done_out = p0_stage3_enable;	// swiglu.k:28:9
+  assign done_out = p0_stage2_enable;	// swiglu.k:28:9
   assign fifo_data_out_0 = fifo_data_out_0_0;	// swiglu.k:28:9
   assign fifo_wren_0 = fifo_wren_0_0;	// swiglu.k:28:9
   assign input_rdy_0 = input_rdy_0_0;	// swiglu.k:28:9
@@ -8029,12 +8271,12 @@ module swiglu_unit(
   output wire        stall_rate_supported_out
 );
 
-  wire [15:0] _compute_swiglu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:93:9
-  wire        _compute_swiglu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:93:9
-  wire        _compute_swiglu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:93:9
-  wire [15:0] _compute_silu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:41:9
-  wire        _compute_silu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:41:9
-  wire        _compute_silu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:41:9
+  wire [15:0] _compute_swiglu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:99:9
+  wire        _compute_swiglu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:99:9
+  wire        _compute_swiglu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:99:9
+  wire [15:0] _compute_silu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:43:9
+  wire        _compute_silu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:43:9
+  wire        _compute_silu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:43:9
   wire [15:0] _lookup_sigmoid_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:28:9
   wire        _lookup_sigmoid_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:28:9
   wire        _lookup_sigmoid_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:28:9
@@ -9204,9 +9446,9 @@ module swiglu_unit(
       logic valid;
       logic [31:0] data;
       logic underflow;
-  } passthrough_data_7;
-  assign passthrough_data_7.underflow = 1'b0;
-  assign passthrough_data_7.rdy_ext = passthrough_data_7.rdy_int & !(!has_startup_completed_delayed_3);
+  } passthrough_data_8;
+  assign passthrough_data_8.underflow = 1'b0;
+  assign passthrough_data_8.rdy_ext = passthrough_data_8.rdy_int & !(!has_startup_completed_delayed_3);
   assign set_sigmoid_lut_rdy_out_net = passthrough_data_4.rdy_ext;
   assign passthrough_data_4.valid = set_sigmoid_lut_rdy_out & set_sigmoid_lut_valid_in;
   assign passthrough_data_4.data = { set_sigmoid_lut_value_in, set_sigmoid_lut_index_in };
@@ -9224,9 +9466,9 @@ module swiglu_unit(
   assign fifo_data_2.rden = compute_silu_rden_in;
   assign compute_silu_result_out_net = fifo_data_2.data_out;
   assign compute_silu_empty_out_net = fifo_data_2.empty;
-  assign compute_swiglu_rdy_out_net = passthrough_data_7.rdy_ext;
-  assign passthrough_data_7.valid = compute_swiglu_rdy_out & compute_swiglu_valid_in;
-  assign passthrough_data_7.data = { compute_swiglu_up_bf16_in, compute_swiglu_gate_bf16_in };
+  assign compute_swiglu_rdy_out_net = passthrough_data_8.rdy_ext;
+  assign passthrough_data_8.valid = compute_swiglu_rdy_out & compute_swiglu_valid_in;
+  assign passthrough_data_8.data = { compute_swiglu_up_bf16_in, compute_swiglu_gate_bf16_in };
   assign fifo_data_3.rden = compute_swiglu_rden_in;
   assign compute_swiglu_result_out_net = fifo_data_3.data_out;
   assign compute_swiglu_empty_out_net = fifo_data_3.empty;
@@ -9262,12 +9504,12 @@ module swiglu_unit(
     fifo_data_1.data_in = _lookup_sigmoid_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:28:9
     fifo_data_1.wren = _lookup_sigmoid_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:28:9
     passthrough_data_5.rdy_int = _lookup_sigmoid_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:28:9
-    fifo_data_2.data_in = _compute_silu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:41:9
-    fifo_data_2.wren = _compute_silu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:41:9
-    passthrough_data_6.rdy_int = _compute_silu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:41:9
-    fifo_data_3.data_in = _compute_swiglu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:93:9
-    fifo_data_3.wren = _compute_swiglu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:93:9
-    passthrough_data_7.rdy_int = _compute_swiglu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:93:9
+    fifo_data_2.data_in = _compute_silu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:43:9
+    fifo_data_2.wren = _compute_silu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:43:9
+    passthrough_data_6.rdy_int = _compute_silu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:43:9
+    fifo_data_3.data_in = _compute_swiglu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:99:9
+    fifo_data_3.wren = _compute_swiglu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:99:9
+    passthrough_data_8.rdy_int = _compute_swiglu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:99:9
   end // always_comb
 
   assign has_startup_completed_raw = 1'b1;
@@ -9276,7 +9518,7 @@ module swiglu_unit(
     .WIDTH(8),
     .DELAY_CYCLES(3),
     .FAN_OUT_LEVELS(1),
-    .HOLD_CYCLES(18),
+    .HOLD_CYCLES(22),
     .ADDTIONAL_LATENCY(1),
     .INIT_VAL(1)
   ) reset_control (
@@ -11402,7 +11644,7 @@ module swiglu_unit(
     .MIN_WRITE_DELAY(0),
     .AUTO_PIPELINE_GROUP("fifo_1_lookup_sigmoid_Return"),
     .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(4),
+    .ALMOSTFULL_ENTRIES(3),
     .USE_LUTRAM(1)
   ) fifo_1_lookup_sigmoid_Return (
     .clock         (clk),
@@ -11426,7 +11668,7 @@ module swiglu_unit(
     .MIN_WRITE_DELAY(0),
     .AUTO_PIPELINE_GROUP("fifo_2_compute_silu_Return"),
     .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(4),
+    .ALMOSTFULL_ENTRIES(6),
     .USE_LUTRAM(1)
   ) fifo_2_compute_silu_Return (
     .clock         (clk),
@@ -11450,7 +11692,7 @@ module swiglu_unit(
     .MIN_WRITE_DELAY(0),
     .AUTO_PIPELINE_GROUP("fifo_3_compute_swiglu_Return"),
     .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(4),
+    .ALMOSTFULL_ENTRIES(9),
     .USE_LUTRAM(1)
   ) fifo_3_compute_swiglu_Return (
     .clock         (clk),
@@ -12776,9 +13018,9 @@ module swiglu_unit(
     .input_valid_0                          (passthrough_data_5.valid),	// swiglu.k:28:9
     .control_state_out                      (/* unused */)
   );	// swiglu.k:28:9
-  swiglu_unit_compute_silu_BasicBlock_0 compute_silu_BasicBlock_0Impl (	// swiglu.k:41:9
-    .clk                                    (clk),	// swiglu.k:41:9
-    .rst                                    (reg_rst_delayed[6]),	// swiglu.k:41:9
+  swiglu_unit_compute_silu_BasicBlock_0 compute_silu_BasicBlock_0Impl (	// swiglu.k:43:9
+    .clk                                    (clk),	// swiglu.k:43:9
+    .rst                                    (reg_rst_delayed[6]),	// swiglu.k:43:9
     .done_out                               (/* unused */),
     .global_in__sigmoid_lut_element_0_9     (__sigmoid_lut_element_0_value_out),	// swiglu.k:13:5
     .global_in__sigmoid_lut_element_1_10    (__sigmoid_lut_element_1_value_out),	// swiglu.k:13:5
@@ -13039,17 +13281,17 @@ module swiglu_unit(
     .fifo_data_out_0
       (_compute_silu_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0                            (_compute_silu_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0              (fifo_data_2.almost_full),	// swiglu.k:41:9
-    .fifo_overflow_in_0                     (fifo_data_2.overflow),	// swiglu.k:41:9
-    .data_in_6                              (passthrough_data_6.data),	// swiglu.k:41:9
-    .input_fifo_underflow_0                 (passthrough_data_6.underflow),	// swiglu.k:41:9
+    .fifo_almost_full_in_raw_0              (fifo_data_2.almost_full),	// swiglu.k:43:9
+    .fifo_overflow_in_0                     (fifo_data_2.overflow),	// swiglu.k:43:9
+    .data_in_6                              (passthrough_data_6.data),	// swiglu.k:43:9
+    .input_fifo_underflow_0                 (passthrough_data_6.underflow),	// swiglu.k:43:9
     .input_rdy_0                            (_compute_silu_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                          (passthrough_data_6.valid),	// swiglu.k:41:9
+    .input_valid_0                          (passthrough_data_6.valid),	// swiglu.k:43:9
     .control_state_out                      (/* unused */)
-  );	// swiglu.k:41:9
-  swiglu_unit_compute_swiglu_BasicBlock_0 compute_swiglu_BasicBlock_0Impl (	// swiglu.k:93:9
-    .clk                                    (clk),	// swiglu.k:93:9
-    .rst                                    (reg_rst_delayed[7]),	// swiglu.k:93:9
+  );	// swiglu.k:43:9
+  swiglu_unit_compute_swiglu_BasicBlock_0 compute_swiglu_BasicBlock_0Impl (	// swiglu.k:99:9
+    .clk                                    (clk),	// swiglu.k:99:9
+    .rst                                    (reg_rst_delayed[7]),	// swiglu.k:99:9
     .done_out                               (/* unused */),
     .global_in__sigmoid_lut_element_0_9     (__sigmoid_lut_element_0_value_out),	// swiglu.k:13:5
     .global_in__sigmoid_lut_element_1_10    (__sigmoid_lut_element_1_value_out),	// swiglu.k:13:5
@@ -13311,15 +13553,15 @@ module swiglu_unit(
       (_compute_swiglu_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0
       (_compute_swiglu_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0              (fifo_data_3.almost_full),	// swiglu.k:93:9
-    .fifo_overflow_in_0                     (fifo_data_3.overflow),	// swiglu.k:93:9
-    .data_in_7                              (passthrough_data_7.data),	// swiglu.k:93:9
-    .input_fifo_underflow_0                 (passthrough_data_7.underflow),	// swiglu.k:93:9
+    .fifo_almost_full_in_raw_0              (fifo_data_3.almost_full),	// swiglu.k:99:9
+    .fifo_overflow_in_0                     (fifo_data_3.overflow),	// swiglu.k:99:9
+    .data_in_8                              (passthrough_data_8.data),	// swiglu.k:99:9
+    .input_fifo_underflow_0                 (passthrough_data_8.underflow),	// swiglu.k:99:9
     .input_rdy_0
       (_compute_swiglu_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                          (passthrough_data_7.valid),	// swiglu.k:93:9
+    .input_valid_0                          (passthrough_data_8.valid),	// swiglu.k:99:9
     .control_state_out                      (/* unused */)
-  );	// swiglu.k:93:9
+  );	// swiglu.k:99:9
   assign rst_and_startup_done_out = rst_and_startup_done_out_net;
   assign set_sigmoid_lut_rdy_out = set_sigmoid_lut_rdy_out_net;
   assign set_sigmoid_lut_empty_out = set_sigmoid_lut_empty_out_net;
