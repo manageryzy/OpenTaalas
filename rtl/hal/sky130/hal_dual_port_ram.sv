@@ -8,7 +8,7 @@
 //   8 × 4194304  → sram_4096x8 × 1024  (kv_cache full-scale, tiled)
 //   16 × 4096    → sram_4096x16        (rmsnorm._gamma; 254×293µm, replaces ~65K FFs)
 //   16 × 256     → sram_256x16         (rmsnorm._rsqrt_lut, swiglu._sigmoid_lut, lut_interp._table; 78×85µm)
-//   32 × 512     → synthesized (mac_array grid, small enough for gates)
+//   32 × 512     → sram_512x32         (codebook_decoder._grid, mac_array._grid; 137×154µm, replaces ~70K FFs)
 //
 // ROM macros: write port is ignored (weights baked at tapeout).
 // For simulation, a behavioral fallback is used.
@@ -204,6 +204,29 @@ module KanagawaHALDualPortRAM
                 .we   (we),
                 .addr (addr),
                 .din  (data_in[0][15:0]),
+                .dout (sram_dout)
+            );
+
+            assign data_out[1] = sram_dout;
+            assign data_out[0] = '0;
+
+        // ---------------------------------------------------------------
+        // SRAM: 32 × 512 (codebook_decoder._grid, mac_array._grid)
+        // 16 Kbit lookup table in 137×154 µm — replaces ~70K gate-synthesized FFs.
+        // ---------------------------------------------------------------
+        end else if (DATA_WIDTH == 32 && DEPTH == 512) begin : gen_sram_512x32
+
+            wire [31:0] sram_dout;
+            wire ce = rden_in[1] || wren_in[0];
+            wire we = wren_in[0];
+            wire [8:0] addr = we ? addr_in[0][8:0] : addr_in[1][8:0];
+
+            sram_512x32 u_sram (
+                .clk  (clk),
+                .ce   (ce),
+                .we   (we),
+                .addr (addr),
+                .din  (data_in[0][31:0]),
                 .dout (sram_dout)
             );
 

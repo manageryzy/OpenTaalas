@@ -1,13 +1,22 @@
-# Place 2× nor_rom_4096x1024 macros in vector_unit.
-# After fold=2 refold: each macro is 956×1118 µm (was 485×2226).
-# Die: 4000×5500.
+# Place 6 macros in vector_unit (4 SRAM + 2 NOR ROM).
+# Die: 3000×3500 (v6 shrunk from 4000×5500 after cell count dropped 791K → 127K).
 #
-# Pins are on EAST/WEST edges of macro:
-#   dout[1023:0] on EAST (x=956)
-#   addr/ce/clk on WEST (x=0)
-# Mirror left macro (MY) so 1024 dout pins face the west die edge.
-# Right macro stays R0 so its dout faces the east die edge.
-# Both addr/clk pin clusters meet in the central gap.
+# Layout (top of die for memories, cells below):
+#
+#   y=3468 ─┌──────────────┐  ┌──────────────┐
+#           │  cos_table   │  │  sin_table   │   nor_rom_4096x1024 fold=2
+#           │   (MY)       │  │   (R0)       │   956×1118 µm
+#   y=2350 ─└──────────────┘  └──────────────┘
+#                                                  100 µm gap
+#   y=2243 ─┌──┐ ┌──┐ ┌─┐ ┌─┐
+#           │ga│ │gm│ │rs│ │sg│   sram_4096x16 (255×293), sram_256x16 (78×85)
+#   y=1950 ─└──┘ └──┘ └─┘ └─┘
+#
+#   y=1700 ─ stdcell sea (large) ─
+#   y=10  ─
+#
+# Mirror cos_table (MY) so its 1024-bit dout faces west die edge.
+# sin_table (R0) faces east die edge — same trick as rope.
 set block [ord::get_db_block]
 set macros {}
 foreach inst [$block getInsts] {
@@ -19,18 +28,16 @@ foreach inst [$block getInsts] {
 puts "Found [llength $macros] macros:"
 foreach m $macros { puts "  '$m'" }
 
-# Layout (2× 956×1118 macros side-by-side near top of die):
-#   west margin: 600 µm
-#   left macro x=600 (orientation MY)
-#   gap: 200 µm
-#   right macro x=1756 (orientation R0)
-#   east margin: 4000 - (1756 + 956) = 1288 µm
-# Place near top so 791K stdcells fill below.
-# y_base = 5500 - 1118 - 200 = 4182
+# Sorted alphabetical name → fixed placement
+# Order: _cos_table, _gamma_pre_attn, _gamma_pre_mlp, _rsqrt_lut, _sigmoid_lut, _sin_table
 set macros [lsort $macros]
 set placements {
-    {600  4182 MY}
-    {1756 4182 R0}
+    {200  2350 MY}
+    {200  1950 R0}
+    {550  1950 R0}
+    {900  1950 R0}
+    {1050 1950 R0}
+    {1844 2350 R0}
 }
 set idx 0
 foreach inst_name $macros {

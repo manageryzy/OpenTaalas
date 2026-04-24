@@ -106,7 +106,7 @@ endmodule
 `ifndef _TYPESCOPE_CoreModuleTypeScope
 `define _TYPESCOPE_CoreModuleTypeScope
 `endif // _TYPESCOPE_CoreModuleTypeScope
-module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
+module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:101:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -126,114 +126,116 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [15:0] memory_read_data_in_9_2_0 = memory_read_data_in_9_2;	// swiglu.k:99:9
-  logic [15:0] data_prop_in_7_0;	// swiglu.k:99:9
-  wire  [15:0] data_prop_out_7_0;	// swiglu.k:99:9
-  logic        done_out_0;	// swiglu.k:99:9
-  logic [7:0]  memory_read_addr_out_9_2_0;	// swiglu.k:99:9
-  logic        memory_rden_out_9_2_0;	// swiglu.k:99:9
-  logic [15:0] fifo_data_out_0_0;	// swiglu.k:99:9
-  logic        fifo_wren_0_0;	// swiglu.k:99:9
-  logic        input_rdy_0_0;	// swiglu.k:99:9
-  logic [7:0]  control_state_out_0;	// swiglu.k:99:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// swiglu.k:99:9
-  always_comb begin	// swiglu.k:99:9
-    input_rdy_0_0 = _GEN;	// swiglu.k:99:9
+  wire  [15:0] memory_read_data_in_9_2_0 = memory_read_data_in_9_2;	// swiglu.k:101:9
+  logic [15:0] data_prop_in_7_0;	// swiglu.k:101:9
+  wire  [15:0] data_prop_out_7_0;	// swiglu.k:101:9
+  logic        done_out_0;	// swiglu.k:101:9
+  logic [7:0]  memory_read_addr_out_9_2_0;	// swiglu.k:101:9
+  logic        memory_rden_out_9_2_0;	// swiglu.k:101:9
+  logic [15:0] fifo_data_out_0_0;	// swiglu.k:101:9
+  logic        fifo_wren_0_0;	// swiglu.k:101:9
+  logic        input_rdy_0_0;	// swiglu.k:101:9
+  logic [7:0]  control_state_out_0;	// swiglu.k:101:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// swiglu.k:101:9
+  always_comb begin	// swiglu.k:101:9
+    input_rdy_0_0 = _GEN;	// swiglu.k:101:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// swiglu.k:99:9
+       ~input_valid_0};	// swiglu.k:101:9
   end // always_comb
-  reg   [15:0] p0_gate_bf16;	// swiglu.k:99:9
-  reg   [15:0] p0_up_bf16;	// swiglu.k:99:9
-  reg          p0_stage1_enable = 1'h0;	// swiglu.k:99:9
-  always_comb begin	// swiglu.k:99:9
-    memory_read_addr_out_9_2_0 = p0_gate_bf16[15:8];	// swiglu.k:99:9, :103:39, :104:26
-    memory_rden_out_9_2_0 = p0_stage1_enable;	// swiglu.k:99:9, :104:26
+  reg   [15:0] p0_gate_bf16;	// swiglu.k:101:9
+  reg   [15:0] p0_up_bf16;	// swiglu.k:101:9
+  reg          p0_stage1_enable = 1'h0;	// swiglu.k:101:9
+  always_comb begin	// swiglu.k:101:9
+    memory_read_addr_out_9_2_0 = p0_gate_bf16[15:8];	// swiglu.k:101:9, :105:39, :106:26
+    memory_rden_out_9_2_0 = p0_stage1_enable;	// swiglu.k:101:9, :106:26
   end // always_comb
-  reg   [15:0] p0_gate_bf16_0;	// swiglu.k:99:9
-  reg   [15:0] p0_up_bf16_0;	// swiglu.k:99:9
-  reg          p0_stage2_enable = 1'h0;	// swiglu.k:99:9
-  reg   [15:0] p0_gate_bf16_1;	// swiglu.k:99:9
-  reg   [15:0] p0_up_bf16_1;	// swiglu.k:99:9
-  reg          p0_stage3_enable = 1'h0;	// swiglu.k:99:9
-  always_comb	// swiglu.k:99:9
-    data_prop_in_7_0 = p0_up_bf16_1;	// swiglu.k:99:9
-  reg   [12:0] p0__prod_plus_ma32_shl_4_;	// swiglu.k:99:9
-  reg   [5:0]  p0_mb;	// swiglu.k:99:9
-  reg   [11:0] p0_prod;	// swiglu.k:99:9
-  reg   [13:0] p0__ma32_shl_5_;	// swiglu.k:99:9
-  reg   [14:0] p0__ma32_shl_6_;	// swiglu.k:99:9
-  reg          p0_mb_0;	// swiglu.k:99:9
-  reg   [15:0] p0__ma32_shl_7_;	// swiglu.k:99:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1_;	// swiglu.k:99:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_;	// swiglu.k:99:9
-  reg   [15:0] p0_memory_read_data_in_9_2;	// swiglu.k:99:9
-  reg   [15:0] p0_gate_bf16_2;	// swiglu.k:99:9
-  reg          p0__b_exp_ne_0_;	// swiglu.k:99:9
-  reg          p0__a_exp_ne_0_;	// swiglu.k:99:9
-  reg   [5:0]  p0_mb_1;	// swiglu.k:99:9
-  reg   [15:0] p0_b_exp;	// swiglu.k:99:9
-  reg          p0_mb_2;	// swiglu.k:99:9
-  reg          p0__b_exp_ne_0__0;	// swiglu.k:99:9
-  reg          p0_stage4_enable = 1'h0;	// swiglu.k:99:9
-  reg          p0_prod_0;	// swiglu.k:99:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__0;	// swiglu.k:99:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__0;	// swiglu.k:99:9
-  reg   [15:0] p0_memory_read_data_in_9_2_0;	// swiglu.k:99:9
-  reg   [15:0] p0_gate_bf16_3;	// swiglu.k:99:9
-  reg   [14:0] p0_prod_1;	// swiglu.k:99:9
-  reg          p0__b_exp_ne_0__1;	// swiglu.k:99:9
-  reg          p0__a_exp_ne_0__0;	// swiglu.k:99:9
-  reg   [5:0]  p0_mb_3;	// swiglu.k:99:9
-  reg   [15:0] p0_b_exp_0;	// swiglu.k:99:9
-  reg          p0_mb_4;	// swiglu.k:99:9
-  reg          p0__b_exp_ne_0__2;	// swiglu.k:99:9
-  reg          p0_stage5_enable = 1'h0;	// swiglu.k:99:9
-  reg   [10:0] p0__prod_plus_ma32_shl_2_;	// swiglu.k:99:9
-  reg   [5:0]  p0_mb_5;	// swiglu.k:99:9
-  reg   [9:0]  p0_prod_2;	// swiglu.k:99:9
-  reg   [11:0] p0__ma32_shl_3_;	// swiglu.k:99:9
-  reg   [12:0] p0__ma32_shl_4_;	// swiglu.k:99:9
-  reg   [13:0] p0__ma32_shl_5__0;	// swiglu.k:99:9
-  reg   [14:0] p0__ma32_shl_6__0;	// swiglu.k:99:9
-  reg          p0_mb_6;	// swiglu.k:99:9
-  reg   [15:0] p0__ma32_shl_7__0;	// swiglu.k:99:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__1;	// swiglu.k:99:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__1;	// swiglu.k:99:9
-  reg   [15:0] p0_silu;	// swiglu.k:99:9
-  reg          p0__b_exp_ne_0__3;	// swiglu.k:99:9
-  reg          p0__a_exp_ne_0__1;	// swiglu.k:99:9
-  reg          p0_stage6_enable = 1'h0;	// swiglu.k:99:9
-  reg   [14:0] p0__prod_plus_ma32_shl_6_;	// swiglu.k:99:9
-  reg          p0_mb_7;	// swiglu.k:99:9
-  reg   [13:0] p0_prod_3;	// swiglu.k:99:9
-  reg   [15:0] p0__ma32_shl_7__1;	// swiglu.k:99:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__2;	// swiglu.k:99:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__2;	// swiglu.k:99:9
-  reg   [15:0] p0_up_bf16_2;	// swiglu.k:99:9
-  reg   [15:0] p0_silu_0;	// swiglu.k:99:9
-  reg          p0__b_exp_ne_0__4;	// swiglu.k:99:9
-  reg          p0__a_exp_ne_0__2;	// swiglu.k:99:9
-  reg          p0_stage7_enable = 1'h0;	// swiglu.k:99:9
-  reg   [15:0] p0_result;	// swiglu.k:99:9
-  reg          p0_stage8_enable = 1'h0;	// swiglu.k:99:9
-  reg   [15:0] p0_result_0;	// swiglu.k:99:9
-  reg          p0_stage9_enable = 1'h0;	// swiglu.k:99:9
-  reg   [15:0] p0_result_1;	// swiglu.k:99:9
-  reg          p0_stage10_enable = 1'h0;	// swiglu.k:99:9
-  wire         prod = p0_gate_bf16_1[6] & memory_read_data_in_9_2_0[0];	// swiglu.k:99:9, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
-  wire         prod_0 = p0_gate_bf16_1[5] & memory_read_data_in_9_2_0[0];	// swiglu.k:99:9, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
-  wire         prod_1 = p0_gate_bf16_1[4] & memory_read_data_in_9_2_0[0];	// swiglu.k:99:9, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
-  wire         prod_2 = p0_gate_bf16_1[3] & memory_read_data_in_9_2_0[0];	// swiglu.k:99:9, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
-  wire         prod_3 = p0_gate_bf16_1[2] & memory_read_data_in_9_2_0[0];	// swiglu.k:99:9, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
-  wire         prod_4 = p0_gate_bf16_1[1] & memory_read_data_in_9_2_0[0];	// swiglu.k:99:9, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
-  wire         prod_5 = p0_gate_bf16_1[0] & memory_read_data_in_9_2_0[0];	// swiglu.k:99:9, :114:{21,33}, :115:{21,33}, :117:35, :118:{21,25}
+  reg   [15:0] p0_gate_bf16_0;	// swiglu.k:101:9
+  reg   [15:0] p0_up_bf16_0;	// swiglu.k:101:9
+  reg          p0_stage2_enable = 1'h0;	// swiglu.k:101:9
+  reg   [15:0] p0_gate_bf16_1;	// swiglu.k:101:9
+  reg   [15:0] p0_up_bf16_1;	// swiglu.k:101:9
+  reg          p0_stage3_enable = 1'h0;	// swiglu.k:101:9
+  always_comb	// swiglu.k:101:9
+    data_prop_in_7_0 = p0_up_bf16_1;	// swiglu.k:101:9
+  reg   [12:0] p0__prod_plus_ma32_shl_4_;	// swiglu.k:101:9
+  reg   [5:0]  p0_mb;	// swiglu.k:101:9
+  reg   [11:0] p0_prod;	// swiglu.k:101:9
+  reg   [13:0] p0__ma32_shl_5_;	// swiglu.k:101:9
+  reg   [14:0] p0__ma32_shl_6_;	// swiglu.k:101:9
+  reg          p0_mb_0;	// swiglu.k:101:9
+  reg   [15:0] p0__ma32_shl_7_;	// swiglu.k:101:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1_;	// swiglu.k:101:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_;	// swiglu.k:101:9
+  reg   [15:0] p0_memory_read_data_in_9_2;	// swiglu.k:101:9
+  reg   [15:0] p0_gate_bf16_2;	// swiglu.k:101:9
+  reg          p0__b_exp_ne_0_;	// swiglu.k:101:9
+  reg          p0__a_exp_ne_0_;	// swiglu.k:101:9
+  reg   [5:0]  p0_mb_1;	// swiglu.k:101:9
+  reg   [15:0] p0_b_exp;	// swiglu.k:101:9
+  reg          p0_mb_2;	// swiglu.k:101:9
+  reg          p0__b_exp_ne_0__0;	// swiglu.k:101:9
+  reg          p0_stage4_enable = 1'h0;	// swiglu.k:101:9
+  reg          p0_prod_0;	// swiglu.k:101:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__0;	// swiglu.k:101:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__0;	// swiglu.k:101:9
+  reg   [15:0] p0_memory_read_data_in_9_2_0;	// swiglu.k:101:9
+  reg   [15:0] p0_gate_bf16_3;	// swiglu.k:101:9
+  reg   [14:0] p0_prod_1;	// swiglu.k:101:9
+  reg          p0__b_exp_ne_0__1;	// swiglu.k:101:9
+  reg          p0__a_exp_ne_0__0;	// swiglu.k:101:9
+  reg   [5:0]  p0_mb_3;	// swiglu.k:101:9
+  reg   [15:0] p0_b_exp_0;	// swiglu.k:101:9
+  reg          p0_mb_4;	// swiglu.k:101:9
+  reg          p0__b_exp_ne_0__2;	// swiglu.k:101:9
+  reg          p0_stage5_enable = 1'h0;	// swiglu.k:101:9
+  reg   [10:0] p0__prod_plus_ma32_shl_2_;	// swiglu.k:101:9
+  reg   [5:0]  p0_mb_5;	// swiglu.k:101:9
+  reg   [9:0]  p0_prod_2;	// swiglu.k:101:9
+  reg   [11:0] p0__ma32_shl_3_;	// swiglu.k:101:9
+  reg   [12:0] p0__ma32_shl_4_;	// swiglu.k:101:9
+  reg   [13:0] p0__ma32_shl_5__0;	// swiglu.k:101:9
+  reg   [14:0] p0__ma32_shl_6__0;	// swiglu.k:101:9
+  reg          p0_mb_6;	// swiglu.k:101:9
+  reg   [15:0] p0__ma32_shl_7__0;	// swiglu.k:101:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__1;	// swiglu.k:101:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__1;	// swiglu.k:101:9
+  reg   [15:0] p0_silu;	// swiglu.k:101:9
+  reg          p0__b_exp_ne_0__3;	// swiglu.k:101:9
+  reg          p0__a_exp_ne_0__1;	// swiglu.k:101:9
+  reg          p0_stage6_enable = 1'h0;	// swiglu.k:101:9
+  reg   [14:0] p0__prod_plus_ma32_shl_6_;	// swiglu.k:101:9
+  reg          p0_mb_7;	// swiglu.k:101:9
+  reg   [13:0] p0_prod_3;	// swiglu.k:101:9
+  reg   [15:0] p0__ma32_shl_7__1;	// swiglu.k:101:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__2;	// swiglu.k:101:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__2;	// swiglu.k:101:9
+  reg   [15:0] p0_up_bf16_2;	// swiglu.k:101:9
+  reg   [15:0] p0_silu_0;	// swiglu.k:101:9
+  reg          p0__b_exp_ne_0__4;	// swiglu.k:101:9
+  reg          p0__a_exp_ne_0__2;	// swiglu.k:101:9
+  reg          p0_stage7_enable = 1'h0;	// swiglu.k:101:9
+  reg   [15:0] p0_result;	// swiglu.k:101:9
+  reg          p0_stage8_enable = 1'h0;	// swiglu.k:101:9
+  reg   [15:0] p0_result_0;	// swiglu.k:101:9
+  reg          p0_stage9_enable = 1'h0;	// swiglu.k:101:9
+  reg   [15:0] p0_result_1;	// swiglu.k:101:9
+  reg          p0_stage10_enable = 1'h0;	// swiglu.k:101:9
+  reg   [15:0] p0_result_2;	// swiglu.k:101:9
+  reg          p0_stage11_enable = 1'h0;	// swiglu.k:101:9
+  wire         prod = p0_gate_bf16_1[6] & memory_read_data_in_9_2_0[0];	// swiglu.k:101:9, :116:{21,33}, :117:{21,33}, :119:35, :120:{21,25}
+  wire         prod_0 = p0_gate_bf16_1[5] & memory_read_data_in_9_2_0[0];	// swiglu.k:101:9, :116:{21,33}, :117:{21,33}, :119:35, :120:{21,25}
+  wire         prod_1 = p0_gate_bf16_1[4] & memory_read_data_in_9_2_0[0];	// swiglu.k:101:9, :116:{21,33}, :117:{21,33}, :119:35, :120:{21,25}
+  wire         prod_2 = p0_gate_bf16_1[3] & memory_read_data_in_9_2_0[0];	// swiglu.k:101:9, :116:{21,33}, :117:{21,33}, :119:35, :120:{21,25}
+  wire         prod_3 = p0_gate_bf16_1[2] & memory_read_data_in_9_2_0[0];	// swiglu.k:101:9, :116:{21,33}, :117:{21,33}, :119:35, :120:{21,25}
+  wire         prod_4 = p0_gate_bf16_1[1] & memory_read_data_in_9_2_0[0];	// swiglu.k:101:9, :116:{21,33}, :117:{21,33}, :119:35, :120:{21,25}
+  wire         prod_5 = p0_gate_bf16_1[0] & memory_read_data_in_9_2_0[0];	// swiglu.k:101:9, :116:{21,33}, :117:{21,33}, :119:35, :120:{21,25}
   wire  [15:0] _a_exp_plus_b_exp_ =
-    16'({8'h0, p0_gate_bf16_1[14:7]} + {8'h0, memory_read_data_in_9_2_0[14:7]});	// swiglu.k:99:9, :131:39, :136:39
+    16'({8'h0, p0_gate_bf16_1[14:7]} + {8'h0, memory_read_data_in_9_2_0[14:7]});	// swiglu.k:101:9, :133:39, :138:39
   wire  [9:0]  _prod_plus_ma32_shl_1_ =
     10'({2'h0,
          memory_read_data_in_9_2_0[0],
@@ -243,41 +245,41 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
          prod_2,
          prod_3,
          prod_4,
-         prod_5} + {2'h1, p0_gate_bf16_1[6:0], 1'h0});	// swiglu.k:99:9, :115:{21,33}, :118:{21,25}, :119:{51,58}
-  wire         prod_6 = _prod_plus_ma32_shl_1_[9] & memory_read_data_in_9_2_0[1];	// swiglu.k:99:9, :115:{21,33}, :119:{21,25,51}
-  wire         prod_7 = _prod_plus_ma32_shl_1_[8] & memory_read_data_in_9_2_0[1];	// swiglu.k:99:9, :115:{21,33}, :119:{21,25,51}
+         prod_5} + {2'h1, p0_gate_bf16_1[6:0], 1'h0});	// swiglu.k:101:9, :117:{21,33}, :120:{21,25}, :121:{51,58}
+  wire         prod_6 = _prod_plus_ma32_shl_1_[9] & memory_read_data_in_9_2_0[1];	// swiglu.k:101:9, :117:{21,33}, :121:{21,25,51}
+  wire         prod_7 = _prod_plus_ma32_shl_1_[8] & memory_read_data_in_9_2_0[1];	// swiglu.k:101:9, :117:{21,33}, :121:{21,25,51}
   wire         prod_8 =
     _prod_plus_ma32_shl_1_[7]
       ? memory_read_data_in_9_2_0[0] | memory_read_data_in_9_2_0[1]
-      : memory_read_data_in_9_2_0[0] & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:99:9, :115:{21,33}, :119:{21,25,51}
+      : memory_read_data_in_9_2_0[0] & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:101:9, :117:{21,33}, :121:{21,25,51}
   wire         prod_9 =
     _prod_plus_ma32_shl_1_[6]
       ? prod | memory_read_data_in_9_2_0[1]
-      : prod & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:99:9, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
+      : prod & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:101:9, :117:{21,33}, :120:{21,25}, :121:{21,25,51}
   wire         prod_10 =
     _prod_plus_ma32_shl_1_[5]
       ? prod_0 | memory_read_data_in_9_2_0[1]
-      : prod_0 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:99:9, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
+      : prod_0 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:101:9, :117:{21,33}, :120:{21,25}, :121:{21,25,51}
   wire         prod_11 =
     _prod_plus_ma32_shl_1_[4]
       ? prod_1 | memory_read_data_in_9_2_0[1]
-      : prod_1 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:99:9, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
+      : prod_1 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:101:9, :117:{21,33}, :120:{21,25}, :121:{21,25,51}
   wire         prod_12 =
     _prod_plus_ma32_shl_1_[3]
       ? prod_2 | memory_read_data_in_9_2_0[1]
-      : prod_2 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:99:9, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
+      : prod_2 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:101:9, :117:{21,33}, :120:{21,25}, :121:{21,25,51}
   wire         prod_13 =
     _prod_plus_ma32_shl_1_[2]
       ? prod_3 | memory_read_data_in_9_2_0[1]
-      : prod_3 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:99:9, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
+      : prod_3 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:101:9, :117:{21,33}, :120:{21,25}, :121:{21,25,51}
   wire         prod_14 =
     _prod_plus_ma32_shl_1_[1]
       ? prod_4 | memory_read_data_in_9_2_0[1]
-      : prod_4 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:99:9, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
+      : prod_4 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:101:9, :117:{21,33}, :120:{21,25}, :121:{21,25,51}
   wire         prod_15 =
     _prod_plus_ma32_shl_1_[0]
       ? prod_5 | memory_read_data_in_9_2_0[1]
-      : prod_5 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:99:9, :115:{21,33}, :118:{21,25}, :119:{21,25,51}
+      : prod_5 & ~(memory_read_data_in_9_2_0[1]);	// swiglu.k:101:9, :117:{21,33}, :120:{21,25}, :121:{21,25,51}
   wire  [10:0] _prod_plus_ma32_shl_2_ =
     11'({1'h0,
          prod_6,
@@ -289,48 +291,48 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
          prod_12,
          prod_13,
          prod_14,
-         prod_15} + {2'h1, p0_gate_bf16_1[6:0], 2'h0});	// swiglu.k:99:9, :119:{21,25}, :120:{51,58}
-  wire         prod_16 = _prod_plus_ma32_shl_2_[10] & memory_read_data_in_9_2_0[2];	// swiglu.k:99:9, :115:{21,33}, :120:{21,25,51}
+         prod_15} + {2'h1, p0_gate_bf16_1[6:0], 2'h0});	// swiglu.k:101:9, :121:{21,25}, :122:{51,58}
+  wire         prod_16 = _prod_plus_ma32_shl_2_[10] & memory_read_data_in_9_2_0[2];	// swiglu.k:101:9, :117:{21,33}, :122:{21,25,51}
   wire         prod_17 =
     _prod_plus_ma32_shl_2_[9]
       ? prod_6 | memory_read_data_in_9_2_0[2]
-      : prod_6 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:99:9, :115:{21,33}, :119:{21,25}, :120:{21,25,51}
+      : prod_6 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:101:9, :117:{21,33}, :121:{21,25}, :122:{21,25,51}
   wire         prod_18 =
     _prod_plus_ma32_shl_2_[8]
       ? prod_7 | memory_read_data_in_9_2_0[2]
-      : prod_7 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:99:9, :115:{21,33}, :119:{21,25}, :120:{21,25,51}
+      : prod_7 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:101:9, :117:{21,33}, :121:{21,25}, :122:{21,25,51}
   wire         prod_19 =
     _prod_plus_ma32_shl_2_[7]
       ? prod_8 | memory_read_data_in_9_2_0[2]
-      : prod_8 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:99:9, :115:{21,33}, :119:{21,25}, :120:{21,25,51}
+      : prod_8 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:101:9, :117:{21,33}, :121:{21,25}, :122:{21,25,51}
   wire         prod_20 =
     _prod_plus_ma32_shl_2_[6]
       ? prod_9 | memory_read_data_in_9_2_0[2]
-      : prod_9 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:99:9, :115:{21,33}, :119:{21,25}, :120:{21,25,51}
+      : prod_9 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:101:9, :117:{21,33}, :121:{21,25}, :122:{21,25,51}
   wire         prod_21 =
     _prod_plus_ma32_shl_2_[5]
       ? prod_10 | memory_read_data_in_9_2_0[2]
-      : prod_10 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:99:9, :115:{21,33}, :119:{21,25}, :120:{21,25,51}
+      : prod_10 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:101:9, :117:{21,33}, :121:{21,25}, :122:{21,25,51}
   wire         prod_22 =
     _prod_plus_ma32_shl_2_[4]
       ? prod_11 | memory_read_data_in_9_2_0[2]
-      : prod_11 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:99:9, :115:{21,33}, :119:{21,25}, :120:{21,25,51}
+      : prod_11 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:101:9, :117:{21,33}, :121:{21,25}, :122:{21,25,51}
   wire         prod_23 =
     _prod_plus_ma32_shl_2_[3]
       ? prod_12 | memory_read_data_in_9_2_0[2]
-      : prod_12 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:99:9, :115:{21,33}, :119:{21,25}, :120:{21,25,51}
+      : prod_12 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:101:9, :117:{21,33}, :121:{21,25}, :122:{21,25,51}
   wire         prod_24 =
     _prod_plus_ma32_shl_2_[2]
       ? prod_13 | memory_read_data_in_9_2_0[2]
-      : prod_13 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:99:9, :115:{21,33}, :119:{21,25}, :120:{21,25,51}
+      : prod_13 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:101:9, :117:{21,33}, :121:{21,25}, :122:{21,25,51}
   wire         prod_25 =
     _prod_plus_ma32_shl_2_[1]
       ? prod_14 | memory_read_data_in_9_2_0[2]
-      : prod_14 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:99:9, :115:{21,33}, :119:{21,25}, :120:{21,25,51}
+      : prod_14 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:101:9, :117:{21,33}, :121:{21,25}, :122:{21,25,51}
   wire         prod_26 =
     _prod_plus_ma32_shl_2_[0]
       ? prod_15 | memory_read_data_in_9_2_0[2]
-      : prod_15 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:99:9, :115:{21,33}, :119:{21,25}, :120:{21,25,51}
+      : prod_15 & ~(memory_read_data_in_9_2_0[2]);	// swiglu.k:101:9, :117:{21,33}, :121:{21,25}, :122:{21,25,51}
   wire  [11:0] _prod_plus_ma32_shl_3_ =
     12'({1'h0,
          prod_16,
@@ -343,77 +345,77 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
          prod_23,
          prod_24,
          prod_25,
-         prod_26} + {2'h1, p0_gate_bf16_1[6:0], 3'h0});	// swiglu.k:99:9, :120:{21,25}, :121:{51,58}
-  wire         prod_27 = _prod_plus_ma32_shl_3_[11] & memory_read_data_in_9_2_0[3];	// swiglu.k:99:9, :115:{21,33}, :121:{21,25,51}
+         prod_26} + {2'h1, p0_gate_bf16_1[6:0], 3'h0});	// swiglu.k:101:9, :122:{21,25}, :123:{51,58}
+  wire         prod_27 = _prod_plus_ma32_shl_3_[11] & memory_read_data_in_9_2_0[3];	// swiglu.k:101:9, :117:{21,33}, :123:{21,25,51}
   wire         prod_28 =
     _prod_plus_ma32_shl_3_[10]
       ? prod_16 | memory_read_data_in_9_2_0[3]
-      : prod_16 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:99:9, :115:{21,33}, :120:{21,25}, :121:{21,25,51}
+      : prod_16 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:101:9, :117:{21,33}, :122:{21,25}, :123:{21,25,51}
   wire         prod_29 =
     _prod_plus_ma32_shl_3_[9]
       ? prod_17 | memory_read_data_in_9_2_0[3]
-      : prod_17 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:99:9, :115:{21,33}, :120:{21,25}, :121:{21,25,51}
+      : prod_17 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:101:9, :117:{21,33}, :122:{21,25}, :123:{21,25,51}
   wire         prod_30 =
     _prod_plus_ma32_shl_3_[8]
       ? prod_18 | memory_read_data_in_9_2_0[3]
-      : prod_18 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:99:9, :115:{21,33}, :120:{21,25}, :121:{21,25,51}
+      : prod_18 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:101:9, :117:{21,33}, :122:{21,25}, :123:{21,25,51}
   wire         prod_31 =
     _prod_plus_ma32_shl_3_[7]
       ? prod_19 | memory_read_data_in_9_2_0[3]
-      : prod_19 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:99:9, :115:{21,33}, :120:{21,25}, :121:{21,25,51}
+      : prod_19 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:101:9, :117:{21,33}, :122:{21,25}, :123:{21,25,51}
   wire         prod_32 =
     _prod_plus_ma32_shl_3_[6]
       ? prod_20 | memory_read_data_in_9_2_0[3]
-      : prod_20 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:99:9, :115:{21,33}, :120:{21,25}, :121:{21,25,51}
+      : prod_20 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:101:9, :117:{21,33}, :122:{21,25}, :123:{21,25,51}
   wire         prod_33 =
     _prod_plus_ma32_shl_3_[5]
       ? prod_21 | memory_read_data_in_9_2_0[3]
-      : prod_21 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:99:9, :115:{21,33}, :120:{21,25}, :121:{21,25,51}
+      : prod_21 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:101:9, :117:{21,33}, :122:{21,25}, :123:{21,25,51}
   wire         prod_34 =
     _prod_plus_ma32_shl_3_[4]
       ? prod_22 | memory_read_data_in_9_2_0[3]
-      : prod_22 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:99:9, :115:{21,33}, :120:{21,25}, :121:{21,25,51}
+      : prod_22 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:101:9, :117:{21,33}, :122:{21,25}, :123:{21,25,51}
   wire         prod_35 =
     _prod_plus_ma32_shl_3_[3]
       ? prod_23 | memory_read_data_in_9_2_0[3]
-      : prod_23 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:99:9, :115:{21,33}, :120:{21,25}, :121:{21,25,51}
+      : prod_23 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:101:9, :117:{21,33}, :122:{21,25}, :123:{21,25,51}
   wire         prod_36 =
     _prod_plus_ma32_shl_3_[2]
       ? prod_24 | memory_read_data_in_9_2_0[3]
-      : prod_24 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:99:9, :115:{21,33}, :120:{21,25}, :121:{21,25,51}
+      : prod_24 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:101:9, :117:{21,33}, :122:{21,25}, :123:{21,25,51}
   wire         prod_37 =
     _prod_plus_ma32_shl_3_[1]
       ? prod_25 | memory_read_data_in_9_2_0[3]
-      : prod_25 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:99:9, :115:{21,33}, :120:{21,25}, :121:{21,25,51}
+      : prod_25 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:101:9, :117:{21,33}, :122:{21,25}, :123:{21,25,51}
   wire         prod_38 =
     _prod_plus_ma32_shl_3_[0]
       ? prod_26 | memory_read_data_in_9_2_0[3]
-      : prod_26 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:99:9, :115:{21,33}, :120:{21,25}, :121:{21,25,51}
-  wire         prod_39 = p0__prod_plus_ma32_shl_4_[12] & p0_mb[4];	// swiglu.k:99:9, :122:{21,25}
+      : prod_26 & ~(memory_read_data_in_9_2_0[3]);	// swiglu.k:101:9, :117:{21,33}, :122:{21,25}, :123:{21,25,51}
+  wire         prod_39 = p0__prod_plus_ma32_shl_4_[12] & p0_mb[4];	// swiglu.k:101:9, :124:{21,25}
   wire         prod_40 =
-    p0__prod_plus_ma32_shl_4_[11] ? p0_prod[11] | p0_mb[4] : p0_prod[11] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[11] ? p0_prod[11] | p0_mb[4] : p0_prod[11] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire         prod_41 =
-    p0__prod_plus_ma32_shl_4_[10] ? p0_prod[10] | p0_mb[4] : p0_prod[10] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[10] ? p0_prod[10] | p0_mb[4] : p0_prod[10] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire         prod_42 =
-    p0__prod_plus_ma32_shl_4_[9] ? p0_prod[9] | p0_mb[4] : p0_prod[9] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[9] ? p0_prod[9] | p0_mb[4] : p0_prod[9] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire         prod_43 =
-    p0__prod_plus_ma32_shl_4_[8] ? p0_prod[8] | p0_mb[4] : p0_prod[8] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[8] ? p0_prod[8] | p0_mb[4] : p0_prod[8] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire         prod_44 =
-    p0__prod_plus_ma32_shl_4_[7] ? p0_prod[7] | p0_mb[4] : p0_prod[7] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[7] ? p0_prod[7] | p0_mb[4] : p0_prod[7] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire         prod_45 =
-    p0__prod_plus_ma32_shl_4_[6] ? p0_prod[6] | p0_mb[4] : p0_prod[6] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[6] ? p0_prod[6] | p0_mb[4] : p0_prod[6] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire         prod_46 =
-    p0__prod_plus_ma32_shl_4_[5] ? p0_prod[5] | p0_mb[4] : p0_prod[5] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[5] ? p0_prod[5] | p0_mb[4] : p0_prod[5] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire         prod_47 =
-    p0__prod_plus_ma32_shl_4_[4] ? p0_prod[4] | p0_mb[4] : p0_prod[4] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[4] ? p0_prod[4] | p0_mb[4] : p0_prod[4] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire         prod_48 =
-    p0__prod_plus_ma32_shl_4_[3] ? p0_prod[3] | p0_mb[4] : p0_prod[3] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[3] ? p0_prod[3] | p0_mb[4] : p0_prod[3] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire         prod_49 =
-    p0__prod_plus_ma32_shl_4_[2] ? p0_prod[2] | p0_mb[4] : p0_prod[2] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[2] ? p0_prod[2] | p0_mb[4] : p0_prod[2] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire         prod_50 =
-    p0__prod_plus_ma32_shl_4_[1] ? p0_prod[1] | p0_mb[4] : p0_prod[1] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[1] ? p0_prod[1] | p0_mb[4] : p0_prod[1] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire         prod_51 =
-    p0__prod_plus_ma32_shl_4_[0] ? p0_prod[0] | p0_mb[4] : p0_prod[0] & ~(p0_mb[4]);	// swiglu.k:99:9, :122:{21,25}
+    p0__prod_plus_ma32_shl_4_[0] ? p0_prod[0] | p0_mb[4] : p0_prod[0] & ~(p0_mb[4]);	// swiglu.k:101:9, :124:{21,25}
   wire  [13:0] _prod_plus_ma32_shl_5_ =
     14'({1'h0,
          prod_39,
@@ -428,34 +430,34 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
          prod_48,
          prod_49,
          prod_50,
-         prod_51} + p0__ma32_shl_5_);	// swiglu.k:99:9, :122:{21,25}, :123:51
-  wire         prod_52 = _prod_plus_ma32_shl_5_[13] & p0_mb[5];	// swiglu.k:99:9, :123:{21,25,51}
+         prod_51} + p0__ma32_shl_5_);	// swiglu.k:101:9, :124:{21,25}, :125:51
+  wire         prod_52 = _prod_plus_ma32_shl_5_[13] & p0_mb[5];	// swiglu.k:101:9, :125:{21,25,51}
   wire         prod_53 =
-    _prod_plus_ma32_shl_5_[12] ? prod_39 | p0_mb[5] : prod_39 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[12] ? prod_39 | p0_mb[5] : prod_39 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_54 =
-    _prod_plus_ma32_shl_5_[11] ? prod_40 | p0_mb[5] : prod_40 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[11] ? prod_40 | p0_mb[5] : prod_40 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_55 =
-    _prod_plus_ma32_shl_5_[10] ? prod_41 | p0_mb[5] : prod_41 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[10] ? prod_41 | p0_mb[5] : prod_41 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_56 =
-    _prod_plus_ma32_shl_5_[9] ? prod_42 | p0_mb[5] : prod_42 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[9] ? prod_42 | p0_mb[5] : prod_42 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_57 =
-    _prod_plus_ma32_shl_5_[8] ? prod_43 | p0_mb[5] : prod_43 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[8] ? prod_43 | p0_mb[5] : prod_43 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_58 =
-    _prod_plus_ma32_shl_5_[7] ? prod_44 | p0_mb[5] : prod_44 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[7] ? prod_44 | p0_mb[5] : prod_44 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_59 =
-    _prod_plus_ma32_shl_5_[6] ? prod_45 | p0_mb[5] : prod_45 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[6] ? prod_45 | p0_mb[5] : prod_45 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_60 =
-    _prod_plus_ma32_shl_5_[5] ? prod_46 | p0_mb[5] : prod_46 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[5] ? prod_46 | p0_mb[5] : prod_46 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_61 =
-    _prod_plus_ma32_shl_5_[4] ? prod_47 | p0_mb[5] : prod_47 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[4] ? prod_47 | p0_mb[5] : prod_47 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_62 =
-    _prod_plus_ma32_shl_5_[3] ? prod_48 | p0_mb[5] : prod_48 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[3] ? prod_48 | p0_mb[5] : prod_48 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_63 =
-    _prod_plus_ma32_shl_5_[2] ? prod_49 | p0_mb[5] : prod_49 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[2] ? prod_49 | p0_mb[5] : prod_49 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_64 =
-    _prod_plus_ma32_shl_5_[1] ? prod_50 | p0_mb[5] : prod_50 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[1] ? prod_50 | p0_mb[5] : prod_50 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire         prod_65 =
-    _prod_plus_ma32_shl_5_[0] ? prod_51 | p0_mb[5] : prod_51 & ~(p0_mb[5]);	// swiglu.k:99:9, :122:{21,25}, :123:{21,25,51}
+    _prod_plus_ma32_shl_5_[0] ? prod_51 | p0_mb[5] : prod_51 & ~(p0_mb[5]);	// swiglu.k:101:9, :124:{21,25}, :125:{21,25,51}
   wire  [14:0] _prod_plus_ma32_shl_6_ =
     15'({1'h0,
          prod_52,
@@ -471,7 +473,7 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
          prod_62,
          prod_63,
          prod_64,
-         prod_65} + p0__ma32_shl_6_);	// swiglu.k:99:9, :123:{21,25}, :124:51
+         prod_65} + p0__ma32_shl_6_);	// swiglu.k:101:9, :125:{21,25}, :126:51
   wire  [15:0] _prod_plus_ma32_shl_7_ =
     16'({1'h0,
          _prod_plus_ma32_shl_6_[14] & p0_mb_0,
@@ -489,113 +491,113 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
          _prod_plus_ma32_shl_6_[2] ? prod_63 | p0_mb_0 : prod_63 & ~p0_mb_0,
          _prod_plus_ma32_shl_6_[1] ? prod_64 | p0_mb_0 : prod_64 & ~p0_mb_0,
          _prod_plus_ma32_shl_6_[0] ? prod_65 | p0_mb_0 : prod_65 & ~p0_mb_0}
-        + p0__ma32_shl_7_);	// swiglu.k:99:9, :123:{21,25}, :124:{21,51}, :125:51
+        + p0__ma32_shl_7_);	// swiglu.k:101:9, :125:{21,25}, :126:{21,51}, :127:51
   wire  [15:0] r_exp =
     p0_prod_0
       ? p0__a_exp_plus_b_exp_minus_127_plus_1__0
-      : p0__a_exp_plus_b_exp_minus_127__0;	// swiglu.k:99:9, :128:21
-  wire         _GEN_0 = r_exp < 16'hFF & (|r_exp);	// swiglu.k:113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25,31,44}, :140:{32,47,49}
-  wire         _GEN_1 = ~p0_prod_0 & _GEN_0;	// swiglu.k:99:9, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
-  wire         _GEN_2 = p0__b_exp_ne_0__1 & p0__a_exp_ne_0__0;	// swiglu.k:99:9, :111:{17,21}
-  wire         silu = r_exp[7] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
-  wire         silu_0 = r_exp[6] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
-  wire         silu_1 = r_exp[5] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
-  wire         silu_2 = r_exp[4] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
-  wire         silu_3 = r_exp[3] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
-  wire         silu_4 = r_exp[2] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
-  wire         silu_5 = r_exp[1] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
-  wire         silu_6 = r_exp[0] & _GEN_0 & _GEN_2;	// swiglu.k:111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+      : p0__a_exp_plus_b_exp_minus_127__0;	// swiglu.k:101:9, :130:21
+  wire         _GEN_0 = r_exp < 16'hFF & (|r_exp);	// swiglu.k:115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25,31,44}, :142:{32,47,49}
+  wire         _GEN_1 = ~p0_prod_0 & _GEN_0;	// swiglu.k:101:9, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
+  wire         _GEN_2 = p0__b_exp_ne_0__1 & p0__a_exp_ne_0__0;	// swiglu.k:101:9, :113:{17,21}
+  wire         silu = r_exp[7] & _GEN_0 & _GEN_2;	// swiglu.k:113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
+  wire         silu_0 = r_exp[6] & _GEN_0 & _GEN_2;	// swiglu.k:113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
+  wire         silu_1 = r_exp[5] & _GEN_0 & _GEN_2;	// swiglu.k:113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
+  wire         silu_2 = r_exp[4] & _GEN_0 & _GEN_2;	// swiglu.k:113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
+  wire         silu_3 = r_exp[3] & _GEN_0 & _GEN_2;	// swiglu.k:113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
+  wire         silu_4 = r_exp[2] & _GEN_0 & _GEN_2;	// swiglu.k:113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
+  wire         silu_5 = r_exp[1] & _GEN_0 & _GEN_2;	// swiglu.k:113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
+  wire         silu_6 = r_exp[0] & _GEN_0 & _GEN_2;	// swiglu.k:113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
   wire         silu_7 =
     (p0_prod_1[14] ? (p0_prod_1[13] | p0_prod_0) & _GEN_0 : p0_prod_1[13] & _GEN_1)
-    & _GEN_2;	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+    & _GEN_2;	// swiglu.k:101:9, :113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
   wire         silu_8 =
     (p0_prod_1[13] ? (p0_prod_1[12] | p0_prod_0) & _GEN_0 : p0_prod_1[12] & _GEN_1)
-    & _GEN_2;	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+    & _GEN_2;	// swiglu.k:101:9, :113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
   wire         silu_9 =
     (p0_prod_1[12] ? (p0_prod_1[11] | p0_prod_0) & _GEN_0 : p0_prod_1[11] & _GEN_1)
-    & _GEN_2;	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+    & _GEN_2;	// swiglu.k:101:9, :113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
   wire         silu_10 =
     (p0_prod_1[11] ? (p0_prod_1[10] | p0_prod_0) & _GEN_0 : p0_prod_1[10] & _GEN_1)
-    & _GEN_2;	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+    & _GEN_2;	// swiglu.k:101:9, :113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
   wire         silu_11 =
     (p0_prod_1[10] ? (p0_prod_1[9] | p0_prod_0) & _GEN_0 : p0_prod_1[9] & _GEN_1)
-    & _GEN_2;	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+    & _GEN_2;	// swiglu.k:101:9, :113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
   wire         silu_12 =
-    (p0_prod_1[9] ? (p0_prod_1[8] | p0_prod_0) & _GEN_0 : p0_prod_1[8] & _GEN_1) & _GEN_2;	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
+    (p0_prod_1[9] ? (p0_prod_1[8] | p0_prod_0) & _GEN_0 : p0_prod_1[8] & _GEN_1) & _GEN_2;	// swiglu.k:101:9, :113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
   wire         silu_13 =
-    (p0_prod_1[8] ? (p0_prod_1[7] | p0_prod_0) & _GEN_0 : p0_prod_1[7] & _GEN_1) & _GEN_2;	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
-  wire         prod_66 = silu_7 & p0_mb_3[0];	// swiglu.k:99:9, :111:{17,21}, :157:{21,25}
-  wire         prod_67 = silu_8 & p0_mb_3[0];	// swiglu.k:99:9, :111:{17,21}, :157:{21,25}
-  wire         prod_68 = silu_9 & p0_mb_3[0];	// swiglu.k:99:9, :111:{17,21}, :157:{21,25}
-  wire         prod_69 = silu_10 & p0_mb_3[0];	// swiglu.k:99:9, :111:{17,21}, :157:{21,25}
-  wire         prod_70 = silu_11 & p0_mb_3[0];	// swiglu.k:99:9, :111:{17,21}, :157:{21,25}
-  wire         prod_71 = silu_12 & p0_mb_3[0];	// swiglu.k:99:9, :111:{17,21}, :157:{21,25}
-  wire         prod_72 = silu_13 & p0_mb_3[0];	// swiglu.k:99:9, :111:{17,21}, :157:{21,25}
+    (p0_prod_1[8] ? (p0_prod_1[7] | p0_prod_0) & _GEN_0 : p0_prod_1[7] & _GEN_1) & _GEN_2;	// swiglu.k:101:9, :113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
+  wire         prod_66 = silu_7 & p0_mb_3[0];	// swiglu.k:101:9, :113:{17,21}, :159:{21,25}
+  wire         prod_67 = silu_8 & p0_mb_3[0];	// swiglu.k:101:9, :113:{17,21}, :159:{21,25}
+  wire         prod_68 = silu_9 & p0_mb_3[0];	// swiglu.k:101:9, :113:{17,21}, :159:{21,25}
+  wire         prod_69 = silu_10 & p0_mb_3[0];	// swiglu.k:101:9, :113:{17,21}, :159:{21,25}
+  wire         prod_70 = silu_11 & p0_mb_3[0];	// swiglu.k:101:9, :113:{17,21}, :159:{21,25}
+  wire         prod_71 = silu_12 & p0_mb_3[0];	// swiglu.k:101:9, :113:{17,21}, :159:{21,25}
+  wire         prod_72 = silu_13 & p0_mb_3[0];	// swiglu.k:101:9, :113:{17,21}, :159:{21,25}
   wire  [15:0] _a_exp_plus_b_exp__0 =
     16'({8'h0, silu, silu_0, silu_1, silu_2, silu_3, silu_4, silu_5, silu_6}
-        + p0_b_exp_0);	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}, :170:39, :175:39
+        + p0_b_exp_0);	// swiglu.k:101:9, :113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}, :172:39, :177:39
   wire  [9:0]  _prod_plus_ma32_shl_1__0 =
     10'({2'h0, p0_mb_3[0], prod_66, prod_67, prod_68, prod_69, prod_70, prod_71, prod_72}
-        + {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 1'h0});	// swiglu.k:99:9, :111:{17,21}, :157:{21,25}, :158:{51,58}
-  wire         prod_73 = _prod_plus_ma32_shl_1__0[9] & p0_mb_3[1];	// swiglu.k:99:9, :158:{21,25,51}
-  wire         prod_74 = _prod_plus_ma32_shl_1__0[8] & p0_mb_3[1];	// swiglu.k:99:9, :158:{21,25,51}
+        + {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 1'h0});	// swiglu.k:101:9, :113:{17,21}, :159:{21,25}, :160:{51,58}
+  wire         prod_73 = _prod_plus_ma32_shl_1__0[9] & p0_mb_3[1];	// swiglu.k:101:9, :160:{21,25,51}
+  wire         prod_74 = _prod_plus_ma32_shl_1__0[8] & p0_mb_3[1];	// swiglu.k:101:9, :160:{21,25,51}
   wire         prod_75 =
-    _prod_plus_ma32_shl_1__0[7] ? p0_mb_3[0] | p0_mb_3[1] : p0_mb_3[0] & ~(p0_mb_3[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
+    _prod_plus_ma32_shl_1__0[7] ? p0_mb_3[0] | p0_mb_3[1] : p0_mb_3[0] & ~(p0_mb_3[1]);	// swiglu.k:101:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_76 =
-    _prod_plus_ma32_shl_1__0[6] ? prod_66 | p0_mb_3[1] : prod_66 & ~(p0_mb_3[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
+    _prod_plus_ma32_shl_1__0[6] ? prod_66 | p0_mb_3[1] : prod_66 & ~(p0_mb_3[1]);	// swiglu.k:101:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_77 =
-    _prod_plus_ma32_shl_1__0[5] ? prod_67 | p0_mb_3[1] : prod_67 & ~(p0_mb_3[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
+    _prod_plus_ma32_shl_1__0[5] ? prod_67 | p0_mb_3[1] : prod_67 & ~(p0_mb_3[1]);	// swiglu.k:101:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_78 =
-    _prod_plus_ma32_shl_1__0[4] ? prod_68 | p0_mb_3[1] : prod_68 & ~(p0_mb_3[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
+    _prod_plus_ma32_shl_1__0[4] ? prod_68 | p0_mb_3[1] : prod_68 & ~(p0_mb_3[1]);	// swiglu.k:101:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_79 =
-    _prod_plus_ma32_shl_1__0[3] ? prod_69 | p0_mb_3[1] : prod_69 & ~(p0_mb_3[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
+    _prod_plus_ma32_shl_1__0[3] ? prod_69 | p0_mb_3[1] : prod_69 & ~(p0_mb_3[1]);	// swiglu.k:101:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_80 =
-    _prod_plus_ma32_shl_1__0[2] ? prod_70 | p0_mb_3[1] : prod_70 & ~(p0_mb_3[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
+    _prod_plus_ma32_shl_1__0[2] ? prod_70 | p0_mb_3[1] : prod_70 & ~(p0_mb_3[1]);	// swiglu.k:101:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_81 =
-    _prod_plus_ma32_shl_1__0[1] ? prod_71 | p0_mb_3[1] : prod_71 & ~(p0_mb_3[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
+    _prod_plus_ma32_shl_1__0[1] ? prod_71 | p0_mb_3[1] : prod_71 & ~(p0_mb_3[1]);	// swiglu.k:101:9, :159:{21,25}, :160:{21,25,51}
   wire         prod_82 =
-    _prod_plus_ma32_shl_1__0[0] ? prod_72 | p0_mb_3[1] : prod_72 & ~(p0_mb_3[1]);	// swiglu.k:99:9, :157:{21,25}, :158:{21,25,51}
-  wire         prod_83 = p0__prod_plus_ma32_shl_2_[10] & p0_mb_5[2];	// swiglu.k:99:9, :159:{21,25}
+    _prod_plus_ma32_shl_1__0[0] ? prod_72 | p0_mb_3[1] : prod_72 & ~(p0_mb_3[1]);	// swiglu.k:101:9, :159:{21,25}, :160:{21,25,51}
+  wire         prod_83 = p0__prod_plus_ma32_shl_2_[10] & p0_mb_5[2];	// swiglu.k:101:9, :161:{21,25}
   wire         prod_84 =
     p0__prod_plus_ma32_shl_2_[9]
       ? p0_prod_2[9] | p0_mb_5[2]
-      : p0_prod_2[9] & ~(p0_mb_5[2]);	// swiglu.k:99:9, :159:{21,25}
+      : p0_prod_2[9] & ~(p0_mb_5[2]);	// swiglu.k:101:9, :161:{21,25}
   wire         prod_85 =
     p0__prod_plus_ma32_shl_2_[8]
       ? p0_prod_2[8] | p0_mb_5[2]
-      : p0_prod_2[8] & ~(p0_mb_5[2]);	// swiglu.k:99:9, :159:{21,25}
+      : p0_prod_2[8] & ~(p0_mb_5[2]);	// swiglu.k:101:9, :161:{21,25}
   wire         prod_86 =
     p0__prod_plus_ma32_shl_2_[7]
       ? p0_prod_2[7] | p0_mb_5[2]
-      : p0_prod_2[7] & ~(p0_mb_5[2]);	// swiglu.k:99:9, :159:{21,25}
+      : p0_prod_2[7] & ~(p0_mb_5[2]);	// swiglu.k:101:9, :161:{21,25}
   wire         prod_87 =
     p0__prod_plus_ma32_shl_2_[6]
       ? p0_prod_2[6] | p0_mb_5[2]
-      : p0_prod_2[6] & ~(p0_mb_5[2]);	// swiglu.k:99:9, :159:{21,25}
+      : p0_prod_2[6] & ~(p0_mb_5[2]);	// swiglu.k:101:9, :161:{21,25}
   wire         prod_88 =
     p0__prod_plus_ma32_shl_2_[5]
       ? p0_prod_2[5] | p0_mb_5[2]
-      : p0_prod_2[5] & ~(p0_mb_5[2]);	// swiglu.k:99:9, :159:{21,25}
+      : p0_prod_2[5] & ~(p0_mb_5[2]);	// swiglu.k:101:9, :161:{21,25}
   wire         prod_89 =
     p0__prod_plus_ma32_shl_2_[4]
       ? p0_prod_2[4] | p0_mb_5[2]
-      : p0_prod_2[4] & ~(p0_mb_5[2]);	// swiglu.k:99:9, :159:{21,25}
+      : p0_prod_2[4] & ~(p0_mb_5[2]);	// swiglu.k:101:9, :161:{21,25}
   wire         prod_90 =
     p0__prod_plus_ma32_shl_2_[3]
       ? p0_prod_2[3] | p0_mb_5[2]
-      : p0_prod_2[3] & ~(p0_mb_5[2]);	// swiglu.k:99:9, :159:{21,25}
+      : p0_prod_2[3] & ~(p0_mb_5[2]);	// swiglu.k:101:9, :161:{21,25}
   wire         prod_91 =
     p0__prod_plus_ma32_shl_2_[2]
       ? p0_prod_2[2] | p0_mb_5[2]
-      : p0_prod_2[2] & ~(p0_mb_5[2]);	// swiglu.k:99:9, :159:{21,25}
+      : p0_prod_2[2] & ~(p0_mb_5[2]);	// swiglu.k:101:9, :161:{21,25}
   wire         prod_92 =
     p0__prod_plus_ma32_shl_2_[1]
       ? p0_prod_2[1] | p0_mb_5[2]
-      : p0_prod_2[1] & ~(p0_mb_5[2]);	// swiglu.k:99:9, :159:{21,25}
+      : p0_prod_2[1] & ~(p0_mb_5[2]);	// swiglu.k:101:9, :161:{21,25}
   wire         prod_93 =
     p0__prod_plus_ma32_shl_2_[0]
       ? p0_prod_2[0] | p0_mb_5[2]
-      : p0_prod_2[0] & ~(p0_mb_5[2]);	// swiglu.k:99:9, :159:{21,25}
+      : p0_prod_2[0] & ~(p0_mb_5[2]);	// swiglu.k:101:9, :161:{21,25}
   wire  [11:0] _prod_plus_ma32_shl_3__0 =
     12'({1'h0,
          prod_83,
@@ -608,30 +610,30 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
          prod_90,
          prod_91,
          prod_92,
-         prod_93} + p0__ma32_shl_3_);	// swiglu.k:99:9, :159:{21,25}, :160:51
-  wire         prod_94 = _prod_plus_ma32_shl_3__0[11] & p0_mb_5[3];	// swiglu.k:99:9, :160:{21,25,51}
+         prod_93} + p0__ma32_shl_3_);	// swiglu.k:101:9, :161:{21,25}, :162:51
+  wire         prod_94 = _prod_plus_ma32_shl_3__0[11] & p0_mb_5[3];	// swiglu.k:101:9, :162:{21,25,51}
   wire         prod_95 =
-    _prod_plus_ma32_shl_3__0[10] ? prod_83 | p0_mb_5[3] : prod_83 & ~(p0_mb_5[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+    _prod_plus_ma32_shl_3__0[10] ? prod_83 | p0_mb_5[3] : prod_83 & ~(p0_mb_5[3]);	// swiglu.k:101:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_96 =
-    _prod_plus_ma32_shl_3__0[9] ? prod_84 | p0_mb_5[3] : prod_84 & ~(p0_mb_5[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+    _prod_plus_ma32_shl_3__0[9] ? prod_84 | p0_mb_5[3] : prod_84 & ~(p0_mb_5[3]);	// swiglu.k:101:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_97 =
-    _prod_plus_ma32_shl_3__0[8] ? prod_85 | p0_mb_5[3] : prod_85 & ~(p0_mb_5[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+    _prod_plus_ma32_shl_3__0[8] ? prod_85 | p0_mb_5[3] : prod_85 & ~(p0_mb_5[3]);	// swiglu.k:101:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_98 =
-    _prod_plus_ma32_shl_3__0[7] ? prod_86 | p0_mb_5[3] : prod_86 & ~(p0_mb_5[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+    _prod_plus_ma32_shl_3__0[7] ? prod_86 | p0_mb_5[3] : prod_86 & ~(p0_mb_5[3]);	// swiglu.k:101:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_99 =
-    _prod_plus_ma32_shl_3__0[6] ? prod_87 | p0_mb_5[3] : prod_87 & ~(p0_mb_5[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+    _prod_plus_ma32_shl_3__0[6] ? prod_87 | p0_mb_5[3] : prod_87 & ~(p0_mb_5[3]);	// swiglu.k:101:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_100 =
-    _prod_plus_ma32_shl_3__0[5] ? prod_88 | p0_mb_5[3] : prod_88 & ~(p0_mb_5[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+    _prod_plus_ma32_shl_3__0[5] ? prod_88 | p0_mb_5[3] : prod_88 & ~(p0_mb_5[3]);	// swiglu.k:101:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_101 =
-    _prod_plus_ma32_shl_3__0[4] ? prod_89 | p0_mb_5[3] : prod_89 & ~(p0_mb_5[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+    _prod_plus_ma32_shl_3__0[4] ? prod_89 | p0_mb_5[3] : prod_89 & ~(p0_mb_5[3]);	// swiglu.k:101:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_102 =
-    _prod_plus_ma32_shl_3__0[3] ? prod_90 | p0_mb_5[3] : prod_90 & ~(p0_mb_5[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+    _prod_plus_ma32_shl_3__0[3] ? prod_90 | p0_mb_5[3] : prod_90 & ~(p0_mb_5[3]);	// swiglu.k:101:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_103 =
-    _prod_plus_ma32_shl_3__0[2] ? prod_91 | p0_mb_5[3] : prod_91 & ~(p0_mb_5[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+    _prod_plus_ma32_shl_3__0[2] ? prod_91 | p0_mb_5[3] : prod_91 & ~(p0_mb_5[3]);	// swiglu.k:101:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_104 =
-    _prod_plus_ma32_shl_3__0[1] ? prod_92 | p0_mb_5[3] : prod_92 & ~(p0_mb_5[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+    _prod_plus_ma32_shl_3__0[1] ? prod_92 | p0_mb_5[3] : prod_92 & ~(p0_mb_5[3]);	// swiglu.k:101:9, :161:{21,25}, :162:{21,25,51}
   wire         prod_105 =
-    _prod_plus_ma32_shl_3__0[0] ? prod_93 | p0_mb_5[3] : prod_93 & ~(p0_mb_5[3]);	// swiglu.k:99:9, :159:{21,25}, :160:{21,25,51}
+    _prod_plus_ma32_shl_3__0[0] ? prod_93 | p0_mb_5[3] : prod_93 & ~(p0_mb_5[3]);	// swiglu.k:101:9, :161:{21,25}, :162:{21,25,51}
   wire  [12:0] _prod_plus_ma32_shl_4_ =
     13'({1'h0,
          prod_94,
@@ -645,32 +647,32 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
          prod_102,
          prod_103,
          prod_104,
-         prod_105} + p0__ma32_shl_4_);	// swiglu.k:99:9, :160:{21,25}, :161:51
-  wire         prod_106 = _prod_plus_ma32_shl_4_[12] & p0_mb_5[4];	// swiglu.k:99:9, :161:{21,25,51}
+         prod_105} + p0__ma32_shl_4_);	// swiglu.k:101:9, :162:{21,25}, :163:51
+  wire         prod_106 = _prod_plus_ma32_shl_4_[12] & p0_mb_5[4];	// swiglu.k:101:9, :163:{21,25,51}
   wire         prod_107 =
-    _prod_plus_ma32_shl_4_[11] ? prod_94 | p0_mb_5[4] : prod_94 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[11] ? prod_94 | p0_mb_5[4] : prod_94 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire         prod_108 =
-    _prod_plus_ma32_shl_4_[10] ? prod_95 | p0_mb_5[4] : prod_95 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[10] ? prod_95 | p0_mb_5[4] : prod_95 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire         prod_109 =
-    _prod_plus_ma32_shl_4_[9] ? prod_96 | p0_mb_5[4] : prod_96 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[9] ? prod_96 | p0_mb_5[4] : prod_96 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire         prod_110 =
-    _prod_plus_ma32_shl_4_[8] ? prod_97 | p0_mb_5[4] : prod_97 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[8] ? prod_97 | p0_mb_5[4] : prod_97 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire         prod_111 =
-    _prod_plus_ma32_shl_4_[7] ? prod_98 | p0_mb_5[4] : prod_98 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[7] ? prod_98 | p0_mb_5[4] : prod_98 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire         prod_112 =
-    _prod_plus_ma32_shl_4_[6] ? prod_99 | p0_mb_5[4] : prod_99 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[6] ? prod_99 | p0_mb_5[4] : prod_99 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire         prod_113 =
-    _prod_plus_ma32_shl_4_[5] ? prod_100 | p0_mb_5[4] : prod_100 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[5] ? prod_100 | p0_mb_5[4] : prod_100 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire         prod_114 =
-    _prod_plus_ma32_shl_4_[4] ? prod_101 | p0_mb_5[4] : prod_101 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[4] ? prod_101 | p0_mb_5[4] : prod_101 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire         prod_115 =
-    _prod_plus_ma32_shl_4_[3] ? prod_102 | p0_mb_5[4] : prod_102 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[3] ? prod_102 | p0_mb_5[4] : prod_102 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire         prod_116 =
-    _prod_plus_ma32_shl_4_[2] ? prod_103 | p0_mb_5[4] : prod_103 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[2] ? prod_103 | p0_mb_5[4] : prod_103 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire         prod_117 =
-    _prod_plus_ma32_shl_4_[1] ? prod_104 | p0_mb_5[4] : prod_104 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[1] ? prod_104 | p0_mb_5[4] : prod_104 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire         prod_118 =
-    _prod_plus_ma32_shl_4_[0] ? prod_105 | p0_mb_5[4] : prod_105 & ~(p0_mb_5[4]);	// swiglu.k:99:9, :160:{21,25}, :161:{21,25,51}
+    _prod_plus_ma32_shl_4_[0] ? prod_105 | p0_mb_5[4] : prod_105 & ~(p0_mb_5[4]);	// swiglu.k:101:9, :162:{21,25}, :163:{21,25,51}
   wire  [13:0] _prod_plus_ma32_shl_5__0 =
     14'({1'h0,
          prod_106,
@@ -685,34 +687,34 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
          prod_115,
          prod_116,
          prod_117,
-         prod_118} + p0__ma32_shl_5__0);	// swiglu.k:99:9, :161:{21,25}, :162:51
-  wire         prod_119 = _prod_plus_ma32_shl_5__0[13] & p0_mb_5[5];	// swiglu.k:99:9, :162:{21,25,51}
+         prod_118} + p0__ma32_shl_5__0);	// swiglu.k:101:9, :163:{21,25}, :164:51
+  wire         prod_119 = _prod_plus_ma32_shl_5__0[13] & p0_mb_5[5];	// swiglu.k:101:9, :164:{21,25,51}
   wire         prod_120 =
-    _prod_plus_ma32_shl_5__0[12] ? prod_106 | p0_mb_5[5] : prod_106 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[12] ? prod_106 | p0_mb_5[5] : prod_106 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_121 =
-    _prod_plus_ma32_shl_5__0[11] ? prod_107 | p0_mb_5[5] : prod_107 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[11] ? prod_107 | p0_mb_5[5] : prod_107 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_122 =
-    _prod_plus_ma32_shl_5__0[10] ? prod_108 | p0_mb_5[5] : prod_108 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[10] ? prod_108 | p0_mb_5[5] : prod_108 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_123 =
-    _prod_plus_ma32_shl_5__0[9] ? prod_109 | p0_mb_5[5] : prod_109 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[9] ? prod_109 | p0_mb_5[5] : prod_109 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_124 =
-    _prod_plus_ma32_shl_5__0[8] ? prod_110 | p0_mb_5[5] : prod_110 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[8] ? prod_110 | p0_mb_5[5] : prod_110 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_125 =
-    _prod_plus_ma32_shl_5__0[7] ? prod_111 | p0_mb_5[5] : prod_111 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[7] ? prod_111 | p0_mb_5[5] : prod_111 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_126 =
-    _prod_plus_ma32_shl_5__0[6] ? prod_112 | p0_mb_5[5] : prod_112 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[6] ? prod_112 | p0_mb_5[5] : prod_112 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_127 =
-    _prod_plus_ma32_shl_5__0[5] ? prod_113 | p0_mb_5[5] : prod_113 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[5] ? prod_113 | p0_mb_5[5] : prod_113 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_128 =
-    _prod_plus_ma32_shl_5__0[4] ? prod_114 | p0_mb_5[5] : prod_114 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[4] ? prod_114 | p0_mb_5[5] : prod_114 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_129 =
-    _prod_plus_ma32_shl_5__0[3] ? prod_115 | p0_mb_5[5] : prod_115 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[3] ? prod_115 | p0_mb_5[5] : prod_115 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_130 =
-    _prod_plus_ma32_shl_5__0[2] ? prod_116 | p0_mb_5[5] : prod_116 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[2] ? prod_116 | p0_mb_5[5] : prod_116 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_131 =
-    _prod_plus_ma32_shl_5__0[1] ? prod_117 | p0_mb_5[5] : prod_117 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[1] ? prod_117 | p0_mb_5[5] : prod_117 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire         prod_132 =
-    _prod_plus_ma32_shl_5__0[0] ? prod_118 | p0_mb_5[5] : prod_118 & ~(p0_mb_5[5]);	// swiglu.k:99:9, :161:{21,25}, :162:{21,25,51}
+    _prod_plus_ma32_shl_5__0[0] ? prod_118 | p0_mb_5[5] : prod_118 & ~(p0_mb_5[5]);	// swiglu.k:101:9, :163:{21,25}, :164:{21,25,51}
   wire  [15:0] _prod_plus_ma32_shl_7__0 =
     16'({1'h0,
          p0__prod_plus_ma32_shl_6_[14] & p0_mb_7,
@@ -738,33 +740,33 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
          p0__prod_plus_ma32_shl_6_[2] ? p0_prod_3[2] | p0_mb_7 : p0_prod_3[2] & ~p0_mb_7,
          p0__prod_plus_ma32_shl_6_[1] ? p0_prod_3[1] | p0_mb_7 : p0_prod_3[1] & ~p0_mb_7,
          p0__prod_plus_ma32_shl_6_[0] ? p0_prod_3[0] | p0_mb_7 : p0_prod_3[0] & ~p0_mb_7}
-        + p0__ma32_shl_7__1);	// swiglu.k:99:9, :163:21, :164:51
+        + p0__ma32_shl_7__1);	// swiglu.k:101:9, :165:21, :166:51
   wire  [15:0] r_exp_0 =
     _prod_plus_ma32_shl_7__0[15]
       ? p0__a_exp_plus_b_exp_minus_127_plus_1__2
-      : p0__a_exp_plus_b_exp_minus_127__2;	// swiglu.k:99:9, :164:{21,51}, :167:21
-  wire         _GEN_3 = r_exp_0 < 16'hFF & (|r_exp_0);	// swiglu.k:152:{21,37,38,53}, :167:21, :169:{34,47}, :174:{34,47}, :177:{21,25,31,44}, :179:{34,49,51}
-  wire         _GEN_4 = ~(_prod_plus_ma32_shl_7__0[15]) & _GEN_3;	// swiglu.k:152:{21,37,38,53}, :164:{21,51}, :167:21, :169:{34,47}, :174:{34,47}, :177:{21,25}, :179:{34,49,51}
-  wire         _GEN_5 = p0__b_exp_ne_0__4 & p0__a_exp_ne_0__2;	// swiglu.k:99:9, :150:{17,21}
-  always @(posedge clk) begin	// swiglu.k:99:9
-    p0_gate_bf16 <= data_in_8[15:0];	// swiglu.k:99:9
-    p0_up_bf16 <= data_in_8[31:16];	// swiglu.k:99:9
-    if (rst)	// swiglu.k:99:9
-      p0_stage1_enable <= 1'h0;	// swiglu.k:99:9
-    else	// swiglu.k:99:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// swiglu.k:99:9
-    p0_gate_bf16_0 <= p0_gate_bf16;	// swiglu.k:99:9
-    p0_up_bf16_0 <= p0_up_bf16;	// swiglu.k:99:9
-    if (rst)	// swiglu.k:99:9
-      p0_stage2_enable <= 1'h0;	// swiglu.k:99:9
-    else	// swiglu.k:99:9
-      p0_stage2_enable <= p0_stage1_enable;	// swiglu.k:99:9
-    p0_gate_bf16_1 <= p0_gate_bf16_0;	// swiglu.k:99:9
-    p0_up_bf16_1 <= p0_up_bf16_0;	// swiglu.k:99:9
-    if (rst)	// swiglu.k:99:9
-      p0_stage3_enable <= 1'h0;	// swiglu.k:99:9
-    else	// swiglu.k:99:9
-      p0_stage3_enable <= p0_stage2_enable;	// swiglu.k:99:9
+      : p0__a_exp_plus_b_exp_minus_127__2;	// swiglu.k:101:9, :166:{21,51}, :169:21
+  wire         _GEN_3 = r_exp_0 < 16'hFF & (|r_exp_0);	// swiglu.k:154:{21,37,38,53}, :169:21, :171:{34,47}, :176:{34,47}, :179:{21,25,31,44}, :181:{34,49,51}
+  wire         _GEN_4 = ~(_prod_plus_ma32_shl_7__0[15]) & _GEN_3;	// swiglu.k:154:{21,37,38,53}, :166:{21,51}, :169:21, :171:{34,47}, :176:{34,47}, :179:{21,25}, :181:{34,49,51}
+  wire         _GEN_5 = p0__b_exp_ne_0__4 & p0__a_exp_ne_0__2;	// swiglu.k:101:9, :152:{17,21}
+  always @(posedge clk) begin	// swiglu.k:101:9
+    p0_gate_bf16 <= data_in_8[15:0];	// swiglu.k:101:9
+    p0_up_bf16 <= data_in_8[31:16];	// swiglu.k:101:9
+    if (rst)	// swiglu.k:101:9
+      p0_stage1_enable <= 1'h0;	// swiglu.k:101:9
+    else	// swiglu.k:101:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// swiglu.k:101:9
+    p0_gate_bf16_0 <= p0_gate_bf16;	// swiglu.k:101:9
+    p0_up_bf16_0 <= p0_up_bf16;	// swiglu.k:101:9
+    if (rst)	// swiglu.k:101:9
+      p0_stage2_enable <= 1'h0;	// swiglu.k:101:9
+    else	// swiglu.k:101:9
+      p0_stage2_enable <= p0_stage1_enable;	// swiglu.k:101:9
+    p0_gate_bf16_1 <= p0_gate_bf16_0;	// swiglu.k:101:9
+    p0_up_bf16_1 <= p0_up_bf16_0;	// swiglu.k:101:9
+    if (rst)	// swiglu.k:101:9
+      p0_stage3_enable <= 1'h0;	// swiglu.k:101:9
+    else	// swiglu.k:101:9
+      p0_stage3_enable <= p0_stage2_enable;	// swiglu.k:101:9
     p0__prod_plus_ma32_shl_4_ <=
       13'({1'h0,
            prod_27,
@@ -778,8 +780,8 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
            prod_35,
            prod_36,
            prod_37,
-           prod_38} + {2'h1, p0_gate_bf16_1[6:0], 4'h0});	// swiglu.k:99:9, :121:{21,25}, :122:{51,58}
-    p0_mb <= memory_read_data_in_9_2_0[5:0];	// swiglu.k:99:9
+           prod_38} + {2'h1, p0_gate_bf16_1[6:0], 4'h0});	// swiglu.k:101:9, :123:{21,25}, :124:{51,58}
+    p0_mb <= memory_read_data_in_9_2_0[5:0];	// swiglu.k:101:9
     p0_prod <=
       {prod_27,
        prod_28,
@@ -792,41 +794,41 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
        prod_35,
        prod_36,
        prod_37,
-       prod_38};	// swiglu.k:99:9, :121:{21,25}
-    p0__ma32_shl_5_ <= {2'h1, p0_gate_bf16_1[6:0], 5'h0};	// swiglu.k:99:9, :123:58
-    p0__ma32_shl_6_ <= {2'h1, p0_gate_bf16_1[6:0], 6'h0};	// swiglu.k:99:9, :124:58
-    p0_mb_0 <= memory_read_data_in_9_2_0[6];	// swiglu.k:99:9, :115:{21,33}
-    p0__ma32_shl_7_ <= {2'h1, p0_gate_bf16_1[6:0], 7'h0};	// swiglu.k:99:9, :125:58
-    p0__a_exp_plus_b_exp_minus_127_plus_1_ <= 16'(_a_exp_plus_b_exp_ - 16'h7E);	// swiglu.k:99:9, :131:{33,39,47}, :136:39
-    p0__a_exp_plus_b_exp_minus_127_ <= 16'(_a_exp_plus_b_exp_ - 16'h7F);	// swiglu.k:99:9, :131:39, :136:{33,39}
-    p0_memory_read_data_in_9_2 <= memory_read_data_in_9_2_0;	// swiglu.k:99:9
-    p0_gate_bf16_2 <= p0_gate_bf16_1;	// swiglu.k:99:9
-    p0__b_exp_ne_0_ <= |(memory_read_data_in_9_2_0[14:7]);	// swiglu.k:99:9, :110:{17,32}, :111:41
-    p0__a_exp_ne_0_ <= |(p0_gate_bf16_1[14:7]);	// swiglu.k:99:9, :109:{17,32}, :111:27
-    p0_mb_1 <= p0_up_bf16_1[5:0];	// swiglu.k:99:9
-    p0_b_exp <= {8'h0, p0_up_bf16_1[14:7]};	// swiglu.k:99:9, :149:{17,32}
-    p0_mb_2 <= p0_up_bf16_1[6];	// swiglu.k:99:9, :154:{21,33}
-    p0__b_exp_ne_0__0 <= |(p0_up_bf16_1[14:7]);	// swiglu.k:99:9, :149:{17,32}, :150:41
-    if (rst)	// swiglu.k:99:9
-      p0_stage4_enable <= 1'h0;	// swiglu.k:99:9
-    else	// swiglu.k:99:9
-      p0_stage4_enable <= p0_stage3_enable;	// swiglu.k:99:9
-    p0_prod_0 <= _prod_plus_ma32_shl_7_[15];	// swiglu.k:99:9, :125:{21,51}
-    p0__a_exp_plus_b_exp_minus_127_plus_1__0 <= p0__a_exp_plus_b_exp_minus_127_plus_1_;	// swiglu.k:99:9
-    p0__a_exp_plus_b_exp_minus_127__0 <= p0__a_exp_plus_b_exp_minus_127_;	// swiglu.k:99:9
-    p0_memory_read_data_in_9_2_0 <= p0_memory_read_data_in_9_2;	// swiglu.k:99:9
-    p0_gate_bf16_3 <= p0_gate_bf16_2;	// swiglu.k:99:9
-    p0_prod_1 <= _prod_plus_ma32_shl_7_[14:0];	// swiglu.k:99:9, :125:51
-    p0__b_exp_ne_0__1 <= p0__b_exp_ne_0_;	// swiglu.k:99:9
-    p0__a_exp_ne_0__0 <= p0__a_exp_ne_0_;	// swiglu.k:99:9
-    p0_mb_3 <= p0_mb_1;	// swiglu.k:99:9
-    p0_b_exp_0 <= p0_b_exp;	// swiglu.k:99:9
-    p0_mb_4 <= p0_mb_2;	// swiglu.k:99:9
-    p0__b_exp_ne_0__2 <= p0__b_exp_ne_0__0;	// swiglu.k:99:9
-    if (rst)	// swiglu.k:99:9
-      p0_stage5_enable <= 1'h0;	// swiglu.k:99:9
-    else	// swiglu.k:99:9
-      p0_stage5_enable <= p0_stage4_enable;	// swiglu.k:99:9
+       prod_38};	// swiglu.k:101:9, :123:{21,25}
+    p0__ma32_shl_5_ <= {2'h1, p0_gate_bf16_1[6:0], 5'h0};	// swiglu.k:101:9, :125:58
+    p0__ma32_shl_6_ <= {2'h1, p0_gate_bf16_1[6:0], 6'h0};	// swiglu.k:101:9, :126:58
+    p0_mb_0 <= memory_read_data_in_9_2_0[6];	// swiglu.k:101:9, :117:{21,33}
+    p0__ma32_shl_7_ <= {2'h1, p0_gate_bf16_1[6:0], 7'h0};	// swiglu.k:101:9, :127:58
+    p0__a_exp_plus_b_exp_minus_127_plus_1_ <= 16'(_a_exp_plus_b_exp_ - 16'h7E);	// swiglu.k:101:9, :133:{33,39,47}, :138:39
+    p0__a_exp_plus_b_exp_minus_127_ <= 16'(_a_exp_plus_b_exp_ - 16'h7F);	// swiglu.k:101:9, :133:39, :138:{33,39}
+    p0_memory_read_data_in_9_2 <= memory_read_data_in_9_2_0;	// swiglu.k:101:9
+    p0_gate_bf16_2 <= p0_gate_bf16_1;	// swiglu.k:101:9
+    p0__b_exp_ne_0_ <= |(memory_read_data_in_9_2_0[14:7]);	// swiglu.k:101:9, :112:{17,32}, :113:41
+    p0__a_exp_ne_0_ <= |(p0_gate_bf16_1[14:7]);	// swiglu.k:101:9, :111:{17,32}, :113:27
+    p0_mb_1 <= p0_up_bf16_1[5:0];	// swiglu.k:101:9
+    p0_b_exp <= {8'h0, p0_up_bf16_1[14:7]};	// swiglu.k:101:9, :151:{17,32}
+    p0_mb_2 <= p0_up_bf16_1[6];	// swiglu.k:101:9, :156:{21,33}
+    p0__b_exp_ne_0__0 <= |(p0_up_bf16_1[14:7]);	// swiglu.k:101:9, :151:{17,32}, :152:41
+    if (rst)	// swiglu.k:101:9
+      p0_stage4_enable <= 1'h0;	// swiglu.k:101:9
+    else	// swiglu.k:101:9
+      p0_stage4_enable <= p0_stage3_enable;	// swiglu.k:101:9
+    p0_prod_0 <= _prod_plus_ma32_shl_7_[15];	// swiglu.k:101:9, :127:{21,51}
+    p0__a_exp_plus_b_exp_minus_127_plus_1__0 <= p0__a_exp_plus_b_exp_minus_127_plus_1_;	// swiglu.k:101:9
+    p0__a_exp_plus_b_exp_minus_127__0 <= p0__a_exp_plus_b_exp_minus_127_;	// swiglu.k:101:9
+    p0_memory_read_data_in_9_2_0 <= p0_memory_read_data_in_9_2;	// swiglu.k:101:9
+    p0_gate_bf16_3 <= p0_gate_bf16_2;	// swiglu.k:101:9
+    p0_prod_1 <= _prod_plus_ma32_shl_7_[14:0];	// swiglu.k:101:9, :127:51
+    p0__b_exp_ne_0__1 <= p0__b_exp_ne_0_;	// swiglu.k:101:9
+    p0__a_exp_ne_0__0 <= p0__a_exp_ne_0_;	// swiglu.k:101:9
+    p0_mb_3 <= p0_mb_1;	// swiglu.k:101:9
+    p0_b_exp_0 <= p0_b_exp;	// swiglu.k:101:9
+    p0_mb_4 <= p0_mb_2;	// swiglu.k:101:9
+    p0__b_exp_ne_0__2 <= p0__b_exp_ne_0__0;	// swiglu.k:101:9
+    if (rst)	// swiglu.k:101:9
+      p0_stage5_enable <= 1'h0;	// swiglu.k:101:9
+    else	// swiglu.k:101:9
+      p0_stage5_enable <= p0_stage4_enable;	// swiglu.k:101:9
     p0__prod_plus_ma32_shl_2_ <=
       11'({1'h0,
            prod_73,
@@ -839,8 +841,8 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
            prod_80,
            prod_81,
            prod_82}
-          + {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 2'h0});	// swiglu.k:99:9, :111:{17,21}, :158:{21,25}, :159:{51,58}
-    p0_mb_5 <= p0_mb_3;	// swiglu.k:99:9
+          + {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 2'h0});	// swiglu.k:101:9, :113:{17,21}, :160:{21,25}, :161:{51,58}
+    p0_mb_5 <= p0_mb_3;	// swiglu.k:101:9
     p0_prod_2 <=
       {prod_73,
        prod_74,
@@ -851,20 +853,20 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
        prod_79,
        prod_80,
        prod_81,
-       prod_82};	// swiglu.k:99:9, :158:{21,25}
+       prod_82};	// swiglu.k:101:9, :160:{21,25}
     p0__ma32_shl_3_ <=
-      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 3'h0};	// swiglu.k:99:9, :111:{17,21}, :160:58
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 3'h0};	// swiglu.k:101:9, :113:{17,21}, :162:58
     p0__ma32_shl_4_ <=
-      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 4'h0};	// swiglu.k:99:9, :111:{17,21}, :161:58
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 4'h0};	// swiglu.k:101:9, :113:{17,21}, :163:58
     p0__ma32_shl_5__0 <=
-      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 5'h0};	// swiglu.k:99:9, :111:{17,21}, :162:58
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 5'h0};	// swiglu.k:101:9, :113:{17,21}, :164:58
     p0__ma32_shl_6__0 <=
-      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 6'h0};	// swiglu.k:99:9, :111:{17,21}, :163:58
-    p0_mb_6 <= p0_mb_4;	// swiglu.k:99:9
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 6'h0};	// swiglu.k:101:9, :113:{17,21}, :165:58
+    p0_mb_6 <= p0_mb_4;	// swiglu.k:101:9
     p0__ma32_shl_7__0 <=
-      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 7'h0};	// swiglu.k:99:9, :111:{17,21}, :164:58
-    p0__a_exp_plus_b_exp_minus_127_plus_1__1 <= 16'(_a_exp_plus_b_exp__0 - 16'h7E);	// swiglu.k:99:9, :170:{33,39,47}, :175:39
-    p0__a_exp_plus_b_exp_minus_127__1 <= 16'(_a_exp_plus_b_exp__0 - 16'h7F);	// swiglu.k:99:9, :170:39, :175:{33,39}
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 7'h0};	// swiglu.k:101:9, :113:{17,21}, :166:58
+    p0__a_exp_plus_b_exp_minus_127_plus_1__1 <= 16'(_a_exp_plus_b_exp__0 - 16'h7E);	// swiglu.k:101:9, :172:{33,39,47}, :177:39
+    p0__a_exp_plus_b_exp_minus_127__1 <= 16'(_a_exp_plus_b_exp__0 - 16'h7F);	// swiglu.k:101:9, :172:39, :177:{33,39}
     p0_silu <=
       {(r_exp[8]
           ? _GEN_0
@@ -885,13 +887,13 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
        silu_10,
        silu_11,
        silu_12,
-       silu_13};	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}
-    p0__b_exp_ne_0__3 <= p0__b_exp_ne_0__2;	// swiglu.k:99:9
-    p0__a_exp_ne_0__1 <= |{silu, silu_0, silu_1, silu_2, silu_3, silu_4, silu_5, silu_6};	// swiglu.k:99:9, :111:{17,21}, :113:{21,37,38,58}, :128:21, :130:{34,47}, :135:{34,47}, :138:{21,25}, :140:{32,47,49}, :148:{17,32}, :150:27
-    if (rst)	// swiglu.k:99:9
-      p0_stage6_enable <= 1'h0;	// swiglu.k:99:9
-    else	// swiglu.k:99:9
-      p0_stage6_enable <= p0_stage5_enable;	// swiglu.k:99:9
+       silu_13};	// swiglu.k:101:9, :113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}
+    p0__b_exp_ne_0__3 <= p0__b_exp_ne_0__2;	// swiglu.k:101:9
+    p0__a_exp_ne_0__1 <= |{silu, silu_0, silu_1, silu_2, silu_3, silu_4, silu_5, silu_6};	// swiglu.k:101:9, :113:{17,21}, :115:{21,37,38,58}, :130:21, :132:{34,47}, :137:{34,47}, :140:{21,25}, :142:{32,47,49}, :150:{17,32}, :152:27
+    if (rst)	// swiglu.k:101:9
+      p0_stage6_enable <= 1'h0;	// swiglu.k:101:9
+    else	// swiglu.k:101:9
+      p0_stage6_enable <= p0_stage5_enable;	// swiglu.k:101:9
     p0__prod_plus_ma32_shl_6_ <=
       15'({1'h0,
            prod_119,
@@ -907,8 +909,8 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
            prod_129,
            prod_130,
            prod_131,
-           prod_132} + p0__ma32_shl_6__0);	// swiglu.k:99:9, :162:{21,25}, :163:51
-    p0_mb_7 <= p0_mb_6;	// swiglu.k:99:9
+           prod_132} + p0__ma32_shl_6__0);	// swiglu.k:101:9, :164:{21,25}, :165:51
+    p0_mb_7 <= p0_mb_6;	// swiglu.k:101:9
     p0_prod_3 <=
       {prod_119,
        prod_120,
@@ -923,18 +925,18 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
        prod_129,
        prod_130,
        prod_131,
-       prod_132};	// swiglu.k:99:9, :162:{21,25}
-    p0__ma32_shl_7__1 <= p0__ma32_shl_7__0;	// swiglu.k:99:9
-    p0__a_exp_plus_b_exp_minus_127_plus_1__2 <= p0__a_exp_plus_b_exp_minus_127_plus_1__1;	// swiglu.k:99:9
-    p0__a_exp_plus_b_exp_minus_127__2 <= p0__a_exp_plus_b_exp_minus_127__1;	// swiglu.k:99:9
-    p0_up_bf16_2 <= data_prop_out_7_0;	// swiglu.k:99:9
-    p0_silu_0 <= p0_silu;	// swiglu.k:99:9
-    p0__b_exp_ne_0__4 <= p0__b_exp_ne_0__3;	// swiglu.k:99:9
-    p0__a_exp_ne_0__2 <= p0__a_exp_ne_0__1;	// swiglu.k:99:9
-    if (rst)	// swiglu.k:99:9
-      p0_stage7_enable <= 1'h0;	// swiglu.k:99:9
-    else	// swiglu.k:99:9
-      p0_stage7_enable <= p0_stage6_enable;	// swiglu.k:99:9
+       prod_132};	// swiglu.k:101:9, :164:{21,25}
+    p0__ma32_shl_7__1 <= p0__ma32_shl_7__0;	// swiglu.k:101:9
+    p0__a_exp_plus_b_exp_minus_127_plus_1__2 <= p0__a_exp_plus_b_exp_minus_127_plus_1__1;	// swiglu.k:101:9
+    p0__a_exp_plus_b_exp_minus_127__2 <= p0__a_exp_plus_b_exp_minus_127__1;	// swiglu.k:101:9
+    p0_up_bf16_2 <= data_prop_out_7_0;	// swiglu.k:101:9
+    p0_silu_0 <= p0_silu;	// swiglu.k:101:9
+    p0__b_exp_ne_0__4 <= p0__b_exp_ne_0__3;	// swiglu.k:101:9
+    p0__a_exp_ne_0__2 <= p0__a_exp_ne_0__1;	// swiglu.k:101:9
+    if (rst)	// swiglu.k:101:9
+      p0_stage7_enable <= 1'h0;	// swiglu.k:101:9
+    else	// swiglu.k:101:9
+      p0_stage7_enable <= p0_stage6_enable;	// swiglu.k:101:9
     p0_result <=
       {(r_exp_0[8]
           ? _GEN_3
@@ -968,25 +970,30 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
           : _prod_plus_ma32_shl_7__0[8] & _GEN_4) & _GEN_5,
        (_prod_plus_ma32_shl_7__0[8]
           ? (_prod_plus_ma32_shl_7__0[7] | _prod_plus_ma32_shl_7__0[15]) & _GEN_3
-          : _prod_plus_ma32_shl_7__0[7] & _GEN_4) & _GEN_5};	// swiglu.k:99:9, :150:{17,21}, :152:{21,37,38,53}, :164:{21,51}, :167:21, :169:{34,47}, :174:{34,47}, :177:{21,25}, :179:{34,49,51}
-    if (rst)	// swiglu.k:99:9
-      p0_stage8_enable <= 1'h0;	// swiglu.k:99:9
-    else	// swiglu.k:99:9
-      p0_stage8_enable <= p0_stage7_enable;	// swiglu.k:99:9
-    p0_result_0 <= p0_result;	// swiglu.k:99:9
-    if (rst)	// swiglu.k:99:9
-      p0_stage9_enable <= 1'h0;	// swiglu.k:99:9
-    else	// swiglu.k:99:9
-      p0_stage9_enable <= p0_stage8_enable;	// swiglu.k:99:9
-    p0_result_1 <= p0_result_0;	// swiglu.k:99:9
-    if (rst)	// swiglu.k:99:9
-      p0_stage10_enable <= 1'h0;	// swiglu.k:99:9
-    else	// swiglu.k:99:9
-      p0_stage10_enable <= p0_stage9_enable;	// swiglu.k:99:9
+          : _prod_plus_ma32_shl_7__0[7] & _GEN_4) & _GEN_5};	// swiglu.k:101:9, :152:{17,21}, :154:{21,37,38,53}, :166:{21,51}, :169:21, :171:{34,47}, :176:{34,47}, :179:{21,25}, :181:{34,49,51}
+    if (rst)	// swiglu.k:101:9
+      p0_stage8_enable <= 1'h0;	// swiglu.k:101:9
+    else	// swiglu.k:101:9
+      p0_stage8_enable <= p0_stage7_enable;	// swiglu.k:101:9
+    p0_result_0 <= p0_result;	// swiglu.k:101:9
+    if (rst)	// swiglu.k:101:9
+      p0_stage9_enable <= 1'h0;	// swiglu.k:101:9
+    else	// swiglu.k:101:9
+      p0_stage9_enable <= p0_stage8_enable;	// swiglu.k:101:9
+    p0_result_1 <= p0_result_0;	// swiglu.k:101:9
+    if (rst)	// swiglu.k:101:9
+      p0_stage10_enable <= 1'h0;	// swiglu.k:101:9
+    else	// swiglu.k:101:9
+      p0_stage10_enable <= p0_stage9_enable;	// swiglu.k:101:9
+    p0_result_2 <= p0_result_1;	// swiglu.k:101:9
+    if (rst)	// swiglu.k:101:9
+      p0_stage11_enable <= 1'h0;	// swiglu.k:101:9
+    else	// swiglu.k:101:9
+      p0_stage11_enable <= p0_stage10_enable;	// swiglu.k:101:9
   end // always @(posedge)
-  always_comb begin	// swiglu.k:99:9
-    fifo_wren_0_0 = p0_stage10_enable;	// swiglu.k:97:5, :99:9
-    fifo_data_out_0_0 = p0_result_1;	// swiglu.k:97:5, :99:9
+  always_comb begin	// swiglu.k:101:9
+    fifo_wren_0_0 = p0_stage11_enable;	// swiglu.k:99:5, :101:9
+    fifo_data_out_0_0 = p0_result_2;	// swiglu.k:99:5, :101:9
   end // always_comb
   KanagawaFixedDelayFifo #(
     .WIDTH(16),
@@ -994,18 +1001,18 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
     .USE_LUTRAM(1),
     .DEVICE_FAMILY("mock"),
     .USE_DSP(0)
-  ) delay_fifo_7_compute_swiglu_Propagation (	// swiglu.k:99:9
-    .clk      (clk),	// swiglu.k:99:9
-    .rst      (rst),	// swiglu.k:99:9
-    .data_in  (data_prop_in_7_0),	// swiglu.k:99:9
+  ) delay_fifo_7_compute_swiglu_Propagation (	// swiglu.k:101:9
+    .clk      (clk),	// swiglu.k:101:9
+    .rst      (rst),	// swiglu.k:101:9
+    .data_in  (data_prop_in_7_0),	// swiglu.k:101:9
     .data_out (data_prop_out_7_0)
-  );	// swiglu.k:99:9
+  );	// swiglu.k:101:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// swiglu.k:99:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// swiglu.k:101:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -1013,29 +1020,29 @@ module swiglu_unit_compute_swiglu_BasicBlock_0(	// swiglu.k:99:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// swiglu.k:99:9
+    .data_in  (~fifo_overflow_in_0),	// swiglu.k:101:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  swiglu_unitDebugView_compute_swigluEntry swiglu_unitDebugView_compute_swigluEntry_instance (	// swiglu.k:97:5
-    .clk        (clk),	// swiglu.k:97:5
-    ._gate_bf16 (p0_stage1_enable ? p0_gate_bf16 : 'x),	// swiglu.k:97:5, :99:9
-    ._up_bf16   (p0_stage1_enable ? p0_up_bf16 : 'x),	// swiglu.k:97:5, :99:9
-    .valid      (p0_stage1_enable),	// swiglu.k:99:9
+  swiglu_unitDebugView_compute_swigluEntry swiglu_unitDebugView_compute_swigluEntry_instance (	// swiglu.k:99:5
+    .clk        (clk),	// swiglu.k:99:5
+    ._gate_bf16 (p0_stage1_enable ? p0_gate_bf16 : 'x),	// swiglu.k:99:5, :101:9
+    ._up_bf16   (p0_stage1_enable ? p0_up_bf16 : 'x),	// swiglu.k:99:5, :101:9
+    .valid      (p0_stage1_enable),	// swiglu.k:101:9
     .valid_out  (/* unused */)
-  );	// swiglu.k:97:5
-  swiglu_unitDebugView_compute_swigluExit swiglu_unitDebugView_compute_swigluExit_instance (	// swiglu.k:97:5
-    .clk          (clk),	// swiglu.k:97:5
-    ._ReturnValue (p0_stage9_enable ? p0_result_0 : 'x),	// swiglu.k:97:5, :99:9
-    .valid        (p0_stage9_enable),	// swiglu.k:99:9
+  );	// swiglu.k:99:5
+  swiglu_unitDebugView_compute_swigluExit swiglu_unitDebugView_compute_swigluExit_instance (	// swiglu.k:99:5
+    .clk          (clk),	// swiglu.k:99:5
+    ._ReturnValue (p0_stage10_enable ? p0_result_1 : 'x),	// swiglu.k:99:5, :101:9
+    .valid        (p0_stage10_enable),	// swiglu.k:101:9
     .valid_out    (/* unused */)
-  );	// swiglu.k:97:5
-  assign done_out = p0_stage10_enable;	// swiglu.k:99:9
-  assign memory_read_addr_out_9_2 = memory_read_addr_out_9_2_0;	// swiglu.k:99:9
-  assign memory_rden_out_9_2 = memory_rden_out_9_2_0;	// swiglu.k:99:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// swiglu.k:99:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// swiglu.k:99:9
-  assign input_rdy_0 = input_rdy_0_0;	// swiglu.k:99:9
-  assign control_state_out = control_state_out_0;	// swiglu.k:99:9
+  );	// swiglu.k:99:5
+  assign done_out = p0_stage11_enable;	// swiglu.k:101:9
+  assign memory_read_addr_out_9_2 = memory_read_addr_out_9_2_0;	// swiglu.k:101:9
+  assign memory_rden_out_9_2 = memory_rden_out_9_2_0;	// swiglu.k:101:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// swiglu.k:101:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// swiglu.k:101:9
+  assign input_rdy_0 = input_rdy_0_0;	// swiglu.k:101:9
+  assign control_state_out = control_state_out_0;	// swiglu.k:101:9
 endmodule
 
 module swiglu_unit_compute_silu_BasicBlock_0(	// swiglu.k:43:9
@@ -1872,11 +1879,11 @@ module swiglu_unit(
   output wire        stall_rate_supported_out
 );
 
-  wire [7:0]  _compute_swiglu_BasicBlock_0Impl_memory_read_addr_out_9_2;	// swiglu.k:99:9
-  wire        _compute_swiglu_BasicBlock_0Impl_memory_rden_out_9_2;	// swiglu.k:99:9
-  wire [15:0] _compute_swiglu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:99:9
-  wire        _compute_swiglu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:99:9
-  wire        _compute_swiglu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:99:9
+  wire [7:0]  _compute_swiglu_BasicBlock_0Impl_memory_read_addr_out_9_2;	// swiglu.k:101:9
+  wire        _compute_swiglu_BasicBlock_0Impl_memory_rden_out_9_2;	// swiglu.k:101:9
+  wire [15:0] _compute_swiglu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:101:9
+  wire        _compute_swiglu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:101:9
+  wire        _compute_swiglu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:101:9
   wire [7:0]  _compute_silu_BasicBlock_0Impl_memory_read_addr_out_9_1;	// swiglu.k:43:9
   wire        _compute_silu_BasicBlock_0Impl_memory_rden_out_9_1;	// swiglu.k:43:9
   wire [15:0] _compute_silu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:43:9
@@ -2099,9 +2106,9 @@ module swiglu_unit(
     fifo_data_2.data_in = _compute_silu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:43:9
     fifo_data_2.wren = _compute_silu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:43:9
     passthrough_data_6.rdy_int = _compute_silu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:43:9
-    fifo_data_3.data_in = _compute_swiglu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:99:9
-    fifo_data_3.wren = _compute_swiglu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:99:9
-    passthrough_data_8.rdy_int = _compute_swiglu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:99:9
+    fifo_data_3.data_in = _compute_swiglu_BasicBlock_0Impl_fifo_data_out_0;	// swiglu.k:101:9
+    fifo_data_3.wren = _compute_swiglu_BasicBlock_0Impl_fifo_wren_0;	// swiglu.k:101:9
+    passthrough_data_8.rdy_int = _compute_swiglu_BasicBlock_0Impl_input_rdy_0;	// swiglu.k:101:9
   end // always_comb
 
   assign has_startup_completed_raw = 1'b1;
@@ -2110,7 +2117,7 @@ module swiglu_unit(
     .WIDTH(8),
     .DELAY_CYCLES(3),
     .FAN_OUT_LEVELS(1),
-    .HOLD_CYCLES(26),
+    .HOLD_CYCLES(28),
     .ADDTIONAL_LATENCY(1),
     .INIT_VAL(1)
   ) reset_control (
@@ -2129,8 +2136,8 @@ module swiglu_unit(
     .read_addr_in_0  (_lookup_sigmoid_BasicBlock_0Impl_memory_read_addr_out_9_0),	// swiglu.k:28:9
     .rden_in_1       (_compute_silu_BasicBlock_0Impl_memory_rden_out_9_1),	// swiglu.k:43:9
     .read_addr_in_1  (_compute_silu_BasicBlock_0Impl_memory_read_addr_out_9_1),	// swiglu.k:43:9
-    .rden_in_2       (_compute_swiglu_BasicBlock_0Impl_memory_rden_out_9_2),	// swiglu.k:99:9
-    .read_addr_in_2  (_compute_swiglu_BasicBlock_0Impl_memory_read_addr_out_9_2),	// swiglu.k:99:9
+    .rden_in_2       (_compute_swiglu_BasicBlock_0Impl_memory_rden_out_9_2),	// swiglu.k:101:9
+    .read_addr_in_2  (_compute_swiglu_BasicBlock_0Impl_memory_read_addr_out_9_2),	// swiglu.k:101:9
     .wren_in_0       (_set_sigmoid_lut_BasicBlock_0Impl_memory_wren_9_0),	// swiglu.k:19:9
     .write_addr_in_0 (_set_sigmoid_lut_BasicBlock_0Impl_memory_write_addr_out_9_0),	// swiglu.k:19:9
     .write_data_in_0 (_set_sigmoid_lut_BasicBlock_0Impl_memory_write_data_out_9_0),	// swiglu.k:19:9
@@ -2253,7 +2260,7 @@ module swiglu_unit(
     .MIN_WRITE_DELAY(0),
     .AUTO_PIPELINE_GROUP("fifo_3_compute_swiglu_Return"),
     .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(11),
+    .ALMOSTFULL_ENTRIES(12),
     .USE_LUTRAM(1)
   ) fifo_3_compute_swiglu_Return (
     .clock         (clk),
@@ -2320,9 +2327,9 @@ module swiglu_unit(
     .input_valid_0             (passthrough_data_6.valid),	// swiglu.k:43:9
     .control_state_out         (/* unused */)
   );	// swiglu.k:43:9
-  swiglu_unit_compute_swiglu_BasicBlock_0 compute_swiglu_BasicBlock_0Impl (	// swiglu.k:99:9
-    .clk                       (clk),	// swiglu.k:99:9
-    .rst                       (reg_rst_delayed[7]),	// swiglu.k:99:9
+  swiglu_unit_compute_swiglu_BasicBlock_0 compute_swiglu_BasicBlock_0Impl (	// swiglu.k:101:9
+    .clk                       (clk),	// swiglu.k:101:9
+    .rst                       (reg_rst_delayed[7]),	// swiglu.k:101:9
     .done_out                  (/* unused */),
     .memory_read_data_in_9_2   (__sigmoid_lut_read_data_out_2),	// swiglu.k:13:5
     .memory_read_addr_out_9_2
@@ -2330,14 +2337,14 @@ module swiglu_unit(
     .memory_rden_out_9_2       (_compute_swiglu_BasicBlock_0Impl_memory_rden_out_9_2),
     .fifo_data_out_0           (_compute_swiglu_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_compute_swiglu_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_3.almost_full),	// swiglu.k:99:9
-    .fifo_overflow_in_0        (fifo_data_3.overflow),	// swiglu.k:99:9
-    .data_in_8                 (passthrough_data_8.data),	// swiglu.k:99:9
-    .input_fifo_underflow_0    (passthrough_data_8.underflow),	// swiglu.k:99:9
+    .fifo_almost_full_in_raw_0 (fifo_data_3.almost_full),	// swiglu.k:101:9
+    .fifo_overflow_in_0        (fifo_data_3.overflow),	// swiglu.k:101:9
+    .data_in_8                 (passthrough_data_8.data),	// swiglu.k:101:9
+    .input_fifo_underflow_0    (passthrough_data_8.underflow),	// swiglu.k:101:9
     .input_rdy_0               (_compute_swiglu_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_8.valid),	// swiglu.k:99:9
+    .input_valid_0             (passthrough_data_8.valid),	// swiglu.k:101:9
     .control_state_out         (/* unused */)
-  );	// swiglu.k:99:9
+  );	// swiglu.k:101:9
   assign rst_and_startup_done_out = rst_and_startup_done_out_net;
   assign set_sigmoid_lut_rdy_out = set_sigmoid_lut_rdy_out_net;
   assign set_sigmoid_lut_empty_out = set_sigmoid_lut_empty_out_net;

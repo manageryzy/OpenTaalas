@@ -942,7 +942,7 @@
                     "width": 1
                 },
                 {
-                    "name": "data_in_31",
+                    "name": "data_in_32",
                     "width": 32
                 },
                 {
@@ -998,7 +998,7 @@
                     "width": 1
                 },
                 {
-                    "name": "data_in_32",
+                    "name": "data_in_33",
                     "width": 44
                 },
                 {
@@ -1054,7 +1054,7 @@
                     "width": 1
                 },
                 {
-                    "name": "data_in_33",
+                    "name": "data_in_34",
                     "width": 32
                 },
                 {
@@ -1272,15 +1272,15 @@
             "name": "underflow"
         },
         {
-            "container": "passthrough_data_31",
-            "name": "underflow"
-        },
-        {
             "container": "passthrough_data_32",
             "name": "underflow"
         },
         {
             "container": "passthrough_data_33",
+            "name": "underflow"
+        },
+        {
+            "container": "passthrough_data_34",
             "name": "underflow"
         }
     ],

@@ -90,14 +90,16 @@ public:
 
     // Compute SwiGLU: SiLU(gate) * up
     // = gate * sigmoid(gate) * up
-    // [[schedule(7)]] gives 7 pipeline stages: lookup + two 3-deep BF16 multipliers.
-    // Without this, all logic is forced into 1 cycle (~17.5 ns crit path at sky130).
-    // Tried [[schedule(9)]] — same WNS (-1.42 vs -1.41), more registers.
-    // Residual WNS is routing/reg overhead, not logic depth.
+    // [[schedule(8)]] is the post-v5 sweet spot. Was schedule(7) pre-v5; the new
+    // sram_256x16 macro adds 1 cycle of read latency, so we add one stage.
+    // Tested s8 (-2.36 ns) vs s7 (-2.40 ns) vs s9 (-2.57 ns regressed) — s8 wins
+    // by 0.04 ns. The SyncRam latency cost cannot be recovered by retiming alone;
+    // 1 ns of slack is permanently lost vs the pre-v5 -1.42 ns. Trade-off accepted
+    // for the 64% cell area win.
     uint16 compute_swiglu(uint16 gate_bf16, uint16 up_bf16)
     {
         uint16 result;
-        [[schedule(7)]]
+        [[schedule(8)]]
         {
             // Step 1: sigmoid LUT lookup
             uint8 index = cast<uint8>(gate_bf16 >> 8);

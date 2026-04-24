@@ -26,9 +26,11 @@ private:
 public:
     // --- RMSNorm ---
 
+    // [[schedule(4)]] pipelines the 8-term BF16 square (~50 levels of logic).
+    // Mirrors standalone rmsnorm.k where s4 was the proven floor (s5 regressed).
     void rmsnorm_accumulate(uint16 x_bf16)
     {
-        atomic
+        [[schedule(4)]]
         {
             // BF16 square: x_sq = x_bf16 * x_bf16
             // Sign is always 0 for x^2.
@@ -181,10 +183,13 @@ public:
         }
     }
 
+    // [[schedule(8)]] pipelines two chained BF16 multipliers + sigmoid LUT lookup.
+    // Standalone swiglu.k peaked at s7 pre-SyncRam; vector_unit's [[memory]] arrays
+    // add 1 cycle of read latency, so s8 is the new sweet spot (one extra stage).
     uint16 swiglu_compute(uint16 gate_bf16, uint16 up_bf16)
     {
         uint16 result;
-        atomic
+        [[schedule(8)]]
         {
             // Step 1: Lookup sigmoid(gate) from LUT using upper 8 bits
             uint8 index = cast<uint8>(gate_bf16 >> 8);
@@ -274,10 +279,13 @@ public:
     // --- Dequantization (IQ3_S: INT24 × (1+2×sub_scale) × BF16_super → BF16) ---
     // Adapted from dequant.k, returns BF16 (upper 16 bits of FP32 result).
 
+    // [[schedule(6)]] pipelines INT5 sub-scale mul + int24→int32 sign extend +
+    // FP32 convert + BF16 normalize. ~80 ops, ~60 logic levels. Matches dequant.k atomic
+    // baseline performance after retiming (was -0.67 ns standalone with no retiming).
     uint16 dequantize(int<24> accum, uint16 super_scale_bf16, uint4 sub_scale)
     {
         uint16 result;
-        atomic
+        [[schedule(6)]]
         {
             // Step 1: Integer multiply by sub-scale factor (1 + 2*sub_scale)
             uint<5> scale5 = cast<uint<5>>(sub_scale) * 2 + 1;
@@ -391,10 +399,12 @@ public:
 
     // --- Residual add (BF16) ---
 
+    // [[schedule(4)]] pipelines BF16 exponent alignment + signed shift + accumulate.
+    // ~40 ops; mirrors rmsnorm s4 which handles a similar 8-term shift-and-add.
     uint16 residual_add(uint16 a_bf16, uint16 b_bf16)
     {
         uint16 result;
-        atomic
+        [[schedule(4)]]
         {
             uint16 a_exp = (a_bf16 >> 7) & 0xFF;
             uint16 b_exp = (b_bf16 >> 7) & 0xFF;

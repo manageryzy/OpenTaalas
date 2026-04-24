@@ -18,11 +18,12 @@ private:
     [[memory]] uint32[512] _grid;
 
 public:
-    // --- MAC operation (unchanged) ---
+    // [[schedule(2)]] pipelines the 3-shift INT3×INT8 multiplier + accumulator (~30 ops).
+    // Mirrors mac_pe.k schedule(2) which recovered -3.23 → -1.71 ns (+27% fmax).
     int<24> mac_step(uint<2> pe_id, uint4 magnitude, uint<1> sign_bit, int8 activation)
     {
         int<24> result;
-        atomic
+        [[schedule(2)]]
         {
             int<24> a = cast<int<24>>(activation);
             int<24> k_val = cast<int<24>>(magnitude >> 1);

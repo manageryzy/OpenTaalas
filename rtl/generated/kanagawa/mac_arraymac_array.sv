@@ -1,6 +1,6 @@
 
 // This file was generated. Do not modify.
-// kanagawa --backend=sv --import-dir=third-party/kanagawa/library --base-library=third-party/kanagawa/library/mini-base.k --output=rtl/generated/kanagawa/mac_array rtl/kanagawa/mac_array.k
+// kanagawa --backend=sv --import-dir=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library --base-library=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library/mini-base.k --output=/home/mana/workspace/OpenTaalas/rtl/generated/kanagawa/mac_array --frequency=250 --register-ratio=8 --max-register-ratio=16 /home/mana/workspace/OpenTaalas/rtl/kanagawa/mac_array.k
 
 `default_nettype wire
 module mac_arrayDebugView_mac_stepEntry
@@ -222,7 +222,7 @@ endmodule
 `ifndef _TYPESCOPE_CoreModuleTypeScope
 `define _TYPESCOPE_CoreModuleTypeScope
 `endif // _TYPESCOPE_CoreModuleTypeScope
-module mac_array_clear_all_BasicBlock_0(	// mac_array.k:82:9
+module mac_array_clear_all_BasicBlock_0(	// mac_array.k:83:9
   input  wire       clk,
   input  wire       rst,
   output wire       done_out,
@@ -245,59 +245,59 @@ module mac_array_clear_all_BasicBlock_0(	// mac_array.k:82:9
 
   wire        _fifo_overflow_ffc_0_data_out;
   wire        _fifo_almostfull_ffc_0_data_out;
-  logic       done_out_0;	// mac_array.k:82:9
-  logic       global_out__accum_element_0_21_2_valid_0;	// mac_array.k:82:9
-  logic       global_out__accum_element_1_22_2_valid_0;	// mac_array.k:82:9
-  logic       global_out__accum_element_2_23_2_valid_0;	// mac_array.k:82:9
-  logic       global_out__accum_element_3_24_2_valid_0;	// mac_array.k:82:9
-  logic       global_out__fp32_accum_element_0_25_2_valid_0;	// mac_array.k:82:9
-  logic       global_out__fp32_accum_element_1_26_2_valid_0;	// mac_array.k:82:9
-  logic       global_out__fp32_accum_element_2_27_2_valid_0;	// mac_array.k:82:9
-  logic       global_out__fp32_accum_element_3_28_2_valid_0;	// mac_array.k:82:9
-  logic       fifo_wren_0_0;	// mac_array.k:82:9
-  logic       input_rdy_0_0;	// mac_array.k:82:9
-  logic [7:0] control_state_out_0;	// mac_array.k:82:9
-  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:82:9
-  always_comb begin	// mac_array.k:82:9
-    input_rdy_0_0 = _GEN;	// mac_array.k:82:9
+  logic       done_out_0;	// mac_array.k:83:9
+  logic       global_out__accum_element_0_21_2_valid_0;	// mac_array.k:83:9
+  logic       global_out__accum_element_1_22_2_valid_0;	// mac_array.k:83:9
+  logic       global_out__accum_element_2_23_2_valid_0;	// mac_array.k:83:9
+  logic       global_out__accum_element_3_24_2_valid_0;	// mac_array.k:83:9
+  logic       global_out__fp32_accum_element_0_25_2_valid_0;	// mac_array.k:83:9
+  logic       global_out__fp32_accum_element_1_26_2_valid_0;	// mac_array.k:83:9
+  logic       global_out__fp32_accum_element_2_27_2_valid_0;	// mac_array.k:83:9
+  logic       global_out__fp32_accum_element_3_28_2_valid_0;	// mac_array.k:83:9
+  logic       fifo_wren_0_0;	// mac_array.k:83:9
+  logic       input_rdy_0_0;	// mac_array.k:83:9
+  logic [7:0] control_state_out_0;	// mac_array.k:83:9
+  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:83:9
+  always_comb begin	// mac_array.k:83:9
+    input_rdy_0_0 = _GEN;	// mac_array.k:83:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_array.k:82:9
+       ~input_valid_0};	// mac_array.k:83:9
   end // always_comb
-  reg         p0_stage1_enable = 1'h0;	// mac_array.k:82:9
-  always_comb begin	// mac_array.k:82:9
-    global_out__accum_element_0_21_2_valid_0 = p0_stage1_enable;	// mac_array.k:82:9
-    global_out__accum_element_1_22_2_valid_0 = p0_stage1_enable;	// mac_array.k:82:9
-    global_out__accum_element_2_23_2_valid_0 = p0_stage1_enable;	// mac_array.k:82:9
-    global_out__accum_element_3_24_2_valid_0 = p0_stage1_enable;	// mac_array.k:82:9
-    global_out__fp32_accum_element_0_25_2_valid_0 = p0_stage1_enable;	// mac_array.k:82:9
-    global_out__fp32_accum_element_1_26_2_valid_0 = p0_stage1_enable;	// mac_array.k:82:9
-    global_out__fp32_accum_element_2_27_2_valid_0 = p0_stage1_enable;	// mac_array.k:82:9
-    global_out__fp32_accum_element_3_28_2_valid_0 = p0_stage1_enable;	// mac_array.k:82:9
+  reg         p0_stage1_enable = 1'h0;	// mac_array.k:83:9
+  always_comb begin	// mac_array.k:83:9
+    global_out__accum_element_0_21_2_valid_0 = p0_stage1_enable;	// mac_array.k:83:9
+    global_out__accum_element_1_22_2_valid_0 = p0_stage1_enable;	// mac_array.k:83:9
+    global_out__accum_element_2_23_2_valid_0 = p0_stage1_enable;	// mac_array.k:83:9
+    global_out__accum_element_3_24_2_valid_0 = p0_stage1_enable;	// mac_array.k:83:9
+    global_out__fp32_accum_element_0_25_2_valid_0 = p0_stage1_enable;	// mac_array.k:83:9
+    global_out__fp32_accum_element_1_26_2_valid_0 = p0_stage1_enable;	// mac_array.k:83:9
+    global_out__fp32_accum_element_2_27_2_valid_0 = p0_stage1_enable;	// mac_array.k:83:9
+    global_out__fp32_accum_element_3_28_2_valid_0 = p0_stage1_enable;	// mac_array.k:83:9
   end // always_comb
-  reg         p0_stage2_enable = 1'h0;	// mac_array.k:82:9
-  always @(posedge clk) begin	// mac_array.k:82:9
-    if (rst) begin	// mac_array.k:82:9
-      p0_stage1_enable <= 1'h0;	// mac_array.k:82:9
-      p0_stage2_enable <= 1'h0;	// mac_array.k:82:9
+  reg         p0_stage2_enable = 1'h0;	// mac_array.k:83:9
+  always @(posedge clk) begin	// mac_array.k:83:9
+    if (rst) begin	// mac_array.k:83:9
+      p0_stage1_enable <= 1'h0;	// mac_array.k:83:9
+      p0_stage2_enable <= 1'h0;	// mac_array.k:83:9
     end
-    else begin	// mac_array.k:82:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:82:9
-      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:82:9
+    else begin	// mac_array.k:83:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:83:9
+      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:83:9
     end
   end // always @(posedge)
-  always_comb	// mac_array.k:82:9
-    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:82:9, :87:9
+  always_comb	// mac_array.k:83:9
+    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:83:9, :88:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:82:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:83:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -305,32 +305,32 @@ module mac_array_clear_all_BasicBlock_0(	// mac_array.k:82:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_array.k:82:9
+    .data_in  (~fifo_overflow_in_0),	// mac_array.k:83:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  assign done_out = p0_stage2_enable;	// mac_array.k:82:9
+  assign done_out = p0_stage2_enable;	// mac_array.k:83:9
   assign global_out__accum_element_0_21_2_valid =
-    global_out__accum_element_0_21_2_valid_0;	// mac_array.k:82:9
+    global_out__accum_element_0_21_2_valid_0;	// mac_array.k:83:9
   assign global_out__accum_element_1_22_2_valid =
-    global_out__accum_element_1_22_2_valid_0;	// mac_array.k:82:9
+    global_out__accum_element_1_22_2_valid_0;	// mac_array.k:83:9
   assign global_out__accum_element_2_23_2_valid =
-    global_out__accum_element_2_23_2_valid_0;	// mac_array.k:82:9
+    global_out__accum_element_2_23_2_valid_0;	// mac_array.k:83:9
   assign global_out__accum_element_3_24_2_valid =
-    global_out__accum_element_3_24_2_valid_0;	// mac_array.k:82:9
+    global_out__accum_element_3_24_2_valid_0;	// mac_array.k:83:9
   assign global_out__fp32_accum_element_0_25_2_valid =
-    global_out__fp32_accum_element_0_25_2_valid_0;	// mac_array.k:82:9
+    global_out__fp32_accum_element_0_25_2_valid_0;	// mac_array.k:83:9
   assign global_out__fp32_accum_element_1_26_2_valid =
-    global_out__fp32_accum_element_1_26_2_valid_0;	// mac_array.k:82:9
+    global_out__fp32_accum_element_1_26_2_valid_0;	// mac_array.k:83:9
   assign global_out__fp32_accum_element_2_27_2_valid =
-    global_out__fp32_accum_element_2_27_2_valid_0;	// mac_array.k:82:9
+    global_out__fp32_accum_element_2_27_2_valid_0;	// mac_array.k:83:9
   assign global_out__fp32_accum_element_3_28_2_valid =
-    global_out__fp32_accum_element_3_28_2_valid_0;	// mac_array.k:82:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:82:9
-  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:82:9
-  assign control_state_out = control_state_out_0;	// mac_array.k:82:9
+    global_out__fp32_accum_element_3_28_2_valid_0;	// mac_array.k:83:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:83:9
+  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:83:9
+  assign control_state_out = control_state_out_0;	// mac_array.k:83:9
 endmodule
 
-module mac_array_clear_fp32_BasicBlock_0(	// mac_array.k:79:38
+module mac_array_clear_fp32_BasicBlock_0(	// mac_array.k:80:38
   input  wire       clk,
   input  wire       rst,
   output wire       done_out,
@@ -350,58 +350,58 @@ module mac_array_clear_fp32_BasicBlock_0(	// mac_array.k:79:38
 
   wire        _fifo_overflow_ffc_0_data_out;
   wire        _fifo_almostfull_ffc_0_data_out;
-  logic       done_out_0;	// mac_array.k:79:38
-  logic       global_out__fp32_accum_element_0_25_1_valid_0;	// mac_array.k:79:38
-  logic       global_out__fp32_accum_element_1_26_1_valid_0;	// mac_array.k:79:38
-  logic       global_out__fp32_accum_element_2_27_1_valid_0;	// mac_array.k:79:38
-  logic       global_out__fp32_accum_element_3_28_1_valid_0;	// mac_array.k:79:38
-  logic       fifo_wren_0_0;	// mac_array.k:79:38
-  logic       input_rdy_0_0;	// mac_array.k:79:38
-  logic [7:0] control_state_out_0;	// mac_array.k:79:38
-  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:79:38
-  always_comb begin	// mac_array.k:79:38
-    input_rdy_0_0 = _GEN;	// mac_array.k:79:38
+  logic       done_out_0;	// mac_array.k:80:38
+  logic       global_out__fp32_accum_element_0_25_1_valid_0;	// mac_array.k:80:38
+  logic       global_out__fp32_accum_element_1_26_1_valid_0;	// mac_array.k:80:38
+  logic       global_out__fp32_accum_element_2_27_1_valid_0;	// mac_array.k:80:38
+  logic       global_out__fp32_accum_element_3_28_1_valid_0;	// mac_array.k:80:38
+  logic       fifo_wren_0_0;	// mac_array.k:80:38
+  logic       input_rdy_0_0;	// mac_array.k:80:38
+  logic [7:0] control_state_out_0;	// mac_array.k:80:38
+  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:80:38
+  always_comb begin	// mac_array.k:80:38
+    input_rdy_0_0 = _GEN;	// mac_array.k:80:38
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_array.k:79:38
+       ~input_valid_0};	// mac_array.k:80:38
   end // always_comb
-  reg   [1:0] p0_data_in_20;	// mac_array.k:79:38
-  reg         p0_stage1_enable = 1'h0;	// mac_array.k:79:38
-  always_comb begin	// mac_array.k:79:38
+  reg   [1:0] p0_data_in_20;	// mac_array.k:80:38
+  reg         p0_stage1_enable = 1'h0;	// mac_array.k:80:38
+  always_comb begin	// mac_array.k:80:38
     global_out__fp32_accum_element_2_27_1_valid_0 =
-      p0_stage1_enable & p0_data_in_20 == 2'h2;	// mac_array.k:79:{38,47}
-    global_out__fp32_accum_element_3_28_1_valid_0 = p0_stage1_enable & (&p0_data_in_20);	// mac_array.k:79:{38,47}
+      p0_stage1_enable & p0_data_in_20 == 2'h2;	// mac_array.k:80:{38,47}
+    global_out__fp32_accum_element_3_28_1_valid_0 = p0_stage1_enable & (&p0_data_in_20);	// mac_array.k:80:{38,47}
   end // always_comb
-  always_comb begin	// mac_array.k:79:38
+  always_comb begin	// mac_array.k:80:38
     global_out__fp32_accum_element_0_25_1_valid_0 =
-      p0_stage1_enable & p0_data_in_20 == 2'h0;	// mac_array.k:79:{38,47}
+      p0_stage1_enable & p0_data_in_20 == 2'h0;	// mac_array.k:80:{38,47}
     global_out__fp32_accum_element_1_26_1_valid_0 =
-      p0_stage1_enable & p0_data_in_20 == 2'h1;	// mac_array.k:79:{38,47}
+      p0_stage1_enable & p0_data_in_20 == 2'h1;	// mac_array.k:80:{38,47}
   end // always_comb
-  reg         p0_stage2_enable = 1'h0;	// mac_array.k:79:38
-  always @(posedge clk) begin	// mac_array.k:79:38
-    p0_data_in_20 <= data_in_20;	// mac_array.k:79:38
-    if (rst) begin	// mac_array.k:79:38
-      p0_stage1_enable <= 1'h0;	// mac_array.k:79:38
-      p0_stage2_enable <= 1'h0;	// mac_array.k:79:38
+  reg         p0_stage2_enable = 1'h0;	// mac_array.k:80:38
+  always @(posedge clk) begin	// mac_array.k:80:38
+    p0_data_in_20 <= data_in_20;	// mac_array.k:80:38
+    if (rst) begin	// mac_array.k:80:38
+      p0_stage1_enable <= 1'h0;	// mac_array.k:80:38
+      p0_stage2_enable <= 1'h0;	// mac_array.k:80:38
     end
-    else begin	// mac_array.k:79:38
-      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:79:38
-      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:79:38
+    else begin	// mac_array.k:80:38
+      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:80:38
+      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:80:38
     end
   end // always @(posedge)
-  always_comb	// mac_array.k:79:38
-    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:79:38
+  always_comb	// mac_array.k:80:38
+    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:80:38
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:79:38
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:80:38
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -409,30 +409,30 @@ module mac_array_clear_fp32_BasicBlock_0(	// mac_array.k:79:38
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_array.k:79:38
+    .data_in  (~fifo_overflow_in_0),	// mac_array.k:80:38
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  mac_arrayDebugView_clear_fp32Entry mac_arrayDebugView_clear_fp32Entry_instance (	// mac_array.k:79:38
-    .clk       (clk),	// mac_array.k:79:38
-    ._pe_id    (p0_stage1_enable ? p0_data_in_20 : 'x),	// mac_array.k:79:38
-    .valid     (p0_stage1_enable),	// mac_array.k:79:38
+  mac_arrayDebugView_clear_fp32Entry mac_arrayDebugView_clear_fp32Entry_instance (	// mac_array.k:80:38
+    .clk       (clk),	// mac_array.k:80:38
+    ._pe_id    (p0_stage1_enable ? p0_data_in_20 : 'x),	// mac_array.k:80:38
+    .valid     (p0_stage1_enable),	// mac_array.k:80:38
     .valid_out (/* unused */)
-  );	// mac_array.k:79:38
-  assign done_out = p0_stage2_enable;	// mac_array.k:79:38
+  );	// mac_array.k:80:38
+  assign done_out = p0_stage2_enable;	// mac_array.k:80:38
   assign global_out__fp32_accum_element_0_25_1_valid =
-    global_out__fp32_accum_element_0_25_1_valid_0;	// mac_array.k:79:38
+    global_out__fp32_accum_element_0_25_1_valid_0;	// mac_array.k:80:38
   assign global_out__fp32_accum_element_1_26_1_valid =
-    global_out__fp32_accum_element_1_26_1_valid_0;	// mac_array.k:79:38
+    global_out__fp32_accum_element_1_26_1_valid_0;	// mac_array.k:80:38
   assign global_out__fp32_accum_element_2_27_1_valid =
-    global_out__fp32_accum_element_2_27_1_valid_0;	// mac_array.k:79:38
+    global_out__fp32_accum_element_2_27_1_valid_0;	// mac_array.k:80:38
   assign global_out__fp32_accum_element_3_28_1_valid =
-    global_out__fp32_accum_element_3_28_1_valid_0;	// mac_array.k:79:38
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:79:38
-  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:79:38
-  assign control_state_out = control_state_out_0;	// mac_array.k:79:38
+    global_out__fp32_accum_element_3_28_1_valid_0;	// mac_array.k:80:38
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:80:38
+  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:80:38
+  assign control_state_out = control_state_out_0;	// mac_array.k:80:38
 endmodule
 
-module mac_array_clear_pe_BasicBlock_0(	// mac_array.k:78:36
+module mac_array_clear_pe_BasicBlock_0(	// mac_array.k:79:36
   input  wire       clk,
   input  wire       rst,
   output wire       done_out,
@@ -452,55 +452,55 @@ module mac_array_clear_pe_BasicBlock_0(	// mac_array.k:78:36
 
   wire        _fifo_overflow_ffc_0_data_out;
   wire        _fifo_almostfull_ffc_0_data_out;
-  logic       done_out_0;	// mac_array.k:78:36
-  logic       global_out__accum_element_0_21_1_valid_0;	// mac_array.k:78:36
-  logic       global_out__accum_element_1_22_1_valid_0;	// mac_array.k:78:36
-  logic       global_out__accum_element_2_23_1_valid_0;	// mac_array.k:78:36
-  logic       global_out__accum_element_3_24_1_valid_0;	// mac_array.k:78:36
-  logic       fifo_wren_0_0;	// mac_array.k:78:36
-  logic       input_rdy_0_0;	// mac_array.k:78:36
-  logic [7:0] control_state_out_0;	// mac_array.k:78:36
-  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:78:36
-  always_comb begin	// mac_array.k:78:36
-    input_rdy_0_0 = _GEN;	// mac_array.k:78:36
+  logic       done_out_0;	// mac_array.k:79:36
+  logic       global_out__accum_element_0_21_1_valid_0;	// mac_array.k:79:36
+  logic       global_out__accum_element_1_22_1_valid_0;	// mac_array.k:79:36
+  logic       global_out__accum_element_2_23_1_valid_0;	// mac_array.k:79:36
+  logic       global_out__accum_element_3_24_1_valid_0;	// mac_array.k:79:36
+  logic       fifo_wren_0_0;	// mac_array.k:79:36
+  logic       input_rdy_0_0;	// mac_array.k:79:36
+  logic [7:0] control_state_out_0;	// mac_array.k:79:36
+  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:79:36
+  always_comb begin	// mac_array.k:79:36
+    input_rdy_0_0 = _GEN;	// mac_array.k:79:36
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_array.k:78:36
+       ~input_valid_0};	// mac_array.k:79:36
   end // always_comb
-  reg   [1:0] p0_data_in_19;	// mac_array.k:78:36
-  reg         p0_stage1_enable = 1'h0;	// mac_array.k:78:36
-  always_comb begin	// mac_array.k:78:36
-    global_out__accum_element_2_23_1_valid_0 = p0_stage1_enable & p0_data_in_19 == 2'h2;	// mac_array.k:78:{36,45}
-    global_out__accum_element_3_24_1_valid_0 = p0_stage1_enable & (&p0_data_in_19);	// mac_array.k:78:{36,45}
+  reg   [1:0] p0_data_in_19;	// mac_array.k:79:36
+  reg         p0_stage1_enable = 1'h0;	// mac_array.k:79:36
+  always_comb begin	// mac_array.k:79:36
+    global_out__accum_element_2_23_1_valid_0 = p0_stage1_enable & p0_data_in_19 == 2'h2;	// mac_array.k:79:{36,45}
+    global_out__accum_element_3_24_1_valid_0 = p0_stage1_enable & (&p0_data_in_19);	// mac_array.k:79:{36,45}
   end // always_comb
-  always_comb begin	// mac_array.k:78:36
-    global_out__accum_element_0_21_1_valid_0 = p0_stage1_enable & p0_data_in_19 == 2'h0;	// mac_array.k:78:{36,45}
-    global_out__accum_element_1_22_1_valid_0 = p0_stage1_enable & p0_data_in_19 == 2'h1;	// mac_array.k:78:{36,45}
+  always_comb begin	// mac_array.k:79:36
+    global_out__accum_element_0_21_1_valid_0 = p0_stage1_enable & p0_data_in_19 == 2'h0;	// mac_array.k:79:{36,45}
+    global_out__accum_element_1_22_1_valid_0 = p0_stage1_enable & p0_data_in_19 == 2'h1;	// mac_array.k:79:{36,45}
   end // always_comb
-  reg         p0_stage2_enable = 1'h0;	// mac_array.k:78:36
-  always @(posedge clk) begin	// mac_array.k:78:36
-    p0_data_in_19 <= data_in_19;	// mac_array.k:78:36
-    if (rst) begin	// mac_array.k:78:36
-      p0_stage1_enable <= 1'h0;	// mac_array.k:78:36
-      p0_stage2_enable <= 1'h0;	// mac_array.k:78:36
+  reg         p0_stage2_enable = 1'h0;	// mac_array.k:79:36
+  always @(posedge clk) begin	// mac_array.k:79:36
+    p0_data_in_19 <= data_in_19;	// mac_array.k:79:36
+    if (rst) begin	// mac_array.k:79:36
+      p0_stage1_enable <= 1'h0;	// mac_array.k:79:36
+      p0_stage2_enable <= 1'h0;	// mac_array.k:79:36
     end
-    else begin	// mac_array.k:78:36
-      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:78:36
-      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:78:36
+    else begin	// mac_array.k:79:36
+      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:79:36
+      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:79:36
     end
   end // always @(posedge)
-  always_comb	// mac_array.k:78:36
-    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:78:36
+  always_comb	// mac_array.k:79:36
+    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:79:36
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:78:36
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:79:36
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -508,30 +508,30 @@ module mac_array_clear_pe_BasicBlock_0(	// mac_array.k:78:36
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_array.k:78:36
+    .data_in  (~fifo_overflow_in_0),	// mac_array.k:79:36
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  mac_arrayDebugView_clear_peEntry mac_arrayDebugView_clear_peEntry_instance (	// mac_array.k:78:36
-    .clk       (clk),	// mac_array.k:78:36
-    ._pe_id    (p0_stage1_enable ? p0_data_in_19 : 'x),	// mac_array.k:78:36
-    .valid     (p0_stage1_enable),	// mac_array.k:78:36
+  mac_arrayDebugView_clear_peEntry mac_arrayDebugView_clear_peEntry_instance (	// mac_array.k:79:36
+    .clk       (clk),	// mac_array.k:79:36
+    ._pe_id    (p0_stage1_enable ? p0_data_in_19 : 'x),	// mac_array.k:79:36
+    .valid     (p0_stage1_enable),	// mac_array.k:79:36
     .valid_out (/* unused */)
-  );	// mac_array.k:78:36
-  assign done_out = p0_stage2_enable;	// mac_array.k:78:36
+  );	// mac_array.k:79:36
+  assign done_out = p0_stage2_enable;	// mac_array.k:79:36
   assign global_out__accum_element_0_21_1_valid =
-    global_out__accum_element_0_21_1_valid_0;	// mac_array.k:78:36
+    global_out__accum_element_0_21_1_valid_0;	// mac_array.k:79:36
   assign global_out__accum_element_1_22_1_valid =
-    global_out__accum_element_1_22_1_valid_0;	// mac_array.k:78:36
+    global_out__accum_element_1_22_1_valid_0;	// mac_array.k:79:36
   assign global_out__accum_element_2_23_1_valid =
-    global_out__accum_element_2_23_1_valid_0;	// mac_array.k:78:36
+    global_out__accum_element_2_23_1_valid_0;	// mac_array.k:79:36
   assign global_out__accum_element_3_24_1_valid =
-    global_out__accum_element_3_24_1_valid_0;	// mac_array.k:78:36
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:78:36
-  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:78:36
-  assign control_state_out = control_state_out_0;	// mac_array.k:78:36
+    global_out__accum_element_3_24_1_valid_0;	// mac_array.k:79:36
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:79:36
+  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:79:36
+  assign control_state_out = control_state_out_0;	// mac_array.k:79:36
 endmodule
 
-module mac_array_read_fp32_accum_BasicBlock_0(	// mac_array.k:75:45
+module mac_array_read_fp32_accum_BasicBlock_0(	// mac_array.k:76:45
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -552,28 +552,28 @@ module mac_array_read_fp32_accum_BasicBlock_0(	// mac_array.k:75:45
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [31:0] global_in__fp32_accum_element_0_25_0 = global_in__fp32_accum_element_0_25;	// mac_array.k:75:45
-  wire  [31:0] global_in__fp32_accum_element_1_26_0 = global_in__fp32_accum_element_1_26;	// mac_array.k:75:45
-  wire  [31:0] global_in__fp32_accum_element_2_27_0 = global_in__fp32_accum_element_2_27;	// mac_array.k:75:45
-  wire  [31:0] global_in__fp32_accum_element_3_28_0 = global_in__fp32_accum_element_3_28;	// mac_array.k:75:45
-  logic        done_out_0;	// mac_array.k:75:45
-  logic [31:0] fifo_data_out_0_0;	// mac_array.k:75:45
-  logic        fifo_wren_0_0;	// mac_array.k:75:45
-  logic        input_rdy_0_0;	// mac_array.k:75:45
-  logic [7:0]  control_state_out_0;	// mac_array.k:75:45
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:75:45
-  always_comb begin	// mac_array.k:75:45
-    input_rdy_0_0 = _GEN;	// mac_array.k:75:45
+  wire  [31:0] global_in__fp32_accum_element_0_25_0 = global_in__fp32_accum_element_0_25;	// mac_array.k:76:45
+  wire  [31:0] global_in__fp32_accum_element_1_26_0 = global_in__fp32_accum_element_1_26;	// mac_array.k:76:45
+  wire  [31:0] global_in__fp32_accum_element_2_27_0 = global_in__fp32_accum_element_2_27;	// mac_array.k:76:45
+  wire  [31:0] global_in__fp32_accum_element_3_28_0 = global_in__fp32_accum_element_3_28;	// mac_array.k:76:45
+  logic        done_out_0;	// mac_array.k:76:45
+  logic [31:0] fifo_data_out_0_0;	// mac_array.k:76:45
+  logic        fifo_wren_0_0;	// mac_array.k:76:45
+  logic        input_rdy_0_0;	// mac_array.k:76:45
+  logic [7:0]  control_state_out_0;	// mac_array.k:76:45
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:76:45
+  always_comb begin	// mac_array.k:76:45
+    input_rdy_0_0 = _GEN;	// mac_array.k:76:45
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_array.k:75:45
+       ~input_valid_0};	// mac_array.k:76:45
   end // always_comb
-  reg   [1:0]  p0_data_in_18;	// mac_array.k:75:45
-  reg          p0_stage1_enable = 1'h0;	// mac_array.k:75:45
+  reg   [1:0]  p0_data_in_18;	// mac_array.k:76:45
+  reg          p0_stage1_enable = 1'h0;	// mac_array.k:76:45
   wire  [31:0] _fp32_accum =
     p0_data_in_18[1]
       ? (p0_data_in_18[0]
@@ -581,31 +581,31 @@ module mac_array_read_fp32_accum_BasicBlock_0(	// mac_array.k:75:45
            : global_in__fp32_accum_element_2_27_0)
       : p0_data_in_18[0]
           ? global_in__fp32_accum_element_1_26_0
-          : global_in__fp32_accum_element_0_25_0;	// mac_array.k:75:{45,52}
-  reg   [31:0] p0__fp32_accum;	// mac_array.k:75:45
-  reg          p0_stage2_enable = 1'h0;	// mac_array.k:75:45
-  always @(posedge clk) begin	// mac_array.k:75:45
-    p0_data_in_18 <= data_in_18;	// mac_array.k:75:45
-    if (rst)	// mac_array.k:75:45
-      p0_stage1_enable <= 1'h0;	// mac_array.k:75:45
-    else	// mac_array.k:75:45
-      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:75:45
-    p0__fp32_accum <= _fp32_accum;	// mac_array.k:75:{45,52}
-    if (rst)	// mac_array.k:75:45
-      p0_stage2_enable <= 1'h0;	// mac_array.k:75:45
-    else	// mac_array.k:75:45
-      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:75:45
+          : global_in__fp32_accum_element_0_25_0;	// mac_array.k:76:{45,52}
+  reg   [31:0] p0__fp32_accum;	// mac_array.k:76:45
+  reg          p0_stage2_enable = 1'h0;	// mac_array.k:76:45
+  always @(posedge clk) begin	// mac_array.k:76:45
+    p0_data_in_18 <= data_in_18;	// mac_array.k:76:45
+    if (rst)	// mac_array.k:76:45
+      p0_stage1_enable <= 1'h0;	// mac_array.k:76:45
+    else	// mac_array.k:76:45
+      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:76:45
+    p0__fp32_accum <= _fp32_accum;	// mac_array.k:76:{45,52}
+    if (rst)	// mac_array.k:76:45
+      p0_stage2_enable <= 1'h0;	// mac_array.k:76:45
+    else	// mac_array.k:76:45
+      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:76:45
   end // always @(posedge)
-  always_comb begin	// mac_array.k:75:45
-    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:75:{5,45}
-    fifo_data_out_0_0 = p0__fp32_accum;	// mac_array.k:75:{5,45}
+  always_comb begin	// mac_array.k:76:45
+    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:76:{5,45}
+    fifo_data_out_0_0 = p0__fp32_accum;	// mac_array.k:76:{5,45}
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:75:45
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:76:45
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -613,29 +613,29 @@ module mac_array_read_fp32_accum_BasicBlock_0(	// mac_array.k:75:45
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_array.k:75:45
+    .data_in  (~fifo_overflow_in_0),	// mac_array.k:76:45
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  mac_arrayDebugView_read_fp32_accumEntry mac_arrayDebugView_read_fp32_accumEntry_instance (	// mac_array.k:75:5
-    .clk       (clk),	// mac_array.k:75:5
-    ._pe_id    (p0_stage1_enable ? p0_data_in_18 : 'x),	// mac_array.k:75:{5,45}
-    .valid     (p0_stage1_enable),	// mac_array.k:75:45
+  mac_arrayDebugView_read_fp32_accumEntry mac_arrayDebugView_read_fp32_accumEntry_instance (	// mac_array.k:76:5
+    .clk       (clk),	// mac_array.k:76:5
+    ._pe_id    (p0_stage1_enable ? p0_data_in_18 : 'x),	// mac_array.k:76:{5,45}
+    .valid     (p0_stage1_enable),	// mac_array.k:76:45
     .valid_out (/* unused */)
-  );	// mac_array.k:75:5
-  mac_arrayDebugView_read_fp32_accumExit mac_arrayDebugView_read_fp32_accumExit_instance (	// mac_array.k:75:5
-    .clk          (clk),	// mac_array.k:75:5
-    ._ReturnValue (p0_stage1_enable ? _fp32_accum : 'x),	// mac_array.k:75:{5,45,52}
-    .valid        (p0_stage1_enable),	// mac_array.k:75:45
+  );	// mac_array.k:76:5
+  mac_arrayDebugView_read_fp32_accumExit mac_arrayDebugView_read_fp32_accumExit_instance (	// mac_array.k:76:5
+    .clk          (clk),	// mac_array.k:76:5
+    ._ReturnValue (p0_stage1_enable ? _fp32_accum : 'x),	// mac_array.k:76:{5,45,52}
+    .valid        (p0_stage1_enable),	// mac_array.k:76:45
     .valid_out    (/* unused */)
-  );	// mac_array.k:75:5
-  assign done_out = p0_stage2_enable;	// mac_array.k:75:45
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_array.k:75:45
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:75:45
-  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:75:45
-  assign control_state_out = control_state_out_0;	// mac_array.k:75:45
+  );	// mac_array.k:76:5
+  assign done_out = p0_stage2_enable;	// mac_array.k:76:45
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_array.k:76:45
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:76:45
+  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:76:45
+  assign control_state_out = control_state_out_0;	// mac_array.k:76:45
 endmodule
 
-module mac_array_set_fp32_accum_BasicBlock_0(	// mac_array.k:72:9
+module mac_array_set_fp32_accum_BasicBlock_0(	// mac_array.k:73:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -659,65 +659,65 @@ module mac_array_set_fp32_accum_BasicBlock_0(	// mac_array.k:72:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  logic        done_out_0;	// mac_array.k:72:9
-  logic        global_out__fp32_accum_element_0_25_0_valid_0;	// mac_array.k:72:9
-  logic [31:0] global_out__fp32_accum_element_0_25_0_0;	// mac_array.k:72:9
-  logic        global_out__fp32_accum_element_1_26_0_valid_0;	// mac_array.k:72:9
-  logic [31:0] global_out__fp32_accum_element_1_26_0_0;	// mac_array.k:72:9
-  logic        global_out__fp32_accum_element_2_27_0_valid_0;	// mac_array.k:72:9
-  logic [31:0] global_out__fp32_accum_element_2_27_0_0;	// mac_array.k:72:9
-  logic        global_out__fp32_accum_element_3_28_0_valid_0;	// mac_array.k:72:9
-  logic [31:0] global_out__fp32_accum_element_3_28_0_0;	// mac_array.k:72:9
-  logic        fifo_wren_0_0;	// mac_array.k:72:9
-  logic        input_rdy_0_0;	// mac_array.k:72:9
-  logic [7:0]  control_state_out_0;	// mac_array.k:72:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:72:9
-  always_comb begin	// mac_array.k:72:9
-    input_rdy_0_0 = _GEN;	// mac_array.k:72:9
+  logic        done_out_0;	// mac_array.k:73:9
+  logic        global_out__fp32_accum_element_0_25_0_valid_0;	// mac_array.k:73:9
+  logic [31:0] global_out__fp32_accum_element_0_25_0_0;	// mac_array.k:73:9
+  logic        global_out__fp32_accum_element_1_26_0_valid_0;	// mac_array.k:73:9
+  logic [31:0] global_out__fp32_accum_element_1_26_0_0;	// mac_array.k:73:9
+  logic        global_out__fp32_accum_element_2_27_0_valid_0;	// mac_array.k:73:9
+  logic [31:0] global_out__fp32_accum_element_2_27_0_0;	// mac_array.k:73:9
+  logic        global_out__fp32_accum_element_3_28_0_valid_0;	// mac_array.k:73:9
+  logic [31:0] global_out__fp32_accum_element_3_28_0_0;	// mac_array.k:73:9
+  logic        fifo_wren_0_0;	// mac_array.k:73:9
+  logic        input_rdy_0_0;	// mac_array.k:73:9
+  logic [7:0]  control_state_out_0;	// mac_array.k:73:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:73:9
+  always_comb begin	// mac_array.k:73:9
+    input_rdy_0_0 = _GEN;	// mac_array.k:73:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_array.k:72:9
+       ~input_valid_0};	// mac_array.k:73:9
   end // always_comb
-  reg   [1:0]  p0_pe_id;	// mac_array.k:72:9
-  reg   [31:0] p0_value;	// mac_array.k:72:9
-  reg          p0_stage1_enable = 1'h0;	// mac_array.k:72:9
-  always_comb begin	// mac_array.k:72:9
-    global_out__fp32_accum_element_2_27_0_0 = p0_value;	// mac_array.k:72:9
-    global_out__fp32_accum_element_2_27_0_valid_0 = p0_stage1_enable & p0_pe_id == 2'h2;	// mac_array.k:72:{9,18}
-    global_out__fp32_accum_element_3_28_0_0 = p0_value;	// mac_array.k:72:9
-    global_out__fp32_accum_element_3_28_0_valid_0 = p0_stage1_enable & (&p0_pe_id);	// mac_array.k:72:{9,18}
+  reg   [1:0]  p0_pe_id;	// mac_array.k:73:9
+  reg   [31:0] p0_value;	// mac_array.k:73:9
+  reg          p0_stage1_enable = 1'h0;	// mac_array.k:73:9
+  always_comb begin	// mac_array.k:73:9
+    global_out__fp32_accum_element_2_27_0_0 = p0_value;	// mac_array.k:73:9
+    global_out__fp32_accum_element_2_27_0_valid_0 = p0_stage1_enable & p0_pe_id == 2'h2;	// mac_array.k:73:{9,18}
+    global_out__fp32_accum_element_3_28_0_0 = p0_value;	// mac_array.k:73:9
+    global_out__fp32_accum_element_3_28_0_valid_0 = p0_stage1_enable & (&p0_pe_id);	// mac_array.k:73:{9,18}
   end // always_comb
-  always_comb begin	// mac_array.k:72:9
-    global_out__fp32_accum_element_0_25_0_0 = p0_value;	// mac_array.k:72:9
-    global_out__fp32_accum_element_0_25_0_valid_0 = p0_stage1_enable & p0_pe_id == 2'h0;	// mac_array.k:72:{9,18}
-    global_out__fp32_accum_element_1_26_0_0 = p0_value;	// mac_array.k:72:9
-    global_out__fp32_accum_element_1_26_0_valid_0 = p0_stage1_enable & p0_pe_id == 2'h1;	// mac_array.k:72:{9,18}
+  always_comb begin	// mac_array.k:73:9
+    global_out__fp32_accum_element_0_25_0_0 = p0_value;	// mac_array.k:73:9
+    global_out__fp32_accum_element_0_25_0_valid_0 = p0_stage1_enable & p0_pe_id == 2'h0;	// mac_array.k:73:{9,18}
+    global_out__fp32_accum_element_1_26_0_0 = p0_value;	// mac_array.k:73:9
+    global_out__fp32_accum_element_1_26_0_valid_0 = p0_stage1_enable & p0_pe_id == 2'h1;	// mac_array.k:73:{9,18}
   end // always_comb
-  reg          p0_stage2_enable = 1'h0;	// mac_array.k:72:9
-  always @(posedge clk) begin	// mac_array.k:72:9
-    p0_pe_id <= data_in_17[1:0];	// mac_array.k:72:9
-    p0_value <= data_in_17[33:2];	// mac_array.k:72:9
-    if (rst) begin	// mac_array.k:72:9
-      p0_stage1_enable <= 1'h0;	// mac_array.k:72:9
-      p0_stage2_enable <= 1'h0;	// mac_array.k:72:9
+  reg          p0_stage2_enable = 1'h0;	// mac_array.k:73:9
+  always @(posedge clk) begin	// mac_array.k:73:9
+    p0_pe_id <= data_in_17[1:0];	// mac_array.k:73:9
+    p0_value <= data_in_17[33:2];	// mac_array.k:73:9
+    if (rst) begin	// mac_array.k:73:9
+      p0_stage1_enable <= 1'h0;	// mac_array.k:73:9
+      p0_stage2_enable <= 1'h0;	// mac_array.k:73:9
     end
-    else begin	// mac_array.k:72:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:72:9
-      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:72:9
+    else begin	// mac_array.k:73:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:73:9
+      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:73:9
     end
   end // always @(posedge)
-  always_comb	// mac_array.k:72:9
-    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:72:9, :73:9
+  always_comb	// mac_array.k:73:9
+    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:73:9, :74:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:72:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:73:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -725,35 +725,35 @@ module mac_array_set_fp32_accum_BasicBlock_0(	// mac_array.k:72:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_array.k:72:9
+    .data_in  (~fifo_overflow_in_0),	// mac_array.k:73:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  mac_arrayDebugView_set_fp32_accumEntry mac_arrayDebugView_set_fp32_accumEntry_instance (	// mac_array.k:73:9
-    .clk       (clk),	// mac_array.k:73:9
-    ._pe_id    (p0_stage1_enable ? p0_pe_id : 'x),	// mac_array.k:72:9, :73:9
-    ._value    (p0_stage1_enable ? p0_value : 'x),	// mac_array.k:72:9, :73:9
-    .valid     (p0_stage1_enable),	// mac_array.k:72:9
+  mac_arrayDebugView_set_fp32_accumEntry mac_arrayDebugView_set_fp32_accumEntry_instance (	// mac_array.k:74:9
+    .clk       (clk),	// mac_array.k:74:9
+    ._pe_id    (p0_stage1_enable ? p0_pe_id : 'x),	// mac_array.k:73:9, :74:9
+    ._value    (p0_stage1_enable ? p0_value : 'x),	// mac_array.k:73:9, :74:9
+    .valid     (p0_stage1_enable),	// mac_array.k:73:9
     .valid_out (/* unused */)
-  );	// mac_array.k:73:9
-  assign done_out = p0_stage2_enable;	// mac_array.k:72:9
+  );	// mac_array.k:74:9
+  assign done_out = p0_stage2_enable;	// mac_array.k:73:9
   assign global_out__fp32_accum_element_0_25_0_valid =
-    global_out__fp32_accum_element_0_25_0_valid_0;	// mac_array.k:72:9
-  assign global_out__fp32_accum_element_0_25_0 = global_out__fp32_accum_element_0_25_0_0;	// mac_array.k:72:9
+    global_out__fp32_accum_element_0_25_0_valid_0;	// mac_array.k:73:9
+  assign global_out__fp32_accum_element_0_25_0 = global_out__fp32_accum_element_0_25_0_0;	// mac_array.k:73:9
   assign global_out__fp32_accum_element_1_26_0_valid =
-    global_out__fp32_accum_element_1_26_0_valid_0;	// mac_array.k:72:9
-  assign global_out__fp32_accum_element_1_26_0 = global_out__fp32_accum_element_1_26_0_0;	// mac_array.k:72:9
+    global_out__fp32_accum_element_1_26_0_valid_0;	// mac_array.k:73:9
+  assign global_out__fp32_accum_element_1_26_0 = global_out__fp32_accum_element_1_26_0_0;	// mac_array.k:73:9
   assign global_out__fp32_accum_element_2_27_0_valid =
-    global_out__fp32_accum_element_2_27_0_valid_0;	// mac_array.k:72:9
-  assign global_out__fp32_accum_element_2_27_0 = global_out__fp32_accum_element_2_27_0_0;	// mac_array.k:72:9
+    global_out__fp32_accum_element_2_27_0_valid_0;	// mac_array.k:73:9
+  assign global_out__fp32_accum_element_2_27_0 = global_out__fp32_accum_element_2_27_0_0;	// mac_array.k:73:9
   assign global_out__fp32_accum_element_3_28_0_valid =
-    global_out__fp32_accum_element_3_28_0_valid_0;	// mac_array.k:72:9
-  assign global_out__fp32_accum_element_3_28_0 = global_out__fp32_accum_element_3_28_0_0;	// mac_array.k:72:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:72:9
-  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:72:9
-  assign control_state_out = control_state_out_0;	// mac_array.k:72:9
+    global_out__fp32_accum_element_3_28_0_valid_0;	// mac_array.k:73:9
+  assign global_out__fp32_accum_element_3_28_0 = global_out__fp32_accum_element_3_28_0_0;	// mac_array.k:73:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:73:9
+  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:73:9
+  assign control_state_out = control_state_out_0;	// mac_array.k:73:9
 endmodule
 
-module mac_array_write_grid_BasicBlock_0(	// mac_array.k:66:9
+module mac_array_write_grid_BasicBlock_0(	// mac_array.k:67:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -772,54 +772,54 @@ module mac_array_write_grid_BasicBlock_0(	// mac_array.k:66:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  logic        done_out_0;	// mac_array.k:66:9
-  logic [31:0] memory_write_data_out_30_0_0;	// mac_array.k:66:9
-  logic [8:0]  memory_write_addr_out_30_0_0;	// mac_array.k:66:9
-  logic        memory_wren_30_0_0;	// mac_array.k:66:9
-  logic        fifo_wren_0_0;	// mac_array.k:66:9
-  logic        input_rdy_0_0;	// mac_array.k:66:9
-  logic [7:0]  control_state_out_0;	// mac_array.k:66:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:66:9
-  wire         _GEN_0 = _GEN & input_valid_0;	// mac_array.k:66:9
-  always_comb begin	// mac_array.k:66:9
-    input_rdy_0_0 = _GEN;	// mac_array.k:66:9
+  logic        done_out_0;	// mac_array.k:67:9
+  logic [31:0] memory_write_data_out_30_0_0;	// mac_array.k:67:9
+  logic [8:0]  memory_write_addr_out_30_0_0;	// mac_array.k:67:9
+  logic        memory_wren_30_0_0;	// mac_array.k:67:9
+  logic        fifo_wren_0_0;	// mac_array.k:67:9
+  logic        input_rdy_0_0;	// mac_array.k:67:9
+  logic [7:0]  control_state_out_0;	// mac_array.k:67:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:67:9
+  wire         _GEN_0 = _GEN & input_valid_0;	// mac_array.k:67:9
+  always_comb begin	// mac_array.k:67:9
+    input_rdy_0_0 = _GEN;	// mac_array.k:67:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_array.k:66:9
+       ~input_valid_0};	// mac_array.k:67:9
   end // always_comb
-  always_comb begin	// mac_array.k:66:9
-    memory_wren_30_0_0 = _GEN_0;	// mac_array.k:66:{9,18}
-    memory_write_addr_out_30_0_0 = data_in_16[8:0];	// mac_array.k:66:18
-    memory_write_data_out_30_0_0 = data_in_16[40:9];	// mac_array.k:66:18
+  always_comb begin	// mac_array.k:67:9
+    memory_wren_30_0_0 = _GEN_0;	// mac_array.k:67:{9,18}
+    memory_write_addr_out_30_0_0 = data_in_16[8:0];	// mac_array.k:67:18
+    memory_write_data_out_30_0_0 = data_in_16[40:9];	// mac_array.k:67:18
   end // always_comb
-  reg   [8:0]  p0_index;	// mac_array.k:66:9
-  reg   [31:0] p0_value;	// mac_array.k:66:9
-  reg          p0_stage1_enable = 1'h0;	// mac_array.k:66:9
-  reg          p0_stage2_enable = 1'h0;	// mac_array.k:66:9
-  always @(posedge clk) begin	// mac_array.k:66:9
-    p0_index <= data_in_16[8:0];	// mac_array.k:66:9
-    p0_value <= data_in_16[40:9];	// mac_array.k:66:9
-    if (rst) begin	// mac_array.k:66:9
-      p0_stage1_enable <= 1'h0;	// mac_array.k:66:9
-      p0_stage2_enable <= 1'h0;	// mac_array.k:66:9
+  reg   [8:0]  p0_index;	// mac_array.k:67:9
+  reg   [31:0] p0_value;	// mac_array.k:67:9
+  reg          p0_stage1_enable = 1'h0;	// mac_array.k:67:9
+  reg          p0_stage2_enable = 1'h0;	// mac_array.k:67:9
+  always @(posedge clk) begin	// mac_array.k:67:9
+    p0_index <= data_in_16[8:0];	// mac_array.k:67:9
+    p0_value <= data_in_16[40:9];	// mac_array.k:67:9
+    if (rst) begin	// mac_array.k:67:9
+      p0_stage1_enable <= 1'h0;	// mac_array.k:67:9
+      p0_stage2_enable <= 1'h0;	// mac_array.k:67:9
     end
-    else begin	// mac_array.k:66:9
-      p0_stage1_enable <= _GEN_0;	// mac_array.k:66:9
-      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:66:9
+    else begin	// mac_array.k:67:9
+      p0_stage1_enable <= _GEN_0;	// mac_array.k:67:9
+      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:67:9
     end
   end // always @(posedge)
-  always_comb	// mac_array.k:66:9
-    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:66:9, :67:9
+  always_comb	// mac_array.k:67:9
+    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:67:9, :68:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:66:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:67:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -827,26 +827,26 @@ module mac_array_write_grid_BasicBlock_0(	// mac_array.k:66:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_array.k:66:9
+    .data_in  (~fifo_overflow_in_0),	// mac_array.k:67:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  mac_arrayDebugView_write_gridEntry mac_arrayDebugView_write_gridEntry_instance (	// mac_array.k:67:9
-    .clk       (clk),	// mac_array.k:67:9
-    ._index    (p0_stage1_enable ? p0_index : 'x),	// mac_array.k:66:9, :67:9
-    ._value    (p0_stage1_enable ? p0_value : 'x),	// mac_array.k:66:9, :67:9
-    .valid     (p0_stage1_enable),	// mac_array.k:66:9
+  mac_arrayDebugView_write_gridEntry mac_arrayDebugView_write_gridEntry_instance (	// mac_array.k:68:9
+    .clk       (clk),	// mac_array.k:68:9
+    ._index    (p0_stage1_enable ? p0_index : 'x),	// mac_array.k:67:9, :68:9
+    ._value    (p0_stage1_enable ? p0_value : 'x),	// mac_array.k:67:9, :68:9
+    .valid     (p0_stage1_enable),	// mac_array.k:67:9
     .valid_out (/* unused */)
-  );	// mac_array.k:67:9
-  assign done_out = p0_stage2_enable;	// mac_array.k:66:9
-  assign memory_write_data_out_30_0 = memory_write_data_out_30_0_0;	// mac_array.k:66:9
-  assign memory_write_addr_out_30_0 = memory_write_addr_out_30_0_0;	// mac_array.k:66:9
-  assign memory_wren_30_0 = memory_wren_30_0_0;	// mac_array.k:66:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:66:9
-  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:66:9
-  assign control_state_out = control_state_out_0;	// mac_array.k:66:9
+  );	// mac_array.k:68:9
+  assign done_out = p0_stage2_enable;	// mac_array.k:67:9
+  assign memory_write_data_out_30_0 = memory_write_data_out_30_0_0;	// mac_array.k:67:9
+  assign memory_write_addr_out_30_0 = memory_write_addr_out_30_0_0;	// mac_array.k:67:9
+  assign memory_wren_30_0 = memory_wren_30_0_0;	// mac_array.k:67:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:67:9
+  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:67:9
+  assign control_state_out = control_state_out_0;	// mac_array.k:67:9
 endmodule
 
-module mac_array_read_grid_BasicBlock_0(	// mac_array.k:59:9
+module mac_array_read_grid_BasicBlock_0(	// mac_array.k:60:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -866,61 +866,61 @@ module mac_array_read_grid_BasicBlock_0(	// mac_array.k:59:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [31:0] memory_read_data_in_30_0_0 = memory_read_data_in_30_0;	// mac_array.k:59:9
-  logic        done_out_0;	// mac_array.k:59:9
-  logic [8:0]  memory_read_addr_out_30_0_0;	// mac_array.k:59:9
-  logic        memory_rden_out_30_0_0;	// mac_array.k:59:9
-  logic [31:0] fifo_data_out_0_0;	// mac_array.k:59:9
-  logic        fifo_wren_0_0;	// mac_array.k:59:9
-  logic        input_rdy_0_0;	// mac_array.k:59:9
-  logic [7:0]  control_state_out_0;	// mac_array.k:59:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:59:9
-  wire         _GEN_0 = _GEN & input_valid_0;	// mac_array.k:59:9
-  always_comb begin	// mac_array.k:59:9
-    input_rdy_0_0 = _GEN;	// mac_array.k:59:9
+  wire  [31:0] memory_read_data_in_30_0_0 = memory_read_data_in_30_0;	// mac_array.k:60:9
+  logic        done_out_0;	// mac_array.k:60:9
+  logic [8:0]  memory_read_addr_out_30_0_0;	// mac_array.k:60:9
+  logic        memory_rden_out_30_0_0;	// mac_array.k:60:9
+  logic [31:0] fifo_data_out_0_0;	// mac_array.k:60:9
+  logic        fifo_wren_0_0;	// mac_array.k:60:9
+  logic        input_rdy_0_0;	// mac_array.k:60:9
+  logic [7:0]  control_state_out_0;	// mac_array.k:60:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:60:9
+  wire         _GEN_0 = _GEN & input_valid_0;	// mac_array.k:60:9
+  always_comb begin	// mac_array.k:60:9
+    input_rdy_0_0 = _GEN;	// mac_array.k:60:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_array.k:59:9
+       ~input_valid_0};	// mac_array.k:60:9
   end // always_comb
-  always_comb begin	// mac_array.k:59:9
-    memory_read_addr_out_30_0_0 = data_in_15;	// mac_array.k:60:27
-    memory_rden_out_30_0_0 = _GEN_0;	// mac_array.k:59:9, :60:27
+  always_comb begin	// mac_array.k:60:9
+    memory_read_addr_out_30_0_0 = data_in_15;	// mac_array.k:61:27
+    memory_rden_out_30_0_0 = _GEN_0;	// mac_array.k:60:9, :61:27
   end // always_comb
-  reg   [8:0]  p0_data_in_15;	// mac_array.k:59:9
-  reg          p0_stage1_enable = 1'h0;	// mac_array.k:59:9
-  reg          p0_stage2_enable = 1'h0;	// mac_array.k:59:9
-  reg   [31:0] p0_memory_read_data_in_30_0;	// mac_array.k:59:9
-  reg          p0_stage3_enable = 1'h0;	// mac_array.k:59:9
-  always @(posedge clk) begin	// mac_array.k:59:9
-    p0_data_in_15 <= data_in_15;	// mac_array.k:59:9
-    if (rst) begin	// mac_array.k:59:9
-      p0_stage1_enable <= 1'h0;	// mac_array.k:59:9
-      p0_stage2_enable <= 1'h0;	// mac_array.k:59:9
+  reg   [8:0]  p0_data_in_15;	// mac_array.k:60:9
+  reg          p0_stage1_enable = 1'h0;	// mac_array.k:60:9
+  reg          p0_stage2_enable = 1'h0;	// mac_array.k:60:9
+  reg   [31:0] p0_memory_read_data_in_30_0;	// mac_array.k:60:9
+  reg          p0_stage3_enable = 1'h0;	// mac_array.k:60:9
+  always @(posedge clk) begin	// mac_array.k:60:9
+    p0_data_in_15 <= data_in_15;	// mac_array.k:60:9
+    if (rst) begin	// mac_array.k:60:9
+      p0_stage1_enable <= 1'h0;	// mac_array.k:60:9
+      p0_stage2_enable <= 1'h0;	// mac_array.k:60:9
     end
-    else begin	// mac_array.k:59:9
-      p0_stage1_enable <= _GEN_0;	// mac_array.k:59:9
-      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:59:9
+    else begin	// mac_array.k:60:9
+      p0_stage1_enable <= _GEN_0;	// mac_array.k:60:9
+      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:60:9
     end
-    p0_memory_read_data_in_30_0 <= memory_read_data_in_30_0_0;	// mac_array.k:59:9
-    if (rst)	// mac_array.k:59:9
-      p0_stage3_enable <= 1'h0;	// mac_array.k:59:9
-    else	// mac_array.k:59:9
-      p0_stage3_enable <= p0_stage2_enable;	// mac_array.k:59:9
+    p0_memory_read_data_in_30_0 <= memory_read_data_in_30_0_0;	// mac_array.k:60:9
+    if (rst)	// mac_array.k:60:9
+      p0_stage3_enable <= 1'h0;	// mac_array.k:60:9
+    else	// mac_array.k:60:9
+      p0_stage3_enable <= p0_stage2_enable;	// mac_array.k:60:9
   end // always @(posedge)
-  always_comb begin	// mac_array.k:59:9
-    fifo_wren_0_0 = p0_stage3_enable;	// mac_array.k:57:5, :59:9
-    fifo_data_out_0_0 = p0_memory_read_data_in_30_0;	// mac_array.k:57:5, :59:9
+  always_comb begin	// mac_array.k:60:9
+    fifo_wren_0_0 = p0_stage3_enable;	// mac_array.k:58:5, :60:9
+    fifo_data_out_0_0 = p0_memory_read_data_in_30_0;	// mac_array.k:58:5, :60:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:59:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:60:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -928,31 +928,31 @@ module mac_array_read_grid_BasicBlock_0(	// mac_array.k:59:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_array.k:59:9
+    .data_in  (~fifo_overflow_in_0),	// mac_array.k:60:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  mac_arrayDebugView_read_gridEntry mac_arrayDebugView_read_gridEntry_instance (	// mac_array.k:57:5
-    .clk       (clk),	// mac_array.k:57:5
-    ._index    (p0_stage1_enable ? p0_data_in_15 : 'x),	// mac_array.k:57:5, :59:9
-    .valid     (p0_stage1_enable),	// mac_array.k:59:9
+  mac_arrayDebugView_read_gridEntry mac_arrayDebugView_read_gridEntry_instance (	// mac_array.k:58:5
+    .clk       (clk),	// mac_array.k:58:5
+    ._index    (p0_stage1_enable ? p0_data_in_15 : 'x),	// mac_array.k:58:5, :60:9
+    .valid     (p0_stage1_enable),	// mac_array.k:60:9
     .valid_out (/* unused */)
-  );	// mac_array.k:57:5
-  mac_arrayDebugView_read_gridExit mac_arrayDebugView_read_gridExit_instance (	// mac_array.k:57:5
-    .clk          (clk),	// mac_array.k:57:5
-    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_30_0_0 : 'x),	// mac_array.k:57:5, :59:9
-    .valid        (p0_stage2_enable),	// mac_array.k:59:9
+  );	// mac_array.k:58:5
+  mac_arrayDebugView_read_gridExit mac_arrayDebugView_read_gridExit_instance (	// mac_array.k:58:5
+    .clk          (clk),	// mac_array.k:58:5
+    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_30_0_0 : 'x),	// mac_array.k:58:5, :60:9
+    .valid        (p0_stage2_enable),	// mac_array.k:60:9
     .valid_out    (/* unused */)
-  );	// mac_array.k:57:5
-  assign done_out = p0_stage3_enable;	// mac_array.k:59:9
-  assign memory_read_addr_out_30_0 = memory_read_addr_out_30_0_0;	// mac_array.k:59:9
-  assign memory_rden_out_30_0 = memory_rden_out_30_0_0;	// mac_array.k:59:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_array.k:59:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:59:9
-  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:59:9
-  assign control_state_out = control_state_out_0;	// mac_array.k:59:9
+  );	// mac_array.k:58:5
+  assign done_out = p0_stage3_enable;	// mac_array.k:60:9
+  assign memory_read_addr_out_30_0 = memory_read_addr_out_30_0_0;	// mac_array.k:60:9
+  assign memory_rden_out_30_0 = memory_rden_out_30_0_0;	// mac_array.k:60:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_array.k:60:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:60:9
+  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:60:9
+  assign control_state_out = control_state_out_0;	// mac_array.k:60:9
 endmodule
 
-module mac_array_write_rom_block_BasicBlock_0(	// mac_array.k:53:9
+module mac_array_write_rom_block_BasicBlock_0(	// mac_array.k:54:9
   input  wire         clk,
   input  wire         rst,
   output wire         done_out,
@@ -971,54 +971,54 @@ module mac_array_write_rom_block_BasicBlock_0(	// mac_array.k:53:9
 
   wire          _fifo_overflow_ffc_0_data_out;
   wire          _fifo_almostfull_ffc_0_data_out;
-  logic         done_out_0;	// mac_array.k:53:9
-  logic [879:0] memory_write_data_out_29_0_0;	// mac_array.k:53:9
-  logic [9:0]   memory_write_addr_out_29_0_0;	// mac_array.k:53:9
-  logic         memory_wren_29_0_0;	// mac_array.k:53:9
-  logic         fifo_wren_0_0;	// mac_array.k:53:9
-  logic         input_rdy_0_0;	// mac_array.k:53:9
-  logic [7:0]   control_state_out_0;	// mac_array.k:53:9
-  wire          _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:53:9
-  wire          _GEN_0 = _GEN & input_valid_0;	// mac_array.k:53:9
-  always_comb begin	// mac_array.k:53:9
-    input_rdy_0_0 = _GEN;	// mac_array.k:53:9
+  logic         done_out_0;	// mac_array.k:54:9
+  logic [879:0] memory_write_data_out_29_0_0;	// mac_array.k:54:9
+  logic [9:0]   memory_write_addr_out_29_0_0;	// mac_array.k:54:9
+  logic         memory_wren_29_0_0;	// mac_array.k:54:9
+  logic         fifo_wren_0_0;	// mac_array.k:54:9
+  logic         input_rdy_0_0;	// mac_array.k:54:9
+  logic [7:0]   control_state_out_0;	// mac_array.k:54:9
+  wire          _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:54:9
+  wire          _GEN_0 = _GEN & input_valid_0;	// mac_array.k:54:9
+  always_comb begin	// mac_array.k:54:9
+    input_rdy_0_0 = _GEN;	// mac_array.k:54:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_array.k:53:9
+       ~input_valid_0};	// mac_array.k:54:9
   end // always_comb
-  always_comb begin	// mac_array.k:53:9
-    memory_wren_29_0_0 = _GEN_0;	// mac_array.k:53:{9,18}
-    memory_write_addr_out_29_0_0 = data_in_14[9:0];	// mac_array.k:53:18
-    memory_write_data_out_29_0_0 = data_in_14[895:16];	// mac_array.k:53:18
+  always_comb begin	// mac_array.k:54:9
+    memory_wren_29_0_0 = _GEN_0;	// mac_array.k:54:{9,18}
+    memory_write_addr_out_29_0_0 = data_in_14[9:0];	// mac_array.k:54:18
+    memory_write_data_out_29_0_0 = data_in_14[895:16];	// mac_array.k:54:18
   end // always_comb
-  reg   [15:0]  p0_block_addr;	// mac_array.k:53:9
-  reg   [879:0] p0_value;	// mac_array.k:53:9
-  reg           p0_stage1_enable = 1'h0;	// mac_array.k:53:9
-  reg           p0_stage2_enable = 1'h0;	// mac_array.k:53:9
-  always @(posedge clk) begin	// mac_array.k:53:9
-    p0_block_addr <= data_in_14[15:0];	// mac_array.k:53:9
-    p0_value <= data_in_14[895:16];	// mac_array.k:53:9
-    if (rst) begin	// mac_array.k:53:9
-      p0_stage1_enable <= 1'h0;	// mac_array.k:53:9
-      p0_stage2_enable <= 1'h0;	// mac_array.k:53:9
+  reg   [15:0]  p0_block_addr;	// mac_array.k:54:9
+  reg   [879:0] p0_value;	// mac_array.k:54:9
+  reg           p0_stage1_enable = 1'h0;	// mac_array.k:54:9
+  reg           p0_stage2_enable = 1'h0;	// mac_array.k:54:9
+  always @(posedge clk) begin	// mac_array.k:54:9
+    p0_block_addr <= data_in_14[15:0];	// mac_array.k:54:9
+    p0_value <= data_in_14[895:16];	// mac_array.k:54:9
+    if (rst) begin	// mac_array.k:54:9
+      p0_stage1_enable <= 1'h0;	// mac_array.k:54:9
+      p0_stage2_enable <= 1'h0;	// mac_array.k:54:9
     end
-    else begin	// mac_array.k:53:9
-      p0_stage1_enable <= _GEN_0;	// mac_array.k:53:9
-      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:53:9
+    else begin	// mac_array.k:54:9
+      p0_stage1_enable <= _GEN_0;	// mac_array.k:54:9
+      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:54:9
     end
   end // always @(posedge)
-  always_comb	// mac_array.k:53:9
-    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:53:9, :54:9
+  always_comb	// mac_array.k:54:9
+    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:54:9, :55:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:53:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:54:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -1026,26 +1026,26 @@ module mac_array_write_rom_block_BasicBlock_0(	// mac_array.k:53:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_array.k:53:9
+    .data_in  (~fifo_overflow_in_0),	// mac_array.k:54:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  mac_arrayDebugView_write_rom_blockEntry mac_arrayDebugView_write_rom_blockEntry_instance (	// mac_array.k:54:9
-    .clk         (clk),	// mac_array.k:54:9
-    ._block_addr (p0_stage1_enable ? p0_block_addr : 'x),	// mac_array.k:53:9, :54:9
-    ._value      (p0_stage1_enable ? p0_value : 'x),	// mac_array.k:53:9, :54:9
-    .valid       (p0_stage1_enable),	// mac_array.k:53:9
+  mac_arrayDebugView_write_rom_blockEntry mac_arrayDebugView_write_rom_blockEntry_instance (	// mac_array.k:55:9
+    .clk         (clk),	// mac_array.k:55:9
+    ._block_addr (p0_stage1_enable ? p0_block_addr : 'x),	// mac_array.k:54:9, :55:9
+    ._value      (p0_stage1_enable ? p0_value : 'x),	// mac_array.k:54:9, :55:9
+    .valid       (p0_stage1_enable),	// mac_array.k:54:9
     .valid_out   (/* unused */)
-  );	// mac_array.k:54:9
-  assign done_out = p0_stage2_enable;	// mac_array.k:53:9
-  assign memory_write_data_out_29_0 = memory_write_data_out_29_0_0;	// mac_array.k:53:9
-  assign memory_write_addr_out_29_0 = memory_write_addr_out_29_0_0;	// mac_array.k:53:9
-  assign memory_wren_29_0 = memory_wren_29_0_0;	// mac_array.k:53:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:53:9
-  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:53:9
-  assign control_state_out = control_state_out_0;	// mac_array.k:53:9
+  );	// mac_array.k:55:9
+  assign done_out = p0_stage2_enable;	// mac_array.k:54:9
+  assign memory_write_data_out_29_0 = memory_write_data_out_29_0_0;	// mac_array.k:54:9
+  assign memory_write_addr_out_29_0 = memory_write_addr_out_29_0_0;	// mac_array.k:54:9
+  assign memory_wren_29_0 = memory_wren_29_0_0;	// mac_array.k:54:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:54:9
+  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:54:9
+  assign control_state_out = control_state_out_0;	// mac_array.k:54:9
 endmodule
 
-module mac_array_read_rom_block_BasicBlock_0(	// mac_array.k:46:9
+module mac_array_read_rom_block_BasicBlock_0(	// mac_array.k:47:9
   input  wire         clk,
   input  wire         rst,
   output wire         done_out,
@@ -1065,61 +1065,61 @@ module mac_array_read_rom_block_BasicBlock_0(	// mac_array.k:46:9
 
   wire          _fifo_overflow_ffc_0_data_out;
   wire          _fifo_almostfull_ffc_0_data_out;
-  wire  [879:0] memory_read_data_in_29_0_0 = memory_read_data_in_29_0;	// mac_array.k:46:9
-  logic         done_out_0;	// mac_array.k:46:9
-  logic [9:0]   memory_read_addr_out_29_0_0;	// mac_array.k:46:9
-  logic         memory_rden_out_29_0_0;	// mac_array.k:46:9
-  logic [879:0] fifo_data_out_0_0;	// mac_array.k:46:9
-  logic         fifo_wren_0_0;	// mac_array.k:46:9
-  logic         input_rdy_0_0;	// mac_array.k:46:9
-  logic [7:0]   control_state_out_0;	// mac_array.k:46:9
-  wire          _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:46:9
-  wire          _GEN_0 = _GEN & input_valid_0;	// mac_array.k:46:9
-  always_comb begin	// mac_array.k:46:9
-    input_rdy_0_0 = _GEN;	// mac_array.k:46:9
+  wire  [879:0] memory_read_data_in_29_0_0 = memory_read_data_in_29_0;	// mac_array.k:47:9
+  logic         done_out_0;	// mac_array.k:47:9
+  logic [9:0]   memory_read_addr_out_29_0_0;	// mac_array.k:47:9
+  logic         memory_rden_out_29_0_0;	// mac_array.k:47:9
+  logic [879:0] fifo_data_out_0_0;	// mac_array.k:47:9
+  logic         fifo_wren_0_0;	// mac_array.k:47:9
+  logic         input_rdy_0_0;	// mac_array.k:47:9
+  logic [7:0]   control_state_out_0;	// mac_array.k:47:9
+  wire          _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:47:9
+  wire          _GEN_0 = _GEN & input_valid_0;	// mac_array.k:47:9
+  always_comb begin	// mac_array.k:47:9
+    input_rdy_0_0 = _GEN;	// mac_array.k:47:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_array.k:46:9
+       ~input_valid_0};	// mac_array.k:47:9
   end // always_comb
-  always_comb begin	// mac_array.k:46:9
-    memory_read_addr_out_29_0_0 = data_in_13[9:0];	// mac_array.k:47:27
-    memory_rden_out_29_0_0 = _GEN_0;	// mac_array.k:46:9, :47:27
+  always_comb begin	// mac_array.k:47:9
+    memory_read_addr_out_29_0_0 = data_in_13[9:0];	// mac_array.k:48:27
+    memory_rden_out_29_0_0 = _GEN_0;	// mac_array.k:47:9, :48:27
   end // always_comb
-  reg   [15:0]  p0_data_in_13;	// mac_array.k:46:9
-  reg           p0_stage1_enable = 1'h0;	// mac_array.k:46:9
-  reg           p0_stage2_enable = 1'h0;	// mac_array.k:46:9
-  reg   [879:0] p0_memory_read_data_in_29_0;	// mac_array.k:46:9
-  reg           p0_stage3_enable = 1'h0;	// mac_array.k:46:9
-  always @(posedge clk) begin	// mac_array.k:46:9
-    p0_data_in_13 <= data_in_13;	// mac_array.k:46:9
-    if (rst) begin	// mac_array.k:46:9
-      p0_stage1_enable <= 1'h0;	// mac_array.k:46:9
-      p0_stage2_enable <= 1'h0;	// mac_array.k:46:9
+  reg   [15:0]  p0_data_in_13;	// mac_array.k:47:9
+  reg           p0_stage1_enable = 1'h0;	// mac_array.k:47:9
+  reg           p0_stage2_enable = 1'h0;	// mac_array.k:47:9
+  reg   [879:0] p0_memory_read_data_in_29_0;	// mac_array.k:47:9
+  reg           p0_stage3_enable = 1'h0;	// mac_array.k:47:9
+  always @(posedge clk) begin	// mac_array.k:47:9
+    p0_data_in_13 <= data_in_13;	// mac_array.k:47:9
+    if (rst) begin	// mac_array.k:47:9
+      p0_stage1_enable <= 1'h0;	// mac_array.k:47:9
+      p0_stage2_enable <= 1'h0;	// mac_array.k:47:9
     end
-    else begin	// mac_array.k:46:9
-      p0_stage1_enable <= _GEN_0;	// mac_array.k:46:9
-      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:46:9
+    else begin	// mac_array.k:47:9
+      p0_stage1_enable <= _GEN_0;	// mac_array.k:47:9
+      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:47:9
     end
-    p0_memory_read_data_in_29_0 <= memory_read_data_in_29_0_0;	// mac_array.k:46:9
-    if (rst)	// mac_array.k:46:9
-      p0_stage3_enable <= 1'h0;	// mac_array.k:46:9
-    else	// mac_array.k:46:9
-      p0_stage3_enable <= p0_stage2_enable;	// mac_array.k:46:9
+    p0_memory_read_data_in_29_0 <= memory_read_data_in_29_0_0;	// mac_array.k:47:9
+    if (rst)	// mac_array.k:47:9
+      p0_stage3_enable <= 1'h0;	// mac_array.k:47:9
+    else	// mac_array.k:47:9
+      p0_stage3_enable <= p0_stage2_enable;	// mac_array.k:47:9
   end // always @(posedge)
-  always_comb begin	// mac_array.k:46:9
-    fifo_wren_0_0 = p0_stage3_enable;	// mac_array.k:44:5, :46:9
-    fifo_data_out_0_0 = p0_memory_read_data_in_29_0;	// mac_array.k:44:5, :46:9
+  always_comb begin	// mac_array.k:47:9
+    fifo_wren_0_0 = p0_stage3_enable;	// mac_array.k:45:5, :47:9
+    fifo_data_out_0_0 = p0_memory_read_data_in_29_0;	// mac_array.k:45:5, :47:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:46:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:47:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -1127,31 +1127,31 @@ module mac_array_read_rom_block_BasicBlock_0(	// mac_array.k:46:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_array.k:46:9
+    .data_in  (~fifo_overflow_in_0),	// mac_array.k:47:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  mac_arrayDebugView_read_rom_blockEntry mac_arrayDebugView_read_rom_blockEntry_instance (	// mac_array.k:44:5
-    .clk         (clk),	// mac_array.k:44:5
-    ._block_addr (p0_stage1_enable ? p0_data_in_13 : 'x),	// mac_array.k:44:5, :46:9
-    .valid       (p0_stage1_enable),	// mac_array.k:46:9
+  mac_arrayDebugView_read_rom_blockEntry mac_arrayDebugView_read_rom_blockEntry_instance (	// mac_array.k:45:5
+    .clk         (clk),	// mac_array.k:45:5
+    ._block_addr (p0_stage1_enable ? p0_data_in_13 : 'x),	// mac_array.k:45:5, :47:9
+    .valid       (p0_stage1_enable),	// mac_array.k:47:9
     .valid_out   (/* unused */)
-  );	// mac_array.k:44:5
-  mac_arrayDebugView_read_rom_blockExit mac_arrayDebugView_read_rom_blockExit_instance (	// mac_array.k:44:5
-    .clk          (clk),	// mac_array.k:44:5
-    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_29_0_0 : 'x),	// mac_array.k:44:5, :46:9
-    .valid        (p0_stage2_enable),	// mac_array.k:46:9
+  );	// mac_array.k:45:5
+  mac_arrayDebugView_read_rom_blockExit mac_arrayDebugView_read_rom_blockExit_instance (	// mac_array.k:45:5
+    .clk          (clk),	// mac_array.k:45:5
+    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_29_0_0 : 'x),	// mac_array.k:45:5, :47:9
+    .valid        (p0_stage2_enable),	// mac_array.k:47:9
     .valid_out    (/* unused */)
-  );	// mac_array.k:44:5
-  assign done_out = p0_stage3_enable;	// mac_array.k:46:9
-  assign memory_read_addr_out_29_0 = memory_read_addr_out_29_0_0;	// mac_array.k:46:9
-  assign memory_rden_out_29_0 = memory_rden_out_29_0_0;	// mac_array.k:46:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_array.k:46:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:46:9
-  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:46:9
-  assign control_state_out = control_state_out_0;	// mac_array.k:46:9
+  );	// mac_array.k:45:5
+  assign done_out = p0_stage3_enable;	// mac_array.k:47:9
+  assign memory_read_addr_out_29_0 = memory_read_addr_out_29_0_0;	// mac_array.k:47:9
+  assign memory_rden_out_29_0 = memory_rden_out_29_0_0;	// mac_array.k:47:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_array.k:47:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:47:9
+  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:47:9
+  assign control_state_out = control_state_out_0;	// mac_array.k:47:9
 endmodule
 
-module mac_array_read_accum_BasicBlock_0(	// mac_array.k:41:41
+module mac_array_read_accum_BasicBlock_0(	// mac_array.k:42:41
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -1172,28 +1172,28 @@ module mac_array_read_accum_BasicBlock_0(	// mac_array.k:41:41
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [23:0] global_in__accum_element_0_21_0 = global_in__accum_element_0_21;	// mac_array.k:41:41
-  wire  [23:0] global_in__accum_element_1_22_0 = global_in__accum_element_1_22;	// mac_array.k:41:41
-  wire  [23:0] global_in__accum_element_2_23_0 = global_in__accum_element_2_23;	// mac_array.k:41:41
-  wire  [23:0] global_in__accum_element_3_24_0 = global_in__accum_element_3_24;	// mac_array.k:41:41
-  logic        done_out_0;	// mac_array.k:41:41
-  logic [23:0] fifo_data_out_0_0;	// mac_array.k:41:41
-  logic        fifo_wren_0_0;	// mac_array.k:41:41
-  logic        input_rdy_0_0;	// mac_array.k:41:41
-  logic [7:0]  control_state_out_0;	// mac_array.k:41:41
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:41:41
-  always_comb begin	// mac_array.k:41:41
-    input_rdy_0_0 = _GEN;	// mac_array.k:41:41
+  wire  [23:0] global_in__accum_element_0_21_0 = global_in__accum_element_0_21;	// mac_array.k:42:41
+  wire  [23:0] global_in__accum_element_1_22_0 = global_in__accum_element_1_22;	// mac_array.k:42:41
+  wire  [23:0] global_in__accum_element_2_23_0 = global_in__accum_element_2_23;	// mac_array.k:42:41
+  wire  [23:0] global_in__accum_element_3_24_0 = global_in__accum_element_3_24;	// mac_array.k:42:41
+  logic        done_out_0;	// mac_array.k:42:41
+  logic [23:0] fifo_data_out_0_0;	// mac_array.k:42:41
+  logic        fifo_wren_0_0;	// mac_array.k:42:41
+  logic        input_rdy_0_0;	// mac_array.k:42:41
+  logic [7:0]  control_state_out_0;	// mac_array.k:42:41
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:42:41
+  always_comb begin	// mac_array.k:42:41
+    input_rdy_0_0 = _GEN;	// mac_array.k:42:41
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_array.k:41:41
+       ~input_valid_0};	// mac_array.k:42:41
   end // always_comb
-  reg   [1:0]  p0_data_in_12;	// mac_array.k:41:41
-  reg          p0_stage1_enable = 1'h0;	// mac_array.k:41:41
+  reg   [1:0]  p0_data_in_12;	// mac_array.k:42:41
+  reg          p0_stage1_enable = 1'h0;	// mac_array.k:42:41
   wire  [23:0] _accum =
     p0_data_in_12[1]
       ? (p0_data_in_12[0]
@@ -1201,31 +1201,31 @@ module mac_array_read_accum_BasicBlock_0(	// mac_array.k:41:41
            : global_in__accum_element_2_23_0)
       : p0_data_in_12[0]
           ? global_in__accum_element_1_22_0
-          : global_in__accum_element_0_21_0;	// mac_array.k:41:{41,48}
-  reg   [23:0] p0__accum;	// mac_array.k:41:41
-  reg          p0_stage2_enable = 1'h0;	// mac_array.k:41:41
-  always @(posedge clk) begin	// mac_array.k:41:41
-    p0_data_in_12 <= data_in_12;	// mac_array.k:41:41
-    if (rst)	// mac_array.k:41:41
-      p0_stage1_enable <= 1'h0;	// mac_array.k:41:41
-    else	// mac_array.k:41:41
-      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:41:41
-    p0__accum <= _accum;	// mac_array.k:41:{41,48}
-    if (rst)	// mac_array.k:41:41
-      p0_stage2_enable <= 1'h0;	// mac_array.k:41:41
-    else	// mac_array.k:41:41
-      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:41:41
+          : global_in__accum_element_0_21_0;	// mac_array.k:42:{41,48}
+  reg   [23:0] p0__accum;	// mac_array.k:42:41
+  reg          p0_stage2_enable = 1'h0;	// mac_array.k:42:41
+  always @(posedge clk) begin	// mac_array.k:42:41
+    p0_data_in_12 <= data_in_12;	// mac_array.k:42:41
+    if (rst)	// mac_array.k:42:41
+      p0_stage1_enable <= 1'h0;	// mac_array.k:42:41
+    else	// mac_array.k:42:41
+      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:42:41
+    p0__accum <= _accum;	// mac_array.k:42:{41,48}
+    if (rst)	// mac_array.k:42:41
+      p0_stage2_enable <= 1'h0;	// mac_array.k:42:41
+    else	// mac_array.k:42:41
+      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:42:41
   end // always @(posedge)
-  always_comb begin	// mac_array.k:41:41
-    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:41:{5,41}
-    fifo_data_out_0_0 = p0__accum;	// mac_array.k:41:{5,41}
+  always_comb begin	// mac_array.k:42:41
+    fifo_wren_0_0 = p0_stage2_enable;	// mac_array.k:42:{5,41}
+    fifo_data_out_0_0 = p0__accum;	// mac_array.k:42:{5,41}
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:41:41
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:42:41
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -1233,29 +1233,29 @@ module mac_array_read_accum_BasicBlock_0(	// mac_array.k:41:41
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_array.k:41:41
+    .data_in  (~fifo_overflow_in_0),	// mac_array.k:42:41
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  mac_arrayDebugView_read_accumEntry mac_arrayDebugView_read_accumEntry_instance (	// mac_array.k:41:5
-    .clk       (clk),	// mac_array.k:41:5
-    ._pe_id    (p0_stage1_enable ? p0_data_in_12 : 'x),	// mac_array.k:41:{5,41}
-    .valid     (p0_stage1_enable),	// mac_array.k:41:41
+  mac_arrayDebugView_read_accumEntry mac_arrayDebugView_read_accumEntry_instance (	// mac_array.k:42:5
+    .clk       (clk),	// mac_array.k:42:5
+    ._pe_id    (p0_stage1_enable ? p0_data_in_12 : 'x),	// mac_array.k:42:{5,41}
+    .valid     (p0_stage1_enable),	// mac_array.k:42:41
     .valid_out (/* unused */)
-  );	// mac_array.k:41:5
-  mac_arrayDebugView_read_accumExit mac_arrayDebugView_read_accumExit_instance (	// mac_array.k:41:5
-    .clk          (clk),	// mac_array.k:41:5
-    ._ReturnValue (p0_stage1_enable ? _accum : 'x),	// mac_array.k:41:{5,41,48}
-    .valid        (p0_stage1_enable),	// mac_array.k:41:41
+  );	// mac_array.k:42:5
+  mac_arrayDebugView_read_accumExit mac_arrayDebugView_read_accumExit_instance (	// mac_array.k:42:5
+    .clk          (clk),	// mac_array.k:42:5
+    ._ReturnValue (p0_stage1_enable ? _accum : 'x),	// mac_array.k:42:{5,41,48}
+    .valid        (p0_stage1_enable),	// mac_array.k:42:41
     .valid_out    (/* unused */)
-  );	// mac_array.k:41:5
-  assign done_out = p0_stage2_enable;	// mac_array.k:41:41
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_array.k:41:41
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:41:41
-  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:41:41
-  assign control_state_out = control_state_out_0;	// mac_array.k:41:41
+  );	// mac_array.k:42:5
+  assign done_out = p0_stage2_enable;	// mac_array.k:42:41
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_array.k:42:41
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:42:41
+  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:42:41
+  assign control_state_out = control_state_out_0;	// mac_array.k:42:41
 endmodule
 
-module mac_array_mac_step_BasicBlock_0(	// mac_array.k:24:9
+module mac_array_mac_step_BasicBlock_0(	// mac_array.k:25:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -1284,84 +1284,108 @@ module mac_array_mac_step_BasicBlock_0(	// mac_array.k:24:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [23:0] global_in__accum_element_0_21_0 = global_in__accum_element_0_21;	// mac_array.k:24:9
-  wire  [23:0] global_in__accum_element_1_22_0 = global_in__accum_element_1_22;	// mac_array.k:24:9
-  wire  [23:0] global_in__accum_element_2_23_0 = global_in__accum_element_2_23;	// mac_array.k:24:9
-  wire  [23:0] global_in__accum_element_3_24_0 = global_in__accum_element_3_24;	// mac_array.k:24:9
-  logic        done_out_0;	// mac_array.k:24:9
-  logic        global_out__accum_element_0_21_0_valid_0;	// mac_array.k:24:9
-  logic [23:0] global_out__accum_element_0_21_0_0;	// mac_array.k:24:9
-  logic        global_out__accum_element_1_22_0_valid_0;	// mac_array.k:24:9
-  logic [23:0] global_out__accum_element_1_22_0_0;	// mac_array.k:24:9
-  logic        global_out__accum_element_2_23_0_valid_0;	// mac_array.k:24:9
-  logic [23:0] global_out__accum_element_2_23_0_0;	// mac_array.k:24:9
-  logic        global_out__accum_element_3_24_0_valid_0;	// mac_array.k:24:9
-  logic [23:0] global_out__accum_element_3_24_0_0;	// mac_array.k:24:9
-  logic [23:0] fifo_data_out_0_0;	// mac_array.k:24:9
-  logic        fifo_wren_0_0;	// mac_array.k:24:9
-  logic        input_rdy_0_0;	// mac_array.k:24:9
-  logic [7:0]  control_state_out_0;	// mac_array.k:24:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:24:9
-  always_comb begin	// mac_array.k:24:9
-    input_rdy_0_0 = _GEN;	// mac_array.k:24:9
+  wire  [23:0] global_in__accum_element_0_21_0 = global_in__accum_element_0_21;	// mac_array.k:25:9
+  wire  [23:0] global_in__accum_element_1_22_0 = global_in__accum_element_1_22;	// mac_array.k:25:9
+  wire  [23:0] global_in__accum_element_2_23_0 = global_in__accum_element_2_23;	// mac_array.k:25:9
+  wire  [23:0] global_in__accum_element_3_24_0 = global_in__accum_element_3_24;	// mac_array.k:25:9
+  logic        done_out_0;	// mac_array.k:25:9
+  logic        global_out__accum_element_0_21_0_valid_0;	// mac_array.k:25:9
+  logic [23:0] global_out__accum_element_0_21_0_0;	// mac_array.k:25:9
+  logic        global_out__accum_element_1_22_0_valid_0;	// mac_array.k:25:9
+  logic [23:0] global_out__accum_element_1_22_0_0;	// mac_array.k:25:9
+  logic        global_out__accum_element_2_23_0_valid_0;	// mac_array.k:25:9
+  logic [23:0] global_out__accum_element_2_23_0_0;	// mac_array.k:25:9
+  logic        global_out__accum_element_3_24_0_valid_0;	// mac_array.k:25:9
+  logic [23:0] global_out__accum_element_3_24_0_0;	// mac_array.k:25:9
+  logic [23:0] fifo_data_out_0_0;	// mac_array.k:25:9
+  logic        fifo_wren_0_0;	// mac_array.k:25:9
+  logic        input_rdy_0_0;	// mac_array.k:25:9
+  logic [7:0]  control_state_out_0;	// mac_array.k:25:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// mac_array.k:25:9
+  always_comb begin	// mac_array.k:25:9
+    input_rdy_0_0 = _GEN;	// mac_array.k:25:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// mac_array.k:24:9
+       ~input_valid_0};	// mac_array.k:25:9
   end // always_comb
-  reg   [1:0]  p0_pe_id;	// mac_array.k:24:9
-  reg   [3:0]  p0_magnitude;	// mac_array.k:24:9
-  reg          p0_sign_bit;	// mac_array.k:24:9
-  reg   [7:0]  p0_activation;	// mac_array.k:24:9
-  reg          p0_stage1_enable = 1'h0;	// mac_array.k:24:9
-  wire         ka = p0_activation[7] & p0_magnitude[1];	// mac_array.k:24:9, :27:25, :28:{29,43}, :30:{13,17}
-  wire         ka_0 = p0_activation[7] & p0_magnitude[1];	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}
-  wire         ka_1 = p0_activation[6] & p0_magnitude[1];	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}
-  wire         ka_2 = p0_activation[5] & p0_magnitude[1];	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}
-  wire         ka_3 = p0_activation[4] & p0_magnitude[1];	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}
-  wire         ka_4 = p0_activation[3] & p0_magnitude[1];	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}
-  wire         ka_5 = p0_activation[2] & p0_magnitude[1];	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}
-  wire         ka_6 = p0_activation[1] & p0_magnitude[1];	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}
-  wire         ka_7 = p0_activation[0] & p0_magnitude[1];	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}
+  reg   [1:0]  p0_pe_id;	// mac_array.k:25:9
+  reg   [3:0]  p0_magnitude;	// mac_array.k:25:9
+  reg          p0_sign_bit;	// mac_array.k:25:9
+  reg   [7:0]  p0_activation;	// mac_array.k:25:9
+  reg          p0_stage1_enable = 1'h0;	// mac_array.k:25:9
+  reg   [23:0] p0__accum;	// mac_array.k:25:9
+  reg   [23:0] p0_product;	// mac_array.k:25:9
+  reg          p0_array_write_enable__accum_pe_id_;	// mac_array.k:25:9
+  reg          p0_array_write_enable__accum_pe_id__0;	// mac_array.k:25:9
+  reg          p0_array_write_enable__accum_pe_id__1;	// mac_array.k:25:9
+  reg          p0_array_write_enable__accum_pe_id__2;	// mac_array.k:25:9
+  reg          p0_stage2_enable = 1'h0;	// mac_array.k:25:9
+  wire  [23:0] _accum_pe_id_plus_product_ = 24'(p0__accum + p0_product);	// mac_array.k:25:9, :36:29
+  always_comb begin	// mac_array.k:25:9
+    global_out__accum_element_0_21_0_0 = _accum_pe_id_plus_product_;	// mac_array.k:26:9, :36:29
+    global_out__accum_element_0_21_0_valid_0 =
+      p0_stage2_enable & p0_array_write_enable__accum_pe_id_;	// mac_array.k:25:9, :26:9
+    global_out__accum_element_1_22_0_0 = _accum_pe_id_plus_product_;	// mac_array.k:26:9, :36:29
+    global_out__accum_element_1_22_0_valid_0 =
+      p0_stage2_enable & p0_array_write_enable__accum_pe_id__0;	// mac_array.k:25:9, :26:9
+    global_out__accum_element_2_23_0_0 = _accum_pe_id_plus_product_;	// mac_array.k:26:9, :36:29
+    global_out__accum_element_2_23_0_valid_0 =
+      p0_stage2_enable & p0_array_write_enable__accum_pe_id__1;	// mac_array.k:25:9, :26:9
+    global_out__accum_element_3_24_0_0 = _accum_pe_id_plus_product_;	// mac_array.k:26:9, :36:29
+    global_out__accum_element_3_24_0_valid_0 =
+      p0_stage2_enable & p0_array_write_enable__accum_pe_id__2;	// mac_array.k:25:9, :26:9
+  end // always_comb
+  reg   [23:0] p0__accum_pe_id_plus_product_;	// mac_array.k:25:9
+  reg          p0_stage3_enable = 1'h0;	// mac_array.k:25:9
+  wire         ka = p0_activation[7] & p0_magnitude[1];	// mac_array.k:25:9, :28:25, :29:{29,43}, :31:{13,17}
+  wire         ka_0 = p0_activation[7] & p0_magnitude[1];	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}
+  wire         ka_1 = p0_activation[6] & p0_magnitude[1];	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}
+  wire         ka_2 = p0_activation[5] & p0_magnitude[1];	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}
+  wire         ka_3 = p0_activation[4] & p0_magnitude[1];	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}
+  wire         ka_4 = p0_activation[3] & p0_magnitude[1];	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}
+  wire         ka_5 = p0_activation[2] & p0_magnitude[1];	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}
+  wire         ka_6 = p0_activation[1] & p0_magnitude[1];	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}
+  wire         ka_7 = p0_activation[0] & p0_magnitude[1];	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}
   wire  [22:0] _ka_plus_a_shl_1_ =
     23'({{15{ka}}, ka_0, ka_1, ka_2, ka_3, ka_4, ka_5, ka_6, ka_7}
-        + {{14{p0_activation[7]}}, p0_activation, 1'h0});	// mac_array.k:24:9, :27:25, :30:{13,17}, :31:{42,47}
-  wire         _GEN_0 = ka | p0_magnitude[2];	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}, :31:{13,17}
-  wire         _GEN_1 = ka & ~(p0_magnitude[2]);	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}, :31:{13,17}
-  wire         ka_8 = _ka_plus_a_shl_1_[22] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_9 = _ka_plus_a_shl_1_[21] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_10 = _ka_plus_a_shl_1_[20] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_11 = _ka_plus_a_shl_1_[19] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_12 = _ka_plus_a_shl_1_[18] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_13 = _ka_plus_a_shl_1_[17] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_14 = _ka_plus_a_shl_1_[16] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_15 = _ka_plus_a_shl_1_[15] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_16 = _ka_plus_a_shl_1_[14] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_17 = _ka_plus_a_shl_1_[13] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_18 = _ka_plus_a_shl_1_[12] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_19 = _ka_plus_a_shl_1_[11] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_20 = _ka_plus_a_shl_1_[10] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_21 = _ka_plus_a_shl_1_[9] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
-  wire         ka_22 = _ka_plus_a_shl_1_[8] ? _GEN_0 : _GEN_1;	// mac_array.k:31:{13,17,42}
+        + {{14{p0_activation[7]}}, p0_activation, 1'h0});	// mac_array.k:25:9, :28:25, :31:{13,17}, :32:{42,47}
+  wire         _GEN_0 = ka | p0_magnitude[2];	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}, :32:{13,17}
+  wire         _GEN_1 = ka & ~(p0_magnitude[2]);	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}, :32:{13,17}
+  wire         ka_8 = _ka_plus_a_shl_1_[22] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_9 = _ka_plus_a_shl_1_[21] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_10 = _ka_plus_a_shl_1_[20] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_11 = _ka_plus_a_shl_1_[19] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_12 = _ka_plus_a_shl_1_[18] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_13 = _ka_plus_a_shl_1_[17] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_14 = _ka_plus_a_shl_1_[16] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_15 = _ka_plus_a_shl_1_[15] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_16 = _ka_plus_a_shl_1_[14] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_17 = _ka_plus_a_shl_1_[13] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_18 = _ka_plus_a_shl_1_[12] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_19 = _ka_plus_a_shl_1_[11] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_20 = _ka_plus_a_shl_1_[10] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_21 = _ka_plus_a_shl_1_[9] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
+  wire         ka_22 = _ka_plus_a_shl_1_[8] ? _GEN_0 : _GEN_1;	// mac_array.k:32:{13,17,42}
   wire         ka_23 =
-    _ka_plus_a_shl_1_[7] ? ka_0 | p0_magnitude[2] : ka_0 & ~(p0_magnitude[2]);	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}, :31:{13,17,42}
+    _ka_plus_a_shl_1_[7] ? ka_0 | p0_magnitude[2] : ka_0 & ~(p0_magnitude[2]);	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}, :32:{13,17,42}
   wire         ka_24 =
-    _ka_plus_a_shl_1_[6] ? ka_1 | p0_magnitude[2] : ka_1 & ~(p0_magnitude[2]);	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}, :31:{13,17,42}
+    _ka_plus_a_shl_1_[6] ? ka_1 | p0_magnitude[2] : ka_1 & ~(p0_magnitude[2]);	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}, :32:{13,17,42}
   wire         ka_25 =
-    _ka_plus_a_shl_1_[5] ? ka_2 | p0_magnitude[2] : ka_2 & ~(p0_magnitude[2]);	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}, :31:{13,17,42}
+    _ka_plus_a_shl_1_[5] ? ka_2 | p0_magnitude[2] : ka_2 & ~(p0_magnitude[2]);	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}, :32:{13,17,42}
   wire         ka_26 =
-    _ka_plus_a_shl_1_[4] ? ka_3 | p0_magnitude[2] : ka_3 & ~(p0_magnitude[2]);	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}, :31:{13,17,42}
+    _ka_plus_a_shl_1_[4] ? ka_3 | p0_magnitude[2] : ka_3 & ~(p0_magnitude[2]);	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}, :32:{13,17,42}
   wire         ka_27 =
-    _ka_plus_a_shl_1_[3] ? ka_4 | p0_magnitude[2] : ka_4 & ~(p0_magnitude[2]);	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}, :31:{13,17,42}
+    _ka_plus_a_shl_1_[3] ? ka_4 | p0_magnitude[2] : ka_4 & ~(p0_magnitude[2]);	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}, :32:{13,17,42}
   wire         ka_28 =
-    _ka_plus_a_shl_1_[2] ? ka_5 | p0_magnitude[2] : ka_5 & ~(p0_magnitude[2]);	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}, :31:{13,17,42}
+    _ka_plus_a_shl_1_[2] ? ka_5 | p0_magnitude[2] : ka_5 & ~(p0_magnitude[2]);	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}, :32:{13,17,42}
   wire         ka_29 =
-    _ka_plus_a_shl_1_[1] ? ka_6 | p0_magnitude[2] : ka_6 & ~(p0_magnitude[2]);	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}, :31:{13,17,42}
+    _ka_plus_a_shl_1_[1] ? ka_6 | p0_magnitude[2] : ka_6 & ~(p0_magnitude[2]);	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}, :32:{13,17,42}
   wire         ka_30 =
-    _ka_plus_a_shl_1_[0] ? ka_7 | p0_magnitude[2] : ka_7 & ~(p0_magnitude[2]);	// mac_array.k:24:9, :28:{29,43}, :30:{13,17}, :31:{13,17,42}
+    _ka_plus_a_shl_1_[0] ? ka_7 | p0_magnitude[2] : ka_7 & ~(p0_magnitude[2]);	// mac_array.k:25:9, :29:{29,43}, :31:{13,17}, :32:{13,17,42}
   wire  [22:0] _ka_plus_a_shl_2_ =
     23'({ka_8,
          ka_9,
@@ -1385,7 +1409,7 @@ module mac_array_mac_step_BasicBlock_0(	// mac_array.k:24:9
          ka_27,
          ka_28,
          ka_29,
-         ka_30} + {{13{p0_activation[7]}}, p0_activation, 2'h0});	// mac_array.k:24:9, :27:25, :31:{13,17}, :32:{42,47}
+         ka_30} + {{13{p0_activation[7]}}, p0_activation, 2'h0});	// mac_array.k:25:9, :28:25, :32:{13,17}, :33:{42,47}
   wire  [23:0] _ka_shl_1_plus_a_ =
     24'({_ka_plus_a_shl_2_[22] ? ka_8 | p0_magnitude[3] : ka_8 & ~(p0_magnitude[3]),
          _ka_plus_a_shl_2_[21] ? ka_9 | p0_magnitude[3] : ka_9 & ~(p0_magnitude[3]),
@@ -1410,132 +1434,120 @@ module mac_array_mac_step_BasicBlock_0(	// mac_array.k:24:9
          _ka_plus_a_shl_2_[2] ? ka_28 | p0_magnitude[3] : ka_28 & ~(p0_magnitude[3]),
          _ka_plus_a_shl_2_[1] ? ka_29 | p0_magnitude[3] : ka_29 & ~(p0_magnitude[3]),
          _ka_plus_a_shl_2_[0] ? ka_30 | p0_magnitude[3] : ka_30 & ~(p0_magnitude[3]),
-         1'h0} + {{16{p0_activation[7]}}, p0_activation});	// mac_array.k:24:9, :27:25, :28:{29,43}, :31:{13,17}, :32:{13,17,42}, :33:31
-  wire  [23:0] _0_minus_product_ = 24'(24'h0 - _ka_shl_1_plus_a_);	// mac_array.k:33:31, :34:44
-  wire  [23:0] _accum_pe_id_plus_product_ =
-    24'((p0_pe_id[1]
-           ? (p0_pe_id[0]
-                ? global_in__accum_element_3_24_0
-                : global_in__accum_element_2_23_0)
-           : p0_pe_id[0]
-               ? global_in__accum_element_1_22_0
-               : global_in__accum_element_0_21_0)
-        + {_0_minus_product_[23]
-             ? _ka_shl_1_plus_a_[23] | p0_sign_bit
-             : _ka_shl_1_plus_a_[23] & ~p0_sign_bit,
-           _0_minus_product_[22]
-             ? _ka_shl_1_plus_a_[22] | p0_sign_bit
-             : _ka_shl_1_plus_a_[22] & ~p0_sign_bit,
-           _0_minus_product_[21]
-             ? _ka_shl_1_plus_a_[21] | p0_sign_bit
-             : _ka_shl_1_plus_a_[21] & ~p0_sign_bit,
-           _0_minus_product_[20]
-             ? _ka_shl_1_plus_a_[20] | p0_sign_bit
-             : _ka_shl_1_plus_a_[20] & ~p0_sign_bit,
-           _0_minus_product_[19]
-             ? _ka_shl_1_plus_a_[19] | p0_sign_bit
-             : _ka_shl_1_plus_a_[19] & ~p0_sign_bit,
-           _0_minus_product_[18]
-             ? _ka_shl_1_plus_a_[18] | p0_sign_bit
-             : _ka_shl_1_plus_a_[18] & ~p0_sign_bit,
-           _0_minus_product_[17]
-             ? _ka_shl_1_plus_a_[17] | p0_sign_bit
-             : _ka_shl_1_plus_a_[17] & ~p0_sign_bit,
-           _0_minus_product_[16]
-             ? _ka_shl_1_plus_a_[16] | p0_sign_bit
-             : _ka_shl_1_plus_a_[16] & ~p0_sign_bit,
-           _0_minus_product_[15]
-             ? _ka_shl_1_plus_a_[15] | p0_sign_bit
-             : _ka_shl_1_plus_a_[15] & ~p0_sign_bit,
-           _0_minus_product_[14]
-             ? _ka_shl_1_plus_a_[14] | p0_sign_bit
-             : _ka_shl_1_plus_a_[14] & ~p0_sign_bit,
-           _0_minus_product_[13]
-             ? _ka_shl_1_plus_a_[13] | p0_sign_bit
-             : _ka_shl_1_plus_a_[13] & ~p0_sign_bit,
-           _0_minus_product_[12]
-             ? _ka_shl_1_plus_a_[12] | p0_sign_bit
-             : _ka_shl_1_plus_a_[12] & ~p0_sign_bit,
-           _0_minus_product_[11]
-             ? _ka_shl_1_plus_a_[11] | p0_sign_bit
-             : _ka_shl_1_plus_a_[11] & ~p0_sign_bit,
-           _0_minus_product_[10]
-             ? _ka_shl_1_plus_a_[10] | p0_sign_bit
-             : _ka_shl_1_plus_a_[10] & ~p0_sign_bit,
-           _0_minus_product_[9]
-             ? _ka_shl_1_plus_a_[9] | p0_sign_bit
-             : _ka_shl_1_plus_a_[9] & ~p0_sign_bit,
-           _0_minus_product_[8]
-             ? _ka_shl_1_plus_a_[8] | p0_sign_bit
-             : _ka_shl_1_plus_a_[8] & ~p0_sign_bit,
-           _0_minus_product_[7]
-             ? _ka_shl_1_plus_a_[7] | p0_sign_bit
-             : _ka_shl_1_plus_a_[7] & ~p0_sign_bit,
-           _0_minus_product_[6]
-             ? _ka_shl_1_plus_a_[6] | p0_sign_bit
-             : _ka_shl_1_plus_a_[6] & ~p0_sign_bit,
-           _0_minus_product_[5]
-             ? _ka_shl_1_plus_a_[5] | p0_sign_bit
-             : _ka_shl_1_plus_a_[5] & ~p0_sign_bit,
-           _0_minus_product_[4]
-             ? _ka_shl_1_plus_a_[4] | p0_sign_bit
-             : _ka_shl_1_plus_a_[4] & ~p0_sign_bit,
-           _0_minus_product_[3]
-             ? _ka_shl_1_plus_a_[3] | p0_sign_bit
-             : _ka_shl_1_plus_a_[3] & ~p0_sign_bit,
-           _0_minus_product_[2]
-             ? _ka_shl_1_plus_a_[2] | p0_sign_bit
-             : _ka_shl_1_plus_a_[2] & ~p0_sign_bit,
-           _0_minus_product_[1]
-             ? _ka_shl_1_plus_a_[1] | p0_sign_bit
-             : _ka_shl_1_plus_a_[1] & ~p0_sign_bit,
-           _0_minus_product_[0]
-             ? _ka_shl_1_plus_a_[0] | p0_sign_bit
-             : _ka_shl_1_plus_a_[0] & ~p0_sign_bit});	// mac_array.k:24:9, :33:31, :34:{13,17,44}, :35:29
-  always_comb begin	// mac_array.k:24:9
-    global_out__accum_element_0_21_0_0 = _accum_pe_id_plus_product_;	// mac_array.k:25:9, :35:29
-    global_out__accum_element_0_21_0_valid_0 = p0_stage1_enable & p0_pe_id == 2'h0;	// mac_array.k:24:9, :25:9, :35:13
-    global_out__accum_element_1_22_0_0 = _accum_pe_id_plus_product_;	// mac_array.k:25:9, :35:29
-    global_out__accum_element_1_22_0_valid_0 = p0_stage1_enable & p0_pe_id == 2'h1;	// mac_array.k:24:9, :25:9, :35:13
-    global_out__accum_element_2_23_0_0 = _accum_pe_id_plus_product_;	// mac_array.k:25:9, :35:29
-    global_out__accum_element_2_23_0_valid_0 = p0_stage1_enable & p0_pe_id == 2'h2;	// mac_array.k:24:9, :25:9, :35:13
-    global_out__accum_element_3_24_0_0 = _accum_pe_id_plus_product_;	// mac_array.k:25:9, :35:29
-    global_out__accum_element_3_24_0_valid_0 = p0_stage1_enable & (&p0_pe_id);	// mac_array.k:24:9, :25:9, :35:13
-  end // always_comb
-  reg   [23:0] p0__accum_pe_id_plus_product_;	// mac_array.k:24:9
-  reg          p0_stage2_enable = 1'h0;	// mac_array.k:24:9
-  reg   [23:0] p0__accum_pe_id_plus_product__0;	// mac_array.k:24:9
-  reg          p0_stage3_enable = 1'h0;	// mac_array.k:24:9
-  always @(posedge clk) begin	// mac_array.k:24:9
-    p0_pe_id <= data_in_11[1:0];	// mac_array.k:24:9
-    p0_magnitude <= data_in_11[5:2];	// mac_array.k:24:9
-    p0_sign_bit <= data_in_11[6];	// mac_array.k:24:9
-    p0_activation <= data_in_11[14:7];	// mac_array.k:24:9
-    if (rst)	// mac_array.k:24:9
-      p0_stage1_enable <= 1'h0;	// mac_array.k:24:9
-    else	// mac_array.k:24:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:24:9
-    p0__accum_pe_id_plus_product_ <= _accum_pe_id_plus_product_;	// mac_array.k:24:9, :35:29
-    if (rst)	// mac_array.k:24:9
-      p0_stage2_enable <= 1'h0;	// mac_array.k:24:9
-    else	// mac_array.k:24:9
-      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:24:9
-    p0__accum_pe_id_plus_product__0 <= p0__accum_pe_id_plus_product_;	// mac_array.k:24:9
-    if (rst)	// mac_array.k:24:9
-      p0_stage3_enable <= 1'h0;	// mac_array.k:24:9
-    else	// mac_array.k:24:9
-      p0_stage3_enable <= p0_stage2_enable;	// mac_array.k:24:9
+         1'h0} + {{16{p0_activation[7]}}, p0_activation});	// mac_array.k:25:9, :28:25, :29:{29,43}, :32:{13,17}, :33:{13,17,42}, :34:31
+  wire  [23:0] _0_minus_product_ = 24'(24'h0 - _ka_shl_1_plus_a_);	// mac_array.k:34:31, :35:44
+  always @(posedge clk) begin	// mac_array.k:25:9
+    p0_pe_id <= data_in_11[1:0];	// mac_array.k:25:9
+    p0_magnitude <= data_in_11[5:2];	// mac_array.k:25:9
+    p0_sign_bit <= data_in_11[6];	// mac_array.k:25:9
+    p0_activation <= data_in_11[14:7];	// mac_array.k:25:9
+    if (rst)	// mac_array.k:25:9
+      p0_stage1_enable <= 1'h0;	// mac_array.k:25:9
+    else	// mac_array.k:25:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// mac_array.k:25:9
+    p0__accum <=
+      p0_pe_id[1]
+        ? (p0_pe_id[0]
+             ? global_in__accum_element_3_24_0
+             : global_in__accum_element_2_23_0)
+        : p0_pe_id[0] ? global_in__accum_element_1_22_0 : global_in__accum_element_0_21_0;	// mac_array.k:25:9, :36:29
+    p0_product <=
+      {_0_minus_product_[23]
+         ? _ka_shl_1_plus_a_[23] | p0_sign_bit
+         : _ka_shl_1_plus_a_[23] & ~p0_sign_bit,
+       _0_minus_product_[22]
+         ? _ka_shl_1_plus_a_[22] | p0_sign_bit
+         : _ka_shl_1_plus_a_[22] & ~p0_sign_bit,
+       _0_minus_product_[21]
+         ? _ka_shl_1_plus_a_[21] | p0_sign_bit
+         : _ka_shl_1_plus_a_[21] & ~p0_sign_bit,
+       _0_minus_product_[20]
+         ? _ka_shl_1_plus_a_[20] | p0_sign_bit
+         : _ka_shl_1_plus_a_[20] & ~p0_sign_bit,
+       _0_minus_product_[19]
+         ? _ka_shl_1_plus_a_[19] | p0_sign_bit
+         : _ka_shl_1_plus_a_[19] & ~p0_sign_bit,
+       _0_minus_product_[18]
+         ? _ka_shl_1_plus_a_[18] | p0_sign_bit
+         : _ka_shl_1_plus_a_[18] & ~p0_sign_bit,
+       _0_minus_product_[17]
+         ? _ka_shl_1_plus_a_[17] | p0_sign_bit
+         : _ka_shl_1_plus_a_[17] & ~p0_sign_bit,
+       _0_minus_product_[16]
+         ? _ka_shl_1_plus_a_[16] | p0_sign_bit
+         : _ka_shl_1_plus_a_[16] & ~p0_sign_bit,
+       _0_minus_product_[15]
+         ? _ka_shl_1_plus_a_[15] | p0_sign_bit
+         : _ka_shl_1_plus_a_[15] & ~p0_sign_bit,
+       _0_minus_product_[14]
+         ? _ka_shl_1_plus_a_[14] | p0_sign_bit
+         : _ka_shl_1_plus_a_[14] & ~p0_sign_bit,
+       _0_minus_product_[13]
+         ? _ka_shl_1_plus_a_[13] | p0_sign_bit
+         : _ka_shl_1_plus_a_[13] & ~p0_sign_bit,
+       _0_minus_product_[12]
+         ? _ka_shl_1_plus_a_[12] | p0_sign_bit
+         : _ka_shl_1_plus_a_[12] & ~p0_sign_bit,
+       _0_minus_product_[11]
+         ? _ka_shl_1_plus_a_[11] | p0_sign_bit
+         : _ka_shl_1_plus_a_[11] & ~p0_sign_bit,
+       _0_minus_product_[10]
+         ? _ka_shl_1_plus_a_[10] | p0_sign_bit
+         : _ka_shl_1_plus_a_[10] & ~p0_sign_bit,
+       _0_minus_product_[9]
+         ? _ka_shl_1_plus_a_[9] | p0_sign_bit
+         : _ka_shl_1_plus_a_[9] & ~p0_sign_bit,
+       _0_minus_product_[8]
+         ? _ka_shl_1_plus_a_[8] | p0_sign_bit
+         : _ka_shl_1_plus_a_[8] & ~p0_sign_bit,
+       _0_minus_product_[7]
+         ? _ka_shl_1_plus_a_[7] | p0_sign_bit
+         : _ka_shl_1_plus_a_[7] & ~p0_sign_bit,
+       _0_minus_product_[6]
+         ? _ka_shl_1_plus_a_[6] | p0_sign_bit
+         : _ka_shl_1_plus_a_[6] & ~p0_sign_bit,
+       _0_minus_product_[5]
+         ? _ka_shl_1_plus_a_[5] | p0_sign_bit
+         : _ka_shl_1_plus_a_[5] & ~p0_sign_bit,
+       _0_minus_product_[4]
+         ? _ka_shl_1_plus_a_[4] | p0_sign_bit
+         : _ka_shl_1_plus_a_[4] & ~p0_sign_bit,
+       _0_minus_product_[3]
+         ? _ka_shl_1_plus_a_[3] | p0_sign_bit
+         : _ka_shl_1_plus_a_[3] & ~p0_sign_bit,
+       _0_minus_product_[2]
+         ? _ka_shl_1_plus_a_[2] | p0_sign_bit
+         : _ka_shl_1_plus_a_[2] & ~p0_sign_bit,
+       _0_minus_product_[1]
+         ? _ka_shl_1_plus_a_[1] | p0_sign_bit
+         : _ka_shl_1_plus_a_[1] & ~p0_sign_bit,
+       _0_minus_product_[0]
+         ? _ka_shl_1_plus_a_[0] | p0_sign_bit
+         : _ka_shl_1_plus_a_[0] & ~p0_sign_bit};	// mac_array.k:25:9, :34:31, :35:{13,17,44}
+    p0_array_write_enable__accum_pe_id_ <= p0_pe_id == 2'h0;	// mac_array.k:25:9, :36:13
+    p0_array_write_enable__accum_pe_id__0 <= p0_pe_id == 2'h1;	// mac_array.k:25:9, :36:13
+    p0_array_write_enable__accum_pe_id__1 <= p0_pe_id == 2'h2;	// mac_array.k:25:9, :36:13
+    p0_array_write_enable__accum_pe_id__2 <= &p0_pe_id;	// mac_array.k:25:9, :36:13
+    if (rst)	// mac_array.k:25:9
+      p0_stage2_enable <= 1'h0;	// mac_array.k:25:9
+    else	// mac_array.k:25:9
+      p0_stage2_enable <= p0_stage1_enable;	// mac_array.k:25:9
+    p0__accum_pe_id_plus_product_ <= _accum_pe_id_plus_product_;	// mac_array.k:25:9, :36:29
+    if (rst)	// mac_array.k:25:9
+      p0_stage3_enable <= 1'h0;	// mac_array.k:25:9
+    else	// mac_array.k:25:9
+      p0_stage3_enable <= p0_stage2_enable;	// mac_array.k:25:9
   end // always @(posedge)
-  always_comb begin	// mac_array.k:24:9
-    fifo_wren_0_0 = p0_stage3_enable;	// mac_array.k:22:5, :24:9
-    fifo_data_out_0_0 = p0__accum_pe_id_plus_product__0;	// mac_array.k:22:5, :24:9
+  always_comb begin	// mac_array.k:25:9
+    fifo_wren_0_0 = p0_stage3_enable;	// mac_array.k:23:5, :25:9
+    fifo_data_out_0_0 = p0__accum_pe_id_plus_product_;	// mac_array.k:23:5, :25:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:24:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// mac_array.k:25:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -1543,41 +1555,41 @@ module mac_array_mac_step_BasicBlock_0(	// mac_array.k:24:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// mac_array.k:24:9
+    .data_in  (~fifo_overflow_in_0),	// mac_array.k:25:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  mac_arrayDebugView_mac_stepEntry mac_arrayDebugView_mac_stepEntry_instance (	// mac_array.k:22:5
-    .clk         (clk),	// mac_array.k:22:5
-    ._pe_id      (p0_stage1_enable ? p0_pe_id : 'x),	// mac_array.k:22:5, :24:9
-    ._magnitude  (p0_stage1_enable ? p0_magnitude : 'x),	// mac_array.k:22:5, :24:9
-    ._sign_bit   (p0_stage1_enable ? p0_sign_bit : 'x),	// mac_array.k:22:5, :24:9
-    ._activation (p0_stage1_enable ? p0_activation : 'x),	// mac_array.k:22:5, :24:9
-    .valid       (p0_stage1_enable),	// mac_array.k:24:9
+  mac_arrayDebugView_mac_stepEntry mac_arrayDebugView_mac_stepEntry_instance (	// mac_array.k:23:5
+    .clk         (clk),	// mac_array.k:23:5
+    ._pe_id      (p0_stage1_enable ? p0_pe_id : 'x),	// mac_array.k:23:5, :25:9
+    ._magnitude  (p0_stage1_enable ? p0_magnitude : 'x),	// mac_array.k:23:5, :25:9
+    ._sign_bit   (p0_stage1_enable ? p0_sign_bit : 'x),	// mac_array.k:23:5, :25:9
+    ._activation (p0_stage1_enable ? p0_activation : 'x),	// mac_array.k:23:5, :25:9
+    .valid       (p0_stage1_enable),	// mac_array.k:25:9
     .valid_out   (/* unused */)
-  );	// mac_array.k:22:5
-  mac_arrayDebugView_mac_stepExit mac_arrayDebugView_mac_stepExit_instance (	// mac_array.k:22:5
-    .clk          (clk),	// mac_array.k:22:5
-    ._ReturnValue (p0_stage2_enable ? p0__accum_pe_id_plus_product_ : 'x),	// mac_array.k:22:5, :24:9
-    .valid        (p0_stage2_enable),	// mac_array.k:24:9
+  );	// mac_array.k:23:5
+  mac_arrayDebugView_mac_stepExit mac_arrayDebugView_mac_stepExit_instance (	// mac_array.k:23:5
+    .clk          (clk),	// mac_array.k:23:5
+    ._ReturnValue (p0_stage2_enable ? _accum_pe_id_plus_product_ : 'x),	// mac_array.k:23:5, :25:9, :36:29
+    .valid        (p0_stage2_enable),	// mac_array.k:25:9
     .valid_out    (/* unused */)
-  );	// mac_array.k:22:5
-  assign done_out = p0_stage3_enable;	// mac_array.k:24:9
+  );	// mac_array.k:23:5
+  assign done_out = p0_stage3_enable;	// mac_array.k:25:9
   assign global_out__accum_element_0_21_0_valid =
-    global_out__accum_element_0_21_0_valid_0;	// mac_array.k:24:9
-  assign global_out__accum_element_0_21_0 = global_out__accum_element_0_21_0_0;	// mac_array.k:24:9
+    global_out__accum_element_0_21_0_valid_0;	// mac_array.k:25:9
+  assign global_out__accum_element_0_21_0 = global_out__accum_element_0_21_0_0;	// mac_array.k:25:9
   assign global_out__accum_element_1_22_0_valid =
-    global_out__accum_element_1_22_0_valid_0;	// mac_array.k:24:9
-  assign global_out__accum_element_1_22_0 = global_out__accum_element_1_22_0_0;	// mac_array.k:24:9
+    global_out__accum_element_1_22_0_valid_0;	// mac_array.k:25:9
+  assign global_out__accum_element_1_22_0 = global_out__accum_element_1_22_0_0;	// mac_array.k:25:9
   assign global_out__accum_element_2_23_0_valid =
-    global_out__accum_element_2_23_0_valid_0;	// mac_array.k:24:9
-  assign global_out__accum_element_2_23_0 = global_out__accum_element_2_23_0_0;	// mac_array.k:24:9
+    global_out__accum_element_2_23_0_valid_0;	// mac_array.k:25:9
+  assign global_out__accum_element_2_23_0 = global_out__accum_element_2_23_0_0;	// mac_array.k:25:9
   assign global_out__accum_element_3_24_0_valid =
-    global_out__accum_element_3_24_0_valid_0;	// mac_array.k:24:9
-  assign global_out__accum_element_3_24_0 = global_out__accum_element_3_24_0_0;	// mac_array.k:24:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_array.k:24:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:24:9
-  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:24:9
-  assign control_state_out = control_state_out_0;	// mac_array.k:24:9
+    global_out__accum_element_3_24_0_valid_0;	// mac_array.k:25:9
+  assign global_out__accum_element_3_24_0 = global_out__accum_element_3_24_0_0;	// mac_array.k:25:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// mac_array.k:25:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// mac_array.k:25:9
+  assign input_rdy_0 = input_rdy_0_0;	// mac_array.k:25:9
+  assign control_state_out = control_state_out_0;	// mac_array.k:25:9
 endmodule
 
 module mac_array_reg_24_w3_v_1_24_0_v_2_24_0(
@@ -1768,79 +1780,79 @@ module mac_array(
   output wire         stall_rate_supported_out
 );
 
-  wire         _clear_all_BasicBlock_0Impl_global_out__accum_element_0_21_2_valid;	// mac_array.k:82:9
-  wire         _clear_all_BasicBlock_0Impl_global_out__accum_element_1_22_2_valid;	// mac_array.k:82:9
-  wire         _clear_all_BasicBlock_0Impl_global_out__accum_element_2_23_2_valid;	// mac_array.k:82:9
-  wire         _clear_all_BasicBlock_0Impl_global_out__accum_element_3_24_2_valid;	// mac_array.k:82:9
-  wire         _clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_2_valid;	// mac_array.k:82:9
-  wire         _clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_2_valid;	// mac_array.k:82:9
-  wire         _clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_2_valid;	// mac_array.k:82:9
-  wire         _clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_2_valid;	// mac_array.k:82:9
-  wire         _clear_all_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:82:9
-  wire         _clear_all_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:82:9
-  wire         _clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_1_valid;	// mac_array.k:79:38
-  wire         _clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_1_valid;	// mac_array.k:79:38
-  wire         _clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_1_valid;	// mac_array.k:79:38
-  wire         _clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_1_valid;	// mac_array.k:79:38
-  wire         _clear_fp32_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:79:38
-  wire         _clear_fp32_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:79:38
-  wire         _clear_pe_BasicBlock_0Impl_global_out__accum_element_0_21_1_valid;	// mac_array.k:78:36
-  wire         _clear_pe_BasicBlock_0Impl_global_out__accum_element_1_22_1_valid;	// mac_array.k:78:36
-  wire         _clear_pe_BasicBlock_0Impl_global_out__accum_element_2_23_1_valid;	// mac_array.k:78:36
-  wire         _clear_pe_BasicBlock_0Impl_global_out__accum_element_3_24_1_valid;	// mac_array.k:78:36
-  wire         _clear_pe_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:78:36
-  wire         _clear_pe_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:78:36
-  wire [31:0]  _read_fp32_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:75:45
-  wire         _read_fp32_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:75:45
-  wire         _read_fp32_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:75:45
+  wire         _clear_all_BasicBlock_0Impl_global_out__accum_element_0_21_2_valid;	// mac_array.k:83:9
+  wire         _clear_all_BasicBlock_0Impl_global_out__accum_element_1_22_2_valid;	// mac_array.k:83:9
+  wire         _clear_all_BasicBlock_0Impl_global_out__accum_element_2_23_2_valid;	// mac_array.k:83:9
+  wire         _clear_all_BasicBlock_0Impl_global_out__accum_element_3_24_2_valid;	// mac_array.k:83:9
+  wire         _clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_2_valid;	// mac_array.k:83:9
+  wire         _clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_2_valid;	// mac_array.k:83:9
+  wire         _clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_2_valid;	// mac_array.k:83:9
+  wire         _clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_2_valid;	// mac_array.k:83:9
+  wire         _clear_all_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:83:9
+  wire         _clear_all_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:83:9
+  wire         _clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_1_valid;	// mac_array.k:80:38
+  wire         _clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_1_valid;	// mac_array.k:80:38
+  wire         _clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_1_valid;	// mac_array.k:80:38
+  wire         _clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_1_valid;	// mac_array.k:80:38
+  wire         _clear_fp32_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:80:38
+  wire         _clear_fp32_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:80:38
+  wire         _clear_pe_BasicBlock_0Impl_global_out__accum_element_0_21_1_valid;	// mac_array.k:79:36
+  wire         _clear_pe_BasicBlock_0Impl_global_out__accum_element_1_22_1_valid;	// mac_array.k:79:36
+  wire         _clear_pe_BasicBlock_0Impl_global_out__accum_element_2_23_1_valid;	// mac_array.k:79:36
+  wire         _clear_pe_BasicBlock_0Impl_global_out__accum_element_3_24_1_valid;	// mac_array.k:79:36
+  wire         _clear_pe_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:79:36
+  wire         _clear_pe_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:79:36
+  wire [31:0]  _read_fp32_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:76:45
+  wire         _read_fp32_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:76:45
+  wire         _read_fp32_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:76:45
   wire
-    _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_0_valid;	// mac_array.k:72:9
-  wire [31:0]  _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_0;	// mac_array.k:72:9
+    _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_0_valid;	// mac_array.k:73:9
+  wire [31:0]  _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_0;	// mac_array.k:73:9
   wire
-    _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_0_valid;	// mac_array.k:72:9
-  wire [31:0]  _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_0;	// mac_array.k:72:9
+    _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_0_valid;	// mac_array.k:73:9
+  wire [31:0]  _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_0;	// mac_array.k:73:9
   wire
-    _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_0_valid;	// mac_array.k:72:9
-  wire [31:0]  _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_0;	// mac_array.k:72:9
+    _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_0_valid;	// mac_array.k:73:9
+  wire [31:0]  _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_0;	// mac_array.k:73:9
   wire
-    _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_0_valid;	// mac_array.k:72:9
-  wire [31:0]  _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_0;	// mac_array.k:72:9
-  wire         _set_fp32_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:72:9
-  wire         _set_fp32_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:72:9
-  wire [31:0]  _write_grid_BasicBlock_0Impl_memory_write_data_out_30_0;	// mac_array.k:66:9
-  wire [8:0]   _write_grid_BasicBlock_0Impl_memory_write_addr_out_30_0;	// mac_array.k:66:9
-  wire         _write_grid_BasicBlock_0Impl_memory_wren_30_0;	// mac_array.k:66:9
-  wire         _write_grid_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:66:9
-  wire         _write_grid_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:66:9
-  wire [8:0]   _read_grid_BasicBlock_0Impl_memory_read_addr_out_30_0;	// mac_array.k:59:9
-  wire         _read_grid_BasicBlock_0Impl_memory_rden_out_30_0;	// mac_array.k:59:9
-  wire [31:0]  _read_grid_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:59:9
-  wire         _read_grid_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:59:9
-  wire         _read_grid_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:59:9
-  wire [879:0] _write_rom_block_BasicBlock_0Impl_memory_write_data_out_29_0;	// mac_array.k:53:9
-  wire [9:0]   _write_rom_block_BasicBlock_0Impl_memory_write_addr_out_29_0;	// mac_array.k:53:9
-  wire         _write_rom_block_BasicBlock_0Impl_memory_wren_29_0;	// mac_array.k:53:9
-  wire         _write_rom_block_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:53:9
-  wire         _write_rom_block_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:53:9
-  wire [9:0]   _read_rom_block_BasicBlock_0Impl_memory_read_addr_out_29_0;	// mac_array.k:46:9
-  wire         _read_rom_block_BasicBlock_0Impl_memory_rden_out_29_0;	// mac_array.k:46:9
-  wire [879:0] _read_rom_block_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:46:9
-  wire         _read_rom_block_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:46:9
-  wire         _read_rom_block_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:46:9
-  wire [23:0]  _read_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:41:41
-  wire         _read_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:41:41
-  wire         _read_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:41:41
-  wire         _mac_step_BasicBlock_0Impl_global_out__accum_element_0_21_0_valid;	// mac_array.k:24:9
-  wire [23:0]  _mac_step_BasicBlock_0Impl_global_out__accum_element_0_21_0;	// mac_array.k:24:9
-  wire         _mac_step_BasicBlock_0Impl_global_out__accum_element_1_22_0_valid;	// mac_array.k:24:9
-  wire [23:0]  _mac_step_BasicBlock_0Impl_global_out__accum_element_1_22_0;	// mac_array.k:24:9
-  wire         _mac_step_BasicBlock_0Impl_global_out__accum_element_2_23_0_valid;	// mac_array.k:24:9
-  wire [23:0]  _mac_step_BasicBlock_0Impl_global_out__accum_element_2_23_0;	// mac_array.k:24:9
-  wire         _mac_step_BasicBlock_0Impl_global_out__accum_element_3_24_0_valid;	// mac_array.k:24:9
-  wire [23:0]  _mac_step_BasicBlock_0Impl_global_out__accum_element_3_24_0;	// mac_array.k:24:9
-  wire [23:0]  _mac_step_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:24:9
-  wire         _mac_step_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:24:9
-  wire         _mac_step_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:24:9
+    _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_0_valid;	// mac_array.k:73:9
+  wire [31:0]  _set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_0;	// mac_array.k:73:9
+  wire         _set_fp32_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:73:9
+  wire         _set_fp32_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:73:9
+  wire [31:0]  _write_grid_BasicBlock_0Impl_memory_write_data_out_30_0;	// mac_array.k:67:9
+  wire [8:0]   _write_grid_BasicBlock_0Impl_memory_write_addr_out_30_0;	// mac_array.k:67:9
+  wire         _write_grid_BasicBlock_0Impl_memory_wren_30_0;	// mac_array.k:67:9
+  wire         _write_grid_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:67:9
+  wire         _write_grid_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:67:9
+  wire [8:0]   _read_grid_BasicBlock_0Impl_memory_read_addr_out_30_0;	// mac_array.k:60:9
+  wire         _read_grid_BasicBlock_0Impl_memory_rden_out_30_0;	// mac_array.k:60:9
+  wire [31:0]  _read_grid_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:60:9
+  wire         _read_grid_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:60:9
+  wire         _read_grid_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:60:9
+  wire [879:0] _write_rom_block_BasicBlock_0Impl_memory_write_data_out_29_0;	// mac_array.k:54:9
+  wire [9:0]   _write_rom_block_BasicBlock_0Impl_memory_write_addr_out_29_0;	// mac_array.k:54:9
+  wire         _write_rom_block_BasicBlock_0Impl_memory_wren_29_0;	// mac_array.k:54:9
+  wire         _write_rom_block_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:54:9
+  wire         _write_rom_block_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:54:9
+  wire [9:0]   _read_rom_block_BasicBlock_0Impl_memory_read_addr_out_29_0;	// mac_array.k:47:9
+  wire         _read_rom_block_BasicBlock_0Impl_memory_rden_out_29_0;	// mac_array.k:47:9
+  wire [879:0] _read_rom_block_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:47:9
+  wire         _read_rom_block_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:47:9
+  wire         _read_rom_block_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:47:9
+  wire [23:0]  _read_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:42:41
+  wire         _read_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:42:41
+  wire         _read_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:42:41
+  wire         _mac_step_BasicBlock_0Impl_global_out__accum_element_0_21_0_valid;	// mac_array.k:25:9
+  wire [23:0]  _mac_step_BasicBlock_0Impl_global_out__accum_element_0_21_0;	// mac_array.k:25:9
+  wire         _mac_step_BasicBlock_0Impl_global_out__accum_element_1_22_0_valid;	// mac_array.k:25:9
+  wire [23:0]  _mac_step_BasicBlock_0Impl_global_out__accum_element_1_22_0;	// mac_array.k:25:9
+  wire         _mac_step_BasicBlock_0Impl_global_out__accum_element_2_23_0_valid;	// mac_array.k:25:9
+  wire [23:0]  _mac_step_BasicBlock_0Impl_global_out__accum_element_2_23_0;	// mac_array.k:25:9
+  wire         _mac_step_BasicBlock_0Impl_global_out__accum_element_3_24_0_valid;	// mac_array.k:25:9
+  wire [23:0]  _mac_step_BasicBlock_0Impl_global_out__accum_element_3_24_0;	// mac_array.k:25:9
+  wire [23:0]  _mac_step_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:25:9
+  wire         _mac_step_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:25:9
+  wire         _mac_step_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:25:9
   wire         _fifo_10_clear_all_Return_overflow_out;
   wire         _fifo_10_clear_all_Return_underflow_out;
   wire         _fifo_10_clear_all_Return_empty;
@@ -2318,33 +2330,33 @@ module mac_array(
     fifo_data_10.underflow = _fifo_10_clear_all_Return_underflow_out;
     fifo_data_10.empty = _fifo_10_clear_all_Return_empty;
     fifo_data_10.almost_full = _fifo_10_clear_all_Return_full;
-    fifo_data_0.data_in = _mac_step_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:24:9
-    fifo_data_0.wren = _mac_step_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:24:9
-    passthrough_data_11.rdy_int = _mac_step_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:24:9
-    fifo_data_1.data_in = _read_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:41:41
-    fifo_data_1.wren = _read_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:41:41
-    passthrough_data_12.rdy_int = _read_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:41:41
-    fifo_data_2.data_in = _read_rom_block_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:46:9
-    fifo_data_2.wren = _read_rom_block_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:46:9
-    passthrough_data_13.rdy_int = _read_rom_block_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:46:9
-    fifo_data_3.wren = _write_rom_block_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:53:9
-    passthrough_data_14.rdy_int = _write_rom_block_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:53:9
-    fifo_data_4.data_in = _read_grid_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:59:9
-    fifo_data_4.wren = _read_grid_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:59:9
-    passthrough_data_15.rdy_int = _read_grid_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:59:9
-    fifo_data_5.wren = _write_grid_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:66:9
-    passthrough_data_16.rdy_int = _write_grid_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:66:9
-    fifo_data_6.wren = _set_fp32_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:72:9
-    passthrough_data_17.rdy_int = _set_fp32_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:72:9
-    fifo_data_7.data_in = _read_fp32_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:75:45
-    fifo_data_7.wren = _read_fp32_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:75:45
-    passthrough_data_18.rdy_int = _read_fp32_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:75:45
-    fifo_data_8.wren = _clear_pe_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:78:36
-    passthrough_data_19.rdy_int = _clear_pe_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:78:36
-    fifo_data_9.wren = _clear_fp32_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:79:38
-    passthrough_data_20.rdy_int = _clear_fp32_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:79:38
-    fifo_data_10.wren = _clear_all_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:82:9
-    passthrough_data_21.rdy_int = _clear_all_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:82:9
+    fifo_data_0.data_in = _mac_step_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:25:9
+    fifo_data_0.wren = _mac_step_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:25:9
+    passthrough_data_11.rdy_int = _mac_step_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:25:9
+    fifo_data_1.data_in = _read_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:42:41
+    fifo_data_1.wren = _read_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:42:41
+    passthrough_data_12.rdy_int = _read_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:42:41
+    fifo_data_2.data_in = _read_rom_block_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:47:9
+    fifo_data_2.wren = _read_rom_block_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:47:9
+    passthrough_data_13.rdy_int = _read_rom_block_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:47:9
+    fifo_data_3.wren = _write_rom_block_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:54:9
+    passthrough_data_14.rdy_int = _write_rom_block_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:54:9
+    fifo_data_4.data_in = _read_grid_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:60:9
+    fifo_data_4.wren = _read_grid_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:60:9
+    passthrough_data_15.rdy_int = _read_grid_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:60:9
+    fifo_data_5.wren = _write_grid_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:67:9
+    passthrough_data_16.rdy_int = _write_grid_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:67:9
+    fifo_data_6.wren = _set_fp32_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:73:9
+    passthrough_data_17.rdy_int = _set_fp32_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:73:9
+    fifo_data_7.data_in = _read_fp32_accum_BasicBlock_0Impl_fifo_data_out_0;	// mac_array.k:76:45
+    fifo_data_7.wren = _read_fp32_accum_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:76:45
+    passthrough_data_18.rdy_int = _read_fp32_accum_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:76:45
+    fifo_data_8.wren = _clear_pe_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:79:36
+    passthrough_data_19.rdy_int = _clear_pe_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:79:36
+    fifo_data_9.wren = _clear_fp32_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:80:38
+    passthrough_data_20.rdy_int = _clear_fp32_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:80:38
+    fifo_data_10.wren = _clear_all_BasicBlock_0Impl_fifo_wren_0;	// mac_array.k:83:9
+    passthrough_data_21.rdy_int = _clear_all_BasicBlock_0Impl_input_rdy_0;	// mac_array.k:83:9
   end // always_comb
 
   assign has_startup_completed_raw = 1'b1;
@@ -2368,103 +2380,103 @@ module mac_array(
   mac_array__rom__mem_container _rom (	// mac_array.k:15:5
     .clk             (clk),	// mac_array.k:15:5
     .rst             (1'b0),	// mac_array.k:15:5
-    .rden_in_0       (_read_rom_block_BasicBlock_0Impl_memory_rden_out_29_0),	// mac_array.k:46:9
-    .read_addr_in_0  (_read_rom_block_BasicBlock_0Impl_memory_read_addr_out_29_0),	// mac_array.k:46:9
-    .wren_in_0       (_write_rom_block_BasicBlock_0Impl_memory_wren_29_0),	// mac_array.k:53:9
-    .write_addr_in_0 (_write_rom_block_BasicBlock_0Impl_memory_write_addr_out_29_0),	// mac_array.k:53:9
-    .write_data_in_0 (_write_rom_block_BasicBlock_0Impl_memory_write_data_out_29_0),	// mac_array.k:53:9
+    .rden_in_0       (_read_rom_block_BasicBlock_0Impl_memory_rden_out_29_0),	// mac_array.k:47:9
+    .read_addr_in_0  (_read_rom_block_BasicBlock_0Impl_memory_read_addr_out_29_0),	// mac_array.k:47:9
+    .wren_in_0       (_write_rom_block_BasicBlock_0Impl_memory_wren_29_0),	// mac_array.k:54:9
+    .write_addr_in_0 (_write_rom_block_BasicBlock_0Impl_memory_write_addr_out_29_0),	// mac_array.k:54:9
+    .write_data_in_0 (_write_rom_block_BasicBlock_0Impl_memory_write_data_out_29_0),	// mac_array.k:54:9
     .read_data_out_0 (__rom_read_data_out_0),
     .init_completed  (__rom_init_completed)
   );	// mac_array.k:15:5
   mac_array__grid__mem_container _grid (	// mac_array.k:18:5
     .clk             (clk),	// mac_array.k:15:5
     .rst             (1'b0),	// mac_array.k:15:5
-    .rden_in_0       (_read_grid_BasicBlock_0Impl_memory_rden_out_30_0),	// mac_array.k:59:9
-    .read_addr_in_0  (_read_grid_BasicBlock_0Impl_memory_read_addr_out_30_0),	// mac_array.k:59:9
-    .wren_in_0       (_write_grid_BasicBlock_0Impl_memory_wren_30_0),	// mac_array.k:66:9
-    .write_addr_in_0 (_write_grid_BasicBlock_0Impl_memory_write_addr_out_30_0),	// mac_array.k:66:9
-    .write_data_in_0 (_write_grid_BasicBlock_0Impl_memory_write_data_out_30_0),	// mac_array.k:66:9
+    .rden_in_0       (_read_grid_BasicBlock_0Impl_memory_rden_out_30_0),	// mac_array.k:60:9
+    .read_addr_in_0  (_read_grid_BasicBlock_0Impl_memory_read_addr_out_30_0),	// mac_array.k:60:9
+    .wren_in_0       (_write_grid_BasicBlock_0Impl_memory_wren_30_0),	// mac_array.k:67:9
+    .write_addr_in_0 (_write_grid_BasicBlock_0Impl_memory_write_addr_out_30_0),	// mac_array.k:67:9
+    .write_data_in_0 (_write_grid_BasicBlock_0Impl_memory_write_data_out_30_0),	// mac_array.k:67:9
     .read_data_out_0 (__grid_read_data_out_0),
     .init_completed  (__grid_init_completed)
   );	// mac_array.k:18:5
   mac_array_reg_24_w3_v_1_24_0_v_2_24_0 _accum_element_0 (	// mac_array.k:11:5
     .clk           (clk),	// mac_array.k:15:5
-    .input_valid_0 (_mac_step_BasicBlock_0Impl_global_out__accum_element_0_21_0_valid),	// mac_array.k:24:9
-    .input_0       (_mac_step_BasicBlock_0Impl_global_out__accum_element_0_21_0),	// mac_array.k:24:9
-    .input_valid_1 (_clear_pe_BasicBlock_0Impl_global_out__accum_element_0_21_1_valid),	// mac_array.k:78:36
-    .input_valid_2 (_clear_all_BasicBlock_0Impl_global_out__accum_element_0_21_2_valid),	// mac_array.k:82:9
+    .input_valid_0 (_mac_step_BasicBlock_0Impl_global_out__accum_element_0_21_0_valid),	// mac_array.k:25:9
+    .input_0       (_mac_step_BasicBlock_0Impl_global_out__accum_element_0_21_0),	// mac_array.k:25:9
+    .input_valid_1 (_clear_pe_BasicBlock_0Impl_global_out__accum_element_0_21_1_valid),	// mac_array.k:79:36
+    .input_valid_2 (_clear_all_BasicBlock_0Impl_global_out__accum_element_0_21_2_valid),	// mac_array.k:83:9
     .value_out     (__accum_element_0_value_out)
   );	// mac_array.k:11:5
   mac_array_reg_24_w3_v_1_24_0_v_2_24_0 _accum_element_1 (	// mac_array.k:11:5
     .clk           (clk),	// mac_array.k:15:5
-    .input_valid_0 (_mac_step_BasicBlock_0Impl_global_out__accum_element_1_22_0_valid),	// mac_array.k:24:9
-    .input_0       (_mac_step_BasicBlock_0Impl_global_out__accum_element_1_22_0),	// mac_array.k:24:9
-    .input_valid_1 (_clear_pe_BasicBlock_0Impl_global_out__accum_element_1_22_1_valid),	// mac_array.k:78:36
-    .input_valid_2 (_clear_all_BasicBlock_0Impl_global_out__accum_element_1_22_2_valid),	// mac_array.k:82:9
+    .input_valid_0 (_mac_step_BasicBlock_0Impl_global_out__accum_element_1_22_0_valid),	// mac_array.k:25:9
+    .input_0       (_mac_step_BasicBlock_0Impl_global_out__accum_element_1_22_0),	// mac_array.k:25:9
+    .input_valid_1 (_clear_pe_BasicBlock_0Impl_global_out__accum_element_1_22_1_valid),	// mac_array.k:79:36
+    .input_valid_2 (_clear_all_BasicBlock_0Impl_global_out__accum_element_1_22_2_valid),	// mac_array.k:83:9
     .value_out     (__accum_element_1_value_out)
   );	// mac_array.k:11:5
   mac_array_reg_24_w3_v_1_24_0_v_2_24_0 _accum_element_2 (	// mac_array.k:11:5
     .clk           (clk),	// mac_array.k:15:5
-    .input_valid_0 (_mac_step_BasicBlock_0Impl_global_out__accum_element_2_23_0_valid),	// mac_array.k:24:9
-    .input_0       (_mac_step_BasicBlock_0Impl_global_out__accum_element_2_23_0),	// mac_array.k:24:9
-    .input_valid_1 (_clear_pe_BasicBlock_0Impl_global_out__accum_element_2_23_1_valid),	// mac_array.k:78:36
-    .input_valid_2 (_clear_all_BasicBlock_0Impl_global_out__accum_element_2_23_2_valid),	// mac_array.k:82:9
+    .input_valid_0 (_mac_step_BasicBlock_0Impl_global_out__accum_element_2_23_0_valid),	// mac_array.k:25:9
+    .input_0       (_mac_step_BasicBlock_0Impl_global_out__accum_element_2_23_0),	// mac_array.k:25:9
+    .input_valid_1 (_clear_pe_BasicBlock_0Impl_global_out__accum_element_2_23_1_valid),	// mac_array.k:79:36
+    .input_valid_2 (_clear_all_BasicBlock_0Impl_global_out__accum_element_2_23_2_valid),	// mac_array.k:83:9
     .value_out     (__accum_element_2_value_out)
   );	// mac_array.k:11:5
   mac_array_reg_24_w3_v_1_24_0_v_2_24_0 _accum_element_3 (	// mac_array.k:11:5
     .clk           (clk),	// mac_array.k:15:5
-    .input_valid_0 (_mac_step_BasicBlock_0Impl_global_out__accum_element_3_24_0_valid),	// mac_array.k:24:9
-    .input_0       (_mac_step_BasicBlock_0Impl_global_out__accum_element_3_24_0),	// mac_array.k:24:9
-    .input_valid_1 (_clear_pe_BasicBlock_0Impl_global_out__accum_element_3_24_1_valid),	// mac_array.k:78:36
-    .input_valid_2 (_clear_all_BasicBlock_0Impl_global_out__accum_element_3_24_2_valid),	// mac_array.k:82:9
+    .input_valid_0 (_mac_step_BasicBlock_0Impl_global_out__accum_element_3_24_0_valid),	// mac_array.k:25:9
+    .input_0       (_mac_step_BasicBlock_0Impl_global_out__accum_element_3_24_0),	// mac_array.k:25:9
+    .input_valid_1 (_clear_pe_BasicBlock_0Impl_global_out__accum_element_3_24_1_valid),	// mac_array.k:79:36
+    .input_valid_2 (_clear_all_BasicBlock_0Impl_global_out__accum_element_3_24_2_valid),	// mac_array.k:83:9
     .value_out     (__accum_element_3_value_out)
   );	// mac_array.k:11:5
   mac_array_reg_32_w3_v_1_32_0_v_2_32_0 _fp32_accum_element_0 (	// mac_array.k:12:5
     .clk           (clk),	// mac_array.k:15:5
     .input_valid_0
-      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_0_valid),	// mac_array.k:72:9
+      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_0_valid),	// mac_array.k:73:9
     .input_0
-      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_0),	// mac_array.k:72:9
+      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_0),	// mac_array.k:73:9
     .input_valid_1
-      (_clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_1_valid),	// mac_array.k:79:38
+      (_clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_1_valid),	// mac_array.k:80:38
     .input_valid_2
-      (_clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_2_valid),	// mac_array.k:82:9
+      (_clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_2_valid),	// mac_array.k:83:9
     .value_out     (__fp32_accum_element_0_value_out)
   );	// mac_array.k:12:5
   mac_array_reg_32_w3_v_1_32_0_v_2_32_0 _fp32_accum_element_1 (	// mac_array.k:12:5
     .clk           (clk),	// mac_array.k:15:5
     .input_valid_0
-      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_0_valid),	// mac_array.k:72:9
+      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_0_valid),	// mac_array.k:73:9
     .input_0
-      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_0),	// mac_array.k:72:9
+      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_0),	// mac_array.k:73:9
     .input_valid_1
-      (_clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_1_valid),	// mac_array.k:79:38
+      (_clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_1_valid),	// mac_array.k:80:38
     .input_valid_2
-      (_clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_2_valid),	// mac_array.k:82:9
+      (_clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_1_26_2_valid),	// mac_array.k:83:9
     .value_out     (__fp32_accum_element_1_value_out)
   );	// mac_array.k:12:5
   mac_array_reg_32_w3_v_1_32_0_v_2_32_0 _fp32_accum_element_2 (	// mac_array.k:12:5
     .clk           (clk),	// mac_array.k:15:5
     .input_valid_0
-      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_0_valid),	// mac_array.k:72:9
+      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_0_valid),	// mac_array.k:73:9
     .input_0
-      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_0),	// mac_array.k:72:9
+      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_0),	// mac_array.k:73:9
     .input_valid_1
-      (_clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_1_valid),	// mac_array.k:79:38
+      (_clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_1_valid),	// mac_array.k:80:38
     .input_valid_2
-      (_clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_2_valid),	// mac_array.k:82:9
+      (_clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_2_27_2_valid),	// mac_array.k:83:9
     .value_out     (__fp32_accum_element_2_value_out)
   );	// mac_array.k:12:5
   mac_array_reg_32_w3_v_1_32_0_v_2_32_0 _fp32_accum_element_3 (	// mac_array.k:12:5
     .clk           (clk),	// mac_array.k:15:5
     .input_valid_0
-      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_0_valid),	// mac_array.k:72:9
+      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_0_valid),	// mac_array.k:73:9
     .input_0
-      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_0),	// mac_array.k:72:9
+      (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_0),	// mac_array.k:73:9
     .input_valid_1
-      (_clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_1_valid),	// mac_array.k:79:38
+      (_clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_1_valid),	// mac_array.k:80:38
     .input_valid_2
-      (_clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_2_valid),	// mac_array.k:82:9
+      (_clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_2_valid),	// mac_array.k:83:9
     .value_out     (__fp32_accum_element_3_value_out)
   );	// mac_array.k:12:5
   KanagawaFlipFlopChainNoEnable #(
@@ -2819,9 +2831,9 @@ module mac_array(
     .data          ('0),
     .q             (/* unused */)
   );
-  mac_array_mac_step_BasicBlock_0 mac_step_BasicBlock_0Impl (	// mac_array.k:24:9
-    .clk                                    (clk),	// mac_array.k:24:9
-    .rst                                    (reg_rst_delayed[11]),	// mac_array.k:24:9
+  mac_array_mac_step_BasicBlock_0 mac_step_BasicBlock_0Impl (	// mac_array.k:25:9
+    .clk                                    (clk),	// mac_array.k:25:9
+    .rst                                    (reg_rst_delayed[11]),	// mac_array.k:25:9
     .done_out                               (/* unused */),
     .global_in__accum_element_0_21          (__accum_element_0_value_out),	// mac_array.k:11:5
     .global_in__accum_element_1_22          (__accum_element_1_value_out),	// mac_array.k:11:5
@@ -2845,17 +2857,17 @@ module mac_array(
       (_mac_step_BasicBlock_0Impl_global_out__accum_element_3_24_0),
     .fifo_data_out_0                        (_mac_step_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0                            (_mac_step_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0              (fifo_data_0.almost_full),	// mac_array.k:24:9
-    .fifo_overflow_in_0                     (fifo_data_0.overflow),	// mac_array.k:24:9
-    .data_in_11                             (passthrough_data_11.data),	// mac_array.k:24:9
-    .input_fifo_underflow_0                 (passthrough_data_11.underflow),	// mac_array.k:24:9
+    .fifo_almost_full_in_raw_0              (fifo_data_0.almost_full),	// mac_array.k:25:9
+    .fifo_overflow_in_0                     (fifo_data_0.overflow),	// mac_array.k:25:9
+    .data_in_11                             (passthrough_data_11.data),	// mac_array.k:25:9
+    .input_fifo_underflow_0                 (passthrough_data_11.underflow),	// mac_array.k:25:9
     .input_rdy_0                            (_mac_step_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                          (passthrough_data_11.valid),	// mac_array.k:24:9
+    .input_valid_0                          (passthrough_data_11.valid),	// mac_array.k:25:9
     .control_state_out                      (/* unused */)
-  );	// mac_array.k:24:9
-  mac_array_read_accum_BasicBlock_0 read_accum_BasicBlock_0Impl (	// mac_array.k:41:41
-    .clk                           (clk),	// mac_array.k:41:41
-    .rst                           (reg_rst_delayed[12]),	// mac_array.k:41:41
+  );	// mac_array.k:25:9
+  mac_array_read_accum_BasicBlock_0 read_accum_BasicBlock_0Impl (	// mac_array.k:42:41
+    .clk                           (clk),	// mac_array.k:42:41
+    .rst                           (reg_rst_delayed[12]),	// mac_array.k:42:41
     .done_out                      (/* unused */),
     .global_in__accum_element_0_21 (__accum_element_0_value_out),	// mac_array.k:11:5
     .global_in__accum_element_1_22 (__accum_element_1_value_out),	// mac_array.k:11:5
@@ -2863,17 +2875,17 @@ module mac_array(
     .global_in__accum_element_3_24 (__accum_element_3_value_out),	// mac_array.k:11:5
     .fifo_data_out_0               (_read_accum_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0                   (_read_accum_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0     (fifo_data_1.almost_full),	// mac_array.k:41:41
-    .fifo_overflow_in_0            (fifo_data_1.overflow),	// mac_array.k:41:41
-    .data_in_12                    (passthrough_data_12.data),	// mac_array.k:41:41
-    .input_fifo_underflow_0        (passthrough_data_12.underflow),	// mac_array.k:41:41
+    .fifo_almost_full_in_raw_0     (fifo_data_1.almost_full),	// mac_array.k:42:41
+    .fifo_overflow_in_0            (fifo_data_1.overflow),	// mac_array.k:42:41
+    .data_in_12                    (passthrough_data_12.data),	// mac_array.k:42:41
+    .input_fifo_underflow_0        (passthrough_data_12.underflow),	// mac_array.k:42:41
     .input_rdy_0                   (_read_accum_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                 (passthrough_data_12.valid),	// mac_array.k:41:41
+    .input_valid_0                 (passthrough_data_12.valid),	// mac_array.k:42:41
     .control_state_out             (/* unused */)
-  );	// mac_array.k:41:41
-  mac_array_read_rom_block_BasicBlock_0 read_rom_block_BasicBlock_0Impl (	// mac_array.k:46:9
-    .clk                       (clk),	// mac_array.k:46:9
-    .rst                       (reg_rst_delayed[13]),	// mac_array.k:46:9
+  );	// mac_array.k:42:41
+  mac_array_read_rom_block_BasicBlock_0 read_rom_block_BasicBlock_0Impl (	// mac_array.k:47:9
+    .clk                       (clk),	// mac_array.k:47:9
+    .rst                       (reg_rst_delayed[13]),	// mac_array.k:47:9
     .done_out                  (/* unused */),
     .memory_read_data_in_29_0  (__rom_read_data_out_0),	// mac_array.k:15:5
     .memory_read_addr_out_29_0
@@ -2881,17 +2893,17 @@ module mac_array(
     .memory_rden_out_29_0      (_read_rom_block_BasicBlock_0Impl_memory_rden_out_29_0),
     .fifo_data_out_0           (_read_rom_block_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_read_rom_block_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_2.almost_full),	// mac_array.k:46:9
-    .fifo_overflow_in_0        (fifo_data_2.overflow),	// mac_array.k:46:9
-    .data_in_13                (passthrough_data_13.data),	// mac_array.k:46:9
-    .input_fifo_underflow_0    (passthrough_data_13.underflow),	// mac_array.k:46:9
+    .fifo_almost_full_in_raw_0 (fifo_data_2.almost_full),	// mac_array.k:47:9
+    .fifo_overflow_in_0        (fifo_data_2.overflow),	// mac_array.k:47:9
+    .data_in_13                (passthrough_data_13.data),	// mac_array.k:47:9
+    .input_fifo_underflow_0    (passthrough_data_13.underflow),	// mac_array.k:47:9
     .input_rdy_0               (_read_rom_block_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_13.valid),	// mac_array.k:46:9
+    .input_valid_0             (passthrough_data_13.valid),	// mac_array.k:47:9
     .control_state_out         (/* unused */)
-  );	// mac_array.k:46:9
-  mac_array_write_rom_block_BasicBlock_0 write_rom_block_BasicBlock_0Impl (	// mac_array.k:53:9
-    .clk                        (clk),	// mac_array.k:53:9
-    .rst                        (reg_rst_delayed[14]),	// mac_array.k:53:9
+  );	// mac_array.k:47:9
+  mac_array_write_rom_block_BasicBlock_0 write_rom_block_BasicBlock_0Impl (	// mac_array.k:54:9
+    .clk                        (clk),	// mac_array.k:54:9
+    .rst                        (reg_rst_delayed[14]),	// mac_array.k:54:9
     .done_out                   (/* unused */),
     .memory_write_data_out_29_0
       (_write_rom_block_BasicBlock_0Impl_memory_write_data_out_29_0),
@@ -2899,50 +2911,50 @@ module mac_array(
       (_write_rom_block_BasicBlock_0Impl_memory_write_addr_out_29_0),
     .memory_wren_29_0           (_write_rom_block_BasicBlock_0Impl_memory_wren_29_0),
     .fifo_wren_0                (_write_rom_block_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0  (fifo_data_3.almost_full),	// mac_array.k:53:9
-    .fifo_overflow_in_0         (fifo_data_3.overflow),	// mac_array.k:53:9
-    .data_in_14                 (passthrough_data_14.data),	// mac_array.k:53:9
-    .input_fifo_underflow_0     (passthrough_data_14.underflow),	// mac_array.k:53:9
+    .fifo_almost_full_in_raw_0  (fifo_data_3.almost_full),	// mac_array.k:54:9
+    .fifo_overflow_in_0         (fifo_data_3.overflow),	// mac_array.k:54:9
+    .data_in_14                 (passthrough_data_14.data),	// mac_array.k:54:9
+    .input_fifo_underflow_0     (passthrough_data_14.underflow),	// mac_array.k:54:9
     .input_rdy_0                (_write_rom_block_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0              (passthrough_data_14.valid),	// mac_array.k:53:9
+    .input_valid_0              (passthrough_data_14.valid),	// mac_array.k:54:9
     .control_state_out          (/* unused */)
-  );	// mac_array.k:53:9
-  mac_array_read_grid_BasicBlock_0 read_grid_BasicBlock_0Impl (	// mac_array.k:59:9
-    .clk                       (clk),	// mac_array.k:59:9
-    .rst                       (reg_rst_delayed[15]),	// mac_array.k:59:9
+  );	// mac_array.k:54:9
+  mac_array_read_grid_BasicBlock_0 read_grid_BasicBlock_0Impl (	// mac_array.k:60:9
+    .clk                       (clk),	// mac_array.k:60:9
+    .rst                       (reg_rst_delayed[15]),	// mac_array.k:60:9
     .done_out                  (/* unused */),
     .memory_read_data_in_30_0  (__grid_read_data_out_0),	// mac_array.k:18:5
     .memory_read_addr_out_30_0 (_read_grid_BasicBlock_0Impl_memory_read_addr_out_30_0),
     .memory_rden_out_30_0      (_read_grid_BasicBlock_0Impl_memory_rden_out_30_0),
     .fifo_data_out_0           (_read_grid_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_read_grid_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_4.almost_full),	// mac_array.k:59:9
-    .fifo_overflow_in_0        (fifo_data_4.overflow),	// mac_array.k:59:9
-    .data_in_15                (passthrough_data_15.data),	// mac_array.k:59:9
-    .input_fifo_underflow_0    (passthrough_data_15.underflow),	// mac_array.k:59:9
+    .fifo_almost_full_in_raw_0 (fifo_data_4.almost_full),	// mac_array.k:60:9
+    .fifo_overflow_in_0        (fifo_data_4.overflow),	// mac_array.k:60:9
+    .data_in_15                (passthrough_data_15.data),	// mac_array.k:60:9
+    .input_fifo_underflow_0    (passthrough_data_15.underflow),	// mac_array.k:60:9
     .input_rdy_0               (_read_grid_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_15.valid),	// mac_array.k:59:9
+    .input_valid_0             (passthrough_data_15.valid),	// mac_array.k:60:9
     .control_state_out         (/* unused */)
-  );	// mac_array.k:59:9
-  mac_array_write_grid_BasicBlock_0 write_grid_BasicBlock_0Impl (	// mac_array.k:66:9
-    .clk                        (clk),	// mac_array.k:66:9
-    .rst                        (reg_rst_delayed[16]),	// mac_array.k:66:9
+  );	// mac_array.k:60:9
+  mac_array_write_grid_BasicBlock_0 write_grid_BasicBlock_0Impl (	// mac_array.k:67:9
+    .clk                        (clk),	// mac_array.k:67:9
+    .rst                        (reg_rst_delayed[16]),	// mac_array.k:67:9
     .done_out                   (/* unused */),
     .memory_write_data_out_30_0 (_write_grid_BasicBlock_0Impl_memory_write_data_out_30_0),
     .memory_write_addr_out_30_0 (_write_grid_BasicBlock_0Impl_memory_write_addr_out_30_0),
     .memory_wren_30_0           (_write_grid_BasicBlock_0Impl_memory_wren_30_0),
     .fifo_wren_0                (_write_grid_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0  (fifo_data_5.almost_full),	// mac_array.k:66:9
-    .fifo_overflow_in_0         (fifo_data_5.overflow),	// mac_array.k:66:9
-    .data_in_16                 (passthrough_data_16.data),	// mac_array.k:66:9
-    .input_fifo_underflow_0     (passthrough_data_16.underflow),	// mac_array.k:66:9
+    .fifo_almost_full_in_raw_0  (fifo_data_5.almost_full),	// mac_array.k:67:9
+    .fifo_overflow_in_0         (fifo_data_5.overflow),	// mac_array.k:67:9
+    .data_in_16                 (passthrough_data_16.data),	// mac_array.k:67:9
+    .input_fifo_underflow_0     (passthrough_data_16.underflow),	// mac_array.k:67:9
     .input_rdy_0                (_write_grid_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0              (passthrough_data_16.valid),	// mac_array.k:66:9
+    .input_valid_0              (passthrough_data_16.valid),	// mac_array.k:67:9
     .control_state_out          (/* unused */)
-  );	// mac_array.k:66:9
-  mac_array_set_fp32_accum_BasicBlock_0 set_fp32_accum_BasicBlock_0Impl (	// mac_array.k:72:9
-    .clk                                         (clk),	// mac_array.k:72:9
-    .rst                                         (reg_rst_delayed[17]),	// mac_array.k:72:9
+  );	// mac_array.k:67:9
+  mac_array_set_fp32_accum_BasicBlock_0 set_fp32_accum_BasicBlock_0Impl (	// mac_array.k:73:9
+    .clk                                         (clk),	// mac_array.k:73:9
+    .rst                                         (reg_rst_delayed[17]),	// mac_array.k:73:9
     .done_out                                    (/* unused */),
     .global_out__fp32_accum_element_0_25_0_valid
       (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_0_valid),
@@ -2962,18 +2974,18 @@ module mac_array(
       (_set_fp32_accum_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_0),
     .fifo_wren_0
       (_set_fp32_accum_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0                   (fifo_data_6.almost_full),	// mac_array.k:72:9
-    .fifo_overflow_in_0                          (fifo_data_6.overflow),	// mac_array.k:72:9
-    .data_in_17                                  (passthrough_data_17.data),	// mac_array.k:72:9
-    .input_fifo_underflow_0                      (passthrough_data_17.underflow),	// mac_array.k:72:9
+    .fifo_almost_full_in_raw_0                   (fifo_data_6.almost_full),	// mac_array.k:73:9
+    .fifo_overflow_in_0                          (fifo_data_6.overflow),	// mac_array.k:73:9
+    .data_in_17                                  (passthrough_data_17.data),	// mac_array.k:73:9
+    .input_fifo_underflow_0                      (passthrough_data_17.underflow),	// mac_array.k:73:9
     .input_rdy_0
       (_set_fp32_accum_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                               (passthrough_data_17.valid),	// mac_array.k:72:9
+    .input_valid_0                               (passthrough_data_17.valid),	// mac_array.k:73:9
     .control_state_out                           (/* unused */)
-  );	// mac_array.k:72:9
-  mac_array_read_fp32_accum_BasicBlock_0 read_fp32_accum_BasicBlock_0Impl (	// mac_array.k:75:45
-    .clk                                (clk),	// mac_array.k:75:45
-    .rst                                (reg_rst_delayed[18]),	// mac_array.k:75:45
+  );	// mac_array.k:73:9
+  mac_array_read_fp32_accum_BasicBlock_0 read_fp32_accum_BasicBlock_0Impl (	// mac_array.k:76:45
+    .clk                                (clk),	// mac_array.k:76:45
+    .rst                                (reg_rst_delayed[18]),	// mac_array.k:76:45
     .done_out                           (/* unused */),
     .global_in__fp32_accum_element_0_25 (__fp32_accum_element_0_value_out),	// mac_array.k:12:5
     .global_in__fp32_accum_element_1_26 (__fp32_accum_element_1_value_out),	// mac_array.k:12:5
@@ -2982,17 +2994,17 @@ module mac_array(
     .fifo_data_out_0
       (_read_fp32_accum_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0                        (_read_fp32_accum_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0          (fifo_data_7.almost_full),	// mac_array.k:75:45
-    .fifo_overflow_in_0                 (fifo_data_7.overflow),	// mac_array.k:75:45
-    .data_in_18                         (passthrough_data_18.data),	// mac_array.k:75:45
-    .input_fifo_underflow_0             (passthrough_data_18.underflow),	// mac_array.k:75:45
+    .fifo_almost_full_in_raw_0          (fifo_data_7.almost_full),	// mac_array.k:76:45
+    .fifo_overflow_in_0                 (fifo_data_7.overflow),	// mac_array.k:76:45
+    .data_in_18                         (passthrough_data_18.data),	// mac_array.k:76:45
+    .input_fifo_underflow_0             (passthrough_data_18.underflow),	// mac_array.k:76:45
     .input_rdy_0                        (_read_fp32_accum_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                      (passthrough_data_18.valid),	// mac_array.k:75:45
+    .input_valid_0                      (passthrough_data_18.valid),	// mac_array.k:76:45
     .control_state_out                  (/* unused */)
-  );	// mac_array.k:75:45
-  mac_array_clear_pe_BasicBlock_0 clear_pe_BasicBlock_0Impl (	// mac_array.k:78:36
-    .clk                                    (clk),	// mac_array.k:78:36
-    .rst                                    (reg_rst_delayed[19]),	// mac_array.k:78:36
+  );	// mac_array.k:76:45
+  mac_array_clear_pe_BasicBlock_0 clear_pe_BasicBlock_0Impl (	// mac_array.k:79:36
+    .clk                                    (clk),	// mac_array.k:79:36
+    .rst                                    (reg_rst_delayed[19]),	// mac_array.k:79:36
     .done_out                               (/* unused */),
     .global_out__accum_element_0_21_1_valid
       (_clear_pe_BasicBlock_0Impl_global_out__accum_element_0_21_1_valid),
@@ -3003,17 +3015,17 @@ module mac_array(
     .global_out__accum_element_3_24_1_valid
       (_clear_pe_BasicBlock_0Impl_global_out__accum_element_3_24_1_valid),
     .fifo_wren_0                            (_clear_pe_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0              (fifo_data_8.almost_full),	// mac_array.k:78:36
-    .fifo_overflow_in_0                     (fifo_data_8.overflow),	// mac_array.k:78:36
-    .data_in_19                             (passthrough_data_19.data),	// mac_array.k:78:36
-    .input_fifo_underflow_0                 (passthrough_data_19.underflow),	// mac_array.k:78:36
+    .fifo_almost_full_in_raw_0              (fifo_data_8.almost_full),	// mac_array.k:79:36
+    .fifo_overflow_in_0                     (fifo_data_8.overflow),	// mac_array.k:79:36
+    .data_in_19                             (passthrough_data_19.data),	// mac_array.k:79:36
+    .input_fifo_underflow_0                 (passthrough_data_19.underflow),	// mac_array.k:79:36
     .input_rdy_0                            (_clear_pe_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                          (passthrough_data_19.valid),	// mac_array.k:78:36
+    .input_valid_0                          (passthrough_data_19.valid),	// mac_array.k:79:36
     .control_state_out                      (/* unused */)
-  );	// mac_array.k:78:36
-  mac_array_clear_fp32_BasicBlock_0 clear_fp32_BasicBlock_0Impl (	// mac_array.k:79:38
-    .clk                                         (clk),	// mac_array.k:79:38
-    .rst                                         (reg_rst_delayed[20]),	// mac_array.k:79:38
+  );	// mac_array.k:79:36
+  mac_array_clear_fp32_BasicBlock_0 clear_fp32_BasicBlock_0Impl (	// mac_array.k:80:38
+    .clk                                         (clk),	// mac_array.k:80:38
+    .rst                                         (reg_rst_delayed[20]),	// mac_array.k:80:38
     .done_out                                    (/* unused */),
     .global_out__fp32_accum_element_0_25_1_valid
       (_clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_0_25_1_valid),
@@ -3025,18 +3037,18 @@ module mac_array(
       (_clear_fp32_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_1_valid),
     .fifo_wren_0
       (_clear_fp32_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0                   (fifo_data_9.almost_full),	// mac_array.k:79:38
-    .fifo_overflow_in_0                          (fifo_data_9.overflow),	// mac_array.k:79:38
-    .data_in_20                                  (passthrough_data_20.data),	// mac_array.k:79:38
-    .input_fifo_underflow_0                      (passthrough_data_20.underflow),	// mac_array.k:79:38
+    .fifo_almost_full_in_raw_0                   (fifo_data_9.almost_full),	// mac_array.k:80:38
+    .fifo_overflow_in_0                          (fifo_data_9.overflow),	// mac_array.k:80:38
+    .data_in_20                                  (passthrough_data_20.data),	// mac_array.k:80:38
+    .input_fifo_underflow_0                      (passthrough_data_20.underflow),	// mac_array.k:80:38
     .input_rdy_0
       (_clear_fp32_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                               (passthrough_data_20.valid),	// mac_array.k:79:38
+    .input_valid_0                               (passthrough_data_20.valid),	// mac_array.k:80:38
     .control_state_out                           (/* unused */)
-  );	// mac_array.k:79:38
-  mac_array_clear_all_BasicBlock_0 clear_all_BasicBlock_0Impl (	// mac_array.k:82:9
-    .clk                                         (clk),	// mac_array.k:82:9
-    .rst                                         (reg_rst_delayed[21]),	// mac_array.k:82:9
+  );	// mac_array.k:80:38
+  mac_array_clear_all_BasicBlock_0 clear_all_BasicBlock_0Impl (	// mac_array.k:83:9
+    .clk                                         (clk),	// mac_array.k:83:9
+    .rst                                         (reg_rst_delayed[21]),	// mac_array.k:83:9
     .done_out                                    (/* unused */),
     .global_out__accum_element_0_21_2_valid
       (_clear_all_BasicBlock_0Impl_global_out__accum_element_0_21_2_valid),
@@ -3056,14 +3068,14 @@ module mac_array(
       (_clear_all_BasicBlock_0Impl_global_out__fp32_accum_element_3_28_2_valid),
     .fifo_wren_0
       (_clear_all_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0                   (fifo_data_10.almost_full),	// mac_array.k:82:9
-    .fifo_overflow_in_0                          (fifo_data_10.overflow),	// mac_array.k:82:9
-    .input_fifo_underflow_0                      (passthrough_data_21.underflow),	// mac_array.k:82:9
+    .fifo_almost_full_in_raw_0                   (fifo_data_10.almost_full),	// mac_array.k:83:9
+    .fifo_overflow_in_0                          (fifo_data_10.overflow),	// mac_array.k:83:9
+    .input_fifo_underflow_0                      (passthrough_data_21.underflow),	// mac_array.k:83:9
     .input_rdy_0
       (_clear_all_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                               (passthrough_data_21.valid),	// mac_array.k:82:9
+    .input_valid_0                               (passthrough_data_21.valid),	// mac_array.k:83:9
     .control_state_out                           (/* unused */)
-  );	// mac_array.k:82:9
+  );	// mac_array.k:83:9
   assign rst_and_startup_done_out = rst_and_startup_done_out_net;
   assign mac_step_rdy_out = mac_step_rdy_out_net;
   assign mac_step_empty_out = mac_step_empty_out_net;

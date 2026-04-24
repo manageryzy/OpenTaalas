@@ -116,6 +116,9 @@ PREDEFINED = [
     SramSpec("sram_4096x16", 16, 4096, col_mux=16),
     # sram_256x16 (col_mux=4): rmsnorm._rsqrt_lut, swiglu._sigmoid_lut, lut_interp._table (4 Kbit)
     SramSpec("sram_256x16", 16, 256, col_mux=4),
+    # sram_512x32 (col_mux=4): codebook_decoder._grid (16 Kbit) and mac_array._grid.
+    # col_mux=4 gives 137×154 µm (1:1.13 aspect) — square. col_mux=8 gave 1:3.0 strip.
+    SramSpec("sram_512x32", 32, 512, col_mux=4),
 ]
 
 
