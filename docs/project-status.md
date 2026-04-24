@@ -21,34 +21,34 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 | Down projection | 0.995683 |
 | Post-MLP residual | 0.999701 |
 
-### Backend PnR: 19 routed through DRT (12 logic-only + 7 macro-bearing)
+### Backend PnR: 19 routed through DRT (10 logic-only + 7 macro-bearing + 2 academic demos)
 
-19 designs configured for ORFS sky130hd at 250 MHz (4ns clock). NOR ROM and SRAM macro collateral integrated via sky130 HAL layer. Three rounds of density work — die resizing (v2, 41%), SRAM col_mux + macro consolidation in kv_cache_demo (-93%), and NOR ROM internal-mux refactor (v3, embed_rom + lm_head_demo each -55%) — reduced total macro-bearing area from 96.6 mm² to 51.8 mm² (**46% reduction**).
+19 designs configured for ORFS sky130hd at 250 MHz (4ns clock). NOR ROM and SRAM macro collateral integrated via sky130 HAL layer. Five rounds of density work — die resizing (v2, 41%), SRAM col_mux + macro consolidation in kv_cache_demo (-93%), NOR ROM internal-mux refactor (v3, embed_rom + lm_head_demo each -55%), `nor_rom_4096x1024` fold=2 reshape for rope (v4), and **v5: `[[memory]]` + new SRAM macros (`sram_4096x16`, `sram_256x16`) for rmsnorm/swiglu/lut_interp + rom_bank die shrink** — reduced total routed area from 96.6 mm² to **47.1 mm² (51% reduction)**. v5 alone saved 14 mm² (-23%) by replacing ~65,000 gate-synthesized flip-flops in `rmsnorm._gamma` with one 0.074 mm² SRAM macro.
 
-#### Completed through DRT — Logic-Only (12 designs)
+#### Completed through DRT — Logic-Only (10 designs)
 
 | Module | Area (µm²) | fmax (MHz) | Timing |
 |--------|-----------|-----------|--------|
 | async_fifo | 3,794 | 326 | **MET** |
+| **lut_interp** | **69,151** | **253** | **MET** |
 | layer_tile | 63,481 | 254 | **MET** |
 | llama_chip | 76,899 | 252 | **MET** |
 | global_controller | 95,816 | 244 | -0.09ns |
 | scale_store | 88,127 | 243 | -0.11ns |
-| lut_interp | 317,621 | 227 | -0.41ns |
 | codebook_decoder | 936,451 | 215 | -0.66ns |
 | dequant | 138,904 | 214 | -0.67ns |
 | mac_pe | 71,462 | 175 | -1.71ns |
 | attention_unit | 147,916 | 139 | -3.21ns |
-| rmsnorm | 2,963,635 | 166 | -2.03ns |
-| swiglu | 325,351 | 184 | -1.42ns |
 
-After Phase 3 HLS retiming via `[[schedule(N)]]` annotations: swiglu (+292% fmax), rmsnorm (+115%), attention_unit (+83%), mac_pe (+27%). Each module hit a retiming floor — pushing schedule(N+1) regressed due to register overhead. embed_rom and lm_head_demo remain at 127–131 MHz (clock skew on the tall folded-ROM die dominates).
+`rmsnorm` and `swiglu` moved to the macro-bearing table after the v5 refactor — they now instantiate real SRAM macros for their LUT/gamma storage (was gate-synthesized FFs). After v3 HLS retiming + v5 SRAM macros: swiglu cell area -64% but timing regressed (-1.42 → -2.40 ns) because `KanagawaSyncRam` 1-cycle read latency disrupts the existing `[[schedule(7)]]` pipeline; rmsnorm cell area -94% AND timing improved (-2.03 → -0.87 ns); lut_interp cell area -78% with timing now MET (+0.05 ns). Each module hit a retiming floor — pushing schedule(N+1) regressed due to register overhead. embed_rom and lm_head_demo remain at 127–131 MHz (clock skew on the tall folded-ROM die dominates).
 
-#### Completed through DRT — Macro-Bearing (7 designs)
+#### Completed through DRT — Macro-Bearing (7 + rmsnorm + swiglu + 2 demos)
 
 | Module | Macro(s) | Die (µm) | Util | DRC | WNS (ns) | fmax (MHz) |
 |--------|----------|----------|------|-----|----------|-----------|
-| rom_bank | 1× nor_rom_1024x880 | 2400×2400 | 60% | **0** | -2.35 | 157 |
+| **rmsnorm** | **1× sram_4096x16 + 1× sram_256x16** | **1200×1200** | 14% | **0** | **-0.87** | **205** |
+| **swiglu** | **3× sram_256x16** | **700×700** | 25% | **0** | -2.40 | 156 |
+| rom_bank | 1× nor_rom_1024x880 | 1500×1500 | 63% | **0** | -2.01 | 167 |
 | mac_array | 1× nor_rom_1024x880 | 2500×3000 | 35% | 641 | -3.88 | 127 |
 | rope | 2× nor_rom_4096x1024 (fold=2, mirrored) | 3000×3300 | 72% | 418 | -4.14 | 122 |
 | embed_rom | 1× nor_rom_65536x192 (internal mux) | 1900×2400 | 78% | **0** | -3.63 | 131 |

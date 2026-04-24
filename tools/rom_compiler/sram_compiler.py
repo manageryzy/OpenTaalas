@@ -110,6 +110,12 @@ PREDEFINED = [
     # Wider variant for kv_cache_demo: 2 tiles per array instead of 4.
     # col_mux=32 makes it nearly square (254×293 µm, 1:1.15 aspect).
     SramSpec("sram_8192x8", 8, 8192, col_mux=32),
+    # 16-bit wide variants for BF16 weight/LUT storage.
+    # sram_4096x16 (col_mux=16): rmsnorm._gamma (64 Kbit) — replaces ~65K flip-flops.
+    # col_mux=16 gives square aspect (255×293 µm, 1:1.15) vs col_mux=8 (1:4.16 strip).
+    SramSpec("sram_4096x16", 16, 4096, col_mux=16),
+    # sram_256x16 (col_mux=4): rmsnorm._rsqrt_lut, swiglu._sigmoid_lut, lut_interp._table (4 Kbit)
+    SramSpec("sram_256x16", 16, 256, col_mux=4),
 ]
 
 

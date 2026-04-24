@@ -5,16 +5,31 @@ export PLATFORM        = sky130hd
 _this_dir := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 _project  := $(abspath $(_this_dir)/../../../..)
 
-include $(_this_dir)/../../kanagawa_runtime.mk
+include $(_this_dir)/../../kanagawa_runtime_sky130.mk
 
 export VERILOG_FILES   = $(_project)/rtl/generated/kanagawa/lut_interplut_unit.sv \
                          $(_project)/rtl/generated/kanagawa/lut_interplut_unit_types.sv \
-                         $(KANAGAWA_RUNTIME_SV)
+                         $(KANAGAWA_RUNTIME_SV) \
+                         $(MACRO_BB)
 export VERILOG_DEFINES = $(KANAGAWA_VERILOG_DEFINES)
 export SDC_FILE        = $(_this_dir)/constraint.sdc
 
 export SYNTH_HDL_FRONTEND = slang
-export CORE_UTILIZATION = 50
-export PLACE_DENSITY_LB_ADDON = 0.20
+export SYNTH_HIERARCHICAL = 1
+# 1× sram_256x16 (78×85 µm) holds _table. Logic was 25K cells in 0.54 mm².
+export DIE_AREA  = 0 0 500 500
+export CORE_AREA = 10 10 490 490
+export PLACE_DENSITY_LB_ADDON = 0.10
+export GENERATE_ARTIFACTS_ON_FAILURE = 1
+export GLOBAL_ROUTE_ARGS = -congestion_iterations 30 -congestion_report_iter_step 5 -verbose -allow_congestion
+export SKIP_INCREMENTAL_REPAIR = 1
+export RECOVER_POWER = 0
+export SKIP_ANTENNA_REPAIR = 1
+export SKIP_ANTENNA_REPAIR_POST_DRT = 1
+export MACRO_PLACE_HALO = 10 10
 export SYNTH_MEMORY_MAX_BITS = 65536
 export REMOVE_ABC_BUFFERS = 1
+
+export ADDITIONAL_LEFS = $(MACRO_LEFS)
+export ADDITIONAL_LIBS = $(MACRO_LIBS)
+export ADDITIONAL_GDS  = $(MACRO_GDS)

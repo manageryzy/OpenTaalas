@@ -1,6 +1,6 @@
 
 // This file was generated. Do not modify.
-// kanagawa --backend=sv --import-dir=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library --base-library=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library/mini-base.k --output=/home/mana/workspace/OpenTaalas/rtl/generated/kanagawa/scale_store /home/mana/workspace/OpenTaalas/rtl/kanagawa/scale_store.k
+// kanagawa --backend=sv --import-dir=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library --base-library=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library/mini-base.k --output=/home/mana/workspace/OpenTaalas/rtl/generated/kanagawa/scale_store --frequency=250 --register-ratio=8 --max-register-ratio=16 /home/mana/workspace/OpenTaalas/rtl/kanagawa/scale_store.k
 
 `default_nettype wire
 module scale_storeDebugView_get_bank_scaleEntry
@@ -96,22 +96,9 @@ module scale_store_set_tensor_scale_BasicBlock_0(	// scale_store.k:35:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  output wire        global_out__tensor_scales_element_0_40_0_valid,
-  output wire [31:0] global_out__tensor_scales_element_0_40_0,
-  output wire        global_out__tensor_scales_element_1_41_0_valid,
-  output wire [31:0] global_out__tensor_scales_element_1_41_0,
-  output wire        global_out__tensor_scales_element_2_42_0_valid,
-  output wire [31:0] global_out__tensor_scales_element_2_42_0,
-  output wire        global_out__tensor_scales_element_3_43_0_valid,
-  output wire [31:0] global_out__tensor_scales_element_3_43_0,
-  output wire        global_out__tensor_scales_element_4_44_0_valid,
-  output wire [31:0] global_out__tensor_scales_element_4_44_0,
-  output wire        global_out__tensor_scales_element_5_45_0_valid,
-  output wire [31:0] global_out__tensor_scales_element_5_45_0,
-  output wire        global_out__tensor_scales_element_6_46_0_valid,
-  output wire [31:0] global_out__tensor_scales_element_6_46_0,
-  output wire        global_out__tensor_scales_element_7_47_0_valid,
-  output wire [31:0] global_out__tensor_scales_element_7_47_0,
+  output wire [31:0] memory_write_data_out_9_0,
+  output wire [2:0]  memory_write_addr_out_9_0,
+  output wire        memory_wren_9_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
@@ -125,26 +112,14 @@ module scale_store_set_tensor_scale_BasicBlock_0(	// scale_store.k:35:9
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
   logic        done_out_0;	// scale_store.k:35:9
-  logic        global_out__tensor_scales_element_0_40_0_valid_0;	// scale_store.k:35:9
-  logic [31:0] global_out__tensor_scales_element_0_40_0_0;	// scale_store.k:35:9
-  logic        global_out__tensor_scales_element_1_41_0_valid_0;	// scale_store.k:35:9
-  logic [31:0] global_out__tensor_scales_element_1_41_0_0;	// scale_store.k:35:9
-  logic        global_out__tensor_scales_element_2_42_0_valid_0;	// scale_store.k:35:9
-  logic [31:0] global_out__tensor_scales_element_2_42_0_0;	// scale_store.k:35:9
-  logic        global_out__tensor_scales_element_3_43_0_valid_0;	// scale_store.k:35:9
-  logic [31:0] global_out__tensor_scales_element_3_43_0_0;	// scale_store.k:35:9
-  logic        global_out__tensor_scales_element_4_44_0_valid_0;	// scale_store.k:35:9
-  logic [31:0] global_out__tensor_scales_element_4_44_0_0;	// scale_store.k:35:9
-  logic        global_out__tensor_scales_element_5_45_0_valid_0;	// scale_store.k:35:9
-  logic [31:0] global_out__tensor_scales_element_5_45_0_0;	// scale_store.k:35:9
-  logic        global_out__tensor_scales_element_6_46_0_valid_0;	// scale_store.k:35:9
-  logic [31:0] global_out__tensor_scales_element_6_46_0_0;	// scale_store.k:35:9
-  logic        global_out__tensor_scales_element_7_47_0_valid_0;	// scale_store.k:35:9
-  logic [31:0] global_out__tensor_scales_element_7_47_0_0;	// scale_store.k:35:9
+  logic [31:0] memory_write_data_out_9_0_0;	// scale_store.k:35:9
+  logic [2:0]  memory_write_addr_out_9_0_0;	// scale_store.k:35:9
+  logic        memory_wren_9_0_0;	// scale_store.k:35:9
   logic        fifo_wren_0_0;	// scale_store.k:35:9
   logic        input_rdy_0_0;	// scale_store.k:35:9
   logic [7:0]  control_state_out_0;	// scale_store.k:35:9
   wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// scale_store.k:35:9
+  wire         _GEN_0 = _GEN & input_valid_0;	// scale_store.k:35:9
   always_comb begin	// scale_store.k:35:9
     input_rdy_0_0 = _GEN;	// scale_store.k:35:9
     control_state_out_0 =
@@ -155,36 +130,14 @@ module scale_store_set_tensor_scale_BasicBlock_0(	// scale_store.k:35:9
        ~_fifo_almostfull_ffc_0_data_out,
        ~input_valid_0};	// scale_store.k:35:9
   end // always_comb
+  always_comb begin	// scale_store.k:35:9
+    memory_wren_9_0_0 = _GEN_0;	// scale_store.k:35:9, :37:13
+    memory_write_addr_out_9_0_0 = data_in_7[2:0];	// scale_store.k:37:13
+    memory_write_data_out_9_0_0 = data_in_7[34:3];	// scale_store.k:37:13
+  end // always_comb
   reg   [2:0]  p0_matrix_id;	// scale_store.k:35:9
   reg   [31:0] p0_value;	// scale_store.k:35:9
   reg          p0_stage1_enable = 1'h0;	// scale_store.k:35:9
-  always_comb begin	// scale_store.k:35:9
-    global_out__tensor_scales_element_4_44_0_0 = p0_value;	// scale_store.k:35:9
-    global_out__tensor_scales_element_4_44_0_valid_0 =
-      p0_stage1_enable & p0_matrix_id == 3'h4;	// scale_store.k:35:9, :37:13
-    global_out__tensor_scales_element_5_45_0_0 = p0_value;	// scale_store.k:35:9
-    global_out__tensor_scales_element_5_45_0_valid_0 =
-      p0_stage1_enable & p0_matrix_id == 3'h5;	// scale_store.k:35:9, :37:13
-    global_out__tensor_scales_element_6_46_0_0 = p0_value;	// scale_store.k:35:9
-    global_out__tensor_scales_element_6_46_0_valid_0 =
-      p0_stage1_enable & p0_matrix_id == 3'h6;	// scale_store.k:35:9, :37:13
-    global_out__tensor_scales_element_7_47_0_0 = p0_value;	// scale_store.k:35:9
-    global_out__tensor_scales_element_7_47_0_valid_0 = p0_stage1_enable & (&p0_matrix_id);	// scale_store.k:35:9, :37:13
-  end // always_comb
-  always_comb begin	// scale_store.k:35:9
-    global_out__tensor_scales_element_0_40_0_0 = p0_value;	// scale_store.k:35:9
-    global_out__tensor_scales_element_0_40_0_valid_0 =
-      p0_stage1_enable & p0_matrix_id == 3'h0;	// scale_store.k:35:9, :37:13
-    global_out__tensor_scales_element_1_41_0_0 = p0_value;	// scale_store.k:35:9
-    global_out__tensor_scales_element_1_41_0_valid_0 =
-      p0_stage1_enable & p0_matrix_id == 3'h1;	// scale_store.k:35:9, :37:13
-    global_out__tensor_scales_element_2_42_0_0 = p0_value;	// scale_store.k:35:9
-    global_out__tensor_scales_element_2_42_0_valid_0 =
-      p0_stage1_enable & p0_matrix_id == 3'h2;	// scale_store.k:35:9, :37:13
-    global_out__tensor_scales_element_3_43_0_0 = p0_value;	// scale_store.k:35:9
-    global_out__tensor_scales_element_3_43_0_valid_0 =
-      p0_stage1_enable & p0_matrix_id == 3'h3;	// scale_store.k:35:9, :37:13
-  end // always_comb
   reg          p0_stage2_enable = 1'h0;	// scale_store.k:35:9
   always @(posedge clk) begin	// scale_store.k:35:9
     p0_matrix_id <= data_in_7[2:0];	// scale_store.k:35:9
@@ -194,7 +147,7 @@ module scale_store_set_tensor_scale_BasicBlock_0(	// scale_store.k:35:9
       p0_stage2_enable <= 1'h0;	// scale_store.k:35:9
     end
     else begin	// scale_store.k:35:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// scale_store.k:35:9
+      p0_stage1_enable <= _GEN_0;	// scale_store.k:35:9
       p0_stage2_enable <= p0_stage1_enable;	// scale_store.k:35:9
     end
   end // always @(posedge)
@@ -224,38 +177,9 @@ module scale_store_set_tensor_scale_BasicBlock_0(	// scale_store.k:35:9
     .valid_out  (/* unused */)
   );	// scale_store.k:39:9
   assign done_out = p0_stage2_enable;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_0_40_0_valid =
-    global_out__tensor_scales_element_0_40_0_valid_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_0_40_0 =
-    global_out__tensor_scales_element_0_40_0_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_1_41_0_valid =
-    global_out__tensor_scales_element_1_41_0_valid_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_1_41_0 =
-    global_out__tensor_scales_element_1_41_0_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_2_42_0_valid =
-    global_out__tensor_scales_element_2_42_0_valid_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_2_42_0 =
-    global_out__tensor_scales_element_2_42_0_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_3_43_0_valid =
-    global_out__tensor_scales_element_3_43_0_valid_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_3_43_0 =
-    global_out__tensor_scales_element_3_43_0_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_4_44_0_valid =
-    global_out__tensor_scales_element_4_44_0_valid_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_4_44_0 =
-    global_out__tensor_scales_element_4_44_0_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_5_45_0_valid =
-    global_out__tensor_scales_element_5_45_0_valid_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_5_45_0 =
-    global_out__tensor_scales_element_5_45_0_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_6_46_0_valid =
-    global_out__tensor_scales_element_6_46_0_valid_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_6_46_0 =
-    global_out__tensor_scales_element_6_46_0_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_7_47_0_valid =
-    global_out__tensor_scales_element_7_47_0_valid_0;	// scale_store.k:35:9
-  assign global_out__tensor_scales_element_7_47_0 =
-    global_out__tensor_scales_element_7_47_0_0;	// scale_store.k:35:9
+  assign memory_write_data_out_9_0 = memory_write_data_out_9_0_0;	// scale_store.k:35:9
+  assign memory_write_addr_out_9_0 = memory_write_addr_out_9_0_0;	// scale_store.k:35:9
+  assign memory_wren_9_0 = memory_wren_9_0_0;	// scale_store.k:35:9
   assign fifo_wren_0 = fifo_wren_0_0;	// scale_store.k:35:9
   assign input_rdy_0 = input_rdy_0_0;	// scale_store.k:35:9
   assign control_state_out = control_state_out_0;	// scale_store.k:35:9
@@ -265,70 +189,9 @@ module scale_store_set_bank_scale_BasicBlock_0(	// scale_store.k:27:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  output wire        global_out__bank_scales_element_0_8_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_0_8_0,
-  output wire        global_out__bank_scales_element_1_9_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_1_9_0,
-  output wire        global_out__bank_scales_element_2_10_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_2_10_0,
-  output wire        global_out__bank_scales_element_3_11_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_3_11_0,
-  output wire        global_out__bank_scales_element_4_12_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_4_12_0,
-  output wire        global_out__bank_scales_element_5_13_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_5_13_0,
-  output wire        global_out__bank_scales_element_6_14_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_6_14_0,
-  output wire        global_out__bank_scales_element_7_15_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_7_15_0,
-  output wire        global_out__bank_scales_element_8_16_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_8_16_0,
-  output wire        global_out__bank_scales_element_9_17_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_9_17_0,
-  output wire        global_out__bank_scales_element_10_18_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_10_18_0,
-  output wire        global_out__bank_scales_element_11_19_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_11_19_0,
-  output wire        global_out__bank_scales_element_12_20_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_12_20_0,
-  output wire        global_out__bank_scales_element_13_21_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_13_21_0,
-  output wire        global_out__bank_scales_element_14_22_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_14_22_0,
-  output wire        global_out__bank_scales_element_15_23_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_15_23_0,
-  output wire        global_out__bank_scales_element_16_24_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_16_24_0,
-  output wire        global_out__bank_scales_element_17_25_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_17_25_0,
-  output wire        global_out__bank_scales_element_18_26_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_18_26_0,
-  output wire        global_out__bank_scales_element_19_27_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_19_27_0,
-  output wire        global_out__bank_scales_element_20_28_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_20_28_0,
-  output wire        global_out__bank_scales_element_21_29_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_21_29_0,
-  output wire        global_out__bank_scales_element_22_30_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_22_30_0,
-  output wire        global_out__bank_scales_element_23_31_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_23_31_0,
-  output wire        global_out__bank_scales_element_24_32_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_24_32_0,
-  output wire        global_out__bank_scales_element_25_33_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_25_33_0,
-  output wire        global_out__bank_scales_element_26_34_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_26_34_0,
-  output wire        global_out__bank_scales_element_27_35_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_27_35_0,
-  output wire        global_out__bank_scales_element_28_36_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_28_36_0,
-  output wire        global_out__bank_scales_element_29_37_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_29_37_0,
-  output wire        global_out__bank_scales_element_30_38_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_30_38_0,
-  output wire        global_out__bank_scales_element_31_39_0_valid,
-  output wire [7:0]  global_out__bank_scales_element_31_39_0,
+  output wire [7:0]  memory_write_data_out_8_0,
+  output wire [4:0]  memory_write_addr_out_8_0,
+  output wire        memory_wren_8_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
@@ -342,74 +205,14 @@ module scale_store_set_bank_scale_BasicBlock_0(	// scale_store.k:27:9
   wire        _fifo_overflow_ffc_0_data_out;
   wire        _fifo_almostfull_ffc_0_data_out;
   logic       done_out_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_0_8_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_0_8_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_1_9_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_1_9_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_2_10_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_2_10_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_3_11_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_3_11_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_4_12_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_4_12_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_5_13_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_5_13_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_6_14_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_6_14_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_7_15_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_7_15_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_8_16_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_8_16_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_9_17_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_9_17_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_10_18_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_10_18_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_11_19_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_11_19_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_12_20_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_12_20_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_13_21_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_13_21_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_14_22_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_14_22_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_15_23_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_15_23_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_16_24_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_16_24_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_17_25_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_17_25_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_18_26_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_18_26_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_19_27_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_19_27_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_20_28_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_20_28_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_21_29_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_21_29_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_22_30_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_22_30_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_23_31_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_23_31_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_24_32_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_24_32_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_25_33_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_25_33_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_26_34_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_26_34_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_27_35_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_27_35_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_28_36_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_28_36_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_29_37_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_29_37_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_30_38_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_30_38_0_0;	// scale_store.k:27:9
-  logic       global_out__bank_scales_element_31_39_0_valid_0;	// scale_store.k:27:9
-  logic [7:0] global_out__bank_scales_element_31_39_0_0;	// scale_store.k:27:9
+  logic [7:0] memory_write_data_out_8_0_0;	// scale_store.k:27:9
+  logic [4:0] memory_write_addr_out_8_0_0;	// scale_store.k:27:9
+  logic       memory_wren_8_0_0;	// scale_store.k:27:9
   logic       fifo_wren_0_0;	// scale_store.k:27:9
   logic       input_rdy_0_0;	// scale_store.k:27:9
   logic [7:0] control_state_out_0;	// scale_store.k:27:9
   wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// scale_store.k:27:9
+  wire        _GEN_0 = _GEN & input_valid_0;	// scale_store.k:27:9
   always_comb begin	// scale_store.k:27:9
     input_rdy_0_0 = _GEN;	// scale_store.k:27:9
     control_state_out_0 =
@@ -420,106 +223,14 @@ module scale_store_set_bank_scale_BasicBlock_0(	// scale_store.k:27:9
        ~_fifo_almostfull_ffc_0_data_out,
        ~input_valid_0};	// scale_store.k:27:9
   end // always_comb
+  always_comb begin	// scale_store.k:27:9
+    memory_wren_8_0_0 = _GEN_0;	// scale_store.k:27:9, :29:13
+    memory_write_addr_out_8_0_0 = data_in_6[4:0];	// scale_store.k:29:13
+    memory_write_data_out_8_0_0 = data_in_6[12:5];	// scale_store.k:29:13
+  end // always_comb
   reg   [4:0] p0_bank_id;	// scale_store.k:27:9
   reg   [7:0] p0_value;	// scale_store.k:27:9
   reg         p0_stage1_enable = 1'h0;	// scale_store.k:27:9
-  always_comb begin	// scale_store.k:27:9
-    global_out__bank_scales_element_16_24_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_16_24_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h10;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_17_25_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_17_25_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h11;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_18_26_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_18_26_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h12;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_19_27_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_19_27_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h13;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_20_28_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_20_28_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h14;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_21_29_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_21_29_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h15;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_22_30_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_22_30_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h16;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_23_31_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_23_31_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h17;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_24_32_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_24_32_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h18;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_25_33_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_25_33_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h19;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_26_34_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_26_34_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h1A;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_27_35_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_27_35_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h1B;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_28_36_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_28_36_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h1C;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_29_37_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_29_37_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h1D;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_30_38_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_30_38_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h1E;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_31_39_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_31_39_0_valid_0 = p0_stage1_enable & (&p0_bank_id);	// scale_store.k:27:9, :29:13
-  end // always_comb
-  always_comb begin	// scale_store.k:27:9
-    global_out__bank_scales_element_0_8_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_0_8_0_valid_0 = p0_stage1_enable & p0_bank_id == 5'h0;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_1_9_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_1_9_0_valid_0 = p0_stage1_enable & p0_bank_id == 5'h1;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_2_10_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_2_10_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h2;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_3_11_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_3_11_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h3;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_4_12_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_4_12_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h4;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_5_13_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_5_13_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h5;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_6_14_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_6_14_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h6;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_7_15_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_7_15_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h7;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_8_16_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_8_16_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h8;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_9_17_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_9_17_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'h9;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_10_18_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_10_18_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'hA;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_11_19_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_11_19_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'hB;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_12_20_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_12_20_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'hC;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_13_21_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_13_21_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'hD;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_14_22_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_14_22_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'hE;	// scale_store.k:27:9, :29:13
-    global_out__bank_scales_element_15_23_0_0 = p0_value;	// scale_store.k:27:9
-    global_out__bank_scales_element_15_23_0_valid_0 =
-      p0_stage1_enable & p0_bank_id == 5'hF;	// scale_store.k:27:9, :29:13
-  end // always_comb
   reg         p0_stage2_enable = 1'h0;	// scale_store.k:27:9
   always @(posedge clk) begin	// scale_store.k:27:9
     p0_bank_id <= data_in_6[4:0];	// scale_store.k:27:9
@@ -529,7 +240,7 @@ module scale_store_set_bank_scale_BasicBlock_0(	// scale_store.k:27:9
       p0_stage2_enable <= 1'h0;	// scale_store.k:27:9
     end
     else begin	// scale_store.k:27:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// scale_store.k:27:9
+      p0_stage1_enable <= _GEN_0;	// scale_store.k:27:9
       p0_stage2_enable <= p0_stage1_enable;	// scale_store.k:27:9
     end
   end // always @(posedge)
@@ -559,132 +270,9 @@ module scale_store_set_bank_scale_BasicBlock_0(	// scale_store.k:27:9
     .valid_out (/* unused */)
   );	// scale_store.k:31:9
   assign done_out = p0_stage2_enable;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_0_8_0_valid =
-    global_out__bank_scales_element_0_8_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_0_8_0 = global_out__bank_scales_element_0_8_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_1_9_0_valid =
-    global_out__bank_scales_element_1_9_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_1_9_0 = global_out__bank_scales_element_1_9_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_2_10_0_valid =
-    global_out__bank_scales_element_2_10_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_2_10_0 =
-    global_out__bank_scales_element_2_10_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_3_11_0_valid =
-    global_out__bank_scales_element_3_11_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_3_11_0 =
-    global_out__bank_scales_element_3_11_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_4_12_0_valid =
-    global_out__bank_scales_element_4_12_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_4_12_0 =
-    global_out__bank_scales_element_4_12_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_5_13_0_valid =
-    global_out__bank_scales_element_5_13_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_5_13_0 =
-    global_out__bank_scales_element_5_13_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_6_14_0_valid =
-    global_out__bank_scales_element_6_14_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_6_14_0 =
-    global_out__bank_scales_element_6_14_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_7_15_0_valid =
-    global_out__bank_scales_element_7_15_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_7_15_0 =
-    global_out__bank_scales_element_7_15_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_8_16_0_valid =
-    global_out__bank_scales_element_8_16_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_8_16_0 =
-    global_out__bank_scales_element_8_16_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_9_17_0_valid =
-    global_out__bank_scales_element_9_17_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_9_17_0 =
-    global_out__bank_scales_element_9_17_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_10_18_0_valid =
-    global_out__bank_scales_element_10_18_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_10_18_0 =
-    global_out__bank_scales_element_10_18_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_11_19_0_valid =
-    global_out__bank_scales_element_11_19_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_11_19_0 =
-    global_out__bank_scales_element_11_19_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_12_20_0_valid =
-    global_out__bank_scales_element_12_20_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_12_20_0 =
-    global_out__bank_scales_element_12_20_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_13_21_0_valid =
-    global_out__bank_scales_element_13_21_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_13_21_0 =
-    global_out__bank_scales_element_13_21_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_14_22_0_valid =
-    global_out__bank_scales_element_14_22_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_14_22_0 =
-    global_out__bank_scales_element_14_22_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_15_23_0_valid =
-    global_out__bank_scales_element_15_23_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_15_23_0 =
-    global_out__bank_scales_element_15_23_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_16_24_0_valid =
-    global_out__bank_scales_element_16_24_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_16_24_0 =
-    global_out__bank_scales_element_16_24_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_17_25_0_valid =
-    global_out__bank_scales_element_17_25_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_17_25_0 =
-    global_out__bank_scales_element_17_25_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_18_26_0_valid =
-    global_out__bank_scales_element_18_26_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_18_26_0 =
-    global_out__bank_scales_element_18_26_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_19_27_0_valid =
-    global_out__bank_scales_element_19_27_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_19_27_0 =
-    global_out__bank_scales_element_19_27_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_20_28_0_valid =
-    global_out__bank_scales_element_20_28_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_20_28_0 =
-    global_out__bank_scales_element_20_28_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_21_29_0_valid =
-    global_out__bank_scales_element_21_29_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_21_29_0 =
-    global_out__bank_scales_element_21_29_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_22_30_0_valid =
-    global_out__bank_scales_element_22_30_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_22_30_0 =
-    global_out__bank_scales_element_22_30_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_23_31_0_valid =
-    global_out__bank_scales_element_23_31_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_23_31_0 =
-    global_out__bank_scales_element_23_31_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_24_32_0_valid =
-    global_out__bank_scales_element_24_32_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_24_32_0 =
-    global_out__bank_scales_element_24_32_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_25_33_0_valid =
-    global_out__bank_scales_element_25_33_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_25_33_0 =
-    global_out__bank_scales_element_25_33_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_26_34_0_valid =
-    global_out__bank_scales_element_26_34_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_26_34_0 =
-    global_out__bank_scales_element_26_34_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_27_35_0_valid =
-    global_out__bank_scales_element_27_35_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_27_35_0 =
-    global_out__bank_scales_element_27_35_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_28_36_0_valid =
-    global_out__bank_scales_element_28_36_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_28_36_0 =
-    global_out__bank_scales_element_28_36_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_29_37_0_valid =
-    global_out__bank_scales_element_29_37_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_29_37_0 =
-    global_out__bank_scales_element_29_37_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_30_38_0_valid =
-    global_out__bank_scales_element_30_38_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_30_38_0 =
-    global_out__bank_scales_element_30_38_0_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_31_39_0_valid =
-    global_out__bank_scales_element_31_39_0_valid_0;	// scale_store.k:27:9
-  assign global_out__bank_scales_element_31_39_0 =
-    global_out__bank_scales_element_31_39_0_0;	// scale_store.k:27:9
+  assign memory_write_data_out_8_0 = memory_write_data_out_8_0_0;	// scale_store.k:27:9
+  assign memory_write_addr_out_8_0 = memory_write_addr_out_8_0_0;	// scale_store.k:27:9
+  assign memory_wren_8_0 = memory_wren_8_0_0;	// scale_store.k:27:9
   assign fifo_wren_0 = fifo_wren_0_0;	// scale_store.k:27:9
   assign input_rdy_0 = input_rdy_0_0;	// scale_store.k:27:9
   assign control_state_out = control_state_out_0;	// scale_store.k:27:9
@@ -694,14 +282,9 @@ module scale_store_get_tensor_scale_BasicBlock_0(	// scale_store.k:22:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  input  wire [31:0] global_in__tensor_scales_element_0_40,
-  input  wire [31:0] global_in__tensor_scales_element_1_41,
-  input  wire [31:0] global_in__tensor_scales_element_2_42,
-  input  wire [31:0] global_in__tensor_scales_element_3_43,
-  input  wire [31:0] global_in__tensor_scales_element_4_44,
-  input  wire [31:0] global_in__tensor_scales_element_5_45,
-  input  wire [31:0] global_in__tensor_scales_element_6_46,
-  input  wire [31:0] global_in__tensor_scales_element_7_47,
+  input  wire [31:0] memory_read_data_in_9_0,
+  output wire [2:0]  memory_read_addr_out_9_0,
+  output wire        memory_rden_out_9_0,
   output wire [31:0] fifo_data_out_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
@@ -715,28 +298,16 @@ module scale_store_get_tensor_scale_BasicBlock_0(	// scale_store.k:22:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [31:0] global_in__tensor_scales_element_0_40_0 =
-    global_in__tensor_scales_element_0_40;	// scale_store.k:22:9
-  wire  [31:0] global_in__tensor_scales_element_1_41_0 =
-    global_in__tensor_scales_element_1_41;	// scale_store.k:22:9
-  wire  [31:0] global_in__tensor_scales_element_2_42_0 =
-    global_in__tensor_scales_element_2_42;	// scale_store.k:22:9
-  wire  [31:0] global_in__tensor_scales_element_3_43_0 =
-    global_in__tensor_scales_element_3_43;	// scale_store.k:22:9
-  wire  [31:0] global_in__tensor_scales_element_4_44_0 =
-    global_in__tensor_scales_element_4_44;	// scale_store.k:22:9
-  wire  [31:0] global_in__tensor_scales_element_5_45_0 =
-    global_in__tensor_scales_element_5_45;	// scale_store.k:22:9
-  wire  [31:0] global_in__tensor_scales_element_6_46_0 =
-    global_in__tensor_scales_element_6_46;	// scale_store.k:22:9
-  wire  [31:0] global_in__tensor_scales_element_7_47_0 =
-    global_in__tensor_scales_element_7_47;	// scale_store.k:22:9
+  wire  [31:0] memory_read_data_in_9_0_0 = memory_read_data_in_9_0;	// scale_store.k:22:9
   logic        done_out_0;	// scale_store.k:22:9
+  logic [2:0]  memory_read_addr_out_9_0_0;	// scale_store.k:22:9
+  logic        memory_rden_out_9_0_0;	// scale_store.k:22:9
   logic [31:0] fifo_data_out_0_0;	// scale_store.k:22:9
   logic        fifo_wren_0_0;	// scale_store.k:22:9
   logic        input_rdy_0_0;	// scale_store.k:22:9
   logic [7:0]  control_state_out_0;	// scale_store.k:22:9
   wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// scale_store.k:22:9
+  wire         _GEN_0 = _GEN & input_valid_0;	// scale_store.k:22:9
   always_comb begin	// scale_store.k:22:9
     input_rdy_0_0 = _GEN;	// scale_store.k:22:9
     control_state_out_0 =
@@ -747,41 +318,34 @@ module scale_store_get_tensor_scale_BasicBlock_0(	// scale_store.k:22:9
        ~_fifo_almostfull_ffc_0_data_out,
        ~input_valid_0};	// scale_store.k:22:9
   end // always_comb
+  always_comb begin	// scale_store.k:22:9
+    memory_read_addr_out_9_0_0 = data_in_5;	// scale_store.k:22:16
+    memory_rden_out_9_0_0 = _GEN_0;	// scale_store.k:22:{9,16}
+  end // always_comb
   reg   [2:0]  p0_data_in_5;	// scale_store.k:22:9
   reg          p0_stage1_enable = 1'h0;	// scale_store.k:22:9
-  wire  [31:0] _tensor_scales =
-    p0_data_in_5[2]
-      ? (p0_data_in_5[1]
-           ? (p0_data_in_5[0]
-                ? global_in__tensor_scales_element_7_47_0
-                : global_in__tensor_scales_element_6_46_0)
-           : p0_data_in_5[0]
-               ? global_in__tensor_scales_element_5_45_0
-               : global_in__tensor_scales_element_4_44_0)
-      : p0_data_in_5[1]
-          ? (p0_data_in_5[0]
-               ? global_in__tensor_scales_element_3_43_0
-               : global_in__tensor_scales_element_2_42_0)
-          : p0_data_in_5[0]
-              ? global_in__tensor_scales_element_1_41_0
-              : global_in__tensor_scales_element_0_40_0;	// scale_store.k:22:{9,16}
-  reg   [31:0] p0__tensor_scales;	// scale_store.k:22:9
   reg          p0_stage2_enable = 1'h0;	// scale_store.k:22:9
+  reg   [31:0] p0_memory_read_data_in_9_0;	// scale_store.k:22:9
+  reg          p0_stage3_enable = 1'h0;	// scale_store.k:22:9
   always @(posedge clk) begin	// scale_store.k:22:9
     p0_data_in_5 <= data_in_5;	// scale_store.k:22:9
-    if (rst)	// scale_store.k:22:9
+    if (rst) begin	// scale_store.k:22:9
       p0_stage1_enable <= 1'h0;	// scale_store.k:22:9
-    else	// scale_store.k:22:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// scale_store.k:22:9
-    p0__tensor_scales <= _tensor_scales;	// scale_store.k:22:{9,16}
-    if (rst)	// scale_store.k:22:9
       p0_stage2_enable <= 1'h0;	// scale_store.k:22:9
-    else	// scale_store.k:22:9
+    end
+    else begin	// scale_store.k:22:9
+      p0_stage1_enable <= _GEN_0;	// scale_store.k:22:9
       p0_stage2_enable <= p0_stage1_enable;	// scale_store.k:22:9
+    end
+    p0_memory_read_data_in_9_0 <= memory_read_data_in_9_0_0;	// scale_store.k:22:9
+    if (rst)	// scale_store.k:22:9
+      p0_stage3_enable <= 1'h0;	// scale_store.k:22:9
+    else	// scale_store.k:22:9
+      p0_stage3_enable <= p0_stage2_enable;	// scale_store.k:22:9
   end // always @(posedge)
   always_comb begin	// scale_store.k:22:9
-    fifo_wren_0_0 = p0_stage2_enable;	// scale_store.k:20:5, :22:9
-    fifo_data_out_0_0 = p0__tensor_scales;	// scale_store.k:20:5, :22:9
+    fifo_wren_0_0 = p0_stage3_enable;	// scale_store.k:20:5, :22:9
+    fifo_data_out_0_0 = p0_memory_read_data_in_9_0;	// scale_store.k:20:5, :22:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
@@ -807,11 +371,13 @@ module scale_store_get_tensor_scale_BasicBlock_0(	// scale_store.k:22:9
   );	// scale_store.k:20:5
   scale_storeDebugView_get_tensor_scaleExit scale_storeDebugView_get_tensor_scaleExit_instance (	// scale_store.k:20:5
     .clk          (clk),	// scale_store.k:20:5
-    ._ReturnValue (p0_stage1_enable ? _tensor_scales : 'x),	// scale_store.k:20:5, :22:{9,16}
-    .valid        (p0_stage1_enable),	// scale_store.k:22:9
+    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_9_0_0 : 'x),	// scale_store.k:20:5, :22:9
+    .valid        (p0_stage2_enable),	// scale_store.k:22:9
     .valid_out    (/* unused */)
   );	// scale_store.k:20:5
-  assign done_out = p0_stage2_enable;	// scale_store.k:22:9
+  assign done_out = p0_stage3_enable;	// scale_store.k:22:9
+  assign memory_read_addr_out_9_0 = memory_read_addr_out_9_0_0;	// scale_store.k:22:9
+  assign memory_rden_out_9_0 = memory_rden_out_9_0_0;	// scale_store.k:22:9
   assign fifo_data_out_0 = fifo_data_out_0_0;	// scale_store.k:22:9
   assign fifo_wren_0 = fifo_wren_0_0;	// scale_store.k:22:9
   assign input_rdy_0 = input_rdy_0_0;	// scale_store.k:22:9
@@ -822,38 +388,9 @@ module scale_store_get_bank_scale_BasicBlock_0(	// scale_store.k:17:9
   input  wire       clk,
   input  wire       rst,
   output wire       done_out,
-  input  wire [7:0] global_in__bank_scales_element_0_8,
-  input  wire [7:0] global_in__bank_scales_element_1_9,
-  input  wire [7:0] global_in__bank_scales_element_2_10,
-  input  wire [7:0] global_in__bank_scales_element_3_11,
-  input  wire [7:0] global_in__bank_scales_element_4_12,
-  input  wire [7:0] global_in__bank_scales_element_5_13,
-  input  wire [7:0] global_in__bank_scales_element_6_14,
-  input  wire [7:0] global_in__bank_scales_element_7_15,
-  input  wire [7:0] global_in__bank_scales_element_8_16,
-  input  wire [7:0] global_in__bank_scales_element_9_17,
-  input  wire [7:0] global_in__bank_scales_element_10_18,
-  input  wire [7:0] global_in__bank_scales_element_11_19,
-  input  wire [7:0] global_in__bank_scales_element_12_20,
-  input  wire [7:0] global_in__bank_scales_element_13_21,
-  input  wire [7:0] global_in__bank_scales_element_14_22,
-  input  wire [7:0] global_in__bank_scales_element_15_23,
-  input  wire [7:0] global_in__bank_scales_element_16_24,
-  input  wire [7:0] global_in__bank_scales_element_17_25,
-  input  wire [7:0] global_in__bank_scales_element_18_26,
-  input  wire [7:0] global_in__bank_scales_element_19_27,
-  input  wire [7:0] global_in__bank_scales_element_20_28,
-  input  wire [7:0] global_in__bank_scales_element_21_29,
-  input  wire [7:0] global_in__bank_scales_element_22_30,
-  input  wire [7:0] global_in__bank_scales_element_23_31,
-  input  wire [7:0] global_in__bank_scales_element_24_32,
-  input  wire [7:0] global_in__bank_scales_element_25_33,
-  input  wire [7:0] global_in__bank_scales_element_26_34,
-  input  wire [7:0] global_in__bank_scales_element_27_35,
-  input  wire [7:0] global_in__bank_scales_element_28_36,
-  input  wire [7:0] global_in__bank_scales_element_29_37,
-  input  wire [7:0] global_in__bank_scales_element_30_38,
-  input  wire [7:0] global_in__bank_scales_element_31_39,
+  input  wire [7:0] memory_read_data_in_8_0,
+  output wire [4:0] memory_read_addr_out_8_0,
+  output wire       memory_rden_out_8_0,
   output wire [7:0] fifo_data_out_0,
   output wire       fifo_wren_0,
   input  wire       fifo_almost_full_in_raw_0,
@@ -867,66 +404,16 @@ module scale_store_get_bank_scale_BasicBlock_0(	// scale_store.k:17:9
 
   wire        _fifo_overflow_ffc_0_data_out;
   wire        _fifo_almostfull_ffc_0_data_out;
-  wire  [7:0] global_in__bank_scales_element_0_8_0 = global_in__bank_scales_element_0_8;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_1_9_0 = global_in__bank_scales_element_1_9;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_2_10_0 = global_in__bank_scales_element_2_10;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_3_11_0 = global_in__bank_scales_element_3_11;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_4_12_0 = global_in__bank_scales_element_4_12;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_5_13_0 = global_in__bank_scales_element_5_13;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_6_14_0 = global_in__bank_scales_element_6_14;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_7_15_0 = global_in__bank_scales_element_7_15;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_8_16_0 = global_in__bank_scales_element_8_16;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_9_17_0 = global_in__bank_scales_element_9_17;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_10_18_0 =
-    global_in__bank_scales_element_10_18;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_11_19_0 =
-    global_in__bank_scales_element_11_19;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_12_20_0 =
-    global_in__bank_scales_element_12_20;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_13_21_0 =
-    global_in__bank_scales_element_13_21;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_14_22_0 =
-    global_in__bank_scales_element_14_22;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_15_23_0 =
-    global_in__bank_scales_element_15_23;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_16_24_0 =
-    global_in__bank_scales_element_16_24;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_17_25_0 =
-    global_in__bank_scales_element_17_25;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_18_26_0 =
-    global_in__bank_scales_element_18_26;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_19_27_0 =
-    global_in__bank_scales_element_19_27;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_20_28_0 =
-    global_in__bank_scales_element_20_28;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_21_29_0 =
-    global_in__bank_scales_element_21_29;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_22_30_0 =
-    global_in__bank_scales_element_22_30;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_23_31_0 =
-    global_in__bank_scales_element_23_31;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_24_32_0 =
-    global_in__bank_scales_element_24_32;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_25_33_0 =
-    global_in__bank_scales_element_25_33;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_26_34_0 =
-    global_in__bank_scales_element_26_34;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_27_35_0 =
-    global_in__bank_scales_element_27_35;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_28_36_0 =
-    global_in__bank_scales_element_28_36;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_29_37_0 =
-    global_in__bank_scales_element_29_37;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_30_38_0 =
-    global_in__bank_scales_element_30_38;	// scale_store.k:17:9
-  wire  [7:0] global_in__bank_scales_element_31_39_0 =
-    global_in__bank_scales_element_31_39;	// scale_store.k:17:9
+  wire  [7:0] memory_read_data_in_8_0_0 = memory_read_data_in_8_0;	// scale_store.k:17:9
   logic       done_out_0;	// scale_store.k:17:9
+  logic [4:0] memory_read_addr_out_8_0_0;	// scale_store.k:17:9
+  logic       memory_rden_out_8_0_0;	// scale_store.k:17:9
   logic [7:0] fifo_data_out_0_0;	// scale_store.k:17:9
   logic       fifo_wren_0_0;	// scale_store.k:17:9
   logic       input_rdy_0_0;	// scale_store.k:17:9
   logic [7:0] control_state_out_0;	// scale_store.k:17:9
   wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// scale_store.k:17:9
+  wire        _GEN_0 = _GEN & input_valid_0;	// scale_store.k:17:9
   always_comb begin	// scale_store.k:17:9
     input_rdy_0_0 = _GEN;	// scale_store.k:17:9
     control_state_out_0 =
@@ -937,87 +424,26 @@ module scale_store_get_bank_scale_BasicBlock_0(	// scale_store.k:17:9
        ~_fifo_almostfull_ffc_0_data_out,
        ~input_valid_0};	// scale_store.k:17:9
   end // always_comb
+  always_comb begin	// scale_store.k:17:9
+    memory_read_addr_out_8_0_0 = data_in_4;	// scale_store.k:17:16
+    memory_rden_out_8_0_0 = _GEN_0;	// scale_store.k:17:{9,16}
+  end // always_comb
   reg   [4:0] p0_data_in_4;	// scale_store.k:17:9
   reg         p0_stage1_enable = 1'h0;	// scale_store.k:17:9
-  reg   [7:0] p0__bank_scales;	// scale_store.k:17:9
   reg         p0_stage2_enable = 1'h0;	// scale_store.k:17:9
-  reg   [7:0] p0__bank_scales_0;	// scale_store.k:17:9
+  reg   [7:0] p0_memory_read_data_in_8_0;	// scale_store.k:17:9
   reg         p0_stage3_enable = 1'h0;	// scale_store.k:17:9
   always @(posedge clk) begin	// scale_store.k:17:9
     p0_data_in_4 <= data_in_4;	// scale_store.k:17:9
-    if (rst)	// scale_store.k:17:9
+    if (rst) begin	// scale_store.k:17:9
       p0_stage1_enable <= 1'h0;	// scale_store.k:17:9
-    else	// scale_store.k:17:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// scale_store.k:17:9
-    p0__bank_scales <=
-      p0_data_in_4[4]
-        ? (p0_data_in_4[3]
-             ? (p0_data_in_4[2]
-                  ? (p0_data_in_4[1]
-                       ? (p0_data_in_4[0]
-                            ? global_in__bank_scales_element_31_39_0
-                            : global_in__bank_scales_element_30_38_0)
-                       : p0_data_in_4[0]
-                           ? global_in__bank_scales_element_29_37_0
-                           : global_in__bank_scales_element_28_36_0)
-                  : p0_data_in_4[1]
-                      ? (p0_data_in_4[0]
-                           ? global_in__bank_scales_element_27_35_0
-                           : global_in__bank_scales_element_26_34_0)
-                      : p0_data_in_4[0]
-                          ? global_in__bank_scales_element_25_33_0
-                          : global_in__bank_scales_element_24_32_0)
-             : p0_data_in_4[2]
-                 ? (p0_data_in_4[1]
-                      ? (p0_data_in_4[0]
-                           ? global_in__bank_scales_element_23_31_0
-                           : global_in__bank_scales_element_22_30_0)
-                      : p0_data_in_4[0]
-                          ? global_in__bank_scales_element_21_29_0
-                          : global_in__bank_scales_element_20_28_0)
-                 : p0_data_in_4[1]
-                     ? (p0_data_in_4[0]
-                          ? global_in__bank_scales_element_19_27_0
-                          : global_in__bank_scales_element_18_26_0)
-                     : p0_data_in_4[0]
-                         ? global_in__bank_scales_element_17_25_0
-                         : global_in__bank_scales_element_16_24_0)
-        : p0_data_in_4[3]
-            ? (p0_data_in_4[2]
-                 ? (p0_data_in_4[1]
-                      ? (p0_data_in_4[0]
-                           ? global_in__bank_scales_element_15_23_0
-                           : global_in__bank_scales_element_14_22_0)
-                      : p0_data_in_4[0]
-                          ? global_in__bank_scales_element_13_21_0
-                          : global_in__bank_scales_element_12_20_0)
-                 : p0_data_in_4[1]
-                     ? (p0_data_in_4[0]
-                          ? global_in__bank_scales_element_11_19_0
-                          : global_in__bank_scales_element_10_18_0)
-                     : p0_data_in_4[0]
-                         ? global_in__bank_scales_element_9_17_0
-                         : global_in__bank_scales_element_8_16_0)
-            : p0_data_in_4[2]
-                ? (p0_data_in_4[1]
-                     ? (p0_data_in_4[0]
-                          ? global_in__bank_scales_element_7_15_0
-                          : global_in__bank_scales_element_6_14_0)
-                     : p0_data_in_4[0]
-                         ? global_in__bank_scales_element_5_13_0
-                         : global_in__bank_scales_element_4_12_0)
-                : p0_data_in_4[1]
-                    ? (p0_data_in_4[0]
-                         ? global_in__bank_scales_element_3_11_0
-                         : global_in__bank_scales_element_2_10_0)
-                    : p0_data_in_4[0]
-                        ? global_in__bank_scales_element_1_9_0
-                        : global_in__bank_scales_element_0_8_0;	// scale_store.k:17:{9,16}
-    if (rst)	// scale_store.k:17:9
       p0_stage2_enable <= 1'h0;	// scale_store.k:17:9
-    else	// scale_store.k:17:9
+    end
+    else begin	// scale_store.k:17:9
+      p0_stage1_enable <= _GEN_0;	// scale_store.k:17:9
       p0_stage2_enable <= p0_stage1_enable;	// scale_store.k:17:9
-    p0__bank_scales_0 <= p0__bank_scales;	// scale_store.k:17:9
+    end
+    p0_memory_read_data_in_8_0 <= memory_read_data_in_8_0_0;	// scale_store.k:17:9
     if (rst)	// scale_store.k:17:9
       p0_stage3_enable <= 1'h0;	// scale_store.k:17:9
     else	// scale_store.k:17:9
@@ -1025,7 +451,7 @@ module scale_store_get_bank_scale_BasicBlock_0(	// scale_store.k:17:9
   end // always @(posedge)
   always_comb begin	// scale_store.k:17:9
     fifo_wren_0_0 = p0_stage3_enable;	// scale_store.k:15:5, :17:9
-    fifo_data_out_0_0 = p0__bank_scales_0;	// scale_store.k:15:5, :17:9
+    fifo_data_out_0_0 = p0_memory_read_data_in_8_0;	// scale_store.k:15:5, :17:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
@@ -1051,41 +477,101 @@ module scale_store_get_bank_scale_BasicBlock_0(	// scale_store.k:17:9
   );	// scale_store.k:15:5
   scale_storeDebugView_get_bank_scaleExit scale_storeDebugView_get_bank_scaleExit_instance (	// scale_store.k:15:5
     .clk          (clk),	// scale_store.k:15:5
-    ._ReturnValue (p0_stage2_enable ? p0__bank_scales : 'x),	// scale_store.k:15:5, :17:9
+    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_8_0_0 : 'x),	// scale_store.k:15:5, :17:9
     .valid        (p0_stage2_enable),	// scale_store.k:17:9
     .valid_out    (/* unused */)
   );	// scale_store.k:15:5
   assign done_out = p0_stage3_enable;	// scale_store.k:17:9
+  assign memory_read_addr_out_8_0 = memory_read_addr_out_8_0_0;	// scale_store.k:17:9
+  assign memory_rden_out_8_0 = memory_rden_out_8_0_0;	// scale_store.k:17:9
   assign fifo_data_out_0 = fifo_data_out_0_0;	// scale_store.k:17:9
   assign fifo_wren_0 = fifo_wren_0_0;	// scale_store.k:17:9
   assign input_rdy_0 = input_rdy_0_0;	// scale_store.k:17:9
   assign control_state_out = control_state_out_0;	// scale_store.k:17:9
 endmodule
 
-module scale_store_reg_8_w1(
+module scale_store__bank_scales__mem_container(	// scale_store.k:11:5
   input  wire       clk,
-  input  wire       input_valid_0,
-  input  wire [7:0] input_0,
-  output wire [7:0] value_out
+  input  wire       rst,
+  input  wire       rden_in_0,
+  input  wire [4:0] read_addr_in_0,
+  input  wire       wren_in_0,
+  input  wire [4:0] write_addr_in_0,
+  input  wire [7:0] write_data_in_0,
+  output wire [7:0] read_data_out_0,
+  output wire       init_completed
 );
 
-  reg [7:0] value;
-  always @(posedge clk)
-    value <= input_valid_0 ? input_0 : value;
-  assign value_out = value;
+  wire [1:0][7:0] ___bank_scales_0_data_out;	// scale_store.k:11:5
+  KanagawaSyncRam #(
+    .DATA_WIDTH(8),
+    .ADDR_WIDTH(5),
+    .DEPTH(32),
+    .MAX_DEPTH(32),
+    .USE_LUTRAM(1),
+    .USE_BRAM(0),
+    .USE_OUTPUT_REG(1),
+    .WRITE_DELAY(0),
+    .USE_HARDENED_BYPASS(0),
+    .TRUE_DUAL_PORT(0),
+    .SUPPORTS_RW_COLLISIONS(0),
+    .ECC(0),
+    .INITIAL_DATA_FILE("UNUSED"),
+    .DEVICE_FAMILY("mock")
+  ) __bank_scales_0 (	// scale_store.k:11:5
+    .clk            (clk),	// scale_store.k:11:5
+    .rst            (rst),
+    .addr_in        ({{read_addr_in_0}, {write_addr_in_0}}),	// scale_store.k:11:5
+    .ecc_status_out (/* unused */),
+    .wren_in        ({{1'h0}, {wren_in_0}}),	// scale_store.k:11:5
+    .data_in        ({{8'h0}, {write_data_in_0}}),	// scale_store.k:11:5
+    .rden_in        ({{rden_in_0}, {1'h0}}),	// scale_store.k:11:5
+    .data_out       (___bank_scales_0_data_out)
+  );	// scale_store.k:11:5
+  assign read_data_out_0 = ___bank_scales_0_data_out[1'h1];	// scale_store.k:11:5
+  assign init_completed = 1'h1;	// scale_store.k:11:5
 endmodule
 
-module scale_store_reg_32_w1(
+module scale_store__tensor_scales__mem_container(	// scale_store.k:12:5
   input  wire        clk,
-  input  wire        input_valid_0,
-  input  wire [31:0] input_0,
-  output wire [31:0] value_out
+  input  wire        rst,
+  input  wire        rden_in_0,
+  input  wire [2:0]  read_addr_in_0,
+  input  wire        wren_in_0,
+  input  wire [2:0]  write_addr_in_0,
+  input  wire [31:0] write_data_in_0,
+  output wire [31:0] read_data_out_0,
+  output wire        init_completed
 );
 
-  reg [31:0] value;
-  always @(posedge clk)
-    value <= input_valid_0 ? input_0 : value;
-  assign value_out = value;
+  wire [1:0][31:0] ___tensor_scales_0_data_out;	// scale_store.k:12:5
+  KanagawaSyncRam #(
+    .DATA_WIDTH(32),
+    .ADDR_WIDTH(3),
+    .DEPTH(8),
+    .MAX_DEPTH(32),
+    .USE_LUTRAM(1),
+    .USE_BRAM(0),
+    .USE_OUTPUT_REG(1),
+    .WRITE_DELAY(0),
+    .USE_HARDENED_BYPASS(0),
+    .TRUE_DUAL_PORT(0),
+    .SUPPORTS_RW_COLLISIONS(0),
+    .ECC(0),
+    .INITIAL_DATA_FILE("UNUSED"),
+    .DEVICE_FAMILY("mock")
+  ) __tensor_scales_0 (	// scale_store.k:12:5
+    .clk            (clk),	// scale_store.k:12:5
+    .rst            (rst),
+    .addr_in        ({{read_addr_in_0}, {write_addr_in_0}}),	// scale_store.k:12:5
+    .ecc_status_out (/* unused */),
+    .wren_in        ({{1'h0}, {wren_in_0}}),	// scale_store.k:12:5
+    .data_in        ({{32'h0}, {write_data_in_0}}),	// scale_store.k:12:5
+    .rden_in        ({{rden_in_0}, {1'h0}}),	// scale_store.k:12:5
+    .data_out       (___tensor_scales_0_data_out)
+  );	// scale_store.k:12:5
+  assign read_data_out_0 = ___tensor_scales_0_data_out[1'h1];	// scale_store.k:12:5
+  assign init_completed = 1'h1;	// scale_store.k:12:5
 endmodule
 
 module scale_store(
@@ -1121,133 +607,23 @@ module scale_store(
   output wire        stall_rate_supported_out
 );
 
-  wire
-    _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_0_40_0_valid;	// scale_store.k:35:9
-  wire [31:0] _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_0_40_0;	// scale_store.k:35:9
-  wire
-    _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_1_41_0_valid;	// scale_store.k:35:9
-  wire [31:0] _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_1_41_0;	// scale_store.k:35:9
-  wire
-    _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_2_42_0_valid;	// scale_store.k:35:9
-  wire [31:0] _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_2_42_0;	// scale_store.k:35:9
-  wire
-    _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_3_43_0_valid;	// scale_store.k:35:9
-  wire [31:0] _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_3_43_0;	// scale_store.k:35:9
-  wire
-    _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_4_44_0_valid;	// scale_store.k:35:9
-  wire [31:0] _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_4_44_0;	// scale_store.k:35:9
-  wire
-    _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_5_45_0_valid;	// scale_store.k:35:9
-  wire [31:0] _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_5_45_0;	// scale_store.k:35:9
-  wire
-    _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_6_46_0_valid;	// scale_store.k:35:9
-  wire [31:0] _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_6_46_0;	// scale_store.k:35:9
-  wire
-    _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_7_47_0_valid;	// scale_store.k:35:9
-  wire [31:0] _set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_7_47_0;	// scale_store.k:35:9
+  wire [31:0] _set_tensor_scale_BasicBlock_0Impl_memory_write_data_out_9_0;	// scale_store.k:35:9
+  wire [2:0]  _set_tensor_scale_BasicBlock_0Impl_memory_write_addr_out_9_0;	// scale_store.k:35:9
+  wire        _set_tensor_scale_BasicBlock_0Impl_memory_wren_9_0;	// scale_store.k:35:9
   wire        _set_tensor_scale_BasicBlock_0Impl_fifo_wren_0;	// scale_store.k:35:9
   wire        _set_tensor_scale_BasicBlock_0Impl_input_rdy_0;	// scale_store.k:35:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_0_8_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_0_8_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_1_9_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_1_9_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_2_10_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_2_10_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_3_11_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_3_11_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_4_12_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_4_12_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_5_13_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_5_13_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_6_14_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_6_14_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_7_15_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_7_15_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_8_16_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_8_16_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_9_17_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_9_17_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_10_18_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_10_18_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_11_19_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_11_19_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_12_20_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_12_20_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_13_21_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_13_21_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_14_22_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_14_22_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_15_23_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_15_23_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_16_24_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_16_24_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_17_25_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_17_25_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_18_26_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_18_26_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_19_27_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_19_27_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_20_28_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_20_28_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_21_29_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_21_29_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_22_30_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_22_30_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_23_31_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_23_31_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_24_32_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_24_32_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_25_33_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_25_33_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_26_34_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_26_34_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_27_35_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_27_35_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_28_36_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_28_36_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_29_37_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_29_37_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_30_38_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_30_38_0;	// scale_store.k:27:9
-  wire
-    _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_31_39_0_valid;	// scale_store.k:27:9
-  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_31_39_0;	// scale_store.k:27:9
+  wire [7:0]  _set_bank_scale_BasicBlock_0Impl_memory_write_data_out_8_0;	// scale_store.k:27:9
+  wire [4:0]  _set_bank_scale_BasicBlock_0Impl_memory_write_addr_out_8_0;	// scale_store.k:27:9
+  wire        _set_bank_scale_BasicBlock_0Impl_memory_wren_8_0;	// scale_store.k:27:9
   wire        _set_bank_scale_BasicBlock_0Impl_fifo_wren_0;	// scale_store.k:27:9
   wire        _set_bank_scale_BasicBlock_0Impl_input_rdy_0;	// scale_store.k:27:9
+  wire [2:0]  _get_tensor_scale_BasicBlock_0Impl_memory_read_addr_out_9_0;	// scale_store.k:22:9
+  wire        _get_tensor_scale_BasicBlock_0Impl_memory_rden_out_9_0;	// scale_store.k:22:9
   wire [31:0] _get_tensor_scale_BasicBlock_0Impl_fifo_data_out_0;	// scale_store.k:22:9
   wire        _get_tensor_scale_BasicBlock_0Impl_fifo_wren_0;	// scale_store.k:22:9
   wire        _get_tensor_scale_BasicBlock_0Impl_input_rdy_0;	// scale_store.k:22:9
+  wire [4:0]  _get_bank_scale_BasicBlock_0Impl_memory_read_addr_out_8_0;	// scale_store.k:17:9
+  wire        _get_bank_scale_BasicBlock_0Impl_memory_rden_out_8_0;	// scale_store.k:17:9
   wire [7:0]  _get_bank_scale_BasicBlock_0Impl_fifo_data_out_0;	// scale_store.k:17:9
   wire        _get_bank_scale_BasicBlock_0Impl_fifo_wren_0;	// scale_store.k:17:9
   wire        _get_bank_scale_BasicBlock_0Impl_input_rdy_0;	// scale_store.k:17:9
@@ -1273,46 +649,10 @@ module scale_store(
   wire        _has_startup_completed_delayed_2_delay_chain_data_out;
   wire        _has_startup_completed_delayed_1_delay_chain_data_out;
   wire        _has_startup_completed_delayed_0_delay_chain_data_out;
-  wire [31:0] __tensor_scales_element_7_value_out;	// scale_store.k:12:5
-  wire [31:0] __tensor_scales_element_6_value_out;	// scale_store.k:12:5
-  wire [31:0] __tensor_scales_element_5_value_out;	// scale_store.k:12:5
-  wire [31:0] __tensor_scales_element_4_value_out;	// scale_store.k:12:5
-  wire [31:0] __tensor_scales_element_3_value_out;	// scale_store.k:12:5
-  wire [31:0] __tensor_scales_element_2_value_out;	// scale_store.k:12:5
-  wire [31:0] __tensor_scales_element_1_value_out;	// scale_store.k:12:5
-  wire [31:0] __tensor_scales_element_0_value_out;	// scale_store.k:12:5
-  wire [7:0]  __bank_scales_element_31_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_30_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_29_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_28_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_27_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_26_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_25_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_24_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_23_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_22_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_21_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_20_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_19_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_18_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_17_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_16_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_15_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_14_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_13_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_12_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_11_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_10_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_9_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_8_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_7_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_6_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_5_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_4_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_3_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_2_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_1_value_out;	// scale_store.k:11:5
-  wire [7:0]  __bank_scales_element_0_value_out;	// scale_store.k:11:5
+  wire [31:0] __tensor_scales_read_data_out_0;	// scale_store.k:12:5
+  wire        __tensor_scales_init_completed;	// scale_store.k:12:5
+  wire [7:0]  __bank_scales_read_data_out_0;	// scale_store.k:11:5
+  wire        __bank_scales_init_completed;	// scale_store.k:11:5
   wire        _reset_control_rst_and_startup_done_out;
   wire [7:0]  _reset_control_rst_delayed_out;
   wire        _reset_control_reset_sequence_finished_this_cycle_out;
@@ -1339,13 +679,17 @@ module scale_store(
   logic reset_sequence_finished_this_cycle;
   logic has_startup_completed_raw;
   logic has_mem_init_completed;
+  wire        _GEN =
+    has_startup_completed_raw & __bank_scales_init_completed
+    & __tensor_scales_init_completed;	// scale_store.k:11:5, :12:5
   logic has_others_completed;
-  assign has_others_completed = has_startup_completed_raw;
+  assign has_others_completed = _GEN;
 
   logic rst_and_startup_done_raw;
 
   logic [0:0] rst_array;
   assign rst_array[0] = combined_reset;
+
   logic has_startup_completed_delayed_0;
 
   logic has_startup_completed_delayed_1;
@@ -1502,331 +846,33 @@ module scale_store(
   ) reset_control (
     .clk                                    (clk),
     .rst_in                                 (combined_reset),
-    .has_others_completed_in                (has_startup_completed_raw),
+    .has_others_completed_in                (_GEN),
     .rst_and_startup_done_out               (_reset_control_rst_and_startup_done_out),
     .rst_delayed_out                        (_reset_control_rst_delayed_out),
     .reset_sequence_finished_this_cycle_out
       (_reset_control_reset_sequence_finished_this_cycle_out)
   );
-  scale_store_reg_8_w1 _bank_scales_element_0 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_0_8_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_0_8_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_0_value_out)
+  scale_store__bank_scales__mem_container _bank_scales (	// scale_store.k:11:5
+    .clk             (clk),	// scale_store.k:11:5
+    .rst             (1'b0),	// scale_store.k:11:5
+    .rden_in_0       (_get_bank_scale_BasicBlock_0Impl_memory_rden_out_8_0),	// scale_store.k:17:9
+    .read_addr_in_0  (_get_bank_scale_BasicBlock_0Impl_memory_read_addr_out_8_0),	// scale_store.k:17:9
+    .wren_in_0       (_set_bank_scale_BasicBlock_0Impl_memory_wren_8_0),	// scale_store.k:27:9
+    .write_addr_in_0 (_set_bank_scale_BasicBlock_0Impl_memory_write_addr_out_8_0),	// scale_store.k:27:9
+    .write_data_in_0 (_set_bank_scale_BasicBlock_0Impl_memory_write_data_out_8_0),	// scale_store.k:27:9
+    .read_data_out_0 (__bank_scales_read_data_out_0),
+    .init_completed  (__bank_scales_init_completed)
   );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_1 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_1_9_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_1_9_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_1_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_2 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_2_10_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_2_10_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_2_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_3 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_3_11_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_3_11_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_3_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_4 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_4_12_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_4_12_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_4_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_5 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_5_13_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_5_13_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_5_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_6 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_6_14_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_6_14_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_6_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_7 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_7_15_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_7_15_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_7_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_8 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_8_16_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_8_16_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_8_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_9 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_9_17_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_9_17_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_9_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_10 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_10_18_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_10_18_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_10_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_11 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_11_19_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_11_19_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_11_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_12 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_12_20_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_12_20_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_12_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_13 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_13_21_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_13_21_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_13_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_14 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_14_22_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_14_22_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_14_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_15 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_15_23_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_15_23_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_15_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_16 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_16_24_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_16_24_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_16_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_17 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_17_25_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_17_25_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_17_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_18 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_18_26_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_18_26_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_18_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_19 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_19_27_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_19_27_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_19_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_20 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_20_28_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_20_28_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_20_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_21 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_21_29_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_21_29_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_21_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_22 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_22_30_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_22_30_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_22_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_23 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_23_31_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_23_31_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_23_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_24 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_24_32_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_24_32_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_24_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_25 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_25_33_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_25_33_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_25_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_26 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_26_34_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_26_34_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_26_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_27 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_27_35_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_27_35_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_27_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_28 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_28_36_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_28_36_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_28_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_29 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_29_37_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_29_37_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_29_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_30 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_30_38_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_30_38_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_30_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_8_w1 _bank_scales_element_31 (	// scale_store.k:11:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_31_39_0_valid),	// scale_store.k:27:9
-    .input_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_31_39_0),	// scale_store.k:27:9
-    .value_out     (__bank_scales_element_31_value_out)
-  );	// scale_store.k:11:5
-  scale_store_reg_32_w1 _tensor_scales_element_0 (	// scale_store.k:12:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_0_40_0_valid),	// scale_store.k:35:9
-    .input_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_0_40_0),	// scale_store.k:35:9
-    .value_out     (__tensor_scales_element_0_value_out)
-  );	// scale_store.k:12:5
-  scale_store_reg_32_w1 _tensor_scales_element_1 (	// scale_store.k:12:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_1_41_0_valid),	// scale_store.k:35:9
-    .input_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_1_41_0),	// scale_store.k:35:9
-    .value_out     (__tensor_scales_element_1_value_out)
-  );	// scale_store.k:12:5
-  scale_store_reg_32_w1 _tensor_scales_element_2 (	// scale_store.k:12:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_2_42_0_valid),	// scale_store.k:35:9
-    .input_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_2_42_0),	// scale_store.k:35:9
-    .value_out     (__tensor_scales_element_2_value_out)
-  );	// scale_store.k:12:5
-  scale_store_reg_32_w1 _tensor_scales_element_3 (	// scale_store.k:12:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_3_43_0_valid),	// scale_store.k:35:9
-    .input_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_3_43_0),	// scale_store.k:35:9
-    .value_out     (__tensor_scales_element_3_value_out)
-  );	// scale_store.k:12:5
-  scale_store_reg_32_w1 _tensor_scales_element_4 (	// scale_store.k:12:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_4_44_0_valid),	// scale_store.k:35:9
-    .input_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_4_44_0),	// scale_store.k:35:9
-    .value_out     (__tensor_scales_element_4_value_out)
-  );	// scale_store.k:12:5
-  scale_store_reg_32_w1 _tensor_scales_element_5 (	// scale_store.k:12:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_5_45_0_valid),	// scale_store.k:35:9
-    .input_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_5_45_0),	// scale_store.k:35:9
-    .value_out     (__tensor_scales_element_5_value_out)
-  );	// scale_store.k:12:5
-  scale_store_reg_32_w1 _tensor_scales_element_6 (	// scale_store.k:12:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_6_46_0_valid),	// scale_store.k:35:9
-    .input_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_6_46_0),	// scale_store.k:35:9
-    .value_out     (__tensor_scales_element_6_value_out)
-  );	// scale_store.k:12:5
-  scale_store_reg_32_w1 _tensor_scales_element_7 (	// scale_store.k:12:5
-    .clk           (clk),	// scale_store.k:11:5
-    .input_valid_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_7_47_0_valid),	// scale_store.k:35:9
-    .input_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_7_47_0),	// scale_store.k:35:9
-    .value_out     (__tensor_scales_element_7_value_out)
+  scale_store__tensor_scales__mem_container _tensor_scales (	// scale_store.k:12:5
+    .clk             (clk),	// scale_store.k:11:5
+    .rst             (1'b0),	// scale_store.k:11:5
+    .rden_in_0       (_get_tensor_scale_BasicBlock_0Impl_memory_rden_out_9_0),	// scale_store.k:22:9
+    .read_addr_in_0  (_get_tensor_scale_BasicBlock_0Impl_memory_read_addr_out_9_0),	// scale_store.k:22:9
+    .wren_in_0       (_set_tensor_scale_BasicBlock_0Impl_memory_wren_9_0),	// scale_store.k:35:9
+    .write_addr_in_0 (_set_tensor_scale_BasicBlock_0Impl_memory_write_addr_out_9_0),	// scale_store.k:35:9
+    .write_data_in_0 (_set_tensor_scale_BasicBlock_0Impl_memory_write_data_out_9_0),	// scale_store.k:35:9
+    .read_data_out_0 (__tensor_scales_read_data_out_0),
+    .init_completed  (__tensor_scales_init_completed)
   );	// scale_store.k:12:5
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
@@ -1894,7 +940,7 @@ module scale_store(
     .MIN_WRITE_DELAY(0),
     .AUTO_PIPELINE_GROUP("fifo_1_get_tensor_scale_Return"),
     .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(3),
+    .ALMOSTFULL_ENTRIES(4),
     .USE_LUTRAM(1)
   ) fifo_1_get_tensor_scale_Return (
     .clock         (clk),
@@ -1957,266 +1003,76 @@ module scale_store(
     .q             (/* unused */)
   );
   scale_store_get_bank_scale_BasicBlock_0 get_bank_scale_BasicBlock_0Impl (	// scale_store.k:17:9
-    .clk                                  (clk),	// scale_store.k:17:9
-    .rst                                  (reg_rst_delayed[4]),	// scale_store.k:17:9
-    .done_out                             (/* unused */),
-    .global_in__bank_scales_element_0_8   (__bank_scales_element_0_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_1_9   (__bank_scales_element_1_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_2_10  (__bank_scales_element_2_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_3_11  (__bank_scales_element_3_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_4_12  (__bank_scales_element_4_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_5_13  (__bank_scales_element_5_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_6_14  (__bank_scales_element_6_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_7_15  (__bank_scales_element_7_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_8_16  (__bank_scales_element_8_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_9_17  (__bank_scales_element_9_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_10_18 (__bank_scales_element_10_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_11_19 (__bank_scales_element_11_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_12_20 (__bank_scales_element_12_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_13_21 (__bank_scales_element_13_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_14_22 (__bank_scales_element_14_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_15_23 (__bank_scales_element_15_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_16_24 (__bank_scales_element_16_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_17_25 (__bank_scales_element_17_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_18_26 (__bank_scales_element_18_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_19_27 (__bank_scales_element_19_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_20_28 (__bank_scales_element_20_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_21_29 (__bank_scales_element_21_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_22_30 (__bank_scales_element_22_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_23_31 (__bank_scales_element_23_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_24_32 (__bank_scales_element_24_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_25_33 (__bank_scales_element_25_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_26_34 (__bank_scales_element_26_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_27_35 (__bank_scales_element_27_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_28_36 (__bank_scales_element_28_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_29_37 (__bank_scales_element_29_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_30_38 (__bank_scales_element_30_value_out),	// scale_store.k:11:5
-    .global_in__bank_scales_element_31_39 (__bank_scales_element_31_value_out),	// scale_store.k:11:5
-    .fifo_data_out_0
-      (_get_bank_scale_BasicBlock_0Impl_fifo_data_out_0),
-    .fifo_wren_0                          (_get_bank_scale_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0            (fifo_data_0.almost_full),	// scale_store.k:17:9
-    .fifo_overflow_in_0                   (fifo_data_0.overflow),	// scale_store.k:17:9
-    .data_in_4                            (passthrough_data_4.data),	// scale_store.k:17:9
-    .input_fifo_underflow_0               (passthrough_data_4.underflow),	// scale_store.k:17:9
-    .input_rdy_0                          (_get_bank_scale_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                        (passthrough_data_4.valid),	// scale_store.k:17:9
-    .control_state_out                    (/* unused */)
+    .clk                       (clk),	// scale_store.k:17:9
+    .rst                       (reg_rst_delayed[4]),	// scale_store.k:17:9
+    .done_out                  (/* unused */),
+    .memory_read_data_in_8_0   (__bank_scales_read_data_out_0),	// scale_store.k:11:5
+    .memory_read_addr_out_8_0
+      (_get_bank_scale_BasicBlock_0Impl_memory_read_addr_out_8_0),
+    .memory_rden_out_8_0       (_get_bank_scale_BasicBlock_0Impl_memory_rden_out_8_0),
+    .fifo_data_out_0           (_get_bank_scale_BasicBlock_0Impl_fifo_data_out_0),
+    .fifo_wren_0               (_get_bank_scale_BasicBlock_0Impl_fifo_wren_0),
+    .fifo_almost_full_in_raw_0 (fifo_data_0.almost_full),	// scale_store.k:17:9
+    .fifo_overflow_in_0        (fifo_data_0.overflow),	// scale_store.k:17:9
+    .data_in_4                 (passthrough_data_4.data),	// scale_store.k:17:9
+    .input_fifo_underflow_0    (passthrough_data_4.underflow),	// scale_store.k:17:9
+    .input_rdy_0               (_get_bank_scale_BasicBlock_0Impl_input_rdy_0),
+    .input_valid_0             (passthrough_data_4.valid),	// scale_store.k:17:9
+    .control_state_out         (/* unused */)
   );	// scale_store.k:17:9
   scale_store_get_tensor_scale_BasicBlock_0 get_tensor_scale_BasicBlock_0Impl (	// scale_store.k:22:9
-    .clk                                   (clk),	// scale_store.k:22:9
-    .rst                                   (reg_rst_delayed[5]),	// scale_store.k:22:9
-    .done_out                              (/* unused */),
-    .global_in__tensor_scales_element_0_40 (__tensor_scales_element_0_value_out),	// scale_store.k:12:5
-    .global_in__tensor_scales_element_1_41 (__tensor_scales_element_1_value_out),	// scale_store.k:12:5
-    .global_in__tensor_scales_element_2_42 (__tensor_scales_element_2_value_out),	// scale_store.k:12:5
-    .global_in__tensor_scales_element_3_43 (__tensor_scales_element_3_value_out),	// scale_store.k:12:5
-    .global_in__tensor_scales_element_4_44 (__tensor_scales_element_4_value_out),	// scale_store.k:12:5
-    .global_in__tensor_scales_element_5_45 (__tensor_scales_element_5_value_out),	// scale_store.k:12:5
-    .global_in__tensor_scales_element_6_46 (__tensor_scales_element_6_value_out),	// scale_store.k:12:5
-    .global_in__tensor_scales_element_7_47 (__tensor_scales_element_7_value_out),	// scale_store.k:12:5
-    .fifo_data_out_0
-      (_get_tensor_scale_BasicBlock_0Impl_fifo_data_out_0),
-    .fifo_wren_0
-      (_get_tensor_scale_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0             (fifo_data_1.almost_full),	// scale_store.k:22:9
-    .fifo_overflow_in_0                    (fifo_data_1.overflow),	// scale_store.k:22:9
-    .data_in_5                             (passthrough_data_5.data),	// scale_store.k:22:9
-    .input_fifo_underflow_0                (passthrough_data_5.underflow),	// scale_store.k:22:9
-    .input_rdy_0
-      (_get_tensor_scale_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                         (passthrough_data_5.valid),	// scale_store.k:22:9
-    .control_state_out                     (/* unused */)
+    .clk                       (clk),	// scale_store.k:22:9
+    .rst                       (reg_rst_delayed[5]),	// scale_store.k:22:9
+    .done_out                  (/* unused */),
+    .memory_read_data_in_9_0   (__tensor_scales_read_data_out_0),	// scale_store.k:12:5
+    .memory_read_addr_out_9_0
+      (_get_tensor_scale_BasicBlock_0Impl_memory_read_addr_out_9_0),
+    .memory_rden_out_9_0       (_get_tensor_scale_BasicBlock_0Impl_memory_rden_out_9_0),
+    .fifo_data_out_0           (_get_tensor_scale_BasicBlock_0Impl_fifo_data_out_0),
+    .fifo_wren_0               (_get_tensor_scale_BasicBlock_0Impl_fifo_wren_0),
+    .fifo_almost_full_in_raw_0 (fifo_data_1.almost_full),	// scale_store.k:22:9
+    .fifo_overflow_in_0        (fifo_data_1.overflow),	// scale_store.k:22:9
+    .data_in_5                 (passthrough_data_5.data),	// scale_store.k:22:9
+    .input_fifo_underflow_0    (passthrough_data_5.underflow),	// scale_store.k:22:9
+    .input_rdy_0               (_get_tensor_scale_BasicBlock_0Impl_input_rdy_0),
+    .input_valid_0             (passthrough_data_5.valid),	// scale_store.k:22:9
+    .control_state_out         (/* unused */)
   );	// scale_store.k:22:9
   scale_store_set_bank_scale_BasicBlock_0 set_bank_scale_BasicBlock_0Impl (	// scale_store.k:27:9
-    .clk                                           (clk),	// scale_store.k:27:9
-    .rst                                           (reg_rst_delayed[6]),	// scale_store.k:27:9
-    .done_out                                      (/* unused */),
-    .global_out__bank_scales_element_0_8_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_0_8_0_valid),
-    .global_out__bank_scales_element_0_8_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_0_8_0),
-    .global_out__bank_scales_element_1_9_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_1_9_0_valid),
-    .global_out__bank_scales_element_1_9_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_1_9_0),
-    .global_out__bank_scales_element_2_10_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_2_10_0_valid),
-    .global_out__bank_scales_element_2_10_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_2_10_0),
-    .global_out__bank_scales_element_3_11_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_3_11_0_valid),
-    .global_out__bank_scales_element_3_11_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_3_11_0),
-    .global_out__bank_scales_element_4_12_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_4_12_0_valid),
-    .global_out__bank_scales_element_4_12_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_4_12_0),
-    .global_out__bank_scales_element_5_13_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_5_13_0_valid),
-    .global_out__bank_scales_element_5_13_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_5_13_0),
-    .global_out__bank_scales_element_6_14_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_6_14_0_valid),
-    .global_out__bank_scales_element_6_14_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_6_14_0),
-    .global_out__bank_scales_element_7_15_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_7_15_0_valid),
-    .global_out__bank_scales_element_7_15_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_7_15_0),
-    .global_out__bank_scales_element_8_16_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_8_16_0_valid),
-    .global_out__bank_scales_element_8_16_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_8_16_0),
-    .global_out__bank_scales_element_9_17_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_9_17_0_valid),
-    .global_out__bank_scales_element_9_17_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_9_17_0),
-    .global_out__bank_scales_element_10_18_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_10_18_0_valid),
-    .global_out__bank_scales_element_10_18_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_10_18_0),
-    .global_out__bank_scales_element_11_19_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_11_19_0_valid),
-    .global_out__bank_scales_element_11_19_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_11_19_0),
-    .global_out__bank_scales_element_12_20_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_12_20_0_valid),
-    .global_out__bank_scales_element_12_20_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_12_20_0),
-    .global_out__bank_scales_element_13_21_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_13_21_0_valid),
-    .global_out__bank_scales_element_13_21_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_13_21_0),
-    .global_out__bank_scales_element_14_22_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_14_22_0_valid),
-    .global_out__bank_scales_element_14_22_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_14_22_0),
-    .global_out__bank_scales_element_15_23_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_15_23_0_valid),
-    .global_out__bank_scales_element_15_23_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_15_23_0),
-    .global_out__bank_scales_element_16_24_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_16_24_0_valid),
-    .global_out__bank_scales_element_16_24_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_16_24_0),
-    .global_out__bank_scales_element_17_25_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_17_25_0_valid),
-    .global_out__bank_scales_element_17_25_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_17_25_0),
-    .global_out__bank_scales_element_18_26_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_18_26_0_valid),
-    .global_out__bank_scales_element_18_26_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_18_26_0),
-    .global_out__bank_scales_element_19_27_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_19_27_0_valid),
-    .global_out__bank_scales_element_19_27_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_19_27_0),
-    .global_out__bank_scales_element_20_28_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_20_28_0_valid),
-    .global_out__bank_scales_element_20_28_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_20_28_0),
-    .global_out__bank_scales_element_21_29_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_21_29_0_valid),
-    .global_out__bank_scales_element_21_29_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_21_29_0),
-    .global_out__bank_scales_element_22_30_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_22_30_0_valid),
-    .global_out__bank_scales_element_22_30_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_22_30_0),
-    .global_out__bank_scales_element_23_31_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_23_31_0_valid),
-    .global_out__bank_scales_element_23_31_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_23_31_0),
-    .global_out__bank_scales_element_24_32_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_24_32_0_valid),
-    .global_out__bank_scales_element_24_32_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_24_32_0),
-    .global_out__bank_scales_element_25_33_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_25_33_0_valid),
-    .global_out__bank_scales_element_25_33_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_25_33_0),
-    .global_out__bank_scales_element_26_34_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_26_34_0_valid),
-    .global_out__bank_scales_element_26_34_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_26_34_0),
-    .global_out__bank_scales_element_27_35_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_27_35_0_valid),
-    .global_out__bank_scales_element_27_35_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_27_35_0),
-    .global_out__bank_scales_element_28_36_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_28_36_0_valid),
-    .global_out__bank_scales_element_28_36_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_28_36_0),
-    .global_out__bank_scales_element_29_37_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_29_37_0_valid),
-    .global_out__bank_scales_element_29_37_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_29_37_0),
-    .global_out__bank_scales_element_30_38_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_30_38_0_valid),
-    .global_out__bank_scales_element_30_38_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_30_38_0),
-    .global_out__bank_scales_element_31_39_0_valid
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_31_39_0_valid),
-    .global_out__bank_scales_element_31_39_0
-      (_set_bank_scale_BasicBlock_0Impl_global_out__bank_scales_element_31_39_0),
-    .fifo_wren_0
-      (_set_bank_scale_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0                     (fifo_data_2.almost_full),	// scale_store.k:27:9
-    .fifo_overflow_in_0                            (fifo_data_2.overflow),	// scale_store.k:27:9
-    .data_in_6                                     (passthrough_data_6.data),	// scale_store.k:27:9
-    .input_fifo_underflow_0                        (passthrough_data_6.underflow),	// scale_store.k:27:9
-    .input_rdy_0
-      (_set_bank_scale_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                                 (passthrough_data_6.valid),	// scale_store.k:27:9
-    .control_state_out                             (/* unused */)
+    .clk                       (clk),	// scale_store.k:27:9
+    .rst                       (reg_rst_delayed[6]),	// scale_store.k:27:9
+    .done_out                  (/* unused */),
+    .memory_write_data_out_8_0
+      (_set_bank_scale_BasicBlock_0Impl_memory_write_data_out_8_0),
+    .memory_write_addr_out_8_0
+      (_set_bank_scale_BasicBlock_0Impl_memory_write_addr_out_8_0),
+    .memory_wren_8_0           (_set_bank_scale_BasicBlock_0Impl_memory_wren_8_0),
+    .fifo_wren_0               (_set_bank_scale_BasicBlock_0Impl_fifo_wren_0),
+    .fifo_almost_full_in_raw_0 (fifo_data_2.almost_full),	// scale_store.k:27:9
+    .fifo_overflow_in_0        (fifo_data_2.overflow),	// scale_store.k:27:9
+    .data_in_6                 (passthrough_data_6.data),	// scale_store.k:27:9
+    .input_fifo_underflow_0    (passthrough_data_6.underflow),	// scale_store.k:27:9
+    .input_rdy_0               (_set_bank_scale_BasicBlock_0Impl_input_rdy_0),
+    .input_valid_0             (passthrough_data_6.valid),	// scale_store.k:27:9
+    .control_state_out         (/* unused */)
   );	// scale_store.k:27:9
   scale_store_set_tensor_scale_BasicBlock_0 set_tensor_scale_BasicBlock_0Impl (	// scale_store.k:35:9
-    .clk                                            (clk),	// scale_store.k:35:9
-    .rst                                            (reg_rst_delayed[7]),	// scale_store.k:35:9
-    .done_out                                       (/* unused */),
-    .global_out__tensor_scales_element_0_40_0_valid
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_0_40_0_valid),
-    .global_out__tensor_scales_element_0_40_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_0_40_0),
-    .global_out__tensor_scales_element_1_41_0_valid
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_1_41_0_valid),
-    .global_out__tensor_scales_element_1_41_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_1_41_0),
-    .global_out__tensor_scales_element_2_42_0_valid
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_2_42_0_valid),
-    .global_out__tensor_scales_element_2_42_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_2_42_0),
-    .global_out__tensor_scales_element_3_43_0_valid
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_3_43_0_valid),
-    .global_out__tensor_scales_element_3_43_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_3_43_0),
-    .global_out__tensor_scales_element_4_44_0_valid
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_4_44_0_valid),
-    .global_out__tensor_scales_element_4_44_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_4_44_0),
-    .global_out__tensor_scales_element_5_45_0_valid
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_5_45_0_valid),
-    .global_out__tensor_scales_element_5_45_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_5_45_0),
-    .global_out__tensor_scales_element_6_46_0_valid
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_6_46_0_valid),
-    .global_out__tensor_scales_element_6_46_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_6_46_0),
-    .global_out__tensor_scales_element_7_47_0_valid
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_7_47_0_valid),
-    .global_out__tensor_scales_element_7_47_0
-      (_set_tensor_scale_BasicBlock_0Impl_global_out__tensor_scales_element_7_47_0),
-    .fifo_wren_0
-      (_set_tensor_scale_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0                      (fifo_data_3.almost_full),	// scale_store.k:35:9
-    .fifo_overflow_in_0                             (fifo_data_3.overflow),	// scale_store.k:35:9
-    .data_in_7                                      (passthrough_data_7.data),	// scale_store.k:35:9
-    .input_fifo_underflow_0                         (passthrough_data_7.underflow),	// scale_store.k:35:9
-    .input_rdy_0
-      (_set_tensor_scale_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                                  (passthrough_data_7.valid),	// scale_store.k:35:9
-    .control_state_out                              (/* unused */)
+    .clk                       (clk),	// scale_store.k:35:9
+    .rst                       (reg_rst_delayed[7]),	// scale_store.k:35:9
+    .done_out                  (/* unused */),
+    .memory_write_data_out_9_0
+      (_set_tensor_scale_BasicBlock_0Impl_memory_write_data_out_9_0),
+    .memory_write_addr_out_9_0
+      (_set_tensor_scale_BasicBlock_0Impl_memory_write_addr_out_9_0),
+    .memory_wren_9_0           (_set_tensor_scale_BasicBlock_0Impl_memory_wren_9_0),
+    .fifo_wren_0               (_set_tensor_scale_BasicBlock_0Impl_fifo_wren_0),
+    .fifo_almost_full_in_raw_0 (fifo_data_3.almost_full),	// scale_store.k:35:9
+    .fifo_overflow_in_0        (fifo_data_3.overflow),	// scale_store.k:35:9
+    .data_in_7                 (passthrough_data_7.data),	// scale_store.k:35:9
+    .input_fifo_underflow_0    (passthrough_data_7.underflow),	// scale_store.k:35:9
+    .input_rdy_0               (_set_tensor_scale_BasicBlock_0Impl_input_rdy_0),
+    .input_valid_0             (passthrough_data_7.valid),	// scale_store.k:35:9
+    .control_state_out         (/* unused */)
   );	// scale_store.k:35:9
   assign rst_and_startup_done_out = rst_and_startup_done_out_net;
   assign get_bank_scale_rdy_out = get_bank_scale_rdy_out_net;

@@ -18,132 +18,16 @@
             "module": "scale_store_get_bank_scale_BasicBlock_0",
             "ports": [
                 {
-                    "name": "global_in__bank_scales_element_0_8",
+                    "name": "memory_read_data_in_8_0",
                     "width": 8
                 },
                 {
-                    "name": "global_in__bank_scales_element_1_9",
-                    "width": 8
+                    "name": "memory_read_addr_out_8_0",
+                    "width": 5
                 },
                 {
-                    "name": "global_in__bank_scales_element_2_10",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_3_11",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_4_12",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_5_13",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_6_14",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_7_15",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_8_16",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_9_17",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_10_18",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_11_19",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_12_20",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_13_21",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_14_22",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_15_23",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_16_24",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_17_25",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_18_26",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_19_27",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_20_28",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_21_29",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_22_30",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_23_31",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_24_32",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_25_33",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_26_34",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_27_35",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_28_36",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_29_37",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_30_38",
-                    "width": 8
-                },
-                {
-                    "name": "global_in__bank_scales_element_31_39",
-                    "width": 8
+                    "name": "memory_rden_out_8_0",
+                    "width": 1
                 },
                 {
                     "name": "fifo_data_out_0",
@@ -202,36 +86,16 @@
             "module": "scale_store_get_tensor_scale_BasicBlock_0",
             "ports": [
                 {
-                    "name": "global_in__tensor_scales_element_0_40",
+                    "name": "memory_read_data_in_9_0",
                     "width": 32
                 },
                 {
-                    "name": "global_in__tensor_scales_element_1_41",
-                    "width": 32
+                    "name": "memory_read_addr_out_9_0",
+                    "width": 3
                 },
                 {
-                    "name": "global_in__tensor_scales_element_2_42",
-                    "width": 32
-                },
-                {
-                    "name": "global_in__tensor_scales_element_3_43",
-                    "width": 32
-                },
-                {
-                    "name": "global_in__tensor_scales_element_4_44",
-                    "width": 32
-                },
-                {
-                    "name": "global_in__tensor_scales_element_5_45",
-                    "width": 32
-                },
-                {
-                    "name": "global_in__tensor_scales_element_6_46",
-                    "width": 32
-                },
-                {
-                    "name": "global_in__tensor_scales_element_7_47",
-                    "width": 32
+                    "name": "memory_rden_out_9_0",
+                    "width": 1
                 },
                 {
                     "name": "fifo_data_out_0",
@@ -290,260 +154,16 @@
             "module": "scale_store_set_bank_scale_BasicBlock_0",
             "ports": [
                 {
-                    "name": "global_out__bank_scales_element_0_8_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_0_8_0",
+                    "name": "memory_write_data_out_8_0",
                     "width": 8
                 },
                 {
-                    "name": "global_out__bank_scales_element_1_9_0_valid",
+                    "name": "memory_write_addr_out_8_0",
+                    "width": 5
+                },
+                {
+                    "name": "memory_wren_8_0",
                     "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_1_9_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_2_10_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_2_10_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_3_11_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_3_11_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_4_12_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_4_12_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_5_13_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_5_13_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_6_14_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_6_14_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_7_15_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_7_15_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_8_16_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_8_16_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_9_17_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_9_17_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_10_18_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_10_18_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_11_19_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_11_19_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_12_20_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_12_20_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_13_21_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_13_21_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_14_22_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_14_22_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_15_23_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_15_23_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_16_24_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_16_24_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_17_25_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_17_25_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_18_26_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_18_26_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_19_27_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_19_27_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_20_28_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_20_28_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_21_29_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_21_29_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_22_30_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_22_30_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_23_31_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_23_31_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_24_32_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_24_32_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_25_33_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_25_33_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_26_34_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_26_34_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_27_35_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_27_35_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_28_36_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_28_36_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_29_37_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_29_37_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_30_38_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_30_38_0",
-                    "width": 8
-                },
-                {
-                    "name": "global_out__bank_scales_element_31_39_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__bank_scales_element_31_39_0",
-                    "width": 8
                 },
                 {
                     "name": "fifo_wren_0",
@@ -598,68 +218,16 @@
             "module": "scale_store_set_tensor_scale_BasicBlock_0",
             "ports": [
                 {
-                    "name": "global_out__tensor_scales_element_0_40_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__tensor_scales_element_0_40_0",
+                    "name": "memory_write_data_out_9_0",
                     "width": 32
                 },
                 {
-                    "name": "global_out__tensor_scales_element_1_41_0_valid",
+                    "name": "memory_write_addr_out_9_0",
+                    "width": 3
+                },
+                {
+                    "name": "memory_wren_9_0",
                     "width": 1
-                },
-                {
-                    "name": "global_out__tensor_scales_element_1_41_0",
-                    "width": 32
-                },
-                {
-                    "name": "global_out__tensor_scales_element_2_42_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__tensor_scales_element_2_42_0",
-                    "width": 32
-                },
-                {
-                    "name": "global_out__tensor_scales_element_3_43_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__tensor_scales_element_3_43_0",
-                    "width": 32
-                },
-                {
-                    "name": "global_out__tensor_scales_element_4_44_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__tensor_scales_element_4_44_0",
-                    "width": 32
-                },
-                {
-                    "name": "global_out__tensor_scales_element_5_45_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__tensor_scales_element_5_45_0",
-                    "width": 32
-                },
-                {
-                    "name": "global_out__tensor_scales_element_6_46_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__tensor_scales_element_6_46_0",
-                    "width": 32
-                },
-                {
-                    "name": "global_out__tensor_scales_element_7_47_0_valid",
-                    "width": 1
-                },
-                {
-                    "name": "global_out__tensor_scales_element_7_47_0",
-                    "width": 32
                 },
                 {
                     "name": "fifo_wren_0",

@@ -11,8 +11,8 @@ class rmsnorm_unit
 private:
     uint32 _sum_sq = 0;
     uint16 _count = 0;
-    uint16[4096] _gamma;
-    uint16[256] _rsqrt_lut;
+    [[memory]] uint16[4096] _gamma;
+    [[memory]] uint16[256] _rsqrt_lut;
 
 public:
     // Accumulate x^2 into running sum (BF16 input as uint16)

@@ -9,7 +9,7 @@ module opentaalas.lut_interp
 class lut_unit
 {
 private:
-    uint16[256] _table;
+    [[memory]] uint16[256] _table;
 
 public:
     // Write a single entry into the LUT

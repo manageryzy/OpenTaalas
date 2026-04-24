@@ -8,8 +8,8 @@ module opentaalas.scale_store
 class scale_store
 {
 private:
-    uint8[32] _bank_scales;
-    uint32[8] _tensor_scales;
+    [[memory]] uint8[32] _bank_scales;
+    [[memory]] uint32[8] _tensor_scales;
 
 public:
     uint8 get_bank_scale(uint<5> bank_id)

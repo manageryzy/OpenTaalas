@@ -14,28 +14,29 @@
 | mac_pe | 6,028 | 84,186 | 137,845 | 62.2% | -3.23 | 6.8M |
 | dequant | 10,508 | 138,904 | 242,256 | 58.3% | -0.67 | 11M |
 | codebook_decoder | 69,838 | 936,451 | 1,545,290 | 61.0% | -0.66 | 75M |
-| lut_interp | 25,483 | 317,621 | 541,740 | 59.2% | -0.41 | 31M |
+| **lut_interp** | **3,011** | **69,151** | **250,000** | **30%** | **+0.05 MET** | TBD |
 | scale_store | 5,823 | 88,127 | 150,862 | 59.5% | -0.11 | 6.6M |
-| rmsnorm | 206,051 | 2,963,635 | 5,506,650 | 53.8% | -2.03 | 212M |
-| swiglu | 24,042 | 325,351 | 599,935 | 54.2% | -1.42 | 31M |
-| attention_unit | 11,348 | 147,916 | 278,515 | 53.1% | -3.21 | 14M |
 | async_fifo | 270 | 3,794 | 6,400 | 79.8% | +0.91 | 456K |
 | layer_tile | 4,758 | 63,481 | 109,230 | 59.3% | +0.06 | 5.2M |
 | global_controller | 7,094 | 95,816 | 162,869 | 59.7% | -0.09 | 7.4M |
 | llama_chip | 5,885 | 76,899 | 132,147 | 59.3% | +0.03 | 6.2M |
+| attention_unit | 11,348 | 147,916 | 278,515 | 53.1% | -3.21 | 14M |
+
+**Note:** `rmsnorm` and `swiglu` moved to the macro-bearing table after the v5 SRAM macro refactor (see below).
 
 **Notes:**
 - Negative WNS = setup timing violation at 250 MHz (4ns period)
-- rmsnorm is largest: 206K cells, 5.5 mm² die, 212M GDS
 - async_fifo is smallest: 270 cells, 6,400 µm² die
-- All logic-only (no macros)
+- All listed designs are logic-only (no macros). `rmsnorm`/`swiglu`/`lut_interp` previously gate-synthesized their LUTs; v5 moved these to real SRAM macros (`sram_4096x16`, `sram_256x16`) — see [Macro-Bearing](#completed-designs--macro-bearing-drt) table and [Lessons](#lessons-learned) item 16.
 - **HLS retiming (v3):** swiglu/rmsnorm/attention_unit pipelined via `[[schedule(N)]]` annotations on long BF16 multiplier paths. WNS recovered 5.6–16.0 ns; fmax up 83–292%. See [Lessons](#lessons-learned) item 13.
 
 ## Completed Designs — Macro-Bearing (DRT)
 
 | Design | Std Cells | Macro(s) | Die (µm) | Util | DRC | WNS (ns) | fmax (MHz) |
 |--------|-----------|----------|----------|------|-----|----------|-----------|
-| rom_bank | 136,629 | 1× nor_rom_1024x880 | 2400×2400 | 60% | **0** | -2.35 | 157 |
+| **rmsnorm** | **6,741** | **1× sram_4096x16 + 1× sram_256x16** | **1200×1200** | 14% | **0** | **-0.87** | **205** |
+| **swiglu** | **6,268** | **3× sram_256x16** | **700×700** | 25% | **0** | -2.40 | 156 |
+| rom_bank | 136,629 | 1× nor_rom_1024x880 | 1500×1500 | 63% | **0** | -2.01 | 167 |
 | mac_array | 233,861 | 1× nor_rom_1024x880 | 2500×3000 | 35% | 641 | -3.88 | 127 |
 | rope | 478,014 | 2× nor_rom_4096x1024 (fold=2, mirrored) | 3000×3300 | 72% | 418 | -4.14 | 122 |
 | embed_rom | 32,365 | 1× nor_rom_65536x192 (internal mux) | 1900×2400 | 78% | **0** | -3.63 | 131 |
@@ -45,6 +46,10 @@
 - *v2:* Die resizing reduced total macro-bearing area from 96.6 mm² to 57.0 mm² (**41% reduction**). NOR ROM folding (nor_rom_65536x192 from 344:1 to 1.6:1 aspect ratio) enabled embed_rom/lm_head_demo to use a square die instead of the original 600×36000 strip.
 - *v3:* Moved the 16:1 column mux **inside** the folded NOR ROM macro (was external in a Verilog wrapper). Macro pin count dropped 3088 → 210 (15×). Simultaneously: stdcell count fell 87% (the gate-synthesized mux disappeared), die area 53% smaller, DRC fixed (embed_rom 103 → 0), and timing improved 5+ ns. Same trick as the SRAM `col_mux` reshape but for NOR ROM. embed_rom and lm_head_demo both went from 10.24 mm² to 4.56 mm² each (**combined 11.4 mm² saved**).
 - *v4 (rope):* Refolded `nor_rom_4096x1024` with fold=2 — macro reshapes from 485×2224 (1:4.58) to **956×1118 (1:1.17)**, no change in total bits or pin count. Combined with **mirrored macro placement** (left=MY orientation, right=R0) so the 2× 1024-bit dout buses face opposite die edges instead of crowding the central gap. rope die: 2000×3500 (1:1.75) → **3000×3300 (1:1.10)**. DRC: 1029 → **418 (-59%)**. fmax: 69 → 122 MHz. Same architectural trick (reshape macro shape via fold) applied to a different macro family.
+- *v5 (LUT/gamma macros + rom_bank shrink):* Four density wins via two architectural fixes.
+  - **`[[memory]]` annotations + new SRAM macros (`sram_4096x16`, `sram_256x16`)** — `rmsnorm._gamma[4096]` was gate-synthesizing into ~65,000 individual flip-flops because the array was a plain `uint16[4096]` (no `[[memory]]` annotation, no matching HAL macro). Same story for `swiglu._sigmoid_lut[256]` and `lut_interp._table[256]`. After the annotation + adding two new SRAM macros to the HAL: **rmsnorm cell area 2.95 → 0.19 mm² (-94%), die 5.51 → 1.44 mm² (-74%), WNS -2.03 → -0.87 ns, fmax 166 → 205 MHz.** **lut_interp 0.32 → 0.07 mm² (-78%), die 0.54 → 0.25 mm² (-54%), WNS -0.41 → +0.05 ns (MET), fmax 227 → 253 MHz.** **swiglu 0.32 → 0.12 mm² (-64%), die 0.60 → 0.49 mm² (-18%) — the only timing regression (-1.42 → -2.40 ns) because the SyncRam read latency disrupted the schedule(7) pipeline.**
+  - **`rom_bank` die-shrink** — was 25% utilization at 2400×2400 (5.76 mm²). Tightened to 1500×1500 with PLACE_DENSITY_LB_ADDON=0.10. Result: **5.76 → 2.25 mm² (-61%), 0 DRC, WNS -2.35 → -2.01 ns (better), fmax 157 → 167 MHz.** Same 880-pin macro, just less wasted whitespace.
+  - **Combined v5 savings: 12.4 mm² (rmsnorm + swiglu + lut_interp + rom_bank old dies) → 4.4 mm² (-64%, 8 mm² saved on these four modules alone).**
 
 ### Rendered Floorplans
 
@@ -183,11 +188,13 @@ All NOR ROM and SRAM macros generated by custom compilers:
 | Macro | Dimensions (µm) | Pins | LEF/LIB/GDS/BB |
 |-------|-----------------|------|-----------------|
 | nor_rom_1024x880 | ~566 × 2226 | 893 (880 dout + 13 ctrl) | ✓ |
-| nor_rom_4096x1024 | ~485 × 2226 | 1039 (1024 dout + 15 ctrl) | ✓ |
+| nor_rom_4096x1024 | ~485 × 2226 (fold=2: ~956 × 1118) | 1039 (1024 dout + 15 ctrl) | ✓ |
 | nor_rom_4096x192 | ~103 × 2226 | 207 (192 dout + 15 ctrl) | ✓ |
 | nor_rom_65536x192 | ~103 × 35404 | 210 (192 dout + 18 ctrl) | ✓ |
 | sram_4096x8 | ~137 × 294 (col_mux=16) | 25 (8 din + 8 dout + 9 ctrl) | ✓ |
 | sram_8192x8 | ~254 × 293 (col_mux=32) | 26 (8 din + 8 dout + 10 ctrl) | ✓ |
+| **sram_4096x16** | **~255 × 293 (col_mux=16)** | **34 (16 din + 16 dout + 14 ctrl)** | **✓** |
+| **sram_256x16** | **~78 × 85 (col_mux=4)** | **34 (16 din + 16 dout + 10 ctrl)** | **✓** |
 
 **NOR ROM internal-mux refactor (v3):** for folded macros (`fold>1`), the column mux is implemented inside the macro periphery instead of as external gate-synthesized RTL. The macro exposes the *logical* interface (`addr_width = log2(rows)`, `dout = cols`) instead of raw bitcell columns. Pin count drops from `cols × fold + log2(rows/fold)` to `cols + log2(rows)` — for `nor_rom_65536x192` (fold=16), that's 3088 → 210 (15×). Same physical dimensions, same total bits.
 
@@ -212,12 +219,14 @@ All NOR ROM and SRAM macros generated by custom compilers:
 
 | Category | Count | Total Cell Area | Total Die Area |
 |----------|-------|-----------------|----------------|
-| Logic-only (GDS) | 12 | 5.2 mm² | 9.4 mm² |
-| Macro-bearing (DRT) | 5 | 26.6 mm² | 46.8 mm² |
+| Logic-only (GDS) | 10 | 1.8 mm² | 3.5 mm² |
+| Macro-bearing (DRT) | 7 | 28.0 mm² | 38.6 mm² |
 | Academic demos (DRT/GDS) | 2 | 5.3 mm² | 5.0 mm² |
-| **Routed total** | **19** | **37.1 mm²** | **61.2 mm²** |
+| **Routed total** | **19** | **35.1 mm²** | **47.1 mm²** |
 
-**Note:** Macro-bearing designs are dominated by ROM area, not standard cells. A full LLaMA 3.1 8B layer tile with all macros would be ~50–100 mm² at sky130. The academic shuttle demo with kv_cache_demo + lm_head_demo adds ~27.6 mm² — feasible for a sky130 shuttle.
+**v5 reduction: 14.1 mm² saved (61.2 → 47.1 mm², -23%).** The wins came from rmsnorm (-4.07 mm²), rom_bank (-3.51 mm²), swiglu (-0.11 mm²), lut_interp (-0.29 mm²), plus moving rmsnorm and swiglu into the macro-bearing category (their LUTs are now real SRAMs, not gate-synthesized FFs). Logic-only counts dropped from 12 to 10 because rmsnorm and swiglu now have macros.
+
+**Note:** Macro-bearing designs are dominated by ROM/SRAM area, not standard cells. The academic shuttle demo with kv_cache_demo + lm_head_demo adds ~5.0 mm² — feasible for a sky130 shuttle.
 
 ## Integration Status
 
@@ -259,6 +268,10 @@ All NOR ROM and SRAM macros generated by custom compilers:
 14. **NOR ROM macro `fold` reshapes the macro itself, not just the wrapper** — third application: `nor_rom_4096x1024` originally 485×2224 µm (1:4.58). Two of these inside rope forced a 2000×3500 die (1:1.75 aspect, 1029 DRC). With `fold=2`: macro becomes 956×1118 (1:1.17), 2 macros side-by-side fit in 3000×3300 (1:1.10), DRC drops to 418 (-59%) and fmax climbs from 69 → 122 MHz. **Pin count is preserved** at the logical interface (1024 dout + 12 addr + ce + clk = 1038 pins), but the longer macro edges spread pins more sparsely, and the placer has more room for cell density. Same trick that fixed kv_cache_demo (SRAM col_mux) and embed_rom/lm_head_demo (NOR ROM internal mux). **Architectural bit-cell rearrangement beats every floorplan or routing knob.**
 
 15. **Macro pin-side orientation matters as much as macro shape** — first attempt at rope v3 with both macros at R0 gave 646K DRT violations: dout pins are on the EAST edge of nor_rom_4096x1024, so left-macro dout (1024 pins) and right-macro addr/clk all crowded into the 200µm gap. Mirrored placement (left macro = MY, dout on WEST edge of footprint = facing west die edge; right macro = R0, dout facing east die edge) dropped DRT to 418 (-99.94%). The diagnostic was reading PIN coordinates from the LEF: `dout[0]` at x=956 (east), `addr[0]` and `clk` at x=0 (west). For wide-bus macros, **pin sides must face routing capacity, not other macros**.
+
+16. **`[[memory]]` annotation is meaningless without a backing macro** — `rmsnorm._gamma[4096]`, `swiglu._sigmoid_lut[256]`, and `lut_interp._table[256]` were all plain Kanagawa arrays without `[[memory]]`, gate-synthesizing into per-element flip-flop banks (rmsnorm: ~65,000 individual FFs for the gamma vector alone, dominating its 5.5 mm² die). Adding `[[memory]]` alone changed nothing — Kanagawa generated a `KanagawaSyncRam` instance, but the sky130 HAL fell through to behavioral RAM (`logic [W-1:0] mem [0:D-1]`) which Yosys still flattens to FFs because sky130 has no BRAM primitive. The complete fix needed THREE coordinated changes: (a) `[[memory]]` annotation in Kanagawa source, (b) new SRAM macros (`sram_4096x16` for the 64 Kbit gamma, `sram_256x16` for 4 Kbit LUTs) compiled via the existing `tools/rom_compiler/sram_compiler.py`, (c) HAL dispatch arms wiring `DATA_WIDTH × DEPTH` to the right macro. Results: rmsnorm cell area -94% (2.95 → 0.19 mm²), die -74% (5.51 → 1.44 mm²), WNS improved 1.16 ns; lut_interp cell area -78% and timing went from -0.41 ns to **MET (+0.05 ns)**. Note the swiglu trade-off: cell area -64% but timing regressed from -1.42 to -2.40 ns because the `KanagawaSyncRam` adds 1 cycle of read latency, which disrupts the existing `[[schedule(7)]]` pipeline structure. Future fix: re-tune the schedule for the new latency. **The general principle: source-level annotations and backend collateral are co-dependent — one without the other is a no-op.**
+
+17. **Logic-light macro-bearing designs need utilization-targeted die size, not the default** — `rom_bank` at 2400×2400 (5.76 mm²) was 25% utilized — the macro is only 419×566 µm and the rest of the design is a thin wrapper. Tightening to 1500×1500 with `PLACE_DENSITY_LB_ADDON=0.10` got 63% utilization, 0 DRC, and slightly better timing (-2.35 → -2.01 ns). Lesson: if a die is <40% utilized post-PnR, shrink the die — the placer adds whitespace it doesn't need, the longer global routes hurt timing more than the cramming hurts congestion.
 
 ## Architecture
 

@@ -1,0 +1,428 @@
+VERSION 5.8 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+
+MACRO sram_256x16
+  CLASS BLOCK ;
+  ORIGIN 0 0 ;
+  SIZE 78.200 BY 87.040 ;
+  SYMMETRY X Y ;
+
+  PIN clk
+    DIRECTION INPUT ;
+    USE CLOCK ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 2.890 0.500 3.230 ;
+    END
+  END clk
+
+  PIN ce
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 3.570 0.500 3.910 ;
+    END
+  END ce
+
+  PIN we
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 4.250 0.500 4.590 ;
+    END
+  END we
+
+  PIN addr[0]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 4.930 0.500 5.270 ;
+    END
+  END addr[0]
+
+  PIN addr[1]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 5.610 0.500 5.950 ;
+    END
+  END addr[1]
+
+  PIN addr[2]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 6.290 0.500 6.630 ;
+    END
+  END addr[2]
+
+  PIN addr[3]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 6.970 0.500 7.310 ;
+    END
+  END addr[3]
+
+  PIN addr[4]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 7.650 0.500 7.990 ;
+    END
+  END addr[4]
+
+  PIN addr[5]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 8.330 0.500 8.670 ;
+    END
+  END addr[5]
+
+  PIN addr[6]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 9.010 0.500 9.350 ;
+    END
+  END addr[6]
+
+  PIN addr[7]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 9.690 0.500 10.030 ;
+    END
+  END addr[7]
+
+  PIN din[0]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 10.370 0.500 10.710 ;
+    END
+  END din[0]
+
+  PIN din[1]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 11.050 0.500 11.390 ;
+    END
+  END din[1]
+
+  PIN din[2]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 11.730 0.500 12.070 ;
+    END
+  END din[2]
+
+  PIN din[3]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 12.410 0.500 12.750 ;
+    END
+  END din[3]
+
+  PIN din[4]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 13.090 0.500 13.430 ;
+    END
+  END din[4]
+
+  PIN din[5]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 13.770 0.500 14.110 ;
+    END
+  END din[5]
+
+  PIN din[6]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 14.450 0.500 14.790 ;
+    END
+  END din[6]
+
+  PIN din[7]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 15.130 0.500 15.470 ;
+    END
+  END din[7]
+
+  PIN din[8]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 15.810 0.500 16.150 ;
+    END
+  END din[8]
+
+  PIN din[9]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 16.490 0.500 16.830 ;
+    END
+  END din[9]
+
+  PIN din[10]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 17.170 0.500 17.510 ;
+    END
+  END din[10]
+
+  PIN din[11]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 17.850 0.500 18.190 ;
+    END
+  END din[11]
+
+  PIN din[12]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 18.530 0.500 18.870 ;
+    END
+  END din[12]
+
+  PIN din[13]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 19.210 0.500 19.550 ;
+    END
+  END din[13]
+
+  PIN din[14]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 19.890 0.500 20.230 ;
+    END
+  END din[14]
+
+  PIN din[15]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT -0.500 20.570 0.500 20.910 ;
+    END
+  END din[15]
+
+  PIN dout[0]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 2.890 78.700 3.230 ;
+    END
+  END dout[0]
+
+  PIN dout[1]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 3.570 78.700 3.910 ;
+    END
+  END dout[1]
+
+  PIN dout[2]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 4.250 78.700 4.590 ;
+    END
+  END dout[2]
+
+  PIN dout[3]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 4.930 78.700 5.270 ;
+    END
+  END dout[3]
+
+  PIN dout[4]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 5.610 78.700 5.950 ;
+    END
+  END dout[4]
+
+  PIN dout[5]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 6.290 78.700 6.630 ;
+    END
+  END dout[5]
+
+  PIN dout[6]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 6.970 78.700 7.310 ;
+    END
+  END dout[6]
+
+  PIN dout[7]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 7.650 78.700 7.990 ;
+    END
+  END dout[7]
+
+  PIN dout[8]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 8.330 78.700 8.670 ;
+    END
+  END dout[8]
+
+  PIN dout[9]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 9.010 78.700 9.350 ;
+    END
+  END dout[9]
+
+  PIN dout[10]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 9.690 78.700 10.030 ;
+    END
+  END dout[10]
+
+  PIN dout[11]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 10.370 78.700 10.710 ;
+    END
+  END dout[11]
+
+  PIN dout[12]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 11.050 78.700 11.390 ;
+    END
+  END dout[12]
+
+  PIN dout[13]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 11.730 78.700 12.070 ;
+    END
+  END dout[13]
+
+  PIN dout[14]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 12.410 78.700 12.750 ;
+    END
+  END dout[14]
+
+  PIN dout[15]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT 77.700 13.090 78.700 13.430 ;
+    END
+  END dout[15]
+
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER met4 ;
+        RECT 12.770 0.000 14.370 87.040 ;
+        RECT 67.050 0.000 68.650 87.040 ;
+    END
+  END VDD
+
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER met4 ;
+        RECT 39.910 0.000 41.510 87.040 ;
+    END
+  END VSS
+
+  OBS
+    LAYER met1 ;
+      RECT 2.000 2.000 76.200 85.040 ;
+    LAYER met2 ;
+      RECT 2.000 2.000 76.200 85.040 ;
+    LAYER met4 ;
+      RECT 2.000 2.000 76.200 85.040 ;
+  END
+
+END sram_256x16
+
+END LIBRARY

@@ -16,9 +16,9 @@ export SDC_FILE        = $(_this_dir)/constraint.sdc
 
 export SYNTH_HDL_FRONTEND = slang
 export SYNTH_HIERARCHICAL = 1
-export DIE_AREA  = 0 0 2400 2400
-export CORE_AREA = 10 10 2390 2390
-export PLACE_DENSITY_LB_ADDON = 0.20
+export DIE_AREA  = 0 0 1500 1500
+export CORE_AREA = 10 10 1490 1490
+export PLACE_DENSITY_LB_ADDON = 0.10
 export GENERATE_ARTIFACTS_ON_FAILURE = 1
 export GLOBAL_ROUTE_ARGS = -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
 export MACRO_PLACEMENT_TCL = $(_this_dir)/macro_place.tcl

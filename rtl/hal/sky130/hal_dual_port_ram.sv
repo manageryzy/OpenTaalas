@@ -6,6 +6,8 @@
 //   192 × 65536  → nor_rom_65536x192   (embed_rom)
 //   8 × 16384    → sram_8192x8 × 2     (kv_cache_demo, tiled; 254×293µm col_mux=32)
 //   8 × 4194304  → sram_4096x8 × 1024  (kv_cache full-scale, tiled)
+//   16 × 4096    → sram_4096x16        (rmsnorm._gamma; 254×293µm, replaces ~65K FFs)
+//   16 × 256     → sram_256x16         (rmsnorm._rsqrt_lut, swiglu._sigmoid_lut, lut_interp._table; 78×85µm)
 //   32 × 512     → synthesized (mac_array grid, small enough for gates)
 //
 // ROM macros: write port is ignored (weights baked at tapeout).
@@ -160,6 +162,52 @@ module KanagawaHALDualPortRAM
             always_ff @(posedge clk) rd_sel_r <= rd_sel;
 
             assign data_out[1] = {{(DATA_WIDTH-8){1'b0}}, tile_dout[rd_sel_r]};
+            assign data_out[0] = '0;
+
+        // ---------------------------------------------------------------
+        // SRAM: 16 × 4096 (rmsnorm._gamma) — single sram_4096x16 macro
+        // Replaces ~65K gate-synthesized flip-flops with a 0.074 mm² macro.
+        // ---------------------------------------------------------------
+        end else if (DATA_WIDTH == 16 && DEPTH == 4096) begin : gen_sram_4096x16
+
+            wire [15:0] sram_dout;
+            wire ce = rden_in[1] || wren_in[0];
+            wire we = wren_in[0];
+            wire [11:0] addr = we ? addr_in[0][11:0] : addr_in[1][11:0];
+
+            sram_4096x16 u_sram (
+                .clk  (clk),
+                .ce   (ce),
+                .we   (we),
+                .addr (addr),
+                .din  (data_in[0][15:0]),
+                .dout (sram_dout)
+            );
+
+            assign data_out[1] = sram_dout;
+            assign data_out[0] = '0;
+
+        // ---------------------------------------------------------------
+        // SRAM: 16 × 256 (rmsnorm._rsqrt_lut, swiglu._sigmoid_lut, lut_interp._table)
+        // Tiny 4 Kbit LUT in a 78×85 µm macro instead of inferred register file.
+        // ---------------------------------------------------------------
+        end else if (DATA_WIDTH == 16 && DEPTH == 256) begin : gen_sram_256x16
+
+            wire [15:0] sram_dout;
+            wire ce = rden_in[1] || wren_in[0];
+            wire we = wren_in[0];
+            wire [7:0] addr = we ? addr_in[0][7:0] : addr_in[1][7:0];
+
+            sram_256x16 u_sram (
+                .clk  (clk),
+                .ce   (ce),
+                .we   (we),
+                .addr (addr),
+                .din  (data_in[0][15:0]),
+                .dout (sram_dout)
+            );
+
+            assign data_out[1] = sram_dout;
             assign data_out[0] = '0;
 
         // ---------------------------------------------------------------

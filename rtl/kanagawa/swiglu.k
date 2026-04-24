@@ -10,7 +10,7 @@ module opentaalas.swiglu
 class swiglu_unit
 {
 private:
-    uint16[256] _sigmoid_lut;
+    [[memory]] uint16[256] _sigmoid_lut;
 
 public:
     // Set a sigmoid LUT entry (BF16 value)
