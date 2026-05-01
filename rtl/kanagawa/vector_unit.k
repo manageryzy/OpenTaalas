@@ -19,9 +19,8 @@ private:
     // SwiGLU state
     [[memory]] uint16[256] _sigmoid_lut;
 
-    // RoPE state — 4096 positions, each row = 64 freq pairs × 16 bits = 1024 bits
-    [[memory]] uint<1024>[4096] _cos_table;
-    [[memory]] uint<1024>[4096] _sin_table;
+    // RoPE tables moved to chip-level rope_gen module (single shared instance,
+    // broadcast cos/sin to per-layer rope_apply units). See rope_gen.k / rope_apply.k.
 
 public:
     // --- RMSNorm ---
@@ -147,31 +146,7 @@ public:
         return result;
     }
 
-    // --- RoPE (wide-word row access) ---
-
-    uint<1024> rope_read_cos_row(uint12 position)
-    {
-        uint<1024> result;
-        atomic { result = _cos_table[position]; }
-        return result;
-    }
-
-    uint<1024> rope_read_sin_row(uint12 position)
-    {
-        uint<1024> result;
-        atomic { result = _sin_table[position]; }
-        return result;
-    }
-
-    void rope_write_cos_row(uint12 position, uint<1024> value)
-    {
-        atomic { _cos_table[position] = value; }
-    }
-
-    void rope_write_sin_row(uint12 position, uint<1024> value)
-    {
-        atomic { _sin_table[position] = value; }
-    }
+    // --- RoPE rows moved to rope_gen.k (chip-level, single shared instance) ---
 
     // --- SwiGLU ---
 

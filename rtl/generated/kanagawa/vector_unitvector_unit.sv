@@ -160,92 +160,6 @@ module vector_unitDebugView_lookup_rsqrtExit
     `endif // KANAGAWA_PRINT_DEBUG_VIEW
     assign valid_out = valid;
 endmodule
-module vector_unitDebugView_rope_read_cos_rowEntry
-(
-    input wire clk,
-    input wire[11:0]  _position,
-    input wire valid,
-    output logic valid_out
-);
-    `ifdef KANAGAWA_PRINT_DEBUG_VIEW
-        always_ff @(posedge clk) begin
-            if (valid) $display("rope_read_cos_rowEntry time: %0t position: %p", $time, _position);
-        end
-    `endif // KANAGAWA_PRINT_DEBUG_VIEW
-    assign valid_out = valid;
-endmodule
-module vector_unitDebugView_rope_read_cos_rowExit
-(
-    input wire clk,
-    input wire[1023:0]  _ReturnValue,
-    input wire valid,
-    output logic valid_out
-);
-    `ifdef KANAGAWA_PRINT_DEBUG_VIEW
-        always_ff @(posedge clk) begin
-            if (valid) $display("rope_read_cos_rowExit time: %0t ReturnValue: %p", $time, _ReturnValue);
-        end
-    `endif // KANAGAWA_PRINT_DEBUG_VIEW
-    assign valid_out = valid;
-endmodule
-module vector_unitDebugView_rope_read_sin_rowEntry
-(
-    input wire clk,
-    input wire[11:0]  _position,
-    input wire valid,
-    output logic valid_out
-);
-    `ifdef KANAGAWA_PRINT_DEBUG_VIEW
-        always_ff @(posedge clk) begin
-            if (valid) $display("rope_read_sin_rowEntry time: %0t position: %p", $time, _position);
-        end
-    `endif // KANAGAWA_PRINT_DEBUG_VIEW
-    assign valid_out = valid;
-endmodule
-module vector_unitDebugView_rope_read_sin_rowExit
-(
-    input wire clk,
-    input wire[1023:0]  _ReturnValue,
-    input wire valid,
-    output logic valid_out
-);
-    `ifdef KANAGAWA_PRINT_DEBUG_VIEW
-        always_ff @(posedge clk) begin
-            if (valid) $display("rope_read_sin_rowExit time: %0t ReturnValue: %p", $time, _ReturnValue);
-        end
-    `endif // KANAGAWA_PRINT_DEBUG_VIEW
-    assign valid_out = valid;
-endmodule
-module vector_unitDebugView_rope_write_cos_rowEntry
-(
-    input wire clk,
-    input wire[11:0]  _position,
-    input wire[1023:0]  _value,
-    input wire valid,
-    output logic valid_out
-);
-    `ifdef KANAGAWA_PRINT_DEBUG_VIEW
-        always_ff @(posedge clk) begin
-            if (valid) $display("rope_write_cos_rowEntry time: %0t position: %p value: %p", $time, _position, _value);
-        end
-    `endif // KANAGAWA_PRINT_DEBUG_VIEW
-    assign valid_out = valid;
-endmodule
-module vector_unitDebugView_rope_write_sin_rowEntry
-(
-    input wire clk,
-    input wire[11:0]  _position,
-    input wire[1023:0]  _value,
-    input wire valid,
-    output logic valid_out
-);
-    `ifdef KANAGAWA_PRINT_DEBUG_VIEW
-        always_ff @(posedge clk) begin
-            if (valid) $display("rope_write_sin_rowEntry time: %0t position: %p value: %p", $time, _position, _value);
-        end
-    `endif // KANAGAWA_PRINT_DEBUG_VIEW
-    assign valid_out = valid;
-endmodule
 module vector_unitDebugView_set_sigmoid_lutEntry
 (
     input wire clk,
@@ -352,7 +266,7 @@ endmodule
 `ifndef _TYPESCOPE_CoreModuleTypeScope
 `define _TYPESCOPE_CoreModuleTypeScope
 `endif // _TYPESCOPE_CoreModuleTypeScope
-module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
+module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:381:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -360,7 +274,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
-  input  wire [31:0] data_in_34,
+  input  wire [31:0] data_in_26,
   input  wire        input_fifo_underflow_0,
   output wire        input_rdy_0,
   input  wire        input_valid_0,
@@ -369,131 +283,131 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  logic        done_out_0;	// vector_unit.k:406:9
-  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:406:9
-  logic        fifo_wren_0_0;	// vector_unit.k:406:9
-  logic        input_rdy_0_0;	// vector_unit.k:406:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:406:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:406:9
-  always_comb begin	// vector_unit.k:406:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:406:9
+  logic        done_out_0;	// vector_unit.k:381:9
+  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:381:9
+  logic        fifo_wren_0_0;	// vector_unit.k:381:9
+  logic        input_rdy_0_0;	// vector_unit.k:381:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:381:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:381:9
+  always_comb begin	// vector_unit.k:381:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:381:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:406:9
+       ~input_valid_0};	// vector_unit.k:381:9
   end // always_comb
-  reg   [15:0] p0_a_bf16;	// vector_unit.k:406:9
-  reg   [15:0] p0_b_bf16;	// vector_unit.k:406:9
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:406:9
-  reg   [15:0] p0_sum;	// vector_unit.k:406:9
-  reg   [15:0] p0_r_exp;	// vector_unit.k:406:9
-  reg          p0_a_sign;	// vector_unit.k:406:9
-  reg          p0_b_sign;	// vector_unit.k:406:9
-  reg          p0__aligned_a_ge_aligned_b_;	// vector_unit.k:406:9
-  reg          p0__a_sign_eq_b_sign_;	// vector_unit.k:406:9
-  reg   [15:0] p0_a_bf16_0;	// vector_unit.k:406:9
-  reg          p0__b_exp_eq_0_;	// vector_unit.k:406:9
-  reg          p0__a_exp_eq_0_;	// vector_unit.k:406:9
-  reg   [15:0] p0_b_bf16_0;	// vector_unit.k:406:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:406:9
-  reg   [15:0] p0_r_exp_0;	// vector_unit.k:406:9
-  reg   [15:0] p0__pos_minus_11_;	// vector_unit.k:406:9
-  reg   [16:0] p0__pos_minus_7_;	// vector_unit.k:406:9
-  reg   [15:0] p0_sum_0;	// vector_unit.k:406:9
-  reg   [15:0] p0__11_minus_pos_;	// vector_unit.k:406:9
-  reg          p0__pos_lt_11_;	// vector_unit.k:406:9
-  reg          p0__pos_gt_11_;	// vector_unit.k:406:9
-  reg          p0_a_sign_0;	// vector_unit.k:406:9
-  reg          p0_b_sign_0;	// vector_unit.k:406:9
-  reg          p0__aligned_a_ge_aligned_b__0;	// vector_unit.k:406:9
-  reg          p0__a_sign_eq_b_sign__0;	// vector_unit.k:406:9
-  reg   [15:0] p0_a_bf16_1;	// vector_unit.k:406:9
-  reg          p0__sum_eq_0_;	// vector_unit.k:406:9
-  reg          p0__b_exp_eq_0__0;	// vector_unit.k:406:9
-  reg          p0__a_exp_eq_0__0;	// vector_unit.k:406:9
-  reg   [15:0] p0_b_bf16_1;	// vector_unit.k:406:9
-  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:406:9
-  reg   [15:0] p0_result;	// vector_unit.k:406:9
-  reg          p0_stage4_enable = 1'h0;	// vector_unit.k:406:9
-  reg   [15:0] p0_result_0;	// vector_unit.k:406:9
-  reg          p0_stage5_enable = 1'h0;	// vector_unit.k:406:9
-  wire  [15:0] a_exp = {8'h0, p0_a_bf16[14:7]};	// vector_unit.k:406:9, :409:{13,28}
-  wire  [15:0] b_exp = {8'h0, p0_b_bf16[14:7]};	// vector_unit.k:406:9, :410:{13,28}
-  wire         _a_exp_ge_b_exp_ = p0_a_bf16[14:7] >= p0_b_bf16[14:7];	// vector_unit.k:406:9, :409:{13,28}, :410:{13,28}, :433:21
-  wire  [15:0] _a_exp_minus_b_exp_ = 16'(a_exp - b_exp);	// vector_unit.k:409:{13,28}, :410:{13,28}, :437:36
-  wire  [15:0] _b_exp_minus_a_exp_ = 16'(b_exp - a_exp);	// vector_unit.k:409:{13,28}, :410:{13,28}, :449:36
-  wire         _a_sign_eq_b_sign_ = p0_a_bf16[15] == p0_b_bf16[15];	// vector_unit.k:406:9, :411:{13,29}, :412:{13,29}, :461:21
-  wire  [3:0]  shift = _a_exp_minus_b_exp_ > 16'hC ? 4'hC : _a_exp_minus_b_exp_[3:0];	// vector_unit.k:437:36, :438:{21,25}
-  wire  [3:0]  shift_0 = _b_exp_minus_a_exp_ > 16'hC ? 4'hC : _b_exp_minus_a_exp_[3:0];	// vector_unit.k:449:36, :450:{21,25}
-  wire         aligned_b = ~(shift[3]) & ~(shift[2]);	// vector_unit.k:438:21, :440:{21,25,45,57}, :441:{21,25,45,57}
-  wire         _GEN_0 = ~(shift[3]) & ~(shift[2]);	// vector_unit.k:438:21, :440:{21,25,45,57}, :441:{21,25,45,57}
-  wire         aligned_b_0 = p0_b_bf16[6] & _GEN_0;	// vector_unit.k:406:9, :427:{17,33}, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :448:33
-  wire         aligned_b_1 = p0_b_bf16[5] & _GEN_0;	// vector_unit.k:406:9, :427:{17,33}, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :448:33
-  wire         aligned_b_2 = p0_b_bf16[4] & _GEN_0;	// vector_unit.k:406:9, :427:{17,33}, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :448:33
-  wire         _GEN_1 = ~(shift[3]) & shift[2];	// vector_unit.k:438:21, :440:{21,25,45,57}, :441:{21,25,45,57}
-  wire         aligned_b_3 = p0_b_bf16[3] ? ~(shift[3]) : _GEN_1;	// vector_unit.k:406:9, :427:{17,33}, :438:21, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :448:33
+  reg   [15:0] p0_a_bf16;	// vector_unit.k:381:9
+  reg   [15:0] p0_b_bf16;	// vector_unit.k:381:9
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:381:9
+  reg   [15:0] p0_sum;	// vector_unit.k:381:9
+  reg   [15:0] p0_r_exp;	// vector_unit.k:381:9
+  reg          p0_a_sign;	// vector_unit.k:381:9
+  reg          p0_b_sign;	// vector_unit.k:381:9
+  reg          p0__aligned_a_ge_aligned_b_;	// vector_unit.k:381:9
+  reg          p0__a_sign_eq_b_sign_;	// vector_unit.k:381:9
+  reg   [15:0] p0_a_bf16_0;	// vector_unit.k:381:9
+  reg          p0__b_exp_eq_0_;	// vector_unit.k:381:9
+  reg          p0__a_exp_eq_0_;	// vector_unit.k:381:9
+  reg   [15:0] p0_b_bf16_0;	// vector_unit.k:381:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:381:9
+  reg   [15:0] p0_r_exp_0;	// vector_unit.k:381:9
+  reg   [15:0] p0__pos_minus_11_;	// vector_unit.k:381:9
+  reg   [16:0] p0__pos_minus_7_;	// vector_unit.k:381:9
+  reg   [15:0] p0_sum_0;	// vector_unit.k:381:9
+  reg   [15:0] p0__11_minus_pos_;	// vector_unit.k:381:9
+  reg          p0__pos_lt_11_;	// vector_unit.k:381:9
+  reg          p0__pos_gt_11_;	// vector_unit.k:381:9
+  reg          p0_a_sign_0;	// vector_unit.k:381:9
+  reg          p0_b_sign_0;	// vector_unit.k:381:9
+  reg          p0__aligned_a_ge_aligned_b__0;	// vector_unit.k:381:9
+  reg          p0__a_sign_eq_b_sign__0;	// vector_unit.k:381:9
+  reg   [15:0] p0_a_bf16_1;	// vector_unit.k:381:9
+  reg          p0__sum_eq_0_;	// vector_unit.k:381:9
+  reg          p0__b_exp_eq_0__0;	// vector_unit.k:381:9
+  reg          p0__a_exp_eq_0__0;	// vector_unit.k:381:9
+  reg   [15:0] p0_b_bf16_1;	// vector_unit.k:381:9
+  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:381:9
+  reg   [15:0] p0_result;	// vector_unit.k:381:9
+  reg          p0_stage4_enable = 1'h0;	// vector_unit.k:381:9
+  reg   [15:0] p0_result_0;	// vector_unit.k:381:9
+  reg          p0_stage5_enable = 1'h0;	// vector_unit.k:381:9
+  wire  [15:0] a_exp = {8'h0, p0_a_bf16[14:7]};	// vector_unit.k:381:9, :384:{13,28}
+  wire  [15:0] b_exp = {8'h0, p0_b_bf16[14:7]};	// vector_unit.k:381:9, :385:{13,28}
+  wire         _a_exp_ge_b_exp_ = p0_a_bf16[14:7] >= p0_b_bf16[14:7];	// vector_unit.k:381:9, :384:{13,28}, :385:{13,28}, :408:21
+  wire  [15:0] _a_exp_minus_b_exp_ = 16'(a_exp - b_exp);	// vector_unit.k:384:{13,28}, :385:{13,28}, :412:36
+  wire  [15:0] _b_exp_minus_a_exp_ = 16'(b_exp - a_exp);	// vector_unit.k:384:{13,28}, :385:{13,28}, :424:36
+  wire         _a_sign_eq_b_sign_ = p0_a_bf16[15] == p0_b_bf16[15];	// vector_unit.k:381:9, :386:{13,29}, :387:{13,29}, :436:21
+  wire  [3:0]  shift = _a_exp_minus_b_exp_ > 16'hC ? 4'hC : _a_exp_minus_b_exp_[3:0];	// vector_unit.k:412:36, :413:{21,25}
+  wire  [3:0]  shift_0 = _b_exp_minus_a_exp_ > 16'hC ? 4'hC : _b_exp_minus_a_exp_[3:0];	// vector_unit.k:424:36, :425:{21,25}
+  wire         aligned_b = ~(shift[3]) & ~(shift[2]);	// vector_unit.k:413:21, :415:{21,25,45,57}, :416:{21,25,45,57}
+  wire         _GEN_0 = ~(shift[3]) & ~(shift[2]);	// vector_unit.k:413:21, :415:{21,25,45,57}, :416:{21,25,45,57}
+  wire         aligned_b_0 = p0_b_bf16[6] & _GEN_0;	// vector_unit.k:381:9, :402:{17,33}, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :423:33
+  wire         aligned_b_1 = p0_b_bf16[5] & _GEN_0;	// vector_unit.k:381:9, :402:{17,33}, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :423:33
+  wire         aligned_b_2 = p0_b_bf16[4] & _GEN_0;	// vector_unit.k:381:9, :402:{17,33}, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :423:33
+  wire         _GEN_1 = ~(shift[3]) & shift[2];	// vector_unit.k:413:21, :415:{21,25,45,57}, :416:{21,25,45,57}
+  wire         aligned_b_3 = p0_b_bf16[3] ? ~(shift[3]) : _GEN_1;	// vector_unit.k:381:9, :402:{17,33}, :413:21, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :423:33
   wire         aligned_b_4 =
-    p0_b_bf16[6] ? (p0_b_bf16[2] ? ~(shift[3]) : _GEN_1) : p0_b_bf16[2] & _GEN_0;	// vector_unit.k:406:9, :427:{17,33}, :438:21, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :448:33
+    p0_b_bf16[6] ? (p0_b_bf16[2] ? ~(shift[3]) : _GEN_1) : p0_b_bf16[2] & _GEN_0;	// vector_unit.k:381:9, :402:{17,33}, :413:21, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :423:33
   wire         aligned_b_5 =
-    p0_b_bf16[5] ? (p0_b_bf16[1] ? ~(shift[3]) : _GEN_1) : p0_b_bf16[1] & _GEN_0;	// vector_unit.k:406:9, :427:{17,33}, :438:21, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :448:33
+    p0_b_bf16[5] ? (p0_b_bf16[1] ? ~(shift[3]) : _GEN_1) : p0_b_bf16[1] & _GEN_0;	// vector_unit.k:381:9, :402:{17,33}, :413:21, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :423:33
   wire         aligned_b_6 =
-    p0_b_bf16[4] ? (p0_b_bf16[0] ? ~(shift[3]) : _GEN_1) : p0_b_bf16[0] & _GEN_0;	// vector_unit.k:406:9, :427:{17,33}, :438:21, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :448:33
-  wire         _GEN_2 = shift[3] ^ shift[2];	// vector_unit.k:438:21, :440:{21,25,45,57}, :441:{21,25,45,57}
-  wire         _GEN_3 = shift[3] & ~(shift[2]);	// vector_unit.k:438:21, :440:{21,25,45,57}, :441:{21,25,45,57}
-  wire         aligned_b_7 = p0_b_bf16[3] ? _GEN_2 : _GEN_3;	// vector_unit.k:406:9, :427:{17,33}, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :448:33
+    p0_b_bf16[4] ? (p0_b_bf16[0] ? ~(shift[3]) : _GEN_1) : p0_b_bf16[0] & _GEN_0;	// vector_unit.k:381:9, :402:{17,33}, :413:21, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :423:33
+  wire         _GEN_2 = shift[3] ^ shift[2];	// vector_unit.k:413:21, :415:{21,25,45,57}, :416:{21,25,45,57}
+  wire         _GEN_3 = shift[3] & ~(shift[2]);	// vector_unit.k:413:21, :415:{21,25,45,57}, :416:{21,25,45,57}
+  wire         aligned_b_7 = p0_b_bf16[3] ? _GEN_2 : _GEN_3;	// vector_unit.k:381:9, :402:{17,33}, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :423:33
   wire         aligned_b_8 =
-    p0_b_bf16[2] ? (p0_b_bf16[6] ? _GEN_2 : _GEN_1) : p0_b_bf16[6] & _GEN_3;	// vector_unit.k:406:9, :427:{17,33}, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :448:33
+    p0_b_bf16[2] ? (p0_b_bf16[6] ? _GEN_2 : _GEN_1) : p0_b_bf16[6] & _GEN_3;	// vector_unit.k:381:9, :402:{17,33}, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :423:33
   wire         aligned_b_9 =
-    p0_b_bf16[1] ? (p0_b_bf16[5] ? _GEN_2 : _GEN_1) : p0_b_bf16[5] & _GEN_3;	// vector_unit.k:406:9, :427:{17,33}, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :448:33
+    p0_b_bf16[1] ? (p0_b_bf16[5] ? _GEN_2 : _GEN_1) : p0_b_bf16[5] & _GEN_3;	// vector_unit.k:381:9, :402:{17,33}, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :423:33
   wire         aligned_b_10 =
-    p0_b_bf16[0] ? (p0_b_bf16[4] ? _GEN_2 : _GEN_1) : p0_b_bf16[4] & _GEN_3;	// vector_unit.k:406:9, :427:{17,33}, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :448:33
-  wire         aligned_a = ~(shift_0[3]) & ~(shift_0[2]);	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}
-  wire         _GEN_4 = ~(shift_0[3]) & ~(shift_0[2]);	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}
-  wire         aligned_a_0 = p0_a_bf16[6] & _GEN_4;	// vector_unit.k:406:9, :426:{17,33}, :436:33, :451:33, :452:{21,25,45,57}, :453:{21,25,45,57}
-  wire         aligned_a_1 = p0_a_bf16[5] & _GEN_4;	// vector_unit.k:406:9, :426:{17,33}, :436:33, :451:33, :452:{21,25,45,57}, :453:{21,25,45,57}
-  wire         aligned_a_2 = p0_a_bf16[4] & _GEN_4;	// vector_unit.k:406:9, :426:{17,33}, :436:33, :451:33, :452:{21,25,45,57}, :453:{21,25,45,57}
-  wire         _GEN_5 = ~(shift_0[3]) & shift_0[2];	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}
-  wire         aligned_a_3 = p0_a_bf16[3] ? ~(shift_0[3]) : _GEN_5;	// vector_unit.k:406:9, :426:{17,33}, :436:33, :450:21, :451:33, :452:{21,25,45,57}, :453:{21,25,45,57}
+    p0_b_bf16[0] ? (p0_b_bf16[4] ? _GEN_2 : _GEN_1) : p0_b_bf16[4] & _GEN_3;	// vector_unit.k:381:9, :402:{17,33}, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :423:33
+  wire         aligned_a = ~(shift_0[3]) & ~(shift_0[2]);	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}
+  wire         _GEN_4 = ~(shift_0[3]) & ~(shift_0[2]);	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}
+  wire         aligned_a_0 = p0_a_bf16[6] & _GEN_4;	// vector_unit.k:381:9, :401:{17,33}, :411:33, :426:33, :427:{21,25,45,57}, :428:{21,25,45,57}
+  wire         aligned_a_1 = p0_a_bf16[5] & _GEN_4;	// vector_unit.k:381:9, :401:{17,33}, :411:33, :426:33, :427:{21,25,45,57}, :428:{21,25,45,57}
+  wire         aligned_a_2 = p0_a_bf16[4] & _GEN_4;	// vector_unit.k:381:9, :401:{17,33}, :411:33, :426:33, :427:{21,25,45,57}, :428:{21,25,45,57}
+  wire         _GEN_5 = ~(shift_0[3]) & shift_0[2];	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}
+  wire         aligned_a_3 = p0_a_bf16[3] ? ~(shift_0[3]) : _GEN_5;	// vector_unit.k:381:9, :401:{17,33}, :411:33, :425:21, :426:33, :427:{21,25,45,57}, :428:{21,25,45,57}
   wire         aligned_a_4 =
-    p0_a_bf16[6] ? (p0_a_bf16[2] ? ~(shift_0[3]) : _GEN_5) : p0_a_bf16[2] & _GEN_4;	// vector_unit.k:406:9, :426:{17,33}, :436:33, :450:21, :451:33, :452:{21,25,45,57}, :453:{21,25,45,57}
+    p0_a_bf16[6] ? (p0_a_bf16[2] ? ~(shift_0[3]) : _GEN_5) : p0_a_bf16[2] & _GEN_4;	// vector_unit.k:381:9, :401:{17,33}, :411:33, :425:21, :426:33, :427:{21,25,45,57}, :428:{21,25,45,57}
   wire         aligned_a_5 =
-    p0_a_bf16[5] ? (p0_a_bf16[1] ? ~(shift_0[3]) : _GEN_5) : p0_a_bf16[1] & _GEN_4;	// vector_unit.k:406:9, :426:{17,33}, :436:33, :450:21, :451:33, :452:{21,25,45,57}, :453:{21,25,45,57}
+    p0_a_bf16[5] ? (p0_a_bf16[1] ? ~(shift_0[3]) : _GEN_5) : p0_a_bf16[1] & _GEN_4;	// vector_unit.k:381:9, :401:{17,33}, :411:33, :425:21, :426:33, :427:{21,25,45,57}, :428:{21,25,45,57}
   wire         aligned_a_6 =
-    p0_a_bf16[4] ? (p0_a_bf16[0] ? ~(shift_0[3]) : _GEN_5) : p0_a_bf16[0] & _GEN_4;	// vector_unit.k:406:9, :426:{17,33}, :436:33, :450:21, :451:33, :452:{21,25,45,57}, :453:{21,25,45,57}
-  wire         _GEN_6 = shift_0[3] ^ shift_0[2];	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}
-  wire         _GEN_7 = shift_0[3] & ~(shift_0[2]);	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}
-  wire         aligned_a_7 = p0_a_bf16[3] ? _GEN_6 : _GEN_7;	// vector_unit.k:406:9, :426:{17,33}, :436:33, :451:33, :452:{21,25,45,57}, :453:{21,25,45,57}
+    p0_a_bf16[4] ? (p0_a_bf16[0] ? ~(shift_0[3]) : _GEN_5) : p0_a_bf16[0] & _GEN_4;	// vector_unit.k:381:9, :401:{17,33}, :411:33, :425:21, :426:33, :427:{21,25,45,57}, :428:{21,25,45,57}
+  wire         _GEN_6 = shift_0[3] ^ shift_0[2];	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}
+  wire         _GEN_7 = shift_0[3] & ~(shift_0[2]);	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}
+  wire         aligned_a_7 = p0_a_bf16[3] ? _GEN_6 : _GEN_7;	// vector_unit.k:381:9, :401:{17,33}, :411:33, :426:33, :427:{21,25,45,57}, :428:{21,25,45,57}
   wire         aligned_a_8 =
-    p0_a_bf16[2] ? (p0_a_bf16[6] ? _GEN_6 : _GEN_5) : p0_a_bf16[6] & _GEN_7;	// vector_unit.k:406:9, :426:{17,33}, :436:33, :451:33, :452:{21,25,45,57}, :453:{21,25,45,57}
+    p0_a_bf16[2] ? (p0_a_bf16[6] ? _GEN_6 : _GEN_5) : p0_a_bf16[6] & _GEN_7;	// vector_unit.k:381:9, :401:{17,33}, :411:33, :426:33, :427:{21,25,45,57}, :428:{21,25,45,57}
   wire         aligned_a_9 =
-    p0_a_bf16[1] ? (p0_a_bf16[5] ? _GEN_6 : _GEN_5) : p0_a_bf16[5] & _GEN_7;	// vector_unit.k:406:9, :426:{17,33}, :436:33, :451:33, :452:{21,25,45,57}, :453:{21,25,45,57}
+    p0_a_bf16[1] ? (p0_a_bf16[5] ? _GEN_6 : _GEN_5) : p0_a_bf16[5] & _GEN_7;	// vector_unit.k:381:9, :401:{17,33}, :411:33, :426:33, :427:{21,25,45,57}, :428:{21,25,45,57}
   wire         aligned_a_10 =
-    p0_a_bf16[0] ? (p0_a_bf16[4] ? _GEN_6 : _GEN_5) : p0_a_bf16[4] & _GEN_7;	// vector_unit.k:406:9, :426:{17,33}, :436:33, :451:33, :452:{21,25,45,57}, :453:{21,25,45,57}
-  wire         _GEN_8 = ~(shift[1]) & ~(shift[0]);	// vector_unit.k:438:21, :442:{21,25,45,57}, :443:{21,25,45,57}
-  wire         _GEN_9 = ~(shift[1]) & shift[0];	// vector_unit.k:438:21, :442:{21,25,45,57}, :443:{21,25,45,57}
-  wire         _GEN_10 = ~(shift[1]) | ~(shift[0]);	// vector_unit.k:438:21, :442:{21,25,45,57}, :443:{21,25,45,57}
-  wire         _GEN_11 = shift[1] ^ shift[0];	// vector_unit.k:438:21, :442:{21,25,45,57}, :443:{21,25,45,57}
-  wire         _GEN_12 = shift[1] | shift[0];	// vector_unit.k:438:21, :442:{21,25,45,57}, :443:{21,25,45,57}
-  wire         _GEN_13 = shift[1] ^ ~(shift[0]);	// vector_unit.k:438:21, :442:{21,25,45,57}, :443:{21,25,45,57}
-  wire         _GEN_14 = shift[1] & shift[0];	// vector_unit.k:438:21, :442:{21,25,45,57}, :443:{21,25,45,57}
-  wire         _GEN_15 = ~(shift_0[1]) & ~(shift_0[0]);	// vector_unit.k:450:21, :454:{21,25,45,57}, :455:{21,25,45,57}
-  wire         _GEN_16 = ~(shift_0[1]) & shift_0[0];	// vector_unit.k:450:21, :454:{21,25,45,57}, :455:{21,25,45,57}
+    p0_a_bf16[0] ? (p0_a_bf16[4] ? _GEN_6 : _GEN_5) : p0_a_bf16[4] & _GEN_7;	// vector_unit.k:381:9, :401:{17,33}, :411:33, :426:33, :427:{21,25,45,57}, :428:{21,25,45,57}
+  wire         _GEN_8 = ~(shift[1]) & ~(shift[0]);	// vector_unit.k:413:21, :417:{21,25,45,57}, :418:{21,25,45,57}
+  wire         _GEN_9 = ~(shift[1]) & shift[0];	// vector_unit.k:413:21, :417:{21,25,45,57}, :418:{21,25,45,57}
+  wire         _GEN_10 = ~(shift[1]) | ~(shift[0]);	// vector_unit.k:413:21, :417:{21,25,45,57}, :418:{21,25,45,57}
+  wire         _GEN_11 = shift[1] ^ shift[0];	// vector_unit.k:413:21, :417:{21,25,45,57}, :418:{21,25,45,57}
+  wire         _GEN_12 = shift[1] | shift[0];	// vector_unit.k:413:21, :417:{21,25,45,57}, :418:{21,25,45,57}
+  wire         _GEN_13 = shift[1] ^ ~(shift[0]);	// vector_unit.k:413:21, :417:{21,25,45,57}, :418:{21,25,45,57}
+  wire         _GEN_14 = shift[1] & shift[0];	// vector_unit.k:413:21, :417:{21,25,45,57}, :418:{21,25,45,57}
+  wire         _GEN_15 = ~(shift_0[1]) & ~(shift_0[0]);	// vector_unit.k:425:21, :429:{21,25,45,57}, :430:{21,25,45,57}
+  wire         _GEN_16 = ~(shift_0[1]) & shift_0[0];	// vector_unit.k:425:21, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_11 =
-    aligned_a ? (aligned_a_0 ? ~(shift_0[1]) : _GEN_16) : aligned_a_0 & _GEN_15;	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
-  wire         _GEN_17 = ~(shift_0[1]) | ~(shift_0[0]);	// vector_unit.k:450:21, :454:{21,25,45,57}, :455:{21,25,45,57}
-  wire         _GEN_18 = shift_0[1] ^ shift_0[0];	// vector_unit.k:450:21, :454:{21,25,45,57}, :455:{21,25,45,57}
+    aligned_a ? (aligned_a_0 ? ~(shift_0[1]) : _GEN_16) : aligned_a_0 & _GEN_15;	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
+  wire         _GEN_17 = ~(shift_0[1]) | ~(shift_0[0]);	// vector_unit.k:425:21, :429:{21,25,45,57}, :430:{21,25,45,57}
+  wire         _GEN_18 = shift_0[1] ^ shift_0[0];	// vector_unit.k:425:21, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_12 =
     aligned_a_0
       ? (aligned_a
            ? (aligned_a_1 ? _GEN_17 : _GEN_18)
            : aligned_a_1 ? ~(shift_0[1]) : _GEN_16)
-      : aligned_a ? (aligned_a_1 | shift_0[1]) & ~(shift_0[0]) : aligned_a_1 & _GEN_15;	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
-  wire         _GEN_19 = shift_0[1] | shift_0[0];	// vector_unit.k:450:21, :454:{21,25,45,57}, :455:{21,25,45,57}
-  wire         _GEN_20 = shift_0[1] ^ ~(shift_0[0]);	// vector_unit.k:450:21, :454:{21,25,45,57}, :455:{21,25,45,57}
-  wire         _GEN_21 = shift_0[1] & shift_0[0];	// vector_unit.k:450:21, :454:{21,25,45,57}, :455:{21,25,45,57}
+      : aligned_a ? (aligned_a_1 | shift_0[1]) & ~(shift_0[0]) : aligned_a_1 & _GEN_15;	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
+  wire         _GEN_19 = shift_0[1] | shift_0[0];	// vector_unit.k:425:21, :429:{21,25,45,57}, :430:{21,25,45,57}
+  wire         _GEN_20 = shift_0[1] ^ ~(shift_0[0]);	// vector_unit.k:425:21, :429:{21,25,45,57}, :430:{21,25,45,57}
+  wire         _GEN_21 = shift_0[1] & shift_0[0];	// vector_unit.k:425:21, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_13 =
     aligned_a
       ? (aligned_a_1
@@ -509,7 +423,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : aligned_a_2 ? ~(shift_0[1]) : _GEN_16)
           : aligned_a_0
               ? (aligned_a_2 | shift_0[1]) & ~(shift_0[0])
-              : aligned_a_2 & _GEN_15;	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
+              : aligned_a_2 & _GEN_15;	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_14 =
     aligned_a_0
       ? (aligned_a_2
@@ -525,7 +439,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : aligned_a_3 ? ~(shift_0[1]) : _GEN_16)
           : aligned_a_1
               ? (aligned_a_3 | shift_0[1]) & ~(shift_0[0])
-              : aligned_a_3 & _GEN_15;	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
+              : aligned_a_3 & _GEN_15;	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_15 =
     aligned_a_1
       ? (aligned_a_3
@@ -541,7 +455,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : aligned_a_4 ? ~(shift_0[1]) : _GEN_16)
           : aligned_a_2
               ? (aligned_a_4 | shift_0[1]) & ~(shift_0[0])
-              : aligned_a_4 & _GEN_15;	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
+              : aligned_a_4 & _GEN_15;	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_16 =
     aligned_a_2
       ? (aligned_a_4
@@ -557,7 +471,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : aligned_a_5 ? ~(shift_0[1]) : _GEN_16)
           : aligned_a_3
               ? (aligned_a_5 | shift_0[1]) & ~(shift_0[0])
-              : aligned_a_5 & _GEN_15;	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
+              : aligned_a_5 & _GEN_15;	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_17 =
     aligned_a_3
       ? (aligned_a_5
@@ -573,22 +487,22 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : aligned_a_6 ? ~(shift_0[1]) : _GEN_16)
           : aligned_a_4
               ? (aligned_a_6 | shift_0[1]) & ~(shift_0[0])
-              : aligned_a_6 & _GEN_15;	// vector_unit.k:450:21, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
-  wire         aligned_a_18 = aligned_a & _GEN_15 | _a_exp_ge_b_exp_;	// vector_unit.k:433:{17,21}, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
+              : aligned_a_6 & _GEN_15;	// vector_unit.k:425:21, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
+  wire         aligned_a_18 = aligned_a & _GEN_15 | _a_exp_ge_b_exp_;	// vector_unit.k:408:{17,21}, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_19 =
-    p0_a_bf16[6] ? aligned_a_11 | _a_exp_ge_b_exp_ : aligned_a_11 & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :426:{17,33}, :433:{17,21}, :436:33, :451:33, :454:{21,25,45,57}, :455:{21,25,45,57}
+    p0_a_bf16[6] ? aligned_a_11 | _a_exp_ge_b_exp_ : aligned_a_11 & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :401:{17,33}, :408:{17,21}, :411:33, :426:33, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_20 =
-    p0_a_bf16[5] ? aligned_a_12 | _a_exp_ge_b_exp_ : aligned_a_12 & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :426:{17,33}, :433:{17,21}, :436:33, :451:33, :454:{21,25,45,57}, :455:{21,25,45,57}
+    p0_a_bf16[5] ? aligned_a_12 | _a_exp_ge_b_exp_ : aligned_a_12 & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :401:{17,33}, :408:{17,21}, :411:33, :426:33, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_21 =
-    p0_a_bf16[4] ? aligned_a_13 | _a_exp_ge_b_exp_ : aligned_a_13 & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :426:{17,33}, :433:{17,21}, :436:33, :451:33, :454:{21,25,45,57}, :455:{21,25,45,57}
+    p0_a_bf16[4] ? aligned_a_13 | _a_exp_ge_b_exp_ : aligned_a_13 & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :401:{17,33}, :408:{17,21}, :411:33, :426:33, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_22 =
-    p0_a_bf16[3] ? aligned_a_14 | _a_exp_ge_b_exp_ : aligned_a_14 & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :426:{17,33}, :433:{17,21}, :436:33, :451:33, :454:{21,25,45,57}, :455:{21,25,45,57}
+    p0_a_bf16[3] ? aligned_a_14 | _a_exp_ge_b_exp_ : aligned_a_14 & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :401:{17,33}, :408:{17,21}, :411:33, :426:33, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_23 =
-    p0_a_bf16[2] ? aligned_a_15 | _a_exp_ge_b_exp_ : aligned_a_15 & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :426:{17,33}, :433:{17,21}, :436:33, :451:33, :454:{21,25,45,57}, :455:{21,25,45,57}
+    p0_a_bf16[2] ? aligned_a_15 | _a_exp_ge_b_exp_ : aligned_a_15 & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :401:{17,33}, :408:{17,21}, :411:33, :426:33, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_24 =
-    p0_a_bf16[1] ? aligned_a_16 | _a_exp_ge_b_exp_ : aligned_a_16 & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :426:{17,33}, :433:{17,21}, :436:33, :451:33, :454:{21,25,45,57}, :455:{21,25,45,57}
+    p0_a_bf16[1] ? aligned_a_16 | _a_exp_ge_b_exp_ : aligned_a_16 & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :401:{17,33}, :408:{17,21}, :411:33, :426:33, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_25 =
-    p0_a_bf16[0] ? aligned_a_17 | _a_exp_ge_b_exp_ : aligned_a_17 & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :426:{17,33}, :433:{17,21}, :436:33, :451:33, :454:{21,25,45,57}, :455:{21,25,45,57}
+    p0_a_bf16[0] ? aligned_a_17 | _a_exp_ge_b_exp_ : aligned_a_17 & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :401:{17,33}, :408:{17,21}, :411:33, :426:33, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_26 =
     (aligned_a_4
        ? (aligned_a_6
@@ -604,7 +518,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 : aligned_a_7 ? ~(shift_0[1]) : _GEN_16)
            : aligned_a_5
                ? (aligned_a_7 | shift_0[1]) & ~(shift_0[0])
-               : aligned_a_7 & _GEN_15) & ~_a_exp_ge_b_exp_;	// vector_unit.k:433:{17,21}, :450:21, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
+               : aligned_a_7 & _GEN_15) & ~_a_exp_ge_b_exp_;	// vector_unit.k:408:{17,21}, :425:21, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_27 =
     (aligned_a_5
        ? (aligned_a_7
@@ -620,7 +534,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 : aligned_a_8 ? ~(shift_0[1]) : _GEN_16)
            : aligned_a_6
                ? (aligned_a_8 | shift_0[1]) & ~(shift_0[0])
-               : aligned_a_8 & _GEN_15) & ~_a_exp_ge_b_exp_;	// vector_unit.k:433:{17,21}, :450:21, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
+               : aligned_a_8 & _GEN_15) & ~_a_exp_ge_b_exp_;	// vector_unit.k:408:{17,21}, :425:21, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_28 =
     (aligned_a_6
        ? (aligned_a_8
@@ -636,7 +550,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 : aligned_a_9 ? ~(shift_0[1]) : _GEN_16)
            : aligned_a_7
                ? (aligned_a_9 | shift_0[1]) & ~(shift_0[0])
-               : aligned_a_9 & _GEN_15) & ~_a_exp_ge_b_exp_;	// vector_unit.k:433:{17,21}, :450:21, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
+               : aligned_a_9 & _GEN_15) & ~_a_exp_ge_b_exp_;	// vector_unit.k:408:{17,21}, :425:21, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire         aligned_a_29 =
     (aligned_a_7
        ? (aligned_a_9
@@ -652,7 +566,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 : aligned_a_10 ? ~(shift_0[1]) : _GEN_16)
            : aligned_a_8
                ? (aligned_a_10 | shift_0[1]) & ~(shift_0[0])
-               : aligned_a_10 & _GEN_15) & ~_a_exp_ge_b_exp_;	// vector_unit.k:433:{17,21}, :450:21, :452:{21,25,45,57}, :453:{21,25,45,57}, :454:{21,25,45,57}, :455:{21,25,45,57}
+               : aligned_a_10 & _GEN_15) & ~_a_exp_ge_b_exp_;	// vector_unit.k:408:{17,21}, :425:21, :427:{21,25,45,57}, :428:{21,25,45,57}, :429:{21,25,45,57}, :430:{21,25,45,57}
   wire  [15:0] aligned_a_30 =
     {4'h0,
      aligned_a_18,
@@ -666,12 +580,12 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
      aligned_a_26,
      aligned_a_27,
      aligned_a_28,
-     aligned_a_29};	// vector_unit.k:433:17
-  wire         aligned_b_11 = aligned_b & _GEN_8 | ~_a_exp_ge_b_exp_;	// vector_unit.k:433:{17,21}, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}
+     aligned_a_29};	// vector_unit.k:408:17
+  wire         aligned_b_11 = aligned_b & _GEN_8 | ~_a_exp_ge_b_exp_;	// vector_unit.k:408:{17,21}, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}
   wire         aligned_b_12 =
     (aligned_b ? (aligned_b_0 ? ~(shift[1]) : _GEN_9) : aligned_b_0 & _GEN_8)
       ? p0_b_bf16[6] | _a_exp_ge_b_exp_
-      : p0_b_bf16[6] & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :427:{17,33}, :433:{17,21}, :438:21, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}, :448:33
+      : p0_b_bf16[6] & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :402:{17,33}, :408:{17,21}, :413:21, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}, :423:33
   wire         aligned_b_13 =
     (aligned_b_0
        ? (aligned_b
@@ -679,7 +593,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
             : aligned_b_1 ? ~(shift[1]) : _GEN_9)
        : aligned_b ? (aligned_b_1 | shift[1]) & ~(shift[0]) : aligned_b_1 & _GEN_8)
       ? p0_b_bf16[5] | _a_exp_ge_b_exp_
-      : p0_b_bf16[5] & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :427:{17,33}, :433:{17,21}, :438:21, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}, :448:33
+      : p0_b_bf16[5] & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :402:{17,33}, :408:{17,21}, :413:21, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}, :423:33
   wire         aligned_b_14 =
     (aligned_b
        ? (aligned_b_1
@@ -693,7 +607,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 : aligned_b_2 ? ~(shift[1]) : _GEN_9)
            : aligned_b_0 ? (aligned_b_2 | shift[1]) & ~(shift[0]) : aligned_b_2 & _GEN_8)
       ? p0_b_bf16[4] | _a_exp_ge_b_exp_
-      : p0_b_bf16[4] & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :427:{17,33}, :433:{17,21}, :438:21, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}, :448:33
+      : p0_b_bf16[4] & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :402:{17,33}, :408:{17,21}, :413:21, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}, :423:33
   wire         aligned_b_15 =
     (aligned_b_0
        ? (aligned_b_2
@@ -707,7 +621,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 : aligned_b_3 ? ~(shift[1]) : _GEN_9)
            : aligned_b_1 ? (aligned_b_3 | shift[1]) & ~(shift[0]) : aligned_b_3 & _GEN_8)
       ? p0_b_bf16[3] | _a_exp_ge_b_exp_
-      : p0_b_bf16[3] & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :427:{17,33}, :433:{17,21}, :438:21, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}, :448:33
+      : p0_b_bf16[3] & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :402:{17,33}, :408:{17,21}, :413:21, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}, :423:33
   wire         aligned_b_16 =
     (aligned_b_1
        ? (aligned_b_3
@@ -721,7 +635,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 : aligned_b_4 ? ~(shift[1]) : _GEN_9)
            : aligned_b_2 ? (aligned_b_4 | shift[1]) & ~(shift[0]) : aligned_b_4 & _GEN_8)
       ? p0_b_bf16[2] | _a_exp_ge_b_exp_
-      : p0_b_bf16[2] & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :427:{17,33}, :433:{17,21}, :438:21, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}, :448:33
+      : p0_b_bf16[2] & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :402:{17,33}, :408:{17,21}, :413:21, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}, :423:33
   wire         aligned_b_17 =
     (aligned_b_2
        ? (aligned_b_4
@@ -735,7 +649,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 : aligned_b_5 ? ~(shift[1]) : _GEN_9)
            : aligned_b_3 ? (aligned_b_5 | shift[1]) & ~(shift[0]) : aligned_b_5 & _GEN_8)
       ? p0_b_bf16[1] | _a_exp_ge_b_exp_
-      : p0_b_bf16[1] & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :427:{17,33}, :433:{17,21}, :438:21, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}, :448:33
+      : p0_b_bf16[1] & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :402:{17,33}, :408:{17,21}, :413:21, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}, :423:33
   wire         aligned_b_18 =
     (aligned_b_3
        ? (aligned_b_5
@@ -749,7 +663,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 : aligned_b_6 ? ~(shift[1]) : _GEN_9)
            : aligned_b_4 ? (aligned_b_6 | shift[1]) & ~(shift[0]) : aligned_b_6 & _GEN_8)
       ? p0_b_bf16[0] | _a_exp_ge_b_exp_
-      : p0_b_bf16[0] & ~_a_exp_ge_b_exp_;	// vector_unit.k:406:9, :427:{17,33}, :433:{17,21}, :438:21, :439:33, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}, :448:33
+      : p0_b_bf16[0] & ~_a_exp_ge_b_exp_;	// vector_unit.k:381:9, :402:{17,33}, :408:{17,21}, :413:21, :414:33, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}, :423:33
   wire         aligned_b_19 =
     (aligned_b_4
        ? (aligned_b_6
@@ -762,7 +676,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 ? (aligned_b_7 ? _GEN_10 : _GEN_11)
                 : aligned_b_7 ? ~(shift[1]) : _GEN_9)
            : aligned_b_5 ? (aligned_b_7 | shift[1]) & ~(shift[0]) : aligned_b_7 & _GEN_8)
-    & _a_exp_ge_b_exp_;	// vector_unit.k:433:{17,21}, :438:21, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}
+    & _a_exp_ge_b_exp_;	// vector_unit.k:408:{17,21}, :413:21, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}
   wire         aligned_b_20 =
     (aligned_b_5
        ? (aligned_b_7
@@ -775,7 +689,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 ? (aligned_b_8 ? _GEN_10 : _GEN_11)
                 : aligned_b_8 ? ~(shift[1]) : _GEN_9)
            : aligned_b_6 ? (aligned_b_8 | shift[1]) & ~(shift[0]) : aligned_b_8 & _GEN_8)
-    & _a_exp_ge_b_exp_;	// vector_unit.k:433:{17,21}, :438:21, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}
+    & _a_exp_ge_b_exp_;	// vector_unit.k:408:{17,21}, :413:21, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}
   wire         aligned_b_21 =
     (aligned_b_6
        ? (aligned_b_8
@@ -788,7 +702,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 ? (aligned_b_9 ? _GEN_10 : _GEN_11)
                 : aligned_b_9 ? ~(shift[1]) : _GEN_9)
            : aligned_b_7 ? (aligned_b_9 | shift[1]) & ~(shift[0]) : aligned_b_9 & _GEN_8)
-    & _a_exp_ge_b_exp_;	// vector_unit.k:433:{17,21}, :438:21, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}
+    & _a_exp_ge_b_exp_;	// vector_unit.k:408:{17,21}, :413:21, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}
   wire         aligned_b_22 =
     (aligned_b_7
        ? (aligned_b_9
@@ -804,7 +718,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                 : aligned_b_10 ? ~(shift[1]) : _GEN_9)
            : aligned_b_8
                ? (aligned_b_10 | shift[1]) & ~(shift[0])
-               : aligned_b_10 & _GEN_8) & _a_exp_ge_b_exp_;	// vector_unit.k:433:{17,21}, :438:21, :440:{21,25,45,57}, :441:{21,25,45,57}, :442:{21,25,45,57}, :443:{21,25,45,57}
+               : aligned_b_10 & _GEN_8) & _a_exp_ge_b_exp_;	// vector_unit.k:408:{17,21}, :413:21, :415:{21,25,45,57}, :416:{21,25,45,57}, :417:{21,25,45,57}, :418:{21,25,45,57}
   wire  [15:0] aligned_b_23 =
     {4'h0,
      aligned_b_11,
@@ -818,7 +732,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
      aligned_b_19,
      aligned_b_20,
      aligned_b_21,
-     aligned_b_22};	// vector_unit.k:433:17
+     aligned_b_22};	// vector_unit.k:408:17
   wire  [12:0] _aligned_a_plus_aligned_b_ =
     13'({1'h0,
          aligned_a_18,
@@ -845,7 +759,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            aligned_b_19,
            aligned_b_20,
            aligned_b_21,
-           aligned_b_22});	// vector_unit.k:433:17, :464:27
+           aligned_b_22});	// vector_unit.k:408:17, :439:27
   wire         _aligned_a_ge_aligned_b_ =
     {aligned_a_18,
      aligned_a_19,
@@ -869,42 +783,42 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                        aligned_b_19,
                        aligned_b_20,
                        aligned_b_21,
-                       aligned_b_22};	// vector_unit.k:433:17, :468:25
-  wire  [15:0] _aligned_a_minus_aligned_b_ = 16'(aligned_a_30 - aligned_b_23);	// vector_unit.k:433:17, :471:31
-  wire  [15:0] _aligned_b_minus_aligned_a_ = 16'(aligned_b_23 - aligned_a_30);	// vector_unit.k:433:17, :476:31
-  wire         _GEN_22 = ~_aligned_a_ge_aligned_b_ & ~_a_sign_eq_b_sign_;	// vector_unit.k:461:{17,21}, :468:{21,25}
-  wire         _GEN_23 = _aligned_a_ge_aligned_b_ | _a_sign_eq_b_sign_;	// vector_unit.k:461:{17,21}, :468:{21,25}
+                       aligned_b_22};	// vector_unit.k:408:17, :443:25
+  wire  [15:0] _aligned_a_minus_aligned_b_ = 16'(aligned_a_30 - aligned_b_23);	// vector_unit.k:408:17, :446:31
+  wire  [15:0] _aligned_b_minus_aligned_a_ = 16'(aligned_b_23 - aligned_a_30);	// vector_unit.k:408:17, :451:31
+  wire         _GEN_22 = ~_aligned_a_ge_aligned_b_ & ~_a_sign_eq_b_sign_;	// vector_unit.k:436:{17,21}, :443:{21,25}
+  wire         _GEN_23 = _aligned_a_ge_aligned_b_ | _a_sign_eq_b_sign_;	// vector_unit.k:436:{17,21}, :443:{21,25}
   wire         tmp =
-    p0_sum[15] ? p0_sum[7] | (|(p0_sum[15:8])) : p0_sum[7] & ~(|(p0_sum[15:8]));	// vector_unit.k:406:9, :480:21, :490:{21,25,48,54}
+    p0_sum[15] ? p0_sum[7] | (|(p0_sum[15:8])) : p0_sum[7] & ~(|(p0_sum[15:8]));	// vector_unit.k:381:9, :455:21, :465:{21,25,48,54}
   wire         tmp_0 =
-    p0_sum[14] ? p0_sum[6] | (|(p0_sum[15:8])) : p0_sum[6] & ~(|(p0_sum[15:8]));	// vector_unit.k:406:9, :480:21, :490:{21,25,48,54}
+    p0_sum[14] ? p0_sum[6] | (|(p0_sum[15:8])) : p0_sum[6] & ~(|(p0_sum[15:8]));	// vector_unit.k:381:9, :455:21, :465:{21,25,48,54}
   wire         tmp_1 =
-    p0_sum[13] ? p0_sum[5] | (|(p0_sum[15:8])) : p0_sum[5] & ~(|(p0_sum[15:8]));	// vector_unit.k:406:9, :480:21, :490:{21,25,48,54}
+    p0_sum[13] ? p0_sum[5] | (|(p0_sum[15:8])) : p0_sum[5] & ~(|(p0_sum[15:8]));	// vector_unit.k:381:9, :455:21, :465:{21,25,48,54}
   wire         tmp_2 =
-    p0_sum[11] ? p0_sum[3] | (|(p0_sum[15:8])) : p0_sum[3] & ~(|(p0_sum[15:8]));	// vector_unit.k:406:9, :480:21, :490:{21,25,48,54}
+    p0_sum[11] ? p0_sum[3] | (|(p0_sum[15:8])) : p0_sum[3] & ~(|(p0_sum[15:8]));	// vector_unit.k:381:9, :455:21, :465:{21,25,48,54}
   wire         tmp_3 =
-    p0_sum[10] ? p0_sum[2] | (|(p0_sum[15:8])) : p0_sum[2] & ~(|(p0_sum[15:8]));	// vector_unit.k:406:9, :480:21, :490:{21,25,48,54}
+    p0_sum[10] ? p0_sum[2] | (|(p0_sum[15:8])) : p0_sum[2] & ~(|(p0_sum[15:8]));	// vector_unit.k:381:9, :455:21, :465:{21,25,48,54}
   wire         tmp_4 =
-    p0_sum[9] ? p0_sum[1] | (|(p0_sum[15:8])) : p0_sum[1] & ~(|(p0_sum[15:8]));	// vector_unit.k:406:9, :480:21, :490:{21,25,48,54}
+    p0_sum[9] ? p0_sum[1] | (|(p0_sum[15:8])) : p0_sum[1] & ~(|(p0_sum[15:8]));	// vector_unit.k:381:9, :455:21, :465:{21,25,48,54}
   wire  [3:0]  _GEN_24 =
     {tmp,
      tmp_0,
      tmp_1,
-     p0_sum[12] ? p0_sum[4] | (|(p0_sum[15:8])) : p0_sum[4] & ~(|(p0_sum[15:8]))};	// vector_unit.k:406:9, :480:21, :490:{21,25,48,54}, :491:25
-  wire         tmp_5 = tmp ? tmp_2 | (|_GEN_24) : tmp_2 & ~(|_GEN_24);	// vector_unit.k:490:{21,48,54}, :491:{21,25,48,54}
-  wire         tmp_6 = tmp_0 ? tmp_3 | (|_GEN_24) : tmp_3 & ~(|_GEN_24);	// vector_unit.k:490:{21,48,54}, :491:{21,25,48,54}
-  wire         pos = tmp_5 | tmp_6;	// vector_unit.k:490:21, :491:{21,48,54,70}, :492:{21,25,48,54,70}, :493:{21,25,54}
+     p0_sum[12] ? p0_sum[4] | (|(p0_sum[15:8])) : p0_sum[4] & ~(|(p0_sum[15:8]))};	// vector_unit.k:381:9, :455:21, :465:{21,25,48,54}, :466:25
+  wire         tmp_5 = tmp ? tmp_2 | (|_GEN_24) : tmp_2 & ~(|_GEN_24);	// vector_unit.k:465:{21,48,54}, :466:{21,25,48,54}
+  wire         tmp_6 = tmp_0 ? tmp_3 | (|_GEN_24) : tmp_3 & ~(|_GEN_24);	// vector_unit.k:465:{21,48,54}, :466:{21,25,48,54}
+  wire         pos = tmp_5 | tmp_6;	// vector_unit.k:465:21, :466:{21,48,54,70}, :467:{21,25,48,54,70}, :468:{21,25,54}
   wire         pos_0 =
-    (tmp_1 ? tmp_4 | (|_GEN_24) : tmp_4 & ~(|_GEN_24)) & ~tmp_6 | tmp_5;	// vector_unit.k:490:{21,48,54}, :491:{21,25,48,54,70}, :492:{21,25,48,54,70}, :493:{21,25,54}
-  wire  [15:0] pos_1 = {12'h0, |(p0_sum[15:8]), |_GEN_24, pos, pos_0};	// vector_unit.k:406:9, :480:21, :490:{21,25}, :491:{21,25,70}, :492:{21,25,48,54,70}, :493:{21,25,54}
-  wire  [15:0] _r_exp_plus_pos_minus_11_ = 16'(p0_r_exp_0 + p0__pos_minus_11_);	// vector_unit.k:406:9, :501:36
-  wire  [15:0] _sum_shr_pos_minus_7_ = p0_sum_0 >> p0__pos_minus_7_[15:0];	// vector_unit.k:406:9, :502:34
-  wire         _diff_ge_r_exp_ = p0__11_minus_pos_ >= p0_r_exp_0;	// vector_unit.k:406:9, :507:29
-  wire  [15:0] _r_exp_minus_diff_ = 16'(p0_r_exp_0 - p0__11_minus_pos_);	// vector_unit.k:406:9, :513:40
-  wire         _GEN_25 = ~(p0__11_minus_pos_[3]) | ~(p0__11_minus_pos_[2]);	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
-  wire         _GEN_26 = p0__11_minus_pos_[3] ^ p0__11_minus_pos_[2];	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
-  wire         _GEN_27 = ~(p0__11_minus_pos_[3]) & p0__11_minus_pos_[2];	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
-  wire         _GEN_28 = ~(p0__11_minus_pos_[3]) & ~(p0__11_minus_pos_[2]);	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
+    (tmp_1 ? tmp_4 | (|_GEN_24) : tmp_4 & ~(|_GEN_24)) & ~tmp_6 | tmp_5;	// vector_unit.k:465:{21,48,54}, :466:{21,25,48,54,70}, :467:{21,25,48,54,70}, :468:{21,25,54}
+  wire  [15:0] pos_1 = {12'h0, |(p0_sum[15:8]), |_GEN_24, pos, pos_0};	// vector_unit.k:381:9, :455:21, :465:{21,25}, :466:{21,25,70}, :467:{21,25,48,54,70}, :468:{21,25,54}
+  wire  [15:0] _r_exp_plus_pos_minus_11_ = 16'(p0_r_exp_0 + p0__pos_minus_11_);	// vector_unit.k:381:9, :476:36
+  wire  [15:0] _sum_shr_pos_minus_7_ = p0_sum_0 >> p0__pos_minus_7_[15:0];	// vector_unit.k:381:9, :477:34
+  wire         _diff_ge_r_exp_ = p0__11_minus_pos_ >= p0_r_exp_0;	// vector_unit.k:381:9, :482:29
+  wire  [15:0] _r_exp_minus_diff_ = 16'(p0_r_exp_0 - p0__11_minus_pos_);	// vector_unit.k:381:9, :488:40
+  wire         _GEN_25 = ~(p0__11_minus_pos_[3]) | ~(p0__11_minus_pos_[2]);	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
+  wire         _GEN_26 = p0__11_minus_pos_[3] ^ p0__11_minus_pos_[2];	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
+  wire         _GEN_27 = ~(p0__11_minus_pos_[3]) & p0__11_minus_pos_[2];	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
+  wire         _GEN_28 = ~(p0__11_minus_pos_[3]) & ~(p0__11_minus_pos_[2]);	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
   wire         shifted =
     p0_sum_0[6]
       ? (p0_sum_0[2]
@@ -912,7 +826,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_sum_0[10] ? ~(p0__11_minus_pos_[3]) : _GEN_27)
       : p0_sum_0[2]
           ? (p0_sum_0[10] | p0__11_minus_pos_[3]) & ~(p0__11_minus_pos_[2])
-          : p0_sum_0[10] & _GEN_28;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
+          : p0_sum_0[10] & _GEN_28;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
   wire         shifted_0 =
     p0_sum_0[5]
       ? (p0_sum_0[1]
@@ -920,7 +834,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_sum_0[9] ? ~(p0__11_minus_pos_[3]) : _GEN_27)
       : p0_sum_0[1]
           ? (p0_sum_0[9] | p0__11_minus_pos_[3]) & ~(p0__11_minus_pos_[2])
-          : p0_sum_0[9] & _GEN_28;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
+          : p0_sum_0[9] & _GEN_28;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
   wire         shifted_1 =
     p0_sum_0[4]
       ? (p0_sum_0[0]
@@ -928,32 +842,32 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_sum_0[8] ? ~(p0__11_minus_pos_[3]) : _GEN_27)
       : p0_sum_0[0]
           ? (p0_sum_0[8] | p0__11_minus_pos_[3]) & ~(p0__11_minus_pos_[2])
-          : p0_sum_0[8] & _GEN_28;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
+          : p0_sum_0[8] & _GEN_28;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
   wire         shifted_2 =
     p0_sum_0[3]
       ? (p0_sum_0[7] ? ~(p0__11_minus_pos_[3]) : _GEN_27)
-      : p0_sum_0[7] & _GEN_28;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
+      : p0_sum_0[7] & _GEN_28;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
   wire         shifted_3 =
     p0_sum_0[2]
       ? (p0_sum_0[6] ? ~(p0__11_minus_pos_[3]) : _GEN_27)
-      : p0_sum_0[6] & _GEN_28;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
+      : p0_sum_0[6] & _GEN_28;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
   wire         shifted_4 =
     p0_sum_0[1]
       ? (p0_sum_0[5] ? ~(p0__11_minus_pos_[3]) : _GEN_27)
-      : p0_sum_0[5] & _GEN_28;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
+      : p0_sum_0[5] & _GEN_28;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
   wire         shifted_5 =
     p0_sum_0[0]
       ? (p0_sum_0[4] ? ~(p0__11_minus_pos_[3]) : _GEN_27)
-      : p0_sum_0[4] & _GEN_28;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
-  wire         shifted_6 = p0_sum_0[3] & _GEN_28;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
-  wire         shifted_7 = p0_sum_0[2] & _GEN_28;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}
-  wire         _GEN_29 = p0__11_minus_pos_[1] | p0__11_minus_pos_[0];	// vector_unit.k:406:9, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
-  wire         _GEN_30 = p0__11_minus_pos_[1] ^ ~(p0__11_minus_pos_[0]);	// vector_unit.k:406:9, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
-  wire         _GEN_31 = p0__11_minus_pos_[1] & p0__11_minus_pos_[0];	// vector_unit.k:406:9, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
-  wire         _GEN_32 = ~(p0__11_minus_pos_[1]) | ~(p0__11_minus_pos_[0]);	// vector_unit.k:406:9, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
-  wire         _GEN_33 = p0__11_minus_pos_[1] ^ p0__11_minus_pos_[0];	// vector_unit.k:406:9, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
-  wire         _GEN_34 = ~(p0__11_minus_pos_[1]) & p0__11_minus_pos_[0];	// vector_unit.k:406:9, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
-  wire         _GEN_35 = ~(p0__11_minus_pos_[1]) & ~(p0__11_minus_pos_[0]);	// vector_unit.k:406:9, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
+      : p0_sum_0[4] & _GEN_28;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
+  wire         shifted_6 = p0_sum_0[3] & _GEN_28;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
+  wire         shifted_7 = p0_sum_0[2] & _GEN_28;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}
+  wire         _GEN_29 = p0__11_minus_pos_[1] | p0__11_minus_pos_[0];	// vector_unit.k:381:9, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
+  wire         _GEN_30 = p0__11_minus_pos_[1] ^ ~(p0__11_minus_pos_[0]);	// vector_unit.k:381:9, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
+  wire         _GEN_31 = p0__11_minus_pos_[1] & p0__11_minus_pos_[0];	// vector_unit.k:381:9, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
+  wire         _GEN_32 = ~(p0__11_minus_pos_[1]) | ~(p0__11_minus_pos_[0]);	// vector_unit.k:381:9, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
+  wire         _GEN_33 = p0__11_minus_pos_[1] ^ p0__11_minus_pos_[0];	// vector_unit.k:381:9, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
+  wire         _GEN_34 = ~(p0__11_minus_pos_[1]) & p0__11_minus_pos_[0];	// vector_unit.k:381:9, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
+  wire         _GEN_35 = ~(p0__11_minus_pos_[1]) & ~(p0__11_minus_pos_[0]);	// vector_unit.k:381:9, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
   wire         r_mant =
     shifted_2
       ? (shifted_0
@@ -969,7 +883,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : shifted ? ~(p0__11_minus_pos_[1]) : _GEN_34)
           : shifted_1
               ? (shifted | p0__11_minus_pos_[1]) & ~(p0__11_minus_pos_[0])
-              : shifted & _GEN_35;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
+              : shifted & _GEN_35;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
   wire         r_mant_0 =
     shifted_3
       ? (shifted_1
@@ -985,7 +899,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : shifted_0 ? ~(p0__11_minus_pos_[1]) : _GEN_34)
           : shifted_2
               ? (shifted_0 | p0__11_minus_pos_[1]) & ~(p0__11_minus_pos_[0])
-              : shifted_0 & _GEN_35;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
+              : shifted_0 & _GEN_35;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
   wire         r_mant_1 =
     shifted_4
       ? (shifted_2
@@ -1001,7 +915,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : shifted_1 ? ~(p0__11_minus_pos_[1]) : _GEN_34)
           : shifted_3
               ? (shifted_1 | p0__11_minus_pos_[1]) & ~(p0__11_minus_pos_[0])
-              : shifted_1 & _GEN_35;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
+              : shifted_1 & _GEN_35;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
   wire         r_mant_2 =
     shifted_5
       ? (shifted_3
@@ -1017,7 +931,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : shifted_2 ? ~(p0__11_minus_pos_[1]) : _GEN_34)
           : shifted_4
               ? (shifted_2 | p0__11_minus_pos_[1]) & ~(p0__11_minus_pos_[0])
-              : shifted_2 & _GEN_35;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
+              : shifted_2 & _GEN_35;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
   wire         r_mant_3 =
     shifted_6
       ? (shifted_4
@@ -1033,7 +947,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : shifted_3 ? ~(p0__11_minus_pos_[1]) : _GEN_34)
           : shifted_5
               ? (shifted_3 | p0__11_minus_pos_[1]) & ~(p0__11_minus_pos_[0])
-              : shifted_3 & _GEN_35;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
+              : shifted_3 & _GEN_35;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
   wire         r_mant_4 =
     shifted_7
       ? (shifted_5
@@ -1049,7 +963,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : shifted_4 ? ~(p0__11_minus_pos_[1]) : _GEN_34)
           : shifted_6
               ? (shifted_4 | p0__11_minus_pos_[1]) & ~(p0__11_minus_pos_[0])
-              : shifted_4 & _GEN_35;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
+              : shifted_4 & _GEN_35;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
   wire         r_mant_5 =
     p0_sum_0[1] & _GEN_28
       ? (shifted_6
@@ -1065,15 +979,15 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
                : shifted_5 ? ~(p0__11_minus_pos_[1]) : _GEN_34)
           : shifted_7
               ? (shifted_5 | p0__11_minus_pos_[1]) & ~(p0__11_minus_pos_[0])
-              : shifted_5 & _GEN_35;	// vector_unit.k:406:9, :517:{25,29,58}, :518:{25,29,58}, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}
-  wire         _GEN_36 = p0__pos_lt_11_ | p0__pos_gt_11_;	// vector_unit.k:406:9, :499:21, :504:26, :507:25
-  wire         _GEN_37 = ~_diff_ge_r_exp_ & p0__pos_lt_11_;	// vector_unit.k:406:9, :499:21, :504:26, :507:{25,29}
-  wire         _GEN_38 = ~_diff_ge_r_exp_ & p0__pos_lt_11_ & ~p0__pos_gt_11_;	// vector_unit.k:406:9, :499:21, :504:26, :507:{25,29}
+              : shifted_5 & _GEN_35;	// vector_unit.k:381:9, :492:{25,29,58}, :493:{25,29,58}, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}
+  wire         _GEN_36 = p0__pos_lt_11_ | p0__pos_gt_11_;	// vector_unit.k:381:9, :474:21, :479:26, :482:25
+  wire         _GEN_37 = ~_diff_ge_r_exp_ & p0__pos_lt_11_;	// vector_unit.k:381:9, :474:21, :479:26, :482:{25,29}
+  wire         _GEN_38 = ~_diff_ge_r_exp_ & p0__pos_lt_11_ & ~p0__pos_gt_11_;	// vector_unit.k:381:9, :474:21, :479:26, :482:{25,29}
   wire         norm_exp =
     _r_exp_plus_pos_minus_11_[8]
       ? _r_exp_minus_diff_[8] & _GEN_37 | p0__pos_gt_11_
-      : _r_exp_minus_diff_[8] & _GEN_38;	// vector_unit.k:406:9, :499:21, :501:36, :504:26, :507:25, :513:40
-  wire         _GEN_39 = ~p0__pos_lt_11_ & ~p0__pos_gt_11_;	// vector_unit.k:406:9, :499:21, :504:26, :507:25
+      : _r_exp_minus_diff_[8] & _GEN_38;	// vector_unit.k:381:9, :474:21, :476:36, :479:26, :482:25, :488:40
+  wire         _GEN_39 = ~p0__pos_lt_11_ & ~p0__pos_gt_11_;	// vector_unit.k:381:9, :474:21, :479:26, :482:25
   wire         norm_exp_0 =
     _r_exp_plus_pos_minus_11_[7]
       ? (~(_r_exp_minus_diff_[7]) | _diff_ge_r_exp_
@@ -1081,7 +995,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_r_exp_0[7] | _GEN_36)
       : ~(_r_exp_minus_diff_[7]) | _diff_ge_r_exp_
           ? p0_r_exp_0[7] & _GEN_39
-          : (p0_r_exp_0[7] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:406:9, :499:21, :501:36, :504:26, :507:{25,29}, :513:40
+          : (p0_r_exp_0[7] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:381:9, :474:21, :476:36, :479:26, :482:{25,29}, :488:40
   wire         norm_exp_1 =
     _r_exp_plus_pos_minus_11_[6]
       ? (~(_r_exp_minus_diff_[6]) | _diff_ge_r_exp_
@@ -1089,7 +1003,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_r_exp_0[6] | _GEN_36)
       : ~(_r_exp_minus_diff_[6]) | _diff_ge_r_exp_
           ? p0_r_exp_0[6] & _GEN_39
-          : (p0_r_exp_0[6] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:406:9, :499:21, :501:36, :504:26, :507:{25,29}, :513:40
+          : (p0_r_exp_0[6] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:381:9, :474:21, :476:36, :479:26, :482:{25,29}, :488:40
   wire         norm_exp_2 =
     _r_exp_plus_pos_minus_11_[5]
       ? (~(_r_exp_minus_diff_[5]) | _diff_ge_r_exp_
@@ -1097,7 +1011,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_r_exp_0[5] | _GEN_36)
       : ~(_r_exp_minus_diff_[5]) | _diff_ge_r_exp_
           ? p0_r_exp_0[5] & _GEN_39
-          : (p0_r_exp_0[5] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:406:9, :499:21, :501:36, :504:26, :507:{25,29}, :513:40
+          : (p0_r_exp_0[5] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:381:9, :474:21, :476:36, :479:26, :482:{25,29}, :488:40
   wire         norm_exp_3 =
     _r_exp_plus_pos_minus_11_[4]
       ? (~(_r_exp_minus_diff_[4]) | _diff_ge_r_exp_
@@ -1105,7 +1019,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_r_exp_0[4] | _GEN_36)
       : ~(_r_exp_minus_diff_[4]) | _diff_ge_r_exp_
           ? p0_r_exp_0[4] & _GEN_39
-          : (p0_r_exp_0[4] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:406:9, :499:21, :501:36, :504:26, :507:{25,29}, :513:40
+          : (p0_r_exp_0[4] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:381:9, :474:21, :476:36, :479:26, :482:{25,29}, :488:40
   wire         norm_exp_4 =
     _r_exp_plus_pos_minus_11_[3]
       ? (~(_r_exp_minus_diff_[3]) | _diff_ge_r_exp_
@@ -1113,7 +1027,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_r_exp_0[3] | _GEN_36)
       : ~(_r_exp_minus_diff_[3]) | _diff_ge_r_exp_
           ? p0_r_exp_0[3] & _GEN_39
-          : (p0_r_exp_0[3] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:406:9, :499:21, :501:36, :504:26, :507:{25,29}, :513:40
+          : (p0_r_exp_0[3] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:381:9, :474:21, :476:36, :479:26, :482:{25,29}, :488:40
   wire         norm_exp_5 =
     _r_exp_plus_pos_minus_11_[2]
       ? (~(_r_exp_minus_diff_[2]) | _diff_ge_r_exp_
@@ -1121,7 +1035,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_r_exp_0[2] | _GEN_36)
       : ~(_r_exp_minus_diff_[2]) | _diff_ge_r_exp_
           ? p0_r_exp_0[2] & _GEN_39
-          : (p0_r_exp_0[2] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:406:9, :499:21, :501:36, :504:26, :507:{25,29}, :513:40
+          : (p0_r_exp_0[2] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:381:9, :474:21, :476:36, :479:26, :482:{25,29}, :488:40
   wire         norm_exp_6 =
     _r_exp_plus_pos_minus_11_[1]
       ? (~(_r_exp_minus_diff_[1]) | _diff_ge_r_exp_
@@ -1129,7 +1043,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_r_exp_0[1] | _GEN_36)
       : ~(_r_exp_minus_diff_[1]) | _diff_ge_r_exp_
           ? p0_r_exp_0[1] & _GEN_39
-          : (p0_r_exp_0[1] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:406:9, :499:21, :501:36, :504:26, :507:{25,29}, :513:40
+          : (p0_r_exp_0[1] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:381:9, :474:21, :476:36, :479:26, :482:{25,29}, :488:40
   wire         norm_exp_7 =
     _r_exp_plus_pos_minus_11_[0]
       ? (~(_r_exp_minus_diff_[0]) | _diff_ge_r_exp_
@@ -1137,7 +1051,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_r_exp_0[0] | _GEN_36)
       : ~(_r_exp_minus_diff_[0]) | _diff_ge_r_exp_
           ? p0_r_exp_0[0] & _GEN_39
-          : (p0_r_exp_0[0] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:406:9, :499:21, :501:36, :504:26, :507:{25,29}, :513:40
+          : (p0_r_exp_0[0] | p0__pos_lt_11_) & ~p0__pos_gt_11_;	// vector_unit.k:381:9, :474:21, :476:36, :479:26, :482:{25,29}, :488:40
   wire  [15:0] norm_exp_8 =
     {_r_exp_plus_pos_minus_11_[15]
        ? _r_exp_minus_diff_[15] & _GEN_37 | p0__pos_gt_11_
@@ -1168,14 +1082,14 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
      norm_exp_4,
      norm_exp_5,
      norm_exp_6,
-     norm_exp_7};	// vector_unit.k:406:9, :499:21, :501:36, :504:26, :507:25, :513:40
-  wire         _norm_exp_eq_0_ = norm_exp_8 == 16'h0;	// vector_unit.k:499:21, :504:26, :507:25, :529:34
-  wire         _norm_exp_ge_255_ = norm_exp_8 > 16'hFE;	// vector_unit.k:499:21, :504:26, :507:25, :529:51
+     norm_exp_7};	// vector_unit.k:381:9, :474:21, :476:36, :479:26, :482:25, :488:40
+  wire         _norm_exp_eq_0_ = norm_exp_8 == 16'h0;	// vector_unit.k:474:21, :479:26, :482:25, :504:34
+  wire         _norm_exp_ge_255_ = norm_exp_8 > 16'hFE;	// vector_unit.k:474:21, :479:26, :482:25, :504:51
   wire         _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant_ =
     norm_exp
     | (p0_a_sign_0
          ? p0_b_sign_0 | p0__aligned_a_ge_aligned_b__0 | p0__a_sign_eq_b_sign__0
-         : p0_b_sign_0 & ~p0__aligned_a_ge_aligned_b__0 & ~p0__a_sign_eq_b_sign__0);	// vector_unit.k:406:9, :461:17, :468:21, :499:21, :502:{25,34}, :504:26, :507:25, :526:{25,34}, :535:{34,49,51}
+         : p0_b_sign_0 & ~p0__aligned_a_ge_aligned_b__0 & ~p0__a_sign_eq_b_sign__0);	// vector_unit.k:381:9, :436:17, :443:21, :474:21, :477:{25,34}, :479:26, :482:25, :501:{25,34}, :510:{34,49,51}
   wire         _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant__0 =
     _sum_shr_pos_minus_7_[6]
       ? (r_mant
@@ -1183,7 +1097,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_sum_0[10] & ~p0__pos_lt_11_ | p0__pos_gt_11_)
       : r_mant
           ? (p0_sum_0[10] | p0__pos_lt_11_) & ~p0__pos_gt_11_
-          : p0_sum_0[10] & _GEN_39;	// vector_unit.k:406:9, :461:17, :468:21, :499:21, :502:{25,34}, :504:26, :507:25, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}, :526:{25,34}, :535:{34,49,51}
+          : p0_sum_0[10] & _GEN_39;	// vector_unit.k:381:9, :436:17, :443:21, :474:21, :477:{25,34}, :479:26, :482:25, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}, :501:{25,34}, :510:{34,49,51}
   wire         _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant__1 =
     _sum_shr_pos_minus_7_[5]
       ? (r_mant_0
@@ -1191,7 +1105,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_sum_0[9] & ~p0__pos_lt_11_ | p0__pos_gt_11_)
       : r_mant_0
           ? (p0_sum_0[9] | p0__pos_lt_11_) & ~p0__pos_gt_11_
-          : p0_sum_0[9] & _GEN_39;	// vector_unit.k:406:9, :461:17, :468:21, :499:21, :502:{25,34}, :504:26, :507:25, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}, :526:{25,34}, :535:{34,49,51}
+          : p0_sum_0[9] & _GEN_39;	// vector_unit.k:381:9, :436:17, :443:21, :474:21, :477:{25,34}, :479:26, :482:25, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}, :501:{25,34}, :510:{34,49,51}
   wire         _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant__2 =
     _sum_shr_pos_minus_7_[4]
       ? (r_mant_1
@@ -1199,7 +1113,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_sum_0[8] & ~p0__pos_lt_11_ | p0__pos_gt_11_)
       : r_mant_1
           ? (p0_sum_0[8] | p0__pos_lt_11_) & ~p0__pos_gt_11_
-          : p0_sum_0[8] & _GEN_39;	// vector_unit.k:406:9, :461:17, :468:21, :499:21, :502:{25,34}, :504:26, :507:25, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}, :526:{25,34}, :535:{34,49,51}
+          : p0_sum_0[8] & _GEN_39;	// vector_unit.k:381:9, :436:17, :443:21, :474:21, :477:{25,34}, :479:26, :482:25, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}, :501:{25,34}, :510:{34,49,51}
   wire         _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant__3 =
     _sum_shr_pos_minus_7_[3]
       ? (r_mant_2
@@ -1207,7 +1121,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_sum_0[7] & ~p0__pos_lt_11_ | p0__pos_gt_11_)
       : r_mant_2
           ? (p0_sum_0[7] | p0__pos_lt_11_) & ~p0__pos_gt_11_
-          : p0_sum_0[7] & _GEN_39;	// vector_unit.k:406:9, :461:17, :468:21, :499:21, :502:{25,34}, :504:26, :507:25, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}, :526:{25,34}, :535:{34,49,51}
+          : p0_sum_0[7] & _GEN_39;	// vector_unit.k:381:9, :436:17, :443:21, :474:21, :477:{25,34}, :479:26, :482:25, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}, :501:{25,34}, :510:{34,49,51}
   wire         _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant__4 =
     _sum_shr_pos_minus_7_[2]
       ? (r_mant_3
@@ -1215,7 +1129,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_sum_0[6] & ~p0__pos_lt_11_ | p0__pos_gt_11_)
       : r_mant_3
           ? (p0_sum_0[6] | p0__pos_lt_11_) & ~p0__pos_gt_11_
-          : p0_sum_0[6] & _GEN_39;	// vector_unit.k:406:9, :461:17, :468:21, :499:21, :502:{25,34}, :504:26, :507:25, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}, :526:{25,34}, :535:{34,49,51}
+          : p0_sum_0[6] & _GEN_39;	// vector_unit.k:381:9, :436:17, :443:21, :474:21, :477:{25,34}, :479:26, :482:25, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}, :501:{25,34}, :510:{34,49,51}
   wire         _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant__5 =
     _sum_shr_pos_minus_7_[1]
       ? (r_mant_4
@@ -1223,7 +1137,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_sum_0[5] & ~p0__pos_lt_11_ | p0__pos_gt_11_)
       : r_mant_4
           ? (p0_sum_0[5] | p0__pos_lt_11_) & ~p0__pos_gt_11_
-          : p0_sum_0[5] & _GEN_39;	// vector_unit.k:406:9, :461:17, :468:21, :499:21, :502:{25,34}, :504:26, :507:25, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}, :526:{25,34}, :535:{34,49,51}
+          : p0_sum_0[5] & _GEN_39;	// vector_unit.k:381:9, :436:17, :443:21, :474:21, :477:{25,34}, :479:26, :482:25, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}, :501:{25,34}, :510:{34,49,51}
   wire         _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant__6 =
     _sum_shr_pos_minus_7_[0]
       ? (r_mant_5
@@ -1231,17 +1145,17 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
            : p0_sum_0[4] & ~p0__pos_lt_11_ | p0__pos_gt_11_)
       : r_mant_5
           ? (p0_sum_0[4] | p0__pos_lt_11_) & ~p0__pos_gt_11_
-          : p0_sum_0[4] & _GEN_39;	// vector_unit.k:406:9, :461:17, :468:21, :499:21, :502:{25,34}, :504:26, :507:25, :519:{25,29,58}, :520:{25,29,58}, :521:{25,34}, :526:{25,34}, :535:{34,49,51}
-  wire         _GEN_40 = ~_norm_exp_ge_255_ & ~_norm_exp_eq_0_ & ~p0__sum_eq_0_;	// vector_unit.k:406:9, :419:18, :480:17, :529:{21,25,34,51}
+          : p0_sum_0[4] & _GEN_39;	// vector_unit.k:381:9, :436:17, :443:21, :474:21, :477:{25,34}, :479:26, :482:25, :494:{25,29,58}, :495:{25,29,58}, :496:{25,34}, :501:{25,34}, :510:{34,49,51}
+  wire         _GEN_40 = ~_norm_exp_ge_255_ & ~_norm_exp_eq_0_ & ~p0__sum_eq_0_;	// vector_unit.k:381:9, :394:18, :455:17, :504:{21,25,34,51}
   wire         _GEN_41 =
-    ~_norm_exp_ge_255_ & ~_norm_exp_eq_0_ & ~p0__sum_eq_0_ & ~p0__b_exp_eq_0__0;	// vector_unit.k:406:9, :419:18, :480:17, :529:{21,25,34,51}
-  always @(posedge clk) begin	// vector_unit.k:406:9
-    p0_a_bf16 <= data_in_34[15:0];	// vector_unit.k:406:9
-    p0_b_bf16 <= data_in_34[31:16];	// vector_unit.k:406:9
-    if (rst)	// vector_unit.k:406:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:406:9
-    else	// vector_unit.k:406:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:406:9
+    ~_norm_exp_ge_255_ & ~_norm_exp_eq_0_ & ~p0__sum_eq_0_ & ~p0__b_exp_eq_0__0;	// vector_unit.k:381:9, :394:18, :455:17, :504:{21,25,34,51}
+  always @(posedge clk) begin	// vector_unit.k:381:9
+    p0_a_bf16 <= data_in_26[15:0];	// vector_unit.k:381:9
+    p0_b_bf16 <= data_in_26[31:16];	// vector_unit.k:381:9
+    if (rst)	// vector_unit.k:381:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:381:9
+    else	// vector_unit.k:381:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:381:9
     p0_sum <=
       {_aligned_a_minus_aligned_b_[15]
          ? (_aligned_b_minus_aligned_a_[15] | _aligned_a_ge_aligned_b_)
@@ -1371,7 +1285,7 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
          : _aligned_a_minus_aligned_b_[0]
              ? (_aligned_b_minus_aligned_a_[0] | _aligned_a_ge_aligned_b_)
                & ~_a_sign_eq_b_sign_
-             : _aligned_b_minus_aligned_a_[0] & _GEN_22};	// vector_unit.k:406:9, :461:{17,21}, :464:27, :468:{21,25}, :471:31, :476:31
+             : _aligned_b_minus_aligned_a_[0] & _GEN_22};	// vector_unit.k:381:9, :436:{17,21}, :439:27, :443:{21,25}, :446:31, :451:31
     p0_r_exp <=
       {8'h0,
        p0_a_bf16[14]
@@ -1391,39 +1305,39 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
          : p0_b_bf16[10] & ~_a_exp_ge_b_exp_,
        p0_a_bf16[9] ? p0_b_bf16[9] | _a_exp_ge_b_exp_ : p0_b_bf16[9] & ~_a_exp_ge_b_exp_,
        p0_a_bf16[8] ? p0_b_bf16[8] | _a_exp_ge_b_exp_ : p0_b_bf16[8] & ~_a_exp_ge_b_exp_,
-       p0_a_bf16[7] ? p0_b_bf16[7] | _a_exp_ge_b_exp_ : p0_b_bf16[7] & ~_a_exp_ge_b_exp_};	// vector_unit.k:406:9, :409:{13,28}, :410:{13,28}, :433:{17,21}
-    p0_a_sign <= p0_a_bf16[15];	// vector_unit.k:406:9, :411:{13,29}
-    p0_b_sign <= p0_b_bf16[15];	// vector_unit.k:406:9, :412:{13,29}
-    p0__aligned_a_ge_aligned_b_ <= _aligned_a_ge_aligned_b_;	// vector_unit.k:406:9, :468:25
-    p0__a_sign_eq_b_sign_ <= _a_sign_eq_b_sign_;	// vector_unit.k:406:9, :461:21
-    p0_a_bf16_0 <= p0_a_bf16;	// vector_unit.k:406:9
-    p0__b_exp_eq_0_ <= p0_b_bf16[14:7] == 8'h0;	// vector_unit.k:406:9, :410:{13,28}, :419:22
-    p0__a_exp_eq_0_ <= p0_a_bf16[14:7] == 8'h0;	// vector_unit.k:406:9, :409:{13,28}, :415:17
-    p0_b_bf16_0 <= p0_b_bf16;	// vector_unit.k:406:9
-    if (rst)	// vector_unit.k:406:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:406:9
-    else	// vector_unit.k:406:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:406:9
-    p0_r_exp_0 <= p0_r_exp;	// vector_unit.k:406:9
-    p0__pos_minus_11_ <= 16'(pos_1 - 16'hB);	// vector_unit.k:406:9, :490:21, :491:{21,70}, :492:{21,25,48,54,70}, :493:{21,25,54}, :501:44
-    p0__pos_minus_7_ <= 17'({13'h0, |(p0_sum[15:8]), |_GEN_24, pos, pos_0} - 17'h7);	// vector_unit.k:406:9, :480:21, :490:{21,25}, :491:{21,25,70}, :492:{21,25,48,54,70}, :493:{21,25,54}, :502:42
-    p0_sum_0 <= p0_sum;	// vector_unit.k:406:9
-    p0__11_minus_pos_ <= 16'(16'hB - pos_1);	// vector_unit.k:406:9, :490:21, :491:{21,70}, :492:{21,25,48,54,70}, :493:{21,25,54}, :506:39
-    p0__pos_lt_11_ <= pos_1 < 16'hB;	// vector_unit.k:406:9, :490:21, :491:{21,70}, :492:{21,25,48,54,70}, :493:{21,25,54}, :504:30
-    p0__pos_gt_11_ <= pos_1 > 16'hB;	// vector_unit.k:406:9, :490:21, :491:{21,70}, :492:{21,25,48,54,70}, :493:{21,25,54}, :499:25
-    p0_a_sign_0 <= p0_a_sign;	// vector_unit.k:406:9
-    p0_b_sign_0 <= p0_b_sign;	// vector_unit.k:406:9
-    p0__aligned_a_ge_aligned_b__0 <= p0__aligned_a_ge_aligned_b_;	// vector_unit.k:406:9
-    p0__a_sign_eq_b_sign__0 <= p0__a_sign_eq_b_sign_;	// vector_unit.k:406:9
-    p0_a_bf16_1 <= p0_a_bf16_0;	// vector_unit.k:406:9
-    p0__sum_eq_0_ <= p0_sum == 16'h0;	// vector_unit.k:406:9, :480:21
-    p0__b_exp_eq_0__0 <= p0__b_exp_eq_0_;	// vector_unit.k:406:9
-    p0__a_exp_eq_0__0 <= p0__a_exp_eq_0_;	// vector_unit.k:406:9
-    p0_b_bf16_1 <= p0_b_bf16_0;	// vector_unit.k:406:9
-    if (rst)	// vector_unit.k:406:9
-      p0_stage3_enable <= 1'h0;	// vector_unit.k:406:9
-    else	// vector_unit.k:406:9
-      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:406:9
+       p0_a_bf16[7] ? p0_b_bf16[7] | _a_exp_ge_b_exp_ : p0_b_bf16[7] & ~_a_exp_ge_b_exp_};	// vector_unit.k:381:9, :384:{13,28}, :385:{13,28}, :408:{17,21}
+    p0_a_sign <= p0_a_bf16[15];	// vector_unit.k:381:9, :386:{13,29}
+    p0_b_sign <= p0_b_bf16[15];	// vector_unit.k:381:9, :387:{13,29}
+    p0__aligned_a_ge_aligned_b_ <= _aligned_a_ge_aligned_b_;	// vector_unit.k:381:9, :443:25
+    p0__a_sign_eq_b_sign_ <= _a_sign_eq_b_sign_;	// vector_unit.k:381:9, :436:21
+    p0_a_bf16_0 <= p0_a_bf16;	// vector_unit.k:381:9
+    p0__b_exp_eq_0_ <= p0_b_bf16[14:7] == 8'h0;	// vector_unit.k:381:9, :385:{13,28}, :394:22
+    p0__a_exp_eq_0_ <= p0_a_bf16[14:7] == 8'h0;	// vector_unit.k:381:9, :384:{13,28}, :390:17
+    p0_b_bf16_0 <= p0_b_bf16;	// vector_unit.k:381:9
+    if (rst)	// vector_unit.k:381:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:381:9
+    else	// vector_unit.k:381:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:381:9
+    p0_r_exp_0 <= p0_r_exp;	// vector_unit.k:381:9
+    p0__pos_minus_11_ <= 16'(pos_1 - 16'hB);	// vector_unit.k:381:9, :465:21, :466:{21,70}, :467:{21,25,48,54,70}, :468:{21,25,54}, :476:44
+    p0__pos_minus_7_ <= 17'({13'h0, |(p0_sum[15:8]), |_GEN_24, pos, pos_0} - 17'h7);	// vector_unit.k:381:9, :455:21, :465:{21,25}, :466:{21,25,70}, :467:{21,25,48,54,70}, :468:{21,25,54}, :477:42
+    p0_sum_0 <= p0_sum;	// vector_unit.k:381:9
+    p0__11_minus_pos_ <= 16'(16'hB - pos_1);	// vector_unit.k:381:9, :465:21, :466:{21,70}, :467:{21,25,48,54,70}, :468:{21,25,54}, :481:39
+    p0__pos_lt_11_ <= pos_1 < 16'hB;	// vector_unit.k:381:9, :465:21, :466:{21,70}, :467:{21,25,48,54,70}, :468:{21,25,54}, :479:30
+    p0__pos_gt_11_ <= pos_1 > 16'hB;	// vector_unit.k:381:9, :465:21, :466:{21,70}, :467:{21,25,48,54,70}, :468:{21,25,54}, :474:25
+    p0_a_sign_0 <= p0_a_sign;	// vector_unit.k:381:9
+    p0_b_sign_0 <= p0_b_sign;	// vector_unit.k:381:9
+    p0__aligned_a_ge_aligned_b__0 <= p0__aligned_a_ge_aligned_b_;	// vector_unit.k:381:9
+    p0__a_sign_eq_b_sign__0 <= p0__a_sign_eq_b_sign_;	// vector_unit.k:381:9
+    p0_a_bf16_1 <= p0_a_bf16_0;	// vector_unit.k:381:9
+    p0__sum_eq_0_ <= p0_sum == 16'h0;	// vector_unit.k:381:9, :455:21
+    p0__b_exp_eq_0__0 <= p0__b_exp_eq_0_;	// vector_unit.k:381:9
+    p0__a_exp_eq_0__0 <= p0__a_exp_eq_0_;	// vector_unit.k:381:9
+    p0_b_bf16_1 <= p0_b_bf16_0;	// vector_unit.k:381:9
+    if (rst)	// vector_unit.k:381:9
+      p0_stage3_enable <= 1'h0;	// vector_unit.k:381:9
+    else	// vector_unit.k:381:9
+      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:381:9
     p0_result <=
       p0__a_exp_eq_0__0
         ? p0_b_bf16_1
@@ -1474,27 +1388,27 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
              : _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant__5 & _GEN_41,
            p0_a_bf16_1[0]
              ? _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant__6 & _GEN_40 | p0__b_exp_eq_0__0
-             : _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant__6 & _GEN_41};	// vector_unit.k:406:9, :415:13, :419:18, :461:17, :468:21, :480:17, :499:21, :502:{25,34}, :504:26, :507:25, :526:{25,34}, :529:{21,25}, :535:{34,49,51}
-    if (rst)	// vector_unit.k:406:9
-      p0_stage4_enable <= 1'h0;	// vector_unit.k:406:9
-    else	// vector_unit.k:406:9
-      p0_stage4_enable <= p0_stage3_enable;	// vector_unit.k:406:9
-    p0_result_0 <= p0_result;	// vector_unit.k:406:9
-    if (rst)	// vector_unit.k:406:9
-      p0_stage5_enable <= 1'h0;	// vector_unit.k:406:9
-    else	// vector_unit.k:406:9
-      p0_stage5_enable <= p0_stage4_enable;	// vector_unit.k:406:9
+             : _r_sign_shl_15_or_norm_exp_shl_7_or_r_mant__6 & _GEN_41};	// vector_unit.k:381:9, :390:13, :394:18, :436:17, :443:21, :455:17, :474:21, :477:{25,34}, :479:26, :482:25, :501:{25,34}, :504:{21,25}, :510:{34,49,51}
+    if (rst)	// vector_unit.k:381:9
+      p0_stage4_enable <= 1'h0;	// vector_unit.k:381:9
+    else	// vector_unit.k:381:9
+      p0_stage4_enable <= p0_stage3_enable;	// vector_unit.k:381:9
+    p0_result_0 <= p0_result;	// vector_unit.k:381:9
+    if (rst)	// vector_unit.k:381:9
+      p0_stage5_enable <= 1'h0;	// vector_unit.k:381:9
+    else	// vector_unit.k:381:9
+      p0_stage5_enable <= p0_stage4_enable;	// vector_unit.k:381:9
   end // always @(posedge)
-  always_comb begin	// vector_unit.k:406:9
-    fifo_wren_0_0 = p0_stage5_enable;	// vector_unit.k:404:5, :406:9
-    fifo_data_out_0_0 = p0_result_0;	// vector_unit.k:404:5, :406:9
+  always_comb begin	// vector_unit.k:381:9
+    fifo_wren_0_0 = p0_stage5_enable;	// vector_unit.k:379:5, :381:9
+    fifo_data_out_0_0 = p0_result_0;	// vector_unit.k:379:5, :381:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:406:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:381:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -1502,30 +1416,30 @@ module vector_unit_residual_add_BasicBlock_0(	// vector_unit.k:406:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:406:9
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:381:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  vector_unitDebugView_residual_addEntry vector_unitDebugView_residual_addEntry_instance (	// vector_unit.k:404:5
-    .clk       (clk),	// vector_unit.k:404:5
-    ._a_bf16   (p0_stage1_enable ? p0_a_bf16 : 'x),	// vector_unit.k:404:5, :406:9
-    ._b_bf16   (p0_stage1_enable ? p0_b_bf16 : 'x),	// vector_unit.k:404:5, :406:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:406:9
+  vector_unitDebugView_residual_addEntry vector_unitDebugView_residual_addEntry_instance (	// vector_unit.k:379:5
+    .clk       (clk),	// vector_unit.k:379:5
+    ._a_bf16   (p0_stage1_enable ? p0_a_bf16 : 'x),	// vector_unit.k:379:5, :381:9
+    ._b_bf16   (p0_stage1_enable ? p0_b_bf16 : 'x),	// vector_unit.k:379:5, :381:9
+    .valid     (p0_stage1_enable),	// vector_unit.k:381:9
     .valid_out (/* unused */)
-  );	// vector_unit.k:404:5
-  vector_unitDebugView_residual_addExit vector_unitDebugView_residual_addExit_instance (	// vector_unit.k:404:5
-    .clk          (clk),	// vector_unit.k:404:5
-    ._ReturnValue (p0_stage4_enable ? p0_result : 'x),	// vector_unit.k:404:5, :406:9
-    .valid        (p0_stage4_enable),	// vector_unit.k:406:9
+  );	// vector_unit.k:379:5
+  vector_unitDebugView_residual_addExit vector_unitDebugView_residual_addExit_instance (	// vector_unit.k:379:5
+    .clk          (clk),	// vector_unit.k:379:5
+    ._ReturnValue (p0_stage4_enable ? p0_result : 'x),	// vector_unit.k:379:5, :381:9
+    .valid        (p0_stage4_enable),	// vector_unit.k:381:9
     .valid_out    (/* unused */)
-  );	// vector_unit.k:404:5
-  assign done_out = p0_stage5_enable;	// vector_unit.k:406:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:406:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:406:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:406:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:406:9
+  );	// vector_unit.k:379:5
+  assign done_out = p0_stage5_enable;	// vector_unit.k:381:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:381:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:381:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:381:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:381:9
 endmodule
 
-module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
+module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:262:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
@@ -1533,7 +1447,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
-  input  wire [43:0] data_in_33,
+  input  wire [43:0] data_in_25,
   input  wire        input_fifo_underflow_0,
   output wire        input_rdy_0,
   input  wire        input_valid_0,
@@ -1542,90 +1456,90 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  logic        done_out_0;	// vector_unit.k:287:9
-  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:287:9
-  logic        fifo_wren_0_0;	// vector_unit.k:287:9
-  logic        input_rdy_0_0;	// vector_unit.k:287:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:287:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:287:9
-  always_comb begin	// vector_unit.k:287:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:287:9
+  logic        done_out_0;	// vector_unit.k:262:9
+  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:262:9
+  logic        fifo_wren_0_0;	// vector_unit.k:262:9
+  logic        input_rdy_0_0;	// vector_unit.k:262:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:262:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:262:9
+  always_comb begin	// vector_unit.k:262:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:262:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:287:9
+       ~input_valid_0};	// vector_unit.k:262:9
   end // always_comb
-  reg   [23:0] p0_accum;	// vector_unit.k:287:9
-  reg   [15:0] p0_super_scale_bf16;	// vector_unit.k:287:9
-  reg   [3:0]  p0_sub_scale;	// vector_unit.k:287:9
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:287:9
-  reg   [31:0] p0_scaled;	// vector_unit.k:287:9
-  reg   [31:0] p0_b_exp;	// vector_unit.k:287:9
-  reg   [5:0]  p0_CastSource;	// vector_unit.k:287:9
-  reg          p0__mb12_and_64_ne_0_;	// vector_unit.k:287:9
-  reg          p0__mb12_and_128_ne_0_;	// vector_unit.k:287:9
-  reg          p0__mb12_and_256_ne_0_;	// vector_unit.k:287:9
-  reg          p0__mb12_and_512_ne_0_;	// vector_unit.k:287:9
-  reg          p0__mb12_and_1024_ne_0_;	// vector_unit.k:287:9
-  reg   [31:0] p0__cast_lt_uint32_gt_super_scale_bf16_shl_16_;	// vector_unit.k:287:9
-  reg          p0__b_exp_ne_0_;	// vector_unit.k:287:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:287:9
-  reg   [31:0] p0_tmp;	// vector_unit.k:287:9
-  reg          p0__tmp_and_4294901760_ne_0_;	// vector_unit.k:287:9
-  reg          p0__tmp_and_65280_ne_0_;	// vector_unit.k:287:9
-  reg   [31:0] p0_mag;	// vector_unit.k:287:9
-  reg          p0__scaled_lt_0_;	// vector_unit.k:287:9
-  reg          p0__mag_ne_0_;	// vector_unit.k:287:9
-  reg   [31:0] p0_b_exp_0;	// vector_unit.k:287:9
-  reg   [5:0]  p0_CastSource_0;	// vector_unit.k:287:9
-  reg          p0__mb12_and_64_ne_0__0;	// vector_unit.k:287:9
-  reg          p0__mb12_and_128_ne_0__0;	// vector_unit.k:287:9
-  reg          p0__mb12_and_256_ne_0__0;	// vector_unit.k:287:9
-  reg          p0__mb12_and_512_ne_0__0;	// vector_unit.k:287:9
-  reg          p0__mb12_and_1024_ne_0__0;	// vector_unit.k:287:9
-  reg   [31:0] p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__0;	// vector_unit.k:287:9
-  reg          p0__b_exp_ne_0__0;	// vector_unit.k:287:9
-  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:287:9
-  reg          p0__scaled_lt_0__0;	// vector_unit.k:287:9
-  reg          p0__mag_ne_0__0;	// vector_unit.k:287:9
-  reg   [7:0]  p0__127_plus_pos_;	// vector_unit.k:287:9
-  reg   [22:0] p0__mag_shr_pos_minus_23_;	// vector_unit.k:287:9
-  reg   [22:0] p0_shifted;	// vector_unit.k:287:9
-  reg          p0__pos_gt_23_;	// vector_unit.k:287:9
-  reg   [31:0] p0_b_exp_1;	// vector_unit.k:287:9
-  reg   [5:0]  p0_CastSource_1;	// vector_unit.k:287:9
-  reg          p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9
-  reg          p0__mb12_and_128_ne_0__1;	// vector_unit.k:287:9
-  reg          p0__mb12_and_256_ne_0__1;	// vector_unit.k:287:9
-  reg          p0__mb12_and_512_ne_0__1;	// vector_unit.k:287:9
-  reg          p0__mb12_and_1024_ne_0__1;	// vector_unit.k:287:9
-  reg   [31:0] p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__1;	// vector_unit.k:287:9
-  reg          p0__b_exp_ne_0__1;	// vector_unit.k:287:9
-  reg          p0_stage4_enable = 1'h0;	// vector_unit.k:287:9
-  reg   [20:0] p0_prod;	// vector_unit.k:287:9
-  reg   [20:0] p0__ma32_shl_8_;	// vector_unit.k:287:9
-  reg          p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9
-  reg   [21:0] p0__ma32_shl_9_;	// vector_unit.k:287:9
-  reg          p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9
-  reg   [22:0] p0__ma32_shl_10_;	// vector_unit.k:287:9
-  reg          p0__mb12_and_1024_ne_0__2;	// vector_unit.k:287:9
-  reg   [22:0] p0__ma32_shl_11_;	// vector_unit.k:287:9
-  reg   [8:0]  p0__a_exp_plus_b_exp_minus_127_;	// vector_unit.k:287:9
-  reg   [31:0] p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__2;	// vector_unit.k:287:9
-  reg   [31:0] p0_fp_accum;	// vector_unit.k:287:9
-  reg          p0__r_exp_lt_255_;	// vector_unit.k:287:9
-  reg          p0__r_exp_ne_0_;	// vector_unit.k:287:9
-  reg          p0__b_exp_ne_0__2;	// vector_unit.k:287:9
-  reg          p0__a_exp_ne_0_;	// vector_unit.k:287:9
-  reg          p0_stage5_enable = 1'h0;	// vector_unit.k:287:9
-  reg   [31:0] p0_fp32_result;	// vector_unit.k:287:9
-  reg          p0__b_exp_ne_0__3;	// vector_unit.k:287:9
-  reg          p0__a_exp_ne_0__0;	// vector_unit.k:287:9
-  reg          p0_stage6_enable = 1'h0;	// vector_unit.k:287:9
-  wire         _GEN_0 = p0__b_exp_ne_0__3 & p0__a_exp_ne_0__0;	// vector_unit.k:287:9, :354:{13,17}, :395:35
+  reg   [23:0] p0_accum;	// vector_unit.k:262:9
+  reg   [15:0] p0_super_scale_bf16;	// vector_unit.k:262:9
+  reg   [3:0]  p0_sub_scale;	// vector_unit.k:262:9
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:262:9
+  reg   [31:0] p0_scaled;	// vector_unit.k:262:9
+  reg   [31:0] p0_b_exp;	// vector_unit.k:262:9
+  reg   [5:0]  p0_CastSource;	// vector_unit.k:262:9
+  reg          p0__mb12_and_64_ne_0_;	// vector_unit.k:262:9
+  reg          p0__mb12_and_128_ne_0_;	// vector_unit.k:262:9
+  reg          p0__mb12_and_256_ne_0_;	// vector_unit.k:262:9
+  reg          p0__mb12_and_512_ne_0_;	// vector_unit.k:262:9
+  reg          p0__mb12_and_1024_ne_0_;	// vector_unit.k:262:9
+  reg   [31:0] p0__cast_lt_uint32_gt_super_scale_bf16_shl_16_;	// vector_unit.k:262:9
+  reg          p0__b_exp_ne_0_;	// vector_unit.k:262:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:262:9
+  reg   [31:0] p0_tmp;	// vector_unit.k:262:9
+  reg          p0__tmp_and_4294901760_ne_0_;	// vector_unit.k:262:9
+  reg          p0__tmp_and_65280_ne_0_;	// vector_unit.k:262:9
+  reg   [31:0] p0_mag;	// vector_unit.k:262:9
+  reg          p0__scaled_lt_0_;	// vector_unit.k:262:9
+  reg          p0__mag_ne_0_;	// vector_unit.k:262:9
+  reg   [31:0] p0_b_exp_0;	// vector_unit.k:262:9
+  reg   [5:0]  p0_CastSource_0;	// vector_unit.k:262:9
+  reg          p0__mb12_and_64_ne_0__0;	// vector_unit.k:262:9
+  reg          p0__mb12_and_128_ne_0__0;	// vector_unit.k:262:9
+  reg          p0__mb12_and_256_ne_0__0;	// vector_unit.k:262:9
+  reg          p0__mb12_and_512_ne_0__0;	// vector_unit.k:262:9
+  reg          p0__mb12_and_1024_ne_0__0;	// vector_unit.k:262:9
+  reg   [31:0] p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__0;	// vector_unit.k:262:9
+  reg          p0__b_exp_ne_0__0;	// vector_unit.k:262:9
+  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:262:9
+  reg          p0__scaled_lt_0__0;	// vector_unit.k:262:9
+  reg          p0__mag_ne_0__0;	// vector_unit.k:262:9
+  reg   [7:0]  p0__127_plus_pos_;	// vector_unit.k:262:9
+  reg   [22:0] p0__mag_shr_pos_minus_23_;	// vector_unit.k:262:9
+  reg   [22:0] p0_shifted;	// vector_unit.k:262:9
+  reg          p0__pos_gt_23_;	// vector_unit.k:262:9
+  reg   [31:0] p0_b_exp_1;	// vector_unit.k:262:9
+  reg   [5:0]  p0_CastSource_1;	// vector_unit.k:262:9
+  reg          p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9
+  reg          p0__mb12_and_128_ne_0__1;	// vector_unit.k:262:9
+  reg          p0__mb12_and_256_ne_0__1;	// vector_unit.k:262:9
+  reg          p0__mb12_and_512_ne_0__1;	// vector_unit.k:262:9
+  reg          p0__mb12_and_1024_ne_0__1;	// vector_unit.k:262:9
+  reg   [31:0] p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__1;	// vector_unit.k:262:9
+  reg          p0__b_exp_ne_0__1;	// vector_unit.k:262:9
+  reg          p0_stage4_enable = 1'h0;	// vector_unit.k:262:9
+  reg   [20:0] p0_prod;	// vector_unit.k:262:9
+  reg   [20:0] p0__ma32_shl_8_;	// vector_unit.k:262:9
+  reg          p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9
+  reg   [21:0] p0__ma32_shl_9_;	// vector_unit.k:262:9
+  reg          p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9
+  reg   [22:0] p0__ma32_shl_10_;	// vector_unit.k:262:9
+  reg          p0__mb12_and_1024_ne_0__2;	// vector_unit.k:262:9
+  reg   [22:0] p0__ma32_shl_11_;	// vector_unit.k:262:9
+  reg   [8:0]  p0__a_exp_plus_b_exp_minus_127_;	// vector_unit.k:262:9
+  reg   [31:0] p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__2;	// vector_unit.k:262:9
+  reg   [31:0] p0_fp_accum;	// vector_unit.k:262:9
+  reg          p0__r_exp_lt_255_;	// vector_unit.k:262:9
+  reg          p0__r_exp_ne_0_;	// vector_unit.k:262:9
+  reg          p0__b_exp_ne_0__2;	// vector_unit.k:262:9
+  reg          p0__a_exp_ne_0_;	// vector_unit.k:262:9
+  reg          p0_stage5_enable = 1'h0;	// vector_unit.k:262:9
+  reg   [31:0] p0_fp32_result;	// vector_unit.k:262:9
+  reg          p0__b_exp_ne_0__3;	// vector_unit.k:262:9
+  reg          p0__a_exp_ne_0__0;	// vector_unit.k:262:9
+  reg          p0_stage6_enable = 1'h0;	// vector_unit.k:262:9
+  wire         _GEN_0 = p0__b_exp_ne_0__3 & p0__a_exp_ne_0__0;	// vector_unit.k:262:9, :329:{13,17}, :370:35
   wire  [15:0] CastSource =
     {p0_fp32_result[31] & _GEN_0,
      p0_fp32_result[30] & _GEN_0,
@@ -1642,117 +1556,117 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
      p0_fp32_result[19] & _GEN_0,
      p0_fp32_result[18] & _GEN_0,
      p0_fp32_result[17] & _GEN_0,
-     p0_fp32_result[16] & _GEN_0};	// vector_unit.k:287:9, :354:{13,17}, :395:35
-  reg   [15:0] p0_CastSource_2;	// vector_unit.k:287:9
-  reg          p0_stage7_enable = 1'h0;	// vector_unit.k:287:9
+     p0_fp32_result[16] & _GEN_0};	// vector_unit.k:262:9, :329:{13,17}, :370:35
+  reg   [15:0] p0_CastSource_2;	// vector_unit.k:262:9
+  reg          p0_stage7_enable = 1'h0;	// vector_unit.k:262:9
   wire  [31:0] _scaled_plus_cast_lt_int32_gt_a_shl_1_ =
-    32'({{8{p0_accum[23]}}, p0_accum} + {{7{p0_accum[23]}}, p0_accum, 1'h0});	// vector_unit.k:287:9, :294:{13,17,57}, :295:{48,57,58}, :296:58, :297:58, :298:58
-  wire         _GEN_1 = p0_accum[23] | p0_sub_scale[0];	// vector_unit.k:287:9, :291:{30,55}, :294:57, :295:{13,17,58}, :296:58, :297:58, :298:58
-  wire         _GEN_2 = p0_accum[23] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:57, :295:{13,17,58}, :296:58, :297:58, :298:58
-  wire         scaled = _scaled_plus_cast_lt_int32_gt_a_shl_1_[31] ? _GEN_1 : _GEN_2;	// vector_unit.k:295:{13,17,48}
-  wire         scaled_0 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[30] ? _GEN_1 : _GEN_2;	// vector_unit.k:295:{13,17,48}
-  wire         scaled_1 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[29] ? _GEN_1 : _GEN_2;	// vector_unit.k:295:{13,17,48}
-  wire         scaled_2 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[28] ? _GEN_1 : _GEN_2;	// vector_unit.k:295:{13,17,48}
-  wire         scaled_3 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[27] ? _GEN_1 : _GEN_2;	// vector_unit.k:295:{13,17,48}
-  wire         scaled_4 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[26] ? _GEN_1 : _GEN_2;	// vector_unit.k:295:{13,17,48}
-  wire         scaled_5 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[25] ? _GEN_1 : _GEN_2;	// vector_unit.k:295:{13,17,48}
-  wire         scaled_6 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[24] ? _GEN_1 : _GEN_2;	// vector_unit.k:295:{13,17,48}
+    32'({{8{p0_accum[23]}}, p0_accum} + {{7{p0_accum[23]}}, p0_accum, 1'h0});	// vector_unit.k:262:9, :269:{13,17,57}, :270:{48,57,58}, :271:58, :272:58, :273:58
+  wire         _GEN_1 = p0_accum[23] | p0_sub_scale[0];	// vector_unit.k:262:9, :266:{30,55}, :269:57, :270:{13,17,58}, :271:58, :272:58, :273:58
+  wire         _GEN_2 = p0_accum[23] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:57, :270:{13,17,58}, :271:58, :272:58, :273:58
+  wire         scaled = _scaled_plus_cast_lt_int32_gt_a_shl_1_[31] ? _GEN_1 : _GEN_2;	// vector_unit.k:270:{13,17,48}
+  wire         scaled_0 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[30] ? _GEN_1 : _GEN_2;	// vector_unit.k:270:{13,17,48}
+  wire         scaled_1 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[29] ? _GEN_1 : _GEN_2;	// vector_unit.k:270:{13,17,48}
+  wire         scaled_2 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[28] ? _GEN_1 : _GEN_2;	// vector_unit.k:270:{13,17,48}
+  wire         scaled_3 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[27] ? _GEN_1 : _GEN_2;	// vector_unit.k:270:{13,17,48}
+  wire         scaled_4 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[26] ? _GEN_1 : _GEN_2;	// vector_unit.k:270:{13,17,48}
+  wire         scaled_5 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[25] ? _GEN_1 : _GEN_2;	// vector_unit.k:270:{13,17,48}
+  wire         scaled_6 = _scaled_plus_cast_lt_int32_gt_a_shl_1_[24] ? _GEN_1 : _GEN_2;	// vector_unit.k:270:{13,17,48}
   wire         scaled_7 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[23]
       ? p0_accum[23] | p0_sub_scale[0]
-      : p0_accum[23] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[23] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_8 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[22]
       ? p0_accum[22] | p0_sub_scale[0]
-      : p0_accum[22] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[22] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_9 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[21]
       ? p0_accum[21] | p0_sub_scale[0]
-      : p0_accum[21] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[21] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_10 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[20]
       ? p0_accum[20] | p0_sub_scale[0]
-      : p0_accum[20] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[20] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_11 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[19]
       ? p0_accum[19] | p0_sub_scale[0]
-      : p0_accum[19] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[19] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_12 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[18]
       ? p0_accum[18] | p0_sub_scale[0]
-      : p0_accum[18] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[18] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_13 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[17]
       ? p0_accum[17] | p0_sub_scale[0]
-      : p0_accum[17] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[17] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_14 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[16]
       ? p0_accum[16] | p0_sub_scale[0]
-      : p0_accum[16] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[16] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_15 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[15]
       ? p0_accum[15] | p0_sub_scale[0]
-      : p0_accum[15] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[15] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_16 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[14]
       ? p0_accum[14] | p0_sub_scale[0]
-      : p0_accum[14] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[14] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_17 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[13]
       ? p0_accum[13] | p0_sub_scale[0]
-      : p0_accum[13] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[13] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_18 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[12]
       ? p0_accum[12] | p0_sub_scale[0]
-      : p0_accum[12] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[12] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_19 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[11]
       ? p0_accum[11] | p0_sub_scale[0]
-      : p0_accum[11] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[11] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_20 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[10]
       ? p0_accum[10] | p0_sub_scale[0]
-      : p0_accum[10] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[10] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_21 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[9]
       ? p0_accum[9] | p0_sub_scale[0]
-      : p0_accum[9] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[9] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_22 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[8]
       ? p0_accum[8] | p0_sub_scale[0]
-      : p0_accum[8] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[8] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_23 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[7]
       ? p0_accum[7] | p0_sub_scale[0]
-      : p0_accum[7] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[7] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_24 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[6]
       ? p0_accum[6] | p0_sub_scale[0]
-      : p0_accum[6] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[6] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_25 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[5]
       ? p0_accum[5] | p0_sub_scale[0]
-      : p0_accum[5] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[5] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_26 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[4]
       ? p0_accum[4] | p0_sub_scale[0]
-      : p0_accum[4] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[4] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_27 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[3]
       ? p0_accum[3] | p0_sub_scale[0]
-      : p0_accum[3] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[3] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_28 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[2]
       ? p0_accum[2] | p0_sub_scale[0]
-      : p0_accum[2] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[2] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_29 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[1]
       ? p0_accum[1] | p0_sub_scale[0]
-      : p0_accum[1] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[1] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire         scaled_30 =
     _scaled_plus_cast_lt_int32_gt_a_shl_1_[0]
       ? p0_accum[0] | p0_sub_scale[0]
-      : p0_accum[0] & ~(p0_sub_scale[0]);	// vector_unit.k:287:9, :291:{30,55}, :294:{13,17}, :295:{13,17,48}
+      : p0_accum[0] & ~(p0_sub_scale[0]);	// vector_unit.k:262:9, :266:{30,55}, :269:{13,17}, :270:{13,17,48}
   wire  [31:0] _scaled_plus_cast_lt_int32_gt_a_shl_2_ =
     32'({scaled,
          scaled_0,
@@ -1785,135 +1699,135 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
          scaled_27,
          scaled_28,
          scaled_29,
-         scaled_30} + {{6{p0_accum[23]}}, p0_accum, 2'h0});	// vector_unit.k:287:9, :294:57, :295:{13,17,58}, :296:{48,57,58}, :297:58, :298:58
+         scaled_30} + {{6{p0_accum[23]}}, p0_accum, 2'h0});	// vector_unit.k:262:9, :269:57, :270:{13,17,58}, :271:{48,57,58}, :272:58, :273:58
   wire         scaled_31 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[31]
       ? scaled | p0_sub_scale[1]
-      : scaled & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_32 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[30]
       ? scaled_0 | p0_sub_scale[1]
-      : scaled_0 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_0 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_33 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[29]
       ? scaled_1 | p0_sub_scale[1]
-      : scaled_1 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_1 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_34 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[28]
       ? scaled_2 | p0_sub_scale[1]
-      : scaled_2 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_2 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_35 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[27]
       ? scaled_3 | p0_sub_scale[1]
-      : scaled_3 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_3 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_36 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[26]
       ? scaled_4 | p0_sub_scale[1]
-      : scaled_4 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_4 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_37 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[25]
       ? scaled_5 | p0_sub_scale[1]
-      : scaled_5 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_5 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_38 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[24]
       ? scaled_6 | p0_sub_scale[1]
-      : scaled_6 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_6 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_39 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[23]
       ? scaled_7 | p0_sub_scale[1]
-      : scaled_7 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_7 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_40 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[22]
       ? scaled_8 | p0_sub_scale[1]
-      : scaled_8 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_8 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_41 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[21]
       ? scaled_9 | p0_sub_scale[1]
-      : scaled_9 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_9 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_42 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[20]
       ? scaled_10 | p0_sub_scale[1]
-      : scaled_10 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_10 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_43 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[19]
       ? scaled_11 | p0_sub_scale[1]
-      : scaled_11 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_11 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_44 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[18]
       ? scaled_12 | p0_sub_scale[1]
-      : scaled_12 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_12 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_45 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[17]
       ? scaled_13 | p0_sub_scale[1]
-      : scaled_13 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_13 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_46 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[16]
       ? scaled_14 | p0_sub_scale[1]
-      : scaled_14 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_14 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_47 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[15]
       ? scaled_15 | p0_sub_scale[1]
-      : scaled_15 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_15 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_48 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[14]
       ? scaled_16 | p0_sub_scale[1]
-      : scaled_16 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_16 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_49 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[13]
       ? scaled_17 | p0_sub_scale[1]
-      : scaled_17 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_17 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_50 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[12]
       ? scaled_18 | p0_sub_scale[1]
-      : scaled_18 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_18 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_51 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[11]
       ? scaled_19 | p0_sub_scale[1]
-      : scaled_19 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_19 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_52 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[10]
       ? scaled_20 | p0_sub_scale[1]
-      : scaled_20 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_20 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_53 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[9]
       ? scaled_21 | p0_sub_scale[1]
-      : scaled_21 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_21 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_54 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[8]
       ? scaled_22 | p0_sub_scale[1]
-      : scaled_22 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_22 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_55 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[7]
       ? scaled_23 | p0_sub_scale[1]
-      : scaled_23 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_23 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_56 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[6]
       ? scaled_24 | p0_sub_scale[1]
-      : scaled_24 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_24 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_57 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[5]
       ? scaled_25 | p0_sub_scale[1]
-      : scaled_25 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_25 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_58 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[4]
       ? scaled_26 | p0_sub_scale[1]
-      : scaled_26 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_26 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_59 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[3]
       ? scaled_27 | p0_sub_scale[1]
-      : scaled_27 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_27 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_60 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[2]
       ? scaled_28 | p0_sub_scale[1]
-      : scaled_28 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_28 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_61 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[1]
       ? scaled_29 | p0_sub_scale[1]
-      : scaled_29 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_29 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire         scaled_62 =
     _scaled_plus_cast_lt_int32_gt_a_shl_2_[0]
       ? scaled_30 | p0_sub_scale[1]
-      : scaled_30 & ~(p0_sub_scale[1]);	// vector_unit.k:287:9, :291:{30,55}, :295:{13,17}, :296:{13,17,48}
+      : scaled_30 & ~(p0_sub_scale[1]);	// vector_unit.k:262:9, :266:{30,55}, :270:{13,17}, :271:{13,17,48}
   wire  [31:0] _scaled_plus_cast_lt_int32_gt_a_shl_3_ =
     32'({scaled_31,
          scaled_32,
@@ -1946,135 +1860,135 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
          scaled_59,
          scaled_60,
          scaled_61,
-         scaled_62} + {{5{p0_accum[23]}}, p0_accum, 3'h0});	// vector_unit.k:287:9, :294:57, :295:58, :296:{13,17,58}, :297:{48,57,58}, :298:58
+         scaled_62} + {{5{p0_accum[23]}}, p0_accum, 3'h0});	// vector_unit.k:262:9, :269:57, :270:58, :271:{13,17,58}, :272:{48,57,58}, :273:58
   wire         scaled_63 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[31]
       ? scaled_31 | p0_sub_scale[2]
-      : scaled_31 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_31 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_64 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[30]
       ? scaled_32 | p0_sub_scale[2]
-      : scaled_32 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_32 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_65 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[29]
       ? scaled_33 | p0_sub_scale[2]
-      : scaled_33 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_33 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_66 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[28]
       ? scaled_34 | p0_sub_scale[2]
-      : scaled_34 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_34 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_67 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[27]
       ? scaled_35 | p0_sub_scale[2]
-      : scaled_35 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_35 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_68 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[26]
       ? scaled_36 | p0_sub_scale[2]
-      : scaled_36 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_36 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_69 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[25]
       ? scaled_37 | p0_sub_scale[2]
-      : scaled_37 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_37 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_70 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[24]
       ? scaled_38 | p0_sub_scale[2]
-      : scaled_38 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_38 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_71 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[23]
       ? scaled_39 | p0_sub_scale[2]
-      : scaled_39 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_39 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_72 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[22]
       ? scaled_40 | p0_sub_scale[2]
-      : scaled_40 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_40 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_73 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[21]
       ? scaled_41 | p0_sub_scale[2]
-      : scaled_41 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_41 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_74 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[20]
       ? scaled_42 | p0_sub_scale[2]
-      : scaled_42 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_42 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_75 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[19]
       ? scaled_43 | p0_sub_scale[2]
-      : scaled_43 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_43 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_76 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[18]
       ? scaled_44 | p0_sub_scale[2]
-      : scaled_44 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_44 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_77 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[17]
       ? scaled_45 | p0_sub_scale[2]
-      : scaled_45 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_45 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_78 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[16]
       ? scaled_46 | p0_sub_scale[2]
-      : scaled_46 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_46 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_79 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[15]
       ? scaled_47 | p0_sub_scale[2]
-      : scaled_47 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_47 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_80 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[14]
       ? scaled_48 | p0_sub_scale[2]
-      : scaled_48 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_48 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_81 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[13]
       ? scaled_49 | p0_sub_scale[2]
-      : scaled_49 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_49 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_82 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[12]
       ? scaled_50 | p0_sub_scale[2]
-      : scaled_50 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_50 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_83 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[11]
       ? scaled_51 | p0_sub_scale[2]
-      : scaled_51 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_51 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_84 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[10]
       ? scaled_52 | p0_sub_scale[2]
-      : scaled_52 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_52 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_85 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[9]
       ? scaled_53 | p0_sub_scale[2]
-      : scaled_53 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_53 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_86 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[8]
       ? scaled_54 | p0_sub_scale[2]
-      : scaled_54 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_54 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_87 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[7]
       ? scaled_55 | p0_sub_scale[2]
-      : scaled_55 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_55 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_88 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[6]
       ? scaled_56 | p0_sub_scale[2]
-      : scaled_56 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_56 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_89 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[5]
       ? scaled_57 | p0_sub_scale[2]
-      : scaled_57 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_57 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_90 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[4]
       ? scaled_58 | p0_sub_scale[2]
-      : scaled_58 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_58 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_91 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[3]
       ? scaled_59 | p0_sub_scale[2]
-      : scaled_59 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_59 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_92 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[2]
       ? scaled_60 | p0_sub_scale[2]
-      : scaled_60 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_60 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_93 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[1]
       ? scaled_61 | p0_sub_scale[2]
-      : scaled_61 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_61 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire         scaled_94 =
     _scaled_plus_cast_lt_int32_gt_a_shl_3_[0]
       ? scaled_62 | p0_sub_scale[2]
-      : scaled_62 & ~(p0_sub_scale[2]);	// vector_unit.k:287:9, :291:{30,55}, :296:{13,17}, :297:{13,17,48}
+      : scaled_62 & ~(p0_sub_scale[2]);	// vector_unit.k:262:9, :266:{30,55}, :271:{13,17}, :272:{13,17,48}
   wire  [31:0] _scaled_plus_cast_lt_int32_gt_a_shl_4_ =
     32'({scaled_63,
          scaled_64,
@@ -2107,73 +2021,73 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
          scaled_91,
          scaled_92,
          scaled_93,
-         scaled_94} + {{4{p0_accum[23]}}, p0_accum, 4'h0});	// vector_unit.k:287:9, :294:57, :295:58, :296:58, :297:{13,17,58}, :298:{48,57,58}
-  wire         _scaled_lt_0_ = $signed(p0_scaled) < 32'sh0;	// vector_unit.k:287:9, :303:17
-  wire  [31:0] CastSource_0 = 32'(32'h0 - p0_scaled);	// vector_unit.k:287:9, :306:36
+         scaled_94} + {{4{p0_accum[23]}}, p0_accum, 4'h0});	// vector_unit.k:262:9, :269:57, :270:58, :271:58, :272:{13,17,58}, :273:{48,57,58}
+  wire         _scaled_lt_0_ = $signed(p0_scaled) < 32'sh0;	// vector_unit.k:262:9, :278:17
+  wire  [31:0] CastSource_0 = 32'(32'h0 - p0_scaled);	// vector_unit.k:262:9, :281:36
   wire         mag =
-    CastSource_0[31] ? p0_scaled[31] | _scaled_lt_0_ : p0_scaled[31] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[31] ? p0_scaled[31] | _scaled_lt_0_ : p0_scaled[31] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_0 =
-    CastSource_0[30] ? p0_scaled[30] | _scaled_lt_0_ : p0_scaled[30] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[30] ? p0_scaled[30] | _scaled_lt_0_ : p0_scaled[30] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_1 =
-    CastSource_0[29] ? p0_scaled[29] | _scaled_lt_0_ : p0_scaled[29] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[29] ? p0_scaled[29] | _scaled_lt_0_ : p0_scaled[29] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_2 =
-    CastSource_0[28] ? p0_scaled[28] | _scaled_lt_0_ : p0_scaled[28] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[28] ? p0_scaled[28] | _scaled_lt_0_ : p0_scaled[28] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_3 =
-    CastSource_0[27] ? p0_scaled[27] | _scaled_lt_0_ : p0_scaled[27] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[27] ? p0_scaled[27] | _scaled_lt_0_ : p0_scaled[27] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_4 =
-    CastSource_0[26] ? p0_scaled[26] | _scaled_lt_0_ : p0_scaled[26] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[26] ? p0_scaled[26] | _scaled_lt_0_ : p0_scaled[26] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_5 =
-    CastSource_0[25] ? p0_scaled[25] | _scaled_lt_0_ : p0_scaled[25] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[25] ? p0_scaled[25] | _scaled_lt_0_ : p0_scaled[25] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_6 =
-    CastSource_0[24] ? p0_scaled[24] | _scaled_lt_0_ : p0_scaled[24] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[24] ? p0_scaled[24] | _scaled_lt_0_ : p0_scaled[24] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_7 =
-    CastSource_0[23] ? p0_scaled[23] | _scaled_lt_0_ : p0_scaled[23] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[23] ? p0_scaled[23] | _scaled_lt_0_ : p0_scaled[23] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_8 =
-    CastSource_0[22] ? p0_scaled[22] | _scaled_lt_0_ : p0_scaled[22] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[22] ? p0_scaled[22] | _scaled_lt_0_ : p0_scaled[22] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_9 =
-    CastSource_0[21] ? p0_scaled[21] | _scaled_lt_0_ : p0_scaled[21] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[21] ? p0_scaled[21] | _scaled_lt_0_ : p0_scaled[21] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_10 =
-    CastSource_0[20] ? p0_scaled[20] | _scaled_lt_0_ : p0_scaled[20] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[20] ? p0_scaled[20] | _scaled_lt_0_ : p0_scaled[20] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_11 =
-    CastSource_0[19] ? p0_scaled[19] | _scaled_lt_0_ : p0_scaled[19] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[19] ? p0_scaled[19] | _scaled_lt_0_ : p0_scaled[19] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_12 =
-    CastSource_0[18] ? p0_scaled[18] | _scaled_lt_0_ : p0_scaled[18] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[18] ? p0_scaled[18] | _scaled_lt_0_ : p0_scaled[18] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_13 =
-    CastSource_0[17] ? p0_scaled[17] | _scaled_lt_0_ : p0_scaled[17] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[17] ? p0_scaled[17] | _scaled_lt_0_ : p0_scaled[17] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_14 =
-    CastSource_0[16] ? p0_scaled[16] | _scaled_lt_0_ : p0_scaled[16] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[16] ? p0_scaled[16] | _scaled_lt_0_ : p0_scaled[16] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_15 =
-    CastSource_0[15] ? p0_scaled[15] | _scaled_lt_0_ : p0_scaled[15] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[15] ? p0_scaled[15] | _scaled_lt_0_ : p0_scaled[15] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_16 =
-    CastSource_0[14] ? p0_scaled[14] | _scaled_lt_0_ : p0_scaled[14] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[14] ? p0_scaled[14] | _scaled_lt_0_ : p0_scaled[14] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_17 =
-    CastSource_0[13] ? p0_scaled[13] | _scaled_lt_0_ : p0_scaled[13] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[13] ? p0_scaled[13] | _scaled_lt_0_ : p0_scaled[13] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_18 =
-    CastSource_0[12] ? p0_scaled[12] | _scaled_lt_0_ : p0_scaled[12] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[12] ? p0_scaled[12] | _scaled_lt_0_ : p0_scaled[12] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_19 =
-    CastSource_0[11] ? p0_scaled[11] | _scaled_lt_0_ : p0_scaled[11] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[11] ? p0_scaled[11] | _scaled_lt_0_ : p0_scaled[11] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_20 =
-    CastSource_0[10] ? p0_scaled[10] | _scaled_lt_0_ : p0_scaled[10] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[10] ? p0_scaled[10] | _scaled_lt_0_ : p0_scaled[10] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_21 =
-    CastSource_0[9] ? p0_scaled[9] | _scaled_lt_0_ : p0_scaled[9] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[9] ? p0_scaled[9] | _scaled_lt_0_ : p0_scaled[9] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_22 =
-    CastSource_0[8] ? p0_scaled[8] | _scaled_lt_0_ : p0_scaled[8] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[8] ? p0_scaled[8] | _scaled_lt_0_ : p0_scaled[8] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_23 =
-    CastSource_0[7] ? p0_scaled[7] | _scaled_lt_0_ : p0_scaled[7] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[7] ? p0_scaled[7] | _scaled_lt_0_ : p0_scaled[7] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_24 =
-    CastSource_0[6] ? p0_scaled[6] | _scaled_lt_0_ : p0_scaled[6] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[6] ? p0_scaled[6] | _scaled_lt_0_ : p0_scaled[6] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_25 =
-    CastSource_0[5] ? p0_scaled[5] | _scaled_lt_0_ : p0_scaled[5] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[5] ? p0_scaled[5] | _scaled_lt_0_ : p0_scaled[5] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_26 =
-    CastSource_0[4] ? p0_scaled[4] | _scaled_lt_0_ : p0_scaled[4] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[4] ? p0_scaled[4] | _scaled_lt_0_ : p0_scaled[4] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_27 =
-    CastSource_0[3] ? p0_scaled[3] | _scaled_lt_0_ : p0_scaled[3] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[3] ? p0_scaled[3] | _scaled_lt_0_ : p0_scaled[3] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_28 =
-    CastSource_0[2] ? p0_scaled[2] | _scaled_lt_0_ : p0_scaled[2] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[2] ? p0_scaled[2] | _scaled_lt_0_ : p0_scaled[2] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_29 =
-    CastSource_0[1] ? p0_scaled[1] | _scaled_lt_0_ : p0_scaled[1] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[1] ? p0_scaled[1] | _scaled_lt_0_ : p0_scaled[1] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire         mag_30 =
-    CastSource_0[0] ? p0_scaled[0] | _scaled_lt_0_ : p0_scaled[0] & ~_scaled_lt_0_;	// vector_unit.k:287:9, :303:{13,17}, :306:{23,36}
+    CastSource_0[0] ? p0_scaled[0] | _scaled_lt_0_ : p0_scaled[0] & ~_scaled_lt_0_;	// vector_unit.k:262:9, :278:{13,17}, :281:{23,36}
   wire  [31:0] mag_31 =
     {mag,
      mag_0,
@@ -2206,7 +2120,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
      mag_27,
      mag_28,
      mag_29,
-     mag_30};	// vector_unit.k:303:13, :306:23
+     mag_30};	// vector_unit.k:278:13, :281:23
   wire  [15:0] _GEN_3 =
     {mag,
      mag_0,
@@ -2223,67 +2137,67 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
      mag_11,
      mag_12,
      mag_13,
-     mag_14};	// vector_unit.k:303:13, :306:23, :319:21
-  wire         tmp = mag & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_0 = mag_0 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_1 = mag_1 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_2 = mag_2 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_3 = mag_3 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_4 = mag_4 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_5 = mag_5 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_6 = mag_6 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_7 = mag_7 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_8 = mag_8 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_9 = mag_9 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_10 = mag_10 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_11 = mag_11 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_12 = mag_12 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_13 = mag_13 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_14 = mag_14 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_15 = mag ? mag_15 | (|_GEN_3) : mag_15 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_16 = mag_0 ? mag_16 | (|_GEN_3) : mag_16 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_17 = mag_1 ? mag_17 | (|_GEN_3) : mag_17 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_18 = mag_2 ? mag_18 | (|_GEN_3) : mag_18 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_19 = mag_3 ? mag_19 | (|_GEN_3) : mag_19 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_20 = mag_4 ? mag_20 | (|_GEN_3) : mag_20 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_21 = mag_5 ? mag_21 | (|_GEN_3) : mag_21 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_22 = mag_6 ? mag_22 | (|_GEN_3) : mag_22 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_23 = mag_7 ? mag_23 | (|_GEN_3) : mag_23 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_24 = mag_8 ? mag_24 | (|_GEN_3) : mag_24 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_25 = mag_9 ? mag_25 | (|_GEN_3) : mag_25 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_26 = mag_10 ? mag_26 | (|_GEN_3) : mag_26 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_27 = mag_11 ? mag_27 | (|_GEN_3) : mag_27 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_28 = mag_12 ? mag_28 | (|_GEN_3) : mag_28 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_29 = mag_13 ? mag_29 | (|_GEN_3) : mag_29 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire         tmp_30 = mag_14 ? mag_30 | (|_GEN_3) : mag_30 & ~(|_GEN_3);	// vector_unit.k:303:13, :306:23, :319:{17,21,48,54}
-  wire  [7:0]  _GEN_4 = {tmp_15, tmp_16, tmp_17, tmp_18, tmp_19, tmp_20, tmp_21, tmp_22};	// vector_unit.k:319:{17,48,54}, :320:21
+     mag_14};	// vector_unit.k:278:13, :281:23, :294:21
+  wire         tmp = mag & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_0 = mag_0 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_1 = mag_1 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_2 = mag_2 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_3 = mag_3 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_4 = mag_4 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_5 = mag_5 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_6 = mag_6 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_7 = mag_7 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_8 = mag_8 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_9 = mag_9 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_10 = mag_10 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_11 = mag_11 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_12 = mag_12 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_13 = mag_13 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_14 = mag_14 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_15 = mag ? mag_15 | (|_GEN_3) : mag_15 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_16 = mag_0 ? mag_16 | (|_GEN_3) : mag_16 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_17 = mag_1 ? mag_17 | (|_GEN_3) : mag_17 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_18 = mag_2 ? mag_18 | (|_GEN_3) : mag_18 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_19 = mag_3 ? mag_19 | (|_GEN_3) : mag_19 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_20 = mag_4 ? mag_20 | (|_GEN_3) : mag_20 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_21 = mag_5 ? mag_21 | (|_GEN_3) : mag_21 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_22 = mag_6 ? mag_22 | (|_GEN_3) : mag_22 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_23 = mag_7 ? mag_23 | (|_GEN_3) : mag_23 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_24 = mag_8 ? mag_24 | (|_GEN_3) : mag_24 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_25 = mag_9 ? mag_25 | (|_GEN_3) : mag_25 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_26 = mag_10 ? mag_26 | (|_GEN_3) : mag_26 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_27 = mag_11 ? mag_27 | (|_GEN_3) : mag_27 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_28 = mag_12 ? mag_28 | (|_GEN_3) : mag_28 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_29 = mag_13 ? mag_29 | (|_GEN_3) : mag_29 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire         tmp_30 = mag_14 ? mag_30 | (|_GEN_3) : mag_30 & ~(|_GEN_3);	// vector_unit.k:278:13, :281:23, :294:{17,21,48,54}
+  wire  [7:0]  _GEN_4 = {tmp_15, tmp_16, tmp_17, tmp_18, tmp_19, tmp_20, tmp_21, tmp_22};	// vector_unit.k:294:{17,48,54}, :295:21
   wire         tmp_31 =
-    p0_tmp[7] ? p0_tmp[3] | (|(p0_tmp[7:4])) : p0_tmp[3] & ~(|(p0_tmp[7:4]));	// vector_unit.k:287:9, :321:{17,21,48,54}
+    p0_tmp[7] ? p0_tmp[3] | (|(p0_tmp[7:4])) : p0_tmp[3] & ~(|(p0_tmp[7:4]));	// vector_unit.k:262:9, :296:{17,21,48,54}
   wire         tmp_32 =
-    p0_tmp[6] ? p0_tmp[2] | (|(p0_tmp[7:4])) : p0_tmp[2] & ~(|(p0_tmp[7:4]));	// vector_unit.k:287:9, :321:{17,21,48,54}
-  wire         pos = tmp_31 | tmp_32;	// vector_unit.k:319:17, :320:{17,71}, :321:{17,48,54,71}, :322:{17,21,48,54,71}, :323:{17,21,54}
+    p0_tmp[6] ? p0_tmp[2] | (|(p0_tmp[7:4])) : p0_tmp[2] & ~(|(p0_tmp[7:4]));	// vector_unit.k:262:9, :296:{17,21,48,54}
+  wire         pos = tmp_31 | tmp_32;	// vector_unit.k:294:17, :295:{17,71}, :296:{17,48,54,71}, :297:{17,21,48,54,71}, :298:{17,21,54}
   wire         pos_0 =
     (p0_tmp[5] ? p0_tmp[1] | (|(p0_tmp[7:4])) : p0_tmp[1] & ~(|(p0_tmp[7:4]))) & ~tmp_32
-    | tmp_31;	// vector_unit.k:287:9, :319:17, :320:{17,71}, :321:{17,21,48,54,71}, :322:{17,21,48,54,71}, :323:{17,21,54}
+    | tmp_31;	// vector_unit.k:262:9, :294:17, :295:{17,71}, :296:{17,21,48,54,71}, :297:{17,21,48,54,71}, :298:{17,21,54}
   wire  [31:0] pos_1 =
     {27'h0,
      p0__tmp_and_4294901760_ne_0_,
      p0__tmp_and_65280_ne_0_,
      |(p0_tmp[7:4]),
      pos,
-     pos_0};	// vector_unit.k:287:9, :319:17, :320:{17,71}, :321:{17,21,71}, :322:{17,21,48,54,71}, :323:{17,21,54}
-  wire         _pos_lt_23_ = pos_1 < 32'h17;	// vector_unit.k:319:17, :320:{17,71}, :321:{17,71}, :322:{17,21,48,54,71}, :323:{17,21,54}, :333:26
+     pos_0};	// vector_unit.k:262:9, :294:17, :295:{17,71}, :296:{17,21,71}, :297:{17,21,48,54,71}, :298:{17,21,54}
+  wire         _pos_lt_23_ = pos_1 < 32'h17;	// vector_unit.k:294:17, :295:{17,71}, :296:{17,71}, :297:{17,21,48,54,71}, :298:{17,21,54}, :308:26
   wire  [4:0]  _23_minus_pos_ =
     5'(5'h17
        - {p0__tmp_and_4294901760_ne_0_,
           p0__tmp_and_65280_ne_0_,
           |(p0_tmp[7:4]),
           pos,
-          pos_0});	// vector_unit.k:287:9, :319:17, :320:{17,71}, :321:{17,21,71}, :322:{17,21,48,54,71}, :323:{17,21,54}, :335:40
-  wire         _GEN_5 = ~(_23_minus_pos_[4]) | ~(_23_minus_pos_[3]);	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}
-  wire         _GEN_6 = _23_minus_pos_[4] ^ _23_minus_pos_[3];	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}
-  wire         _GEN_7 = ~(_23_minus_pos_[4]) & _23_minus_pos_[3];	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}
-  wire         _GEN_8 = ~(_23_minus_pos_[4]) & ~(_23_minus_pos_[3]);	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}
+          pos_0});	// vector_unit.k:262:9, :294:17, :295:{17,71}, :296:{17,21,71}, :297:{17,21,48,54,71}, :298:{17,21,54}, :310:40
+  wire         _GEN_5 = ~(_23_minus_pos_[4]) | ~(_23_minus_pos_[3]);	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}
+  wire         _GEN_6 = _23_minus_pos_[4] ^ _23_minus_pos_[3];	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}
+  wire         _GEN_7 = ~(_23_minus_pos_[4]) & _23_minus_pos_[3];	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}
+  wire         _GEN_8 = ~(_23_minus_pos_[4]) & ~(_23_minus_pos_[3]);	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted =
     p0_mag[14]
       ? (p0_mag[6]
@@ -2291,7 +2205,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            : p0_mag[22] ? ~(_23_minus_pos_[4]) : _GEN_7)
       : p0_mag[6]
           ? (p0_mag[22] | _23_minus_pos_[4]) & ~(_23_minus_pos_[3])
-          : p0_mag[22] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+          : p0_mag[22] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_0 =
     p0_mag[13]
       ? (p0_mag[5]
@@ -2299,7 +2213,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            : p0_mag[21] ? ~(_23_minus_pos_[4]) : _GEN_7)
       : p0_mag[5]
           ? (p0_mag[21] | _23_minus_pos_[4]) & ~(_23_minus_pos_[3])
-          : p0_mag[21] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+          : p0_mag[21] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_1 =
     p0_mag[12]
       ? (p0_mag[4]
@@ -2307,7 +2221,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            : p0_mag[20] ? ~(_23_minus_pos_[4]) : _GEN_7)
       : p0_mag[4]
           ? (p0_mag[20] | _23_minus_pos_[4]) & ~(_23_minus_pos_[3])
-          : p0_mag[20] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+          : p0_mag[20] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_2 =
     p0_mag[11]
       ? (p0_mag[3]
@@ -2315,7 +2229,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            : p0_mag[19] ? ~(_23_minus_pos_[4]) : _GEN_7)
       : p0_mag[3]
           ? (p0_mag[19] | _23_minus_pos_[4]) & ~(_23_minus_pos_[3])
-          : p0_mag[19] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+          : p0_mag[19] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_3 =
     p0_mag[10]
       ? (p0_mag[2]
@@ -2323,7 +2237,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            : p0_mag[18] ? ~(_23_minus_pos_[4]) : _GEN_7)
       : p0_mag[2]
           ? (p0_mag[18] | _23_minus_pos_[4]) & ~(_23_minus_pos_[3])
-          : p0_mag[18] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+          : p0_mag[18] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_4 =
     p0_mag[9]
       ? (p0_mag[1]
@@ -2331,7 +2245,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            : p0_mag[17] ? ~(_23_minus_pos_[4]) : _GEN_7)
       : p0_mag[1]
           ? (p0_mag[17] | _23_minus_pos_[4]) & ~(_23_minus_pos_[3])
-          : p0_mag[17] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+          : p0_mag[17] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_5 =
     p0_mag[8]
       ? (p0_mag[0]
@@ -2339,38 +2253,38 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            : p0_mag[16] ? ~(_23_minus_pos_[4]) : _GEN_7)
       : p0_mag[0]
           ? (p0_mag[16] | _23_minus_pos_[4]) & ~(_23_minus_pos_[3])
-          : p0_mag[16] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+          : p0_mag[16] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_6 =
-    p0_mag[7] ? (p0_mag[15] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[15] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+    p0_mag[7] ? (p0_mag[15] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[15] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_7 =
-    p0_mag[6] ? (p0_mag[14] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[14] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+    p0_mag[6] ? (p0_mag[14] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[14] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_8 =
-    p0_mag[5] ? (p0_mag[13] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[13] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+    p0_mag[5] ? (p0_mag[13] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[13] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_9 =
-    p0_mag[4] ? (p0_mag[12] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[12] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+    p0_mag[4] ? (p0_mag[12] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[12] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_10 =
-    p0_mag[3] ? (p0_mag[11] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[11] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+    p0_mag[3] ? (p0_mag[11] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[11] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_11 =
-    p0_mag[2] ? (p0_mag[10] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[10] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+    p0_mag[2] ? (p0_mag[10] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[10] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_12 =
-    p0_mag[1] ? (p0_mag[9] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[9] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
+    p0_mag[1] ? (p0_mag[9] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[9] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
   wire         shifted_13 =
-    p0_mag[0] ? (p0_mag[8] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[8] & _GEN_8;	// vector_unit.k:287:9, :335:40, :336:{21,25,60}, :337:{21,25,60}
-  wire         shifted_14 = p0_mag[7] & _GEN_8;	// vector_unit.k:287:9, :336:{21,25,60}, :337:{21,25,60}
-  wire         shifted_15 = p0_mag[6] & _GEN_8;	// vector_unit.k:287:9, :336:{21,25,60}, :337:{21,25,60}
-  wire         shifted_16 = p0_mag[5] & _GEN_8;	// vector_unit.k:287:9, :336:{21,25,60}, :337:{21,25,60}
-  wire         shifted_17 = p0_mag[4] & _GEN_8;	// vector_unit.k:287:9, :336:{21,25,60}, :337:{21,25,60}
-  wire         shifted_18 = p0_mag[3] & _GEN_8;	// vector_unit.k:287:9, :336:{21,25,60}, :337:{21,25,60}
-  wire         shifted_19 = p0_mag[2] & _GEN_8;	// vector_unit.k:287:9, :336:{21,25,60}, :337:{21,25,60}
-  wire         shifted_20 = p0_mag[1] & _GEN_8;	// vector_unit.k:287:9, :336:{21,25,60}, :337:{21,25,60}
-  wire         shifted_21 = p0_mag[0] & _GEN_8;	// vector_unit.k:287:9, :336:{21,25,60}, :337:{21,25,60}
-  wire         _GEN_9 = _23_minus_pos_[2] | _23_minus_pos_[1];	// vector_unit.k:335:40, :338:{21,25,60}, :339:{21,25,60}
-  wire         _GEN_10 = _23_minus_pos_[2] ^ ~(_23_minus_pos_[1]);	// vector_unit.k:335:40, :338:{21,25,60}, :339:{21,25,60}
-  wire         _GEN_11 = _23_minus_pos_[2] & _23_minus_pos_[1];	// vector_unit.k:335:40, :338:{21,25,60}, :339:{21,25,60}
-  wire         _GEN_12 = ~(_23_minus_pos_[2]) | ~(_23_minus_pos_[1]);	// vector_unit.k:335:40, :338:{21,25,60}, :339:{21,25,60}
-  wire         _GEN_13 = _23_minus_pos_[2] ^ _23_minus_pos_[1];	// vector_unit.k:335:40, :338:{21,25,60}, :339:{21,25,60}
-  wire         _GEN_14 = ~(_23_minus_pos_[2]) & _23_minus_pos_[1];	// vector_unit.k:335:40, :338:{21,25,60}, :339:{21,25,60}
-  wire         _GEN_15 = ~(_23_minus_pos_[2]) & ~(_23_minus_pos_[1]);	// vector_unit.k:335:40, :338:{21,25,60}, :339:{21,25,60}
+    p0_mag[0] ? (p0_mag[8] ? ~(_23_minus_pos_[4]) : _GEN_7) : p0_mag[8] & _GEN_8;	// vector_unit.k:262:9, :310:40, :311:{21,25,60}, :312:{21,25,60}
+  wire         shifted_14 = p0_mag[7] & _GEN_8;	// vector_unit.k:262:9, :311:{21,25,60}, :312:{21,25,60}
+  wire         shifted_15 = p0_mag[6] & _GEN_8;	// vector_unit.k:262:9, :311:{21,25,60}, :312:{21,25,60}
+  wire         shifted_16 = p0_mag[5] & _GEN_8;	// vector_unit.k:262:9, :311:{21,25,60}, :312:{21,25,60}
+  wire         shifted_17 = p0_mag[4] & _GEN_8;	// vector_unit.k:262:9, :311:{21,25,60}, :312:{21,25,60}
+  wire         shifted_18 = p0_mag[3] & _GEN_8;	// vector_unit.k:262:9, :311:{21,25,60}, :312:{21,25,60}
+  wire         shifted_19 = p0_mag[2] & _GEN_8;	// vector_unit.k:262:9, :311:{21,25,60}, :312:{21,25,60}
+  wire         shifted_20 = p0_mag[1] & _GEN_8;	// vector_unit.k:262:9, :311:{21,25,60}, :312:{21,25,60}
+  wire         shifted_21 = p0_mag[0] & _GEN_8;	// vector_unit.k:262:9, :311:{21,25,60}, :312:{21,25,60}
+  wire         _GEN_9 = _23_minus_pos_[2] | _23_minus_pos_[1];	// vector_unit.k:310:40, :313:{21,25,60}, :314:{21,25,60}
+  wire         _GEN_10 = _23_minus_pos_[2] ^ ~(_23_minus_pos_[1]);	// vector_unit.k:310:40, :313:{21,25,60}, :314:{21,25,60}
+  wire         _GEN_11 = _23_minus_pos_[2] & _23_minus_pos_[1];	// vector_unit.k:310:40, :313:{21,25,60}, :314:{21,25,60}
+  wire         _GEN_12 = ~(_23_minus_pos_[2]) | ~(_23_minus_pos_[1]);	// vector_unit.k:310:40, :313:{21,25,60}, :314:{21,25,60}
+  wire         _GEN_13 = _23_minus_pos_[2] ^ _23_minus_pos_[1];	// vector_unit.k:310:40, :313:{21,25,60}, :314:{21,25,60}
+  wire         _GEN_14 = ~(_23_minus_pos_[2]) & _23_minus_pos_[1];	// vector_unit.k:310:40, :313:{21,25,60}, :314:{21,25,60}
+  wire         _GEN_15 = ~(_23_minus_pos_[2]) & ~(_23_minus_pos_[1]);	// vector_unit.k:310:40, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_22 =
     shifted_5
       ? (shifted_1
@@ -2386,7 +2300,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_3
               ? (shifted | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_23 =
     shifted_6
       ? (shifted_2
@@ -2402,7 +2316,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_0 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_4
               ? (shifted_0 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_0 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_0 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_24 =
     shifted_7
       ? (shifted_3
@@ -2418,7 +2332,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_1 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_5
               ? (shifted_1 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_1 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_1 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_25 =
     shifted_8
       ? (shifted_4
@@ -2434,7 +2348,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_2 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_6
               ? (shifted_2 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_2 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_2 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_26 =
     shifted_9
       ? (shifted_5
@@ -2450,7 +2364,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_3 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_7
               ? (shifted_3 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_3 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_3 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_27 =
     shifted_10
       ? (shifted_6
@@ -2466,7 +2380,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_4 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_8
               ? (shifted_4 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_4 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_4 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_28 =
     shifted_11
       ? (shifted_7
@@ -2482,7 +2396,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_5 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_9
               ? (shifted_5 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_5 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_5 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_29 =
     shifted_12
       ? (shifted_8
@@ -2498,7 +2412,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_6 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_10
               ? (shifted_6 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_6 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_6 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_30 =
     shifted_13
       ? (shifted_9
@@ -2514,7 +2428,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_7 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_11
               ? (shifted_7 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_7 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_7 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_31 =
     shifted_14
       ? (shifted_10
@@ -2530,7 +2444,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_8 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_12
               ? (shifted_8 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_8 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_8 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_32 =
     shifted_15
       ? (shifted_11
@@ -2546,7 +2460,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_9 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_13
               ? (shifted_9 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_9 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_9 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_33 =
     shifted_16
       ? (shifted_12
@@ -2562,7 +2476,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_10 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_14
               ? (shifted_10 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_10 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_10 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_34 =
     shifted_17
       ? (shifted_13
@@ -2578,7 +2492,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_11 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_15
               ? (shifted_11 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_11 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_11 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_35 =
     shifted_18
       ? (shifted_14
@@ -2594,7 +2508,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_12 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_16
               ? (shifted_12 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_12 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_12 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_36 =
     shifted_19
       ? (shifted_15
@@ -2610,7 +2524,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_13 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_17
               ? (shifted_13 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_13 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_13 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_37 =
     shifted_20
       ? (shifted_16
@@ -2626,7 +2540,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_14 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_18
               ? (shifted_14 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_14 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_14 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_38 =
     shifted_21
       ? (shifted_17
@@ -2642,7 +2556,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
                : shifted_15 ? ~(_23_minus_pos_[2]) : _GEN_14)
           : shifted_19
               ? (shifted_15 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-              : shifted_15 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+              : shifted_15 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_39 =
     shifted_18
       ? (shifted_20
@@ -2650,7 +2564,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            : shifted_16 ? ~(_23_minus_pos_[2]) : _GEN_14)
       : shifted_20
           ? (shifted_16 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-          : shifted_16 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+          : shifted_16 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_40 =
     shifted_19
       ? (shifted_21
@@ -2658,121 +2572,121 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            : shifted_17 ? ~(_23_minus_pos_[2]) : _GEN_14)
       : shifted_21
           ? (shifted_17 | _23_minus_pos_[2]) & ~(_23_minus_pos_[1])
-          : shifted_17 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+          : shifted_17 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_41 =
-    shifted_20 ? (shifted_18 ? ~(_23_minus_pos_[2]) : _GEN_14) : shifted_18 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
+    shifted_20 ? (shifted_18 ? ~(_23_minus_pos_[2]) : _GEN_14) : shifted_18 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
   wire         shifted_42 =
-    shifted_21 ? (shifted_19 ? ~(_23_minus_pos_[2]) : _GEN_14) : shifted_19 & _GEN_15;	// vector_unit.k:335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
-  wire         shifted_43 = shifted_20 & _GEN_15;	// vector_unit.k:336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
-  wire         shifted_44 = shifted_21 & _GEN_15;	// vector_unit.k:336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}
-  wire         _GEN_16 = p0_mag[22] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_17 = p0_mag[22] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_18 = p0_mag[21] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_19 = p0_mag[21] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_20 = p0_mag[20] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_21 = p0_mag[20] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_22 = p0_mag[19] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_23 = p0_mag[19] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_24 = p0_mag[18] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_25 = p0_mag[18] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_26 = p0_mag[17] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_27 = p0_mag[17] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_28 = p0_mag[16] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_29 = p0_mag[16] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_30 = p0_mag[15] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_31 = p0_mag[15] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_32 = p0_mag[14] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_33 = p0_mag[14] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_34 = p0_mag[13] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_35 = p0_mag[13] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_36 = p0_mag[12] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_37 = p0_mag[12] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_38 = p0_mag[11] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_39 = p0_mag[11] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_40 = p0_mag[10] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_41 = p0_mag[10] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_42 = p0_mag[9] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_43 = p0_mag[9] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_44 = p0_mag[8] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_45 = p0_mag[8] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_46 = p0_mag[7] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_47 = p0_mag[7] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_48 = p0_mag[6] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_49 = p0_mag[6] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_50 = p0_mag[5] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_51 = p0_mag[5] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_52 = p0_mag[4] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_53 = p0_mag[4] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_54 = p0_mag[3] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_55 = p0_mag[3] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_56 = p0_mag[2] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_57 = p0_mag[2] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_58 = p0_mag[1] | _pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         _GEN_59 = p0_mag[1] & ~_pos_lt_23_;	// vector_unit.k:287:9, :333:{22,26}, :336:{21,25,60}, :337:{21,25,60}, :340:{21,25,60}
-  wire         fp_accum = p0__127_plus_pos_[7] & p0__mag_ne_0__0;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
-  wire         fp_accum_0 = p0__127_plus_pos_[6] & p0__mag_ne_0__0;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
-  wire         fp_accum_1 = p0__127_plus_pos_[5] & p0__mag_ne_0__0;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
-  wire         fp_accum_2 = p0__127_plus_pos_[4] & p0__mag_ne_0__0;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
-  wire         fp_accum_3 = p0__127_plus_pos_[3] & p0__mag_ne_0__0;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
-  wire         fp_accum_4 = p0__127_plus_pos_[2] & p0__mag_ne_0__0;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
-  wire         fp_accum_5 = p0__127_plus_pos_[1] & p0__mag_ne_0__0;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
-  wire         fp_accum_6 = p0__127_plus_pos_[0] & p0__mag_ne_0__0;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
-  wire         _GEN_60 = ~p0__pos_gt_23_ & p0__mag_ne_0__0;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
+    shifted_21 ? (shifted_19 ? ~(_23_minus_pos_[2]) : _GEN_14) : shifted_19 & _GEN_15;	// vector_unit.k:310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
+  wire         shifted_43 = shifted_20 & _GEN_15;	// vector_unit.k:311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
+  wire         shifted_44 = shifted_21 & _GEN_15;	// vector_unit.k:311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}
+  wire         _GEN_16 = p0_mag[22] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_17 = p0_mag[22] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_18 = p0_mag[21] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_19 = p0_mag[21] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_20 = p0_mag[20] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_21 = p0_mag[20] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_22 = p0_mag[19] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_23 = p0_mag[19] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_24 = p0_mag[18] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_25 = p0_mag[18] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_26 = p0_mag[17] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_27 = p0_mag[17] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_28 = p0_mag[16] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_29 = p0_mag[16] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_30 = p0_mag[15] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_31 = p0_mag[15] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_32 = p0_mag[14] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_33 = p0_mag[14] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_34 = p0_mag[13] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_35 = p0_mag[13] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_36 = p0_mag[12] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_37 = p0_mag[12] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_38 = p0_mag[11] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_39 = p0_mag[11] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_40 = p0_mag[10] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_41 = p0_mag[10] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_42 = p0_mag[9] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_43 = p0_mag[9] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_44 = p0_mag[8] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_45 = p0_mag[8] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_46 = p0_mag[7] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_47 = p0_mag[7] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_48 = p0_mag[6] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_49 = p0_mag[6] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_50 = p0_mag[5] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_51 = p0_mag[5] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_52 = p0_mag[4] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_53 = p0_mag[4] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_54 = p0_mag[3] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_55 = p0_mag[3] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_56 = p0_mag[2] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_57 = p0_mag[2] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_58 = p0_mag[1] | _pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         _GEN_59 = p0_mag[1] & ~_pos_lt_23_;	// vector_unit.k:262:9, :308:{22,26}, :311:{21,25,60}, :312:{21,25,60}, :315:{21,25,60}
+  wire         fp_accum = p0__127_plus_pos_[7] & p0__mag_ne_0__0;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
+  wire         fp_accum_0 = p0__127_plus_pos_[6] & p0__mag_ne_0__0;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
+  wire         fp_accum_1 = p0__127_plus_pos_[5] & p0__mag_ne_0__0;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
+  wire         fp_accum_2 = p0__127_plus_pos_[4] & p0__mag_ne_0__0;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
+  wire         fp_accum_3 = p0__127_plus_pos_[3] & p0__mag_ne_0__0;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
+  wire         fp_accum_4 = p0__127_plus_pos_[2] & p0__mag_ne_0__0;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
+  wire         fp_accum_5 = p0__127_plus_pos_[1] & p0__mag_ne_0__0;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
+  wire         fp_accum_6 = p0__127_plus_pos_[0] & p0__mag_ne_0__0;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
+  wire         _GEN_60 = ~p0__pos_gt_23_ & p0__mag_ne_0__0;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
   wire         fp_accum_7 =
     p0__mag_shr_pos_minus_23_[22]
       ? (p0_shifted[22] | p0__pos_gt_23_) & p0__mag_ne_0__0
-      : p0_shifted[22] & _GEN_60;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
+      : p0_shifted[22] & _GEN_60;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
   wire         fp_accum_8 =
     p0__mag_shr_pos_minus_23_[21]
       ? (p0_shifted[21] | p0__pos_gt_23_) & p0__mag_ne_0__0
-      : p0_shifted[21] & _GEN_60;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
+      : p0_shifted[21] & _GEN_60;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
   wire         fp_accum_9 =
     p0__mag_shr_pos_minus_23_[20]
       ? (p0_shifted[20] | p0__pos_gt_23_) & p0__mag_ne_0__0
-      : p0_shifted[20] & _GEN_60;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
+      : p0_shifted[20] & _GEN_60;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
   wire         fp_accum_10 =
     p0__mag_shr_pos_minus_23_[19]
       ? (p0_shifted[19] | p0__pos_gt_23_) & p0__mag_ne_0__0
-      : p0_shifted[19] & _GEN_60;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
+      : p0_shifted[19] & _GEN_60;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
   wire         fp_accum_11 =
     p0__mag_shr_pos_minus_23_[18]
       ? (p0_shifted[18] | p0__pos_gt_23_) & p0__mag_ne_0__0
-      : p0_shifted[18] & _GEN_60;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
+      : p0_shifted[18] & _GEN_60;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
   wire         fp_accum_12 =
     p0__mag_shr_pos_minus_23_[17]
       ? (p0_shifted[17] | p0__pos_gt_23_) & p0__mag_ne_0__0
-      : p0_shifted[17] & _GEN_60;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
+      : p0_shifted[17] & _GEN_60;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
   wire         fp_accum_13 =
     p0__mag_shr_pos_minus_23_[16]
       ? (p0_shifted[16] | p0__pos_gt_23_) & p0__mag_ne_0__0
-      : p0_shifted[16] & _GEN_60;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
+      : p0_shifted[16] & _GEN_60;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
   wire         fp_accum_14 =
     p0__mag_shr_pos_minus_23_[15]
       ? (p0_shifted[15] | p0__pos_gt_23_) & p0__mag_ne_0__0
-      : p0_shifted[15] & _GEN_60;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
+      : p0_shifted[15] & _GEN_60;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
   wire         fp_accum_15 =
     p0__mag_shr_pos_minus_23_[14]
       ? (p0_shifted[14] | p0__pos_gt_23_) & p0__mag_ne_0__0
-      : p0_shifted[14] & _GEN_60;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
+      : p0_shifted[14] & _GEN_60;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
   wire         fp_accum_16 =
     p0__mag_shr_pos_minus_23_[13]
       ? (p0_shifted[13] | p0__pos_gt_23_) & p0__mag_ne_0__0
-      : p0_shifted[13] & _GEN_60;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
+      : p0_shifted[13] & _GEN_60;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
   wire         fp_accum_17 =
     p0__mag_shr_pos_minus_23_[12]
       ? (p0_shifted[12] | p0__pos_gt_23_) & p0__mag_ne_0__0
-      : p0_shifted[12] & _GEN_60;	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
-  wire         prod = fp_accum_7 & p0_CastSource_1[4];	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}
-  wire         prod_0 = fp_accum_8 & p0_CastSource_1[4];	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}
-  wire         prod_1 = fp_accum_9 & p0_CastSource_1[4];	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}
-  wire         prod_2 = fp_accum_10 & p0_CastSource_1[4];	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}
-  wire         prod_3 = fp_accum_11 & p0_CastSource_1[4];	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}
-  wire         prod_4 = fp_accum_12 & p0_CastSource_1[4];	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}
-  wire         prod_5 = fp_accum_13 & p0_CastSource_1[4];	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}
-  wire         prod_6 = fp_accum_14 & p0_CastSource_1[4];	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}
-  wire         prod_7 = fp_accum_15 & p0_CastSource_1[4];	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}
-  wire         prod_8 = fp_accum_16 & p0_CastSource_1[4];	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}
-  wire         prod_9 = fp_accum_17 & p0_CastSource_1[4];	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}
+      : p0_shifted[12] & _GEN_60;	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
+  wire         prod = fp_accum_7 & p0_CastSource_1[4];	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}
+  wire         prod_0 = fp_accum_8 & p0_CastSource_1[4];	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}
+  wire         prod_1 = fp_accum_9 & p0_CastSource_1[4];	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}
+  wire         prod_2 = fp_accum_10 & p0_CastSource_1[4];	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}
+  wire         prod_3 = fp_accum_11 & p0_CastSource_1[4];	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}
+  wire         prod_4 = fp_accum_12 & p0_CastSource_1[4];	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}
+  wire         prod_5 = fp_accum_13 & p0_CastSource_1[4];	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}
+  wire         prod_6 = fp_accum_14 & p0_CastSource_1[4];	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}
+  wire         prod_7 = fp_accum_15 & p0_CastSource_1[4];	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}
+  wire         prod_8 = fp_accum_16 & p0_CastSource_1[4];	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}
+  wire         prod_9 = fp_accum_17 & p0_CastSource_1[4];	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}
   wire  [31:0] _a_exp_plus_b_exp_minus_127_ =
     32'({24'h0,
          fp_accum,
@@ -2782,7 +2696,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
          fp_accum_3,
          fp_accum_4,
          fp_accum_5,
-         fp_accum_6} + 32'(p0_b_exp_1 - 32'h7F));	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :357:{32,38}
+         fp_accum_6} + 32'(p0_b_exp_1 - 32'h7F));	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :332:{32,38}
   wire  [17:0] _prod_plus_ma32_shl_5_ =
     18'({2'h0,
          p0_CastSource_1[4],
@@ -2810,59 +2724,59 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            fp_accum_15,
            fp_accum_16,
            fp_accum_17,
-           5'h0});	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :368:{17,21,50,57}, :369:{50,57}
-  wire         prod_10 = _prod_plus_ma32_shl_5_[17] & p0_CastSource_1[5];	// vector_unit.k:287:9, :369:{17,21,50}
-  wire         prod_11 = _prod_plus_ma32_shl_5_[16] & p0_CastSource_1[5];	// vector_unit.k:287:9, :369:{17,21,50}
+           5'h0});	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :343:{17,21,50,57}, :344:{50,57}
+  wire         prod_10 = _prod_plus_ma32_shl_5_[17] & p0_CastSource_1[5];	// vector_unit.k:262:9, :344:{17,21,50}
+  wire         prod_11 = _prod_plus_ma32_shl_5_[16] & p0_CastSource_1[5];	// vector_unit.k:262:9, :344:{17,21,50}
   wire         prod_12 =
     _prod_plus_ma32_shl_5_[15]
       ? p0_CastSource_1[4] | p0_CastSource_1[5]
-      : p0_CastSource_1[4] & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
+      : p0_CastSource_1[4] & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
   wire         prod_13 =
-    _prod_plus_ma32_shl_5_[14] ? prod | p0_CastSource_1[5] : prod & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
+    _prod_plus_ma32_shl_5_[14] ? prod | p0_CastSource_1[5] : prod & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
   wire         prod_14 =
     _prod_plus_ma32_shl_5_[13]
       ? prod_0 | p0_CastSource_1[5]
-      : prod_0 & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
+      : prod_0 & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
   wire         prod_15 =
     _prod_plus_ma32_shl_5_[12]
       ? prod_1 | p0_CastSource_1[5]
-      : prod_1 & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
+      : prod_1 & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
   wire         prod_16 =
     _prod_plus_ma32_shl_5_[11]
       ? prod_2 | p0_CastSource_1[5]
-      : prod_2 & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
+      : prod_2 & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
   wire         prod_17 =
     _prod_plus_ma32_shl_5_[10]
       ? prod_3 | p0_CastSource_1[5]
-      : prod_3 & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
+      : prod_3 & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
   wire         prod_18 =
     _prod_plus_ma32_shl_5_[9]
       ? prod_4 | p0_CastSource_1[5]
-      : prod_4 & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
+      : prod_4 & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
   wire         prod_19 =
     _prod_plus_ma32_shl_5_[8]
       ? prod_5 | p0_CastSource_1[5]
-      : prod_5 & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
+      : prod_5 & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
   wire         prod_20 =
     _prod_plus_ma32_shl_5_[7]
       ? prod_6 | p0_CastSource_1[5]
-      : prod_6 & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
+      : prod_6 & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
   wire         prod_21 =
     _prod_plus_ma32_shl_5_[6]
       ? prod_7 | p0_CastSource_1[5]
-      : prod_7 & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
+      : prod_7 & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
   wire         prod_22 =
     _prod_plus_ma32_shl_5_[5]
       ? prod_8 | p0_CastSource_1[5]
-      : prod_8 & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
+      : prod_8 & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
   wire         prod_23 =
     _prod_plus_ma32_shl_5_[4]
       ? prod_9 | p0_CastSource_1[5]
-      : prod_9 & ~(p0_CastSource_1[5]);	// vector_unit.k:287:9, :368:{17,21,50,57}, :369:{17,21,50}
-  wire         prod_24 = _prod_plus_ma32_shl_5_[3] & p0_CastSource_1[5];	// vector_unit.k:287:9, :369:{17,21,50}
-  wire         prod_25 = _prod_plus_ma32_shl_5_[2] & p0_CastSource_1[5];	// vector_unit.k:287:9, :369:{17,21,50}
-  wire         prod_26 = _prod_plus_ma32_shl_5_[1] & p0_CastSource_1[5];	// vector_unit.k:287:9, :369:{17,21,50}
-  wire         prod_27 = _prod_plus_ma32_shl_5_[0] & p0_CastSource_1[5];	// vector_unit.k:287:9, :369:{17,21,50}
+      : prod_9 & ~(p0_CastSource_1[5]);	// vector_unit.k:262:9, :343:{17,21,50,57}, :344:{17,21,50}
+  wire         prod_24 = _prod_plus_ma32_shl_5_[3] & p0_CastSource_1[5];	// vector_unit.k:262:9, :344:{17,21,50}
+  wire         prod_25 = _prod_plus_ma32_shl_5_[2] & p0_CastSource_1[5];	// vector_unit.k:262:9, :344:{17,21,50}
+  wire         prod_26 = _prod_plus_ma32_shl_5_[1] & p0_CastSource_1[5];	// vector_unit.k:262:9, :344:{17,21,50}
+  wire         prod_27 = _prod_plus_ma32_shl_5_[0] & p0_CastSource_1[5];	// vector_unit.k:262:9, :344:{17,21,50}
   wire  [18:0] _prod_plus_ma32_shl_6_ =
     19'({1'h0,
          prod_10,
@@ -2895,80 +2809,80 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            fp_accum_15,
            fp_accum_16,
            fp_accum_17,
-           6'h0});	// vector_unit.k:303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :369:{17,21}, :370:{50,57}
-  wire         prod_28 = _prod_plus_ma32_shl_6_[18] & p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :370:{17,50}
+           6'h0});	// vector_unit.k:278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :344:{17,21}, :345:{50,57}
+  wire         prod_28 = _prod_plus_ma32_shl_6_[18] & p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :345:{17,50}
   wire         prod_29 =
     _prod_plus_ma32_shl_6_[17]
       ? prod_10 | p0__mb12_and_64_ne_0__1
-      : prod_10 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_10 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_30 =
     _prod_plus_ma32_shl_6_[16]
       ? prod_11 | p0__mb12_and_64_ne_0__1
-      : prod_11 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_11 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_31 =
     _prod_plus_ma32_shl_6_[15]
       ? prod_12 | p0__mb12_and_64_ne_0__1
-      : prod_12 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_12 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_32 =
     _prod_plus_ma32_shl_6_[14]
       ? prod_13 | p0__mb12_and_64_ne_0__1
-      : prod_13 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_13 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_33 =
     _prod_plus_ma32_shl_6_[13]
       ? prod_14 | p0__mb12_and_64_ne_0__1
-      : prod_14 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_14 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_34 =
     _prod_plus_ma32_shl_6_[12]
       ? prod_15 | p0__mb12_and_64_ne_0__1
-      : prod_15 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_15 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_35 =
     _prod_plus_ma32_shl_6_[11]
       ? prod_16 | p0__mb12_and_64_ne_0__1
-      : prod_16 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_16 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_36 =
     _prod_plus_ma32_shl_6_[10]
       ? prod_17 | p0__mb12_and_64_ne_0__1
-      : prod_17 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_17 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_37 =
     _prod_plus_ma32_shl_6_[9]
       ? prod_18 | p0__mb12_and_64_ne_0__1
-      : prod_18 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_18 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_38 =
     _prod_plus_ma32_shl_6_[8]
       ? prod_19 | p0__mb12_and_64_ne_0__1
-      : prod_19 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_19 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_39 =
     _prod_plus_ma32_shl_6_[7]
       ? prod_20 | p0__mb12_and_64_ne_0__1
-      : prod_20 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_20 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_40 =
     _prod_plus_ma32_shl_6_[6]
       ? prod_21 | p0__mb12_and_64_ne_0__1
-      : prod_21 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_21 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_41 =
     _prod_plus_ma32_shl_6_[5]
       ? prod_22 | p0__mb12_and_64_ne_0__1
-      : prod_22 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_22 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_42 =
     _prod_plus_ma32_shl_6_[4]
       ? prod_23 | p0__mb12_and_64_ne_0__1
-      : prod_23 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_23 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_43 =
     _prod_plus_ma32_shl_6_[3]
       ? prod_24 | p0__mb12_and_64_ne_0__1
-      : prod_24 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_24 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_44 =
     _prod_plus_ma32_shl_6_[2]
       ? prod_25 | p0__mb12_and_64_ne_0__1
-      : prod_25 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_25 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_45 =
     _prod_plus_ma32_shl_6_[1]
       ? prod_26 | p0__mb12_and_64_ne_0__1
-      : prod_26 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_26 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire         prod_46 =
     _prod_plus_ma32_shl_6_[0]
       ? prod_27 | p0__mb12_and_64_ne_0__1
-      : prod_27 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:287:9, :369:{17,21}, :370:{17,50}
+      : prod_27 & ~p0__mb12_and_64_ne_0__1;	// vector_unit.k:262:9, :344:{17,21}, :345:{17,50}
   wire  [19:0] _prod_plus_ma32_shl_7_ =
     20'({1'h0,
          prod_28,
@@ -3002,89 +2916,89 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            fp_accum_15,
            fp_accum_16,
            fp_accum_17,
-           7'h0});	// vector_unit.k:303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :370:17, :371:{50,57}
-  wire  [20:0] _prod_plus_ma32_shl_8_ = 21'(p0_prod + p0__ma32_shl_8_);	// vector_unit.k:287:9, :372:50
-  wire         prod_47 = _prod_plus_ma32_shl_8_[20] & p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+           7'h0});	// vector_unit.k:278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :345:17, :346:{50,57}
+  wire  [20:0] _prod_plus_ma32_shl_8_ = 21'(p0_prod + p0__ma32_shl_8_);	// vector_unit.k:262:9, :347:50
+  wire         prod_47 = _prod_plus_ma32_shl_8_[20] & p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_48 =
     _prod_plus_ma32_shl_8_[19]
       ? p0_prod[19] | p0__mb12_and_256_ne_0__2
-      : p0_prod[19] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[19] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_49 =
     _prod_plus_ma32_shl_8_[18]
       ? p0_prod[18] | p0__mb12_and_256_ne_0__2
-      : p0_prod[18] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[18] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_50 =
     _prod_plus_ma32_shl_8_[17]
       ? p0_prod[17] | p0__mb12_and_256_ne_0__2
-      : p0_prod[17] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[17] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_51 =
     _prod_plus_ma32_shl_8_[16]
       ? p0_prod[16] | p0__mb12_and_256_ne_0__2
-      : p0_prod[16] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[16] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_52 =
     _prod_plus_ma32_shl_8_[15]
       ? p0_prod[15] | p0__mb12_and_256_ne_0__2
-      : p0_prod[15] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[15] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_53 =
     _prod_plus_ma32_shl_8_[14]
       ? p0_prod[14] | p0__mb12_and_256_ne_0__2
-      : p0_prod[14] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[14] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_54 =
     _prod_plus_ma32_shl_8_[13]
       ? p0_prod[13] | p0__mb12_and_256_ne_0__2
-      : p0_prod[13] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[13] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_55 =
     _prod_plus_ma32_shl_8_[12]
       ? p0_prod[12] | p0__mb12_and_256_ne_0__2
-      : p0_prod[12] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[12] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_56 =
     _prod_plus_ma32_shl_8_[11]
       ? p0_prod[11] | p0__mb12_and_256_ne_0__2
-      : p0_prod[11] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[11] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_57 =
     _prod_plus_ma32_shl_8_[10]
       ? p0_prod[10] | p0__mb12_and_256_ne_0__2
-      : p0_prod[10] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[10] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_58 =
     _prod_plus_ma32_shl_8_[9]
       ? p0_prod[9] | p0__mb12_and_256_ne_0__2
-      : p0_prod[9] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[9] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_59 =
     _prod_plus_ma32_shl_8_[8]
       ? p0_prod[8] | p0__mb12_and_256_ne_0__2
-      : p0_prod[8] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[8] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_60 =
     _prod_plus_ma32_shl_8_[7]
       ? p0_prod[7] | p0__mb12_and_256_ne_0__2
-      : p0_prod[7] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[7] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_61 =
     _prod_plus_ma32_shl_8_[6]
       ? p0_prod[6] | p0__mb12_and_256_ne_0__2
-      : p0_prod[6] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[6] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_62 =
     _prod_plus_ma32_shl_8_[5]
       ? p0_prod[5] | p0__mb12_and_256_ne_0__2
-      : p0_prod[5] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[5] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_63 =
     _prod_plus_ma32_shl_8_[4]
       ? p0_prod[4] | p0__mb12_and_256_ne_0__2
-      : p0_prod[4] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[4] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_64 =
     _prod_plus_ma32_shl_8_[3]
       ? p0_prod[3] | p0__mb12_and_256_ne_0__2
-      : p0_prod[3] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[3] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_65 =
     _prod_plus_ma32_shl_8_[2]
       ? p0_prod[2] | p0__mb12_and_256_ne_0__2
-      : p0_prod[2] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[2] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_66 =
     _prod_plus_ma32_shl_8_[1]
       ? p0_prod[1] | p0__mb12_and_256_ne_0__2
-      : p0_prod[1] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[1] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire         prod_67 =
     _prod_plus_ma32_shl_8_[0]
       ? p0_prod[0] | p0__mb12_and_256_ne_0__2
-      : p0_prod[0] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:287:9, :372:{17,50}
+      : p0_prod[0] & ~p0__mb12_and_256_ne_0__2;	// vector_unit.k:262:9, :347:{17,50}
   wire  [21:0] _prod_plus_ma32_shl_9_ =
     22'({1'h0,
          prod_47,
@@ -3107,92 +3021,92 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
          prod_64,
          prod_65,
          prod_66,
-         prod_67} + p0__ma32_shl_9_);	// vector_unit.k:287:9, :372:17, :373:50
-  wire         prod_68 = _prod_plus_ma32_shl_9_[21] & p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :373:{17,50}
+         prod_67} + p0__ma32_shl_9_);	// vector_unit.k:262:9, :347:17, :348:50
+  wire         prod_68 = _prod_plus_ma32_shl_9_[21] & p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :348:{17,50}
   wire         prod_69 =
     _prod_plus_ma32_shl_9_[20]
       ? prod_47 | p0__mb12_and_512_ne_0__2
-      : prod_47 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_47 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_70 =
     _prod_plus_ma32_shl_9_[19]
       ? prod_48 | p0__mb12_and_512_ne_0__2
-      : prod_48 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_48 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_71 =
     _prod_plus_ma32_shl_9_[18]
       ? prod_49 | p0__mb12_and_512_ne_0__2
-      : prod_49 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_49 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_72 =
     _prod_plus_ma32_shl_9_[17]
       ? prod_50 | p0__mb12_and_512_ne_0__2
-      : prod_50 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_50 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_73 =
     _prod_plus_ma32_shl_9_[16]
       ? prod_51 | p0__mb12_and_512_ne_0__2
-      : prod_51 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_51 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_74 =
     _prod_plus_ma32_shl_9_[15]
       ? prod_52 | p0__mb12_and_512_ne_0__2
-      : prod_52 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_52 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_75 =
     _prod_plus_ma32_shl_9_[14]
       ? prod_53 | p0__mb12_and_512_ne_0__2
-      : prod_53 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_53 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_76 =
     _prod_plus_ma32_shl_9_[13]
       ? prod_54 | p0__mb12_and_512_ne_0__2
-      : prod_54 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_54 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_77 =
     _prod_plus_ma32_shl_9_[12]
       ? prod_55 | p0__mb12_and_512_ne_0__2
-      : prod_55 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_55 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_78 =
     _prod_plus_ma32_shl_9_[11]
       ? prod_56 | p0__mb12_and_512_ne_0__2
-      : prod_56 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_56 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_79 =
     _prod_plus_ma32_shl_9_[10]
       ? prod_57 | p0__mb12_and_512_ne_0__2
-      : prod_57 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_57 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_80 =
     _prod_plus_ma32_shl_9_[9]
       ? prod_58 | p0__mb12_and_512_ne_0__2
-      : prod_58 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_58 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_81 =
     _prod_plus_ma32_shl_9_[8]
       ? prod_59 | p0__mb12_and_512_ne_0__2
-      : prod_59 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_59 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_82 =
     _prod_plus_ma32_shl_9_[7]
       ? prod_60 | p0__mb12_and_512_ne_0__2
-      : prod_60 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_60 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_83 =
     _prod_plus_ma32_shl_9_[6]
       ? prod_61 | p0__mb12_and_512_ne_0__2
-      : prod_61 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_61 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_84 =
     _prod_plus_ma32_shl_9_[5]
       ? prod_62 | p0__mb12_and_512_ne_0__2
-      : prod_62 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_62 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_85 =
     _prod_plus_ma32_shl_9_[4]
       ? prod_63 | p0__mb12_and_512_ne_0__2
-      : prod_63 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_63 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_86 =
     _prod_plus_ma32_shl_9_[3]
       ? prod_64 | p0__mb12_and_512_ne_0__2
-      : prod_64 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_64 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_87 =
     _prod_plus_ma32_shl_9_[2]
       ? prod_65 | p0__mb12_and_512_ne_0__2
-      : prod_65 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_65 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_88 =
     _prod_plus_ma32_shl_9_[1]
       ? prod_66 | p0__mb12_and_512_ne_0__2
-      : prod_66 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_66 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire         prod_89 =
     _prod_plus_ma32_shl_9_[0]
       ? prod_67 | p0__mb12_and_512_ne_0__2
-      : prod_67 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:287:9, :372:17, :373:{17,50}
+      : prod_67 & ~p0__mb12_and_512_ne_0__2;	// vector_unit.k:262:9, :347:17, :348:{17,50}
   wire  [22:0] _prod_plus_ma32_shl_10_ =
     23'({1'h0,
          prod_68,
@@ -3216,7 +3130,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
          prod_86,
          prod_87,
          prod_88,
-         prod_89} + p0__ma32_shl_10_);	// vector_unit.k:287:9, :373:17, :374:50
+         prod_89} + p0__ma32_shl_10_);	// vector_unit.k:262:9, :348:17, :349:50
   wire  [22:0] _prod_plus_ma32_shl_11_ =
     23'({_prod_plus_ma32_shl_10_[22] & p0__mb12_and_1024_ne_0__2,
          _prod_plus_ma32_shl_10_[21]
@@ -3284,8 +3198,8 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
            : prod_88 & ~p0__mb12_and_1024_ne_0__2,
          _prod_plus_ma32_shl_10_[0]
            ? prod_89 | p0__mb12_and_1024_ne_0__2
-           : prod_89 & ~p0__mb12_and_1024_ne_0__2} + p0__ma32_shl_11_);	// vector_unit.k:287:9, :373:17, :374:{17,50}, :375:50
-  wire         _GEN_61 = p0__r_exp_lt_255_ & p0__r_exp_ne_0_;	// vector_unit.k:287:9, :356:{17,33,34,53}, :375:17, :378:17, :380:{21,30}, :385:{21,30}, :388:{17,21}, :390:{35,50,52}
+           : prod_89 & ~p0__mb12_and_1024_ne_0__2} + p0__ma32_shl_11_);	// vector_unit.k:262:9, :348:17, :349:{17,50}, :350:50
+  wire         _GEN_61 = p0__r_exp_lt_255_ & p0__r_exp_ne_0_;	// vector_unit.k:262:9, :331:{17,33,34,53}, :350:17, :353:17, :355:{21,30}, :360:{21,30}, :363:{17,21}, :365:{35,50,52}
   wire  [31:0] _mag_shr_pos_minus_23_ =
     p0_mag
     >> 32'({27'h0,
@@ -3293,15 +3207,15 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
             p0__tmp_and_65280_ne_0_,
             |(p0_tmp[7:4]),
             pos,
-            pos_0} - 32'h17);	// vector_unit.k:287:9, :319:17, :320:{17,71}, :321:{17,21,71}, :322:{17,21,48,54,71}, :323:{17,21,54}, :331:{31,38}
-  always @(posedge clk) begin	// vector_unit.k:287:9
-    p0_accum <= data_in_33[23:0];	// vector_unit.k:287:9
-    p0_super_scale_bf16 <= data_in_33[39:24];	// vector_unit.k:287:9
-    p0_sub_scale <= data_in_33[43:40];	// vector_unit.k:287:9
-    if (rst)	// vector_unit.k:287:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:287:9
-    else	// vector_unit.k:287:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:287:9
+            pos_0} - 32'h17);	// vector_unit.k:262:9, :294:17, :295:{17,71}, :296:{17,21,71}, :297:{17,21,48,54,71}, :298:{17,21,54}, :306:{31,38}
+  always @(posedge clk) begin	// vector_unit.k:262:9
+    p0_accum <= data_in_25[23:0];	// vector_unit.k:262:9
+    p0_super_scale_bf16 <= data_in_25[39:24];	// vector_unit.k:262:9
+    p0_sub_scale <= data_in_25[43:40];	// vector_unit.k:262:9
+    if (rst)	// vector_unit.k:262:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:262:9
+    else	// vector_unit.k:262:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:262:9
     p0_scaled <=
       {_scaled_plus_cast_lt_int32_gt_a_shl_4_[31]
          ? scaled_63 | p0_sub_scale[3]
@@ -3398,20 +3312,20 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
          : scaled_93 & ~(p0_sub_scale[3]),
        _scaled_plus_cast_lt_int32_gt_a_shl_4_[0]
          ? scaled_94 | p0_sub_scale[3]
-         : scaled_94 & ~(p0_sub_scale[3])};	// vector_unit.k:287:9, :291:{30,55}, :297:{13,17}, :298:{13,17,48}
-    p0_b_exp <= {24'h0, p0_super_scale_bf16[14:7]};	// vector_unit.k:287:9, :351:{13,28}
-    p0_CastSource <= {p0_super_scale_bf16[1:0], 4'h0};	// vector_unit.k:287:9
-    p0__mb12_and_64_ne_0_ <= p0_super_scale_bf16[2];	// vector_unit.k:287:9, :347:33
-    p0__mb12_and_128_ne_0_ <= p0_super_scale_bf16[3];	// vector_unit.k:287:9, :347:33
-    p0__mb12_and_256_ne_0_ <= p0_super_scale_bf16[4];	// vector_unit.k:287:9, :347:33
-    p0__mb12_and_512_ne_0_ <= p0_super_scale_bf16[5];	// vector_unit.k:287:9, :347:33
-    p0__mb12_and_1024_ne_0_ <= p0_super_scale_bf16[6];	// vector_unit.k:287:9, :347:33
-    p0__cast_lt_uint32_gt_super_scale_bf16_shl_16_ <= {p0_super_scale_bf16, 16'h0};	// vector_unit.k:287:9, :347:33
-    p0__b_exp_ne_0_ <= |(p0_super_scale_bf16[14:7]);	// vector_unit.k:287:9, :351:{13,28}, :354:37
-    if (rst)	// vector_unit.k:287:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:287:9
-    else	// vector_unit.k:287:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:287:9
+         : scaled_94 & ~(p0_sub_scale[3])};	// vector_unit.k:262:9, :266:{30,55}, :272:{13,17}, :273:{13,17,48}
+    p0_b_exp <= {24'h0, p0_super_scale_bf16[14:7]};	// vector_unit.k:262:9, :326:{13,28}
+    p0_CastSource <= {p0_super_scale_bf16[1:0], 4'h0};	// vector_unit.k:262:9
+    p0__mb12_and_64_ne_0_ <= p0_super_scale_bf16[2];	// vector_unit.k:262:9, :322:33
+    p0__mb12_and_128_ne_0_ <= p0_super_scale_bf16[3];	// vector_unit.k:262:9, :322:33
+    p0__mb12_and_256_ne_0_ <= p0_super_scale_bf16[4];	// vector_unit.k:262:9, :322:33
+    p0__mb12_and_512_ne_0_ <= p0_super_scale_bf16[5];	// vector_unit.k:262:9, :322:33
+    p0__mb12_and_1024_ne_0_ <= p0_super_scale_bf16[6];	// vector_unit.k:262:9, :322:33
+    p0__cast_lt_uint32_gt_super_scale_bf16_shl_16_ <= {p0_super_scale_bf16, 16'h0};	// vector_unit.k:262:9, :322:33
+    p0__b_exp_ne_0_ <= |(p0_super_scale_bf16[14:7]);	// vector_unit.k:262:9, :326:{13,28}, :329:37
+    if (rst)	// vector_unit.k:262:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:262:9
+    else	// vector_unit.k:262:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:262:9
     p0_tmp <=
       {tmp & ~(|_GEN_4),
        tmp_0 & ~(|_GEN_4),
@@ -3444,36 +3358,36 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
        tmp_19 ? tmp_27 | (|_GEN_4) : tmp_27 & ~(|_GEN_4),
        tmp_20 ? tmp_28 | (|_GEN_4) : tmp_28 & ~(|_GEN_4),
        tmp_21 ? tmp_29 | (|_GEN_4) : tmp_29 & ~(|_GEN_4),
-       tmp_22 ? tmp_30 | (|_GEN_4) : tmp_30 & ~(|_GEN_4)};	// vector_unit.k:287:9, :319:{17,48,54}, :320:{17,21,48,54}
-    p0__tmp_and_4294901760_ne_0_ <= |_GEN_3;	// vector_unit.k:287:9, :319:21
-    p0__tmp_and_65280_ne_0_ <= |_GEN_4;	// vector_unit.k:287:9, :320:21
-    p0_mag <= mag_31;	// vector_unit.k:287:9, :303:13, :306:23
-    p0__scaled_lt_0_ <= _scaled_lt_0_;	// vector_unit.k:287:9, :303:17
-    p0__mag_ne_0_ <= |mag_31;	// vector_unit.k:287:9, :303:13, :306:23, :314:17
-    p0_b_exp_0 <= p0_b_exp;	// vector_unit.k:287:9
-    p0_CastSource_0 <= p0_CastSource;	// vector_unit.k:287:9
-    p0__mb12_and_64_ne_0__0 <= p0__mb12_and_64_ne_0_;	// vector_unit.k:287:9
-    p0__mb12_and_128_ne_0__0 <= p0__mb12_and_128_ne_0_;	// vector_unit.k:287:9
-    p0__mb12_and_256_ne_0__0 <= p0__mb12_and_256_ne_0_;	// vector_unit.k:287:9
-    p0__mb12_and_512_ne_0__0 <= p0__mb12_and_512_ne_0_;	// vector_unit.k:287:9
-    p0__mb12_and_1024_ne_0__0 <= p0__mb12_and_1024_ne_0_;	// vector_unit.k:287:9
+       tmp_22 ? tmp_30 | (|_GEN_4) : tmp_30 & ~(|_GEN_4)};	// vector_unit.k:262:9, :294:{17,48,54}, :295:{17,21,48,54}
+    p0__tmp_and_4294901760_ne_0_ <= |_GEN_3;	// vector_unit.k:262:9, :294:21
+    p0__tmp_and_65280_ne_0_ <= |_GEN_4;	// vector_unit.k:262:9, :295:21
+    p0_mag <= mag_31;	// vector_unit.k:262:9, :278:13, :281:23
+    p0__scaled_lt_0_ <= _scaled_lt_0_;	// vector_unit.k:262:9, :278:17
+    p0__mag_ne_0_ <= |mag_31;	// vector_unit.k:262:9, :278:13, :281:23, :289:17
+    p0_b_exp_0 <= p0_b_exp;	// vector_unit.k:262:9
+    p0_CastSource_0 <= p0_CastSource;	// vector_unit.k:262:9
+    p0__mb12_and_64_ne_0__0 <= p0__mb12_and_64_ne_0_;	// vector_unit.k:262:9
+    p0__mb12_and_128_ne_0__0 <= p0__mb12_and_128_ne_0_;	// vector_unit.k:262:9
+    p0__mb12_and_256_ne_0__0 <= p0__mb12_and_256_ne_0_;	// vector_unit.k:262:9
+    p0__mb12_and_512_ne_0__0 <= p0__mb12_and_512_ne_0_;	// vector_unit.k:262:9
+    p0__mb12_and_1024_ne_0__0 <= p0__mb12_and_1024_ne_0_;	// vector_unit.k:262:9
     p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__0 <=
-      p0__cast_lt_uint32_gt_super_scale_bf16_shl_16_;	// vector_unit.k:287:9
-    p0__b_exp_ne_0__0 <= p0__b_exp_ne_0_;	// vector_unit.k:287:9
-    if (rst)	// vector_unit.k:287:9
-      p0_stage3_enable <= 1'h0;	// vector_unit.k:287:9
-    else	// vector_unit.k:287:9
-      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:287:9
-    p0__scaled_lt_0__0 <= p0__scaled_lt_0_;	// vector_unit.k:287:9
-    p0__mag_ne_0__0 <= p0__mag_ne_0_;	// vector_unit.k:287:9
+      p0__cast_lt_uint32_gt_super_scale_bf16_shl_16_;	// vector_unit.k:262:9
+    p0__b_exp_ne_0__0 <= p0__b_exp_ne_0_;	// vector_unit.k:262:9
+    if (rst)	// vector_unit.k:262:9
+      p0_stage3_enable <= 1'h0;	// vector_unit.k:262:9
+    else	// vector_unit.k:262:9
+      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:262:9
+    p0__scaled_lt_0__0 <= p0__scaled_lt_0_;	// vector_unit.k:262:9
+    p0__mag_ne_0__0 <= p0__mag_ne_0_;	// vector_unit.k:262:9
     p0__127_plus_pos_ <=
       8'({3'h0,
           p0__tmp_and_4294901760_ne_0_,
           p0__tmp_and_65280_ne_0_,
           |(p0_tmp[7:4]),
           pos,
-          pos_0} + 8'h7F);	// vector_unit.k:287:9, :319:17, :320:{17,71}, :321:{17,21,71}, :322:{17,21,48,54,71}, :323:{17,21,54}, :325:34
-    p0__mag_shr_pos_minus_23_ <= _mag_shr_pos_minus_23_[22:0];	// vector_unit.k:287:9, :331:31
+          pos_0} + 8'h7F);	// vector_unit.k:262:9, :294:17, :295:{17,71}, :296:{17,21,71}, :297:{17,21,48,54,71}, :298:{17,21,54}, :300:34
+    p0__mag_shr_pos_minus_23_ <= _mag_shr_pos_minus_23_[22:0];	// vector_unit.k:262:9, :306:31
     p0_shifted <=
       {shifted_23
          ? (shifted_22 | _23_minus_pos_[0] ? _GEN_16 : _GEN_17)
@@ -3543,22 +3457,22 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
          : ~shifted_43 | _23_minus_pos_[0] ? _GEN_59 : _GEN_58,
        ~shifted_44 | _23_minus_pos_[0]
          ? p0_mag[0] & ~_pos_lt_23_
-         : p0_mag[0] | _pos_lt_23_};	// vector_unit.k:287:9, :333:{22,26}, :335:40, :336:{21,25,60}, :337:{21,25,60}, :338:{21,25,60}, :339:{21,25,60}, :340:{21,25,60}
-    p0__pos_gt_23_ <= pos_1 > 32'h17;	// vector_unit.k:287:9, :319:17, :320:{17,71}, :321:{17,71}, :322:{17,21,48,54,71}, :323:{17,21,54}, :329:21
-    p0_b_exp_1 <= p0_b_exp_0;	// vector_unit.k:287:9
-    p0_CastSource_1 <= p0_CastSource_0;	// vector_unit.k:287:9
-    p0__mb12_and_64_ne_0__1 <= p0__mb12_and_64_ne_0__0;	// vector_unit.k:287:9
-    p0__mb12_and_128_ne_0__1 <= p0__mb12_and_128_ne_0__0;	// vector_unit.k:287:9
-    p0__mb12_and_256_ne_0__1 <= p0__mb12_and_256_ne_0__0;	// vector_unit.k:287:9
-    p0__mb12_and_512_ne_0__1 <= p0__mb12_and_512_ne_0__0;	// vector_unit.k:287:9
-    p0__mb12_and_1024_ne_0__1 <= p0__mb12_and_1024_ne_0__0;	// vector_unit.k:287:9
+         : p0_mag[0] | _pos_lt_23_};	// vector_unit.k:262:9, :308:{22,26}, :310:40, :311:{21,25,60}, :312:{21,25,60}, :313:{21,25,60}, :314:{21,25,60}, :315:{21,25,60}
+    p0__pos_gt_23_ <= pos_1 > 32'h17;	// vector_unit.k:262:9, :294:17, :295:{17,71}, :296:{17,71}, :297:{17,21,48,54,71}, :298:{17,21,54}, :304:21
+    p0_b_exp_1 <= p0_b_exp_0;	// vector_unit.k:262:9
+    p0_CastSource_1 <= p0_CastSource_0;	// vector_unit.k:262:9
+    p0__mb12_and_64_ne_0__1 <= p0__mb12_and_64_ne_0__0;	// vector_unit.k:262:9
+    p0__mb12_and_128_ne_0__1 <= p0__mb12_and_128_ne_0__0;	// vector_unit.k:262:9
+    p0__mb12_and_256_ne_0__1 <= p0__mb12_and_256_ne_0__0;	// vector_unit.k:262:9
+    p0__mb12_and_512_ne_0__1 <= p0__mb12_and_512_ne_0__0;	// vector_unit.k:262:9
+    p0__mb12_and_1024_ne_0__1 <= p0__mb12_and_1024_ne_0__0;	// vector_unit.k:262:9
     p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__1 <=
-      p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__0;	// vector_unit.k:287:9
-    p0__b_exp_ne_0__1 <= p0__b_exp_ne_0__0;	// vector_unit.k:287:9
-    if (rst)	// vector_unit.k:287:9
-      p0_stage4_enable <= 1'h0;	// vector_unit.k:287:9
-    else	// vector_unit.k:287:9
-      p0_stage4_enable <= p0_stage3_enable;	// vector_unit.k:287:9
+      p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__0;	// vector_unit.k:262:9
+    p0__b_exp_ne_0__1 <= p0__b_exp_ne_0__0;	// vector_unit.k:262:9
+    if (rst)	// vector_unit.k:262:9
+      p0_stage4_enable <= 1'h0;	// vector_unit.k:262:9
+    else	// vector_unit.k:262:9
+      p0_stage4_enable <= p0_stage3_enable;	// vector_unit.k:262:9
     p0_prod <=
       {1'h0,
        _prod_plus_ma32_shl_7_[19] & p0__mb12_and_128_ne_0__1,
@@ -3618,7 +3532,7 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
          : prod_45 & ~p0__mb12_and_128_ne_0__1,
        _prod_plus_ma32_shl_7_[0]
          ? prod_46 | p0__mb12_and_128_ne_0__1
-         : prod_46 & ~p0__mb12_and_128_ne_0__1};	// vector_unit.k:287:9, :370:17, :371:{17,50}
+         : prod_46 & ~p0__mb12_and_128_ne_0__1};	// vector_unit.k:262:9, :345:17, :346:{17,50}
     p0__ma32_shl_8_ <=
       {2'h1,
        fp_accum_7,
@@ -3632,8 +3546,8 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
        fp_accum_15,
        fp_accum_16,
        fp_accum_17,
-       8'h0};	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :372:57
-    p0__mb12_and_256_ne_0__2 <= p0__mb12_and_256_ne_0__1;	// vector_unit.k:287:9
+       8'h0};	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :347:57
+    p0__mb12_and_256_ne_0__2 <= p0__mb12_and_256_ne_0__1;	// vector_unit.k:262:9
     p0__ma32_shl_9_ <=
       {2'h1,
        fp_accum_7,
@@ -3647,8 +3561,8 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
        fp_accum_15,
        fp_accum_16,
        fp_accum_17,
-       9'h0};	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :373:57
-    p0__mb12_and_512_ne_0__2 <= p0__mb12_and_512_ne_0__1;	// vector_unit.k:287:9
+       9'h0};	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :348:57
+    p0__mb12_and_512_ne_0__2 <= p0__mb12_and_512_ne_0__1;	// vector_unit.k:262:9
     p0__ma32_shl_10_ <=
       {2'h1,
        fp_accum_7,
@@ -3662,8 +3576,8 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
        fp_accum_15,
        fp_accum_16,
        fp_accum_17,
-       10'h0};	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :374:57
-    p0__mb12_and_1024_ne_0__2 <= p0__mb12_and_1024_ne_0__1;	// vector_unit.k:287:9
+       10'h0};	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :349:57
+    p0__mb12_and_1024_ne_0__2 <= p0__mb12_and_1024_ne_0__1;	// vector_unit.k:262:9
     p0__ma32_shl_11_ <=
       {1'h1,
        fp_accum_7,
@@ -3677,10 +3591,10 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
        fp_accum_15,
        fp_accum_16,
        fp_accum_17,
-       11'h0};	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :375:57
-    p0__a_exp_plus_b_exp_minus_127_ <= _a_exp_plus_b_exp_minus_127_[8:0];	// vector_unit.k:287:9, :357:{32,38}
+       11'h0};	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :350:57
+    p0__a_exp_plus_b_exp_minus_127_ <= _a_exp_plus_b_exp_minus_127_[8:0];	// vector_unit.k:262:9, :332:{32,38}
     p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__2 <=
-      p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__1;	// vector_unit.k:287:9
+      p0__cast_lt_uint32_gt_super_scale_bf16_shl_16__1;	// vector_unit.k:262:9
     p0_fp_accum <=
       {p0__scaled_lt_0__0 & p0__mag_ne_0__0,
        fp_accum,
@@ -3737,10 +3651,10 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
          : p0_shifted[1] & _GEN_60,
        p0__mag_shr_pos_minus_23_[0]
          ? (p0_shifted[0] | p0__pos_gt_23_) & p0__mag_ne_0__0
-         : p0_shifted[0] & _GEN_60};	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}
-    p0__r_exp_lt_255_ <= _a_exp_plus_b_exp_minus_127_ < 32'hFF;	// vector_unit.k:287:9, :357:{32,38}, :388:41
-    p0__r_exp_ne_0_ <= |_a_exp_plus_b_exp_minus_127_;	// vector_unit.k:287:9, :357:{32,38}, :388:27
-    p0__b_exp_ne_0__2 <= p0__b_exp_ne_0__1;	// vector_unit.k:287:9
+         : p0_shifted[0] & _GEN_60};	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}
+    p0__r_exp_lt_255_ <= _a_exp_plus_b_exp_minus_127_ < 32'hFF;	// vector_unit.k:262:9, :332:{32,38}, :363:41
+    p0__r_exp_ne_0_ <= |_a_exp_plus_b_exp_minus_127_;	// vector_unit.k:262:9, :332:{32,38}, :363:27
+    p0__b_exp_ne_0__2 <= p0__b_exp_ne_0__1;	// vector_unit.k:262:9
     p0__a_exp_ne_0_ <=
       |{fp_accum,
         fp_accum_0,
@@ -3749,11 +3663,11 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
         fp_accum_3,
         fp_accum_4,
         fp_accum_5,
-        fp_accum_6};	// vector_unit.k:287:9, :303:13, :314:13, :329:17, :342:{17,31}, :343:{28,43,45}, :350:{13,28}, :354:23
-    if (rst)	// vector_unit.k:287:9
-      p0_stage5_enable <= 1'h0;	// vector_unit.k:287:9
-    else	// vector_unit.k:287:9
-      p0_stage5_enable <= p0_stage4_enable;	// vector_unit.k:287:9
+        fp_accum_6};	// vector_unit.k:262:9, :278:13, :289:13, :304:17, :317:{17,31}, :318:{28,43,45}, :325:{13,28}, :329:23
+    if (rst)	// vector_unit.k:262:9
+      p0_stage5_enable <= 1'h0;	// vector_unit.k:262:9
+    else	// vector_unit.k:262:9
+      p0_stage5_enable <= p0_stage4_enable;	// vector_unit.k:262:9
     p0_fp32_result <=
       {p0__a_exp_plus_b_exp_minus_127_[8]
          ? _GEN_61
@@ -3790,29 +3704,29 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
        _prod_plus_ma32_shl_11_[3] & _GEN_61,
        _prod_plus_ma32_shl_11_[2] & _GEN_61,
        _prod_plus_ma32_shl_11_[1] & _GEN_61,
-       _prod_plus_ma32_shl_11_[0] & _GEN_61};	// vector_unit.k:287:9, :356:{17,33,34,53}, :375:{17,50}, :378:17, :380:{21,30}, :385:{21,30}, :388:{17,21}, :390:{35,50,52}
-    p0__b_exp_ne_0__3 <= p0__b_exp_ne_0__2;	// vector_unit.k:287:9
-    p0__a_exp_ne_0__0 <= p0__a_exp_ne_0_;	// vector_unit.k:287:9
-    if (rst)	// vector_unit.k:287:9
-      p0_stage6_enable <= 1'h0;	// vector_unit.k:287:9
-    else	// vector_unit.k:287:9
-      p0_stage6_enable <= p0_stage5_enable;	// vector_unit.k:287:9
-    p0_CastSource_2 <= CastSource;	// vector_unit.k:287:9, :354:{13,17}, :395:35
-    if (rst)	// vector_unit.k:287:9
-      p0_stage7_enable <= 1'h0;	// vector_unit.k:287:9
-    else	// vector_unit.k:287:9
-      p0_stage7_enable <= p0_stage6_enable;	// vector_unit.k:287:9
+       _prod_plus_ma32_shl_11_[0] & _GEN_61};	// vector_unit.k:262:9, :331:{17,33,34,53}, :350:{17,50}, :353:17, :355:{21,30}, :360:{21,30}, :363:{17,21}, :365:{35,50,52}
+    p0__b_exp_ne_0__3 <= p0__b_exp_ne_0__2;	// vector_unit.k:262:9
+    p0__a_exp_ne_0__0 <= p0__a_exp_ne_0_;	// vector_unit.k:262:9
+    if (rst)	// vector_unit.k:262:9
+      p0_stage6_enable <= 1'h0;	// vector_unit.k:262:9
+    else	// vector_unit.k:262:9
+      p0_stage6_enable <= p0_stage5_enable;	// vector_unit.k:262:9
+    p0_CastSource_2 <= CastSource;	// vector_unit.k:262:9, :329:{13,17}, :370:35
+    if (rst)	// vector_unit.k:262:9
+      p0_stage7_enable <= 1'h0;	// vector_unit.k:262:9
+    else	// vector_unit.k:262:9
+      p0_stage7_enable <= p0_stage6_enable;	// vector_unit.k:262:9
   end // always @(posedge)
-  always_comb begin	// vector_unit.k:287:9
-    fifo_wren_0_0 = p0_stage7_enable;	// vector_unit.k:285:5, :287:9
-    fifo_data_out_0_0 = p0_CastSource_2;	// vector_unit.k:285:5, :287:9
+  always_comb begin	// vector_unit.k:262:9
+    fifo_wren_0_0 = p0_stage7_enable;	// vector_unit.k:260:5, :262:9
+    fifo_data_out_0_0 = p0_CastSource_2;	// vector_unit.k:260:5, :262:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:287:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:262:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -3820,42 +3734,42 @@ module vector_unit_dequantize_BasicBlock_0(	// vector_unit.k:287:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:287:9
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:262:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  vector_unitDebugView_dequantizeEntry vector_unitDebugView_dequantizeEntry_instance (	// vector_unit.k:285:5
-    .clk               (clk),	// vector_unit.k:285:5
-    ._accum            (p0_stage1_enable ? p0_accum : 'x),	// vector_unit.k:285:5, :287:9
-    ._super_scale_bf16 (p0_stage1_enable ? p0_super_scale_bf16 : 'x),	// vector_unit.k:285:5, :287:9
-    ._sub_scale        (p0_stage1_enable ? p0_sub_scale : 'x),	// vector_unit.k:285:5, :287:9
-    .valid             (p0_stage1_enable),	// vector_unit.k:287:9
+  vector_unitDebugView_dequantizeEntry vector_unitDebugView_dequantizeEntry_instance (	// vector_unit.k:260:5
+    .clk               (clk),	// vector_unit.k:260:5
+    ._accum            (p0_stage1_enable ? p0_accum : 'x),	// vector_unit.k:260:5, :262:9
+    ._super_scale_bf16 (p0_stage1_enable ? p0_super_scale_bf16 : 'x),	// vector_unit.k:260:5, :262:9
+    ._sub_scale        (p0_stage1_enable ? p0_sub_scale : 'x),	// vector_unit.k:260:5, :262:9
+    .valid             (p0_stage1_enable),	// vector_unit.k:262:9
     .valid_out         (/* unused */)
-  );	// vector_unit.k:285:5
-  vector_unitDebugView_dequantizeExit vector_unitDebugView_dequantizeExit_instance (	// vector_unit.k:285:5
-    .clk          (clk),	// vector_unit.k:285:5
-    ._ReturnValue (p0_stage6_enable ? CastSource : 'x),	// vector_unit.k:285:5, :287:9, :354:{13,17}, :395:35
-    .valid        (p0_stage6_enable),	// vector_unit.k:287:9
+  );	// vector_unit.k:260:5
+  vector_unitDebugView_dequantizeExit vector_unitDebugView_dequantizeExit_instance (	// vector_unit.k:260:5
+    .clk          (clk),	// vector_unit.k:260:5
+    ._ReturnValue (p0_stage6_enable ? CastSource : 'x),	// vector_unit.k:260:5, :262:9, :329:{13,17}, :370:35
+    .valid        (p0_stage6_enable),	// vector_unit.k:262:9
     .valid_out    (/* unused */)
-  );	// vector_unit.k:285:5
-  assign done_out = p0_stage7_enable;	// vector_unit.k:287:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:287:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:287:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:287:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:287:9
+  );	// vector_unit.k:260:5
+  assign done_out = p0_stage7_enable;	// vector_unit.k:262:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:262:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:262:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:262:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:262:9
 endmodule
 
-module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
+module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:166:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  input  wire [15:0] memory_read_data_in_38_0,
-  output wire [7:0]  memory_read_addr_out_38_0,
-  output wire        memory_rden_out_38_0,
+  input  wire [15:0] memory_read_data_in_30_0,
+  output wire [7:0]  memory_read_addr_out_30_0,
+  output wire        memory_rden_out_30_0,
   output wire [15:0] fifo_data_out_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
-  input  wire [31:0] data_in_32,
+  input  wire [31:0] data_in_24,
   input  wire        input_fifo_underflow_0,
   output wire        input_rdy_0,
   input  wire        input_valid_0,
@@ -3864,160 +3778,160 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [15:0] memory_read_data_in_38_0_0 = memory_read_data_in_38_0;	// vector_unit.k:191:9
-  logic [15:0] data_prop_in_31_0;	// vector_unit.k:191:9
-  wire  [15:0] data_prop_out_31_0;	// vector_unit.k:191:9
-  logic        done_out_0;	// vector_unit.k:191:9
-  logic [7:0]  memory_read_addr_out_38_0_0;	// vector_unit.k:191:9
-  logic        memory_rden_out_38_0_0;	// vector_unit.k:191:9
-  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:191:9
-  logic        fifo_wren_0_0;	// vector_unit.k:191:9
-  logic        input_rdy_0_0;	// vector_unit.k:191:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:191:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:191:9
-  always_comb begin	// vector_unit.k:191:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:191:9
+  wire  [15:0] memory_read_data_in_30_0_0 = memory_read_data_in_30_0;	// vector_unit.k:166:9
+  logic [15:0] data_prop_in_23_0;	// vector_unit.k:166:9
+  wire  [15:0] data_prop_out_23_0;	// vector_unit.k:166:9
+  logic        done_out_0;	// vector_unit.k:166:9
+  logic [7:0]  memory_read_addr_out_30_0_0;	// vector_unit.k:166:9
+  logic        memory_rden_out_30_0_0;	// vector_unit.k:166:9
+  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:166:9
+  logic        fifo_wren_0_0;	// vector_unit.k:166:9
+  logic        input_rdy_0_0;	// vector_unit.k:166:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:166:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:166:9
+  always_comb begin	// vector_unit.k:166:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:166:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:191:9
+       ~input_valid_0};	// vector_unit.k:166:9
   end // always_comb
-  reg   [15:0] p0_gate_bf16;	// vector_unit.k:191:9
-  reg   [15:0] p0_up_bf16;	// vector_unit.k:191:9
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:191:9
-  always_comb begin	// vector_unit.k:191:9
-    memory_read_addr_out_38_0_0 = p0_gate_bf16[15:8];	// vector_unit.k:191:9, :195:39, :196:26
-    memory_rden_out_38_0_0 = p0_stage1_enable;	// vector_unit.k:191:9, :196:26
+  reg   [15:0] p0_gate_bf16;	// vector_unit.k:166:9
+  reg   [15:0] p0_up_bf16;	// vector_unit.k:166:9
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:166:9
+  always_comb begin	// vector_unit.k:166:9
+    memory_read_addr_out_30_0_0 = p0_gate_bf16[15:8];	// vector_unit.k:166:9, :170:39, :171:26
+    memory_rden_out_30_0_0 = p0_stage1_enable;	// vector_unit.k:166:9, :171:26
   end // always_comb
-  reg   [15:0] p0_gate_bf16_0;	// vector_unit.k:191:9
-  reg   [15:0] p0_up_bf16_0;	// vector_unit.k:191:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:191:9
-  reg   [15:0] p0_gate_bf16_1;	// vector_unit.k:191:9
-  reg   [15:0] p0_up_bf16_1;	// vector_unit.k:191:9
-  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:191:9
-  always_comb	// vector_unit.k:191:9
-    data_prop_in_31_0 = p0_up_bf16_1;	// vector_unit.k:191:9
-  reg   [12:0] p0__prod_plus_ma32_shl_4_;	// vector_unit.k:191:9
-  reg   [5:0]  p0_mb;	// vector_unit.k:191:9
-  reg   [11:0] p0_prod;	// vector_unit.k:191:9
-  reg   [13:0] p0__ma32_shl_5_;	// vector_unit.k:191:9
-  reg   [14:0] p0__ma32_shl_6_;	// vector_unit.k:191:9
-  reg          p0_mb_0;	// vector_unit.k:191:9
-  reg   [15:0] p0__ma32_shl_7_;	// vector_unit.k:191:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1_;	// vector_unit.k:191:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_;	// vector_unit.k:191:9
-  reg   [15:0] p0_memory_read_data_in_38_0;	// vector_unit.k:191:9
-  reg   [15:0] p0_gate_bf16_2;	// vector_unit.k:191:9
-  reg          p0__b_exp_ne_0_;	// vector_unit.k:191:9
-  reg          p0__a_exp_ne_0_;	// vector_unit.k:191:9
-  reg   [5:0]  p0_mb_1;	// vector_unit.k:191:9
-  reg   [15:0] p0_b_exp;	// vector_unit.k:191:9
-  reg          p0_mb_2;	// vector_unit.k:191:9
-  reg          p0__b_exp_ne_0__0;	// vector_unit.k:191:9
-  reg          p0_stage4_enable = 1'h0;	// vector_unit.k:191:9
-  reg          p0_prod_0;	// vector_unit.k:191:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__0;	// vector_unit.k:191:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__0;	// vector_unit.k:191:9
-  reg   [15:0] p0_memory_read_data_in_38_0_0;	// vector_unit.k:191:9
-  reg   [15:0] p0_gate_bf16_3;	// vector_unit.k:191:9
-  reg   [14:0] p0_prod_1;	// vector_unit.k:191:9
-  reg          p0__b_exp_ne_0__1;	// vector_unit.k:191:9
-  reg          p0__a_exp_ne_0__0;	// vector_unit.k:191:9
-  reg   [5:0]  p0_mb_3;	// vector_unit.k:191:9
-  reg   [15:0] p0_b_exp_0;	// vector_unit.k:191:9
-  reg          p0_mb_4;	// vector_unit.k:191:9
-  reg          p0__b_exp_ne_0__2;	// vector_unit.k:191:9
-  reg          p0_stage5_enable = 1'h0;	// vector_unit.k:191:9
-  reg   [10:0] p0__prod_plus_ma32_shl_2_;	// vector_unit.k:191:9
-  reg   [5:0]  p0_mb_5;	// vector_unit.k:191:9
-  reg   [9:0]  p0_prod_2;	// vector_unit.k:191:9
-  reg   [11:0] p0__ma32_shl_3_;	// vector_unit.k:191:9
-  reg   [12:0] p0__ma32_shl_4_;	// vector_unit.k:191:9
-  reg   [13:0] p0__ma32_shl_5__0;	// vector_unit.k:191:9
-  reg   [14:0] p0__ma32_shl_6__0;	// vector_unit.k:191:9
-  reg          p0_mb_6;	// vector_unit.k:191:9
-  reg   [15:0] p0__ma32_shl_7__0;	// vector_unit.k:191:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__1;	// vector_unit.k:191:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__1;	// vector_unit.k:191:9
-  reg   [15:0] p0_silu;	// vector_unit.k:191:9
-  reg          p0__b_exp_ne_0__3;	// vector_unit.k:191:9
-  reg          p0__a_exp_ne_0__1;	// vector_unit.k:191:9
-  reg          p0_stage6_enable = 1'h0;	// vector_unit.k:191:9
-  reg   [14:0] p0__prod_plus_ma32_shl_6_;	// vector_unit.k:191:9
-  reg          p0_mb_7;	// vector_unit.k:191:9
-  reg   [13:0] p0_prod_3;	// vector_unit.k:191:9
-  reg   [15:0] p0__ma32_shl_7__1;	// vector_unit.k:191:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__2;	// vector_unit.k:191:9
-  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__2;	// vector_unit.k:191:9
-  reg   [15:0] p0_up_bf16_2;	// vector_unit.k:191:9
-  reg   [15:0] p0_silu_0;	// vector_unit.k:191:9
-  reg          p0__b_exp_ne_0__4;	// vector_unit.k:191:9
-  reg          p0__a_exp_ne_0__2;	// vector_unit.k:191:9
-  reg          p0_stage7_enable = 1'h0;	// vector_unit.k:191:9
-  reg   [15:0] p0_result;	// vector_unit.k:191:9
-  reg          p0_stage8_enable = 1'h0;	// vector_unit.k:191:9
-  reg   [15:0] p0_result_0;	// vector_unit.k:191:9
-  reg          p0_stage9_enable = 1'h0;	// vector_unit.k:191:9
-  reg   [15:0] p0_result_1;	// vector_unit.k:191:9
-  reg          p0_stage10_enable = 1'h0;	// vector_unit.k:191:9
-  reg   [15:0] p0_result_2;	// vector_unit.k:191:9
-  reg          p0_stage11_enable = 1'h0;	// vector_unit.k:191:9
-  wire         prod = p0_gate_bf16_1[6] & memory_read_data_in_38_0_0[0];	// vector_unit.k:191:9, :206:{21,33}, :207:{21,33}, :209:35, :210:{21,25}
-  wire         prod_0 = p0_gate_bf16_1[5] & memory_read_data_in_38_0_0[0];	// vector_unit.k:191:9, :206:{21,33}, :207:{21,33}, :209:35, :210:{21,25}
-  wire         prod_1 = p0_gate_bf16_1[4] & memory_read_data_in_38_0_0[0];	// vector_unit.k:191:9, :206:{21,33}, :207:{21,33}, :209:35, :210:{21,25}
-  wire         prod_2 = p0_gate_bf16_1[3] & memory_read_data_in_38_0_0[0];	// vector_unit.k:191:9, :206:{21,33}, :207:{21,33}, :209:35, :210:{21,25}
-  wire         prod_3 = p0_gate_bf16_1[2] & memory_read_data_in_38_0_0[0];	// vector_unit.k:191:9, :206:{21,33}, :207:{21,33}, :209:35, :210:{21,25}
-  wire         prod_4 = p0_gate_bf16_1[1] & memory_read_data_in_38_0_0[0];	// vector_unit.k:191:9, :206:{21,33}, :207:{21,33}, :209:35, :210:{21,25}
-  wire         prod_5 = p0_gate_bf16_1[0] & memory_read_data_in_38_0_0[0];	// vector_unit.k:191:9, :206:{21,33}, :207:{21,33}, :209:35, :210:{21,25}
+  reg   [15:0] p0_gate_bf16_0;	// vector_unit.k:166:9
+  reg   [15:0] p0_up_bf16_0;	// vector_unit.k:166:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:166:9
+  reg   [15:0] p0_gate_bf16_1;	// vector_unit.k:166:9
+  reg   [15:0] p0_up_bf16_1;	// vector_unit.k:166:9
+  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:166:9
+  always_comb	// vector_unit.k:166:9
+    data_prop_in_23_0 = p0_up_bf16_1;	// vector_unit.k:166:9
+  reg   [12:0] p0__prod_plus_ma32_shl_4_;	// vector_unit.k:166:9
+  reg   [5:0]  p0_mb;	// vector_unit.k:166:9
+  reg   [11:0] p0_prod;	// vector_unit.k:166:9
+  reg   [13:0] p0__ma32_shl_5_;	// vector_unit.k:166:9
+  reg   [14:0] p0__ma32_shl_6_;	// vector_unit.k:166:9
+  reg          p0_mb_0;	// vector_unit.k:166:9
+  reg   [15:0] p0__ma32_shl_7_;	// vector_unit.k:166:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1_;	// vector_unit.k:166:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_;	// vector_unit.k:166:9
+  reg   [15:0] p0_memory_read_data_in_30_0;	// vector_unit.k:166:9
+  reg   [15:0] p0_gate_bf16_2;	// vector_unit.k:166:9
+  reg          p0__b_exp_ne_0_;	// vector_unit.k:166:9
+  reg          p0__a_exp_ne_0_;	// vector_unit.k:166:9
+  reg   [5:0]  p0_mb_1;	// vector_unit.k:166:9
+  reg   [15:0] p0_b_exp;	// vector_unit.k:166:9
+  reg          p0_mb_2;	// vector_unit.k:166:9
+  reg          p0__b_exp_ne_0__0;	// vector_unit.k:166:9
+  reg          p0_stage4_enable = 1'h0;	// vector_unit.k:166:9
+  reg          p0_prod_0;	// vector_unit.k:166:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__0;	// vector_unit.k:166:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__0;	// vector_unit.k:166:9
+  reg   [15:0] p0_memory_read_data_in_30_0_0;	// vector_unit.k:166:9
+  reg   [15:0] p0_gate_bf16_3;	// vector_unit.k:166:9
+  reg   [14:0] p0_prod_1;	// vector_unit.k:166:9
+  reg          p0__b_exp_ne_0__1;	// vector_unit.k:166:9
+  reg          p0__a_exp_ne_0__0;	// vector_unit.k:166:9
+  reg   [5:0]  p0_mb_3;	// vector_unit.k:166:9
+  reg   [15:0] p0_b_exp_0;	// vector_unit.k:166:9
+  reg          p0_mb_4;	// vector_unit.k:166:9
+  reg          p0__b_exp_ne_0__2;	// vector_unit.k:166:9
+  reg          p0_stage5_enable = 1'h0;	// vector_unit.k:166:9
+  reg   [10:0] p0__prod_plus_ma32_shl_2_;	// vector_unit.k:166:9
+  reg   [5:0]  p0_mb_5;	// vector_unit.k:166:9
+  reg   [9:0]  p0_prod_2;	// vector_unit.k:166:9
+  reg   [11:0] p0__ma32_shl_3_;	// vector_unit.k:166:9
+  reg   [12:0] p0__ma32_shl_4_;	// vector_unit.k:166:9
+  reg   [13:0] p0__ma32_shl_5__0;	// vector_unit.k:166:9
+  reg   [14:0] p0__ma32_shl_6__0;	// vector_unit.k:166:9
+  reg          p0_mb_6;	// vector_unit.k:166:9
+  reg   [15:0] p0__ma32_shl_7__0;	// vector_unit.k:166:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__1;	// vector_unit.k:166:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__1;	// vector_unit.k:166:9
+  reg   [15:0] p0_silu;	// vector_unit.k:166:9
+  reg          p0__b_exp_ne_0__3;	// vector_unit.k:166:9
+  reg          p0__a_exp_ne_0__1;	// vector_unit.k:166:9
+  reg          p0_stage6_enable = 1'h0;	// vector_unit.k:166:9
+  reg   [14:0] p0__prod_plus_ma32_shl_6_;	// vector_unit.k:166:9
+  reg          p0_mb_7;	// vector_unit.k:166:9
+  reg   [13:0] p0_prod_3;	// vector_unit.k:166:9
+  reg   [15:0] p0__ma32_shl_7__1;	// vector_unit.k:166:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127_plus_1__2;	// vector_unit.k:166:9
+  reg   [15:0] p0__a_exp_plus_b_exp_minus_127__2;	// vector_unit.k:166:9
+  reg   [15:0] p0_up_bf16_2;	// vector_unit.k:166:9
+  reg   [15:0] p0_silu_0;	// vector_unit.k:166:9
+  reg          p0__b_exp_ne_0__4;	// vector_unit.k:166:9
+  reg          p0__a_exp_ne_0__2;	// vector_unit.k:166:9
+  reg          p0_stage7_enable = 1'h0;	// vector_unit.k:166:9
+  reg   [15:0] p0_result;	// vector_unit.k:166:9
+  reg          p0_stage8_enable = 1'h0;	// vector_unit.k:166:9
+  reg   [15:0] p0_result_0;	// vector_unit.k:166:9
+  reg          p0_stage9_enable = 1'h0;	// vector_unit.k:166:9
+  reg   [15:0] p0_result_1;	// vector_unit.k:166:9
+  reg          p0_stage10_enable = 1'h0;	// vector_unit.k:166:9
+  reg   [15:0] p0_result_2;	// vector_unit.k:166:9
+  reg          p0_stage11_enable = 1'h0;	// vector_unit.k:166:9
+  wire         prod = p0_gate_bf16_1[6] & memory_read_data_in_30_0_0[0];	// vector_unit.k:166:9, :181:{21,33}, :182:{21,33}, :184:35, :185:{21,25}
+  wire         prod_0 = p0_gate_bf16_1[5] & memory_read_data_in_30_0_0[0];	// vector_unit.k:166:9, :181:{21,33}, :182:{21,33}, :184:35, :185:{21,25}
+  wire         prod_1 = p0_gate_bf16_1[4] & memory_read_data_in_30_0_0[0];	// vector_unit.k:166:9, :181:{21,33}, :182:{21,33}, :184:35, :185:{21,25}
+  wire         prod_2 = p0_gate_bf16_1[3] & memory_read_data_in_30_0_0[0];	// vector_unit.k:166:9, :181:{21,33}, :182:{21,33}, :184:35, :185:{21,25}
+  wire         prod_3 = p0_gate_bf16_1[2] & memory_read_data_in_30_0_0[0];	// vector_unit.k:166:9, :181:{21,33}, :182:{21,33}, :184:35, :185:{21,25}
+  wire         prod_4 = p0_gate_bf16_1[1] & memory_read_data_in_30_0_0[0];	// vector_unit.k:166:9, :181:{21,33}, :182:{21,33}, :184:35, :185:{21,25}
+  wire         prod_5 = p0_gate_bf16_1[0] & memory_read_data_in_30_0_0[0];	// vector_unit.k:166:9, :181:{21,33}, :182:{21,33}, :184:35, :185:{21,25}
   wire  [15:0] _a_exp_plus_b_exp_ =
-    16'({8'h0, p0_gate_bf16_1[14:7]} + {8'h0, memory_read_data_in_38_0_0[14:7]});	// vector_unit.k:191:9, :223:39, :228:39
+    16'({8'h0, p0_gate_bf16_1[14:7]} + {8'h0, memory_read_data_in_30_0_0[14:7]});	// vector_unit.k:166:9, :198:39, :203:39
   wire  [9:0]  _prod_plus_ma32_shl_1_ =
     10'({2'h0,
-         memory_read_data_in_38_0_0[0],
+         memory_read_data_in_30_0_0[0],
          prod,
          prod_0,
          prod_1,
          prod_2,
          prod_3,
          prod_4,
-         prod_5} + {2'h1, p0_gate_bf16_1[6:0], 1'h0});	// vector_unit.k:191:9, :207:{21,33}, :210:{21,25}, :211:{51,58}
-  wire         prod_6 = _prod_plus_ma32_shl_1_[9] & memory_read_data_in_38_0_0[1];	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25,51}
-  wire         prod_7 = _prod_plus_ma32_shl_1_[8] & memory_read_data_in_38_0_0[1];	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25,51}
+         prod_5} + {2'h1, p0_gate_bf16_1[6:0], 1'h0});	// vector_unit.k:166:9, :182:{21,33}, :185:{21,25}, :186:{51,58}
+  wire         prod_6 = _prod_plus_ma32_shl_1_[9] & memory_read_data_in_30_0_0[1];	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25,51}
+  wire         prod_7 = _prod_plus_ma32_shl_1_[8] & memory_read_data_in_30_0_0[1];	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25,51}
   wire         prod_8 =
     _prod_plus_ma32_shl_1_[7]
-      ? memory_read_data_in_38_0_0[0] | memory_read_data_in_38_0_0[1]
-      : memory_read_data_in_38_0_0[0] & ~(memory_read_data_in_38_0_0[1]);	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25,51}
+      ? memory_read_data_in_30_0_0[0] | memory_read_data_in_30_0_0[1]
+      : memory_read_data_in_30_0_0[0] & ~(memory_read_data_in_30_0_0[1]);	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25,51}
   wire         prod_9 =
     _prod_plus_ma32_shl_1_[6]
-      ? prod | memory_read_data_in_38_0_0[1]
-      : prod & ~(memory_read_data_in_38_0_0[1]);	// vector_unit.k:191:9, :207:{21,33}, :210:{21,25}, :211:{21,25,51}
+      ? prod | memory_read_data_in_30_0_0[1]
+      : prod & ~(memory_read_data_in_30_0_0[1]);	// vector_unit.k:166:9, :182:{21,33}, :185:{21,25}, :186:{21,25,51}
   wire         prod_10 =
     _prod_plus_ma32_shl_1_[5]
-      ? prod_0 | memory_read_data_in_38_0_0[1]
-      : prod_0 & ~(memory_read_data_in_38_0_0[1]);	// vector_unit.k:191:9, :207:{21,33}, :210:{21,25}, :211:{21,25,51}
+      ? prod_0 | memory_read_data_in_30_0_0[1]
+      : prod_0 & ~(memory_read_data_in_30_0_0[1]);	// vector_unit.k:166:9, :182:{21,33}, :185:{21,25}, :186:{21,25,51}
   wire         prod_11 =
     _prod_plus_ma32_shl_1_[4]
-      ? prod_1 | memory_read_data_in_38_0_0[1]
-      : prod_1 & ~(memory_read_data_in_38_0_0[1]);	// vector_unit.k:191:9, :207:{21,33}, :210:{21,25}, :211:{21,25,51}
+      ? prod_1 | memory_read_data_in_30_0_0[1]
+      : prod_1 & ~(memory_read_data_in_30_0_0[1]);	// vector_unit.k:166:9, :182:{21,33}, :185:{21,25}, :186:{21,25,51}
   wire         prod_12 =
     _prod_plus_ma32_shl_1_[3]
-      ? prod_2 | memory_read_data_in_38_0_0[1]
-      : prod_2 & ~(memory_read_data_in_38_0_0[1]);	// vector_unit.k:191:9, :207:{21,33}, :210:{21,25}, :211:{21,25,51}
+      ? prod_2 | memory_read_data_in_30_0_0[1]
+      : prod_2 & ~(memory_read_data_in_30_0_0[1]);	// vector_unit.k:166:9, :182:{21,33}, :185:{21,25}, :186:{21,25,51}
   wire         prod_13 =
     _prod_plus_ma32_shl_1_[2]
-      ? prod_3 | memory_read_data_in_38_0_0[1]
-      : prod_3 & ~(memory_read_data_in_38_0_0[1]);	// vector_unit.k:191:9, :207:{21,33}, :210:{21,25}, :211:{21,25,51}
+      ? prod_3 | memory_read_data_in_30_0_0[1]
+      : prod_3 & ~(memory_read_data_in_30_0_0[1]);	// vector_unit.k:166:9, :182:{21,33}, :185:{21,25}, :186:{21,25,51}
   wire         prod_14 =
     _prod_plus_ma32_shl_1_[1]
-      ? prod_4 | memory_read_data_in_38_0_0[1]
-      : prod_4 & ~(memory_read_data_in_38_0_0[1]);	// vector_unit.k:191:9, :207:{21,33}, :210:{21,25}, :211:{21,25,51}
+      ? prod_4 | memory_read_data_in_30_0_0[1]
+      : prod_4 & ~(memory_read_data_in_30_0_0[1]);	// vector_unit.k:166:9, :182:{21,33}, :185:{21,25}, :186:{21,25,51}
   wire         prod_15 =
     _prod_plus_ma32_shl_1_[0]
-      ? prod_5 | memory_read_data_in_38_0_0[1]
-      : prod_5 & ~(memory_read_data_in_38_0_0[1]);	// vector_unit.k:191:9, :207:{21,33}, :210:{21,25}, :211:{21,25,51}
+      ? prod_5 | memory_read_data_in_30_0_0[1]
+      : prod_5 & ~(memory_read_data_in_30_0_0[1]);	// vector_unit.k:166:9, :182:{21,33}, :185:{21,25}, :186:{21,25,51}
   wire  [10:0] _prod_plus_ma32_shl_2_ =
     11'({1'h0,
          prod_6,
@@ -4029,48 +3943,48 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
          prod_12,
          prod_13,
          prod_14,
-         prod_15} + {2'h1, p0_gate_bf16_1[6:0], 2'h0});	// vector_unit.k:191:9, :211:{21,25}, :212:{51,58}
-  wire         prod_16 = _prod_plus_ma32_shl_2_[10] & memory_read_data_in_38_0_0[2];	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25,51}
+         prod_15} + {2'h1, p0_gate_bf16_1[6:0], 2'h0});	// vector_unit.k:166:9, :186:{21,25}, :187:{51,58}
+  wire         prod_16 = _prod_plus_ma32_shl_2_[10] & memory_read_data_in_30_0_0[2];	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25,51}
   wire         prod_17 =
     _prod_plus_ma32_shl_2_[9]
-      ? prod_6 | memory_read_data_in_38_0_0[2]
-      : prod_6 & ~(memory_read_data_in_38_0_0[2]);	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25}, :212:{21,25,51}
+      ? prod_6 | memory_read_data_in_30_0_0[2]
+      : prod_6 & ~(memory_read_data_in_30_0_0[2]);	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25}, :187:{21,25,51}
   wire         prod_18 =
     _prod_plus_ma32_shl_2_[8]
-      ? prod_7 | memory_read_data_in_38_0_0[2]
-      : prod_7 & ~(memory_read_data_in_38_0_0[2]);	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25}, :212:{21,25,51}
+      ? prod_7 | memory_read_data_in_30_0_0[2]
+      : prod_7 & ~(memory_read_data_in_30_0_0[2]);	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25}, :187:{21,25,51}
   wire         prod_19 =
     _prod_plus_ma32_shl_2_[7]
-      ? prod_8 | memory_read_data_in_38_0_0[2]
-      : prod_8 & ~(memory_read_data_in_38_0_0[2]);	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25}, :212:{21,25,51}
+      ? prod_8 | memory_read_data_in_30_0_0[2]
+      : prod_8 & ~(memory_read_data_in_30_0_0[2]);	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25}, :187:{21,25,51}
   wire         prod_20 =
     _prod_plus_ma32_shl_2_[6]
-      ? prod_9 | memory_read_data_in_38_0_0[2]
-      : prod_9 & ~(memory_read_data_in_38_0_0[2]);	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25}, :212:{21,25,51}
+      ? prod_9 | memory_read_data_in_30_0_0[2]
+      : prod_9 & ~(memory_read_data_in_30_0_0[2]);	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25}, :187:{21,25,51}
   wire         prod_21 =
     _prod_plus_ma32_shl_2_[5]
-      ? prod_10 | memory_read_data_in_38_0_0[2]
-      : prod_10 & ~(memory_read_data_in_38_0_0[2]);	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25}, :212:{21,25,51}
+      ? prod_10 | memory_read_data_in_30_0_0[2]
+      : prod_10 & ~(memory_read_data_in_30_0_0[2]);	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25}, :187:{21,25,51}
   wire         prod_22 =
     _prod_plus_ma32_shl_2_[4]
-      ? prod_11 | memory_read_data_in_38_0_0[2]
-      : prod_11 & ~(memory_read_data_in_38_0_0[2]);	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25}, :212:{21,25,51}
+      ? prod_11 | memory_read_data_in_30_0_0[2]
+      : prod_11 & ~(memory_read_data_in_30_0_0[2]);	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25}, :187:{21,25,51}
   wire         prod_23 =
     _prod_plus_ma32_shl_2_[3]
-      ? prod_12 | memory_read_data_in_38_0_0[2]
-      : prod_12 & ~(memory_read_data_in_38_0_0[2]);	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25}, :212:{21,25,51}
+      ? prod_12 | memory_read_data_in_30_0_0[2]
+      : prod_12 & ~(memory_read_data_in_30_0_0[2]);	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25}, :187:{21,25,51}
   wire         prod_24 =
     _prod_plus_ma32_shl_2_[2]
-      ? prod_13 | memory_read_data_in_38_0_0[2]
-      : prod_13 & ~(memory_read_data_in_38_0_0[2]);	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25}, :212:{21,25,51}
+      ? prod_13 | memory_read_data_in_30_0_0[2]
+      : prod_13 & ~(memory_read_data_in_30_0_0[2]);	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25}, :187:{21,25,51}
   wire         prod_25 =
     _prod_plus_ma32_shl_2_[1]
-      ? prod_14 | memory_read_data_in_38_0_0[2]
-      : prod_14 & ~(memory_read_data_in_38_0_0[2]);	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25}, :212:{21,25,51}
+      ? prod_14 | memory_read_data_in_30_0_0[2]
+      : prod_14 & ~(memory_read_data_in_30_0_0[2]);	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25}, :187:{21,25,51}
   wire         prod_26 =
     _prod_plus_ma32_shl_2_[0]
-      ? prod_15 | memory_read_data_in_38_0_0[2]
-      : prod_15 & ~(memory_read_data_in_38_0_0[2]);	// vector_unit.k:191:9, :207:{21,33}, :211:{21,25}, :212:{21,25,51}
+      ? prod_15 | memory_read_data_in_30_0_0[2]
+      : prod_15 & ~(memory_read_data_in_30_0_0[2]);	// vector_unit.k:166:9, :182:{21,33}, :186:{21,25}, :187:{21,25,51}
   wire  [11:0] _prod_plus_ma32_shl_3_ =
     12'({1'h0,
          prod_16,
@@ -4083,77 +3997,77 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
          prod_23,
          prod_24,
          prod_25,
-         prod_26} + {2'h1, p0_gate_bf16_1[6:0], 3'h0});	// vector_unit.k:191:9, :212:{21,25}, :213:{51,58}
-  wire         prod_27 = _prod_plus_ma32_shl_3_[11] & memory_read_data_in_38_0_0[3];	// vector_unit.k:191:9, :207:{21,33}, :213:{21,25,51}
+         prod_26} + {2'h1, p0_gate_bf16_1[6:0], 3'h0});	// vector_unit.k:166:9, :187:{21,25}, :188:{51,58}
+  wire         prod_27 = _prod_plus_ma32_shl_3_[11] & memory_read_data_in_30_0_0[3];	// vector_unit.k:166:9, :182:{21,33}, :188:{21,25,51}
   wire         prod_28 =
     _prod_plus_ma32_shl_3_[10]
-      ? prod_16 | memory_read_data_in_38_0_0[3]
-      : prod_16 & ~(memory_read_data_in_38_0_0[3]);	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25}, :213:{21,25,51}
+      ? prod_16 | memory_read_data_in_30_0_0[3]
+      : prod_16 & ~(memory_read_data_in_30_0_0[3]);	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25}, :188:{21,25,51}
   wire         prod_29 =
     _prod_plus_ma32_shl_3_[9]
-      ? prod_17 | memory_read_data_in_38_0_0[3]
-      : prod_17 & ~(memory_read_data_in_38_0_0[3]);	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25}, :213:{21,25,51}
+      ? prod_17 | memory_read_data_in_30_0_0[3]
+      : prod_17 & ~(memory_read_data_in_30_0_0[3]);	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25}, :188:{21,25,51}
   wire         prod_30 =
     _prod_plus_ma32_shl_3_[8]
-      ? prod_18 | memory_read_data_in_38_0_0[3]
-      : prod_18 & ~(memory_read_data_in_38_0_0[3]);	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25}, :213:{21,25,51}
+      ? prod_18 | memory_read_data_in_30_0_0[3]
+      : prod_18 & ~(memory_read_data_in_30_0_0[3]);	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25}, :188:{21,25,51}
   wire         prod_31 =
     _prod_plus_ma32_shl_3_[7]
-      ? prod_19 | memory_read_data_in_38_0_0[3]
-      : prod_19 & ~(memory_read_data_in_38_0_0[3]);	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25}, :213:{21,25,51}
+      ? prod_19 | memory_read_data_in_30_0_0[3]
+      : prod_19 & ~(memory_read_data_in_30_0_0[3]);	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25}, :188:{21,25,51}
   wire         prod_32 =
     _prod_plus_ma32_shl_3_[6]
-      ? prod_20 | memory_read_data_in_38_0_0[3]
-      : prod_20 & ~(memory_read_data_in_38_0_0[3]);	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25}, :213:{21,25,51}
+      ? prod_20 | memory_read_data_in_30_0_0[3]
+      : prod_20 & ~(memory_read_data_in_30_0_0[3]);	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25}, :188:{21,25,51}
   wire         prod_33 =
     _prod_plus_ma32_shl_3_[5]
-      ? prod_21 | memory_read_data_in_38_0_0[3]
-      : prod_21 & ~(memory_read_data_in_38_0_0[3]);	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25}, :213:{21,25,51}
+      ? prod_21 | memory_read_data_in_30_0_0[3]
+      : prod_21 & ~(memory_read_data_in_30_0_0[3]);	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25}, :188:{21,25,51}
   wire         prod_34 =
     _prod_plus_ma32_shl_3_[4]
-      ? prod_22 | memory_read_data_in_38_0_0[3]
-      : prod_22 & ~(memory_read_data_in_38_0_0[3]);	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25}, :213:{21,25,51}
+      ? prod_22 | memory_read_data_in_30_0_0[3]
+      : prod_22 & ~(memory_read_data_in_30_0_0[3]);	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25}, :188:{21,25,51}
   wire         prod_35 =
     _prod_plus_ma32_shl_3_[3]
-      ? prod_23 | memory_read_data_in_38_0_0[3]
-      : prod_23 & ~(memory_read_data_in_38_0_0[3]);	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25}, :213:{21,25,51}
+      ? prod_23 | memory_read_data_in_30_0_0[3]
+      : prod_23 & ~(memory_read_data_in_30_0_0[3]);	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25}, :188:{21,25,51}
   wire         prod_36 =
     _prod_plus_ma32_shl_3_[2]
-      ? prod_24 | memory_read_data_in_38_0_0[3]
-      : prod_24 & ~(memory_read_data_in_38_0_0[3]);	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25}, :213:{21,25,51}
+      ? prod_24 | memory_read_data_in_30_0_0[3]
+      : prod_24 & ~(memory_read_data_in_30_0_0[3]);	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25}, :188:{21,25,51}
   wire         prod_37 =
     _prod_plus_ma32_shl_3_[1]
-      ? prod_25 | memory_read_data_in_38_0_0[3]
-      : prod_25 & ~(memory_read_data_in_38_0_0[3]);	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25}, :213:{21,25,51}
+      ? prod_25 | memory_read_data_in_30_0_0[3]
+      : prod_25 & ~(memory_read_data_in_30_0_0[3]);	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25}, :188:{21,25,51}
   wire         prod_38 =
     _prod_plus_ma32_shl_3_[0]
-      ? prod_26 | memory_read_data_in_38_0_0[3]
-      : prod_26 & ~(memory_read_data_in_38_0_0[3]);	// vector_unit.k:191:9, :207:{21,33}, :212:{21,25}, :213:{21,25,51}
-  wire         prod_39 = p0__prod_plus_ma32_shl_4_[12] & p0_mb[4];	// vector_unit.k:191:9, :214:{21,25}
+      ? prod_26 | memory_read_data_in_30_0_0[3]
+      : prod_26 & ~(memory_read_data_in_30_0_0[3]);	// vector_unit.k:166:9, :182:{21,33}, :187:{21,25}, :188:{21,25,51}
+  wire         prod_39 = p0__prod_plus_ma32_shl_4_[12] & p0_mb[4];	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_40 =
-    p0__prod_plus_ma32_shl_4_[11] ? p0_prod[11] | p0_mb[4] : p0_prod[11] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[11] ? p0_prod[11] | p0_mb[4] : p0_prod[11] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_41 =
-    p0__prod_plus_ma32_shl_4_[10] ? p0_prod[10] | p0_mb[4] : p0_prod[10] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[10] ? p0_prod[10] | p0_mb[4] : p0_prod[10] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_42 =
-    p0__prod_plus_ma32_shl_4_[9] ? p0_prod[9] | p0_mb[4] : p0_prod[9] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[9] ? p0_prod[9] | p0_mb[4] : p0_prod[9] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_43 =
-    p0__prod_plus_ma32_shl_4_[8] ? p0_prod[8] | p0_mb[4] : p0_prod[8] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[8] ? p0_prod[8] | p0_mb[4] : p0_prod[8] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_44 =
-    p0__prod_plus_ma32_shl_4_[7] ? p0_prod[7] | p0_mb[4] : p0_prod[7] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[7] ? p0_prod[7] | p0_mb[4] : p0_prod[7] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_45 =
-    p0__prod_plus_ma32_shl_4_[6] ? p0_prod[6] | p0_mb[4] : p0_prod[6] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[6] ? p0_prod[6] | p0_mb[4] : p0_prod[6] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_46 =
-    p0__prod_plus_ma32_shl_4_[5] ? p0_prod[5] | p0_mb[4] : p0_prod[5] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[5] ? p0_prod[5] | p0_mb[4] : p0_prod[5] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_47 =
-    p0__prod_plus_ma32_shl_4_[4] ? p0_prod[4] | p0_mb[4] : p0_prod[4] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[4] ? p0_prod[4] | p0_mb[4] : p0_prod[4] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_48 =
-    p0__prod_plus_ma32_shl_4_[3] ? p0_prod[3] | p0_mb[4] : p0_prod[3] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[3] ? p0_prod[3] | p0_mb[4] : p0_prod[3] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_49 =
-    p0__prod_plus_ma32_shl_4_[2] ? p0_prod[2] | p0_mb[4] : p0_prod[2] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[2] ? p0_prod[2] | p0_mb[4] : p0_prod[2] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_50 =
-    p0__prod_plus_ma32_shl_4_[1] ? p0_prod[1] | p0_mb[4] : p0_prod[1] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[1] ? p0_prod[1] | p0_mb[4] : p0_prod[1] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire         prod_51 =
-    p0__prod_plus_ma32_shl_4_[0] ? p0_prod[0] | p0_mb[4] : p0_prod[0] & ~(p0_mb[4]);	// vector_unit.k:191:9, :214:{21,25}
+    p0__prod_plus_ma32_shl_4_[0] ? p0_prod[0] | p0_mb[4] : p0_prod[0] & ~(p0_mb[4]);	// vector_unit.k:166:9, :189:{21,25}
   wire  [13:0] _prod_plus_ma32_shl_5_ =
     14'({1'h0,
          prod_39,
@@ -4168,34 +4082,34 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
          prod_48,
          prod_49,
          prod_50,
-         prod_51} + p0__ma32_shl_5_);	// vector_unit.k:191:9, :214:{21,25}, :215:51
-  wire         prod_52 = _prod_plus_ma32_shl_5_[13] & p0_mb[5];	// vector_unit.k:191:9, :215:{21,25,51}
+         prod_51} + p0__ma32_shl_5_);	// vector_unit.k:166:9, :189:{21,25}, :190:51
+  wire         prod_52 = _prod_plus_ma32_shl_5_[13] & p0_mb[5];	// vector_unit.k:166:9, :190:{21,25,51}
   wire         prod_53 =
-    _prod_plus_ma32_shl_5_[12] ? prod_39 | p0_mb[5] : prod_39 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[12] ? prod_39 | p0_mb[5] : prod_39 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_54 =
-    _prod_plus_ma32_shl_5_[11] ? prod_40 | p0_mb[5] : prod_40 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[11] ? prod_40 | p0_mb[5] : prod_40 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_55 =
-    _prod_plus_ma32_shl_5_[10] ? prod_41 | p0_mb[5] : prod_41 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[10] ? prod_41 | p0_mb[5] : prod_41 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_56 =
-    _prod_plus_ma32_shl_5_[9] ? prod_42 | p0_mb[5] : prod_42 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[9] ? prod_42 | p0_mb[5] : prod_42 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_57 =
-    _prod_plus_ma32_shl_5_[8] ? prod_43 | p0_mb[5] : prod_43 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[8] ? prod_43 | p0_mb[5] : prod_43 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_58 =
-    _prod_plus_ma32_shl_5_[7] ? prod_44 | p0_mb[5] : prod_44 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[7] ? prod_44 | p0_mb[5] : prod_44 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_59 =
-    _prod_plus_ma32_shl_5_[6] ? prod_45 | p0_mb[5] : prod_45 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[6] ? prod_45 | p0_mb[5] : prod_45 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_60 =
-    _prod_plus_ma32_shl_5_[5] ? prod_46 | p0_mb[5] : prod_46 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[5] ? prod_46 | p0_mb[5] : prod_46 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_61 =
-    _prod_plus_ma32_shl_5_[4] ? prod_47 | p0_mb[5] : prod_47 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[4] ? prod_47 | p0_mb[5] : prod_47 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_62 =
-    _prod_plus_ma32_shl_5_[3] ? prod_48 | p0_mb[5] : prod_48 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[3] ? prod_48 | p0_mb[5] : prod_48 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_63 =
-    _prod_plus_ma32_shl_5_[2] ? prod_49 | p0_mb[5] : prod_49 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[2] ? prod_49 | p0_mb[5] : prod_49 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_64 =
-    _prod_plus_ma32_shl_5_[1] ? prod_50 | p0_mb[5] : prod_50 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[1] ? prod_50 | p0_mb[5] : prod_50 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire         prod_65 =
-    _prod_plus_ma32_shl_5_[0] ? prod_51 | p0_mb[5] : prod_51 & ~(p0_mb[5]);	// vector_unit.k:191:9, :214:{21,25}, :215:{21,25,51}
+    _prod_plus_ma32_shl_5_[0] ? prod_51 | p0_mb[5] : prod_51 & ~(p0_mb[5]);	// vector_unit.k:166:9, :189:{21,25}, :190:{21,25,51}
   wire  [14:0] _prod_plus_ma32_shl_6_ =
     15'({1'h0,
          prod_52,
@@ -4211,7 +4125,7 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
          prod_62,
          prod_63,
          prod_64,
-         prod_65} + p0__ma32_shl_6_);	// vector_unit.k:191:9, :215:{21,25}, :216:51
+         prod_65} + p0__ma32_shl_6_);	// vector_unit.k:166:9, :190:{21,25}, :191:51
   wire  [15:0] _prod_plus_ma32_shl_7_ =
     16'({1'h0,
          _prod_plus_ma32_shl_6_[14] & p0_mb_0,
@@ -4229,113 +4143,113 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
          _prod_plus_ma32_shl_6_[2] ? prod_63 | p0_mb_0 : prod_63 & ~p0_mb_0,
          _prod_plus_ma32_shl_6_[1] ? prod_64 | p0_mb_0 : prod_64 & ~p0_mb_0,
          _prod_plus_ma32_shl_6_[0] ? prod_65 | p0_mb_0 : prod_65 & ~p0_mb_0}
-        + p0__ma32_shl_7_);	// vector_unit.k:191:9, :215:{21,25}, :216:{21,51}, :217:51
+        + p0__ma32_shl_7_);	// vector_unit.k:166:9, :190:{21,25}, :191:{21,51}, :192:51
   wire  [15:0] r_exp =
     p0_prod_0
       ? p0__a_exp_plus_b_exp_minus_127_plus_1__0
-      : p0__a_exp_plus_b_exp_minus_127__0;	// vector_unit.k:191:9, :220:21
-  wire         _GEN_0 = r_exp < 16'hFF & (|r_exp);	// vector_unit.k:205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25,31,44}, :232:{32,47,49}
-  wire         _GEN_1 = ~p0_prod_0 & _GEN_0;	// vector_unit.k:191:9, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
-  wire         _GEN_2 = p0__b_exp_ne_0__1 & p0__a_exp_ne_0__0;	// vector_unit.k:191:9, :203:{17,21}
-  wire         silu = r_exp[7] & _GEN_0 & _GEN_2;	// vector_unit.k:203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
-  wire         silu_0 = r_exp[6] & _GEN_0 & _GEN_2;	// vector_unit.k:203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
-  wire         silu_1 = r_exp[5] & _GEN_0 & _GEN_2;	// vector_unit.k:203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
-  wire         silu_2 = r_exp[4] & _GEN_0 & _GEN_2;	// vector_unit.k:203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
-  wire         silu_3 = r_exp[3] & _GEN_0 & _GEN_2;	// vector_unit.k:203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
-  wire         silu_4 = r_exp[2] & _GEN_0 & _GEN_2;	// vector_unit.k:203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
-  wire         silu_5 = r_exp[1] & _GEN_0 & _GEN_2;	// vector_unit.k:203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
-  wire         silu_6 = r_exp[0] & _GEN_0 & _GEN_2;	// vector_unit.k:203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
+      : p0__a_exp_plus_b_exp_minus_127__0;	// vector_unit.k:166:9, :195:21
+  wire         _GEN_0 = r_exp < 16'hFF & (|r_exp);	// vector_unit.k:180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25,31,44}, :207:{32,47,49}
+  wire         _GEN_1 = ~p0_prod_0 & _GEN_0;	// vector_unit.k:166:9, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
+  wire         _GEN_2 = p0__b_exp_ne_0__1 & p0__a_exp_ne_0__0;	// vector_unit.k:166:9, :178:{17,21}
+  wire         silu = r_exp[7] & _GEN_0 & _GEN_2;	// vector_unit.k:178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
+  wire         silu_0 = r_exp[6] & _GEN_0 & _GEN_2;	// vector_unit.k:178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
+  wire         silu_1 = r_exp[5] & _GEN_0 & _GEN_2;	// vector_unit.k:178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
+  wire         silu_2 = r_exp[4] & _GEN_0 & _GEN_2;	// vector_unit.k:178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
+  wire         silu_3 = r_exp[3] & _GEN_0 & _GEN_2;	// vector_unit.k:178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
+  wire         silu_4 = r_exp[2] & _GEN_0 & _GEN_2;	// vector_unit.k:178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
+  wire         silu_5 = r_exp[1] & _GEN_0 & _GEN_2;	// vector_unit.k:178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
+  wire         silu_6 = r_exp[0] & _GEN_0 & _GEN_2;	// vector_unit.k:178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
   wire         silu_7 =
     (p0_prod_1[14] ? (p0_prod_1[13] | p0_prod_0) & _GEN_0 : p0_prod_1[13] & _GEN_1)
-    & _GEN_2;	// vector_unit.k:191:9, :203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
+    & _GEN_2;	// vector_unit.k:166:9, :178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
   wire         silu_8 =
     (p0_prod_1[13] ? (p0_prod_1[12] | p0_prod_0) & _GEN_0 : p0_prod_1[12] & _GEN_1)
-    & _GEN_2;	// vector_unit.k:191:9, :203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
+    & _GEN_2;	// vector_unit.k:166:9, :178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
   wire         silu_9 =
     (p0_prod_1[12] ? (p0_prod_1[11] | p0_prod_0) & _GEN_0 : p0_prod_1[11] & _GEN_1)
-    & _GEN_2;	// vector_unit.k:191:9, :203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
+    & _GEN_2;	// vector_unit.k:166:9, :178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
   wire         silu_10 =
     (p0_prod_1[11] ? (p0_prod_1[10] | p0_prod_0) & _GEN_0 : p0_prod_1[10] & _GEN_1)
-    & _GEN_2;	// vector_unit.k:191:9, :203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
+    & _GEN_2;	// vector_unit.k:166:9, :178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
   wire         silu_11 =
     (p0_prod_1[10] ? (p0_prod_1[9] | p0_prod_0) & _GEN_0 : p0_prod_1[9] & _GEN_1)
-    & _GEN_2;	// vector_unit.k:191:9, :203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
+    & _GEN_2;	// vector_unit.k:166:9, :178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
   wire         silu_12 =
-    (p0_prod_1[9] ? (p0_prod_1[8] | p0_prod_0) & _GEN_0 : p0_prod_1[8] & _GEN_1) & _GEN_2;	// vector_unit.k:191:9, :203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
+    (p0_prod_1[9] ? (p0_prod_1[8] | p0_prod_0) & _GEN_0 : p0_prod_1[8] & _GEN_1) & _GEN_2;	// vector_unit.k:166:9, :178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
   wire         silu_13 =
-    (p0_prod_1[8] ? (p0_prod_1[7] | p0_prod_0) & _GEN_0 : p0_prod_1[7] & _GEN_1) & _GEN_2;	// vector_unit.k:191:9, :203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
-  wire         prod_66 = silu_7 & p0_mb_3[0];	// vector_unit.k:191:9, :203:{17,21}, :249:{21,25}
-  wire         prod_67 = silu_8 & p0_mb_3[0];	// vector_unit.k:191:9, :203:{17,21}, :249:{21,25}
-  wire         prod_68 = silu_9 & p0_mb_3[0];	// vector_unit.k:191:9, :203:{17,21}, :249:{21,25}
-  wire         prod_69 = silu_10 & p0_mb_3[0];	// vector_unit.k:191:9, :203:{17,21}, :249:{21,25}
-  wire         prod_70 = silu_11 & p0_mb_3[0];	// vector_unit.k:191:9, :203:{17,21}, :249:{21,25}
-  wire         prod_71 = silu_12 & p0_mb_3[0];	// vector_unit.k:191:9, :203:{17,21}, :249:{21,25}
-  wire         prod_72 = silu_13 & p0_mb_3[0];	// vector_unit.k:191:9, :203:{17,21}, :249:{21,25}
+    (p0_prod_1[8] ? (p0_prod_1[7] | p0_prod_0) & _GEN_0 : p0_prod_1[7] & _GEN_1) & _GEN_2;	// vector_unit.k:166:9, :178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
+  wire         prod_66 = silu_7 & p0_mb_3[0];	// vector_unit.k:166:9, :178:{17,21}, :224:{21,25}
+  wire         prod_67 = silu_8 & p0_mb_3[0];	// vector_unit.k:166:9, :178:{17,21}, :224:{21,25}
+  wire         prod_68 = silu_9 & p0_mb_3[0];	// vector_unit.k:166:9, :178:{17,21}, :224:{21,25}
+  wire         prod_69 = silu_10 & p0_mb_3[0];	// vector_unit.k:166:9, :178:{17,21}, :224:{21,25}
+  wire         prod_70 = silu_11 & p0_mb_3[0];	// vector_unit.k:166:9, :178:{17,21}, :224:{21,25}
+  wire         prod_71 = silu_12 & p0_mb_3[0];	// vector_unit.k:166:9, :178:{17,21}, :224:{21,25}
+  wire         prod_72 = silu_13 & p0_mb_3[0];	// vector_unit.k:166:9, :178:{17,21}, :224:{21,25}
   wire  [15:0] _a_exp_plus_b_exp__0 =
     16'({8'h0, silu, silu_0, silu_1, silu_2, silu_3, silu_4, silu_5, silu_6}
-        + p0_b_exp_0);	// vector_unit.k:191:9, :203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}, :262:39, :267:39
+        + p0_b_exp_0);	// vector_unit.k:166:9, :178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}, :237:39, :242:39
   wire  [9:0]  _prod_plus_ma32_shl_1__0 =
     10'({2'h0, p0_mb_3[0], prod_66, prod_67, prod_68, prod_69, prod_70, prod_71, prod_72}
-        + {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 1'h0});	// vector_unit.k:191:9, :203:{17,21}, :249:{21,25}, :250:{51,58}
-  wire         prod_73 = _prod_plus_ma32_shl_1__0[9] & p0_mb_3[1];	// vector_unit.k:191:9, :250:{21,25,51}
-  wire         prod_74 = _prod_plus_ma32_shl_1__0[8] & p0_mb_3[1];	// vector_unit.k:191:9, :250:{21,25,51}
+        + {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 1'h0});	// vector_unit.k:166:9, :178:{17,21}, :224:{21,25}, :225:{51,58}
+  wire         prod_73 = _prod_plus_ma32_shl_1__0[9] & p0_mb_3[1];	// vector_unit.k:166:9, :225:{21,25,51}
+  wire         prod_74 = _prod_plus_ma32_shl_1__0[8] & p0_mb_3[1];	// vector_unit.k:166:9, :225:{21,25,51}
   wire         prod_75 =
-    _prod_plus_ma32_shl_1__0[7] ? p0_mb_3[0] | p0_mb_3[1] : p0_mb_3[0] & ~(p0_mb_3[1]);	// vector_unit.k:191:9, :249:{21,25}, :250:{21,25,51}
+    _prod_plus_ma32_shl_1__0[7] ? p0_mb_3[0] | p0_mb_3[1] : p0_mb_3[0] & ~(p0_mb_3[1]);	// vector_unit.k:166:9, :224:{21,25}, :225:{21,25,51}
   wire         prod_76 =
-    _prod_plus_ma32_shl_1__0[6] ? prod_66 | p0_mb_3[1] : prod_66 & ~(p0_mb_3[1]);	// vector_unit.k:191:9, :249:{21,25}, :250:{21,25,51}
+    _prod_plus_ma32_shl_1__0[6] ? prod_66 | p0_mb_3[1] : prod_66 & ~(p0_mb_3[1]);	// vector_unit.k:166:9, :224:{21,25}, :225:{21,25,51}
   wire         prod_77 =
-    _prod_plus_ma32_shl_1__0[5] ? prod_67 | p0_mb_3[1] : prod_67 & ~(p0_mb_3[1]);	// vector_unit.k:191:9, :249:{21,25}, :250:{21,25,51}
+    _prod_plus_ma32_shl_1__0[5] ? prod_67 | p0_mb_3[1] : prod_67 & ~(p0_mb_3[1]);	// vector_unit.k:166:9, :224:{21,25}, :225:{21,25,51}
   wire         prod_78 =
-    _prod_plus_ma32_shl_1__0[4] ? prod_68 | p0_mb_3[1] : prod_68 & ~(p0_mb_3[1]);	// vector_unit.k:191:9, :249:{21,25}, :250:{21,25,51}
+    _prod_plus_ma32_shl_1__0[4] ? prod_68 | p0_mb_3[1] : prod_68 & ~(p0_mb_3[1]);	// vector_unit.k:166:9, :224:{21,25}, :225:{21,25,51}
   wire         prod_79 =
-    _prod_plus_ma32_shl_1__0[3] ? prod_69 | p0_mb_3[1] : prod_69 & ~(p0_mb_3[1]);	// vector_unit.k:191:9, :249:{21,25}, :250:{21,25,51}
+    _prod_plus_ma32_shl_1__0[3] ? prod_69 | p0_mb_3[1] : prod_69 & ~(p0_mb_3[1]);	// vector_unit.k:166:9, :224:{21,25}, :225:{21,25,51}
   wire         prod_80 =
-    _prod_plus_ma32_shl_1__0[2] ? prod_70 | p0_mb_3[1] : prod_70 & ~(p0_mb_3[1]);	// vector_unit.k:191:9, :249:{21,25}, :250:{21,25,51}
+    _prod_plus_ma32_shl_1__0[2] ? prod_70 | p0_mb_3[1] : prod_70 & ~(p0_mb_3[1]);	// vector_unit.k:166:9, :224:{21,25}, :225:{21,25,51}
   wire         prod_81 =
-    _prod_plus_ma32_shl_1__0[1] ? prod_71 | p0_mb_3[1] : prod_71 & ~(p0_mb_3[1]);	// vector_unit.k:191:9, :249:{21,25}, :250:{21,25,51}
+    _prod_plus_ma32_shl_1__0[1] ? prod_71 | p0_mb_3[1] : prod_71 & ~(p0_mb_3[1]);	// vector_unit.k:166:9, :224:{21,25}, :225:{21,25,51}
   wire         prod_82 =
-    _prod_plus_ma32_shl_1__0[0] ? prod_72 | p0_mb_3[1] : prod_72 & ~(p0_mb_3[1]);	// vector_unit.k:191:9, :249:{21,25}, :250:{21,25,51}
-  wire         prod_83 = p0__prod_plus_ma32_shl_2_[10] & p0_mb_5[2];	// vector_unit.k:191:9, :251:{21,25}
+    _prod_plus_ma32_shl_1__0[0] ? prod_72 | p0_mb_3[1] : prod_72 & ~(p0_mb_3[1]);	// vector_unit.k:166:9, :224:{21,25}, :225:{21,25,51}
+  wire         prod_83 = p0__prod_plus_ma32_shl_2_[10] & p0_mb_5[2];	// vector_unit.k:166:9, :226:{21,25}
   wire         prod_84 =
     p0__prod_plus_ma32_shl_2_[9]
       ? p0_prod_2[9] | p0_mb_5[2]
-      : p0_prod_2[9] & ~(p0_mb_5[2]);	// vector_unit.k:191:9, :251:{21,25}
+      : p0_prod_2[9] & ~(p0_mb_5[2]);	// vector_unit.k:166:9, :226:{21,25}
   wire         prod_85 =
     p0__prod_plus_ma32_shl_2_[8]
       ? p0_prod_2[8] | p0_mb_5[2]
-      : p0_prod_2[8] & ~(p0_mb_5[2]);	// vector_unit.k:191:9, :251:{21,25}
+      : p0_prod_2[8] & ~(p0_mb_5[2]);	// vector_unit.k:166:9, :226:{21,25}
   wire         prod_86 =
     p0__prod_plus_ma32_shl_2_[7]
       ? p0_prod_2[7] | p0_mb_5[2]
-      : p0_prod_2[7] & ~(p0_mb_5[2]);	// vector_unit.k:191:9, :251:{21,25}
+      : p0_prod_2[7] & ~(p0_mb_5[2]);	// vector_unit.k:166:9, :226:{21,25}
   wire         prod_87 =
     p0__prod_plus_ma32_shl_2_[6]
       ? p0_prod_2[6] | p0_mb_5[2]
-      : p0_prod_2[6] & ~(p0_mb_5[2]);	// vector_unit.k:191:9, :251:{21,25}
+      : p0_prod_2[6] & ~(p0_mb_5[2]);	// vector_unit.k:166:9, :226:{21,25}
   wire         prod_88 =
     p0__prod_plus_ma32_shl_2_[5]
       ? p0_prod_2[5] | p0_mb_5[2]
-      : p0_prod_2[5] & ~(p0_mb_5[2]);	// vector_unit.k:191:9, :251:{21,25}
+      : p0_prod_2[5] & ~(p0_mb_5[2]);	// vector_unit.k:166:9, :226:{21,25}
   wire         prod_89 =
     p0__prod_plus_ma32_shl_2_[4]
       ? p0_prod_2[4] | p0_mb_5[2]
-      : p0_prod_2[4] & ~(p0_mb_5[2]);	// vector_unit.k:191:9, :251:{21,25}
+      : p0_prod_2[4] & ~(p0_mb_5[2]);	// vector_unit.k:166:9, :226:{21,25}
   wire         prod_90 =
     p0__prod_plus_ma32_shl_2_[3]
       ? p0_prod_2[3] | p0_mb_5[2]
-      : p0_prod_2[3] & ~(p0_mb_5[2]);	// vector_unit.k:191:9, :251:{21,25}
+      : p0_prod_2[3] & ~(p0_mb_5[2]);	// vector_unit.k:166:9, :226:{21,25}
   wire         prod_91 =
     p0__prod_plus_ma32_shl_2_[2]
       ? p0_prod_2[2] | p0_mb_5[2]
-      : p0_prod_2[2] & ~(p0_mb_5[2]);	// vector_unit.k:191:9, :251:{21,25}
+      : p0_prod_2[2] & ~(p0_mb_5[2]);	// vector_unit.k:166:9, :226:{21,25}
   wire         prod_92 =
     p0__prod_plus_ma32_shl_2_[1]
       ? p0_prod_2[1] | p0_mb_5[2]
-      : p0_prod_2[1] & ~(p0_mb_5[2]);	// vector_unit.k:191:9, :251:{21,25}
+      : p0_prod_2[1] & ~(p0_mb_5[2]);	// vector_unit.k:166:9, :226:{21,25}
   wire         prod_93 =
     p0__prod_plus_ma32_shl_2_[0]
       ? p0_prod_2[0] | p0_mb_5[2]
-      : p0_prod_2[0] & ~(p0_mb_5[2]);	// vector_unit.k:191:9, :251:{21,25}
+      : p0_prod_2[0] & ~(p0_mb_5[2]);	// vector_unit.k:166:9, :226:{21,25}
   wire  [11:0] _prod_plus_ma32_shl_3__0 =
     12'({1'h0,
          prod_83,
@@ -4348,30 +4262,30 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
          prod_90,
          prod_91,
          prod_92,
-         prod_93} + p0__ma32_shl_3_);	// vector_unit.k:191:9, :251:{21,25}, :252:51
-  wire         prod_94 = _prod_plus_ma32_shl_3__0[11] & p0_mb_5[3];	// vector_unit.k:191:9, :252:{21,25,51}
+         prod_93} + p0__ma32_shl_3_);	// vector_unit.k:166:9, :226:{21,25}, :227:51
+  wire         prod_94 = _prod_plus_ma32_shl_3__0[11] & p0_mb_5[3];	// vector_unit.k:166:9, :227:{21,25,51}
   wire         prod_95 =
-    _prod_plus_ma32_shl_3__0[10] ? prod_83 | p0_mb_5[3] : prod_83 & ~(p0_mb_5[3]);	// vector_unit.k:191:9, :251:{21,25}, :252:{21,25,51}
+    _prod_plus_ma32_shl_3__0[10] ? prod_83 | p0_mb_5[3] : prod_83 & ~(p0_mb_5[3]);	// vector_unit.k:166:9, :226:{21,25}, :227:{21,25,51}
   wire         prod_96 =
-    _prod_plus_ma32_shl_3__0[9] ? prod_84 | p0_mb_5[3] : prod_84 & ~(p0_mb_5[3]);	// vector_unit.k:191:9, :251:{21,25}, :252:{21,25,51}
+    _prod_plus_ma32_shl_3__0[9] ? prod_84 | p0_mb_5[3] : prod_84 & ~(p0_mb_5[3]);	// vector_unit.k:166:9, :226:{21,25}, :227:{21,25,51}
   wire         prod_97 =
-    _prod_plus_ma32_shl_3__0[8] ? prod_85 | p0_mb_5[3] : prod_85 & ~(p0_mb_5[3]);	// vector_unit.k:191:9, :251:{21,25}, :252:{21,25,51}
+    _prod_plus_ma32_shl_3__0[8] ? prod_85 | p0_mb_5[3] : prod_85 & ~(p0_mb_5[3]);	// vector_unit.k:166:9, :226:{21,25}, :227:{21,25,51}
   wire         prod_98 =
-    _prod_plus_ma32_shl_3__0[7] ? prod_86 | p0_mb_5[3] : prod_86 & ~(p0_mb_5[3]);	// vector_unit.k:191:9, :251:{21,25}, :252:{21,25,51}
+    _prod_plus_ma32_shl_3__0[7] ? prod_86 | p0_mb_5[3] : prod_86 & ~(p0_mb_5[3]);	// vector_unit.k:166:9, :226:{21,25}, :227:{21,25,51}
   wire         prod_99 =
-    _prod_plus_ma32_shl_3__0[6] ? prod_87 | p0_mb_5[3] : prod_87 & ~(p0_mb_5[3]);	// vector_unit.k:191:9, :251:{21,25}, :252:{21,25,51}
+    _prod_plus_ma32_shl_3__0[6] ? prod_87 | p0_mb_5[3] : prod_87 & ~(p0_mb_5[3]);	// vector_unit.k:166:9, :226:{21,25}, :227:{21,25,51}
   wire         prod_100 =
-    _prod_plus_ma32_shl_3__0[5] ? prod_88 | p0_mb_5[3] : prod_88 & ~(p0_mb_5[3]);	// vector_unit.k:191:9, :251:{21,25}, :252:{21,25,51}
+    _prod_plus_ma32_shl_3__0[5] ? prod_88 | p0_mb_5[3] : prod_88 & ~(p0_mb_5[3]);	// vector_unit.k:166:9, :226:{21,25}, :227:{21,25,51}
   wire         prod_101 =
-    _prod_plus_ma32_shl_3__0[4] ? prod_89 | p0_mb_5[3] : prod_89 & ~(p0_mb_5[3]);	// vector_unit.k:191:9, :251:{21,25}, :252:{21,25,51}
+    _prod_plus_ma32_shl_3__0[4] ? prod_89 | p0_mb_5[3] : prod_89 & ~(p0_mb_5[3]);	// vector_unit.k:166:9, :226:{21,25}, :227:{21,25,51}
   wire         prod_102 =
-    _prod_plus_ma32_shl_3__0[3] ? prod_90 | p0_mb_5[3] : prod_90 & ~(p0_mb_5[3]);	// vector_unit.k:191:9, :251:{21,25}, :252:{21,25,51}
+    _prod_plus_ma32_shl_3__0[3] ? prod_90 | p0_mb_5[3] : prod_90 & ~(p0_mb_5[3]);	// vector_unit.k:166:9, :226:{21,25}, :227:{21,25,51}
   wire         prod_103 =
-    _prod_plus_ma32_shl_3__0[2] ? prod_91 | p0_mb_5[3] : prod_91 & ~(p0_mb_5[3]);	// vector_unit.k:191:9, :251:{21,25}, :252:{21,25,51}
+    _prod_plus_ma32_shl_3__0[2] ? prod_91 | p0_mb_5[3] : prod_91 & ~(p0_mb_5[3]);	// vector_unit.k:166:9, :226:{21,25}, :227:{21,25,51}
   wire         prod_104 =
-    _prod_plus_ma32_shl_3__0[1] ? prod_92 | p0_mb_5[3] : prod_92 & ~(p0_mb_5[3]);	// vector_unit.k:191:9, :251:{21,25}, :252:{21,25,51}
+    _prod_plus_ma32_shl_3__0[1] ? prod_92 | p0_mb_5[3] : prod_92 & ~(p0_mb_5[3]);	// vector_unit.k:166:9, :226:{21,25}, :227:{21,25,51}
   wire         prod_105 =
-    _prod_plus_ma32_shl_3__0[0] ? prod_93 | p0_mb_5[3] : prod_93 & ~(p0_mb_5[3]);	// vector_unit.k:191:9, :251:{21,25}, :252:{21,25,51}
+    _prod_plus_ma32_shl_3__0[0] ? prod_93 | p0_mb_5[3] : prod_93 & ~(p0_mb_5[3]);	// vector_unit.k:166:9, :226:{21,25}, :227:{21,25,51}
   wire  [12:0] _prod_plus_ma32_shl_4_ =
     13'({1'h0,
          prod_94,
@@ -4385,32 +4299,32 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
          prod_102,
          prod_103,
          prod_104,
-         prod_105} + p0__ma32_shl_4_);	// vector_unit.k:191:9, :252:{21,25}, :253:51
-  wire         prod_106 = _prod_plus_ma32_shl_4_[12] & p0_mb_5[4];	// vector_unit.k:191:9, :253:{21,25,51}
+         prod_105} + p0__ma32_shl_4_);	// vector_unit.k:166:9, :227:{21,25}, :228:51
+  wire         prod_106 = _prod_plus_ma32_shl_4_[12] & p0_mb_5[4];	// vector_unit.k:166:9, :228:{21,25,51}
   wire         prod_107 =
-    _prod_plus_ma32_shl_4_[11] ? prod_94 | p0_mb_5[4] : prod_94 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[11] ? prod_94 | p0_mb_5[4] : prod_94 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire         prod_108 =
-    _prod_plus_ma32_shl_4_[10] ? prod_95 | p0_mb_5[4] : prod_95 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[10] ? prod_95 | p0_mb_5[4] : prod_95 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire         prod_109 =
-    _prod_plus_ma32_shl_4_[9] ? prod_96 | p0_mb_5[4] : prod_96 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[9] ? prod_96 | p0_mb_5[4] : prod_96 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire         prod_110 =
-    _prod_plus_ma32_shl_4_[8] ? prod_97 | p0_mb_5[4] : prod_97 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[8] ? prod_97 | p0_mb_5[4] : prod_97 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire         prod_111 =
-    _prod_plus_ma32_shl_4_[7] ? prod_98 | p0_mb_5[4] : prod_98 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[7] ? prod_98 | p0_mb_5[4] : prod_98 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire         prod_112 =
-    _prod_plus_ma32_shl_4_[6] ? prod_99 | p0_mb_5[4] : prod_99 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[6] ? prod_99 | p0_mb_5[4] : prod_99 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire         prod_113 =
-    _prod_plus_ma32_shl_4_[5] ? prod_100 | p0_mb_5[4] : prod_100 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[5] ? prod_100 | p0_mb_5[4] : prod_100 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire         prod_114 =
-    _prod_plus_ma32_shl_4_[4] ? prod_101 | p0_mb_5[4] : prod_101 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[4] ? prod_101 | p0_mb_5[4] : prod_101 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire         prod_115 =
-    _prod_plus_ma32_shl_4_[3] ? prod_102 | p0_mb_5[4] : prod_102 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[3] ? prod_102 | p0_mb_5[4] : prod_102 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire         prod_116 =
-    _prod_plus_ma32_shl_4_[2] ? prod_103 | p0_mb_5[4] : prod_103 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[2] ? prod_103 | p0_mb_5[4] : prod_103 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire         prod_117 =
-    _prod_plus_ma32_shl_4_[1] ? prod_104 | p0_mb_5[4] : prod_104 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[1] ? prod_104 | p0_mb_5[4] : prod_104 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire         prod_118 =
-    _prod_plus_ma32_shl_4_[0] ? prod_105 | p0_mb_5[4] : prod_105 & ~(p0_mb_5[4]);	// vector_unit.k:191:9, :252:{21,25}, :253:{21,25,51}
+    _prod_plus_ma32_shl_4_[0] ? prod_105 | p0_mb_5[4] : prod_105 & ~(p0_mb_5[4]);	// vector_unit.k:166:9, :227:{21,25}, :228:{21,25,51}
   wire  [13:0] _prod_plus_ma32_shl_5__0 =
     14'({1'h0,
          prod_106,
@@ -4425,34 +4339,34 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
          prod_115,
          prod_116,
          prod_117,
-         prod_118} + p0__ma32_shl_5__0);	// vector_unit.k:191:9, :253:{21,25}, :254:51
-  wire         prod_119 = _prod_plus_ma32_shl_5__0[13] & p0_mb_5[5];	// vector_unit.k:191:9, :254:{21,25,51}
+         prod_118} + p0__ma32_shl_5__0);	// vector_unit.k:166:9, :228:{21,25}, :229:51
+  wire         prod_119 = _prod_plus_ma32_shl_5__0[13] & p0_mb_5[5];	// vector_unit.k:166:9, :229:{21,25,51}
   wire         prod_120 =
-    _prod_plus_ma32_shl_5__0[12] ? prod_106 | p0_mb_5[5] : prod_106 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[12] ? prod_106 | p0_mb_5[5] : prod_106 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_121 =
-    _prod_plus_ma32_shl_5__0[11] ? prod_107 | p0_mb_5[5] : prod_107 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[11] ? prod_107 | p0_mb_5[5] : prod_107 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_122 =
-    _prod_plus_ma32_shl_5__0[10] ? prod_108 | p0_mb_5[5] : prod_108 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[10] ? prod_108 | p0_mb_5[5] : prod_108 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_123 =
-    _prod_plus_ma32_shl_5__0[9] ? prod_109 | p0_mb_5[5] : prod_109 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[9] ? prod_109 | p0_mb_5[5] : prod_109 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_124 =
-    _prod_plus_ma32_shl_5__0[8] ? prod_110 | p0_mb_5[5] : prod_110 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[8] ? prod_110 | p0_mb_5[5] : prod_110 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_125 =
-    _prod_plus_ma32_shl_5__0[7] ? prod_111 | p0_mb_5[5] : prod_111 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[7] ? prod_111 | p0_mb_5[5] : prod_111 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_126 =
-    _prod_plus_ma32_shl_5__0[6] ? prod_112 | p0_mb_5[5] : prod_112 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[6] ? prod_112 | p0_mb_5[5] : prod_112 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_127 =
-    _prod_plus_ma32_shl_5__0[5] ? prod_113 | p0_mb_5[5] : prod_113 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[5] ? prod_113 | p0_mb_5[5] : prod_113 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_128 =
-    _prod_plus_ma32_shl_5__0[4] ? prod_114 | p0_mb_5[5] : prod_114 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[4] ? prod_114 | p0_mb_5[5] : prod_114 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_129 =
-    _prod_plus_ma32_shl_5__0[3] ? prod_115 | p0_mb_5[5] : prod_115 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[3] ? prod_115 | p0_mb_5[5] : prod_115 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_130 =
-    _prod_plus_ma32_shl_5__0[2] ? prod_116 | p0_mb_5[5] : prod_116 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[2] ? prod_116 | p0_mb_5[5] : prod_116 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_131 =
-    _prod_plus_ma32_shl_5__0[1] ? prod_117 | p0_mb_5[5] : prod_117 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[1] ? prod_117 | p0_mb_5[5] : prod_117 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire         prod_132 =
-    _prod_plus_ma32_shl_5__0[0] ? prod_118 | p0_mb_5[5] : prod_118 & ~(p0_mb_5[5]);	// vector_unit.k:191:9, :253:{21,25}, :254:{21,25,51}
+    _prod_plus_ma32_shl_5__0[0] ? prod_118 | p0_mb_5[5] : prod_118 & ~(p0_mb_5[5]);	// vector_unit.k:166:9, :228:{21,25}, :229:{21,25,51}
   wire  [15:0] _prod_plus_ma32_shl_7__0 =
     16'({1'h0,
          p0__prod_plus_ma32_shl_6_[14] & p0_mb_7,
@@ -4478,33 +4392,33 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
          p0__prod_plus_ma32_shl_6_[2] ? p0_prod_3[2] | p0_mb_7 : p0_prod_3[2] & ~p0_mb_7,
          p0__prod_plus_ma32_shl_6_[1] ? p0_prod_3[1] | p0_mb_7 : p0_prod_3[1] & ~p0_mb_7,
          p0__prod_plus_ma32_shl_6_[0] ? p0_prod_3[0] | p0_mb_7 : p0_prod_3[0] & ~p0_mb_7}
-        + p0__ma32_shl_7__1);	// vector_unit.k:191:9, :255:21, :256:51
+        + p0__ma32_shl_7__1);	// vector_unit.k:166:9, :230:21, :231:51
   wire  [15:0] r_exp_0 =
     _prod_plus_ma32_shl_7__0[15]
       ? p0__a_exp_plus_b_exp_minus_127_plus_1__2
-      : p0__a_exp_plus_b_exp_minus_127__2;	// vector_unit.k:191:9, :256:{21,51}, :259:21
-  wire         _GEN_3 = r_exp_0 < 16'hFF & (|r_exp_0);	// vector_unit.k:244:{21,37,38,53}, :259:21, :261:{34,47}, :266:{34,47}, :269:{21,25,31,44}, :271:{34,49,51}
-  wire         _GEN_4 = ~(_prod_plus_ma32_shl_7__0[15]) & _GEN_3;	// vector_unit.k:244:{21,37,38,53}, :256:{21,51}, :259:21, :261:{34,47}, :266:{34,47}, :269:{21,25}, :271:{34,49,51}
-  wire         _GEN_5 = p0__b_exp_ne_0__4 & p0__a_exp_ne_0__2;	// vector_unit.k:191:9, :242:{17,21}
-  always @(posedge clk) begin	// vector_unit.k:191:9
-    p0_gate_bf16 <= data_in_32[15:0];	// vector_unit.k:191:9
-    p0_up_bf16 <= data_in_32[31:16];	// vector_unit.k:191:9
-    if (rst)	// vector_unit.k:191:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:191:9
-    else	// vector_unit.k:191:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:191:9
-    p0_gate_bf16_0 <= p0_gate_bf16;	// vector_unit.k:191:9
-    p0_up_bf16_0 <= p0_up_bf16;	// vector_unit.k:191:9
-    if (rst)	// vector_unit.k:191:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:191:9
-    else	// vector_unit.k:191:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:191:9
-    p0_gate_bf16_1 <= p0_gate_bf16_0;	// vector_unit.k:191:9
-    p0_up_bf16_1 <= p0_up_bf16_0;	// vector_unit.k:191:9
-    if (rst)	// vector_unit.k:191:9
-      p0_stage3_enable <= 1'h0;	// vector_unit.k:191:9
-    else	// vector_unit.k:191:9
-      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:191:9
+      : p0__a_exp_plus_b_exp_minus_127__2;	// vector_unit.k:166:9, :231:{21,51}, :234:21
+  wire         _GEN_3 = r_exp_0 < 16'hFF & (|r_exp_0);	// vector_unit.k:219:{21,37,38,53}, :234:21, :236:{34,47}, :241:{34,47}, :244:{21,25,31,44}, :246:{34,49,51}
+  wire         _GEN_4 = ~(_prod_plus_ma32_shl_7__0[15]) & _GEN_3;	// vector_unit.k:219:{21,37,38,53}, :231:{21,51}, :234:21, :236:{34,47}, :241:{34,47}, :244:{21,25}, :246:{34,49,51}
+  wire         _GEN_5 = p0__b_exp_ne_0__4 & p0__a_exp_ne_0__2;	// vector_unit.k:166:9, :217:{17,21}
+  always @(posedge clk) begin	// vector_unit.k:166:9
+    p0_gate_bf16 <= data_in_24[15:0];	// vector_unit.k:166:9
+    p0_up_bf16 <= data_in_24[31:16];	// vector_unit.k:166:9
+    if (rst)	// vector_unit.k:166:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:166:9
+    else	// vector_unit.k:166:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:166:9
+    p0_gate_bf16_0 <= p0_gate_bf16;	// vector_unit.k:166:9
+    p0_up_bf16_0 <= p0_up_bf16;	// vector_unit.k:166:9
+    if (rst)	// vector_unit.k:166:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:166:9
+    else	// vector_unit.k:166:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:166:9
+    p0_gate_bf16_1 <= p0_gate_bf16_0;	// vector_unit.k:166:9
+    p0_up_bf16_1 <= p0_up_bf16_0;	// vector_unit.k:166:9
+    if (rst)	// vector_unit.k:166:9
+      p0_stage3_enable <= 1'h0;	// vector_unit.k:166:9
+    else	// vector_unit.k:166:9
+      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:166:9
     p0__prod_plus_ma32_shl_4_ <=
       13'({1'h0,
            prod_27,
@@ -4518,8 +4432,8 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
            prod_35,
            prod_36,
            prod_37,
-           prod_38} + {2'h1, p0_gate_bf16_1[6:0], 4'h0});	// vector_unit.k:191:9, :213:{21,25}, :214:{51,58}
-    p0_mb <= memory_read_data_in_38_0_0[5:0];	// vector_unit.k:191:9
+           prod_38} + {2'h1, p0_gate_bf16_1[6:0], 4'h0});	// vector_unit.k:166:9, :188:{21,25}, :189:{51,58}
+    p0_mb <= memory_read_data_in_30_0_0[5:0];	// vector_unit.k:166:9
     p0_prod <=
       {prod_27,
        prod_28,
@@ -4532,41 +4446,41 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
        prod_35,
        prod_36,
        prod_37,
-       prod_38};	// vector_unit.k:191:9, :213:{21,25}
-    p0__ma32_shl_5_ <= {2'h1, p0_gate_bf16_1[6:0], 5'h0};	// vector_unit.k:191:9, :215:58
-    p0__ma32_shl_6_ <= {2'h1, p0_gate_bf16_1[6:0], 6'h0};	// vector_unit.k:191:9, :216:58
-    p0_mb_0 <= memory_read_data_in_38_0_0[6];	// vector_unit.k:191:9, :207:{21,33}
-    p0__ma32_shl_7_ <= {2'h1, p0_gate_bf16_1[6:0], 7'h0};	// vector_unit.k:191:9, :217:58
-    p0__a_exp_plus_b_exp_minus_127_plus_1_ <= 16'(_a_exp_plus_b_exp_ - 16'h7E);	// vector_unit.k:191:9, :223:{33,39,47}, :228:39
-    p0__a_exp_plus_b_exp_minus_127_ <= 16'(_a_exp_plus_b_exp_ - 16'h7F);	// vector_unit.k:191:9, :223:39, :228:{33,39}
-    p0_memory_read_data_in_38_0 <= memory_read_data_in_38_0_0;	// vector_unit.k:191:9
-    p0_gate_bf16_2 <= p0_gate_bf16_1;	// vector_unit.k:191:9
-    p0__b_exp_ne_0_ <= |(memory_read_data_in_38_0_0[14:7]);	// vector_unit.k:191:9, :202:{17,32}, :203:41
-    p0__a_exp_ne_0_ <= |(p0_gate_bf16_1[14:7]);	// vector_unit.k:191:9, :201:{17,32}, :203:27
-    p0_mb_1 <= p0_up_bf16_1[5:0];	// vector_unit.k:191:9
-    p0_b_exp <= {8'h0, p0_up_bf16_1[14:7]};	// vector_unit.k:191:9, :241:{17,32}
-    p0_mb_2 <= p0_up_bf16_1[6];	// vector_unit.k:191:9, :246:{21,33}
-    p0__b_exp_ne_0__0 <= |(p0_up_bf16_1[14:7]);	// vector_unit.k:191:9, :241:{17,32}, :242:41
-    if (rst)	// vector_unit.k:191:9
-      p0_stage4_enable <= 1'h0;	// vector_unit.k:191:9
-    else	// vector_unit.k:191:9
-      p0_stage4_enable <= p0_stage3_enable;	// vector_unit.k:191:9
-    p0_prod_0 <= _prod_plus_ma32_shl_7_[15];	// vector_unit.k:191:9, :217:{21,51}
-    p0__a_exp_plus_b_exp_minus_127_plus_1__0 <= p0__a_exp_plus_b_exp_minus_127_plus_1_;	// vector_unit.k:191:9
-    p0__a_exp_plus_b_exp_minus_127__0 <= p0__a_exp_plus_b_exp_minus_127_;	// vector_unit.k:191:9
-    p0_memory_read_data_in_38_0_0 <= p0_memory_read_data_in_38_0;	// vector_unit.k:191:9
-    p0_gate_bf16_3 <= p0_gate_bf16_2;	// vector_unit.k:191:9
-    p0_prod_1 <= _prod_plus_ma32_shl_7_[14:0];	// vector_unit.k:191:9, :217:51
-    p0__b_exp_ne_0__1 <= p0__b_exp_ne_0_;	// vector_unit.k:191:9
-    p0__a_exp_ne_0__0 <= p0__a_exp_ne_0_;	// vector_unit.k:191:9
-    p0_mb_3 <= p0_mb_1;	// vector_unit.k:191:9
-    p0_b_exp_0 <= p0_b_exp;	// vector_unit.k:191:9
-    p0_mb_4 <= p0_mb_2;	// vector_unit.k:191:9
-    p0__b_exp_ne_0__2 <= p0__b_exp_ne_0__0;	// vector_unit.k:191:9
-    if (rst)	// vector_unit.k:191:9
-      p0_stage5_enable <= 1'h0;	// vector_unit.k:191:9
-    else	// vector_unit.k:191:9
-      p0_stage5_enable <= p0_stage4_enable;	// vector_unit.k:191:9
+       prod_38};	// vector_unit.k:166:9, :188:{21,25}
+    p0__ma32_shl_5_ <= {2'h1, p0_gate_bf16_1[6:0], 5'h0};	// vector_unit.k:166:9, :190:58
+    p0__ma32_shl_6_ <= {2'h1, p0_gate_bf16_1[6:0], 6'h0};	// vector_unit.k:166:9, :191:58
+    p0_mb_0 <= memory_read_data_in_30_0_0[6];	// vector_unit.k:166:9, :182:{21,33}
+    p0__ma32_shl_7_ <= {2'h1, p0_gate_bf16_1[6:0], 7'h0};	// vector_unit.k:166:9, :192:58
+    p0__a_exp_plus_b_exp_minus_127_plus_1_ <= 16'(_a_exp_plus_b_exp_ - 16'h7E);	// vector_unit.k:166:9, :198:{33,39,47}, :203:39
+    p0__a_exp_plus_b_exp_minus_127_ <= 16'(_a_exp_plus_b_exp_ - 16'h7F);	// vector_unit.k:166:9, :198:39, :203:{33,39}
+    p0_memory_read_data_in_30_0 <= memory_read_data_in_30_0_0;	// vector_unit.k:166:9
+    p0_gate_bf16_2 <= p0_gate_bf16_1;	// vector_unit.k:166:9
+    p0__b_exp_ne_0_ <= |(memory_read_data_in_30_0_0[14:7]);	// vector_unit.k:166:9, :177:{17,32}, :178:41
+    p0__a_exp_ne_0_ <= |(p0_gate_bf16_1[14:7]);	// vector_unit.k:166:9, :176:{17,32}, :178:27
+    p0_mb_1 <= p0_up_bf16_1[5:0];	// vector_unit.k:166:9
+    p0_b_exp <= {8'h0, p0_up_bf16_1[14:7]};	// vector_unit.k:166:9, :216:{17,32}
+    p0_mb_2 <= p0_up_bf16_1[6];	// vector_unit.k:166:9, :221:{21,33}
+    p0__b_exp_ne_0__0 <= |(p0_up_bf16_1[14:7]);	// vector_unit.k:166:9, :216:{17,32}, :217:41
+    if (rst)	// vector_unit.k:166:9
+      p0_stage4_enable <= 1'h0;	// vector_unit.k:166:9
+    else	// vector_unit.k:166:9
+      p0_stage4_enable <= p0_stage3_enable;	// vector_unit.k:166:9
+    p0_prod_0 <= _prod_plus_ma32_shl_7_[15];	// vector_unit.k:166:9, :192:{21,51}
+    p0__a_exp_plus_b_exp_minus_127_plus_1__0 <= p0__a_exp_plus_b_exp_minus_127_plus_1_;	// vector_unit.k:166:9
+    p0__a_exp_plus_b_exp_minus_127__0 <= p0__a_exp_plus_b_exp_minus_127_;	// vector_unit.k:166:9
+    p0_memory_read_data_in_30_0_0 <= p0_memory_read_data_in_30_0;	// vector_unit.k:166:9
+    p0_gate_bf16_3 <= p0_gate_bf16_2;	// vector_unit.k:166:9
+    p0_prod_1 <= _prod_plus_ma32_shl_7_[14:0];	// vector_unit.k:166:9, :192:51
+    p0__b_exp_ne_0__1 <= p0__b_exp_ne_0_;	// vector_unit.k:166:9
+    p0__a_exp_ne_0__0 <= p0__a_exp_ne_0_;	// vector_unit.k:166:9
+    p0_mb_3 <= p0_mb_1;	// vector_unit.k:166:9
+    p0_b_exp_0 <= p0_b_exp;	// vector_unit.k:166:9
+    p0_mb_4 <= p0_mb_2;	// vector_unit.k:166:9
+    p0__b_exp_ne_0__2 <= p0__b_exp_ne_0__0;	// vector_unit.k:166:9
+    if (rst)	// vector_unit.k:166:9
+      p0_stage5_enable <= 1'h0;	// vector_unit.k:166:9
+    else	// vector_unit.k:166:9
+      p0_stage5_enable <= p0_stage4_enable;	// vector_unit.k:166:9
     p0__prod_plus_ma32_shl_2_ <=
       11'({1'h0,
            prod_73,
@@ -4579,8 +4493,8 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
            prod_80,
            prod_81,
            prod_82}
-          + {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 2'h0});	// vector_unit.k:191:9, :203:{17,21}, :250:{21,25}, :251:{51,58}
-    p0_mb_5 <= p0_mb_3;	// vector_unit.k:191:9
+          + {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 2'h0});	// vector_unit.k:166:9, :178:{17,21}, :225:{21,25}, :226:{51,58}
+    p0_mb_5 <= p0_mb_3;	// vector_unit.k:166:9
     p0_prod_2 <=
       {prod_73,
        prod_74,
@@ -4591,24 +4505,24 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
        prod_79,
        prod_80,
        prod_81,
-       prod_82};	// vector_unit.k:191:9, :250:{21,25}
+       prod_82};	// vector_unit.k:166:9, :225:{21,25}
     p0__ma32_shl_3_ <=
-      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 3'h0};	// vector_unit.k:191:9, :203:{17,21}, :252:58
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 3'h0};	// vector_unit.k:166:9, :178:{17,21}, :227:58
     p0__ma32_shl_4_ <=
-      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 4'h0};	// vector_unit.k:191:9, :203:{17,21}, :253:58
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 4'h0};	// vector_unit.k:166:9, :178:{17,21}, :228:58
     p0__ma32_shl_5__0 <=
-      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 5'h0};	// vector_unit.k:191:9, :203:{17,21}, :254:58
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 5'h0};	// vector_unit.k:166:9, :178:{17,21}, :229:58
     p0__ma32_shl_6__0 <=
-      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 6'h0};	// vector_unit.k:191:9, :203:{17,21}, :255:58
-    p0_mb_6 <= p0_mb_4;	// vector_unit.k:191:9
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 6'h0};	// vector_unit.k:166:9, :178:{17,21}, :230:58
+    p0_mb_6 <= p0_mb_4;	// vector_unit.k:166:9
     p0__ma32_shl_7__0 <=
-      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 7'h0};	// vector_unit.k:191:9, :203:{17,21}, :256:58
-    p0__a_exp_plus_b_exp_minus_127_plus_1__1 <= 16'(_a_exp_plus_b_exp__0 - 16'h7E);	// vector_unit.k:191:9, :262:{33,39,47}, :267:39
-    p0__a_exp_plus_b_exp_minus_127__1 <= 16'(_a_exp_plus_b_exp__0 - 16'h7F);	// vector_unit.k:191:9, :262:39, :267:{33,39}
+      {2'h1, silu_7, silu_8, silu_9, silu_10, silu_11, silu_12, silu_13, 7'h0};	// vector_unit.k:166:9, :178:{17,21}, :231:58
+    p0__a_exp_plus_b_exp_minus_127_plus_1__1 <= 16'(_a_exp_plus_b_exp__0 - 16'h7E);	// vector_unit.k:166:9, :237:{33,39,47}, :242:39
+    p0__a_exp_plus_b_exp_minus_127__1 <= 16'(_a_exp_plus_b_exp__0 - 16'h7F);	// vector_unit.k:166:9, :237:39, :242:{33,39}
     p0_silu <=
       {(r_exp[8]
           ? _GEN_0
-          : p0_memory_read_data_in_38_0_0[15]
+          : p0_memory_read_data_in_30_0_0[15]
               ? ~(p0_gate_bf16_3[15]) & _GEN_0
               : p0_gate_bf16_3[15] & _GEN_0) & _GEN_2,
        silu,
@@ -4625,13 +4539,13 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
        silu_10,
        silu_11,
        silu_12,
-       silu_13};	// vector_unit.k:191:9, :203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}
-    p0__b_exp_ne_0__3 <= p0__b_exp_ne_0__2;	// vector_unit.k:191:9
-    p0__a_exp_ne_0__1 <= |{silu, silu_0, silu_1, silu_2, silu_3, silu_4, silu_5, silu_6};	// vector_unit.k:191:9, :203:{17,21}, :205:{21,37,38,58}, :220:21, :222:{34,47}, :227:{34,47}, :230:{21,25}, :232:{32,47,49}, :240:{17,32}, :242:27
-    if (rst)	// vector_unit.k:191:9
-      p0_stage6_enable <= 1'h0;	// vector_unit.k:191:9
-    else	// vector_unit.k:191:9
-      p0_stage6_enable <= p0_stage5_enable;	// vector_unit.k:191:9
+       silu_13};	// vector_unit.k:166:9, :178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}
+    p0__b_exp_ne_0__3 <= p0__b_exp_ne_0__2;	// vector_unit.k:166:9
+    p0__a_exp_ne_0__1 <= |{silu, silu_0, silu_1, silu_2, silu_3, silu_4, silu_5, silu_6};	// vector_unit.k:166:9, :178:{17,21}, :180:{21,37,38,58}, :195:21, :197:{34,47}, :202:{34,47}, :205:{21,25}, :207:{32,47,49}, :215:{17,32}, :217:27
+    if (rst)	// vector_unit.k:166:9
+      p0_stage6_enable <= 1'h0;	// vector_unit.k:166:9
+    else	// vector_unit.k:166:9
+      p0_stage6_enable <= p0_stage5_enable;	// vector_unit.k:166:9
     p0__prod_plus_ma32_shl_6_ <=
       15'({1'h0,
            prod_119,
@@ -4647,8 +4561,8 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
            prod_129,
            prod_130,
            prod_131,
-           prod_132} + p0__ma32_shl_6__0);	// vector_unit.k:191:9, :254:{21,25}, :255:51
-    p0_mb_7 <= p0_mb_6;	// vector_unit.k:191:9
+           prod_132} + p0__ma32_shl_6__0);	// vector_unit.k:166:9, :229:{21,25}, :230:51
+    p0_mb_7 <= p0_mb_6;	// vector_unit.k:166:9
     p0_prod_3 <=
       {prod_119,
        prod_120,
@@ -4663,18 +4577,18 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
        prod_129,
        prod_130,
        prod_131,
-       prod_132};	// vector_unit.k:191:9, :254:{21,25}
-    p0__ma32_shl_7__1 <= p0__ma32_shl_7__0;	// vector_unit.k:191:9
-    p0__a_exp_plus_b_exp_minus_127_plus_1__2 <= p0__a_exp_plus_b_exp_minus_127_plus_1__1;	// vector_unit.k:191:9
-    p0__a_exp_plus_b_exp_minus_127__2 <= p0__a_exp_plus_b_exp_minus_127__1;	// vector_unit.k:191:9
-    p0_up_bf16_2 <= data_prop_out_31_0;	// vector_unit.k:191:9
-    p0_silu_0 <= p0_silu;	// vector_unit.k:191:9
-    p0__b_exp_ne_0__4 <= p0__b_exp_ne_0__3;	// vector_unit.k:191:9
-    p0__a_exp_ne_0__2 <= p0__a_exp_ne_0__1;	// vector_unit.k:191:9
-    if (rst)	// vector_unit.k:191:9
-      p0_stage7_enable <= 1'h0;	// vector_unit.k:191:9
-    else	// vector_unit.k:191:9
-      p0_stage7_enable <= p0_stage6_enable;	// vector_unit.k:191:9
+       prod_132};	// vector_unit.k:166:9, :229:{21,25}
+    p0__ma32_shl_7__1 <= p0__ma32_shl_7__0;	// vector_unit.k:166:9
+    p0__a_exp_plus_b_exp_minus_127_plus_1__2 <= p0__a_exp_plus_b_exp_minus_127_plus_1__1;	// vector_unit.k:166:9
+    p0__a_exp_plus_b_exp_minus_127__2 <= p0__a_exp_plus_b_exp_minus_127__1;	// vector_unit.k:166:9
+    p0_up_bf16_2 <= data_prop_out_23_0;	// vector_unit.k:166:9
+    p0_silu_0 <= p0_silu;	// vector_unit.k:166:9
+    p0__b_exp_ne_0__4 <= p0__b_exp_ne_0__3;	// vector_unit.k:166:9
+    p0__a_exp_ne_0__2 <= p0__a_exp_ne_0__1;	// vector_unit.k:166:9
+    if (rst)	// vector_unit.k:166:9
+      p0_stage7_enable <= 1'h0;	// vector_unit.k:166:9
+    else	// vector_unit.k:166:9
+      p0_stage7_enable <= p0_stage6_enable;	// vector_unit.k:166:9
     p0_result <=
       {(r_exp_0[8]
           ? _GEN_3
@@ -4708,30 +4622,30 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
           : _prod_plus_ma32_shl_7__0[8] & _GEN_4) & _GEN_5,
        (_prod_plus_ma32_shl_7__0[8]
           ? (_prod_plus_ma32_shl_7__0[7] | _prod_plus_ma32_shl_7__0[15]) & _GEN_3
-          : _prod_plus_ma32_shl_7__0[7] & _GEN_4) & _GEN_5};	// vector_unit.k:191:9, :242:{17,21}, :244:{21,37,38,53}, :256:{21,51}, :259:21, :261:{34,47}, :266:{34,47}, :269:{21,25}, :271:{34,49,51}
-    if (rst)	// vector_unit.k:191:9
-      p0_stage8_enable <= 1'h0;	// vector_unit.k:191:9
-    else	// vector_unit.k:191:9
-      p0_stage8_enable <= p0_stage7_enable;	// vector_unit.k:191:9
-    p0_result_0 <= p0_result;	// vector_unit.k:191:9
-    if (rst)	// vector_unit.k:191:9
-      p0_stage9_enable <= 1'h0;	// vector_unit.k:191:9
-    else	// vector_unit.k:191:9
-      p0_stage9_enable <= p0_stage8_enable;	// vector_unit.k:191:9
-    p0_result_1 <= p0_result_0;	// vector_unit.k:191:9
-    if (rst)	// vector_unit.k:191:9
-      p0_stage10_enable <= 1'h0;	// vector_unit.k:191:9
-    else	// vector_unit.k:191:9
-      p0_stage10_enable <= p0_stage9_enable;	// vector_unit.k:191:9
-    p0_result_2 <= p0_result_1;	// vector_unit.k:191:9
-    if (rst)	// vector_unit.k:191:9
-      p0_stage11_enable <= 1'h0;	// vector_unit.k:191:9
-    else	// vector_unit.k:191:9
-      p0_stage11_enable <= p0_stage10_enable;	// vector_unit.k:191:9
+          : _prod_plus_ma32_shl_7__0[7] & _GEN_4) & _GEN_5};	// vector_unit.k:166:9, :217:{17,21}, :219:{21,37,38,53}, :231:{21,51}, :234:21, :236:{34,47}, :241:{34,47}, :244:{21,25}, :246:{34,49,51}
+    if (rst)	// vector_unit.k:166:9
+      p0_stage8_enable <= 1'h0;	// vector_unit.k:166:9
+    else	// vector_unit.k:166:9
+      p0_stage8_enable <= p0_stage7_enable;	// vector_unit.k:166:9
+    p0_result_0 <= p0_result;	// vector_unit.k:166:9
+    if (rst)	// vector_unit.k:166:9
+      p0_stage9_enable <= 1'h0;	// vector_unit.k:166:9
+    else	// vector_unit.k:166:9
+      p0_stage9_enable <= p0_stage8_enable;	// vector_unit.k:166:9
+    p0_result_1 <= p0_result_0;	// vector_unit.k:166:9
+    if (rst)	// vector_unit.k:166:9
+      p0_stage10_enable <= 1'h0;	// vector_unit.k:166:9
+    else	// vector_unit.k:166:9
+      p0_stage10_enable <= p0_stage9_enable;	// vector_unit.k:166:9
+    p0_result_2 <= p0_result_1;	// vector_unit.k:166:9
+    if (rst)	// vector_unit.k:166:9
+      p0_stage11_enable <= 1'h0;	// vector_unit.k:166:9
+    else	// vector_unit.k:166:9
+      p0_stage11_enable <= p0_stage10_enable;	// vector_unit.k:166:9
   end // always @(posedge)
-  always_comb begin	// vector_unit.k:191:9
-    fifo_wren_0_0 = p0_stage11_enable;	// vector_unit.k:189:5, :191:9
-    fifo_data_out_0_0 = p0_result_2;	// vector_unit.k:189:5, :191:9
+  always_comb begin	// vector_unit.k:166:9
+    fifo_wren_0_0 = p0_stage11_enable;	// vector_unit.k:164:5, :166:9
+    fifo_data_out_0_0 = p0_result_2;	// vector_unit.k:164:5, :166:9
   end // always_comb
   KanagawaFixedDelayFifo #(
     .WIDTH(16),
@@ -4739,18 +4653,18 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
     .USE_LUTRAM(1),
     .DEVICE_FAMILY("mock"),
     .USE_DSP(0)
-  ) delay_fifo_31_swiglu_compute_Propagation (	// vector_unit.k:191:9
-    .clk      (clk),	// vector_unit.k:191:9
-    .rst      (rst),	// vector_unit.k:191:9
-    .data_in  (data_prop_in_31_0),	// vector_unit.k:191:9
-    .data_out (data_prop_out_31_0)
-  );	// vector_unit.k:191:9
+  ) delay_fifo_23_swiglu_compute_Propagation (	// vector_unit.k:166:9
+    .clk      (clk),	// vector_unit.k:166:9
+    .rst      (rst),	// vector_unit.k:166:9
+    .data_in  (data_prop_in_23_0),	// vector_unit.k:166:9
+    .data_out (data_prop_out_23_0)
+  );	// vector_unit.k:166:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:191:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:166:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -4758,42 +4672,42 @@ module vector_unit_swiglu_compute_BasicBlock_0(	// vector_unit.k:191:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:191:9
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:166:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  vector_unitDebugView_swiglu_computeEntry vector_unitDebugView_swiglu_computeEntry_instance (	// vector_unit.k:189:5
-    .clk        (clk),	// vector_unit.k:189:5
-    ._gate_bf16 (p0_stage1_enable ? p0_gate_bf16 : 'x),	// vector_unit.k:189:5, :191:9
-    ._up_bf16   (p0_stage1_enable ? p0_up_bf16 : 'x),	// vector_unit.k:189:5, :191:9
-    .valid      (p0_stage1_enable),	// vector_unit.k:191:9
+  vector_unitDebugView_swiglu_computeEntry vector_unitDebugView_swiglu_computeEntry_instance (	// vector_unit.k:164:5
+    .clk        (clk),	// vector_unit.k:164:5
+    ._gate_bf16 (p0_stage1_enable ? p0_gate_bf16 : 'x),	// vector_unit.k:164:5, :166:9
+    ._up_bf16   (p0_stage1_enable ? p0_up_bf16 : 'x),	// vector_unit.k:164:5, :166:9
+    .valid      (p0_stage1_enable),	// vector_unit.k:166:9
     .valid_out  (/* unused */)
-  );	// vector_unit.k:189:5
-  vector_unitDebugView_swiglu_computeExit vector_unitDebugView_swiglu_computeExit_instance (	// vector_unit.k:189:5
-    .clk          (clk),	// vector_unit.k:189:5
-    ._ReturnValue (p0_stage10_enable ? p0_result_1 : 'x),	// vector_unit.k:189:5, :191:9
-    .valid        (p0_stage10_enable),	// vector_unit.k:191:9
+  );	// vector_unit.k:164:5
+  vector_unitDebugView_swiglu_computeExit vector_unitDebugView_swiglu_computeExit_instance (	// vector_unit.k:164:5
+    .clk          (clk),	// vector_unit.k:164:5
+    ._ReturnValue (p0_stage10_enable ? p0_result_1 : 'x),	// vector_unit.k:164:5, :166:9
+    .valid        (p0_stage10_enable),	// vector_unit.k:166:9
     .valid_out    (/* unused */)
-  );	// vector_unit.k:189:5
-  assign done_out = p0_stage11_enable;	// vector_unit.k:191:9
-  assign memory_read_addr_out_38_0 = memory_read_addr_out_38_0_0;	// vector_unit.k:191:9
-  assign memory_rden_out_38_0 = memory_rden_out_38_0_0;	// vector_unit.k:191:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:191:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:191:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:191:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:191:9
+  );	// vector_unit.k:164:5
+  assign done_out = p0_stage11_enable;	// vector_unit.k:166:9
+  assign memory_read_addr_out_30_0 = memory_read_addr_out_30_0_0;	// vector_unit.k:166:9
+  assign memory_rden_out_30_0 = memory_rden_out_30_0_0;	// vector_unit.k:166:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:166:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:166:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:166:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:166:9
 endmodule
 
-module vector_unit_set_sigmoid_lut_BasicBlock_0(	// vector_unit.k:180:9
+module vector_unit_set_sigmoid_lut_BasicBlock_0(	// vector_unit.k:155:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  output wire [15:0] memory_write_data_out_38_0,
-  output wire [7:0]  memory_write_addr_out_38_0,
-  output wire        memory_wren_38_0,
+  output wire [15:0] memory_write_data_out_30_0,
+  output wire [7:0]  memory_write_addr_out_30_0,
+  output wire        memory_wren_30_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
-  input  wire [23:0] data_in_30,
+  input  wire [23:0] data_in_22,
   input  wire        input_fifo_underflow_0,
   output wire        input_rdy_0,
   input  wire        input_valid_0,
@@ -4802,54 +4716,54 @@ module vector_unit_set_sigmoid_lut_BasicBlock_0(	// vector_unit.k:180:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  logic        done_out_0;	// vector_unit.k:180:9
-  logic [15:0] memory_write_data_out_38_0_0;	// vector_unit.k:180:9
-  logic [7:0]  memory_write_addr_out_38_0_0;	// vector_unit.k:180:9
-  logic        memory_wren_38_0_0;	// vector_unit.k:180:9
-  logic        fifo_wren_0_0;	// vector_unit.k:180:9
-  logic        input_rdy_0_0;	// vector_unit.k:180:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:180:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:180:9
-  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:180:9
-  always_comb begin	// vector_unit.k:180:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:180:9
+  logic        done_out_0;	// vector_unit.k:155:9
+  logic [15:0] memory_write_data_out_30_0_0;	// vector_unit.k:155:9
+  logic [7:0]  memory_write_addr_out_30_0_0;	// vector_unit.k:155:9
+  logic        memory_wren_30_0_0;	// vector_unit.k:155:9
+  logic        fifo_wren_0_0;	// vector_unit.k:155:9
+  logic        input_rdy_0_0;	// vector_unit.k:155:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:155:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:155:9
+  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:155:9
+  always_comb begin	// vector_unit.k:155:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:155:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:180:9
+       ~input_valid_0};	// vector_unit.k:155:9
   end // always_comb
-  always_comb begin	// vector_unit.k:180:9
-    memory_wren_38_0_0 = _GEN_0;	// vector_unit.k:180:9, :182:13
-    memory_write_addr_out_38_0_0 = data_in_30[7:0];	// vector_unit.k:182:13
-    memory_write_data_out_38_0_0 = data_in_30[23:8];	// vector_unit.k:182:13
+  always_comb begin	// vector_unit.k:155:9
+    memory_wren_30_0_0 = _GEN_0;	// vector_unit.k:155:9, :157:13
+    memory_write_addr_out_30_0_0 = data_in_22[7:0];	// vector_unit.k:157:13
+    memory_write_data_out_30_0_0 = data_in_22[23:8];	// vector_unit.k:157:13
   end // always_comb
-  reg   [7:0]  p0_index;	// vector_unit.k:180:9
-  reg   [15:0] p0_value;	// vector_unit.k:180:9
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:180:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:180:9
-  always @(posedge clk) begin	// vector_unit.k:180:9
-    p0_index <= data_in_30[7:0];	// vector_unit.k:180:9
-    p0_value <= data_in_30[23:8];	// vector_unit.k:180:9
-    if (rst) begin	// vector_unit.k:180:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:180:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:180:9
+  reg   [7:0]  p0_index;	// vector_unit.k:155:9
+  reg   [15:0] p0_value;	// vector_unit.k:155:9
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:155:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:155:9
+  always @(posedge clk) begin	// vector_unit.k:155:9
+    p0_index <= data_in_22[7:0];	// vector_unit.k:155:9
+    p0_value <= data_in_22[23:8];	// vector_unit.k:155:9
+    if (rst) begin	// vector_unit.k:155:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:155:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:155:9
     end
-    else begin	// vector_unit.k:180:9
-      p0_stage1_enable <= _GEN_0;	// vector_unit.k:180:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:180:9
+    else begin	// vector_unit.k:155:9
+      p0_stage1_enable <= _GEN_0;	// vector_unit.k:155:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:155:9
     end
   end // always @(posedge)
-  always_comb	// vector_unit.k:180:9
-    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:180:9, :184:9
+  always_comb	// vector_unit.k:155:9
+    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:155:9, :159:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:180:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:155:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -4857,435 +4771,37 @@ module vector_unit_set_sigmoid_lut_BasicBlock_0(	// vector_unit.k:180:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:180:9
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:155:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  vector_unitDebugView_set_sigmoid_lutEntry vector_unitDebugView_set_sigmoid_lutEntry_instance (	// vector_unit.k:184:9
-    .clk       (clk),	// vector_unit.k:184:9
-    ._index    (p0_stage1_enable ? p0_index : 'x),	// vector_unit.k:180:9, :184:9
-    ._value    (p0_stage1_enable ? p0_value : 'x),	// vector_unit.k:180:9, :184:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:180:9
+  vector_unitDebugView_set_sigmoid_lutEntry vector_unitDebugView_set_sigmoid_lutEntry_instance (	// vector_unit.k:159:9
+    .clk       (clk),	// vector_unit.k:159:9
+    ._index    (p0_stage1_enable ? p0_index : 'x),	// vector_unit.k:155:9, :159:9
+    ._value    (p0_stage1_enable ? p0_value : 'x),	// vector_unit.k:155:9, :159:9
+    .valid     (p0_stage1_enable),	// vector_unit.k:155:9
     .valid_out (/* unused */)
-  );	// vector_unit.k:184:9
-  assign done_out = p0_stage2_enable;	// vector_unit.k:180:9
-  assign memory_write_data_out_38_0 = memory_write_data_out_38_0_0;	// vector_unit.k:180:9
-  assign memory_write_addr_out_38_0 = memory_write_addr_out_38_0_0;	// vector_unit.k:180:9
-  assign memory_wren_38_0 = memory_wren_38_0_0;	// vector_unit.k:180:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:180:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:180:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:180:9
+  );	// vector_unit.k:159:9
+  assign done_out = p0_stage2_enable;	// vector_unit.k:155:9
+  assign memory_write_data_out_30_0 = memory_write_data_out_30_0_0;	// vector_unit.k:155:9
+  assign memory_write_addr_out_30_0 = memory_write_addr_out_30_0_0;	// vector_unit.k:155:9
+  assign memory_wren_30_0 = memory_wren_30_0_0;	// vector_unit.k:155:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:155:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:155:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:155:9
 endmodule
 
-module vector_unit_rope_write_sin_row_BasicBlock_0(	// vector_unit.k:173:9
-  input  wire          clk,
-  input  wire          rst,
-  output wire          done_out,
-  output wire [1023:0] memory_write_data_out_40_0,
-  output wire [11:0]   memory_write_addr_out_40_0,
-  output wire          memory_wren_40_0,
-  output wire          fifo_wren_0,
-  input  wire          fifo_almost_full_in_raw_0,
-  input  wire          fifo_overflow_in_0,
-  input  wire [1035:0] data_in_29,
-  input  wire          input_fifo_underflow_0,
-  output wire          input_rdy_0,
-  input  wire          input_valid_0,
-  output wire [7:0]    control_state_out
-);
-
-  wire           _fifo_overflow_ffc_0_data_out;
-  wire           _fifo_almostfull_ffc_0_data_out;
-  logic          done_out_0;	// vector_unit.k:173:9
-  logic [1023:0] memory_write_data_out_40_0_0;	// vector_unit.k:173:9
-  logic [11:0]   memory_write_addr_out_40_0_0;	// vector_unit.k:173:9
-  logic          memory_wren_40_0_0;	// vector_unit.k:173:9
-  logic          fifo_wren_0_0;	// vector_unit.k:173:9
-  logic          input_rdy_0_0;	// vector_unit.k:173:9
-  logic [7:0]    control_state_out_0;	// vector_unit.k:173:9
-  wire           _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:173:9
-  wire           _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:173:9
-  always_comb begin	// vector_unit.k:173:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:173:9
-    control_state_out_0 =
-      {2'h0,
-       ~_fifo_overflow_ffc_0_data_out,
-       input_fifo_underflow_0,
-       2'h0,
-       ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:173:9
-  end // always_comb
-  always_comb begin	// vector_unit.k:173:9
-    memory_wren_40_0_0 = _GEN_0;	// vector_unit.k:173:{9,18}
-    memory_write_addr_out_40_0_0 = data_in_29[11:0];	// vector_unit.k:173:18
-    memory_write_data_out_40_0_0 = data_in_29[1035:12];	// vector_unit.k:173:18
-  end // always_comb
-  reg   [11:0]   p0_position;	// vector_unit.k:173:9
-  reg   [1023:0] p0_value;	// vector_unit.k:173:9
-  reg            p0_stage1_enable = 1'h0;	// vector_unit.k:173:9
-  reg            p0_stage2_enable = 1'h0;	// vector_unit.k:173:9
-  always @(posedge clk) begin	// vector_unit.k:173:9
-    p0_position <= data_in_29[11:0];	// vector_unit.k:173:9
-    p0_value <= data_in_29[1035:12];	// vector_unit.k:173:9
-    if (rst) begin	// vector_unit.k:173:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:173:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:173:9
-    end
-    else begin	// vector_unit.k:173:9
-      p0_stage1_enable <= _GEN_0;	// vector_unit.k:173:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:173:9
-    end
-  end // always @(posedge)
-  always_comb	// vector_unit.k:173:9
-    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:173:9, :174:9
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_almostfull_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:173:9
-    .data_out (_fifo_almostfull_ffc_0_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_overflow_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:173:9
-    .data_out (_fifo_overflow_ffc_0_data_out)
-  );
-  vector_unitDebugView_rope_write_sin_rowEntry vector_unitDebugView_rope_write_sin_rowEntry_instance (	// vector_unit.k:174:9
-    .clk       (clk),	// vector_unit.k:174:9
-    ._position (p0_stage1_enable ? p0_position : 'x),	// vector_unit.k:173:9, :174:9
-    ._value    (p0_stage1_enable ? p0_value : 'x),	// vector_unit.k:173:9, :174:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:173:9
-    .valid_out (/* unused */)
-  );	// vector_unit.k:174:9
-  assign done_out = p0_stage2_enable;	// vector_unit.k:173:9
-  assign memory_write_data_out_40_0 = memory_write_data_out_40_0_0;	// vector_unit.k:173:9
-  assign memory_write_addr_out_40_0 = memory_write_addr_out_40_0_0;	// vector_unit.k:173:9
-  assign memory_wren_40_0 = memory_wren_40_0_0;	// vector_unit.k:173:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:173:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:173:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:173:9
-endmodule
-
-module vector_unit_rope_write_cos_row_BasicBlock_0(	// vector_unit.k:168:9
-  input  wire          clk,
-  input  wire          rst,
-  output wire          done_out,
-  output wire [1023:0] memory_write_data_out_39_0,
-  output wire [11:0]   memory_write_addr_out_39_0,
-  output wire          memory_wren_39_0,
-  output wire          fifo_wren_0,
-  input  wire          fifo_almost_full_in_raw_0,
-  input  wire          fifo_overflow_in_0,
-  input  wire [1035:0] data_in_28,
-  input  wire          input_fifo_underflow_0,
-  output wire          input_rdy_0,
-  input  wire          input_valid_0,
-  output wire [7:0]    control_state_out
-);
-
-  wire           _fifo_overflow_ffc_0_data_out;
-  wire           _fifo_almostfull_ffc_0_data_out;
-  logic          done_out_0;	// vector_unit.k:168:9
-  logic [1023:0] memory_write_data_out_39_0_0;	// vector_unit.k:168:9
-  logic [11:0]   memory_write_addr_out_39_0_0;	// vector_unit.k:168:9
-  logic          memory_wren_39_0_0;	// vector_unit.k:168:9
-  logic          fifo_wren_0_0;	// vector_unit.k:168:9
-  logic          input_rdy_0_0;	// vector_unit.k:168:9
-  logic [7:0]    control_state_out_0;	// vector_unit.k:168:9
-  wire           _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:168:9
-  wire           _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:168:9
-  always_comb begin	// vector_unit.k:168:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:168:9
-    control_state_out_0 =
-      {2'h0,
-       ~_fifo_overflow_ffc_0_data_out,
-       input_fifo_underflow_0,
-       2'h0,
-       ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:168:9
-  end // always_comb
-  always_comb begin	// vector_unit.k:168:9
-    memory_wren_39_0_0 = _GEN_0;	// vector_unit.k:168:{9,18}
-    memory_write_addr_out_39_0_0 = data_in_28[11:0];	// vector_unit.k:168:18
-    memory_write_data_out_39_0_0 = data_in_28[1035:12];	// vector_unit.k:168:18
-  end // always_comb
-  reg   [11:0]   p0_position;	// vector_unit.k:168:9
-  reg   [1023:0] p0_value;	// vector_unit.k:168:9
-  reg            p0_stage1_enable = 1'h0;	// vector_unit.k:168:9
-  reg            p0_stage2_enable = 1'h0;	// vector_unit.k:168:9
-  always @(posedge clk) begin	// vector_unit.k:168:9
-    p0_position <= data_in_28[11:0];	// vector_unit.k:168:9
-    p0_value <= data_in_28[1035:12];	// vector_unit.k:168:9
-    if (rst) begin	// vector_unit.k:168:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:168:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:168:9
-    end
-    else begin	// vector_unit.k:168:9
-      p0_stage1_enable <= _GEN_0;	// vector_unit.k:168:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:168:9
-    end
-  end // always @(posedge)
-  always_comb	// vector_unit.k:168:9
-    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:168:9, :169:9
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_almostfull_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:168:9
-    .data_out (_fifo_almostfull_ffc_0_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_overflow_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:168:9
-    .data_out (_fifo_overflow_ffc_0_data_out)
-  );
-  vector_unitDebugView_rope_write_cos_rowEntry vector_unitDebugView_rope_write_cos_rowEntry_instance (	// vector_unit.k:169:9
-    .clk       (clk),	// vector_unit.k:169:9
-    ._position (p0_stage1_enable ? p0_position : 'x),	// vector_unit.k:168:9, :169:9
-    ._value    (p0_stage1_enable ? p0_value : 'x),	// vector_unit.k:168:9, :169:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:168:9
-    .valid_out (/* unused */)
-  );	// vector_unit.k:169:9
-  assign done_out = p0_stage2_enable;	// vector_unit.k:168:9
-  assign memory_write_data_out_39_0 = memory_write_data_out_39_0_0;	// vector_unit.k:168:9
-  assign memory_write_addr_out_39_0 = memory_write_addr_out_39_0_0;	// vector_unit.k:168:9
-  assign memory_wren_39_0 = memory_wren_39_0_0;	// vector_unit.k:168:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:168:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:168:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:168:9
-endmodule
-
-module vector_unit_rope_read_sin_row_BasicBlock_0(	// vector_unit.k:161:9
-  input  wire          clk,
-  input  wire          rst,
-  output wire          done_out,
-  input  wire [1023:0] memory_read_data_in_40_0,
-  output wire [11:0]   memory_read_addr_out_40_0,
-  output wire          memory_rden_out_40_0,
-  output wire [1023:0] fifo_data_out_0,
-  output wire          fifo_wren_0,
-  input  wire          fifo_almost_full_in_raw_0,
-  input  wire          fifo_overflow_in_0,
-  input  wire [11:0]   data_in_27,
-  input  wire          input_fifo_underflow_0,
-  output wire          input_rdy_0,
-  input  wire          input_valid_0,
-  output wire [7:0]    control_state_out
-);
-
-  wire           _fifo_overflow_ffc_0_data_out;
-  wire           _fifo_almostfull_ffc_0_data_out;
-  wire  [1023:0] memory_read_data_in_40_0_0 = memory_read_data_in_40_0;	// vector_unit.k:161:9
-  logic          done_out_0;	// vector_unit.k:161:9
-  logic [11:0]   memory_read_addr_out_40_0_0;	// vector_unit.k:161:9
-  logic          memory_rden_out_40_0_0;	// vector_unit.k:161:9
-  logic [1023:0] fifo_data_out_0_0;	// vector_unit.k:161:9
-  logic          fifo_wren_0_0;	// vector_unit.k:161:9
-  logic          input_rdy_0_0;	// vector_unit.k:161:9
-  logic [7:0]    control_state_out_0;	// vector_unit.k:161:9
-  wire           _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:161:9
-  wire           _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:161:9
-  always_comb begin	// vector_unit.k:161:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:161:9
-    control_state_out_0 =
-      {2'h0,
-       ~_fifo_overflow_ffc_0_data_out,
-       input_fifo_underflow_0,
-       2'h0,
-       ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:161:9
-  end // always_comb
-  always_comb begin	// vector_unit.k:161:9
-    memory_read_addr_out_40_0_0 = data_in_27;	// vector_unit.k:162:27
-    memory_rden_out_40_0_0 = _GEN_0;	// vector_unit.k:161:9, :162:27
-  end // always_comb
-  reg   [11:0]   p0_data_in_27;	// vector_unit.k:161:9
-  reg            p0_stage1_enable = 1'h0;	// vector_unit.k:161:9
-  reg            p0_stage2_enable = 1'h0;	// vector_unit.k:161:9
-  reg   [1023:0] p0_memory_read_data_in_40_0;	// vector_unit.k:161:9
-  reg            p0_stage3_enable = 1'h0;	// vector_unit.k:161:9
-  always @(posedge clk) begin	// vector_unit.k:161:9
-    p0_data_in_27 <= data_in_27;	// vector_unit.k:161:9
-    if (rst) begin	// vector_unit.k:161:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:161:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:161:9
-    end
-    else begin	// vector_unit.k:161:9
-      p0_stage1_enable <= _GEN_0;	// vector_unit.k:161:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:161:9
-    end
-    p0_memory_read_data_in_40_0 <= memory_read_data_in_40_0_0;	// vector_unit.k:161:9
-    if (rst)	// vector_unit.k:161:9
-      p0_stage3_enable <= 1'h0;	// vector_unit.k:161:9
-    else	// vector_unit.k:161:9
-      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:161:9
-  end // always @(posedge)
-  always_comb begin	// vector_unit.k:161:9
-    fifo_wren_0_0 = p0_stage3_enable;	// vector_unit.k:159:5, :161:9
-    fifo_data_out_0_0 = p0_memory_read_data_in_40_0;	// vector_unit.k:159:5, :161:9
-  end // always_comb
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_almostfull_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:161:9
-    .data_out (_fifo_almostfull_ffc_0_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_overflow_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:161:9
-    .data_out (_fifo_overflow_ffc_0_data_out)
-  );
-  vector_unitDebugView_rope_read_sin_rowEntry vector_unitDebugView_rope_read_sin_rowEntry_instance (	// vector_unit.k:159:5
-    .clk       (clk),	// vector_unit.k:159:5
-    ._position (p0_stage1_enable ? p0_data_in_27 : 'x),	// vector_unit.k:159:5, :161:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:161:9
-    .valid_out (/* unused */)
-  );	// vector_unit.k:159:5
-  vector_unitDebugView_rope_read_sin_rowExit vector_unitDebugView_rope_read_sin_rowExit_instance (	// vector_unit.k:159:5
-    .clk          (clk),	// vector_unit.k:159:5
-    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_40_0_0 : 'x),	// vector_unit.k:159:5, :161:9
-    .valid        (p0_stage2_enable),	// vector_unit.k:161:9
-    .valid_out    (/* unused */)
-  );	// vector_unit.k:159:5
-  assign done_out = p0_stage3_enable;	// vector_unit.k:161:9
-  assign memory_read_addr_out_40_0 = memory_read_addr_out_40_0_0;	// vector_unit.k:161:9
-  assign memory_rden_out_40_0 = memory_rden_out_40_0_0;	// vector_unit.k:161:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:161:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:161:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:161:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:161:9
-endmodule
-
-module vector_unit_rope_read_cos_row_BasicBlock_0(	// vector_unit.k:154:9
-  input  wire          clk,
-  input  wire          rst,
-  output wire          done_out,
-  input  wire [1023:0] memory_read_data_in_39_0,
-  output wire [11:0]   memory_read_addr_out_39_0,
-  output wire          memory_rden_out_39_0,
-  output wire [1023:0] fifo_data_out_0,
-  output wire          fifo_wren_0,
-  input  wire          fifo_almost_full_in_raw_0,
-  input  wire          fifo_overflow_in_0,
-  input  wire [11:0]   data_in_26,
-  input  wire          input_fifo_underflow_0,
-  output wire          input_rdy_0,
-  input  wire          input_valid_0,
-  output wire [7:0]    control_state_out
-);
-
-  wire           _fifo_overflow_ffc_0_data_out;
-  wire           _fifo_almostfull_ffc_0_data_out;
-  wire  [1023:0] memory_read_data_in_39_0_0 = memory_read_data_in_39_0;	// vector_unit.k:154:9
-  logic          done_out_0;	// vector_unit.k:154:9
-  logic [11:0]   memory_read_addr_out_39_0_0;	// vector_unit.k:154:9
-  logic          memory_rden_out_39_0_0;	// vector_unit.k:154:9
-  logic [1023:0] fifo_data_out_0_0;	// vector_unit.k:154:9
-  logic          fifo_wren_0_0;	// vector_unit.k:154:9
-  logic          input_rdy_0_0;	// vector_unit.k:154:9
-  logic [7:0]    control_state_out_0;	// vector_unit.k:154:9
-  wire           _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:154:9
-  wire           _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:154:9
-  always_comb begin	// vector_unit.k:154:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:154:9
-    control_state_out_0 =
-      {2'h0,
-       ~_fifo_overflow_ffc_0_data_out,
-       input_fifo_underflow_0,
-       2'h0,
-       ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:154:9
-  end // always_comb
-  always_comb begin	// vector_unit.k:154:9
-    memory_read_addr_out_39_0_0 = data_in_26;	// vector_unit.k:155:27
-    memory_rden_out_39_0_0 = _GEN_0;	// vector_unit.k:154:9, :155:27
-  end // always_comb
-  reg   [11:0]   p0_data_in_26;	// vector_unit.k:154:9
-  reg            p0_stage1_enable = 1'h0;	// vector_unit.k:154:9
-  reg            p0_stage2_enable = 1'h0;	// vector_unit.k:154:9
-  reg   [1023:0] p0_memory_read_data_in_39_0;	// vector_unit.k:154:9
-  reg            p0_stage3_enable = 1'h0;	// vector_unit.k:154:9
-  always @(posedge clk) begin	// vector_unit.k:154:9
-    p0_data_in_26 <= data_in_26;	// vector_unit.k:154:9
-    if (rst) begin	// vector_unit.k:154:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:154:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:154:9
-    end
-    else begin	// vector_unit.k:154:9
-      p0_stage1_enable <= _GEN_0;	// vector_unit.k:154:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:154:9
-    end
-    p0_memory_read_data_in_39_0 <= memory_read_data_in_39_0_0;	// vector_unit.k:154:9
-    if (rst)	// vector_unit.k:154:9
-      p0_stage3_enable <= 1'h0;	// vector_unit.k:154:9
-    else	// vector_unit.k:154:9
-      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:154:9
-  end // always @(posedge)
-  always_comb begin	// vector_unit.k:154:9
-    fifo_wren_0_0 = p0_stage3_enable;	// vector_unit.k:152:5, :154:9
-    fifo_data_out_0_0 = p0_memory_read_data_in_39_0;	// vector_unit.k:152:5, :154:9
-  end // always_comb
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_almostfull_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:154:9
-    .data_out (_fifo_almostfull_ffc_0_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_overflow_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:154:9
-    .data_out (_fifo_overflow_ffc_0_data_out)
-  );
-  vector_unitDebugView_rope_read_cos_rowEntry vector_unitDebugView_rope_read_cos_rowEntry_instance (	// vector_unit.k:152:5
-    .clk       (clk),	// vector_unit.k:152:5
-    ._position (p0_stage1_enable ? p0_data_in_26 : 'x),	// vector_unit.k:152:5, :154:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:154:9
-    .valid_out (/* unused */)
-  );	// vector_unit.k:152:5
-  vector_unitDebugView_rope_read_cos_rowExit vector_unitDebugView_rope_read_cos_rowExit_instance (	// vector_unit.k:152:5
-    .clk          (clk),	// vector_unit.k:152:5
-    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_39_0_0 : 'x),	// vector_unit.k:152:5, :154:9
-    .valid        (p0_stage2_enable),	// vector_unit.k:154:9
-    .valid_out    (/* unused */)
-  );	// vector_unit.k:152:5
-  assign done_out = p0_stage3_enable;	// vector_unit.k:154:9
-  assign memory_read_addr_out_39_0 = memory_read_addr_out_39_0_0;	// vector_unit.k:154:9
-  assign memory_rden_out_39_0 = memory_rden_out_39_0_0;	// vector_unit.k:154:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:154:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:154:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:154:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:154:9
-endmodule
-
-module vector_unit_lookup_rsqrt_BasicBlock_0(	// vector_unit.k:142:9
+module vector_unit_lookup_rsqrt_BasicBlock_0(	// vector_unit.k:141:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  input  wire [15:0] memory_read_data_in_37_0,
-  output wire [7:0]  memory_read_addr_out_37_0,
-  output wire        memory_rden_out_37_0,
+  input  wire [15:0] memory_read_data_in_29_0,
+  output wire [7:0]  memory_read_addr_out_29_0,
+  output wire        memory_rden_out_29_0,
   output wire [15:0] fifo_data_out_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
-  input  wire [7:0]  data_in_25,
+  input  wire [7:0]  data_in_21,
   input  wire        input_fifo_underflow_0,
   output wire        input_rdy_0,
   input  wire        input_valid_0,
@@ -5294,61 +4810,61 @@ module vector_unit_lookup_rsqrt_BasicBlock_0(	// vector_unit.k:142:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [15:0] memory_read_data_in_37_0_0 = memory_read_data_in_37_0;	// vector_unit.k:142:9
-  logic        done_out_0;	// vector_unit.k:142:9
-  logic [7:0]  memory_read_addr_out_37_0_0;	// vector_unit.k:142:9
-  logic        memory_rden_out_37_0_0;	// vector_unit.k:142:9
-  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:142:9
-  logic        fifo_wren_0_0;	// vector_unit.k:142:9
-  logic        input_rdy_0_0;	// vector_unit.k:142:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:142:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:142:9
-  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:142:9
-  always_comb begin	// vector_unit.k:142:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:142:9
+  wire  [15:0] memory_read_data_in_29_0_0 = memory_read_data_in_29_0;	// vector_unit.k:141:9
+  logic        done_out_0;	// vector_unit.k:141:9
+  logic [7:0]  memory_read_addr_out_29_0_0;	// vector_unit.k:141:9
+  logic        memory_rden_out_29_0_0;	// vector_unit.k:141:9
+  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:141:9
+  logic        fifo_wren_0_0;	// vector_unit.k:141:9
+  logic        input_rdy_0_0;	// vector_unit.k:141:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:141:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:141:9
+  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:141:9
+  always_comb begin	// vector_unit.k:141:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:141:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:142:9
+       ~input_valid_0};	// vector_unit.k:141:9
   end // always_comb
-  always_comb begin	// vector_unit.k:142:9
-    memory_read_addr_out_37_0_0 = data_in_25;	// vector_unit.k:145:22
-    memory_rden_out_37_0_0 = _GEN_0;	// vector_unit.k:142:9, :145:22
+  always_comb begin	// vector_unit.k:141:9
+    memory_read_addr_out_29_0_0 = data_in_21;	// vector_unit.k:144:22
+    memory_rden_out_29_0_0 = _GEN_0;	// vector_unit.k:141:9, :144:22
   end // always_comb
-  reg   [7:0]  p0_data_in_25;	// vector_unit.k:142:9
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:142:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:142:9
-  reg   [15:0] p0_memory_read_data_in_37_0;	// vector_unit.k:142:9
-  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:142:9
-  always @(posedge clk) begin	// vector_unit.k:142:9
-    p0_data_in_25 <= data_in_25;	// vector_unit.k:142:9
-    if (rst) begin	// vector_unit.k:142:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:142:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:142:9
+  reg   [7:0]  p0_data_in_21;	// vector_unit.k:141:9
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:141:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:141:9
+  reg   [15:0] p0_memory_read_data_in_29_0;	// vector_unit.k:141:9
+  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:141:9
+  always @(posedge clk) begin	// vector_unit.k:141:9
+    p0_data_in_21 <= data_in_21;	// vector_unit.k:141:9
+    if (rst) begin	// vector_unit.k:141:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:141:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:141:9
     end
-    else begin	// vector_unit.k:142:9
-      p0_stage1_enable <= _GEN_0;	// vector_unit.k:142:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:142:9
+    else begin	// vector_unit.k:141:9
+      p0_stage1_enable <= _GEN_0;	// vector_unit.k:141:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:141:9
     end
-    p0_memory_read_data_in_37_0 <= memory_read_data_in_37_0_0;	// vector_unit.k:142:9
-    if (rst)	// vector_unit.k:142:9
-      p0_stage3_enable <= 1'h0;	// vector_unit.k:142:9
-    else	// vector_unit.k:142:9
-      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:142:9
+    p0_memory_read_data_in_29_0 <= memory_read_data_in_29_0_0;	// vector_unit.k:141:9
+    if (rst)	// vector_unit.k:141:9
+      p0_stage3_enable <= 1'h0;	// vector_unit.k:141:9
+    else	// vector_unit.k:141:9
+      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:141:9
   end // always @(posedge)
-  always_comb begin	// vector_unit.k:142:9
-    fifo_wren_0_0 = p0_stage3_enable;	// vector_unit.k:140:5, :142:9
-    fifo_data_out_0_0 = p0_memory_read_data_in_37_0;	// vector_unit.k:140:5, :142:9
+  always_comb begin	// vector_unit.k:141:9
+    fifo_wren_0_0 = p0_stage3_enable;	// vector_unit.k:139:5, :141:9
+    fifo_data_out_0_0 = p0_memory_read_data_in_29_0;	// vector_unit.k:139:5, :141:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:142:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:141:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -5356,41 +4872,41 @@ module vector_unit_lookup_rsqrt_BasicBlock_0(	// vector_unit.k:142:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:142:9
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:141:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  vector_unitDebugView_lookup_rsqrtEntry vector_unitDebugView_lookup_rsqrtEntry_instance (	// vector_unit.k:140:5
-    .clk       (clk),	// vector_unit.k:140:5
-    ._index    (p0_stage1_enable ? p0_data_in_25 : 'x),	// vector_unit.k:140:5, :142:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:142:9
+  vector_unitDebugView_lookup_rsqrtEntry vector_unitDebugView_lookup_rsqrtEntry_instance (	// vector_unit.k:139:5
+    .clk       (clk),	// vector_unit.k:139:5
+    ._index    (p0_stage1_enable ? p0_data_in_21 : 'x),	// vector_unit.k:139:5, :141:9
+    .valid     (p0_stage1_enable),	// vector_unit.k:141:9
     .valid_out (/* unused */)
-  );	// vector_unit.k:140:5
-  vector_unitDebugView_lookup_rsqrtExit vector_unitDebugView_lookup_rsqrtExit_instance (	// vector_unit.k:140:5
-    .clk          (clk),	// vector_unit.k:140:5
-    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_37_0_0 : 'x),	// vector_unit.k:140:5, :142:9
-    .valid        (p0_stage2_enable),	// vector_unit.k:142:9
+  );	// vector_unit.k:139:5
+  vector_unitDebugView_lookup_rsqrtExit vector_unitDebugView_lookup_rsqrtExit_instance (	// vector_unit.k:139:5
+    .clk          (clk),	// vector_unit.k:139:5
+    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_29_0_0 : 'x),	// vector_unit.k:139:5, :141:9
+    .valid        (p0_stage2_enable),	// vector_unit.k:141:9
     .valid_out    (/* unused */)
-  );	// vector_unit.k:140:5
-  assign done_out = p0_stage3_enable;	// vector_unit.k:142:9
-  assign memory_read_addr_out_37_0 = memory_read_addr_out_37_0_0;	// vector_unit.k:142:9
-  assign memory_rden_out_37_0 = memory_rden_out_37_0_0;	// vector_unit.k:142:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:142:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:142:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:142:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:142:9
+  );	// vector_unit.k:139:5
+  assign done_out = p0_stage3_enable;	// vector_unit.k:141:9
+  assign memory_read_addr_out_29_0 = memory_read_addr_out_29_0_0;	// vector_unit.k:141:9
+  assign memory_rden_out_29_0 = memory_rden_out_29_0_0;	// vector_unit.k:141:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:141:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:141:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:141:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:141:9
 endmodule
 
-module vector_unit_set_rsqrt_lut_BasicBlock_0(	// vector_unit.k:134:9
+module vector_unit_set_rsqrt_lut_BasicBlock_0(	// vector_unit.k:133:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  output wire [15:0] memory_write_data_out_37_0,
-  output wire [7:0]  memory_write_addr_out_37_0,
-  output wire        memory_wren_37_0,
+  output wire [15:0] memory_write_data_out_29_0,
+  output wire [7:0]  memory_write_addr_out_29_0,
+  output wire        memory_wren_29_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
-  input  wire [23:0] data_in_24,
+  input  wire [23:0] data_in_20,
   input  wire        input_fifo_underflow_0,
   output wire        input_rdy_0,
   input  wire        input_valid_0,
@@ -5399,54 +4915,54 @@ module vector_unit_set_rsqrt_lut_BasicBlock_0(	// vector_unit.k:134:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  logic        done_out_0;	// vector_unit.k:134:9
-  logic [15:0] memory_write_data_out_37_0_0;	// vector_unit.k:134:9
-  logic [7:0]  memory_write_addr_out_37_0_0;	// vector_unit.k:134:9
-  logic        memory_wren_37_0_0;	// vector_unit.k:134:9
-  logic        fifo_wren_0_0;	// vector_unit.k:134:9
-  logic        input_rdy_0_0;	// vector_unit.k:134:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:134:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:134:9
-  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:134:9
-  always_comb begin	// vector_unit.k:134:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:134:9
+  logic        done_out_0;	// vector_unit.k:133:9
+  logic [15:0] memory_write_data_out_29_0_0;	// vector_unit.k:133:9
+  logic [7:0]  memory_write_addr_out_29_0_0;	// vector_unit.k:133:9
+  logic        memory_wren_29_0_0;	// vector_unit.k:133:9
+  logic        fifo_wren_0_0;	// vector_unit.k:133:9
+  logic        input_rdy_0_0;	// vector_unit.k:133:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:133:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:133:9
+  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:133:9
+  always_comb begin	// vector_unit.k:133:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:133:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:134:9
+       ~input_valid_0};	// vector_unit.k:133:9
   end // always_comb
-  always_comb begin	// vector_unit.k:134:9
-    memory_wren_37_0_0 = _GEN_0;	// vector_unit.k:134:9, :136:13
-    memory_write_addr_out_37_0_0 = data_in_24[7:0];	// vector_unit.k:136:13
-    memory_write_data_out_37_0_0 = data_in_24[23:8];	// vector_unit.k:136:13
+  always_comb begin	// vector_unit.k:133:9
+    memory_wren_29_0_0 = _GEN_0;	// vector_unit.k:133:9, :135:13
+    memory_write_addr_out_29_0_0 = data_in_20[7:0];	// vector_unit.k:135:13
+    memory_write_data_out_29_0_0 = data_in_20[23:8];	// vector_unit.k:135:13
   end // always_comb
-  reg   [7:0]  p0_index;	// vector_unit.k:134:9
-  reg   [15:0] p0_value;	// vector_unit.k:134:9
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:134:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:134:9
-  always @(posedge clk) begin	// vector_unit.k:134:9
-    p0_index <= data_in_24[7:0];	// vector_unit.k:134:9
-    p0_value <= data_in_24[23:8];	// vector_unit.k:134:9
-    if (rst) begin	// vector_unit.k:134:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:134:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:134:9
+  reg   [7:0]  p0_index;	// vector_unit.k:133:9
+  reg   [15:0] p0_value;	// vector_unit.k:133:9
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:133:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:133:9
+  always @(posedge clk) begin	// vector_unit.k:133:9
+    p0_index <= data_in_20[7:0];	// vector_unit.k:133:9
+    p0_value <= data_in_20[23:8];	// vector_unit.k:133:9
+    if (rst) begin	// vector_unit.k:133:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:133:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:133:9
     end
-    else begin	// vector_unit.k:134:9
-      p0_stage1_enable <= _GEN_0;	// vector_unit.k:134:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:134:9
+    else begin	// vector_unit.k:133:9
+      p0_stage1_enable <= _GEN_0;	// vector_unit.k:133:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:133:9
     end
   end // always @(posedge)
-  always_comb	// vector_unit.k:134:9
-    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:134:9, :138:9
+  always_comb	// vector_unit.k:133:9
+    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:133:9, :137:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:134:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:133:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -5454,37 +4970,37 @@ module vector_unit_set_rsqrt_lut_BasicBlock_0(	// vector_unit.k:134:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:134:9
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:133:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  vector_unitDebugView_set_rsqrt_lutEntry vector_unitDebugView_set_rsqrt_lutEntry_instance (	// vector_unit.k:138:9
-    .clk       (clk),	// vector_unit.k:138:9
-    ._index    (p0_stage1_enable ? p0_index : 'x),	// vector_unit.k:134:9, :138:9
-    ._value    (p0_stage1_enable ? p0_value : 'x),	// vector_unit.k:134:9, :138:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:134:9
+  vector_unitDebugView_set_rsqrt_lutEntry vector_unitDebugView_set_rsqrt_lutEntry_instance (	// vector_unit.k:137:9
+    .clk       (clk),	// vector_unit.k:137:9
+    ._index    (p0_stage1_enable ? p0_index : 'x),	// vector_unit.k:133:9, :137:9
+    ._value    (p0_stage1_enable ? p0_value : 'x),	// vector_unit.k:133:9, :137:9
+    .valid     (p0_stage1_enable),	// vector_unit.k:133:9
     .valid_out (/* unused */)
-  );	// vector_unit.k:138:9
-  assign done_out = p0_stage2_enable;	// vector_unit.k:134:9
-  assign memory_write_data_out_37_0 = memory_write_data_out_37_0_0;	// vector_unit.k:134:9
-  assign memory_write_addr_out_37_0 = memory_write_addr_out_37_0_0;	// vector_unit.k:134:9
-  assign memory_wren_37_0 = memory_wren_37_0_0;	// vector_unit.k:134:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:134:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:134:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:134:9
+  );	// vector_unit.k:137:9
+  assign done_out = p0_stage2_enable;	// vector_unit.k:133:9
+  assign memory_write_data_out_29_0 = memory_write_data_out_29_0_0;	// vector_unit.k:133:9
+  assign memory_write_addr_out_29_0 = memory_write_addr_out_29_0_0;	// vector_unit.k:133:9
+  assign memory_wren_29_0 = memory_wren_29_0_0;	// vector_unit.k:133:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:133:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:133:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:133:9
 endmodule
 
-module vector_unit_get_gamma_pre_mlp_BasicBlock_0(	// vector_unit.k:124:9
+module vector_unit_get_gamma_pre_mlp_BasicBlock_0(	// vector_unit.k:123:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  input  wire [15:0] memory_read_data_in_36_0,
-  output wire [11:0] memory_read_addr_out_36_0,
-  output wire        memory_rden_out_36_0,
+  input  wire [15:0] memory_read_data_in_28_0,
+  output wire [11:0] memory_read_addr_out_28_0,
+  output wire        memory_rden_out_28_0,
   output wire [15:0] fifo_data_out_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
-  input  wire [15:0] data_in_23,
+  input  wire [15:0] data_in_19,
   input  wire        input_fifo_underflow_0,
   output wire        input_rdy_0,
   input  wire        input_valid_0,
@@ -5493,61 +5009,61 @@ module vector_unit_get_gamma_pre_mlp_BasicBlock_0(	// vector_unit.k:124:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [15:0] memory_read_data_in_36_0_0 = memory_read_data_in_36_0;	// vector_unit.k:124:9
-  logic        done_out_0;	// vector_unit.k:124:9
-  logic [11:0] memory_read_addr_out_36_0_0;	// vector_unit.k:124:9
-  logic        memory_rden_out_36_0_0;	// vector_unit.k:124:9
-  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:124:9
-  logic        fifo_wren_0_0;	// vector_unit.k:124:9
-  logic        input_rdy_0_0;	// vector_unit.k:124:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:124:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:124:9
-  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:124:9
-  always_comb begin	// vector_unit.k:124:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:124:9
+  wire  [15:0] memory_read_data_in_28_0_0 = memory_read_data_in_28_0;	// vector_unit.k:123:9
+  logic        done_out_0;	// vector_unit.k:123:9
+  logic [11:0] memory_read_addr_out_28_0_0;	// vector_unit.k:123:9
+  logic        memory_rden_out_28_0_0;	// vector_unit.k:123:9
+  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:123:9
+  logic        fifo_wren_0_0;	// vector_unit.k:123:9
+  logic        input_rdy_0_0;	// vector_unit.k:123:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:123:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:123:9
+  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:123:9
+  always_comb begin	// vector_unit.k:123:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:123:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:124:9
+       ~input_valid_0};	// vector_unit.k:123:9
   end // always_comb
-  always_comb begin	// vector_unit.k:124:9
-    memory_read_addr_out_36_0_0 = data_in_23[11:0];	// vector_unit.k:127:22
-    memory_rden_out_36_0_0 = _GEN_0;	// vector_unit.k:124:9, :127:22
+  always_comb begin	// vector_unit.k:123:9
+    memory_read_addr_out_28_0_0 = data_in_19[11:0];	// vector_unit.k:126:22
+    memory_rden_out_28_0_0 = _GEN_0;	// vector_unit.k:123:9, :126:22
   end // always_comb
-  reg   [15:0] p0_data_in_23;	// vector_unit.k:124:9
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:124:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:124:9
-  reg   [15:0] p0_memory_read_data_in_36_0;	// vector_unit.k:124:9
-  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:124:9
-  always @(posedge clk) begin	// vector_unit.k:124:9
-    p0_data_in_23 <= data_in_23;	// vector_unit.k:124:9
-    if (rst) begin	// vector_unit.k:124:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:124:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:124:9
+  reg   [15:0] p0_data_in_19;	// vector_unit.k:123:9
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:123:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:123:9
+  reg   [15:0] p0_memory_read_data_in_28_0;	// vector_unit.k:123:9
+  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:123:9
+  always @(posedge clk) begin	// vector_unit.k:123:9
+    p0_data_in_19 <= data_in_19;	// vector_unit.k:123:9
+    if (rst) begin	// vector_unit.k:123:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:123:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:123:9
     end
-    else begin	// vector_unit.k:124:9
-      p0_stage1_enable <= _GEN_0;	// vector_unit.k:124:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:124:9
+    else begin	// vector_unit.k:123:9
+      p0_stage1_enable <= _GEN_0;	// vector_unit.k:123:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:123:9
     end
-    p0_memory_read_data_in_36_0 <= memory_read_data_in_36_0_0;	// vector_unit.k:124:9
-    if (rst)	// vector_unit.k:124:9
-      p0_stage3_enable <= 1'h0;	// vector_unit.k:124:9
-    else	// vector_unit.k:124:9
-      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:124:9
+    p0_memory_read_data_in_28_0 <= memory_read_data_in_28_0_0;	// vector_unit.k:123:9
+    if (rst)	// vector_unit.k:123:9
+      p0_stage3_enable <= 1'h0;	// vector_unit.k:123:9
+    else	// vector_unit.k:123:9
+      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:123:9
   end // always @(posedge)
-  always_comb begin	// vector_unit.k:124:9
-    fifo_wren_0_0 = p0_stage3_enable;	// vector_unit.k:122:5, :124:9
-    fifo_data_out_0_0 = p0_memory_read_data_in_36_0;	// vector_unit.k:122:5, :124:9
+  always_comb begin	// vector_unit.k:123:9
+    fifo_wren_0_0 = p0_stage3_enable;	// vector_unit.k:121:5, :123:9
+    fifo_data_out_0_0 = p0_memory_read_data_in_28_0;	// vector_unit.k:121:5, :123:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:124:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:123:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -5555,41 +5071,41 @@ module vector_unit_get_gamma_pre_mlp_BasicBlock_0(	// vector_unit.k:124:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:124:9
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:123:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  vector_unitDebugView_get_gamma_pre_mlpEntry vector_unitDebugView_get_gamma_pre_mlpEntry_instance (	// vector_unit.k:122:5
-    .clk       (clk),	// vector_unit.k:122:5
-    ._index    (p0_stage1_enable ? p0_data_in_23 : 'x),	// vector_unit.k:122:5, :124:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:124:9
+  vector_unitDebugView_get_gamma_pre_mlpEntry vector_unitDebugView_get_gamma_pre_mlpEntry_instance (	// vector_unit.k:121:5
+    .clk       (clk),	// vector_unit.k:121:5
+    ._index    (p0_stage1_enable ? p0_data_in_19 : 'x),	// vector_unit.k:121:5, :123:9
+    .valid     (p0_stage1_enable),	// vector_unit.k:123:9
     .valid_out (/* unused */)
-  );	// vector_unit.k:122:5
-  vector_unitDebugView_get_gamma_pre_mlpExit vector_unitDebugView_get_gamma_pre_mlpExit_instance (	// vector_unit.k:122:5
-    .clk          (clk),	// vector_unit.k:122:5
-    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_36_0_0 : 'x),	// vector_unit.k:122:5, :124:9
-    .valid        (p0_stage2_enable),	// vector_unit.k:124:9
+  );	// vector_unit.k:121:5
+  vector_unitDebugView_get_gamma_pre_mlpExit vector_unitDebugView_get_gamma_pre_mlpExit_instance (	// vector_unit.k:121:5
+    .clk          (clk),	// vector_unit.k:121:5
+    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_28_0_0 : 'x),	// vector_unit.k:121:5, :123:9
+    .valid        (p0_stage2_enable),	// vector_unit.k:123:9
     .valid_out    (/* unused */)
-  );	// vector_unit.k:122:5
-  assign done_out = p0_stage3_enable;	// vector_unit.k:124:9
-  assign memory_read_addr_out_36_0 = memory_read_addr_out_36_0_0;	// vector_unit.k:124:9
-  assign memory_rden_out_36_0 = memory_rden_out_36_0_0;	// vector_unit.k:124:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:124:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:124:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:124:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:124:9
+  );	// vector_unit.k:121:5
+  assign done_out = p0_stage3_enable;	// vector_unit.k:123:9
+  assign memory_read_addr_out_28_0 = memory_read_addr_out_28_0_0;	// vector_unit.k:123:9
+  assign memory_rden_out_28_0 = memory_rden_out_28_0_0;	// vector_unit.k:123:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:123:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:123:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:123:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:123:9
 endmodule
 
-module vector_unit_set_gamma_pre_mlp_BasicBlock_0(	// vector_unit.k:116:9
+module vector_unit_set_gamma_pre_mlp_BasicBlock_0(	// vector_unit.k:115:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  output wire [15:0] memory_write_data_out_36_0,
-  output wire [11:0] memory_write_addr_out_36_0,
-  output wire        memory_wren_36_0,
+  output wire [15:0] memory_write_data_out_28_0,
+  output wire [11:0] memory_write_addr_out_28_0,
+  output wire        memory_wren_28_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
-  input  wire [31:0] data_in_22,
+  input  wire [31:0] data_in_18,
   input  wire        input_fifo_underflow_0,
   output wire        input_rdy_0,
   input  wire        input_valid_0,
@@ -5598,54 +5114,54 @@ module vector_unit_set_gamma_pre_mlp_BasicBlock_0(	// vector_unit.k:116:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  logic        done_out_0;	// vector_unit.k:116:9
-  logic [15:0] memory_write_data_out_36_0_0;	// vector_unit.k:116:9
-  logic [11:0] memory_write_addr_out_36_0_0;	// vector_unit.k:116:9
-  logic        memory_wren_36_0_0;	// vector_unit.k:116:9
-  logic        fifo_wren_0_0;	// vector_unit.k:116:9
-  logic        input_rdy_0_0;	// vector_unit.k:116:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:116:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:116:9
-  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:116:9
-  always_comb begin	// vector_unit.k:116:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:116:9
+  logic        done_out_0;	// vector_unit.k:115:9
+  logic [15:0] memory_write_data_out_28_0_0;	// vector_unit.k:115:9
+  logic [11:0] memory_write_addr_out_28_0_0;	// vector_unit.k:115:9
+  logic        memory_wren_28_0_0;	// vector_unit.k:115:9
+  logic        fifo_wren_0_0;	// vector_unit.k:115:9
+  logic        input_rdy_0_0;	// vector_unit.k:115:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:115:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:115:9
+  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:115:9
+  always_comb begin	// vector_unit.k:115:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:115:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:116:9
+       ~input_valid_0};	// vector_unit.k:115:9
   end // always_comb
-  always_comb begin	// vector_unit.k:116:9
-    memory_wren_36_0_0 = _GEN_0;	// vector_unit.k:116:9, :118:13
-    memory_write_addr_out_36_0_0 = data_in_22[11:0];	// vector_unit.k:118:13
-    memory_write_data_out_36_0_0 = data_in_22[31:16];	// vector_unit.k:118:13
+  always_comb begin	// vector_unit.k:115:9
+    memory_wren_28_0_0 = _GEN_0;	// vector_unit.k:115:9, :117:13
+    memory_write_addr_out_28_0_0 = data_in_18[11:0];	// vector_unit.k:117:13
+    memory_write_data_out_28_0_0 = data_in_18[31:16];	// vector_unit.k:117:13
   end // always_comb
-  reg   [15:0] p0_index;	// vector_unit.k:116:9
-  reg   [15:0] p0_value;	// vector_unit.k:116:9
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:116:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:116:9
-  always @(posedge clk) begin	// vector_unit.k:116:9
-    p0_index <= data_in_22[15:0];	// vector_unit.k:116:9
-    p0_value <= data_in_22[31:16];	// vector_unit.k:116:9
-    if (rst) begin	// vector_unit.k:116:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:116:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:116:9
+  reg   [15:0] p0_index;	// vector_unit.k:115:9
+  reg   [15:0] p0_value;	// vector_unit.k:115:9
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:115:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:115:9
+  always @(posedge clk) begin	// vector_unit.k:115:9
+    p0_index <= data_in_18[15:0];	// vector_unit.k:115:9
+    p0_value <= data_in_18[31:16];	// vector_unit.k:115:9
+    if (rst) begin	// vector_unit.k:115:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:115:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:115:9
     end
-    else begin	// vector_unit.k:116:9
-      p0_stage1_enable <= _GEN_0;	// vector_unit.k:116:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:116:9
+    else begin	// vector_unit.k:115:9
+      p0_stage1_enable <= _GEN_0;	// vector_unit.k:115:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:115:9
     end
   end // always @(posedge)
-  always_comb	// vector_unit.k:116:9
-    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:116:9, :120:9
+  always_comb	// vector_unit.k:115:9
+    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:115:9, :119:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:116:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:115:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -5653,383 +5169,33 @@ module vector_unit_set_gamma_pre_mlp_BasicBlock_0(	// vector_unit.k:116:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:116:9
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:115:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  vector_unitDebugView_set_gamma_pre_mlpEntry vector_unitDebugView_set_gamma_pre_mlpEntry_instance (	// vector_unit.k:120:9
-    .clk       (clk),	// vector_unit.k:120:9
-    ._index    (p0_stage1_enable ? p0_index : 'x),	// vector_unit.k:116:9, :120:9
-    ._value    (p0_stage1_enable ? p0_value : 'x),	// vector_unit.k:116:9, :120:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:116:9
+  vector_unitDebugView_set_gamma_pre_mlpEntry vector_unitDebugView_set_gamma_pre_mlpEntry_instance (	// vector_unit.k:119:9
+    .clk       (clk),	// vector_unit.k:119:9
+    ._index    (p0_stage1_enable ? p0_index : 'x),	// vector_unit.k:115:9, :119:9
+    ._value    (p0_stage1_enable ? p0_value : 'x),	// vector_unit.k:115:9, :119:9
+    .valid     (p0_stage1_enable),	// vector_unit.k:115:9
     .valid_out (/* unused */)
-  );	// vector_unit.k:120:9
-  assign done_out = p0_stage2_enable;	// vector_unit.k:116:9
-  assign memory_write_data_out_36_0 = memory_write_data_out_36_0_0;	// vector_unit.k:116:9
-  assign memory_write_addr_out_36_0 = memory_write_addr_out_36_0_0;	// vector_unit.k:116:9
-  assign memory_wren_36_0 = memory_wren_36_0_0;	// vector_unit.k:116:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:116:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:116:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:116:9
+  );	// vector_unit.k:119:9
+  assign done_out = p0_stage2_enable;	// vector_unit.k:115:9
+  assign memory_write_data_out_28_0 = memory_write_data_out_28_0_0;	// vector_unit.k:115:9
+  assign memory_write_addr_out_28_0 = memory_write_addr_out_28_0_0;	// vector_unit.k:115:9
+  assign memory_wren_28_0 = memory_wren_28_0_0;	// vector_unit.k:115:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:115:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:115:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:115:9
 endmodule
 
-module vector_unit_get_gamma_pre_attn_BasicBlock_0(	// vector_unit.k:106:9
+module vector_unit_get_gamma_pre_attn_BasicBlock_0(	// vector_unit.k:105:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  input  wire [15:0] memory_read_data_in_35_0,
-  output wire [11:0] memory_read_addr_out_35_0,
-  output wire        memory_rden_out_35_0,
+  input  wire [15:0] memory_read_data_in_27_0,
+  output wire [11:0] memory_read_addr_out_27_0,
+  output wire        memory_rden_out_27_0,
   output wire [15:0] fifo_data_out_0,
-  output wire        fifo_wren_0,
-  input  wire        fifo_almost_full_in_raw_0,
-  input  wire        fifo_overflow_in_0,
-  input  wire [15:0] data_in_21,
-  input  wire        input_fifo_underflow_0,
-  output wire        input_rdy_0,
-  input  wire        input_valid_0,
-  output wire [7:0]  control_state_out
-);
-
-  wire         _fifo_overflow_ffc_0_data_out;
-  wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [15:0] memory_read_data_in_35_0_0 = memory_read_data_in_35_0;	// vector_unit.k:106:9
-  logic        done_out_0;	// vector_unit.k:106:9
-  logic [11:0] memory_read_addr_out_35_0_0;	// vector_unit.k:106:9
-  logic        memory_rden_out_35_0_0;	// vector_unit.k:106:9
-  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:106:9
-  logic        fifo_wren_0_0;	// vector_unit.k:106:9
-  logic        input_rdy_0_0;	// vector_unit.k:106:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:106:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:106:9
-  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:106:9
-  always_comb begin	// vector_unit.k:106:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:106:9
-    control_state_out_0 =
-      {2'h0,
-       ~_fifo_overflow_ffc_0_data_out,
-       input_fifo_underflow_0,
-       2'h0,
-       ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:106:9
-  end // always_comb
-  always_comb begin	// vector_unit.k:106:9
-    memory_read_addr_out_35_0_0 = data_in_21[11:0];	// vector_unit.k:109:22
-    memory_rden_out_35_0_0 = _GEN_0;	// vector_unit.k:106:9, :109:22
-  end // always_comb
-  reg   [15:0] p0_data_in_21;	// vector_unit.k:106:9
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:106:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:106:9
-  reg   [15:0] p0_memory_read_data_in_35_0;	// vector_unit.k:106:9
-  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:106:9
-  always @(posedge clk) begin	// vector_unit.k:106:9
-    p0_data_in_21 <= data_in_21;	// vector_unit.k:106:9
-    if (rst) begin	// vector_unit.k:106:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:106:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:106:9
-    end
-    else begin	// vector_unit.k:106:9
-      p0_stage1_enable <= _GEN_0;	// vector_unit.k:106:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:106:9
-    end
-    p0_memory_read_data_in_35_0 <= memory_read_data_in_35_0_0;	// vector_unit.k:106:9
-    if (rst)	// vector_unit.k:106:9
-      p0_stage3_enable <= 1'h0;	// vector_unit.k:106:9
-    else	// vector_unit.k:106:9
-      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:106:9
-  end // always @(posedge)
-  always_comb begin	// vector_unit.k:106:9
-    fifo_wren_0_0 = p0_stage3_enable;	// vector_unit.k:104:5, :106:9
-    fifo_data_out_0_0 = p0_memory_read_data_in_35_0;	// vector_unit.k:104:5, :106:9
-  end // always_comb
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_almostfull_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:106:9
-    .data_out (_fifo_almostfull_ffc_0_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_overflow_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:106:9
-    .data_out (_fifo_overflow_ffc_0_data_out)
-  );
-  vector_unitDebugView_get_gamma_pre_attnEntry vector_unitDebugView_get_gamma_pre_attnEntry_instance (	// vector_unit.k:104:5
-    .clk       (clk),	// vector_unit.k:104:5
-    ._index    (p0_stage1_enable ? p0_data_in_21 : 'x),	// vector_unit.k:104:5, :106:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:106:9
-    .valid_out (/* unused */)
-  );	// vector_unit.k:104:5
-  vector_unitDebugView_get_gamma_pre_attnExit vector_unitDebugView_get_gamma_pre_attnExit_instance (	// vector_unit.k:104:5
-    .clk          (clk),	// vector_unit.k:104:5
-    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_35_0_0 : 'x),	// vector_unit.k:104:5, :106:9
-    .valid        (p0_stage2_enable),	// vector_unit.k:106:9
-    .valid_out    (/* unused */)
-  );	// vector_unit.k:104:5
-  assign done_out = p0_stage3_enable;	// vector_unit.k:106:9
-  assign memory_read_addr_out_35_0 = memory_read_addr_out_35_0_0;	// vector_unit.k:106:9
-  assign memory_rden_out_35_0 = memory_rden_out_35_0_0;	// vector_unit.k:106:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:106:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:106:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:106:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:106:9
-endmodule
-
-module vector_unit_set_gamma_pre_attn_BasicBlock_0(	// vector_unit.k:98:9
-  input  wire        clk,
-  input  wire        rst,
-  output wire        done_out,
-  output wire [15:0] memory_write_data_out_35_0,
-  output wire [11:0] memory_write_addr_out_35_0,
-  output wire        memory_wren_35_0,
-  output wire        fifo_wren_0,
-  input  wire        fifo_almost_full_in_raw_0,
-  input  wire        fifo_overflow_in_0,
-  input  wire [31:0] data_in_20,
-  input  wire        input_fifo_underflow_0,
-  output wire        input_rdy_0,
-  input  wire        input_valid_0,
-  output wire [7:0]  control_state_out
-);
-
-  wire         _fifo_overflow_ffc_0_data_out;
-  wire         _fifo_almostfull_ffc_0_data_out;
-  logic        done_out_0;	// vector_unit.k:98:9
-  logic [15:0] memory_write_data_out_35_0_0;	// vector_unit.k:98:9
-  logic [11:0] memory_write_addr_out_35_0_0;	// vector_unit.k:98:9
-  logic        memory_wren_35_0_0;	// vector_unit.k:98:9
-  logic        fifo_wren_0_0;	// vector_unit.k:98:9
-  logic        input_rdy_0_0;	// vector_unit.k:98:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:98:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:98:9
-  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:98:9
-  always_comb begin	// vector_unit.k:98:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:98:9
-    control_state_out_0 =
-      {2'h0,
-       ~_fifo_overflow_ffc_0_data_out,
-       input_fifo_underflow_0,
-       2'h0,
-       ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:98:9
-  end // always_comb
-  always_comb begin	// vector_unit.k:98:9
-    memory_wren_35_0_0 = _GEN_0;	// vector_unit.k:98:9, :100:13
-    memory_write_addr_out_35_0_0 = data_in_20[11:0];	// vector_unit.k:100:13
-    memory_write_data_out_35_0_0 = data_in_20[31:16];	// vector_unit.k:100:13
-  end // always_comb
-  reg   [15:0] p0_index;	// vector_unit.k:98:9
-  reg   [15:0] p0_value;	// vector_unit.k:98:9
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:98:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:98:9
-  always @(posedge clk) begin	// vector_unit.k:98:9
-    p0_index <= data_in_20[15:0];	// vector_unit.k:98:9
-    p0_value <= data_in_20[31:16];	// vector_unit.k:98:9
-    if (rst) begin	// vector_unit.k:98:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:98:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:98:9
-    end
-    else begin	// vector_unit.k:98:9
-      p0_stage1_enable <= _GEN_0;	// vector_unit.k:98:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:98:9
-    end
-  end // always @(posedge)
-  always_comb	// vector_unit.k:98:9
-    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:98:9, :102:9
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_almostfull_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:98:9
-    .data_out (_fifo_almostfull_ffc_0_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_overflow_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:98:9
-    .data_out (_fifo_overflow_ffc_0_data_out)
-  );
-  vector_unitDebugView_set_gamma_pre_attnEntry vector_unitDebugView_set_gamma_pre_attnEntry_instance (	// vector_unit.k:102:9
-    .clk       (clk),	// vector_unit.k:102:9
-    ._index    (p0_stage1_enable ? p0_index : 'x),	// vector_unit.k:98:9, :102:9
-    ._value    (p0_stage1_enable ? p0_value : 'x),	// vector_unit.k:98:9, :102:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:98:9
-    .valid_out (/* unused */)
-  );	// vector_unit.k:102:9
-  assign done_out = p0_stage2_enable;	// vector_unit.k:98:9
-  assign memory_write_data_out_35_0 = memory_write_data_out_35_0_0;	// vector_unit.k:98:9
-  assign memory_write_addr_out_35_0 = memory_write_addr_out_35_0_0;	// vector_unit.k:98:9
-  assign memory_wren_35_0 = memory_wren_35_0_0;	// vector_unit.k:98:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:98:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:98:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:98:9
-endmodule
-
-module vector_unit_rmsnorm_reset_BasicBlock_0(	// vector_unit.k:89:9
-  input  wire       clk,
-  input  wire       rst,
-  output wire       done_out,
-  output wire       global_out__sum_sq_34_1_valid,
-  output wire       fifo_wren_0,
-  input  wire       fifo_almost_full_in_raw_0,
-  input  wire       fifo_overflow_in_0,
-  input  wire       input_fifo_underflow_0,
-  output wire       input_rdy_0,
-  input  wire       input_valid_0,
-  output wire [7:0] control_state_out
-);
-
-  wire        _fifo_overflow_ffc_0_data_out;
-  wire        _fifo_almostfull_ffc_0_data_out;
-  logic       done_out_0;	// vector_unit.k:89:9
-  logic       global_out__sum_sq_34_1_valid_0;	// vector_unit.k:89:9
-  logic       fifo_wren_0_0;	// vector_unit.k:89:9
-  logic       input_rdy_0_0;	// vector_unit.k:89:9
-  logic [7:0] control_state_out_0;	// vector_unit.k:89:9
-  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:89:9
-  always_comb begin	// vector_unit.k:89:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:89:9
-    control_state_out_0 =
-      {2'h0,
-       ~_fifo_overflow_ffc_0_data_out,
-       input_fifo_underflow_0,
-       2'h0,
-       ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:89:9
-  end // always_comb
-  reg         p0_stage1_enable = 1'h0;	// vector_unit.k:89:9
-  always_comb	// vector_unit.k:89:9
-    global_out__sum_sq_34_1_valid_0 = p0_stage1_enable;	// vector_unit.k:89:9
-  reg         p0_stage2_enable = 1'h0;	// vector_unit.k:89:9
-  always @(posedge clk) begin	// vector_unit.k:89:9
-    if (rst) begin	// vector_unit.k:89:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:89:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:89:9
-    end
-    else begin	// vector_unit.k:89:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:89:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:89:9
-    end
-  end // always @(posedge)
-  always_comb	// vector_unit.k:89:9
-    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:89:9, :94:9
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_almostfull_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:89:9
-    .data_out (_fifo_almostfull_ffc_0_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_overflow_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:89:9
-    .data_out (_fifo_overflow_ffc_0_data_out)
-  );
-  assign done_out = p0_stage2_enable;	// vector_unit.k:89:9
-  assign global_out__sum_sq_34_1_valid = global_out__sum_sq_34_1_valid_0;	// vector_unit.k:89:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:89:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:89:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:89:9
-endmodule
-
-module vector_unit_rmsnorm_get_sum_BasicBlock_0(	// vector_unit.k:79:9
-  input  wire        clk,
-  input  wire        rst,
-  output wire        done_out,
-  input  wire [31:0] global_in__sum_sq_34,
-  output wire [31:0] fifo_data_out_0,
-  output wire        fifo_wren_0,
-  input  wire        fifo_almost_full_in_raw_0,
-  input  wire        fifo_overflow_in_0,
-  input  wire        input_fifo_underflow_0,
-  output wire        input_rdy_0,
-  input  wire        input_valid_0,
-  output wire [7:0]  control_state_out
-);
-
-  wire         _fifo_overflow_ffc_0_data_out;
-  wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [31:0] global_in__sum_sq_34_0 = global_in__sum_sq_34;	// vector_unit.k:79:9
-  logic        done_out_0;	// vector_unit.k:79:9
-  logic [31:0] fifo_data_out_0_0;	// vector_unit.k:79:9
-  logic        fifo_wren_0_0;	// vector_unit.k:79:9
-  logic        input_rdy_0_0;	// vector_unit.k:79:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:79:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:79:9
-  always_comb begin	// vector_unit.k:79:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:79:9
-    control_state_out_0 =
-      {2'h0,
-       ~_fifo_overflow_ffc_0_data_out,
-       input_fifo_underflow_0,
-       2'h0,
-       ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:79:9
-  end // always_comb
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:79:9
-  reg   [31:0] p0_global_in__sum_sq_34;	// vector_unit.k:79:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:79:9
-  always @(posedge clk) begin	// vector_unit.k:79:9
-    if (rst)	// vector_unit.k:79:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:79:9
-    else	// vector_unit.k:79:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:79:9
-    p0_global_in__sum_sq_34 <= global_in__sum_sq_34_0;	// vector_unit.k:79:9
-    if (rst)	// vector_unit.k:79:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:79:9
-    else	// vector_unit.k:79:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:79:9
-  end // always @(posedge)
-  always_comb begin	// vector_unit.k:79:9
-    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:77:5, :79:9
-    fifo_data_out_0_0 = p0_global_in__sum_sq_34;	// vector_unit.k:77:5, :79:9
-  end // always_comb
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_almostfull_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:79:9
-    .data_out (_fifo_almostfull_ffc_0_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_overflow_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:79:9
-    .data_out (_fifo_overflow_ffc_0_data_out)
-  );
-  vector_unitDebugView_rmsnorm_get_sumExit vector_unitDebugView_rmsnorm_get_sumExit_instance (	// vector_unit.k:77:5
-    .clk          (clk),	// vector_unit.k:77:5
-    ._ReturnValue (p0_stage1_enable ? global_in__sum_sq_34_0 : 'x),	// vector_unit.k:77:5, :79:9
-    .valid        (p0_stage1_enable),	// vector_unit.k:79:9
-    .valid_out    (/* unused */)
-  );	// vector_unit.k:77:5
-  assign done_out = p0_stage2_enable;	// vector_unit.k:79:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:79:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:79:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:79:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:79:9
-endmodule
-
-module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:33:9
-  input  wire        clk,
-  input  wire        rst,
-  output wire        done_out,
-  input  wire [31:0] global_in__sum_sq_34,
-  output wire        global_out__sum_sq_34_0_valid,
-  output wire [31:0] global_out__sum_sq_34_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
@@ -6042,91 +5208,441 @@ module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:33:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [31:0] global_in__sum_sq_34_0 = global_in__sum_sq_34;	// vector_unit.k:33:9
-  logic        done_out_0;	// vector_unit.k:33:9
-  logic        global_out__sum_sq_34_0_valid_0;	// vector_unit.k:33:9
-  logic [31:0] global_out__sum_sq_34_0_0;	// vector_unit.k:33:9
-  logic        fifo_wren_0_0;	// vector_unit.k:33:9
-  logic        input_rdy_0_0;	// vector_unit.k:33:9
-  logic [7:0]  control_state_out_0;	// vector_unit.k:33:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:33:9
-  always_comb begin	// vector_unit.k:33:9
-    input_rdy_0_0 = _GEN;	// vector_unit.k:33:9
+  wire  [15:0] memory_read_data_in_27_0_0 = memory_read_data_in_27_0;	// vector_unit.k:105:9
+  logic        done_out_0;	// vector_unit.k:105:9
+  logic [11:0] memory_read_addr_out_27_0_0;	// vector_unit.k:105:9
+  logic        memory_rden_out_27_0_0;	// vector_unit.k:105:9
+  logic [15:0] fifo_data_out_0_0;	// vector_unit.k:105:9
+  logic        fifo_wren_0_0;	// vector_unit.k:105:9
+  logic        input_rdy_0_0;	// vector_unit.k:105:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:105:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:105:9
+  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:105:9
+  always_comb begin	// vector_unit.k:105:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:105:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// vector_unit.k:33:9
+       ~input_valid_0};	// vector_unit.k:105:9
   end // always_comb
-  reg   [15:0] p0_data_in_17;	// vector_unit.k:33:9
-  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:33:9
-  reg   [12:0] p0__prod_plus_ma32_shl_4_;	// vector_unit.k:33:9
-  reg   [5:0]  p0_ma;	// vector_unit.k:33:9
-  reg   [11:0] p0_prod;	// vector_unit.k:33:9
-  reg   [13:0] p0__ma32_shl_5_;	// vector_unit.k:33:9
-  reg   [14:0] p0__ma32_shl_6_;	// vector_unit.k:33:9
-  reg          p0_ma_0;	// vector_unit.k:33:9
-  reg   [15:0] p0__ma32_shl_7_;	// vector_unit.k:33:9
-  reg   [15:0] p0__x_exp_plus_x_exp_minus_127_plus_1_;	// vector_unit.k:33:9
-  reg   [15:0] p0__x_exp_plus_x_exp_minus_127_;	// vector_unit.k:33:9
-  reg          p0__x_exp_ne_0_;	// vector_unit.k:33:9
-  reg   [31:0] p0_global_in__sum_sq_34;	// vector_unit.k:33:9
-  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:33:9
-  reg          p0_prod_0;	// vector_unit.k:33:9
-  reg   [15:0] p0__x_exp_plus_x_exp_minus_127_plus_1__0;	// vector_unit.k:33:9
-  reg   [15:0] p0__x_exp_plus_x_exp_minus_127__0;	// vector_unit.k:33:9
-  reg          p0__x_exp_ne_0__0;	// vector_unit.k:33:9
-  reg   [14:0] p0_prod_1;	// vector_unit.k:33:9
-  reg   [31:0] p0_global_in__sum_sq_34_0;	// vector_unit.k:33:9
-  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:33:9
-  reg   [31:0] p0__sum_sq_plus_cast_lt_uint32_gt_x_sq_;	// vector_unit.k:33:9
-  reg          p0_stage4_enable = 1'h0;	// vector_unit.k:33:9
-  always_comb begin	// vector_unit.k:33:9
-    global_out__sum_sq_34_0_0 = p0__sum_sq_plus_cast_lt_uint32_gt_x_sq_;	// vector_unit.k:33:9
-    global_out__sum_sq_34_0_valid_0 = p0_stage4_enable;	// vector_unit.k:33:9
+  always_comb begin	// vector_unit.k:105:9
+    memory_read_addr_out_27_0_0 = data_in_17[11:0];	// vector_unit.k:108:22
+    memory_rden_out_27_0_0 = _GEN_0;	// vector_unit.k:105:9, :108:22
   end // always_comb
-  reg          p0_stage5_enable = 1'h0;	// vector_unit.k:33:9
-  wire  [15:0] _GEN_0 = {7'h0, p0_data_in_17[14:7], 1'h0};	// vector_unit.k:33:9, :59:39, :64:39
-  wire         prod = p0_data_in_17[6] & p0_data_in_17[0];	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}
-  wire         prod_0 = p0_data_in_17[5] & p0_data_in_17[0];	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}
-  wire         prod_1 = p0_data_in_17[4] & p0_data_in_17[0];	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}
-  wire         prod_2 = p0_data_in_17[3] & p0_data_in_17[0];	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}
-  wire         prod_3 = p0_data_in_17[2] & p0_data_in_17[0];	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}
-  wire         prod_4 = p0_data_in_17[1] & p0_data_in_17[0];	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}
+  reg   [15:0] p0_data_in_17;	// vector_unit.k:105:9
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:105:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:105:9
+  reg   [15:0] p0_memory_read_data_in_27_0;	// vector_unit.k:105:9
+  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:105:9
+  always @(posedge clk) begin	// vector_unit.k:105:9
+    p0_data_in_17 <= data_in_17;	// vector_unit.k:105:9
+    if (rst) begin	// vector_unit.k:105:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:105:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:105:9
+    end
+    else begin	// vector_unit.k:105:9
+      p0_stage1_enable <= _GEN_0;	// vector_unit.k:105:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:105:9
+    end
+    p0_memory_read_data_in_27_0 <= memory_read_data_in_27_0_0;	// vector_unit.k:105:9
+    if (rst)	// vector_unit.k:105:9
+      p0_stage3_enable <= 1'h0;	// vector_unit.k:105:9
+    else	// vector_unit.k:105:9
+      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:105:9
+  end // always @(posedge)
+  always_comb begin	// vector_unit.k:105:9
+    fifo_wren_0_0 = p0_stage3_enable;	// vector_unit.k:103:5, :105:9
+    fifo_data_out_0_0 = p0_memory_read_data_in_27_0;	// vector_unit.k:103:5, :105:9
+  end // always_comb
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_almostfull_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:105:9
+    .data_out (_fifo_almostfull_ffc_0_data_out)
+  );
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_overflow_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:105:9
+    .data_out (_fifo_overflow_ffc_0_data_out)
+  );
+  vector_unitDebugView_get_gamma_pre_attnEntry vector_unitDebugView_get_gamma_pre_attnEntry_instance (	// vector_unit.k:103:5
+    .clk       (clk),	// vector_unit.k:103:5
+    ._index    (p0_stage1_enable ? p0_data_in_17 : 'x),	// vector_unit.k:103:5, :105:9
+    .valid     (p0_stage1_enable),	// vector_unit.k:105:9
+    .valid_out (/* unused */)
+  );	// vector_unit.k:103:5
+  vector_unitDebugView_get_gamma_pre_attnExit vector_unitDebugView_get_gamma_pre_attnExit_instance (	// vector_unit.k:103:5
+    .clk          (clk),	// vector_unit.k:103:5
+    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_27_0_0 : 'x),	// vector_unit.k:103:5, :105:9
+    .valid        (p0_stage2_enable),	// vector_unit.k:105:9
+    .valid_out    (/* unused */)
+  );	// vector_unit.k:103:5
+  assign done_out = p0_stage3_enable;	// vector_unit.k:105:9
+  assign memory_read_addr_out_27_0 = memory_read_addr_out_27_0_0;	// vector_unit.k:105:9
+  assign memory_rden_out_27_0 = memory_rden_out_27_0_0;	// vector_unit.k:105:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:105:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:105:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:105:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:105:9
+endmodule
+
+module vector_unit_set_gamma_pre_attn_BasicBlock_0(	// vector_unit.k:97:9
+  input  wire        clk,
+  input  wire        rst,
+  output wire        done_out,
+  output wire [15:0] memory_write_data_out_27_0,
+  output wire [11:0] memory_write_addr_out_27_0,
+  output wire        memory_wren_27_0,
+  output wire        fifo_wren_0,
+  input  wire        fifo_almost_full_in_raw_0,
+  input  wire        fifo_overflow_in_0,
+  input  wire [31:0] data_in_16,
+  input  wire        input_fifo_underflow_0,
+  output wire        input_rdy_0,
+  input  wire        input_valid_0,
+  output wire [7:0]  control_state_out
+);
+
+  wire         _fifo_overflow_ffc_0_data_out;
+  wire         _fifo_almostfull_ffc_0_data_out;
+  logic        done_out_0;	// vector_unit.k:97:9
+  logic [15:0] memory_write_data_out_27_0_0;	// vector_unit.k:97:9
+  logic [11:0] memory_write_addr_out_27_0_0;	// vector_unit.k:97:9
+  logic        memory_wren_27_0_0;	// vector_unit.k:97:9
+  logic        fifo_wren_0_0;	// vector_unit.k:97:9
+  logic        input_rdy_0_0;	// vector_unit.k:97:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:97:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:97:9
+  wire         _GEN_0 = _GEN & input_valid_0;	// vector_unit.k:97:9
+  always_comb begin	// vector_unit.k:97:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:97:9
+    control_state_out_0 =
+      {2'h0,
+       ~_fifo_overflow_ffc_0_data_out,
+       input_fifo_underflow_0,
+       2'h0,
+       ~_fifo_almostfull_ffc_0_data_out,
+       ~input_valid_0};	// vector_unit.k:97:9
+  end // always_comb
+  always_comb begin	// vector_unit.k:97:9
+    memory_wren_27_0_0 = _GEN_0;	// vector_unit.k:97:9, :99:13
+    memory_write_addr_out_27_0_0 = data_in_16[11:0];	// vector_unit.k:99:13
+    memory_write_data_out_27_0_0 = data_in_16[31:16];	// vector_unit.k:99:13
+  end // always_comb
+  reg   [15:0] p0_index;	// vector_unit.k:97:9
+  reg   [15:0] p0_value;	// vector_unit.k:97:9
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:97:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:97:9
+  always @(posedge clk) begin	// vector_unit.k:97:9
+    p0_index <= data_in_16[15:0];	// vector_unit.k:97:9
+    p0_value <= data_in_16[31:16];	// vector_unit.k:97:9
+    if (rst) begin	// vector_unit.k:97:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:97:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:97:9
+    end
+    else begin	// vector_unit.k:97:9
+      p0_stage1_enable <= _GEN_0;	// vector_unit.k:97:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:97:9
+    end
+  end // always @(posedge)
+  always_comb	// vector_unit.k:97:9
+    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:97:9, :101:9
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_almostfull_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:97:9
+    .data_out (_fifo_almostfull_ffc_0_data_out)
+  );
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_overflow_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:97:9
+    .data_out (_fifo_overflow_ffc_0_data_out)
+  );
+  vector_unitDebugView_set_gamma_pre_attnEntry vector_unitDebugView_set_gamma_pre_attnEntry_instance (	// vector_unit.k:101:9
+    .clk       (clk),	// vector_unit.k:101:9
+    ._index    (p0_stage1_enable ? p0_index : 'x),	// vector_unit.k:97:9, :101:9
+    ._value    (p0_stage1_enable ? p0_value : 'x),	// vector_unit.k:97:9, :101:9
+    .valid     (p0_stage1_enable),	// vector_unit.k:97:9
+    .valid_out (/* unused */)
+  );	// vector_unit.k:101:9
+  assign done_out = p0_stage2_enable;	// vector_unit.k:97:9
+  assign memory_write_data_out_27_0 = memory_write_data_out_27_0_0;	// vector_unit.k:97:9
+  assign memory_write_addr_out_27_0 = memory_write_addr_out_27_0_0;	// vector_unit.k:97:9
+  assign memory_wren_27_0 = memory_wren_27_0_0;	// vector_unit.k:97:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:97:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:97:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:97:9
+endmodule
+
+module vector_unit_rmsnorm_reset_BasicBlock_0(	// vector_unit.k:88:9
+  input  wire       clk,
+  input  wire       rst,
+  output wire       done_out,
+  output wire       global_out__sum_sq_26_1_valid,
+  output wire       fifo_wren_0,
+  input  wire       fifo_almost_full_in_raw_0,
+  input  wire       fifo_overflow_in_0,
+  input  wire       input_fifo_underflow_0,
+  output wire       input_rdy_0,
+  input  wire       input_valid_0,
+  output wire [7:0] control_state_out
+);
+
+  wire        _fifo_overflow_ffc_0_data_out;
+  wire        _fifo_almostfull_ffc_0_data_out;
+  logic       done_out_0;	// vector_unit.k:88:9
+  logic       global_out__sum_sq_26_1_valid_0;	// vector_unit.k:88:9
+  logic       fifo_wren_0_0;	// vector_unit.k:88:9
+  logic       input_rdy_0_0;	// vector_unit.k:88:9
+  logic [7:0] control_state_out_0;	// vector_unit.k:88:9
+  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:88:9
+  always_comb begin	// vector_unit.k:88:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:88:9
+    control_state_out_0 =
+      {2'h0,
+       ~_fifo_overflow_ffc_0_data_out,
+       input_fifo_underflow_0,
+       2'h0,
+       ~_fifo_almostfull_ffc_0_data_out,
+       ~input_valid_0};	// vector_unit.k:88:9
+  end // always_comb
+  reg         p0_stage1_enable = 1'h0;	// vector_unit.k:88:9
+  always_comb	// vector_unit.k:88:9
+    global_out__sum_sq_26_1_valid_0 = p0_stage1_enable;	// vector_unit.k:88:9
+  reg         p0_stage2_enable = 1'h0;	// vector_unit.k:88:9
+  always @(posedge clk) begin	// vector_unit.k:88:9
+    if (rst) begin	// vector_unit.k:88:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:88:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:88:9
+    end
+    else begin	// vector_unit.k:88:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:88:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:88:9
+    end
+  end // always @(posedge)
+  always_comb	// vector_unit.k:88:9
+    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:88:9, :93:9
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_almostfull_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:88:9
+    .data_out (_fifo_almostfull_ffc_0_data_out)
+  );
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_overflow_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:88:9
+    .data_out (_fifo_overflow_ffc_0_data_out)
+  );
+  assign done_out = p0_stage2_enable;	// vector_unit.k:88:9
+  assign global_out__sum_sq_26_1_valid = global_out__sum_sq_26_1_valid_0;	// vector_unit.k:88:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:88:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:88:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:88:9
+endmodule
+
+module vector_unit_rmsnorm_get_sum_BasicBlock_0(	// vector_unit.k:78:9
+  input  wire        clk,
+  input  wire        rst,
+  output wire        done_out,
+  input  wire [31:0] global_in__sum_sq_26,
+  output wire [31:0] fifo_data_out_0,
+  output wire        fifo_wren_0,
+  input  wire        fifo_almost_full_in_raw_0,
+  input  wire        fifo_overflow_in_0,
+  input  wire        input_fifo_underflow_0,
+  output wire        input_rdy_0,
+  input  wire        input_valid_0,
+  output wire [7:0]  control_state_out
+);
+
+  wire         _fifo_overflow_ffc_0_data_out;
+  wire         _fifo_almostfull_ffc_0_data_out;
+  wire  [31:0] global_in__sum_sq_26_0 = global_in__sum_sq_26;	// vector_unit.k:78:9
+  logic        done_out_0;	// vector_unit.k:78:9
+  logic [31:0] fifo_data_out_0_0;	// vector_unit.k:78:9
+  logic        fifo_wren_0_0;	// vector_unit.k:78:9
+  logic        input_rdy_0_0;	// vector_unit.k:78:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:78:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:78:9
+  always_comb begin	// vector_unit.k:78:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:78:9
+    control_state_out_0 =
+      {2'h0,
+       ~_fifo_overflow_ffc_0_data_out,
+       input_fifo_underflow_0,
+       2'h0,
+       ~_fifo_almostfull_ffc_0_data_out,
+       ~input_valid_0};	// vector_unit.k:78:9
+  end // always_comb
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:78:9
+  reg   [31:0] p0_global_in__sum_sq_26;	// vector_unit.k:78:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:78:9
+  always @(posedge clk) begin	// vector_unit.k:78:9
+    if (rst)	// vector_unit.k:78:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:78:9
+    else	// vector_unit.k:78:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:78:9
+    p0_global_in__sum_sq_26 <= global_in__sum_sq_26_0;	// vector_unit.k:78:9
+    if (rst)	// vector_unit.k:78:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:78:9
+    else	// vector_unit.k:78:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:78:9
+  end // always @(posedge)
+  always_comb begin	// vector_unit.k:78:9
+    fifo_wren_0_0 = p0_stage2_enable;	// vector_unit.k:76:5, :78:9
+    fifo_data_out_0_0 = p0_global_in__sum_sq_26;	// vector_unit.k:76:5, :78:9
+  end // always_comb
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_almostfull_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:78:9
+    .data_out (_fifo_almostfull_ffc_0_data_out)
+  );
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_overflow_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:78:9
+    .data_out (_fifo_overflow_ffc_0_data_out)
+  );
+  vector_unitDebugView_rmsnorm_get_sumExit vector_unitDebugView_rmsnorm_get_sumExit_instance (	// vector_unit.k:76:5
+    .clk          (clk),	// vector_unit.k:76:5
+    ._ReturnValue (p0_stage1_enable ? global_in__sum_sq_26_0 : 'x),	// vector_unit.k:76:5, :78:9
+    .valid        (p0_stage1_enable),	// vector_unit.k:78:9
+    .valid_out    (/* unused */)
+  );	// vector_unit.k:76:5
+  assign done_out = p0_stage2_enable;	// vector_unit.k:78:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// vector_unit.k:78:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:78:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:78:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:78:9
+endmodule
+
+module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:32:9
+  input  wire        clk,
+  input  wire        rst,
+  output wire        done_out,
+  input  wire [31:0] global_in__sum_sq_26,
+  output wire        global_out__sum_sq_26_0_valid,
+  output wire [31:0] global_out__sum_sq_26_0,
+  output wire        fifo_wren_0,
+  input  wire        fifo_almost_full_in_raw_0,
+  input  wire        fifo_overflow_in_0,
+  input  wire [15:0] data_in_13,
+  input  wire        input_fifo_underflow_0,
+  output wire        input_rdy_0,
+  input  wire        input_valid_0,
+  output wire [7:0]  control_state_out
+);
+
+  wire         _fifo_overflow_ffc_0_data_out;
+  wire         _fifo_almostfull_ffc_0_data_out;
+  wire  [31:0] global_in__sum_sq_26_0 = global_in__sum_sq_26;	// vector_unit.k:32:9
+  logic        done_out_0;	// vector_unit.k:32:9
+  logic        global_out__sum_sq_26_0_valid_0;	// vector_unit.k:32:9
+  logic [31:0] global_out__sum_sq_26_0_0;	// vector_unit.k:32:9
+  logic        fifo_wren_0_0;	// vector_unit.k:32:9
+  logic        input_rdy_0_0;	// vector_unit.k:32:9
+  logic [7:0]  control_state_out_0;	// vector_unit.k:32:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// vector_unit.k:32:9
+  always_comb begin	// vector_unit.k:32:9
+    input_rdy_0_0 = _GEN;	// vector_unit.k:32:9
+    control_state_out_0 =
+      {2'h0,
+       ~_fifo_overflow_ffc_0_data_out,
+       input_fifo_underflow_0,
+       2'h0,
+       ~_fifo_almostfull_ffc_0_data_out,
+       ~input_valid_0};	// vector_unit.k:32:9
+  end // always_comb
+  reg   [15:0] p0_data_in_13;	// vector_unit.k:32:9
+  reg          p0_stage1_enable = 1'h0;	// vector_unit.k:32:9
+  reg   [12:0] p0__prod_plus_ma32_shl_4_;	// vector_unit.k:32:9
+  reg   [5:0]  p0_ma;	// vector_unit.k:32:9
+  reg   [11:0] p0_prod;	// vector_unit.k:32:9
+  reg   [13:0] p0__ma32_shl_5_;	// vector_unit.k:32:9
+  reg   [14:0] p0__ma32_shl_6_;	// vector_unit.k:32:9
+  reg          p0_ma_0;	// vector_unit.k:32:9
+  reg   [15:0] p0__ma32_shl_7_;	// vector_unit.k:32:9
+  reg   [15:0] p0__x_exp_plus_x_exp_minus_127_plus_1_;	// vector_unit.k:32:9
+  reg   [15:0] p0__x_exp_plus_x_exp_minus_127_;	// vector_unit.k:32:9
+  reg          p0__x_exp_ne_0_;	// vector_unit.k:32:9
+  reg   [31:0] p0_global_in__sum_sq_26;	// vector_unit.k:32:9
+  reg          p0_stage2_enable = 1'h0;	// vector_unit.k:32:9
+  reg          p0_prod_0;	// vector_unit.k:32:9
+  reg   [15:0] p0__x_exp_plus_x_exp_minus_127_plus_1__0;	// vector_unit.k:32:9
+  reg   [15:0] p0__x_exp_plus_x_exp_minus_127__0;	// vector_unit.k:32:9
+  reg          p0__x_exp_ne_0__0;	// vector_unit.k:32:9
+  reg   [14:0] p0_prod_1;	// vector_unit.k:32:9
+  reg   [31:0] p0_global_in__sum_sq_26_0;	// vector_unit.k:32:9
+  reg          p0_stage3_enable = 1'h0;	// vector_unit.k:32:9
+  reg   [31:0] p0__sum_sq_plus_cast_lt_uint32_gt_x_sq_;	// vector_unit.k:32:9
+  reg          p0_stage4_enable = 1'h0;	// vector_unit.k:32:9
+  always_comb begin	// vector_unit.k:32:9
+    global_out__sum_sq_26_0_0 = p0__sum_sq_plus_cast_lt_uint32_gt_x_sq_;	// vector_unit.k:32:9
+    global_out__sum_sq_26_0_valid_0 = p0_stage4_enable;	// vector_unit.k:32:9
+  end // always_comb
+  reg          p0_stage5_enable = 1'h0;	// vector_unit.k:32:9
+  wire  [15:0] _GEN_0 = {7'h0, p0_data_in_13[14:7], 1'h0};	// vector_unit.k:32:9, :58:39, :63:39
+  wire         prod = p0_data_in_13[6] & p0_data_in_13[0];	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}
+  wire         prod_0 = p0_data_in_13[5] & p0_data_in_13[0];	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}
+  wire         prod_1 = p0_data_in_13[4] & p0_data_in_13[0];	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}
+  wire         prod_2 = p0_data_in_13[3] & p0_data_in_13[0];	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}
+  wire         prod_3 = p0_data_in_13[2] & p0_data_in_13[0];	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}
+  wire         prod_4 = p0_data_in_13[1] & p0_data_in_13[0];	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}
   wire  [9:0]  _prod_plus_ma32_shl_1_ =
     10'({2'h0,
-         p0_data_in_17[0],
+         p0_data_in_13[0],
          prod,
          prod_0,
          prod_1,
          prod_2,
          prod_3,
          prod_4,
-         p0_data_in_17[0]} + {2'h1, p0_data_in_17[6:0], 1'h0});	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}, :47:{51,58}
-  wire         prod_5 = _prod_plus_ma32_shl_1_[9] & p0_data_in_17[1];	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25,51}
-  wire         prod_6 = _prod_plus_ma32_shl_1_[8] & p0_data_in_17[1];	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25,51}
+         p0_data_in_13[0]} + {2'h1, p0_data_in_13[6:0], 1'h0});	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}, :46:{51,58}
+  wire         prod_5 = _prod_plus_ma32_shl_1_[9] & p0_data_in_13[1];	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25,51}
+  wire         prod_6 = _prod_plus_ma32_shl_1_[8] & p0_data_in_13[1];	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25,51}
   wire         prod_7 =
     _prod_plus_ma32_shl_1_[7]
-      ? p0_data_in_17[0] | p0_data_in_17[1]
-      : p0_data_in_17[0] & ~(p0_data_in_17[1]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25,51}
+      ? p0_data_in_13[0] | p0_data_in_13[1]
+      : p0_data_in_13[0] & ~(p0_data_in_13[1]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25,51}
   wire         prod_8 =
-    _prod_plus_ma32_shl_1_[6] ? prod | p0_data_in_17[1] : prod & ~(p0_data_in_17[1]);	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}, :47:{21,25,51}
+    _prod_plus_ma32_shl_1_[6] ? prod | p0_data_in_13[1] : prod & ~(p0_data_in_13[1]);	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}, :46:{21,25,51}
   wire         prod_9 =
-    _prod_plus_ma32_shl_1_[5] ? prod_0 | p0_data_in_17[1] : prod_0 & ~(p0_data_in_17[1]);	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}, :47:{21,25,51}
+    _prod_plus_ma32_shl_1_[5] ? prod_0 | p0_data_in_13[1] : prod_0 & ~(p0_data_in_13[1]);	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}, :46:{21,25,51}
   wire         prod_10 =
-    _prod_plus_ma32_shl_1_[4] ? prod_1 | p0_data_in_17[1] : prod_1 & ~(p0_data_in_17[1]);	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}, :47:{21,25,51}
+    _prod_plus_ma32_shl_1_[4] ? prod_1 | p0_data_in_13[1] : prod_1 & ~(p0_data_in_13[1]);	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}, :46:{21,25,51}
   wire         prod_11 =
-    _prod_plus_ma32_shl_1_[3] ? prod_2 | p0_data_in_17[1] : prod_2 & ~(p0_data_in_17[1]);	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}, :47:{21,25,51}
+    _prod_plus_ma32_shl_1_[3] ? prod_2 | p0_data_in_13[1] : prod_2 & ~(p0_data_in_13[1]);	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}, :46:{21,25,51}
   wire         prod_12 =
-    _prod_plus_ma32_shl_1_[2] ? prod_3 | p0_data_in_17[1] : prod_3 & ~(p0_data_in_17[1]);	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}, :47:{21,25,51}
+    _prod_plus_ma32_shl_1_[2] ? prod_3 | p0_data_in_13[1] : prod_3 & ~(p0_data_in_13[1]);	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}, :46:{21,25,51}
   wire         prod_13 =
-    _prod_plus_ma32_shl_1_[1] ? prod_4 | p0_data_in_17[1] : prod_4 & ~(p0_data_in_17[1]);	// vector_unit.k:33:9, :42:{21,33}, :46:{21,25}, :47:{21,25,51}
+    _prod_plus_ma32_shl_1_[1] ? prod_4 | p0_data_in_13[1] : prod_4 & ~(p0_data_in_13[1]);	// vector_unit.k:32:9, :41:{21,33}, :45:{21,25}, :46:{21,25,51}
   wire         prod_14 =
     _prod_plus_ma32_shl_1_[0]
-      ? p0_data_in_17[0] | p0_data_in_17[1]
-      : p0_data_in_17[0] & ~(p0_data_in_17[1]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25,51}
+      ? p0_data_in_13[0] | p0_data_in_13[1]
+      : p0_data_in_13[0] & ~(p0_data_in_13[1]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25,51}
   wire  [10:0] _prod_plus_ma32_shl_2_ =
     11'({1'h0,
          prod_5,
@@ -6138,38 +5654,38 @@ module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:33:9
          prod_11,
          prod_12,
          prod_13,
-         prod_14} + {2'h1, p0_data_in_17[6:0], 2'h0});	// vector_unit.k:33:9, :47:{21,25}, :48:{51,58}
-  wire         prod_15 = _prod_plus_ma32_shl_2_[10] & p0_data_in_17[2];	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25,51}
+         prod_14} + {2'h1, p0_data_in_13[6:0], 2'h0});	// vector_unit.k:32:9, :46:{21,25}, :47:{51,58}
+  wire         prod_15 = _prod_plus_ma32_shl_2_[10] & p0_data_in_13[2];	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25,51}
   wire         prod_16 =
-    _prod_plus_ma32_shl_2_[9] ? prod_5 | p0_data_in_17[2] : prod_5 & ~(p0_data_in_17[2]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25}, :48:{21,25,51}
+    _prod_plus_ma32_shl_2_[9] ? prod_5 | p0_data_in_13[2] : prod_5 & ~(p0_data_in_13[2]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25}, :47:{21,25,51}
   wire         prod_17 =
-    _prod_plus_ma32_shl_2_[8] ? prod_6 | p0_data_in_17[2] : prod_6 & ~(p0_data_in_17[2]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25}, :48:{21,25,51}
+    _prod_plus_ma32_shl_2_[8] ? prod_6 | p0_data_in_13[2] : prod_6 & ~(p0_data_in_13[2]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25}, :47:{21,25,51}
   wire         prod_18 =
-    _prod_plus_ma32_shl_2_[7] ? prod_7 | p0_data_in_17[2] : prod_7 & ~(p0_data_in_17[2]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25}, :48:{21,25,51}
+    _prod_plus_ma32_shl_2_[7] ? prod_7 | p0_data_in_13[2] : prod_7 & ~(p0_data_in_13[2]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25}, :47:{21,25,51}
   wire         prod_19 =
-    _prod_plus_ma32_shl_2_[6] ? prod_8 | p0_data_in_17[2] : prod_8 & ~(p0_data_in_17[2]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25}, :48:{21,25,51}
+    _prod_plus_ma32_shl_2_[6] ? prod_8 | p0_data_in_13[2] : prod_8 & ~(p0_data_in_13[2]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25}, :47:{21,25,51}
   wire         prod_20 =
-    _prod_plus_ma32_shl_2_[5] ? prod_9 | p0_data_in_17[2] : prod_9 & ~(p0_data_in_17[2]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25}, :48:{21,25,51}
+    _prod_plus_ma32_shl_2_[5] ? prod_9 | p0_data_in_13[2] : prod_9 & ~(p0_data_in_13[2]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25}, :47:{21,25,51}
   wire         prod_21 =
     _prod_plus_ma32_shl_2_[4]
-      ? prod_10 | p0_data_in_17[2]
-      : prod_10 & ~(p0_data_in_17[2]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25}, :48:{21,25,51}
+      ? prod_10 | p0_data_in_13[2]
+      : prod_10 & ~(p0_data_in_13[2]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25}, :47:{21,25,51}
   wire         prod_22 =
     _prod_plus_ma32_shl_2_[3]
-      ? prod_11 | p0_data_in_17[2]
-      : prod_11 & ~(p0_data_in_17[2]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25}, :48:{21,25,51}
+      ? prod_11 | p0_data_in_13[2]
+      : prod_11 & ~(p0_data_in_13[2]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25}, :47:{21,25,51}
   wire         prod_23 =
     _prod_plus_ma32_shl_2_[2]
-      ? prod_12 | p0_data_in_17[2]
-      : prod_12 & ~(p0_data_in_17[2]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25}, :48:{21,25,51}
+      ? prod_12 | p0_data_in_13[2]
+      : prod_12 & ~(p0_data_in_13[2]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25}, :47:{21,25,51}
   wire         prod_24 =
     _prod_plus_ma32_shl_2_[1]
-      ? prod_13 | p0_data_in_17[2]
-      : prod_13 & ~(p0_data_in_17[2]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25}, :48:{21,25,51}
+      ? prod_13 | p0_data_in_13[2]
+      : prod_13 & ~(p0_data_in_13[2]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25}, :47:{21,25,51}
   wire         prod_25 =
     _prod_plus_ma32_shl_2_[0]
-      ? prod_14 | p0_data_in_17[2]
-      : prod_14 & ~(p0_data_in_17[2]);	// vector_unit.k:33:9, :42:{21,33}, :47:{21,25}, :48:{21,25,51}
+      ? prod_14 | p0_data_in_13[2]
+      : prod_14 & ~(p0_data_in_13[2]);	// vector_unit.k:32:9, :41:{21,33}, :46:{21,25}, :47:{21,25,51}
   wire  [11:0] _prod_plus_ma32_shl_3_ =
     12'({1'h0,
          prod_15,
@@ -6182,77 +5698,77 @@ module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:33:9
          prod_22,
          prod_23,
          prod_24,
-         prod_25} + {2'h1, p0_data_in_17[6:0], 3'h0});	// vector_unit.k:33:9, :48:{21,25}, :49:{51,58}
-  wire         prod_26 = _prod_plus_ma32_shl_3_[11] & p0_data_in_17[3];	// vector_unit.k:33:9, :42:{21,33}, :49:{21,25,51}
+         prod_25} + {2'h1, p0_data_in_13[6:0], 3'h0});	// vector_unit.k:32:9, :47:{21,25}, :48:{51,58}
+  wire         prod_26 = _prod_plus_ma32_shl_3_[11] & p0_data_in_13[3];	// vector_unit.k:32:9, :41:{21,33}, :48:{21,25,51}
   wire         prod_27 =
     _prod_plus_ma32_shl_3_[10]
-      ? prod_15 | p0_data_in_17[3]
-      : prod_15 & ~(p0_data_in_17[3]);	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25}, :49:{21,25,51}
+      ? prod_15 | p0_data_in_13[3]
+      : prod_15 & ~(p0_data_in_13[3]);	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25}, :48:{21,25,51}
   wire         prod_28 =
     _prod_plus_ma32_shl_3_[9]
-      ? prod_16 | p0_data_in_17[3]
-      : prod_16 & ~(p0_data_in_17[3]);	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25}, :49:{21,25,51}
+      ? prod_16 | p0_data_in_13[3]
+      : prod_16 & ~(p0_data_in_13[3]);	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25}, :48:{21,25,51}
   wire         prod_29 =
     _prod_plus_ma32_shl_3_[8]
-      ? prod_17 | p0_data_in_17[3]
-      : prod_17 & ~(p0_data_in_17[3]);	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25}, :49:{21,25,51}
+      ? prod_17 | p0_data_in_13[3]
+      : prod_17 & ~(p0_data_in_13[3]);	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25}, :48:{21,25,51}
   wire         prod_30 =
     _prod_plus_ma32_shl_3_[7]
-      ? prod_18 | p0_data_in_17[3]
-      : prod_18 & ~(p0_data_in_17[3]);	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25}, :49:{21,25,51}
+      ? prod_18 | p0_data_in_13[3]
+      : prod_18 & ~(p0_data_in_13[3]);	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25}, :48:{21,25,51}
   wire         prod_31 =
     _prod_plus_ma32_shl_3_[6]
-      ? prod_19 | p0_data_in_17[3]
-      : prod_19 & ~(p0_data_in_17[3]);	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25}, :49:{21,25,51}
+      ? prod_19 | p0_data_in_13[3]
+      : prod_19 & ~(p0_data_in_13[3]);	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25}, :48:{21,25,51}
   wire         prod_32 =
     _prod_plus_ma32_shl_3_[5]
-      ? prod_20 | p0_data_in_17[3]
-      : prod_20 & ~(p0_data_in_17[3]);	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25}, :49:{21,25,51}
+      ? prod_20 | p0_data_in_13[3]
+      : prod_20 & ~(p0_data_in_13[3]);	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25}, :48:{21,25,51}
   wire         prod_33 =
     _prod_plus_ma32_shl_3_[4]
-      ? prod_21 | p0_data_in_17[3]
-      : prod_21 & ~(p0_data_in_17[3]);	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25}, :49:{21,25,51}
+      ? prod_21 | p0_data_in_13[3]
+      : prod_21 & ~(p0_data_in_13[3]);	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25}, :48:{21,25,51}
   wire         prod_34 =
     _prod_plus_ma32_shl_3_[3]
-      ? prod_22 | p0_data_in_17[3]
-      : prod_22 & ~(p0_data_in_17[3]);	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25}, :49:{21,25,51}
+      ? prod_22 | p0_data_in_13[3]
+      : prod_22 & ~(p0_data_in_13[3]);	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25}, :48:{21,25,51}
   wire         prod_35 =
     _prod_plus_ma32_shl_3_[2]
-      ? prod_23 | p0_data_in_17[3]
-      : prod_23 & ~(p0_data_in_17[3]);	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25}, :49:{21,25,51}
+      ? prod_23 | p0_data_in_13[3]
+      : prod_23 & ~(p0_data_in_13[3]);	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25}, :48:{21,25,51}
   wire         prod_36 =
     _prod_plus_ma32_shl_3_[1]
-      ? prod_24 | p0_data_in_17[3]
-      : prod_24 & ~(p0_data_in_17[3]);	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25}, :49:{21,25,51}
+      ? prod_24 | p0_data_in_13[3]
+      : prod_24 & ~(p0_data_in_13[3]);	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25}, :48:{21,25,51}
   wire         prod_37 =
     _prod_plus_ma32_shl_3_[0]
-      ? prod_25 | p0_data_in_17[3]
-      : prod_25 & ~(p0_data_in_17[3]);	// vector_unit.k:33:9, :42:{21,33}, :48:{21,25}, :49:{21,25,51}
-  wire         prod_38 = p0__prod_plus_ma32_shl_4_[12] & p0_ma[4];	// vector_unit.k:33:9, :50:{21,25}
+      ? prod_25 | p0_data_in_13[3]
+      : prod_25 & ~(p0_data_in_13[3]);	// vector_unit.k:32:9, :41:{21,33}, :47:{21,25}, :48:{21,25,51}
+  wire         prod_38 = p0__prod_plus_ma32_shl_4_[12] & p0_ma[4];	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_39 =
-    p0__prod_plus_ma32_shl_4_[11] ? p0_prod[11] | p0_ma[4] : p0_prod[11] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[11] ? p0_prod[11] | p0_ma[4] : p0_prod[11] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_40 =
-    p0__prod_plus_ma32_shl_4_[10] ? p0_prod[10] | p0_ma[4] : p0_prod[10] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[10] ? p0_prod[10] | p0_ma[4] : p0_prod[10] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_41 =
-    p0__prod_plus_ma32_shl_4_[9] ? p0_prod[9] | p0_ma[4] : p0_prod[9] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[9] ? p0_prod[9] | p0_ma[4] : p0_prod[9] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_42 =
-    p0__prod_plus_ma32_shl_4_[8] ? p0_prod[8] | p0_ma[4] : p0_prod[8] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[8] ? p0_prod[8] | p0_ma[4] : p0_prod[8] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_43 =
-    p0__prod_plus_ma32_shl_4_[7] ? p0_prod[7] | p0_ma[4] : p0_prod[7] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[7] ? p0_prod[7] | p0_ma[4] : p0_prod[7] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_44 =
-    p0__prod_plus_ma32_shl_4_[6] ? p0_prod[6] | p0_ma[4] : p0_prod[6] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[6] ? p0_prod[6] | p0_ma[4] : p0_prod[6] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_45 =
-    p0__prod_plus_ma32_shl_4_[5] ? p0_prod[5] | p0_ma[4] : p0_prod[5] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[5] ? p0_prod[5] | p0_ma[4] : p0_prod[5] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_46 =
-    p0__prod_plus_ma32_shl_4_[4] ? p0_prod[4] | p0_ma[4] : p0_prod[4] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[4] ? p0_prod[4] | p0_ma[4] : p0_prod[4] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_47 =
-    p0__prod_plus_ma32_shl_4_[3] ? p0_prod[3] | p0_ma[4] : p0_prod[3] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[3] ? p0_prod[3] | p0_ma[4] : p0_prod[3] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_48 =
-    p0__prod_plus_ma32_shl_4_[2] ? p0_prod[2] | p0_ma[4] : p0_prod[2] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[2] ? p0_prod[2] | p0_ma[4] : p0_prod[2] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_49 =
-    p0__prod_plus_ma32_shl_4_[1] ? p0_prod[1] | p0_ma[4] : p0_prod[1] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[1] ? p0_prod[1] | p0_ma[4] : p0_prod[1] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire         prod_50 =
-    p0__prod_plus_ma32_shl_4_[0] ? p0_prod[0] | p0_ma[4] : p0_prod[0] & ~(p0_ma[4]);	// vector_unit.k:33:9, :50:{21,25}
+    p0__prod_plus_ma32_shl_4_[0] ? p0_prod[0] | p0_ma[4] : p0_prod[0] & ~(p0_ma[4]);	// vector_unit.k:32:9, :49:{21,25}
   wire  [13:0] _prod_plus_ma32_shl_5_ =
     14'({1'h0,
          prod_38,
@@ -6267,34 +5783,34 @@ module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:33:9
          prod_47,
          prod_48,
          prod_49,
-         prod_50} + p0__ma32_shl_5_);	// vector_unit.k:33:9, :50:{21,25}, :51:51
-  wire         prod_51 = _prod_plus_ma32_shl_5_[13] & p0_ma[5];	// vector_unit.k:33:9, :51:{21,25,51}
+         prod_50} + p0__ma32_shl_5_);	// vector_unit.k:32:9, :49:{21,25}, :50:51
+  wire         prod_51 = _prod_plus_ma32_shl_5_[13] & p0_ma[5];	// vector_unit.k:32:9, :50:{21,25,51}
   wire         prod_52 =
-    _prod_plus_ma32_shl_5_[12] ? prod_38 | p0_ma[5] : prod_38 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[12] ? prod_38 | p0_ma[5] : prod_38 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_53 =
-    _prod_plus_ma32_shl_5_[11] ? prod_39 | p0_ma[5] : prod_39 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[11] ? prod_39 | p0_ma[5] : prod_39 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_54 =
-    _prod_plus_ma32_shl_5_[10] ? prod_40 | p0_ma[5] : prod_40 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[10] ? prod_40 | p0_ma[5] : prod_40 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_55 =
-    _prod_plus_ma32_shl_5_[9] ? prod_41 | p0_ma[5] : prod_41 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[9] ? prod_41 | p0_ma[5] : prod_41 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_56 =
-    _prod_plus_ma32_shl_5_[8] ? prod_42 | p0_ma[5] : prod_42 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[8] ? prod_42 | p0_ma[5] : prod_42 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_57 =
-    _prod_plus_ma32_shl_5_[7] ? prod_43 | p0_ma[5] : prod_43 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[7] ? prod_43 | p0_ma[5] : prod_43 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_58 =
-    _prod_plus_ma32_shl_5_[6] ? prod_44 | p0_ma[5] : prod_44 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[6] ? prod_44 | p0_ma[5] : prod_44 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_59 =
-    _prod_plus_ma32_shl_5_[5] ? prod_45 | p0_ma[5] : prod_45 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[5] ? prod_45 | p0_ma[5] : prod_45 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_60 =
-    _prod_plus_ma32_shl_5_[4] ? prod_46 | p0_ma[5] : prod_46 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[4] ? prod_46 | p0_ma[5] : prod_46 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_61 =
-    _prod_plus_ma32_shl_5_[3] ? prod_47 | p0_ma[5] : prod_47 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[3] ? prod_47 | p0_ma[5] : prod_47 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_62 =
-    _prod_plus_ma32_shl_5_[2] ? prod_48 | p0_ma[5] : prod_48 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[2] ? prod_48 | p0_ma[5] : prod_48 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_63 =
-    _prod_plus_ma32_shl_5_[1] ? prod_49 | p0_ma[5] : prod_49 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[1] ? prod_49 | p0_ma[5] : prod_49 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire         prod_64 =
-    _prod_plus_ma32_shl_5_[0] ? prod_50 | p0_ma[5] : prod_50 & ~(p0_ma[5]);	// vector_unit.k:33:9, :50:{21,25}, :51:{21,25,51}
+    _prod_plus_ma32_shl_5_[0] ? prod_50 | p0_ma[5] : prod_50 & ~(p0_ma[5]);	// vector_unit.k:32:9, :49:{21,25}, :50:{21,25,51}
   wire  [14:0] _prod_plus_ma32_shl_6_ =
     15'({1'h0,
          prod_51,
@@ -6310,7 +5826,7 @@ module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:33:9
          prod_61,
          prod_62,
          prod_63,
-         prod_64} + p0__ma32_shl_6_);	// vector_unit.k:33:9, :51:{21,25}, :52:51
+         prod_64} + p0__ma32_shl_6_);	// vector_unit.k:32:9, :50:{21,25}, :51:51
   wire  [15:0] _prod_plus_ma32_shl_7_ =
     16'({1'h0,
          _prod_plus_ma32_shl_6_[14] & p0_ma_0,
@@ -6328,19 +5844,19 @@ module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:33:9
          _prod_plus_ma32_shl_6_[2] ? prod_62 | p0_ma_0 : prod_62 & ~p0_ma_0,
          _prod_plus_ma32_shl_6_[1] ? prod_63 | p0_ma_0 : prod_63 & ~p0_ma_0,
          _prod_plus_ma32_shl_6_[0] ? prod_64 | p0_ma_0 : prod_64 & ~p0_ma_0}
-        + p0__ma32_shl_7_);	// vector_unit.k:33:9, :51:{21,25}, :52:{21,51}, :53:51
+        + p0__ma32_shl_7_);	// vector_unit.k:32:9, :50:{21,25}, :51:{21,51}, :52:51
   wire  [15:0] r_exp =
     p0_prod_0
       ? p0__x_exp_plus_x_exp_minus_127_plus_1__0
-      : p0__x_exp_plus_x_exp_minus_127__0;	// vector_unit.k:33:9, :56:21
-  wire         _GEN_1 = r_exp < 16'hFF & (|r_exp) & p0__x_exp_ne_0__0;	// vector_unit.k:33:9, :40:17, :56:21, :58:{34,47}, :63:{34,47}, :66:{21,25,31,44}, :68:32, :72:33
-  wire         _GEN_2 = ~p0_prod_0 & _GEN_1;	// vector_unit.k:33:9, :40:17, :56:21, :58:{34,47}, :63:{34,47}, :66:{21,25}, :68:32, :72:33
-  always @(posedge clk) begin	// vector_unit.k:33:9
-    p0_data_in_17 <= data_in_17;	// vector_unit.k:33:9
-    if (rst)	// vector_unit.k:33:9
-      p0_stage1_enable <= 1'h0;	// vector_unit.k:33:9
-    else	// vector_unit.k:33:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:33:9
+      : p0__x_exp_plus_x_exp_minus_127__0;	// vector_unit.k:32:9, :55:21
+  wire         _GEN_1 = r_exp < 16'hFF & (|r_exp) & p0__x_exp_ne_0__0;	// vector_unit.k:32:9, :39:17, :55:21, :57:{34,47}, :62:{34,47}, :65:{21,25,31,44}, :67:32, :71:33
+  wire         _GEN_2 = ~p0_prod_0 & _GEN_1;	// vector_unit.k:32:9, :39:17, :55:21, :57:{34,47}, :62:{34,47}, :65:{21,25}, :67:32, :71:33
+  always @(posedge clk) begin	// vector_unit.k:32:9
+    p0_data_in_13 <= data_in_13;	// vector_unit.k:32:9
+    if (rst)	// vector_unit.k:32:9
+      p0_stage1_enable <= 1'h0;	// vector_unit.k:32:9
+    else	// vector_unit.k:32:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// vector_unit.k:32:9
     p0__prod_plus_ma32_shl_4_ <=
       13'({1'h0,
            prod_26,
@@ -6354,8 +5870,8 @@ module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:33:9
            prod_34,
            prod_35,
            prod_36,
-           prod_37} + {2'h1, p0_data_in_17[6:0], 4'h0});	// vector_unit.k:33:9, :49:{21,25}, :50:{51,58}
-    p0_ma <= p0_data_in_17[5:0];	// vector_unit.k:33:9
+           prod_37} + {2'h1, p0_data_in_13[6:0], 4'h0});	// vector_unit.k:32:9, :48:{21,25}, :49:{51,58}
+    p0_ma <= p0_data_in_13[5:0];	// vector_unit.k:32:9
     p0_prod <=
       {prod_26,
        prod_27,
@@ -6368,31 +5884,31 @@ module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:33:9
        prod_34,
        prod_35,
        prod_36,
-       prod_37};	// vector_unit.k:33:9, :49:{21,25}
-    p0__ma32_shl_5_ <= {2'h1, p0_data_in_17[6:0], 5'h0};	// vector_unit.k:33:9, :51:58
-    p0__ma32_shl_6_ <= {2'h1, p0_data_in_17[6:0], 6'h0};	// vector_unit.k:33:9, :52:58
-    p0_ma_0 <= p0_data_in_17[6];	// vector_unit.k:33:9, :42:{21,33}
-    p0__ma32_shl_7_ <= {2'h1, p0_data_in_17[6:0], 7'h0};	// vector_unit.k:33:9, :53:58
-    p0__x_exp_plus_x_exp_minus_127_plus_1_ <= 16'(_GEN_0 - 16'h7E);	// vector_unit.k:33:9, :59:{33,39,47}, :64:39
-    p0__x_exp_plus_x_exp_minus_127_ <= 16'(_GEN_0 - 16'h7F);	// vector_unit.k:33:9, :59:39, :64:{33,39}
-    p0__x_exp_ne_0_ <= |(p0_data_in_17[14:7]);	// vector_unit.k:33:9, :39:{17,32}, :40:21
-    p0_global_in__sum_sq_34 <= global_in__sum_sq_34_0;	// vector_unit.k:33:9
-    if (rst)	// vector_unit.k:33:9
-      p0_stage2_enable <= 1'h0;	// vector_unit.k:33:9
-    else	// vector_unit.k:33:9
-      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:33:9
-    p0_prod_0 <= _prod_plus_ma32_shl_7_[15];	// vector_unit.k:33:9, :53:{21,51}
-    p0__x_exp_plus_x_exp_minus_127_plus_1__0 <= p0__x_exp_plus_x_exp_minus_127_plus_1_;	// vector_unit.k:33:9
-    p0__x_exp_plus_x_exp_minus_127__0 <= p0__x_exp_plus_x_exp_minus_127_;	// vector_unit.k:33:9
-    p0__x_exp_ne_0__0 <= p0__x_exp_ne_0_;	// vector_unit.k:33:9
-    p0_prod_1 <= _prod_plus_ma32_shl_7_[14:0];	// vector_unit.k:33:9, :53:51
-    p0_global_in__sum_sq_34_0 <= p0_global_in__sum_sq_34;	// vector_unit.k:33:9
-    if (rst)	// vector_unit.k:33:9
-      p0_stage3_enable <= 1'h0;	// vector_unit.k:33:9
-    else	// vector_unit.k:33:9
-      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:33:9
+       prod_37};	// vector_unit.k:32:9, :48:{21,25}
+    p0__ma32_shl_5_ <= {2'h1, p0_data_in_13[6:0], 5'h0};	// vector_unit.k:32:9, :50:58
+    p0__ma32_shl_6_ <= {2'h1, p0_data_in_13[6:0], 6'h0};	// vector_unit.k:32:9, :51:58
+    p0_ma_0 <= p0_data_in_13[6];	// vector_unit.k:32:9, :41:{21,33}
+    p0__ma32_shl_7_ <= {2'h1, p0_data_in_13[6:0], 7'h0};	// vector_unit.k:32:9, :52:58
+    p0__x_exp_plus_x_exp_minus_127_plus_1_ <= 16'(_GEN_0 - 16'h7E);	// vector_unit.k:32:9, :58:{33,39,47}, :63:39
+    p0__x_exp_plus_x_exp_minus_127_ <= 16'(_GEN_0 - 16'h7F);	// vector_unit.k:32:9, :58:39, :63:{33,39}
+    p0__x_exp_ne_0_ <= |(p0_data_in_13[14:7]);	// vector_unit.k:32:9, :38:{17,32}, :39:21
+    p0_global_in__sum_sq_26 <= global_in__sum_sq_26_0;	// vector_unit.k:32:9
+    if (rst)	// vector_unit.k:32:9
+      p0_stage2_enable <= 1'h0;	// vector_unit.k:32:9
+    else	// vector_unit.k:32:9
+      p0_stage2_enable <= p0_stage1_enable;	// vector_unit.k:32:9
+    p0_prod_0 <= _prod_plus_ma32_shl_7_[15];	// vector_unit.k:32:9, :52:{21,51}
+    p0__x_exp_plus_x_exp_minus_127_plus_1__0 <= p0__x_exp_plus_x_exp_minus_127_plus_1_;	// vector_unit.k:32:9
+    p0__x_exp_plus_x_exp_minus_127__0 <= p0__x_exp_plus_x_exp_minus_127_;	// vector_unit.k:32:9
+    p0__x_exp_ne_0__0 <= p0__x_exp_ne_0_;	// vector_unit.k:32:9
+    p0_prod_1 <= _prod_plus_ma32_shl_7_[14:0];	// vector_unit.k:32:9, :52:51
+    p0_global_in__sum_sq_26_0 <= p0_global_in__sum_sq_26;	// vector_unit.k:32:9
+    if (rst)	// vector_unit.k:32:9
+      p0_stage3_enable <= 1'h0;	// vector_unit.k:32:9
+    else	// vector_unit.k:32:9
+      p0_stage3_enable <= p0_stage2_enable;	// vector_unit.k:32:9
     p0__sum_sq_plus_cast_lt_uint32_gt_x_sq_ <=
-      32'(p0_global_in__sum_sq_34_0
+      32'(p0_global_in__sum_sq_26_0
           + {16'h0,
              r_exp[8] & _GEN_1,
              r_exp[7] & _GEN_1,
@@ -6417,24 +5933,24 @@ module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:33:9
                : p0_prod_1[10] & _GEN_2,
              p0_prod_1[10] ? (p0_prod_1[9] | p0_prod_0) & _GEN_1 : p0_prod_1[9] & _GEN_2,
              p0_prod_1[9] ? (p0_prod_1[8] | p0_prod_0) & _GEN_1 : p0_prod_1[8] & _GEN_2,
-             p0_prod_1[8] ? (p0_prod_1[7] | p0_prod_0) & _GEN_1 : p0_prod_1[7] & _GEN_2});	// vector_unit.k:33:9, :40:17, :56:21, :58:{34,47}, :63:{34,47}, :66:{21,25}, :68:32, :72:{23,33}
-    if (rst) begin	// vector_unit.k:33:9
-      p0_stage4_enable <= 1'h0;	// vector_unit.k:33:9
-      p0_stage5_enable <= 1'h0;	// vector_unit.k:33:9
+             p0_prod_1[8] ? (p0_prod_1[7] | p0_prod_0) & _GEN_1 : p0_prod_1[7] & _GEN_2});	// vector_unit.k:32:9, :39:17, :55:21, :57:{34,47}, :62:{34,47}, :65:{21,25}, :67:32, :71:{23,33}
+    if (rst) begin	// vector_unit.k:32:9
+      p0_stage4_enable <= 1'h0;	// vector_unit.k:32:9
+      p0_stage5_enable <= 1'h0;	// vector_unit.k:32:9
     end
-    else begin	// vector_unit.k:33:9
-      p0_stage4_enable <= p0_stage3_enable;	// vector_unit.k:33:9
-      p0_stage5_enable <= p0_stage4_enable;	// vector_unit.k:33:9
+    else begin	// vector_unit.k:32:9
+      p0_stage4_enable <= p0_stage3_enable;	// vector_unit.k:32:9
+      p0_stage5_enable <= p0_stage4_enable;	// vector_unit.k:32:9
     end
   end // always @(posedge)
-  always_comb	// vector_unit.k:33:9
-    fifo_wren_0_0 = p0_stage5_enable;	// vector_unit.k:33:9, :75:9
+  always_comb	// vector_unit.k:32:9
+    fifo_wren_0_0 = p0_stage5_enable;	// vector_unit.k:32:9, :74:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:33:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// vector_unit.k:32:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -6442,21 +5958,21 @@ module vector_unit_rmsnorm_accumulate_BasicBlock_0(	// vector_unit.k:33:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:33:9
+    .data_in  (~fifo_overflow_in_0),	// vector_unit.k:32:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  vector_unitDebugView_rmsnorm_accumulateEntry vector_unitDebugView_rmsnorm_accumulateEntry_instance (	// vector_unit.k:75:9
-    .clk       (clk),	// vector_unit.k:75:9
-    ._x_bf16   (p0_stage1_enable ? p0_data_in_17 : 'x),	// vector_unit.k:33:9, :75:9
-    .valid     (p0_stage1_enable),	// vector_unit.k:33:9
+  vector_unitDebugView_rmsnorm_accumulateEntry vector_unitDebugView_rmsnorm_accumulateEntry_instance (	// vector_unit.k:74:9
+    .clk       (clk),	// vector_unit.k:74:9
+    ._x_bf16   (p0_stage1_enable ? p0_data_in_13 : 'x),	// vector_unit.k:32:9, :74:9
+    .valid     (p0_stage1_enable),	// vector_unit.k:32:9
     .valid_out (/* unused */)
-  );	// vector_unit.k:75:9
-  assign done_out = p0_stage5_enable;	// vector_unit.k:33:9
-  assign global_out__sum_sq_34_0_valid = global_out__sum_sq_34_0_valid_0;	// vector_unit.k:33:9
-  assign global_out__sum_sq_34_0 = global_out__sum_sq_34_0_0;	// vector_unit.k:33:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:33:9
-  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:33:9
-  assign control_state_out = control_state_out_0;	// vector_unit.k:33:9
+  );	// vector_unit.k:74:9
+  assign done_out = p0_stage5_enable;	// vector_unit.k:32:9
+  assign global_out__sum_sq_26_0_valid = global_out__sum_sq_26_0_valid_0;	// vector_unit.k:32:9
+  assign global_out__sum_sq_26_0 = global_out__sum_sq_26_0_0;	// vector_unit.k:32:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// vector_unit.k:32:9
+  assign input_rdy_0 = input_rdy_0_0;	// vector_unit.k:32:9
+  assign control_state_out = control_state_out_0;	// vector_unit.k:32:9
 endmodule
 
 module vector_unit_reg_32_w2_v_1_32_0_i_32_0(
@@ -6646,387 +6162,233 @@ module vector_unit__sigmoid_lut__mem_container(	// vector_unit.k:20:5
   assign init_completed = 1'h1;	// vector_unit.k:20:5
 endmodule
 
-module vector_unit__cos_table__mem_container(	// vector_unit.k:23:5
-  input  wire          clk,
-  input  wire          rst,
-  input  wire          rden_in_0,
-  input  wire [11:0]   read_addr_in_0,
-  input  wire          wren_in_0,
-  input  wire [11:0]   write_addr_in_0,
-  input  wire [1023:0] write_data_in_0,
-  output wire [1023:0] read_data_out_0,
-  output wire          init_completed
-);
-
-  wire [1:0][1023:0] ___cos_table_0_data_out;	// vector_unit.k:23:5
-  KanagawaSyncRam #(
-    .DATA_WIDTH(1024),
-    .ADDR_WIDTH(12),
-    .DEPTH(4096),
-    .MAX_DEPTH(512),
-    .USE_LUTRAM(0),
-    .USE_BRAM(1),
-    .USE_OUTPUT_REG(1),
-    .WRITE_DELAY(0),
-    .USE_HARDENED_BYPASS(0),
-    .TRUE_DUAL_PORT(0),
-    .SUPPORTS_RW_COLLISIONS(0),
-    .ECC(0),
-    .INITIAL_DATA_FILE("UNUSED"),
-    .DEVICE_FAMILY("mock")
-  ) __cos_table_0 (	// vector_unit.k:23:5
-    .clk            (clk),	// vector_unit.k:23:5
-    .rst            (rst),
-    .addr_in        ({{read_addr_in_0}, {write_addr_in_0}}),	// vector_unit.k:23:5
-    .ecc_status_out (/* unused */),
-    .wren_in        ({{1'h0}, {wren_in_0}}),	// vector_unit.k:23:5
-    .data_in        ({{1024'h0}, {write_data_in_0}}),	// vector_unit.k:23:5
-    .rden_in        ({{rden_in_0}, {1'h0}}),	// vector_unit.k:23:5
-    .data_out       (___cos_table_0_data_out)
-  );	// vector_unit.k:23:5
-  assign read_data_out_0 = ___cos_table_0_data_out[1'h1];	// vector_unit.k:23:5
-  assign init_completed = 1'h1;	// vector_unit.k:23:5
-endmodule
-
-module vector_unit__sin_table__mem_container(	// vector_unit.k:24:5
-  input  wire          clk,
-  input  wire          rst,
-  input  wire          rden_in_0,
-  input  wire [11:0]   read_addr_in_0,
-  input  wire          wren_in_0,
-  input  wire [11:0]   write_addr_in_0,
-  input  wire [1023:0] write_data_in_0,
-  output wire [1023:0] read_data_out_0,
-  output wire          init_completed
-);
-
-  wire [1:0][1023:0] ___sin_table_0_data_out;	// vector_unit.k:24:5
-  KanagawaSyncRam #(
-    .DATA_WIDTH(1024),
-    .ADDR_WIDTH(12),
-    .DEPTH(4096),
-    .MAX_DEPTH(512),
-    .USE_LUTRAM(0),
-    .USE_BRAM(1),
-    .USE_OUTPUT_REG(1),
-    .WRITE_DELAY(0),
-    .USE_HARDENED_BYPASS(0),
-    .TRUE_DUAL_PORT(0),
-    .SUPPORTS_RW_COLLISIONS(0),
-    .ECC(0),
-    .INITIAL_DATA_FILE("UNUSED"),
-    .DEVICE_FAMILY("mock")
-  ) __sin_table_0 (	// vector_unit.k:24:5
-    .clk            (clk),	// vector_unit.k:24:5
-    .rst            (rst),
-    .addr_in        ({{read_addr_in_0}, {write_addr_in_0}}),	// vector_unit.k:24:5
-    .ecc_status_out (/* unused */),
-    .wren_in        ({{1'h0}, {wren_in_0}}),	// vector_unit.k:24:5
-    .data_in        ({{1024'h0}, {write_data_in_0}}),	// vector_unit.k:24:5
-    .rden_in        ({{rden_in_0}, {1'h0}}),	// vector_unit.k:24:5
-    .data_out       (___sin_table_0_data_out)
-  );	// vector_unit.k:24:5
-  assign read_data_out_0 = ___sin_table_0_data_out[1'h1];	// vector_unit.k:24:5
-  assign init_completed = 1'h1;	// vector_unit.k:24:5
-endmodule
-
 module vector_unit(
-  input  wire          clk,
-  input  wire          rst,
-  input  wire          rmsnorm_accumulate_valid_in,
-  input  wire [15:0]   rmsnorm_accumulate_x_bf16_in,
-  input  wire          rmsnorm_accumulate_rden_in,
-  input  wire          rmsnorm_get_sum_valid_in,
-  input  wire          rmsnorm_get_sum_rden_in,
-  input  wire          rmsnorm_reset_valid_in,
-  input  wire          rmsnorm_reset_rden_in,
-  input  wire          set_gamma_pre_attn_valid_in,
-  input  wire [15:0]   set_gamma_pre_attn_index_in,
-  input  wire [15:0]   set_gamma_pre_attn_value_in,
-  input  wire          set_gamma_pre_attn_rden_in,
-  input  wire          get_gamma_pre_attn_valid_in,
-  input  wire [15:0]   get_gamma_pre_attn_index_in,
-  input  wire          get_gamma_pre_attn_rden_in,
-  input  wire          set_gamma_pre_mlp_valid_in,
-  input  wire [15:0]   set_gamma_pre_mlp_index_in,
-  input  wire [15:0]   set_gamma_pre_mlp_value_in,
-  input  wire          set_gamma_pre_mlp_rden_in,
-  input  wire          get_gamma_pre_mlp_valid_in,
-  input  wire [15:0]   get_gamma_pre_mlp_index_in,
-  input  wire          get_gamma_pre_mlp_rden_in,
-  input  wire          set_rsqrt_lut_valid_in,
-  input  wire [7:0]    set_rsqrt_lut_index_in,
-  input  wire [15:0]   set_rsqrt_lut_value_in,
-  input  wire          set_rsqrt_lut_rden_in,
-  input  wire          lookup_rsqrt_valid_in,
-  input  wire [7:0]    lookup_rsqrt_index_in,
-  input  wire          lookup_rsqrt_rden_in,
-  input  wire          rope_read_cos_row_valid_in,
-  input  wire [11:0]   rope_read_cos_row_position_in,
-  input  wire          rope_read_cos_row_rden_in,
-  input  wire          rope_read_sin_row_valid_in,
-  input  wire [11:0]   rope_read_sin_row_position_in,
-  input  wire          rope_read_sin_row_rden_in,
-  input  wire          rope_write_cos_row_valid_in,
-  input  wire [11:0]   rope_write_cos_row_position_in,
-  input  wire [1023:0] rope_write_cos_row_value_in,
-  input  wire          rope_write_cos_row_rden_in,
-  input  wire          rope_write_sin_row_valid_in,
-  input  wire [11:0]   rope_write_sin_row_position_in,
-  input  wire [1023:0] rope_write_sin_row_value_in,
-  input  wire          rope_write_sin_row_rden_in,
-  input  wire          set_sigmoid_lut_valid_in,
-  input  wire [7:0]    set_sigmoid_lut_index_in,
-  input  wire [15:0]   set_sigmoid_lut_value_in,
-  input  wire          set_sigmoid_lut_rden_in,
-  input  wire          swiglu_compute_valid_in,
-  input  wire [15:0]   swiglu_compute_gate_bf16_in,
-  input  wire [15:0]   swiglu_compute_up_bf16_in,
-  input  wire          swiglu_compute_rden_in,
-  input  wire          dequantize_valid_in,
-  input  wire [23:0]   dequantize_accum_in,
-  input  wire [15:0]   dequantize_super_scale_bf16_in,
-  input  wire [3:0]    dequantize_sub_scale_in,
-  input  wire          dequantize_rden_in,
-  input  wire          residual_add_valid_in,
-  input  wire [15:0]   residual_add_a_bf16_in,
-  input  wire [15:0]   residual_add_b_bf16_in,
-  input  wire          residual_add_rden_in,
-  input  wire [2:0]    stall_rate_in,
-  input  wire          stall_rate_valid_in,
-  output wire          rst_and_startup_done_out,
-  output wire          rmsnorm_accumulate_rdy_out,
-  output wire          rmsnorm_accumulate_empty_out,
-  output wire          rmsnorm_get_sum_rdy_out,
-  output wire          rmsnorm_get_sum_empty_out,
-  output wire [31:0]   rmsnorm_get_sum_result_out,
-  output wire          rmsnorm_reset_rdy_out,
-  output wire          rmsnorm_reset_empty_out,
-  output wire          set_gamma_pre_attn_rdy_out,
-  output wire          set_gamma_pre_attn_empty_out,
-  output wire          get_gamma_pre_attn_rdy_out,
-  output wire          get_gamma_pre_attn_empty_out,
-  output wire [15:0]   get_gamma_pre_attn_result_out,
-  output wire          set_gamma_pre_mlp_rdy_out,
-  output wire          set_gamma_pre_mlp_empty_out,
-  output wire          get_gamma_pre_mlp_rdy_out,
-  output wire          get_gamma_pre_mlp_empty_out,
-  output wire [15:0]   get_gamma_pre_mlp_result_out,
-  output wire          set_rsqrt_lut_rdy_out,
-  output wire          set_rsqrt_lut_empty_out,
-  output wire          lookup_rsqrt_rdy_out,
-  output wire          lookup_rsqrt_empty_out,
-  output wire [15:0]   lookup_rsqrt_result_out,
-  output wire          rope_read_cos_row_rdy_out,
-  output wire          rope_read_cos_row_empty_out,
-  output wire [1023:0] rope_read_cos_row_result_out,
-  output wire          rope_read_sin_row_rdy_out,
-  output wire          rope_read_sin_row_empty_out,
-  output wire [1023:0] rope_read_sin_row_result_out,
-  output wire          rope_write_cos_row_rdy_out,
-  output wire          rope_write_cos_row_empty_out,
-  output wire          rope_write_sin_row_rdy_out,
-  output wire          rope_write_sin_row_empty_out,
-  output wire          set_sigmoid_lut_rdy_out,
-  output wire          set_sigmoid_lut_empty_out,
-  output wire          swiglu_compute_rdy_out,
-  output wire          swiglu_compute_empty_out,
-  output wire [15:0]   swiglu_compute_result_out,
-  output wire          dequantize_rdy_out,
-  output wire          dequantize_empty_out,
-  output wire [15:0]   dequantize_result_out,
-  output wire          residual_add_rdy_out,
-  output wire          residual_add_empty_out,
-  output wire [15:0]   residual_add_result_out,
-  output wire          stall_rate_supported_out
+  input  wire        clk,
+  input  wire        rst,
+  input  wire        rmsnorm_accumulate_valid_in,
+  input  wire [15:0] rmsnorm_accumulate_x_bf16_in,
+  input  wire        rmsnorm_accumulate_rden_in,
+  input  wire        rmsnorm_get_sum_valid_in,
+  input  wire        rmsnorm_get_sum_rden_in,
+  input  wire        rmsnorm_reset_valid_in,
+  input  wire        rmsnorm_reset_rden_in,
+  input  wire        set_gamma_pre_attn_valid_in,
+  input  wire [15:0] set_gamma_pre_attn_index_in,
+  input  wire [15:0] set_gamma_pre_attn_value_in,
+  input  wire        set_gamma_pre_attn_rden_in,
+  input  wire        get_gamma_pre_attn_valid_in,
+  input  wire [15:0] get_gamma_pre_attn_index_in,
+  input  wire        get_gamma_pre_attn_rden_in,
+  input  wire        set_gamma_pre_mlp_valid_in,
+  input  wire [15:0] set_gamma_pre_mlp_index_in,
+  input  wire [15:0] set_gamma_pre_mlp_value_in,
+  input  wire        set_gamma_pre_mlp_rden_in,
+  input  wire        get_gamma_pre_mlp_valid_in,
+  input  wire [15:0] get_gamma_pre_mlp_index_in,
+  input  wire        get_gamma_pre_mlp_rden_in,
+  input  wire        set_rsqrt_lut_valid_in,
+  input  wire [7:0]  set_rsqrt_lut_index_in,
+  input  wire [15:0] set_rsqrt_lut_value_in,
+  input  wire        set_rsqrt_lut_rden_in,
+  input  wire        lookup_rsqrt_valid_in,
+  input  wire [7:0]  lookup_rsqrt_index_in,
+  input  wire        lookup_rsqrt_rden_in,
+  input  wire        set_sigmoid_lut_valid_in,
+  input  wire [7:0]  set_sigmoid_lut_index_in,
+  input  wire [15:0] set_sigmoid_lut_value_in,
+  input  wire        set_sigmoid_lut_rden_in,
+  input  wire        swiglu_compute_valid_in,
+  input  wire [15:0] swiglu_compute_gate_bf16_in,
+  input  wire [15:0] swiglu_compute_up_bf16_in,
+  input  wire        swiglu_compute_rden_in,
+  input  wire        dequantize_valid_in,
+  input  wire [23:0] dequantize_accum_in,
+  input  wire [15:0] dequantize_super_scale_bf16_in,
+  input  wire [3:0]  dequantize_sub_scale_in,
+  input  wire        dequantize_rden_in,
+  input  wire        residual_add_valid_in,
+  input  wire [15:0] residual_add_a_bf16_in,
+  input  wire [15:0] residual_add_b_bf16_in,
+  input  wire        residual_add_rden_in,
+  input  wire [2:0]  stall_rate_in,
+  input  wire        stall_rate_valid_in,
+  output wire        rst_and_startup_done_out,
+  output wire        rmsnorm_accumulate_rdy_out,
+  output wire        rmsnorm_accumulate_empty_out,
+  output wire        rmsnorm_get_sum_rdy_out,
+  output wire        rmsnorm_get_sum_empty_out,
+  output wire [31:0] rmsnorm_get_sum_result_out,
+  output wire        rmsnorm_reset_rdy_out,
+  output wire        rmsnorm_reset_empty_out,
+  output wire        set_gamma_pre_attn_rdy_out,
+  output wire        set_gamma_pre_attn_empty_out,
+  output wire        get_gamma_pre_attn_rdy_out,
+  output wire        get_gamma_pre_attn_empty_out,
+  output wire [15:0] get_gamma_pre_attn_result_out,
+  output wire        set_gamma_pre_mlp_rdy_out,
+  output wire        set_gamma_pre_mlp_empty_out,
+  output wire        get_gamma_pre_mlp_rdy_out,
+  output wire        get_gamma_pre_mlp_empty_out,
+  output wire [15:0] get_gamma_pre_mlp_result_out,
+  output wire        set_rsqrt_lut_rdy_out,
+  output wire        set_rsqrt_lut_empty_out,
+  output wire        lookup_rsqrt_rdy_out,
+  output wire        lookup_rsqrt_empty_out,
+  output wire [15:0] lookup_rsqrt_result_out,
+  output wire        set_sigmoid_lut_rdy_out,
+  output wire        set_sigmoid_lut_empty_out,
+  output wire        swiglu_compute_rdy_out,
+  output wire        swiglu_compute_empty_out,
+  output wire [15:0] swiglu_compute_result_out,
+  output wire        dequantize_rdy_out,
+  output wire        dequantize_empty_out,
+  output wire [15:0] dequantize_result_out,
+  output wire        residual_add_rdy_out,
+  output wire        residual_add_empty_out,
+  output wire [15:0] residual_add_result_out,
+  output wire        stall_rate_supported_out
 );
 
-  wire [15:0]   _residual_add_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:406:9
-  wire          _residual_add_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:406:9
-  wire          _residual_add_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:406:9
-  wire [15:0]   _dequantize_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:287:9
-  wire          _dequantize_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:287:9
-  wire          _dequantize_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:287:9
-  wire [7:0]    _swiglu_compute_BasicBlock_0Impl_memory_read_addr_out_38_0;	// vector_unit.k:191:9
-  wire          _swiglu_compute_BasicBlock_0Impl_memory_rden_out_38_0;	// vector_unit.k:191:9
-  wire [15:0]   _swiglu_compute_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:191:9
-  wire          _swiglu_compute_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:191:9
-  wire          _swiglu_compute_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:191:9
-  wire [15:0]   _set_sigmoid_lut_BasicBlock_0Impl_memory_write_data_out_38_0;	// vector_unit.k:180:9
-  wire [7:0]    _set_sigmoid_lut_BasicBlock_0Impl_memory_write_addr_out_38_0;	// vector_unit.k:180:9
-  wire          _set_sigmoid_lut_BasicBlock_0Impl_memory_wren_38_0;	// vector_unit.k:180:9
-  wire          _set_sigmoid_lut_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:180:9
-  wire          _set_sigmoid_lut_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:180:9
-  wire [1023:0] _rope_write_sin_row_BasicBlock_0Impl_memory_write_data_out_40_0;	// vector_unit.k:173:9
-  wire [11:0]   _rope_write_sin_row_BasicBlock_0Impl_memory_write_addr_out_40_0;	// vector_unit.k:173:9
-  wire          _rope_write_sin_row_BasicBlock_0Impl_memory_wren_40_0;	// vector_unit.k:173:9
-  wire          _rope_write_sin_row_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:173:9
-  wire          _rope_write_sin_row_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:173:9
-  wire [1023:0] _rope_write_cos_row_BasicBlock_0Impl_memory_write_data_out_39_0;	// vector_unit.k:168:9
-  wire [11:0]   _rope_write_cos_row_BasicBlock_0Impl_memory_write_addr_out_39_0;	// vector_unit.k:168:9
-  wire          _rope_write_cos_row_BasicBlock_0Impl_memory_wren_39_0;	// vector_unit.k:168:9
-  wire          _rope_write_cos_row_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:168:9
-  wire          _rope_write_cos_row_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:168:9
-  wire [11:0]   _rope_read_sin_row_BasicBlock_0Impl_memory_read_addr_out_40_0;	// vector_unit.k:161:9
-  wire          _rope_read_sin_row_BasicBlock_0Impl_memory_rden_out_40_0;	// vector_unit.k:161:9
-  wire [1023:0] _rope_read_sin_row_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:161:9
-  wire          _rope_read_sin_row_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:161:9
-  wire          _rope_read_sin_row_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:161:9
-  wire [11:0]   _rope_read_cos_row_BasicBlock_0Impl_memory_read_addr_out_39_0;	// vector_unit.k:154:9
-  wire          _rope_read_cos_row_BasicBlock_0Impl_memory_rden_out_39_0;	// vector_unit.k:154:9
-  wire [1023:0] _rope_read_cos_row_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:154:9
-  wire          _rope_read_cos_row_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:154:9
-  wire          _rope_read_cos_row_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:154:9
-  wire [7:0]    _lookup_rsqrt_BasicBlock_0Impl_memory_read_addr_out_37_0;	// vector_unit.k:142:9
-  wire          _lookup_rsqrt_BasicBlock_0Impl_memory_rden_out_37_0;	// vector_unit.k:142:9
-  wire [15:0]   _lookup_rsqrt_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:142:9
-  wire          _lookup_rsqrt_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:142:9
-  wire          _lookup_rsqrt_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:142:9
-  wire [15:0]   _set_rsqrt_lut_BasicBlock_0Impl_memory_write_data_out_37_0;	// vector_unit.k:134:9
-  wire [7:0]    _set_rsqrt_lut_BasicBlock_0Impl_memory_write_addr_out_37_0;	// vector_unit.k:134:9
-  wire          _set_rsqrt_lut_BasicBlock_0Impl_memory_wren_37_0;	// vector_unit.k:134:9
-  wire          _set_rsqrt_lut_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:134:9
-  wire          _set_rsqrt_lut_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:134:9
-  wire [11:0]   _get_gamma_pre_mlp_BasicBlock_0Impl_memory_read_addr_out_36_0;	// vector_unit.k:124:9
-  wire          _get_gamma_pre_mlp_BasicBlock_0Impl_memory_rden_out_36_0;	// vector_unit.k:124:9
-  wire [15:0]   _get_gamma_pre_mlp_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:124:9
-  wire          _get_gamma_pre_mlp_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:124:9
-  wire          _get_gamma_pre_mlp_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:124:9
-  wire [15:0]   _set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_data_out_36_0;	// vector_unit.k:116:9
-  wire [11:0]   _set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_addr_out_36_0;	// vector_unit.k:116:9
-  wire          _set_gamma_pre_mlp_BasicBlock_0Impl_memory_wren_36_0;	// vector_unit.k:116:9
-  wire          _set_gamma_pre_mlp_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:116:9
-  wire          _set_gamma_pre_mlp_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:116:9
-  wire [11:0]   _get_gamma_pre_attn_BasicBlock_0Impl_memory_read_addr_out_35_0;	// vector_unit.k:106:9
-  wire          _get_gamma_pre_attn_BasicBlock_0Impl_memory_rden_out_35_0;	// vector_unit.k:106:9
-  wire [15:0]   _get_gamma_pre_attn_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:106:9
-  wire          _get_gamma_pre_attn_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:106:9
-  wire          _get_gamma_pre_attn_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:106:9
-  wire [15:0]   _set_gamma_pre_attn_BasicBlock_0Impl_memory_write_data_out_35_0;	// vector_unit.k:98:9
-  wire [11:0]   _set_gamma_pre_attn_BasicBlock_0Impl_memory_write_addr_out_35_0;	// vector_unit.k:98:9
-  wire          _set_gamma_pre_attn_BasicBlock_0Impl_memory_wren_35_0;	// vector_unit.k:98:9
-  wire          _set_gamma_pre_attn_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:98:9
-  wire          _set_gamma_pre_attn_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:98:9
-  wire          _rmsnorm_reset_BasicBlock_0Impl_global_out__sum_sq_34_1_valid;	// vector_unit.k:89:9
-  wire          _rmsnorm_reset_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:89:9
-  wire          _rmsnorm_reset_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:89:9
-  wire [31:0]   _rmsnorm_get_sum_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:79:9
-  wire          _rmsnorm_get_sum_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:79:9
-  wire          _rmsnorm_get_sum_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:79:9
-  wire          _rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_34_0_valid;	// vector_unit.k:33:9
-  wire [31:0]   _rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_34_0;	// vector_unit.k:33:9
-  wire          _rmsnorm_accumulate_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:33:9
-  wire          _rmsnorm_accumulate_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:33:9
-  wire          _fifo_16_residual_add_Return_overflow_out;
-  wire          _fifo_16_residual_add_Return_underflow_out;
-  wire          _fifo_16_residual_add_Return_empty;
-  wire          _fifo_16_residual_add_Return_full;
-  wire [15:0]   _fifo_16_residual_add_Return_q;
-  wire          _fifo_15_dequantize_Return_overflow_out;
-  wire          _fifo_15_dequantize_Return_underflow_out;
-  wire          _fifo_15_dequantize_Return_empty;
-  wire          _fifo_15_dequantize_Return_full;
-  wire [15:0]   _fifo_15_dequantize_Return_q;
-  wire          _fifo_14_swiglu_compute_Return_overflow_out;
-  wire          _fifo_14_swiglu_compute_Return_underflow_out;
-  wire          _fifo_14_swiglu_compute_Return_empty;
-  wire          _fifo_14_swiglu_compute_Return_full;
-  wire [15:0]   _fifo_14_swiglu_compute_Return_q;
-  wire          _fifo_13_set_sigmoid_lut_Return_overflow_out;
-  wire          _fifo_13_set_sigmoid_lut_Return_underflow_out;
-  wire          _fifo_13_set_sigmoid_lut_Return_empty;
-  wire          _fifo_13_set_sigmoid_lut_Return_full;
-  wire          _fifo_12_rope_write_sin_row_Return_overflow_out;
-  wire          _fifo_12_rope_write_sin_row_Return_underflow_out;
-  wire          _fifo_12_rope_write_sin_row_Return_empty;
-  wire          _fifo_12_rope_write_sin_row_Return_full;
-  wire          _fifo_11_rope_write_cos_row_Return_overflow_out;
-  wire          _fifo_11_rope_write_cos_row_Return_underflow_out;
-  wire          _fifo_11_rope_write_cos_row_Return_empty;
-  wire          _fifo_11_rope_write_cos_row_Return_full;
-  wire          _fifo_10_rope_read_sin_row_Return_overflow_out;
-  wire          _fifo_10_rope_read_sin_row_Return_underflow_out;
-  wire          _fifo_10_rope_read_sin_row_Return_empty;
-  wire          _fifo_10_rope_read_sin_row_Return_full;
-  wire [1023:0] _fifo_10_rope_read_sin_row_Return_q;
-  wire          _fifo_9_rope_read_cos_row_Return_overflow_out;
-  wire          _fifo_9_rope_read_cos_row_Return_underflow_out;
-  wire          _fifo_9_rope_read_cos_row_Return_empty;
-  wire          _fifo_9_rope_read_cos_row_Return_full;
-  wire [1023:0] _fifo_9_rope_read_cos_row_Return_q;
-  wire          _fifo_8_lookup_rsqrt_Return_overflow_out;
-  wire          _fifo_8_lookup_rsqrt_Return_underflow_out;
-  wire          _fifo_8_lookup_rsqrt_Return_empty;
-  wire          _fifo_8_lookup_rsqrt_Return_full;
-  wire [15:0]   _fifo_8_lookup_rsqrt_Return_q;
-  wire          _fifo_7_set_rsqrt_lut_Return_overflow_out;
-  wire          _fifo_7_set_rsqrt_lut_Return_underflow_out;
-  wire          _fifo_7_set_rsqrt_lut_Return_empty;
-  wire          _fifo_7_set_rsqrt_lut_Return_full;
-  wire          _fifo_6_get_gamma_pre_mlp_Return_overflow_out;
-  wire          _fifo_6_get_gamma_pre_mlp_Return_underflow_out;
-  wire          _fifo_6_get_gamma_pre_mlp_Return_empty;
-  wire          _fifo_6_get_gamma_pre_mlp_Return_full;
-  wire [15:0]   _fifo_6_get_gamma_pre_mlp_Return_q;
-  wire          _fifo_5_set_gamma_pre_mlp_Return_overflow_out;
-  wire          _fifo_5_set_gamma_pre_mlp_Return_underflow_out;
-  wire          _fifo_5_set_gamma_pre_mlp_Return_empty;
-  wire          _fifo_5_set_gamma_pre_mlp_Return_full;
-  wire          _fifo_4_get_gamma_pre_attn_Return_overflow_out;
-  wire          _fifo_4_get_gamma_pre_attn_Return_underflow_out;
-  wire          _fifo_4_get_gamma_pre_attn_Return_empty;
-  wire          _fifo_4_get_gamma_pre_attn_Return_full;
-  wire [15:0]   _fifo_4_get_gamma_pre_attn_Return_q;
-  wire          _fifo_3_set_gamma_pre_attn_Return_overflow_out;
-  wire          _fifo_3_set_gamma_pre_attn_Return_underflow_out;
-  wire          _fifo_3_set_gamma_pre_attn_Return_empty;
-  wire          _fifo_3_set_gamma_pre_attn_Return_full;
-  wire          _fifo_2_rmsnorm_reset_Return_overflow_out;
-  wire          _fifo_2_rmsnorm_reset_Return_underflow_out;
-  wire          _fifo_2_rmsnorm_reset_Return_empty;
-  wire          _fifo_2_rmsnorm_reset_Return_full;
-  wire          _fifo_1_rmsnorm_get_sum_Return_overflow_out;
-  wire          _fifo_1_rmsnorm_get_sum_Return_underflow_out;
-  wire          _fifo_1_rmsnorm_get_sum_Return_empty;
-  wire          _fifo_1_rmsnorm_get_sum_Return_full;
-  wire [31:0]   _fifo_1_rmsnorm_get_sum_Return_q;
-  wire          _fifo_0_rmsnorm_accumulate_Return_overflow_out;
-  wire          _fifo_0_rmsnorm_accumulate_Return_underflow_out;
-  wire          _fifo_0_rmsnorm_accumulate_Return_empty;
-  wire          _fifo_0_rmsnorm_accumulate_Return_full;
-  wire          _has_startup_completed_delayed_16_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_15_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_14_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_13_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_12_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_11_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_10_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_9_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_8_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_7_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_6_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_5_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_4_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_3_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_2_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_1_delay_chain_data_out;
-  wire          _has_startup_completed_delayed_0_delay_chain_data_out;
-  wire [31:0]   __sum_sq_value_out;	// vector_unit.k:13:5
-  wire [1023:0] __sin_table_read_data_out_0;	// vector_unit.k:24:5
-  wire          __sin_table_init_completed;	// vector_unit.k:24:5
-  wire [1023:0] __cos_table_read_data_out_0;	// vector_unit.k:23:5
-  wire          __cos_table_init_completed;	// vector_unit.k:23:5
-  wire [15:0]   __sigmoid_lut_read_data_out_0;	// vector_unit.k:20:5
-  wire          __sigmoid_lut_init_completed;	// vector_unit.k:20:5
-  wire [15:0]   __rsqrt_lut_read_data_out_0;	// vector_unit.k:17:5
-  wire          __rsqrt_lut_init_completed;	// vector_unit.k:17:5
-  wire [15:0]   __gamma_pre_mlp_read_data_out_0;	// vector_unit.k:16:5
-  wire          __gamma_pre_mlp_init_completed;	// vector_unit.k:16:5
-  wire [15:0]   __gamma_pre_attn_read_data_out_0;	// vector_unit.k:15:5
-  wire          __gamma_pre_attn_init_completed;	// vector_unit.k:15:5
-  wire          _reset_control_rst_and_startup_done_out;
-  wire [34:0]   _reset_control_rst_delayed_out;
-  wire          _reset_control_reset_sequence_finished_this_cycle_out;
+  wire [15:0] _residual_add_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:381:9
+  wire        _residual_add_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:381:9
+  wire        _residual_add_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:381:9
+  wire [15:0] _dequantize_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:262:9
+  wire        _dequantize_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:262:9
+  wire        _dequantize_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:262:9
+  wire [7:0]  _swiglu_compute_BasicBlock_0Impl_memory_read_addr_out_30_0;	// vector_unit.k:166:9
+  wire        _swiglu_compute_BasicBlock_0Impl_memory_rden_out_30_0;	// vector_unit.k:166:9
+  wire [15:0] _swiglu_compute_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:166:9
+  wire        _swiglu_compute_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:166:9
+  wire        _swiglu_compute_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:166:9
+  wire [15:0] _set_sigmoid_lut_BasicBlock_0Impl_memory_write_data_out_30_0;	// vector_unit.k:155:9
+  wire [7:0]  _set_sigmoid_lut_BasicBlock_0Impl_memory_write_addr_out_30_0;	// vector_unit.k:155:9
+  wire        _set_sigmoid_lut_BasicBlock_0Impl_memory_wren_30_0;	// vector_unit.k:155:9
+  wire        _set_sigmoid_lut_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:155:9
+  wire        _set_sigmoid_lut_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:155:9
+  wire [7:0]  _lookup_rsqrt_BasicBlock_0Impl_memory_read_addr_out_29_0;	// vector_unit.k:141:9
+  wire        _lookup_rsqrt_BasicBlock_0Impl_memory_rden_out_29_0;	// vector_unit.k:141:9
+  wire [15:0] _lookup_rsqrt_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:141:9
+  wire        _lookup_rsqrt_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:141:9
+  wire        _lookup_rsqrt_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:141:9
+  wire [15:0] _set_rsqrt_lut_BasicBlock_0Impl_memory_write_data_out_29_0;	// vector_unit.k:133:9
+  wire [7:0]  _set_rsqrt_lut_BasicBlock_0Impl_memory_write_addr_out_29_0;	// vector_unit.k:133:9
+  wire        _set_rsqrt_lut_BasicBlock_0Impl_memory_wren_29_0;	// vector_unit.k:133:9
+  wire        _set_rsqrt_lut_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:133:9
+  wire        _set_rsqrt_lut_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:133:9
+  wire [11:0] _get_gamma_pre_mlp_BasicBlock_0Impl_memory_read_addr_out_28_0;	// vector_unit.k:123:9
+  wire        _get_gamma_pre_mlp_BasicBlock_0Impl_memory_rden_out_28_0;	// vector_unit.k:123:9
+  wire [15:0] _get_gamma_pre_mlp_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:123:9
+  wire        _get_gamma_pre_mlp_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:123:9
+  wire        _get_gamma_pre_mlp_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:123:9
+  wire [15:0] _set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_data_out_28_0;	// vector_unit.k:115:9
+  wire [11:0] _set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_addr_out_28_0;	// vector_unit.k:115:9
+  wire        _set_gamma_pre_mlp_BasicBlock_0Impl_memory_wren_28_0;	// vector_unit.k:115:9
+  wire        _set_gamma_pre_mlp_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:115:9
+  wire        _set_gamma_pre_mlp_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:115:9
+  wire [11:0] _get_gamma_pre_attn_BasicBlock_0Impl_memory_read_addr_out_27_0;	// vector_unit.k:105:9
+  wire        _get_gamma_pre_attn_BasicBlock_0Impl_memory_rden_out_27_0;	// vector_unit.k:105:9
+  wire [15:0] _get_gamma_pre_attn_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:105:9
+  wire        _get_gamma_pre_attn_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:105:9
+  wire        _get_gamma_pre_attn_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:105:9
+  wire [15:0] _set_gamma_pre_attn_BasicBlock_0Impl_memory_write_data_out_27_0;	// vector_unit.k:97:9
+  wire [11:0] _set_gamma_pre_attn_BasicBlock_0Impl_memory_write_addr_out_27_0;	// vector_unit.k:97:9
+  wire        _set_gamma_pre_attn_BasicBlock_0Impl_memory_wren_27_0;	// vector_unit.k:97:9
+  wire        _set_gamma_pre_attn_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:97:9
+  wire        _set_gamma_pre_attn_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:97:9
+  wire        _rmsnorm_reset_BasicBlock_0Impl_global_out__sum_sq_26_1_valid;	// vector_unit.k:88:9
+  wire        _rmsnorm_reset_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:88:9
+  wire        _rmsnorm_reset_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:88:9
+  wire [31:0] _rmsnorm_get_sum_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:78:9
+  wire        _rmsnorm_get_sum_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:78:9
+  wire        _rmsnorm_get_sum_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:78:9
+  wire        _rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_26_0_valid;	// vector_unit.k:32:9
+  wire [31:0] _rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_26_0;	// vector_unit.k:32:9
+  wire        _rmsnorm_accumulate_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:32:9
+  wire        _rmsnorm_accumulate_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:32:9
+  wire        _fifo_12_residual_add_Return_overflow_out;
+  wire        _fifo_12_residual_add_Return_underflow_out;
+  wire        _fifo_12_residual_add_Return_empty;
+  wire        _fifo_12_residual_add_Return_full;
+  wire [15:0] _fifo_12_residual_add_Return_q;
+  wire        _fifo_11_dequantize_Return_overflow_out;
+  wire        _fifo_11_dequantize_Return_underflow_out;
+  wire        _fifo_11_dequantize_Return_empty;
+  wire        _fifo_11_dequantize_Return_full;
+  wire [15:0] _fifo_11_dequantize_Return_q;
+  wire        _fifo_10_swiglu_compute_Return_overflow_out;
+  wire        _fifo_10_swiglu_compute_Return_underflow_out;
+  wire        _fifo_10_swiglu_compute_Return_empty;
+  wire        _fifo_10_swiglu_compute_Return_full;
+  wire [15:0] _fifo_10_swiglu_compute_Return_q;
+  wire        _fifo_9_set_sigmoid_lut_Return_overflow_out;
+  wire        _fifo_9_set_sigmoid_lut_Return_underflow_out;
+  wire        _fifo_9_set_sigmoid_lut_Return_empty;
+  wire        _fifo_9_set_sigmoid_lut_Return_full;
+  wire        _fifo_8_lookup_rsqrt_Return_overflow_out;
+  wire        _fifo_8_lookup_rsqrt_Return_underflow_out;
+  wire        _fifo_8_lookup_rsqrt_Return_empty;
+  wire        _fifo_8_lookup_rsqrt_Return_full;
+  wire [15:0] _fifo_8_lookup_rsqrt_Return_q;
+  wire        _fifo_7_set_rsqrt_lut_Return_overflow_out;
+  wire        _fifo_7_set_rsqrt_lut_Return_underflow_out;
+  wire        _fifo_7_set_rsqrt_lut_Return_empty;
+  wire        _fifo_7_set_rsqrt_lut_Return_full;
+  wire        _fifo_6_get_gamma_pre_mlp_Return_overflow_out;
+  wire        _fifo_6_get_gamma_pre_mlp_Return_underflow_out;
+  wire        _fifo_6_get_gamma_pre_mlp_Return_empty;
+  wire        _fifo_6_get_gamma_pre_mlp_Return_full;
+  wire [15:0] _fifo_6_get_gamma_pre_mlp_Return_q;
+  wire        _fifo_5_set_gamma_pre_mlp_Return_overflow_out;
+  wire        _fifo_5_set_gamma_pre_mlp_Return_underflow_out;
+  wire        _fifo_5_set_gamma_pre_mlp_Return_empty;
+  wire        _fifo_5_set_gamma_pre_mlp_Return_full;
+  wire        _fifo_4_get_gamma_pre_attn_Return_overflow_out;
+  wire        _fifo_4_get_gamma_pre_attn_Return_underflow_out;
+  wire        _fifo_4_get_gamma_pre_attn_Return_empty;
+  wire        _fifo_4_get_gamma_pre_attn_Return_full;
+  wire [15:0] _fifo_4_get_gamma_pre_attn_Return_q;
+  wire        _fifo_3_set_gamma_pre_attn_Return_overflow_out;
+  wire        _fifo_3_set_gamma_pre_attn_Return_underflow_out;
+  wire        _fifo_3_set_gamma_pre_attn_Return_empty;
+  wire        _fifo_3_set_gamma_pre_attn_Return_full;
+  wire        _fifo_2_rmsnorm_reset_Return_overflow_out;
+  wire        _fifo_2_rmsnorm_reset_Return_underflow_out;
+  wire        _fifo_2_rmsnorm_reset_Return_empty;
+  wire        _fifo_2_rmsnorm_reset_Return_full;
+  wire        _fifo_1_rmsnorm_get_sum_Return_overflow_out;
+  wire        _fifo_1_rmsnorm_get_sum_Return_underflow_out;
+  wire        _fifo_1_rmsnorm_get_sum_Return_empty;
+  wire        _fifo_1_rmsnorm_get_sum_Return_full;
+  wire [31:0] _fifo_1_rmsnorm_get_sum_Return_q;
+  wire        _fifo_0_rmsnorm_accumulate_Return_overflow_out;
+  wire        _fifo_0_rmsnorm_accumulate_Return_underflow_out;
+  wire        _fifo_0_rmsnorm_accumulate_Return_empty;
+  wire        _fifo_0_rmsnorm_accumulate_Return_full;
+  wire        _has_startup_completed_delayed_12_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_11_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_10_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_9_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_8_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_7_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_6_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_5_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_4_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_3_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_2_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_1_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_0_delay_chain_data_out;
+  wire [31:0] __sum_sq_value_out;	// vector_unit.k:13:5
+  wire [15:0] __sigmoid_lut_read_data_out_0;	// vector_unit.k:20:5
+  wire        __sigmoid_lut_init_completed;	// vector_unit.k:20:5
+  wire [15:0] __rsqrt_lut_read_data_out_0;	// vector_unit.k:17:5
+  wire        __rsqrt_lut_init_completed;	// vector_unit.k:17:5
+  wire [15:0] __gamma_pre_mlp_read_data_out_0;	// vector_unit.k:16:5
+  wire        __gamma_pre_mlp_init_completed;	// vector_unit.k:16:5
+  wire [15:0] __gamma_pre_attn_read_data_out_0;	// vector_unit.k:15:5
+  wire        __gamma_pre_attn_init_completed;	// vector_unit.k:15:5
+  wire        _reset_control_rst_and_startup_done_out;
+  wire [26:0] _reset_control_rst_delayed_out;
+  wire        _reset_control_reset_sequence_finished_this_cycle_out;
   logic  stall_rate_supported_out_net;
   logic  residual_add_empty_out_net;
   logic [15:0] residual_add_result_out_net;
@@ -7039,16 +6401,6 @@ module vector_unit(
   logic  swiglu_compute_rdy_out_net;
   logic  set_sigmoid_lut_empty_out_net;
   logic  set_sigmoid_lut_rdy_out_net;
-  logic  rope_write_sin_row_empty_out_net;
-  logic  rope_write_sin_row_rdy_out_net;
-  logic  rope_write_cos_row_empty_out_net;
-  logic  rope_write_cos_row_rdy_out_net;
-  logic  rope_read_sin_row_empty_out_net;
-  logic [1023:0] rope_read_sin_row_result_out_net;
-  logic  rope_read_sin_row_rdy_out_net;
-  logic  rope_read_cos_row_empty_out_net;
-  logic [1023:0] rope_read_cos_row_result_out_net;
-  logic  rope_read_cos_row_rdy_out_net;
   logic  lookup_rsqrt_empty_out_net;
   logic [15:0] lookup_rsqrt_result_out_net;
   logic  lookup_rsqrt_rdy_out_net;
@@ -7077,17 +6429,16 @@ module vector_unit(
   //synopsys translate_off
   KanagawaStringTable string_table(.clk(clk));
   //synopsys translate_on
-  logic [34:0] reg_rst_delayed;
+  logic [26:0] reg_rst_delayed;
   logic combined_reset;
   assign combined_reset = rst;
   logic reset_sequence_finished_this_cycle;
   logic has_startup_completed_raw;
   logic has_mem_init_completed;
-  wire          _GEN =
+  wire        _GEN =
     has_startup_completed_raw & __gamma_pre_attn_init_completed
     & __gamma_pre_mlp_init_completed & __rsqrt_lut_init_completed
-    & __sigmoid_lut_init_completed & __cos_table_init_completed
-    & __sin_table_init_completed;	// vector_unit.k:15:5, :16:5, :17:5, :20:5, :23:5, :24:5
+    & __sigmoid_lut_init_completed;	// vector_unit.k:15:5, :16:5, :17:5, :20:5
   logic has_others_completed;
   assign has_others_completed = _GEN;
 
@@ -7121,14 +6472,6 @@ module vector_unit(
   logic has_startup_completed_delayed_11;
 
   logic has_startup_completed_delayed_12;
-
-  logic has_startup_completed_delayed_13;
-
-  logic has_startup_completed_delayed_14;
-
-  logic has_startup_completed_delayed_15;
-
-  logic has_startup_completed_delayed_16;
 
   struct packed {
       logic rden;
@@ -7224,8 +6567,6 @@ module vector_unit(
       logic empty;
       logic wren;
       logic almost_full;
-      logic [1023:0] data_in;
-      logic [1023:0] data_out;
       logic overflow;
       logic underflow;
   } fifo_data_9;
@@ -7235,8 +6576,8 @@ module vector_unit(
       logic empty;
       logic wren;
       logic almost_full;
-      logic [1023:0] data_in;
-      logic [1023:0] data_out;
+      logic [15:0] data_in;
+      logic [15:0] data_out;
       logic overflow;
       logic underflow;
   } fifo_data_10;
@@ -7246,6 +6587,8 @@ module vector_unit(
       logic empty;
       logic wren;
       logic almost_full;
+      logic [15:0] data_in;
+      logic [15:0] data_out;
       logic overflow;
       logic underflow;
   } fifo_data_11;
@@ -7255,52 +6598,46 @@ module vector_unit(
       logic empty;
       logic wren;
       logic almost_full;
+      logic [15:0] data_in;
+      logic [15:0] data_out;
       logic overflow;
       logic underflow;
   } fifo_data_12;
 
   struct packed {
-      logic rden;
-      logic empty;
-      logic wren;
-      logic almost_full;
-      logic overflow;
+      logic rdy_int;
+      logic rdy_ext;
+      logic valid;
+      logic [15:0] data;
       logic underflow;
-  } fifo_data_13;
-
+  } passthrough_data_13;
+  assign passthrough_data_13.underflow = 1'b0;
+  assign passthrough_data_13.rdy_ext = passthrough_data_13.rdy_int & !(!has_startup_completed_delayed_0);
   struct packed {
-      logic rden;
-      logic empty;
-      logic wren;
-      logic almost_full;
-      logic [15:0] data_in;
-      logic [15:0] data_out;
-      logic overflow;
+      logic rdy_int;
+      logic rdy_ext;
+      logic valid;
       logic underflow;
-  } fifo_data_14;
-
+  } passthrough_data_14;
+  assign passthrough_data_14.underflow = 1'b0;
+  assign passthrough_data_14.rdy_ext = passthrough_data_14.rdy_int & !(!has_startup_completed_delayed_1);
   struct packed {
-      logic rden;
-      logic empty;
-      logic wren;
-      logic almost_full;
-      logic [15:0] data_in;
-      logic [15:0] data_out;
-      logic overflow;
+      logic rdy_int;
+      logic rdy_ext;
+      logic valid;
       logic underflow;
-  } fifo_data_15;
-
+  } passthrough_data_15;
+  assign passthrough_data_15.underflow = 1'b0;
+  assign passthrough_data_15.rdy_ext = passthrough_data_15.rdy_int & !(!has_startup_completed_delayed_2);
   struct packed {
-      logic rden;
-      logic empty;
-      logic wren;
-      logic almost_full;
-      logic [15:0] data_in;
-      logic [15:0] data_out;
-      logic overflow;
+      logic rdy_int;
+      logic rdy_ext;
+      logic valid;
+      logic [31:0] data;
       logic underflow;
-  } fifo_data_16;
-
+  } passthrough_data_16;
+  assign passthrough_data_16.underflow = 1'b0;
+  assign passthrough_data_16.rdy_ext = passthrough_data_16.rdy_int & !(!has_startup_completed_delayed_3);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
@@ -7309,241 +6646,149 @@ module vector_unit(
       logic underflow;
   } passthrough_data_17;
   assign passthrough_data_17.underflow = 1'b0;
-  assign passthrough_data_17.rdy_ext = passthrough_data_17.rdy_int & !(!has_startup_completed_delayed_0);
+  assign passthrough_data_17.rdy_ext = passthrough_data_17.rdy_int & !(!has_startup_completed_delayed_4);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
       logic valid;
+      logic [31:0] data;
       logic underflow;
   } passthrough_data_18;
   assign passthrough_data_18.underflow = 1'b0;
-  assign passthrough_data_18.rdy_ext = passthrough_data_18.rdy_int & !(!has_startup_completed_delayed_1);
+  assign passthrough_data_18.rdy_ext = passthrough_data_18.rdy_int & !(!has_startup_completed_delayed_5);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
       logic valid;
+      logic [15:0] data;
       logic underflow;
   } passthrough_data_19;
   assign passthrough_data_19.underflow = 1'b0;
-  assign passthrough_data_19.rdy_ext = passthrough_data_19.rdy_int & !(!has_startup_completed_delayed_2);
-  struct packed {
-      logic rdy_int;
-      logic rdy_ext;
-      logic valid;
-      logic [31:0] data;
-      logic underflow;
-  } passthrough_data_20;
-  assign passthrough_data_20.underflow = 1'b0;
-  assign passthrough_data_20.rdy_ext = passthrough_data_20.rdy_int & !(!has_startup_completed_delayed_3);
-  struct packed {
-      logic rdy_int;
-      logic rdy_ext;
-      logic valid;
-      logic [15:0] data;
-      logic underflow;
-  } passthrough_data_21;
-  assign passthrough_data_21.underflow = 1'b0;
-  assign passthrough_data_21.rdy_ext = passthrough_data_21.rdy_int & !(!has_startup_completed_delayed_4);
-  struct packed {
-      logic rdy_int;
-      logic rdy_ext;
-      logic valid;
-      logic [31:0] data;
-      logic underflow;
-  } passthrough_data_22;
-  assign passthrough_data_22.underflow = 1'b0;
-  assign passthrough_data_22.rdy_ext = passthrough_data_22.rdy_int & !(!has_startup_completed_delayed_5);
-  struct packed {
-      logic rdy_int;
-      logic rdy_ext;
-      logic valid;
-      logic [15:0] data;
-      logic underflow;
-  } passthrough_data_23;
-  assign passthrough_data_23.underflow = 1'b0;
-  assign passthrough_data_23.rdy_ext = passthrough_data_23.rdy_int & !(!has_startup_completed_delayed_6);
+  assign passthrough_data_19.rdy_ext = passthrough_data_19.rdy_int & !(!has_startup_completed_delayed_6);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
       logic valid;
       logic [23:0] data;
       logic underflow;
-  } passthrough_data_24;
-  assign passthrough_data_24.underflow = 1'b0;
-  assign passthrough_data_24.rdy_ext = passthrough_data_24.rdy_int & !(!has_startup_completed_delayed_7);
+  } passthrough_data_20;
+  assign passthrough_data_20.underflow = 1'b0;
+  assign passthrough_data_20.rdy_ext = passthrough_data_20.rdy_int & !(!has_startup_completed_delayed_7);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
       logic valid;
       logic [7:0] data;
       logic underflow;
-  } passthrough_data_25;
-  assign passthrough_data_25.underflow = 1'b0;
-  assign passthrough_data_25.rdy_ext = passthrough_data_25.rdy_int & !(!has_startup_completed_delayed_8);
-  struct packed {
-      logic rdy_int;
-      logic rdy_ext;
-      logic valid;
-      logic [11:0] data;
-      logic underflow;
-  } passthrough_data_26;
-  assign passthrough_data_26.underflow = 1'b0;
-  assign passthrough_data_26.rdy_ext = passthrough_data_26.rdy_int & !(!has_startup_completed_delayed_9);
-  struct packed {
-      logic rdy_int;
-      logic rdy_ext;
-      logic valid;
-      logic [11:0] data;
-      logic underflow;
-  } passthrough_data_27;
-  assign passthrough_data_27.underflow = 1'b0;
-  assign passthrough_data_27.rdy_ext = passthrough_data_27.rdy_int & !(!has_startup_completed_delayed_10);
-  struct packed {
-      logic rdy_int;
-      logic rdy_ext;
-      logic valid;
-      logic [1035:0] data;
-      logic underflow;
-  } passthrough_data_28;
-  assign passthrough_data_28.underflow = 1'b0;
-  assign passthrough_data_28.rdy_ext = passthrough_data_28.rdy_int & !(!has_startup_completed_delayed_11);
-  struct packed {
-      logic rdy_int;
-      logic rdy_ext;
-      logic valid;
-      logic [1035:0] data;
-      logic underflow;
-  } passthrough_data_29;
-  assign passthrough_data_29.underflow = 1'b0;
-  assign passthrough_data_29.rdy_ext = passthrough_data_29.rdy_int & !(!has_startup_completed_delayed_12);
+  } passthrough_data_21;
+  assign passthrough_data_21.underflow = 1'b0;
+  assign passthrough_data_21.rdy_ext = passthrough_data_21.rdy_int & !(!has_startup_completed_delayed_8);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
       logic valid;
       logic [23:0] data;
       logic underflow;
-  } passthrough_data_30;
-  assign passthrough_data_30.underflow = 1'b0;
-  assign passthrough_data_30.rdy_ext = passthrough_data_30.rdy_int & !(!has_startup_completed_delayed_13);
+  } passthrough_data_22;
+  assign passthrough_data_22.underflow = 1'b0;
+  assign passthrough_data_22.rdy_ext = passthrough_data_22.rdy_int & !(!has_startup_completed_delayed_9);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
       logic valid;
       logic [31:0] data;
       logic underflow;
-  } passthrough_data_32;
-  assign passthrough_data_32.underflow = 1'b0;
-  assign passthrough_data_32.rdy_ext = passthrough_data_32.rdy_int & !(!has_startup_completed_delayed_14);
+  } passthrough_data_24;
+  assign passthrough_data_24.underflow = 1'b0;
+  assign passthrough_data_24.rdy_ext = passthrough_data_24.rdy_int & !(!has_startup_completed_delayed_10);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
       logic valid;
       logic [43:0] data;
       logic underflow;
-  } passthrough_data_33;
-  assign passthrough_data_33.underflow = 1'b0;
-  assign passthrough_data_33.rdy_ext = passthrough_data_33.rdy_int & !(!has_startup_completed_delayed_15);
+  } passthrough_data_25;
+  assign passthrough_data_25.underflow = 1'b0;
+  assign passthrough_data_25.rdy_ext = passthrough_data_25.rdy_int & !(!has_startup_completed_delayed_11);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
       logic valid;
       logic [31:0] data;
       logic underflow;
-  } passthrough_data_34;
-  assign passthrough_data_34.underflow = 1'b0;
-  assign passthrough_data_34.rdy_ext = passthrough_data_34.rdy_int & !(!has_startup_completed_delayed_16);
-  assign rmsnorm_accumulate_rdy_out_net = passthrough_data_17.rdy_ext;
-  assign passthrough_data_17.valid = rmsnorm_accumulate_rdy_out & rmsnorm_accumulate_valid_in;
-  assign passthrough_data_17.data = { rmsnorm_accumulate_x_bf16_in };
+  } passthrough_data_26;
+  assign passthrough_data_26.underflow = 1'b0;
+  assign passthrough_data_26.rdy_ext = passthrough_data_26.rdy_int & !(!has_startup_completed_delayed_12);
+  assign rmsnorm_accumulate_rdy_out_net = passthrough_data_13.rdy_ext;
+  assign passthrough_data_13.valid = rmsnorm_accumulate_rdy_out & rmsnorm_accumulate_valid_in;
+  assign passthrough_data_13.data = { rmsnorm_accumulate_x_bf16_in };
   assign fifo_data_0.rden = rmsnorm_accumulate_rden_in;
   assign rmsnorm_accumulate_empty_out_net = fifo_data_0.empty;
-  assign rmsnorm_get_sum_rdy_out_net = passthrough_data_18.rdy_ext;
-  assign passthrough_data_18.valid = rmsnorm_get_sum_rdy_out & rmsnorm_get_sum_valid_in;
+  assign rmsnorm_get_sum_rdy_out_net = passthrough_data_14.rdy_ext;
+  assign passthrough_data_14.valid = rmsnorm_get_sum_rdy_out & rmsnorm_get_sum_valid_in;
   assign fifo_data_1.rden = rmsnorm_get_sum_rden_in;
   assign rmsnorm_get_sum_result_out_net = fifo_data_1.data_out;
   assign rmsnorm_get_sum_empty_out_net = fifo_data_1.empty;
-  assign rmsnorm_reset_rdy_out_net = passthrough_data_19.rdy_ext;
-  assign passthrough_data_19.valid = rmsnorm_reset_rdy_out & rmsnorm_reset_valid_in;
+  assign rmsnorm_reset_rdy_out_net = passthrough_data_15.rdy_ext;
+  assign passthrough_data_15.valid = rmsnorm_reset_rdy_out & rmsnorm_reset_valid_in;
   assign fifo_data_2.rden = rmsnorm_reset_rden_in;
   assign rmsnorm_reset_empty_out_net = fifo_data_2.empty;
-  assign set_gamma_pre_attn_rdy_out_net = passthrough_data_20.rdy_ext;
-  assign passthrough_data_20.valid = set_gamma_pre_attn_rdy_out & set_gamma_pre_attn_valid_in;
-  assign passthrough_data_20.data = { set_gamma_pre_attn_value_in, set_gamma_pre_attn_index_in };
+  assign set_gamma_pre_attn_rdy_out_net = passthrough_data_16.rdy_ext;
+  assign passthrough_data_16.valid = set_gamma_pre_attn_rdy_out & set_gamma_pre_attn_valid_in;
+  assign passthrough_data_16.data = { set_gamma_pre_attn_value_in, set_gamma_pre_attn_index_in };
   assign fifo_data_3.rden = set_gamma_pre_attn_rden_in;
   assign set_gamma_pre_attn_empty_out_net = fifo_data_3.empty;
-  assign get_gamma_pre_attn_rdy_out_net = passthrough_data_21.rdy_ext;
-  assign passthrough_data_21.valid = get_gamma_pre_attn_rdy_out & get_gamma_pre_attn_valid_in;
-  assign passthrough_data_21.data = { get_gamma_pre_attn_index_in };
+  assign get_gamma_pre_attn_rdy_out_net = passthrough_data_17.rdy_ext;
+  assign passthrough_data_17.valid = get_gamma_pre_attn_rdy_out & get_gamma_pre_attn_valid_in;
+  assign passthrough_data_17.data = { get_gamma_pre_attn_index_in };
   assign fifo_data_4.rden = get_gamma_pre_attn_rden_in;
   assign get_gamma_pre_attn_result_out_net = fifo_data_4.data_out;
   assign get_gamma_pre_attn_empty_out_net = fifo_data_4.empty;
-  assign set_gamma_pre_mlp_rdy_out_net = passthrough_data_22.rdy_ext;
-  assign passthrough_data_22.valid = set_gamma_pre_mlp_rdy_out & set_gamma_pre_mlp_valid_in;
-  assign passthrough_data_22.data = { set_gamma_pre_mlp_value_in, set_gamma_pre_mlp_index_in };
+  assign set_gamma_pre_mlp_rdy_out_net = passthrough_data_18.rdy_ext;
+  assign passthrough_data_18.valid = set_gamma_pre_mlp_rdy_out & set_gamma_pre_mlp_valid_in;
+  assign passthrough_data_18.data = { set_gamma_pre_mlp_value_in, set_gamma_pre_mlp_index_in };
   assign fifo_data_5.rden = set_gamma_pre_mlp_rden_in;
   assign set_gamma_pre_mlp_empty_out_net = fifo_data_5.empty;
-  assign get_gamma_pre_mlp_rdy_out_net = passthrough_data_23.rdy_ext;
-  assign passthrough_data_23.valid = get_gamma_pre_mlp_rdy_out & get_gamma_pre_mlp_valid_in;
-  assign passthrough_data_23.data = { get_gamma_pre_mlp_index_in };
+  assign get_gamma_pre_mlp_rdy_out_net = passthrough_data_19.rdy_ext;
+  assign passthrough_data_19.valid = get_gamma_pre_mlp_rdy_out & get_gamma_pre_mlp_valid_in;
+  assign passthrough_data_19.data = { get_gamma_pre_mlp_index_in };
   assign fifo_data_6.rden = get_gamma_pre_mlp_rden_in;
   assign get_gamma_pre_mlp_result_out_net = fifo_data_6.data_out;
   assign get_gamma_pre_mlp_empty_out_net = fifo_data_6.empty;
-  assign set_rsqrt_lut_rdy_out_net = passthrough_data_24.rdy_ext;
-  assign passthrough_data_24.valid = set_rsqrt_lut_rdy_out & set_rsqrt_lut_valid_in;
-  assign passthrough_data_24.data = { set_rsqrt_lut_value_in, set_rsqrt_lut_index_in };
+  assign set_rsqrt_lut_rdy_out_net = passthrough_data_20.rdy_ext;
+  assign passthrough_data_20.valid = set_rsqrt_lut_rdy_out & set_rsqrt_lut_valid_in;
+  assign passthrough_data_20.data = { set_rsqrt_lut_value_in, set_rsqrt_lut_index_in };
   assign fifo_data_7.rden = set_rsqrt_lut_rden_in;
   assign set_rsqrt_lut_empty_out_net = fifo_data_7.empty;
-  assign lookup_rsqrt_rdy_out_net = passthrough_data_25.rdy_ext;
-  assign passthrough_data_25.valid = lookup_rsqrt_rdy_out & lookup_rsqrt_valid_in;
-  assign passthrough_data_25.data = { lookup_rsqrt_index_in };
+  assign lookup_rsqrt_rdy_out_net = passthrough_data_21.rdy_ext;
+  assign passthrough_data_21.valid = lookup_rsqrt_rdy_out & lookup_rsqrt_valid_in;
+  assign passthrough_data_21.data = { lookup_rsqrt_index_in };
   assign fifo_data_8.rden = lookup_rsqrt_rden_in;
   assign lookup_rsqrt_result_out_net = fifo_data_8.data_out;
   assign lookup_rsqrt_empty_out_net = fifo_data_8.empty;
-  assign rope_read_cos_row_rdy_out_net = passthrough_data_26.rdy_ext;
-  assign passthrough_data_26.valid = rope_read_cos_row_rdy_out & rope_read_cos_row_valid_in;
-  assign passthrough_data_26.data = { rope_read_cos_row_position_in };
-  assign fifo_data_9.rden = rope_read_cos_row_rden_in;
-  assign rope_read_cos_row_result_out_net = fifo_data_9.data_out;
-  assign rope_read_cos_row_empty_out_net = fifo_data_9.empty;
-  assign rope_read_sin_row_rdy_out_net = passthrough_data_27.rdy_ext;
-  assign passthrough_data_27.valid = rope_read_sin_row_rdy_out & rope_read_sin_row_valid_in;
-  assign passthrough_data_27.data = { rope_read_sin_row_position_in };
-  assign fifo_data_10.rden = rope_read_sin_row_rden_in;
-  assign rope_read_sin_row_result_out_net = fifo_data_10.data_out;
-  assign rope_read_sin_row_empty_out_net = fifo_data_10.empty;
-  assign rope_write_cos_row_rdy_out_net = passthrough_data_28.rdy_ext;
-  assign passthrough_data_28.valid = rope_write_cos_row_rdy_out & rope_write_cos_row_valid_in;
-  assign passthrough_data_28.data = { rope_write_cos_row_value_in, rope_write_cos_row_position_in };
-  assign fifo_data_11.rden = rope_write_cos_row_rden_in;
-  assign rope_write_cos_row_empty_out_net = fifo_data_11.empty;
-  assign rope_write_sin_row_rdy_out_net = passthrough_data_29.rdy_ext;
-  assign passthrough_data_29.valid = rope_write_sin_row_rdy_out & rope_write_sin_row_valid_in;
-  assign passthrough_data_29.data = { rope_write_sin_row_value_in, rope_write_sin_row_position_in };
-  assign fifo_data_12.rden = rope_write_sin_row_rden_in;
-  assign rope_write_sin_row_empty_out_net = fifo_data_12.empty;
-  assign set_sigmoid_lut_rdy_out_net = passthrough_data_30.rdy_ext;
-  assign passthrough_data_30.valid = set_sigmoid_lut_rdy_out & set_sigmoid_lut_valid_in;
-  assign passthrough_data_30.data = { set_sigmoid_lut_value_in, set_sigmoid_lut_index_in };
-  assign fifo_data_13.rden = set_sigmoid_lut_rden_in;
-  assign set_sigmoid_lut_empty_out_net = fifo_data_13.empty;
-  assign swiglu_compute_rdy_out_net = passthrough_data_32.rdy_ext;
-  assign passthrough_data_32.valid = swiglu_compute_rdy_out & swiglu_compute_valid_in;
-  assign passthrough_data_32.data = { swiglu_compute_up_bf16_in, swiglu_compute_gate_bf16_in };
-  assign fifo_data_14.rden = swiglu_compute_rden_in;
-  assign swiglu_compute_result_out_net = fifo_data_14.data_out;
-  assign swiglu_compute_empty_out_net = fifo_data_14.empty;
-  assign dequantize_rdy_out_net = passthrough_data_33.rdy_ext;
-  assign passthrough_data_33.valid = dequantize_rdy_out & dequantize_valid_in;
-  assign passthrough_data_33.data = { dequantize_sub_scale_in, dequantize_super_scale_bf16_in, dequantize_accum_in };
-  assign fifo_data_15.rden = dequantize_rden_in;
-  assign dequantize_result_out_net = fifo_data_15.data_out;
-  assign dequantize_empty_out_net = fifo_data_15.empty;
-  assign residual_add_rdy_out_net = passthrough_data_34.rdy_ext;
-  assign passthrough_data_34.valid = residual_add_rdy_out & residual_add_valid_in;
-  assign passthrough_data_34.data = { residual_add_b_bf16_in, residual_add_a_bf16_in };
-  assign fifo_data_16.rden = residual_add_rden_in;
-  assign residual_add_result_out_net = fifo_data_16.data_out;
-  assign residual_add_empty_out_net = fifo_data_16.empty;
+  assign set_sigmoid_lut_rdy_out_net = passthrough_data_22.rdy_ext;
+  assign passthrough_data_22.valid = set_sigmoid_lut_rdy_out & set_sigmoid_lut_valid_in;
+  assign passthrough_data_22.data = { set_sigmoid_lut_value_in, set_sigmoid_lut_index_in };
+  assign fifo_data_9.rden = set_sigmoid_lut_rden_in;
+  assign set_sigmoid_lut_empty_out_net = fifo_data_9.empty;
+  assign swiglu_compute_rdy_out_net = passthrough_data_24.rdy_ext;
+  assign passthrough_data_24.valid = swiglu_compute_rdy_out & swiglu_compute_valid_in;
+  assign passthrough_data_24.data = { swiglu_compute_up_bf16_in, swiglu_compute_gate_bf16_in };
+  assign fifo_data_10.rden = swiglu_compute_rden_in;
+  assign swiglu_compute_result_out_net = fifo_data_10.data_out;
+  assign swiglu_compute_empty_out_net = fifo_data_10.empty;
+  assign dequantize_rdy_out_net = passthrough_data_25.rdy_ext;
+  assign passthrough_data_25.valid = dequantize_rdy_out & dequantize_valid_in;
+  assign passthrough_data_25.data = { dequantize_sub_scale_in, dequantize_super_scale_bf16_in, dequantize_accum_in };
+  assign fifo_data_11.rden = dequantize_rden_in;
+  assign dequantize_result_out_net = fifo_data_11.data_out;
+  assign dequantize_empty_out_net = fifo_data_11.empty;
+  assign residual_add_rdy_out_net = passthrough_data_26.rdy_ext;
+  assign passthrough_data_26.valid = residual_add_rdy_out & residual_add_valid_in;
+  assign passthrough_data_26.data = { residual_add_b_bf16_in, residual_add_a_bf16_in };
+  assign fifo_data_12.rden = residual_add_rden_in;
+  assign residual_add_result_out_net = fifo_data_12.data_out;
+  assign residual_add_empty_out_net = fifo_data_12.empty;
   always_comb begin
     rst_and_startup_done_out_net = _reset_control_rst_and_startup_done_out;
     reg_rst_delayed = _reset_control_rst_delayed_out;
@@ -7561,10 +6806,6 @@ module vector_unit(
     has_startup_completed_delayed_10 = _has_startup_completed_delayed_10_delay_chain_data_out;
     has_startup_completed_delayed_11 = _has_startup_completed_delayed_11_delay_chain_data_out;
     has_startup_completed_delayed_12 = _has_startup_completed_delayed_12_delay_chain_data_out;
-    has_startup_completed_delayed_13 = _has_startup_completed_delayed_13_delay_chain_data_out;
-    has_startup_completed_delayed_14 = _has_startup_completed_delayed_14_delay_chain_data_out;
-    has_startup_completed_delayed_15 = _has_startup_completed_delayed_15_delay_chain_data_out;
-    has_startup_completed_delayed_16 = _has_startup_completed_delayed_16_delay_chain_data_out;
     fifo_data_0.overflow = _fifo_0_rmsnorm_accumulate_Return_overflow_out;
     fifo_data_0.underflow = _fifo_0_rmsnorm_accumulate_Return_underflow_out;
     fifo_data_0.empty = _fifo_0_rmsnorm_accumulate_Return_empty;
@@ -7605,92 +6846,64 @@ module vector_unit(
     fifo_data_8.empty = _fifo_8_lookup_rsqrt_Return_empty;
     fifo_data_8.almost_full = _fifo_8_lookup_rsqrt_Return_full;
     fifo_data_8.data_out = _fifo_8_lookup_rsqrt_Return_q;
-    fifo_data_9.overflow = _fifo_9_rope_read_cos_row_Return_overflow_out;
-    fifo_data_9.underflow = _fifo_9_rope_read_cos_row_Return_underflow_out;
-    fifo_data_9.empty = _fifo_9_rope_read_cos_row_Return_empty;
-    fifo_data_9.almost_full = _fifo_9_rope_read_cos_row_Return_full;
-    fifo_data_9.data_out = _fifo_9_rope_read_cos_row_Return_q;
-    fifo_data_10.overflow = _fifo_10_rope_read_sin_row_Return_overflow_out;
-    fifo_data_10.underflow = _fifo_10_rope_read_sin_row_Return_underflow_out;
-    fifo_data_10.empty = _fifo_10_rope_read_sin_row_Return_empty;
-    fifo_data_10.almost_full = _fifo_10_rope_read_sin_row_Return_full;
-    fifo_data_10.data_out = _fifo_10_rope_read_sin_row_Return_q;
-    fifo_data_11.overflow = _fifo_11_rope_write_cos_row_Return_overflow_out;
-    fifo_data_11.underflow = _fifo_11_rope_write_cos_row_Return_underflow_out;
-    fifo_data_11.empty = _fifo_11_rope_write_cos_row_Return_empty;
-    fifo_data_11.almost_full = _fifo_11_rope_write_cos_row_Return_full;
-    fifo_data_12.overflow = _fifo_12_rope_write_sin_row_Return_overflow_out;
-    fifo_data_12.underflow = _fifo_12_rope_write_sin_row_Return_underflow_out;
-    fifo_data_12.empty = _fifo_12_rope_write_sin_row_Return_empty;
-    fifo_data_12.almost_full = _fifo_12_rope_write_sin_row_Return_full;
-    fifo_data_13.overflow = _fifo_13_set_sigmoid_lut_Return_overflow_out;
-    fifo_data_13.underflow = _fifo_13_set_sigmoid_lut_Return_underflow_out;
-    fifo_data_13.empty = _fifo_13_set_sigmoid_lut_Return_empty;
-    fifo_data_13.almost_full = _fifo_13_set_sigmoid_lut_Return_full;
-    fifo_data_14.overflow = _fifo_14_swiglu_compute_Return_overflow_out;
-    fifo_data_14.underflow = _fifo_14_swiglu_compute_Return_underflow_out;
-    fifo_data_14.empty = _fifo_14_swiglu_compute_Return_empty;
-    fifo_data_14.almost_full = _fifo_14_swiglu_compute_Return_full;
-    fifo_data_14.data_out = _fifo_14_swiglu_compute_Return_q;
-    fifo_data_15.overflow = _fifo_15_dequantize_Return_overflow_out;
-    fifo_data_15.underflow = _fifo_15_dequantize_Return_underflow_out;
-    fifo_data_15.empty = _fifo_15_dequantize_Return_empty;
-    fifo_data_15.almost_full = _fifo_15_dequantize_Return_full;
-    fifo_data_15.data_out = _fifo_15_dequantize_Return_q;
-    fifo_data_16.overflow = _fifo_16_residual_add_Return_overflow_out;
-    fifo_data_16.underflow = _fifo_16_residual_add_Return_underflow_out;
-    fifo_data_16.empty = _fifo_16_residual_add_Return_empty;
-    fifo_data_16.almost_full = _fifo_16_residual_add_Return_full;
-    fifo_data_16.data_out = _fifo_16_residual_add_Return_q;
-    fifo_data_0.wren = _rmsnorm_accumulate_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:33:9
-    passthrough_data_17.rdy_int = _rmsnorm_accumulate_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:33:9
-    fifo_data_1.data_in = _rmsnorm_get_sum_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:79:9
-    fifo_data_1.wren = _rmsnorm_get_sum_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:79:9
-    passthrough_data_18.rdy_int = _rmsnorm_get_sum_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:79:9
-    fifo_data_2.wren = _rmsnorm_reset_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:89:9
-    passthrough_data_19.rdy_int = _rmsnorm_reset_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:89:9
-    fifo_data_3.wren = _set_gamma_pre_attn_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:98:9
-    passthrough_data_20.rdy_int = _set_gamma_pre_attn_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:98:9
-    fifo_data_4.data_in = _get_gamma_pre_attn_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:106:9
-    fifo_data_4.wren = _get_gamma_pre_attn_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:106:9
-    passthrough_data_21.rdy_int = _get_gamma_pre_attn_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:106:9
-    fifo_data_5.wren = _set_gamma_pre_mlp_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:116:9
-    passthrough_data_22.rdy_int = _set_gamma_pre_mlp_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:116:9
-    fifo_data_6.data_in = _get_gamma_pre_mlp_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:124:9
-    fifo_data_6.wren = _get_gamma_pre_mlp_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:124:9
-    passthrough_data_23.rdy_int = _get_gamma_pre_mlp_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:124:9
-    fifo_data_7.wren = _set_rsqrt_lut_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:134:9
-    passthrough_data_24.rdy_int = _set_rsqrt_lut_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:134:9
-    fifo_data_8.data_in = _lookup_rsqrt_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:142:9
-    fifo_data_8.wren = _lookup_rsqrt_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:142:9
-    passthrough_data_25.rdy_int = _lookup_rsqrt_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:142:9
-    fifo_data_9.data_in = _rope_read_cos_row_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:154:9
-    fifo_data_9.wren = _rope_read_cos_row_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:154:9
-    passthrough_data_26.rdy_int = _rope_read_cos_row_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:154:9
-    fifo_data_10.data_in = _rope_read_sin_row_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:161:9
-    fifo_data_10.wren = _rope_read_sin_row_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:161:9
-    passthrough_data_27.rdy_int = _rope_read_sin_row_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:161:9
-    fifo_data_11.wren = _rope_write_cos_row_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:168:9
-    passthrough_data_28.rdy_int = _rope_write_cos_row_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:168:9
-    fifo_data_12.wren = _rope_write_sin_row_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:173:9
-    passthrough_data_29.rdy_int = _rope_write_sin_row_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:173:9
-    fifo_data_13.wren = _set_sigmoid_lut_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:180:9
-    passthrough_data_30.rdy_int = _set_sigmoid_lut_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:180:9
-    fifo_data_14.data_in = _swiglu_compute_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:191:9
-    fifo_data_14.wren = _swiglu_compute_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:191:9
-    passthrough_data_32.rdy_int = _swiglu_compute_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:191:9
-    fifo_data_15.data_in = _dequantize_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:287:9
-    fifo_data_15.wren = _dequantize_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:287:9
-    passthrough_data_33.rdy_int = _dequantize_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:287:9
-    fifo_data_16.data_in = _residual_add_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:406:9
-    fifo_data_16.wren = _residual_add_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:406:9
-    passthrough_data_34.rdy_int = _residual_add_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:406:9
+    fifo_data_9.overflow = _fifo_9_set_sigmoid_lut_Return_overflow_out;
+    fifo_data_9.underflow = _fifo_9_set_sigmoid_lut_Return_underflow_out;
+    fifo_data_9.empty = _fifo_9_set_sigmoid_lut_Return_empty;
+    fifo_data_9.almost_full = _fifo_9_set_sigmoid_lut_Return_full;
+    fifo_data_10.overflow = _fifo_10_swiglu_compute_Return_overflow_out;
+    fifo_data_10.underflow = _fifo_10_swiglu_compute_Return_underflow_out;
+    fifo_data_10.empty = _fifo_10_swiglu_compute_Return_empty;
+    fifo_data_10.almost_full = _fifo_10_swiglu_compute_Return_full;
+    fifo_data_10.data_out = _fifo_10_swiglu_compute_Return_q;
+    fifo_data_11.overflow = _fifo_11_dequantize_Return_overflow_out;
+    fifo_data_11.underflow = _fifo_11_dequantize_Return_underflow_out;
+    fifo_data_11.empty = _fifo_11_dequantize_Return_empty;
+    fifo_data_11.almost_full = _fifo_11_dequantize_Return_full;
+    fifo_data_11.data_out = _fifo_11_dequantize_Return_q;
+    fifo_data_12.overflow = _fifo_12_residual_add_Return_overflow_out;
+    fifo_data_12.underflow = _fifo_12_residual_add_Return_underflow_out;
+    fifo_data_12.empty = _fifo_12_residual_add_Return_empty;
+    fifo_data_12.almost_full = _fifo_12_residual_add_Return_full;
+    fifo_data_12.data_out = _fifo_12_residual_add_Return_q;
+    fifo_data_0.wren = _rmsnorm_accumulate_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:32:9
+    passthrough_data_13.rdy_int = _rmsnorm_accumulate_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:32:9
+    fifo_data_1.data_in = _rmsnorm_get_sum_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:78:9
+    fifo_data_1.wren = _rmsnorm_get_sum_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:78:9
+    passthrough_data_14.rdy_int = _rmsnorm_get_sum_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:78:9
+    fifo_data_2.wren = _rmsnorm_reset_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:88:9
+    passthrough_data_15.rdy_int = _rmsnorm_reset_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:88:9
+    fifo_data_3.wren = _set_gamma_pre_attn_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:97:9
+    passthrough_data_16.rdy_int = _set_gamma_pre_attn_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:97:9
+    fifo_data_4.data_in = _get_gamma_pre_attn_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:105:9
+    fifo_data_4.wren = _get_gamma_pre_attn_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:105:9
+    passthrough_data_17.rdy_int = _get_gamma_pre_attn_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:105:9
+    fifo_data_5.wren = _set_gamma_pre_mlp_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:115:9
+    passthrough_data_18.rdy_int = _set_gamma_pre_mlp_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:115:9
+    fifo_data_6.data_in = _get_gamma_pre_mlp_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:123:9
+    fifo_data_6.wren = _get_gamma_pre_mlp_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:123:9
+    passthrough_data_19.rdy_int = _get_gamma_pre_mlp_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:123:9
+    fifo_data_7.wren = _set_rsqrt_lut_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:133:9
+    passthrough_data_20.rdy_int = _set_rsqrt_lut_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:133:9
+    fifo_data_8.data_in = _lookup_rsqrt_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:141:9
+    fifo_data_8.wren = _lookup_rsqrt_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:141:9
+    passthrough_data_21.rdy_int = _lookup_rsqrt_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:141:9
+    fifo_data_9.wren = _set_sigmoid_lut_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:155:9
+    passthrough_data_22.rdy_int = _set_sigmoid_lut_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:155:9
+    fifo_data_10.data_in = _swiglu_compute_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:166:9
+    fifo_data_10.wren = _swiglu_compute_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:166:9
+    passthrough_data_24.rdy_int = _swiglu_compute_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:166:9
+    fifo_data_11.data_in = _dequantize_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:262:9
+    fifo_data_11.wren = _dequantize_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:262:9
+    passthrough_data_25.rdy_int = _dequantize_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:262:9
+    fifo_data_12.data_in = _residual_add_BasicBlock_0Impl_fifo_data_out_0;	// vector_unit.k:381:9
+    fifo_data_12.wren = _residual_add_BasicBlock_0Impl_fifo_wren_0;	// vector_unit.k:381:9
+    passthrough_data_26.rdy_int = _residual_add_BasicBlock_0Impl_input_rdy_0;	// vector_unit.k:381:9
   end // always_comb
 
   assign has_startup_completed_raw = 1'b1;
   assign stall_rate_supported_out_net = 1'b0;
   KanagawaResetControl #(
-    .WIDTH(35),
+    .WIDTH(27),
     .DELAY_CYCLES(3),
     .FAN_OUT_LEVELS(1),
     .HOLD_CYCLES(28),
@@ -7708,75 +6921,53 @@ module vector_unit(
   vector_unit__gamma_pre_attn__mem_container _gamma_pre_attn (	// vector_unit.k:15:5
     .clk             (clk),	// vector_unit.k:15:5
     .rst             (1'b0),	// vector_unit.k:15:5
-    .rden_in_0       (_get_gamma_pre_attn_BasicBlock_0Impl_memory_rden_out_35_0),	// vector_unit.k:106:9
-    .read_addr_in_0  (_get_gamma_pre_attn_BasicBlock_0Impl_memory_read_addr_out_35_0),	// vector_unit.k:106:9
-    .wren_in_0       (_set_gamma_pre_attn_BasicBlock_0Impl_memory_wren_35_0),	// vector_unit.k:98:9
-    .write_addr_in_0 (_set_gamma_pre_attn_BasicBlock_0Impl_memory_write_addr_out_35_0),	// vector_unit.k:98:9
-    .write_data_in_0 (_set_gamma_pre_attn_BasicBlock_0Impl_memory_write_data_out_35_0),	// vector_unit.k:98:9
+    .rden_in_0       (_get_gamma_pre_attn_BasicBlock_0Impl_memory_rden_out_27_0),	// vector_unit.k:105:9
+    .read_addr_in_0  (_get_gamma_pre_attn_BasicBlock_0Impl_memory_read_addr_out_27_0),	// vector_unit.k:105:9
+    .wren_in_0       (_set_gamma_pre_attn_BasicBlock_0Impl_memory_wren_27_0),	// vector_unit.k:97:9
+    .write_addr_in_0 (_set_gamma_pre_attn_BasicBlock_0Impl_memory_write_addr_out_27_0),	// vector_unit.k:97:9
+    .write_data_in_0 (_set_gamma_pre_attn_BasicBlock_0Impl_memory_write_data_out_27_0),	// vector_unit.k:97:9
     .read_data_out_0 (__gamma_pre_attn_read_data_out_0),
     .init_completed  (__gamma_pre_attn_init_completed)
   );	// vector_unit.k:15:5
   vector_unit__gamma_pre_mlp__mem_container _gamma_pre_mlp (	// vector_unit.k:16:5
     .clk             (clk),	// vector_unit.k:15:5
     .rst             (1'b0),	// vector_unit.k:15:5
-    .rden_in_0       (_get_gamma_pre_mlp_BasicBlock_0Impl_memory_rden_out_36_0),	// vector_unit.k:124:9
-    .read_addr_in_0  (_get_gamma_pre_mlp_BasicBlock_0Impl_memory_read_addr_out_36_0),	// vector_unit.k:124:9
-    .wren_in_0       (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_wren_36_0),	// vector_unit.k:116:9
-    .write_addr_in_0 (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_addr_out_36_0),	// vector_unit.k:116:9
-    .write_data_in_0 (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_data_out_36_0),	// vector_unit.k:116:9
+    .rden_in_0       (_get_gamma_pre_mlp_BasicBlock_0Impl_memory_rden_out_28_0),	// vector_unit.k:123:9
+    .read_addr_in_0  (_get_gamma_pre_mlp_BasicBlock_0Impl_memory_read_addr_out_28_0),	// vector_unit.k:123:9
+    .wren_in_0       (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_wren_28_0),	// vector_unit.k:115:9
+    .write_addr_in_0 (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_addr_out_28_0),	// vector_unit.k:115:9
+    .write_data_in_0 (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_data_out_28_0),	// vector_unit.k:115:9
     .read_data_out_0 (__gamma_pre_mlp_read_data_out_0),
     .init_completed  (__gamma_pre_mlp_init_completed)
   );	// vector_unit.k:16:5
   vector_unit__rsqrt_lut__mem_container _rsqrt_lut (	// vector_unit.k:17:5
     .clk             (clk),	// vector_unit.k:15:5
     .rst             (1'b0),	// vector_unit.k:15:5
-    .rden_in_0       (_lookup_rsqrt_BasicBlock_0Impl_memory_rden_out_37_0),	// vector_unit.k:142:9
-    .read_addr_in_0  (_lookup_rsqrt_BasicBlock_0Impl_memory_read_addr_out_37_0),	// vector_unit.k:142:9
-    .wren_in_0       (_set_rsqrt_lut_BasicBlock_0Impl_memory_wren_37_0),	// vector_unit.k:134:9
-    .write_addr_in_0 (_set_rsqrt_lut_BasicBlock_0Impl_memory_write_addr_out_37_0),	// vector_unit.k:134:9
-    .write_data_in_0 (_set_rsqrt_lut_BasicBlock_0Impl_memory_write_data_out_37_0),	// vector_unit.k:134:9
+    .rden_in_0       (_lookup_rsqrt_BasicBlock_0Impl_memory_rden_out_29_0),	// vector_unit.k:141:9
+    .read_addr_in_0  (_lookup_rsqrt_BasicBlock_0Impl_memory_read_addr_out_29_0),	// vector_unit.k:141:9
+    .wren_in_0       (_set_rsqrt_lut_BasicBlock_0Impl_memory_wren_29_0),	// vector_unit.k:133:9
+    .write_addr_in_0 (_set_rsqrt_lut_BasicBlock_0Impl_memory_write_addr_out_29_0),	// vector_unit.k:133:9
+    .write_data_in_0 (_set_rsqrt_lut_BasicBlock_0Impl_memory_write_data_out_29_0),	// vector_unit.k:133:9
     .read_data_out_0 (__rsqrt_lut_read_data_out_0),
     .init_completed  (__rsqrt_lut_init_completed)
   );	// vector_unit.k:17:5
   vector_unit__sigmoid_lut__mem_container _sigmoid_lut (	// vector_unit.k:20:5
     .clk             (clk),	// vector_unit.k:15:5
     .rst             (1'b0),	// vector_unit.k:15:5
-    .rden_in_0       (_swiglu_compute_BasicBlock_0Impl_memory_rden_out_38_0),	// vector_unit.k:191:9
-    .read_addr_in_0  (_swiglu_compute_BasicBlock_0Impl_memory_read_addr_out_38_0),	// vector_unit.k:191:9
-    .wren_in_0       (_set_sigmoid_lut_BasicBlock_0Impl_memory_wren_38_0),	// vector_unit.k:180:9
-    .write_addr_in_0 (_set_sigmoid_lut_BasicBlock_0Impl_memory_write_addr_out_38_0),	// vector_unit.k:180:9
-    .write_data_in_0 (_set_sigmoid_lut_BasicBlock_0Impl_memory_write_data_out_38_0),	// vector_unit.k:180:9
+    .rden_in_0       (_swiglu_compute_BasicBlock_0Impl_memory_rden_out_30_0),	// vector_unit.k:166:9
+    .read_addr_in_0  (_swiglu_compute_BasicBlock_0Impl_memory_read_addr_out_30_0),	// vector_unit.k:166:9
+    .wren_in_0       (_set_sigmoid_lut_BasicBlock_0Impl_memory_wren_30_0),	// vector_unit.k:155:9
+    .write_addr_in_0 (_set_sigmoid_lut_BasicBlock_0Impl_memory_write_addr_out_30_0),	// vector_unit.k:155:9
+    .write_data_in_0 (_set_sigmoid_lut_BasicBlock_0Impl_memory_write_data_out_30_0),	// vector_unit.k:155:9
     .read_data_out_0 (__sigmoid_lut_read_data_out_0),
     .init_completed  (__sigmoid_lut_init_completed)
   );	// vector_unit.k:20:5
-  vector_unit__cos_table__mem_container _cos_table (	// vector_unit.k:23:5
-    .clk             (clk),	// vector_unit.k:15:5
-    .rst             (1'b0),	// vector_unit.k:15:5
-    .rden_in_0       (_rope_read_cos_row_BasicBlock_0Impl_memory_rden_out_39_0),	// vector_unit.k:154:9
-    .read_addr_in_0  (_rope_read_cos_row_BasicBlock_0Impl_memory_read_addr_out_39_0),	// vector_unit.k:154:9
-    .wren_in_0       (_rope_write_cos_row_BasicBlock_0Impl_memory_wren_39_0),	// vector_unit.k:168:9
-    .write_addr_in_0 (_rope_write_cos_row_BasicBlock_0Impl_memory_write_addr_out_39_0),	// vector_unit.k:168:9
-    .write_data_in_0 (_rope_write_cos_row_BasicBlock_0Impl_memory_write_data_out_39_0),	// vector_unit.k:168:9
-    .read_data_out_0 (__cos_table_read_data_out_0),
-    .init_completed  (__cos_table_init_completed)
-  );	// vector_unit.k:23:5
-  vector_unit__sin_table__mem_container _sin_table (	// vector_unit.k:24:5
-    .clk             (clk),	// vector_unit.k:15:5
-    .rst             (1'b0),	// vector_unit.k:15:5
-    .rden_in_0       (_rope_read_sin_row_BasicBlock_0Impl_memory_rden_out_40_0),	// vector_unit.k:161:9
-    .read_addr_in_0  (_rope_read_sin_row_BasicBlock_0Impl_memory_read_addr_out_40_0),	// vector_unit.k:161:9
-    .wren_in_0       (_rope_write_sin_row_BasicBlock_0Impl_memory_wren_40_0),	// vector_unit.k:173:9
-    .write_addr_in_0 (_rope_write_sin_row_BasicBlock_0Impl_memory_write_addr_out_40_0),	// vector_unit.k:173:9
-    .write_data_in_0 (_rope_write_sin_row_BasicBlock_0Impl_memory_write_data_out_40_0),	// vector_unit.k:173:9
-    .read_data_out_0 (__sin_table_read_data_out_0),
-    .init_completed  (__sin_table_init_completed)
-  );	// vector_unit.k:24:5
   vector_unit_reg_32_w2_v_1_32_0_i_32_0 _sum_sq (	// vector_unit.k:13:5
     .clk           (clk),	// vector_unit.k:15:5
     .rst           (reg_rst_delayed[0]),	// vector_unit.k:13:5
-    .input_valid_0 (_rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_34_0_valid),	// vector_unit.k:33:9
-    .input_0       (_rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_34_0),	// vector_unit.k:33:9
-    .input_valid_1 (_rmsnorm_reset_BasicBlock_0Impl_global_out__sum_sq_34_1_valid),	// vector_unit.k:89:9
+    .input_valid_0 (_rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_26_0_valid),	// vector_unit.k:32:9
+    .input_0       (_rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_26_0),	// vector_unit.k:32:9
+    .input_valid_1 (_rmsnorm_reset_BasicBlock_0Impl_global_out__sum_sq_26_1_valid),	// vector_unit.k:88:9
     .value_out     (__sum_sq_value_out)
   );	// vector_unit.k:13:5
   KanagawaFlipFlopChainNoEnable #(
@@ -7882,38 +7073,6 @@ module vector_unit(
     .clk      (clk),
     .data_in  (has_others_completed),
     .data_out (_has_startup_completed_delayed_12_delay_chain_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) has_startup_completed_delayed_13_delay_chain (
-    .clk      (clk),
-    .data_in  (has_others_completed),
-    .data_out (_has_startup_completed_delayed_13_delay_chain_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) has_startup_completed_delayed_14_delay_chain (
-    .clk      (clk),
-    .data_in  (has_others_completed),
-    .data_out (_has_startup_completed_delayed_14_delay_chain_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) has_startup_completed_delayed_15_delay_chain (
-    .clk      (clk),
-    .data_in  (has_others_completed),
-    .data_out (_has_startup_completed_delayed_15_delay_chain_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) has_startup_completed_delayed_16_delay_chain (
-    .clk      (clk),
-    .data_in  (has_others_completed),
-    .data_out (_has_startup_completed_delayed_16_delay_chain_data_out)
   );
   KanagawaWriteDelayFifo #(
     .IS_TRANSACTIONAL(0),
@@ -8134,120 +7293,24 @@ module vector_unit(
   KanagawaWriteDelayFifo #(
     .IS_TRANSACTIONAL(0),
     .END_TRANSACTION_OFFSET(0),
-    .WIDTH(1024),
-    .PORT_WIDTH(1024),
+    .WIDTH(0),
+    .PORT_WIDTH(1),
     .WRITE_DELAY(0),
     .ALMOSTEMPTY_VAL(0),
     .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_9_rope_read_cos_row_Return"),
+    .AUTO_PIPELINE_GROUP("fifo_9_set_sigmoid_lut_Return"),
     .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(4),
-    .USE_LUTRAM(1)
-  ) fifo_9_rope_read_cos_row_Return (
+    .ALMOSTFULL_ENTRIES(3),
+    .USE_LUTRAM(0)
+  ) fifo_9_set_sigmoid_lut_Return (
     .clock         (clk),
     .rst           (reg_rst_delayed[10]),
-    .overflow_out  (_fifo_9_rope_read_cos_row_Return_overflow_out),
-    .underflow_out (_fifo_9_rope_read_cos_row_Return_underflow_out),
-    .empty         (_fifo_9_rope_read_cos_row_Return_empty),
+    .overflow_out  (_fifo_9_set_sigmoid_lut_Return_overflow_out),
+    .underflow_out (_fifo_9_set_sigmoid_lut_Return_underflow_out),
+    .empty         (_fifo_9_set_sigmoid_lut_Return_empty),
     .rdreq         (fifo_data_9.rden),
-    .full          (_fifo_9_rope_read_cos_row_Return_full),
+    .full          (_fifo_9_set_sigmoid_lut_Return_full),
     .wrreq         (fifo_data_9.wren),
-    .data          (fifo_data_9.data_in),
-    .q             (_fifo_9_rope_read_cos_row_Return_q)
-  );
-  KanagawaWriteDelayFifo #(
-    .IS_TRANSACTIONAL(0),
-    .END_TRANSACTION_OFFSET(0),
-    .WIDTH(1024),
-    .PORT_WIDTH(1024),
-    .WRITE_DELAY(0),
-    .ALMOSTEMPTY_VAL(0),
-    .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_10_rope_read_sin_row_Return"),
-    .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(4),
-    .USE_LUTRAM(1)
-  ) fifo_10_rope_read_sin_row_Return (
-    .clock         (clk),
-    .rst           (reg_rst_delayed[11]),
-    .overflow_out  (_fifo_10_rope_read_sin_row_Return_overflow_out),
-    .underflow_out (_fifo_10_rope_read_sin_row_Return_underflow_out),
-    .empty         (_fifo_10_rope_read_sin_row_Return_empty),
-    .rdreq         (fifo_data_10.rden),
-    .full          (_fifo_10_rope_read_sin_row_Return_full),
-    .wrreq         (fifo_data_10.wren),
-    .data          (fifo_data_10.data_in),
-    .q             (_fifo_10_rope_read_sin_row_Return_q)
-  );
-  KanagawaWriteDelayFifo #(
-    .IS_TRANSACTIONAL(0),
-    .END_TRANSACTION_OFFSET(0),
-    .WIDTH(0),
-    .PORT_WIDTH(1),
-    .WRITE_DELAY(0),
-    .ALMOSTEMPTY_VAL(0),
-    .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_11_rope_write_cos_row_Return"),
-    .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(3),
-    .USE_LUTRAM(0)
-  ) fifo_11_rope_write_cos_row_Return (
-    .clock         (clk),
-    .rst           (reg_rst_delayed[12]),
-    .overflow_out  (_fifo_11_rope_write_cos_row_Return_overflow_out),
-    .underflow_out (_fifo_11_rope_write_cos_row_Return_underflow_out),
-    .empty         (_fifo_11_rope_write_cos_row_Return_empty),
-    .rdreq         (fifo_data_11.rden),
-    .full          (_fifo_11_rope_write_cos_row_Return_full),
-    .wrreq         (fifo_data_11.wren),
-    .data          ('0),
-    .q             (/* unused */)
-  );
-  KanagawaWriteDelayFifo #(
-    .IS_TRANSACTIONAL(0),
-    .END_TRANSACTION_OFFSET(0),
-    .WIDTH(0),
-    .PORT_WIDTH(1),
-    .WRITE_DELAY(0),
-    .ALMOSTEMPTY_VAL(0),
-    .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_12_rope_write_sin_row_Return"),
-    .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(3),
-    .USE_LUTRAM(0)
-  ) fifo_12_rope_write_sin_row_Return (
-    .clock         (clk),
-    .rst           (reg_rst_delayed[13]),
-    .overflow_out  (_fifo_12_rope_write_sin_row_Return_overflow_out),
-    .underflow_out (_fifo_12_rope_write_sin_row_Return_underflow_out),
-    .empty         (_fifo_12_rope_write_sin_row_Return_empty),
-    .rdreq         (fifo_data_12.rden),
-    .full          (_fifo_12_rope_write_sin_row_Return_full),
-    .wrreq         (fifo_data_12.wren),
-    .data          ('0),
-    .q             (/* unused */)
-  );
-  KanagawaWriteDelayFifo #(
-    .IS_TRANSACTIONAL(0),
-    .END_TRANSACTION_OFFSET(0),
-    .WIDTH(0),
-    .PORT_WIDTH(1),
-    .WRITE_DELAY(0),
-    .ALMOSTEMPTY_VAL(0),
-    .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_13_set_sigmoid_lut_Return"),
-    .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(3),
-    .USE_LUTRAM(0)
-  ) fifo_13_set_sigmoid_lut_Return (
-    .clock         (clk),
-    .rst           (reg_rst_delayed[14]),
-    .overflow_out  (_fifo_13_set_sigmoid_lut_Return_overflow_out),
-    .underflow_out (_fifo_13_set_sigmoid_lut_Return_underflow_out),
-    .empty         (_fifo_13_set_sigmoid_lut_Return_empty),
-    .rdreq         (fifo_data_13.rden),
-    .full          (_fifo_13_set_sigmoid_lut_Return_full),
-    .wrreq         (fifo_data_13.wren),
     .data          ('0),
     .q             (/* unused */)
   );
@@ -8259,21 +7322,21 @@ module vector_unit(
     .WRITE_DELAY(0),
     .ALMOSTEMPTY_VAL(0),
     .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_14_swiglu_compute_Return"),
+    .AUTO_PIPELINE_GROUP("fifo_10_swiglu_compute_Return"),
     .DEPTH(32),
     .ALMOSTFULL_ENTRIES(12),
     .USE_LUTRAM(1)
-  ) fifo_14_swiglu_compute_Return (
+  ) fifo_10_swiglu_compute_Return (
     .clock         (clk),
-    .rst           (reg_rst_delayed[15]),
-    .overflow_out  (_fifo_14_swiglu_compute_Return_overflow_out),
-    .underflow_out (_fifo_14_swiglu_compute_Return_underflow_out),
-    .empty         (_fifo_14_swiglu_compute_Return_empty),
-    .rdreq         (fifo_data_14.rden),
-    .full          (_fifo_14_swiglu_compute_Return_full),
-    .wrreq         (fifo_data_14.wren),
-    .data          (fifo_data_14.data_in),
-    .q             (_fifo_14_swiglu_compute_Return_q)
+    .rst           (reg_rst_delayed[11]),
+    .overflow_out  (_fifo_10_swiglu_compute_Return_overflow_out),
+    .underflow_out (_fifo_10_swiglu_compute_Return_underflow_out),
+    .empty         (_fifo_10_swiglu_compute_Return_empty),
+    .rdreq         (fifo_data_10.rden),
+    .full          (_fifo_10_swiglu_compute_Return_full),
+    .wrreq         (fifo_data_10.wren),
+    .data          (fifo_data_10.data_in),
+    .q             (_fifo_10_swiglu_compute_Return_q)
   );
   KanagawaWriteDelayFifo #(
     .IS_TRANSACTIONAL(0),
@@ -8283,21 +7346,21 @@ module vector_unit(
     .WRITE_DELAY(0),
     .ALMOSTEMPTY_VAL(0),
     .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_15_dequantize_Return"),
+    .AUTO_PIPELINE_GROUP("fifo_11_dequantize_Return"),
     .DEPTH(32),
     .ALMOSTFULL_ENTRIES(8),
     .USE_LUTRAM(1)
-  ) fifo_15_dequantize_Return (
+  ) fifo_11_dequantize_Return (
     .clock         (clk),
-    .rst           (reg_rst_delayed[16]),
-    .overflow_out  (_fifo_15_dequantize_Return_overflow_out),
-    .underflow_out (_fifo_15_dequantize_Return_underflow_out),
-    .empty         (_fifo_15_dequantize_Return_empty),
-    .rdreq         (fifo_data_15.rden),
-    .full          (_fifo_15_dequantize_Return_full),
-    .wrreq         (fifo_data_15.wren),
-    .data          (fifo_data_15.data_in),
-    .q             (_fifo_15_dequantize_Return_q)
+    .rst           (reg_rst_delayed[12]),
+    .overflow_out  (_fifo_11_dequantize_Return_overflow_out),
+    .underflow_out (_fifo_11_dequantize_Return_underflow_out),
+    .empty         (_fifo_11_dequantize_Return_empty),
+    .rdreq         (fifo_data_11.rden),
+    .full          (_fifo_11_dequantize_Return_full),
+    .wrreq         (fifo_data_11.wren),
+    .data          (fifo_data_11.data_in),
+    .q             (_fifo_11_dequantize_Return_q)
   );
   KanagawaWriteDelayFifo #(
     .IS_TRANSACTIONAL(0),
@@ -8307,312 +7370,240 @@ module vector_unit(
     .WRITE_DELAY(0),
     .ALMOSTEMPTY_VAL(0),
     .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_16_residual_add_Return"),
+    .AUTO_PIPELINE_GROUP("fifo_12_residual_add_Return"),
     .DEPTH(32),
     .ALMOSTFULL_ENTRIES(6),
     .USE_LUTRAM(1)
-  ) fifo_16_residual_add_Return (
+  ) fifo_12_residual_add_Return (
     .clock         (clk),
-    .rst           (reg_rst_delayed[17]),
-    .overflow_out  (_fifo_16_residual_add_Return_overflow_out),
-    .underflow_out (_fifo_16_residual_add_Return_underflow_out),
-    .empty         (_fifo_16_residual_add_Return_empty),
-    .rdreq         (fifo_data_16.rden),
-    .full          (_fifo_16_residual_add_Return_full),
-    .wrreq         (fifo_data_16.wren),
-    .data          (fifo_data_16.data_in),
-    .q             (_fifo_16_residual_add_Return_q)
+    .rst           (reg_rst_delayed[13]),
+    .overflow_out  (_fifo_12_residual_add_Return_overflow_out),
+    .underflow_out (_fifo_12_residual_add_Return_underflow_out),
+    .empty         (_fifo_12_residual_add_Return_empty),
+    .rdreq         (fifo_data_12.rden),
+    .full          (_fifo_12_residual_add_Return_full),
+    .wrreq         (fifo_data_12.wren),
+    .data          (fifo_data_12.data_in),
+    .q             (_fifo_12_residual_add_Return_q)
   );
-  vector_unit_rmsnorm_accumulate_BasicBlock_0 rmsnorm_accumulate_BasicBlock_0Impl (	// vector_unit.k:33:9
-    .clk                           (clk),	// vector_unit.k:33:9
-    .rst                           (reg_rst_delayed[18]),	// vector_unit.k:33:9
+  vector_unit_rmsnorm_accumulate_BasicBlock_0 rmsnorm_accumulate_BasicBlock_0Impl (	// vector_unit.k:32:9
+    .clk                           (clk),	// vector_unit.k:32:9
+    .rst                           (reg_rst_delayed[14]),	// vector_unit.k:32:9
     .done_out                      (/* unused */),
-    .global_in__sum_sq_34          (__sum_sq_value_out),	// vector_unit.k:13:5
-    .global_out__sum_sq_34_0_valid
-      (_rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_34_0_valid),
-    .global_out__sum_sq_34_0
-      (_rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_34_0),
+    .global_in__sum_sq_26          (__sum_sq_value_out),	// vector_unit.k:13:5
+    .global_out__sum_sq_26_0_valid
+      (_rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_26_0_valid),
+    .global_out__sum_sq_26_0
+      (_rmsnorm_accumulate_BasicBlock_0Impl_global_out__sum_sq_26_0),
     .fifo_wren_0                   (_rmsnorm_accumulate_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0     (fifo_data_0.almost_full),	// vector_unit.k:33:9
-    .fifo_overflow_in_0            (fifo_data_0.overflow),	// vector_unit.k:33:9
-    .data_in_17                    (passthrough_data_17.data),	// vector_unit.k:33:9
-    .input_fifo_underflow_0        (passthrough_data_17.underflow),	// vector_unit.k:33:9
+    .fifo_almost_full_in_raw_0     (fifo_data_0.almost_full),	// vector_unit.k:32:9
+    .fifo_overflow_in_0            (fifo_data_0.overflow),	// vector_unit.k:32:9
+    .data_in_13                    (passthrough_data_13.data),	// vector_unit.k:32:9
+    .input_fifo_underflow_0        (passthrough_data_13.underflow),	// vector_unit.k:32:9
     .input_rdy_0                   (_rmsnorm_accumulate_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                 (passthrough_data_17.valid),	// vector_unit.k:33:9
+    .input_valid_0                 (passthrough_data_13.valid),	// vector_unit.k:32:9
     .control_state_out             (/* unused */)
-  );	// vector_unit.k:33:9
-  vector_unit_rmsnorm_get_sum_BasicBlock_0 rmsnorm_get_sum_BasicBlock_0Impl (	// vector_unit.k:79:9
-    .clk                       (clk),	// vector_unit.k:79:9
-    .rst                       (reg_rst_delayed[19]),	// vector_unit.k:79:9
+  );	// vector_unit.k:32:9
+  vector_unit_rmsnorm_get_sum_BasicBlock_0 rmsnorm_get_sum_BasicBlock_0Impl (	// vector_unit.k:78:9
+    .clk                       (clk),	// vector_unit.k:78:9
+    .rst                       (reg_rst_delayed[15]),	// vector_unit.k:78:9
     .done_out                  (/* unused */),
-    .global_in__sum_sq_34      (__sum_sq_value_out),	// vector_unit.k:13:5
+    .global_in__sum_sq_26      (__sum_sq_value_out),	// vector_unit.k:13:5
     .fifo_data_out_0           (_rmsnorm_get_sum_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_rmsnorm_get_sum_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_1.almost_full),	// vector_unit.k:79:9
-    .fifo_overflow_in_0        (fifo_data_1.overflow),	// vector_unit.k:79:9
-    .input_fifo_underflow_0    (passthrough_data_18.underflow),	// vector_unit.k:79:9
+    .fifo_almost_full_in_raw_0 (fifo_data_1.almost_full),	// vector_unit.k:78:9
+    .fifo_overflow_in_0        (fifo_data_1.overflow),	// vector_unit.k:78:9
+    .input_fifo_underflow_0    (passthrough_data_14.underflow),	// vector_unit.k:78:9
     .input_rdy_0               (_rmsnorm_get_sum_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_18.valid),	// vector_unit.k:79:9
+    .input_valid_0             (passthrough_data_14.valid),	// vector_unit.k:78:9
     .control_state_out         (/* unused */)
-  );	// vector_unit.k:79:9
-  vector_unit_rmsnorm_reset_BasicBlock_0 rmsnorm_reset_BasicBlock_0Impl (	// vector_unit.k:89:9
-    .clk                           (clk),	// vector_unit.k:89:9
-    .rst                           (reg_rst_delayed[20]),	// vector_unit.k:89:9
+  );	// vector_unit.k:78:9
+  vector_unit_rmsnorm_reset_BasicBlock_0 rmsnorm_reset_BasicBlock_0Impl (	// vector_unit.k:88:9
+    .clk                           (clk),	// vector_unit.k:88:9
+    .rst                           (reg_rst_delayed[16]),	// vector_unit.k:88:9
     .done_out                      (/* unused */),
-    .global_out__sum_sq_34_1_valid
-      (_rmsnorm_reset_BasicBlock_0Impl_global_out__sum_sq_34_1_valid),
+    .global_out__sum_sq_26_1_valid
+      (_rmsnorm_reset_BasicBlock_0Impl_global_out__sum_sq_26_1_valid),
     .fifo_wren_0                   (_rmsnorm_reset_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0     (fifo_data_2.almost_full),	// vector_unit.k:89:9
-    .fifo_overflow_in_0            (fifo_data_2.overflow),	// vector_unit.k:89:9
-    .input_fifo_underflow_0        (passthrough_data_19.underflow),	// vector_unit.k:89:9
+    .fifo_almost_full_in_raw_0     (fifo_data_2.almost_full),	// vector_unit.k:88:9
+    .fifo_overflow_in_0            (fifo_data_2.overflow),	// vector_unit.k:88:9
+    .input_fifo_underflow_0        (passthrough_data_15.underflow),	// vector_unit.k:88:9
     .input_rdy_0                   (_rmsnorm_reset_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                 (passthrough_data_19.valid),	// vector_unit.k:89:9
+    .input_valid_0                 (passthrough_data_15.valid),	// vector_unit.k:88:9
     .control_state_out             (/* unused */)
-  );	// vector_unit.k:89:9
-  vector_unit_set_gamma_pre_attn_BasicBlock_0 set_gamma_pre_attn_BasicBlock_0Impl (	// vector_unit.k:98:9
-    .clk                        (clk),	// vector_unit.k:98:9
-    .rst                        (reg_rst_delayed[21]),	// vector_unit.k:98:9
+  );	// vector_unit.k:88:9
+  vector_unit_set_gamma_pre_attn_BasicBlock_0 set_gamma_pre_attn_BasicBlock_0Impl (	// vector_unit.k:97:9
+    .clk                        (clk),	// vector_unit.k:97:9
+    .rst                        (reg_rst_delayed[17]),	// vector_unit.k:97:9
     .done_out                   (/* unused */),
-    .memory_write_data_out_35_0
-      (_set_gamma_pre_attn_BasicBlock_0Impl_memory_write_data_out_35_0),
-    .memory_write_addr_out_35_0
-      (_set_gamma_pre_attn_BasicBlock_0Impl_memory_write_addr_out_35_0),
-    .memory_wren_35_0           (_set_gamma_pre_attn_BasicBlock_0Impl_memory_wren_35_0),
+    .memory_write_data_out_27_0
+      (_set_gamma_pre_attn_BasicBlock_0Impl_memory_write_data_out_27_0),
+    .memory_write_addr_out_27_0
+      (_set_gamma_pre_attn_BasicBlock_0Impl_memory_write_addr_out_27_0),
+    .memory_wren_27_0           (_set_gamma_pre_attn_BasicBlock_0Impl_memory_wren_27_0),
     .fifo_wren_0                (_set_gamma_pre_attn_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0  (fifo_data_3.almost_full),	// vector_unit.k:98:9
-    .fifo_overflow_in_0         (fifo_data_3.overflow),	// vector_unit.k:98:9
-    .data_in_20                 (passthrough_data_20.data),	// vector_unit.k:98:9
-    .input_fifo_underflow_0     (passthrough_data_20.underflow),	// vector_unit.k:98:9
+    .fifo_almost_full_in_raw_0  (fifo_data_3.almost_full),	// vector_unit.k:97:9
+    .fifo_overflow_in_0         (fifo_data_3.overflow),	// vector_unit.k:97:9
+    .data_in_16                 (passthrough_data_16.data),	// vector_unit.k:97:9
+    .input_fifo_underflow_0     (passthrough_data_16.underflow),	// vector_unit.k:97:9
     .input_rdy_0                (_set_gamma_pre_attn_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0              (passthrough_data_20.valid),	// vector_unit.k:98:9
+    .input_valid_0              (passthrough_data_16.valid),	// vector_unit.k:97:9
     .control_state_out          (/* unused */)
-  );	// vector_unit.k:98:9
-  vector_unit_get_gamma_pre_attn_BasicBlock_0 get_gamma_pre_attn_BasicBlock_0Impl (	// vector_unit.k:106:9
-    .clk                       (clk),	// vector_unit.k:106:9
-    .rst                       (reg_rst_delayed[22]),	// vector_unit.k:106:9
+  );	// vector_unit.k:97:9
+  vector_unit_get_gamma_pre_attn_BasicBlock_0 get_gamma_pre_attn_BasicBlock_0Impl (	// vector_unit.k:105:9
+    .clk                       (clk),	// vector_unit.k:105:9
+    .rst                       (reg_rst_delayed[18]),	// vector_unit.k:105:9
     .done_out                  (/* unused */),
-    .memory_read_data_in_35_0  (__gamma_pre_attn_read_data_out_0),	// vector_unit.k:15:5
-    .memory_read_addr_out_35_0
-      (_get_gamma_pre_attn_BasicBlock_0Impl_memory_read_addr_out_35_0),
-    .memory_rden_out_35_0
-      (_get_gamma_pre_attn_BasicBlock_0Impl_memory_rden_out_35_0),
+    .memory_read_data_in_27_0  (__gamma_pre_attn_read_data_out_0),	// vector_unit.k:15:5
+    .memory_read_addr_out_27_0
+      (_get_gamma_pre_attn_BasicBlock_0Impl_memory_read_addr_out_27_0),
+    .memory_rden_out_27_0
+      (_get_gamma_pre_attn_BasicBlock_0Impl_memory_rden_out_27_0),
     .fifo_data_out_0           (_get_gamma_pre_attn_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_get_gamma_pre_attn_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_4.almost_full),	// vector_unit.k:106:9
-    .fifo_overflow_in_0        (fifo_data_4.overflow),	// vector_unit.k:106:9
-    .data_in_21                (passthrough_data_21.data),	// vector_unit.k:106:9
-    .input_fifo_underflow_0    (passthrough_data_21.underflow),	// vector_unit.k:106:9
+    .fifo_almost_full_in_raw_0 (fifo_data_4.almost_full),	// vector_unit.k:105:9
+    .fifo_overflow_in_0        (fifo_data_4.overflow),	// vector_unit.k:105:9
+    .data_in_17                (passthrough_data_17.data),	// vector_unit.k:105:9
+    .input_fifo_underflow_0    (passthrough_data_17.underflow),	// vector_unit.k:105:9
     .input_rdy_0               (_get_gamma_pre_attn_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_21.valid),	// vector_unit.k:106:9
+    .input_valid_0             (passthrough_data_17.valid),	// vector_unit.k:105:9
     .control_state_out         (/* unused */)
-  );	// vector_unit.k:106:9
-  vector_unit_set_gamma_pre_mlp_BasicBlock_0 set_gamma_pre_mlp_BasicBlock_0Impl (	// vector_unit.k:116:9
-    .clk                        (clk),	// vector_unit.k:116:9
-    .rst                        (reg_rst_delayed[23]),	// vector_unit.k:116:9
+  );	// vector_unit.k:105:9
+  vector_unit_set_gamma_pre_mlp_BasicBlock_0 set_gamma_pre_mlp_BasicBlock_0Impl (	// vector_unit.k:115:9
+    .clk                        (clk),	// vector_unit.k:115:9
+    .rst                        (reg_rst_delayed[19]),	// vector_unit.k:115:9
     .done_out                   (/* unused */),
-    .memory_write_data_out_36_0
-      (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_data_out_36_0),
-    .memory_write_addr_out_36_0
-      (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_addr_out_36_0),
-    .memory_wren_36_0           (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_wren_36_0),
+    .memory_write_data_out_28_0
+      (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_data_out_28_0),
+    .memory_write_addr_out_28_0
+      (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_write_addr_out_28_0),
+    .memory_wren_28_0           (_set_gamma_pre_mlp_BasicBlock_0Impl_memory_wren_28_0),
     .fifo_wren_0                (_set_gamma_pre_mlp_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0  (fifo_data_5.almost_full),	// vector_unit.k:116:9
-    .fifo_overflow_in_0         (fifo_data_5.overflow),	// vector_unit.k:116:9
-    .data_in_22                 (passthrough_data_22.data),	// vector_unit.k:116:9
-    .input_fifo_underflow_0     (passthrough_data_22.underflow),	// vector_unit.k:116:9
+    .fifo_almost_full_in_raw_0  (fifo_data_5.almost_full),	// vector_unit.k:115:9
+    .fifo_overflow_in_0         (fifo_data_5.overflow),	// vector_unit.k:115:9
+    .data_in_18                 (passthrough_data_18.data),	// vector_unit.k:115:9
+    .input_fifo_underflow_0     (passthrough_data_18.underflow),	// vector_unit.k:115:9
     .input_rdy_0                (_set_gamma_pre_mlp_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0              (passthrough_data_22.valid),	// vector_unit.k:116:9
+    .input_valid_0              (passthrough_data_18.valid),	// vector_unit.k:115:9
     .control_state_out          (/* unused */)
-  );	// vector_unit.k:116:9
-  vector_unit_get_gamma_pre_mlp_BasicBlock_0 get_gamma_pre_mlp_BasicBlock_0Impl (	// vector_unit.k:124:9
-    .clk                       (clk),	// vector_unit.k:124:9
-    .rst                       (reg_rst_delayed[24]),	// vector_unit.k:124:9
+  );	// vector_unit.k:115:9
+  vector_unit_get_gamma_pre_mlp_BasicBlock_0 get_gamma_pre_mlp_BasicBlock_0Impl (	// vector_unit.k:123:9
+    .clk                       (clk),	// vector_unit.k:123:9
+    .rst                       (reg_rst_delayed[20]),	// vector_unit.k:123:9
     .done_out                  (/* unused */),
-    .memory_read_data_in_36_0  (__gamma_pre_mlp_read_data_out_0),	// vector_unit.k:16:5
-    .memory_read_addr_out_36_0
-      (_get_gamma_pre_mlp_BasicBlock_0Impl_memory_read_addr_out_36_0),
-    .memory_rden_out_36_0      (_get_gamma_pre_mlp_BasicBlock_0Impl_memory_rden_out_36_0),
+    .memory_read_data_in_28_0  (__gamma_pre_mlp_read_data_out_0),	// vector_unit.k:16:5
+    .memory_read_addr_out_28_0
+      (_get_gamma_pre_mlp_BasicBlock_0Impl_memory_read_addr_out_28_0),
+    .memory_rden_out_28_0      (_get_gamma_pre_mlp_BasicBlock_0Impl_memory_rden_out_28_0),
     .fifo_data_out_0           (_get_gamma_pre_mlp_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_get_gamma_pre_mlp_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_6.almost_full),	// vector_unit.k:124:9
-    .fifo_overflow_in_0        (fifo_data_6.overflow),	// vector_unit.k:124:9
-    .data_in_23                (passthrough_data_23.data),	// vector_unit.k:124:9
-    .input_fifo_underflow_0    (passthrough_data_23.underflow),	// vector_unit.k:124:9
+    .fifo_almost_full_in_raw_0 (fifo_data_6.almost_full),	// vector_unit.k:123:9
+    .fifo_overflow_in_0        (fifo_data_6.overflow),	// vector_unit.k:123:9
+    .data_in_19                (passthrough_data_19.data),	// vector_unit.k:123:9
+    .input_fifo_underflow_0    (passthrough_data_19.underflow),	// vector_unit.k:123:9
     .input_rdy_0               (_get_gamma_pre_mlp_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_23.valid),	// vector_unit.k:124:9
+    .input_valid_0             (passthrough_data_19.valid),	// vector_unit.k:123:9
     .control_state_out         (/* unused */)
-  );	// vector_unit.k:124:9
-  vector_unit_set_rsqrt_lut_BasicBlock_0 set_rsqrt_lut_BasicBlock_0Impl (	// vector_unit.k:134:9
-    .clk                        (clk),	// vector_unit.k:134:9
-    .rst                        (reg_rst_delayed[25]),	// vector_unit.k:134:9
+  );	// vector_unit.k:123:9
+  vector_unit_set_rsqrt_lut_BasicBlock_0 set_rsqrt_lut_BasicBlock_0Impl (	// vector_unit.k:133:9
+    .clk                        (clk),	// vector_unit.k:133:9
+    .rst                        (reg_rst_delayed[21]),	// vector_unit.k:133:9
     .done_out                   (/* unused */),
-    .memory_write_data_out_37_0
-      (_set_rsqrt_lut_BasicBlock_0Impl_memory_write_data_out_37_0),
-    .memory_write_addr_out_37_0
-      (_set_rsqrt_lut_BasicBlock_0Impl_memory_write_addr_out_37_0),
-    .memory_wren_37_0           (_set_rsqrt_lut_BasicBlock_0Impl_memory_wren_37_0),
+    .memory_write_data_out_29_0
+      (_set_rsqrt_lut_BasicBlock_0Impl_memory_write_data_out_29_0),
+    .memory_write_addr_out_29_0
+      (_set_rsqrt_lut_BasicBlock_0Impl_memory_write_addr_out_29_0),
+    .memory_wren_29_0           (_set_rsqrt_lut_BasicBlock_0Impl_memory_wren_29_0),
     .fifo_wren_0                (_set_rsqrt_lut_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0  (fifo_data_7.almost_full),	// vector_unit.k:134:9
-    .fifo_overflow_in_0         (fifo_data_7.overflow),	// vector_unit.k:134:9
-    .data_in_24                 (passthrough_data_24.data),	// vector_unit.k:134:9
-    .input_fifo_underflow_0     (passthrough_data_24.underflow),	// vector_unit.k:134:9
+    .fifo_almost_full_in_raw_0  (fifo_data_7.almost_full),	// vector_unit.k:133:9
+    .fifo_overflow_in_0         (fifo_data_7.overflow),	// vector_unit.k:133:9
+    .data_in_20                 (passthrough_data_20.data),	// vector_unit.k:133:9
+    .input_fifo_underflow_0     (passthrough_data_20.underflow),	// vector_unit.k:133:9
     .input_rdy_0                (_set_rsqrt_lut_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0              (passthrough_data_24.valid),	// vector_unit.k:134:9
+    .input_valid_0              (passthrough_data_20.valid),	// vector_unit.k:133:9
     .control_state_out          (/* unused */)
-  );	// vector_unit.k:134:9
-  vector_unit_lookup_rsqrt_BasicBlock_0 lookup_rsqrt_BasicBlock_0Impl (	// vector_unit.k:142:9
-    .clk                       (clk),	// vector_unit.k:142:9
-    .rst                       (reg_rst_delayed[26]),	// vector_unit.k:142:9
+  );	// vector_unit.k:133:9
+  vector_unit_lookup_rsqrt_BasicBlock_0 lookup_rsqrt_BasicBlock_0Impl (	// vector_unit.k:141:9
+    .clk                       (clk),	// vector_unit.k:141:9
+    .rst                       (reg_rst_delayed[22]),	// vector_unit.k:141:9
     .done_out                  (/* unused */),
-    .memory_read_data_in_37_0  (__rsqrt_lut_read_data_out_0),	// vector_unit.k:17:5
-    .memory_read_addr_out_37_0 (_lookup_rsqrt_BasicBlock_0Impl_memory_read_addr_out_37_0),
-    .memory_rden_out_37_0      (_lookup_rsqrt_BasicBlock_0Impl_memory_rden_out_37_0),
+    .memory_read_data_in_29_0  (__rsqrt_lut_read_data_out_0),	// vector_unit.k:17:5
+    .memory_read_addr_out_29_0 (_lookup_rsqrt_BasicBlock_0Impl_memory_read_addr_out_29_0),
+    .memory_rden_out_29_0      (_lookup_rsqrt_BasicBlock_0Impl_memory_rden_out_29_0),
     .fifo_data_out_0           (_lookup_rsqrt_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_lookup_rsqrt_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_8.almost_full),	// vector_unit.k:142:9
-    .fifo_overflow_in_0        (fifo_data_8.overflow),	// vector_unit.k:142:9
-    .data_in_25                (passthrough_data_25.data),	// vector_unit.k:142:9
-    .input_fifo_underflow_0    (passthrough_data_25.underflow),	// vector_unit.k:142:9
+    .fifo_almost_full_in_raw_0 (fifo_data_8.almost_full),	// vector_unit.k:141:9
+    .fifo_overflow_in_0        (fifo_data_8.overflow),	// vector_unit.k:141:9
+    .data_in_21                (passthrough_data_21.data),	// vector_unit.k:141:9
+    .input_fifo_underflow_0    (passthrough_data_21.underflow),	// vector_unit.k:141:9
     .input_rdy_0               (_lookup_rsqrt_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_25.valid),	// vector_unit.k:142:9
+    .input_valid_0             (passthrough_data_21.valid),	// vector_unit.k:141:9
     .control_state_out         (/* unused */)
-  );	// vector_unit.k:142:9
-  vector_unit_rope_read_cos_row_BasicBlock_0 rope_read_cos_row_BasicBlock_0Impl (	// vector_unit.k:154:9
-    .clk                       (clk),	// vector_unit.k:154:9
-    .rst                       (reg_rst_delayed[27]),	// vector_unit.k:154:9
-    .done_out                  (/* unused */),
-    .memory_read_data_in_39_0  (__cos_table_read_data_out_0),	// vector_unit.k:23:5
-    .memory_read_addr_out_39_0
-      (_rope_read_cos_row_BasicBlock_0Impl_memory_read_addr_out_39_0),
-    .memory_rden_out_39_0      (_rope_read_cos_row_BasicBlock_0Impl_memory_rden_out_39_0),
-    .fifo_data_out_0           (_rope_read_cos_row_BasicBlock_0Impl_fifo_data_out_0),
-    .fifo_wren_0               (_rope_read_cos_row_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_9.almost_full),	// vector_unit.k:154:9
-    .fifo_overflow_in_0        (fifo_data_9.overflow),	// vector_unit.k:154:9
-    .data_in_26                (passthrough_data_26.data),	// vector_unit.k:154:9
-    .input_fifo_underflow_0    (passthrough_data_26.underflow),	// vector_unit.k:154:9
-    .input_rdy_0               (_rope_read_cos_row_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_26.valid),	// vector_unit.k:154:9
-    .control_state_out         (/* unused */)
-  );	// vector_unit.k:154:9
-  vector_unit_rope_read_sin_row_BasicBlock_0 rope_read_sin_row_BasicBlock_0Impl (	// vector_unit.k:161:9
-    .clk                       (clk),	// vector_unit.k:161:9
-    .rst                       (reg_rst_delayed[28]),	// vector_unit.k:161:9
-    .done_out                  (/* unused */),
-    .memory_read_data_in_40_0  (__sin_table_read_data_out_0),	// vector_unit.k:24:5
-    .memory_read_addr_out_40_0
-      (_rope_read_sin_row_BasicBlock_0Impl_memory_read_addr_out_40_0),
-    .memory_rden_out_40_0      (_rope_read_sin_row_BasicBlock_0Impl_memory_rden_out_40_0),
-    .fifo_data_out_0           (_rope_read_sin_row_BasicBlock_0Impl_fifo_data_out_0),
-    .fifo_wren_0               (_rope_read_sin_row_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_10.almost_full),	// vector_unit.k:161:9
-    .fifo_overflow_in_0        (fifo_data_10.overflow),	// vector_unit.k:161:9
-    .data_in_27                (passthrough_data_27.data),	// vector_unit.k:161:9
-    .input_fifo_underflow_0    (passthrough_data_27.underflow),	// vector_unit.k:161:9
-    .input_rdy_0               (_rope_read_sin_row_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_27.valid),	// vector_unit.k:161:9
-    .control_state_out         (/* unused */)
-  );	// vector_unit.k:161:9
-  vector_unit_rope_write_cos_row_BasicBlock_0 rope_write_cos_row_BasicBlock_0Impl (	// vector_unit.k:168:9
-    .clk                        (clk),	// vector_unit.k:168:9
-    .rst                        (reg_rst_delayed[29]),	// vector_unit.k:168:9
+  );	// vector_unit.k:141:9
+  vector_unit_set_sigmoid_lut_BasicBlock_0 set_sigmoid_lut_BasicBlock_0Impl (	// vector_unit.k:155:9
+    .clk                        (clk),	// vector_unit.k:155:9
+    .rst                        (reg_rst_delayed[23]),	// vector_unit.k:155:9
     .done_out                   (/* unused */),
-    .memory_write_data_out_39_0
-      (_rope_write_cos_row_BasicBlock_0Impl_memory_write_data_out_39_0),
-    .memory_write_addr_out_39_0
-      (_rope_write_cos_row_BasicBlock_0Impl_memory_write_addr_out_39_0),
-    .memory_wren_39_0           (_rope_write_cos_row_BasicBlock_0Impl_memory_wren_39_0),
-    .fifo_wren_0                (_rope_write_cos_row_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0  (fifo_data_11.almost_full),	// vector_unit.k:168:9
-    .fifo_overflow_in_0         (fifo_data_11.overflow),	// vector_unit.k:168:9
-    .data_in_28                 (passthrough_data_28.data),	// vector_unit.k:168:9
-    .input_fifo_underflow_0     (passthrough_data_28.underflow),	// vector_unit.k:168:9
-    .input_rdy_0                (_rope_write_cos_row_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0              (passthrough_data_28.valid),	// vector_unit.k:168:9
-    .control_state_out          (/* unused */)
-  );	// vector_unit.k:168:9
-  vector_unit_rope_write_sin_row_BasicBlock_0 rope_write_sin_row_BasicBlock_0Impl (	// vector_unit.k:173:9
-    .clk                        (clk),	// vector_unit.k:173:9
-    .rst                        (reg_rst_delayed[30]),	// vector_unit.k:173:9
-    .done_out                   (/* unused */),
-    .memory_write_data_out_40_0
-      (_rope_write_sin_row_BasicBlock_0Impl_memory_write_data_out_40_0),
-    .memory_write_addr_out_40_0
-      (_rope_write_sin_row_BasicBlock_0Impl_memory_write_addr_out_40_0),
-    .memory_wren_40_0           (_rope_write_sin_row_BasicBlock_0Impl_memory_wren_40_0),
-    .fifo_wren_0                (_rope_write_sin_row_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0  (fifo_data_12.almost_full),	// vector_unit.k:173:9
-    .fifo_overflow_in_0         (fifo_data_12.overflow),	// vector_unit.k:173:9
-    .data_in_29                 (passthrough_data_29.data),	// vector_unit.k:173:9
-    .input_fifo_underflow_0     (passthrough_data_29.underflow),	// vector_unit.k:173:9
-    .input_rdy_0                (_rope_write_sin_row_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0              (passthrough_data_29.valid),	// vector_unit.k:173:9
-    .control_state_out          (/* unused */)
-  );	// vector_unit.k:173:9
-  vector_unit_set_sigmoid_lut_BasicBlock_0 set_sigmoid_lut_BasicBlock_0Impl (	// vector_unit.k:180:9
-    .clk                        (clk),	// vector_unit.k:180:9
-    .rst                        (reg_rst_delayed[31]),	// vector_unit.k:180:9
-    .done_out                   (/* unused */),
-    .memory_write_data_out_38_0
-      (_set_sigmoid_lut_BasicBlock_0Impl_memory_write_data_out_38_0),
-    .memory_write_addr_out_38_0
-      (_set_sigmoid_lut_BasicBlock_0Impl_memory_write_addr_out_38_0),
-    .memory_wren_38_0           (_set_sigmoid_lut_BasicBlock_0Impl_memory_wren_38_0),
+    .memory_write_data_out_30_0
+      (_set_sigmoid_lut_BasicBlock_0Impl_memory_write_data_out_30_0),
+    .memory_write_addr_out_30_0
+      (_set_sigmoid_lut_BasicBlock_0Impl_memory_write_addr_out_30_0),
+    .memory_wren_30_0           (_set_sigmoid_lut_BasicBlock_0Impl_memory_wren_30_0),
     .fifo_wren_0                (_set_sigmoid_lut_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0  (fifo_data_13.almost_full),	// vector_unit.k:180:9
-    .fifo_overflow_in_0         (fifo_data_13.overflow),	// vector_unit.k:180:9
-    .data_in_30                 (passthrough_data_30.data),	// vector_unit.k:180:9
-    .input_fifo_underflow_0     (passthrough_data_30.underflow),	// vector_unit.k:180:9
+    .fifo_almost_full_in_raw_0  (fifo_data_9.almost_full),	// vector_unit.k:155:9
+    .fifo_overflow_in_0         (fifo_data_9.overflow),	// vector_unit.k:155:9
+    .data_in_22                 (passthrough_data_22.data),	// vector_unit.k:155:9
+    .input_fifo_underflow_0     (passthrough_data_22.underflow),	// vector_unit.k:155:9
     .input_rdy_0                (_set_sigmoid_lut_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0              (passthrough_data_30.valid),	// vector_unit.k:180:9
+    .input_valid_0              (passthrough_data_22.valid),	// vector_unit.k:155:9
     .control_state_out          (/* unused */)
-  );	// vector_unit.k:180:9
-  vector_unit_swiglu_compute_BasicBlock_0 swiglu_compute_BasicBlock_0Impl (	// vector_unit.k:191:9
-    .clk                       (clk),	// vector_unit.k:191:9
-    .rst                       (reg_rst_delayed[32]),	// vector_unit.k:191:9
+  );	// vector_unit.k:155:9
+  vector_unit_swiglu_compute_BasicBlock_0 swiglu_compute_BasicBlock_0Impl (	// vector_unit.k:166:9
+    .clk                       (clk),	// vector_unit.k:166:9
+    .rst                       (reg_rst_delayed[24]),	// vector_unit.k:166:9
     .done_out                  (/* unused */),
-    .memory_read_data_in_38_0  (__sigmoid_lut_read_data_out_0),	// vector_unit.k:20:5
-    .memory_read_addr_out_38_0
-      (_swiglu_compute_BasicBlock_0Impl_memory_read_addr_out_38_0),
-    .memory_rden_out_38_0      (_swiglu_compute_BasicBlock_0Impl_memory_rden_out_38_0),
+    .memory_read_data_in_30_0  (__sigmoid_lut_read_data_out_0),	// vector_unit.k:20:5
+    .memory_read_addr_out_30_0
+      (_swiglu_compute_BasicBlock_0Impl_memory_read_addr_out_30_0),
+    .memory_rden_out_30_0      (_swiglu_compute_BasicBlock_0Impl_memory_rden_out_30_0),
     .fifo_data_out_0           (_swiglu_compute_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_swiglu_compute_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_14.almost_full),	// vector_unit.k:191:9
-    .fifo_overflow_in_0        (fifo_data_14.overflow),	// vector_unit.k:191:9
-    .data_in_32                (passthrough_data_32.data),	// vector_unit.k:191:9
-    .input_fifo_underflow_0    (passthrough_data_32.underflow),	// vector_unit.k:191:9
+    .fifo_almost_full_in_raw_0 (fifo_data_10.almost_full),	// vector_unit.k:166:9
+    .fifo_overflow_in_0        (fifo_data_10.overflow),	// vector_unit.k:166:9
+    .data_in_24                (passthrough_data_24.data),	// vector_unit.k:166:9
+    .input_fifo_underflow_0    (passthrough_data_24.underflow),	// vector_unit.k:166:9
     .input_rdy_0               (_swiglu_compute_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_32.valid),	// vector_unit.k:191:9
+    .input_valid_0             (passthrough_data_24.valid),	// vector_unit.k:166:9
     .control_state_out         (/* unused */)
-  );	// vector_unit.k:191:9
-  vector_unit_dequantize_BasicBlock_0 dequantize_BasicBlock_0Impl (	// vector_unit.k:287:9
-    .clk                       (clk),	// vector_unit.k:287:9
-    .rst                       (reg_rst_delayed[33]),	// vector_unit.k:287:9
+  );	// vector_unit.k:166:9
+  vector_unit_dequantize_BasicBlock_0 dequantize_BasicBlock_0Impl (	// vector_unit.k:262:9
+    .clk                       (clk),	// vector_unit.k:262:9
+    .rst                       (reg_rst_delayed[25]),	// vector_unit.k:262:9
     .done_out                  (/* unused */),
     .fifo_data_out_0           (_dequantize_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_dequantize_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_15.almost_full),	// vector_unit.k:287:9
-    .fifo_overflow_in_0        (fifo_data_15.overflow),	// vector_unit.k:287:9
-    .data_in_33                (passthrough_data_33.data),	// vector_unit.k:287:9
-    .input_fifo_underflow_0    (passthrough_data_33.underflow),	// vector_unit.k:287:9
+    .fifo_almost_full_in_raw_0 (fifo_data_11.almost_full),	// vector_unit.k:262:9
+    .fifo_overflow_in_0        (fifo_data_11.overflow),	// vector_unit.k:262:9
+    .data_in_25                (passthrough_data_25.data),	// vector_unit.k:262:9
+    .input_fifo_underflow_0    (passthrough_data_25.underflow),	// vector_unit.k:262:9
     .input_rdy_0               (_dequantize_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_33.valid),	// vector_unit.k:287:9
+    .input_valid_0             (passthrough_data_25.valid),	// vector_unit.k:262:9
     .control_state_out         (/* unused */)
-  );	// vector_unit.k:287:9
-  vector_unit_residual_add_BasicBlock_0 residual_add_BasicBlock_0Impl (	// vector_unit.k:406:9
-    .clk                       (clk),	// vector_unit.k:406:9
-    .rst                       (reg_rst_delayed[34]),	// vector_unit.k:406:9
+  );	// vector_unit.k:262:9
+  vector_unit_residual_add_BasicBlock_0 residual_add_BasicBlock_0Impl (	// vector_unit.k:381:9
+    .clk                       (clk),	// vector_unit.k:381:9
+    .rst                       (reg_rst_delayed[26]),	// vector_unit.k:381:9
     .done_out                  (/* unused */),
     .fifo_data_out_0           (_residual_add_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_residual_add_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_16.almost_full),	// vector_unit.k:406:9
-    .fifo_overflow_in_0        (fifo_data_16.overflow),	// vector_unit.k:406:9
-    .data_in_34                (passthrough_data_34.data),	// vector_unit.k:406:9
-    .input_fifo_underflow_0    (passthrough_data_34.underflow),	// vector_unit.k:406:9
+    .fifo_almost_full_in_raw_0 (fifo_data_12.almost_full),	// vector_unit.k:381:9
+    .fifo_overflow_in_0        (fifo_data_12.overflow),	// vector_unit.k:381:9
+    .data_in_26                (passthrough_data_26.data),	// vector_unit.k:381:9
+    .input_fifo_underflow_0    (passthrough_data_26.underflow),	// vector_unit.k:381:9
     .input_rdy_0               (_residual_add_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_34.valid),	// vector_unit.k:406:9
+    .input_valid_0             (passthrough_data_26.valid),	// vector_unit.k:381:9
     .control_state_out         (/* unused */)
-  );	// vector_unit.k:406:9
+  );	// vector_unit.k:381:9
   assign rst_and_startup_done_out = rst_and_startup_done_out_net;
   assign rmsnorm_accumulate_rdy_out = rmsnorm_accumulate_rdy_out_net;
   assign rmsnorm_accumulate_empty_out = rmsnorm_accumulate_empty_out_net;
@@ -8636,16 +7627,6 @@ module vector_unit(
   assign lookup_rsqrt_rdy_out = lookup_rsqrt_rdy_out_net;
   assign lookup_rsqrt_empty_out = lookup_rsqrt_empty_out_net;
   assign lookup_rsqrt_result_out = lookup_rsqrt_result_out_net;
-  assign rope_read_cos_row_rdy_out = rope_read_cos_row_rdy_out_net;
-  assign rope_read_cos_row_empty_out = rope_read_cos_row_empty_out_net;
-  assign rope_read_cos_row_result_out = rope_read_cos_row_result_out_net;
-  assign rope_read_sin_row_rdy_out = rope_read_sin_row_rdy_out_net;
-  assign rope_read_sin_row_empty_out = rope_read_sin_row_empty_out_net;
-  assign rope_read_sin_row_result_out = rope_read_sin_row_result_out_net;
-  assign rope_write_cos_row_rdy_out = rope_write_cos_row_rdy_out_net;
-  assign rope_write_cos_row_empty_out = rope_write_cos_row_empty_out_net;
-  assign rope_write_sin_row_rdy_out = rope_write_sin_row_rdy_out_net;
-  assign rope_write_sin_row_empty_out = rope_write_sin_row_empty_out_net;
   assign set_sigmoid_lut_rdy_out = set_sigmoid_lut_rdy_out_net;
   assign set_sigmoid_lut_empty_out = set_sigmoid_lut_empty_out_net;
   assign swiglu_compute_rdy_out = swiglu_compute_rdy_out_net;
@@ -8681,14 +7662,6 @@ module vector_unit_EsiWrapper(
      input  wire                                                                                            rmsnorm_get_sum_arg_valid,
   // input  wire /*Zero Width*/                                                                             rmsnorm_reset_arg,
      input  wire                                                                                            rmsnorm_reset_arg_valid,
-     input  wire struct packed {logic [11:0] position; }                                                    rope_read_cos_row_arg,
-     input  wire                                                                                            rope_read_cos_row_arg_valid,
-     input  wire struct packed {logic [11:0] position; }                                                    rope_read_sin_row_arg,
-     input  wire                                                                                            rope_read_sin_row_arg_valid,
-     input  wire struct packed {logic [11:0] position; logic [1023:0] value; }                              rope_write_cos_row_arg,
-     input  wire                                                                                            rope_write_cos_row_arg_valid,
-     input  wire struct packed {logic [11:0] position; logic [1023:0] value; }                              rope_write_sin_row_arg,
-     input  wire                                                                                            rope_write_sin_row_arg_valid,
      input  wire struct packed {logic [15:0] index; logic [15:0] value; }                                   set_gamma_pre_attn_arg,
      input  wire                                                                                            set_gamma_pre_attn_arg_valid,
      input  wire struct packed {logic [15:0] index; logic [15:0] value; }                                   set_gamma_pre_mlp_arg,
@@ -8707,10 +7680,6 @@ module vector_unit_EsiWrapper(
      input  wire                                                                                            rmsnorm_accumulate_result_rden,
      input  wire                                                                                            rmsnorm_get_sum_result_rden,
      input  wire                                                                                            rmsnorm_reset_result_rden,
-     input  wire                                                                                            rope_read_cos_row_result_rden,
-     input  wire                                                                                            rope_read_sin_row_result_rden,
-     input  wire                                                                                            rope_write_cos_row_result_rden,
-     input  wire                                                                                            rope_write_sin_row_result_rden,
      input  wire                                                                                            set_gamma_pre_attn_result_rden,
      input  wire                                                                                            set_gamma_pre_mlp_result_rden,
      input  wire                                                                                            set_rsqrt_lut_result_rden,
@@ -8724,10 +7693,6 @@ module vector_unit_EsiWrapper(
      output wire                                                                                            rmsnorm_accumulate_arg_ready,
      output wire                                                                                            rmsnorm_get_sum_arg_ready,
      output wire                                                                                            rmsnorm_reset_arg_ready,
-     output wire                                                                                            rope_read_cos_row_arg_ready,
-     output wire                                                                                            rope_read_sin_row_arg_ready,
-     output wire                                                                                            rope_write_cos_row_arg_ready,
-     output wire                                                                                            rope_write_sin_row_arg_ready,
      output wire                                                                                            set_gamma_pre_attn_arg_ready,
      output wire                                                                                            set_gamma_pre_mlp_arg_ready,
      output wire                                                                                            set_rsqrt_lut_arg_ready,
@@ -8749,14 +7714,6 @@ module vector_unit_EsiWrapper(
      output wire                                                                                            rmsnorm_get_sum_result_empty,
   // output wire /*Zero Width*/                                                                             rmsnorm_reset_result,
      output wire                                                                                            rmsnorm_reset_result_empty,
-     output wire [1023:0]                                                                                   rope_read_cos_row_result,
-     output wire                                                                                            rope_read_cos_row_result_empty,
-     output wire [1023:0]                                                                                   rope_read_sin_row_result,
-     output wire                                                                                            rope_read_sin_row_result_empty,
-  // output wire /*Zero Width*/                                                                             rope_write_cos_row_result,
-     output wire                                                                                            rope_write_cos_row_result_empty,
-  // output wire /*Zero Width*/                                                                             rope_write_sin_row_result,
-     output wire                                                                                            rope_write_sin_row_result_empty,
   // output wire /*Zero Width*/                                                                             set_gamma_pre_attn_result,
      output wire                                                                                            set_gamma_pre_attn_result_empty,
   // output wire /*Zero Width*/                                                                             set_gamma_pre_mlp_result,
@@ -8771,15 +7728,13 @@ module vector_unit_EsiWrapper(
      output wire                                                                                            stall_rate_supported_out
 );
 
-  wire [31:0]   _EsiWrapped_rmsnorm_get_sum_result_out;
-  wire [15:0]   _EsiWrapped_get_gamma_pre_attn_result_out;
-  wire [15:0]   _EsiWrapped_get_gamma_pre_mlp_result_out;
-  wire [15:0]   _EsiWrapped_lookup_rsqrt_result_out;
-  wire [1023:0] _EsiWrapped_rope_read_cos_row_result_out;
-  wire [1023:0] _EsiWrapped_rope_read_sin_row_result_out;
-  wire [15:0]   _EsiWrapped_swiglu_compute_result_out;
-  wire [15:0]   _EsiWrapped_dequantize_result_out;
-  wire [15:0]   _EsiWrapped_residual_add_result_out;
+  wire [31:0] _EsiWrapped_rmsnorm_get_sum_result_out;
+  wire [15:0] _EsiWrapped_get_gamma_pre_attn_result_out;
+  wire [15:0] _EsiWrapped_get_gamma_pre_mlp_result_out;
+  wire [15:0] _EsiWrapped_lookup_rsqrt_result_out;
+  wire [15:0] _EsiWrapped_swiglu_compute_result_out;
+  wire [15:0] _EsiWrapped_dequantize_result_out;
+  wire [15:0] _EsiWrapped_residual_add_result_out;
   vector_unit EsiWrapped (
     .clk                            (clk),
     .rst                            (rst),
@@ -8811,20 +7766,6 @@ module vector_unit_EsiWrapper(
     .lookup_rsqrt_valid_in          (lookup_rsqrt_arg_valid),
     .lookup_rsqrt_index_in          (lookup_rsqrt_arg.index),
     .lookup_rsqrt_rden_in           (lookup_rsqrt_result_rden),
-    .rope_read_cos_row_valid_in     (rope_read_cos_row_arg_valid),
-    .rope_read_cos_row_position_in  (rope_read_cos_row_arg.position),
-    .rope_read_cos_row_rden_in      (rope_read_cos_row_result_rden),
-    .rope_read_sin_row_valid_in     (rope_read_sin_row_arg_valid),
-    .rope_read_sin_row_position_in  (rope_read_sin_row_arg.position),
-    .rope_read_sin_row_rden_in      (rope_read_sin_row_result_rden),
-    .rope_write_cos_row_valid_in    (rope_write_cos_row_arg_valid),
-    .rope_write_cos_row_position_in (rope_write_cos_row_arg.position),
-    .rope_write_cos_row_value_in    (rope_write_cos_row_arg.value),
-    .rope_write_cos_row_rden_in     (rope_write_cos_row_result_rden),
-    .rope_write_sin_row_valid_in    (rope_write_sin_row_arg_valid),
-    .rope_write_sin_row_position_in (rope_write_sin_row_arg.position),
-    .rope_write_sin_row_value_in    (rope_write_sin_row_arg.value),
-    .rope_write_sin_row_rden_in     (rope_write_sin_row_result_rden),
     .set_sigmoid_lut_valid_in       (set_sigmoid_lut_arg_valid),
     .set_sigmoid_lut_index_in       (set_sigmoid_lut_arg.index),
     .set_sigmoid_lut_value_in       (set_sigmoid_lut_arg.value),
@@ -8867,16 +7808,6 @@ module vector_unit_EsiWrapper(
     .lookup_rsqrt_rdy_out           (lookup_rsqrt_arg_ready),
     .lookup_rsqrt_empty_out         (lookup_rsqrt_result_empty),
     .lookup_rsqrt_result_out        (_EsiWrapped_lookup_rsqrt_result_out),
-    .rope_read_cos_row_rdy_out      (rope_read_cos_row_arg_ready),
-    .rope_read_cos_row_empty_out    (rope_read_cos_row_result_empty),
-    .rope_read_cos_row_result_out   (_EsiWrapped_rope_read_cos_row_result_out),
-    .rope_read_sin_row_rdy_out      (rope_read_sin_row_arg_ready),
-    .rope_read_sin_row_empty_out    (rope_read_sin_row_result_empty),
-    .rope_read_sin_row_result_out   (_EsiWrapped_rope_read_sin_row_result_out),
-    .rope_write_cos_row_rdy_out     (rope_write_cos_row_arg_ready),
-    .rope_write_cos_row_empty_out   (rope_write_cos_row_result_empty),
-    .rope_write_sin_row_rdy_out     (rope_write_sin_row_arg_ready),
-    .rope_write_sin_row_empty_out   (rope_write_sin_row_result_empty),
     .set_sigmoid_lut_rdy_out        (set_sigmoid_lut_arg_ready),
     .set_sigmoid_lut_empty_out      (set_sigmoid_lut_result_empty),
     .swiglu_compute_rdy_out         (swiglu_compute_arg_ready),
@@ -8898,10 +7829,6 @@ module vector_unit_EsiWrapper(
   // Zero width: assign rmsnorm_accumulate_result = /*Zero width*/;
   assign rmsnorm_get_sum_result = _EsiWrapped_rmsnorm_get_sum_result_out;
   // Zero width: assign rmsnorm_reset_result = /*Zero width*/;
-  assign rope_read_cos_row_result = _EsiWrapped_rope_read_cos_row_result_out;
-  assign rope_read_sin_row_result = _EsiWrapped_rope_read_sin_row_result_out;
-  // Zero width: assign rope_write_cos_row_result = /*Zero width*/;
-  // Zero width: assign rope_write_sin_row_result = /*Zero width*/;
   // Zero width: assign set_gamma_pre_attn_result = /*Zero width*/;
   // Zero width: assign set_gamma_pre_mlp_result = /*Zero width*/;
   // Zero width: assign set_rsqrt_lut_result = /*Zero width*/;

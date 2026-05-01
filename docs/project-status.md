@@ -4,7 +4,7 @@
 
 Open-source LLM inference ASIC targeting sky130hd PDK. Kanagawa HLS → SystemVerilog RTL → Verilator co-simulation verification → OpenROAD synthesis and place-and-route.
 
-## Current State (2026-03-19)
+## Current State (2026-04-30)
 
 ### Hardware Verification: COMPLETE
 All RTL modules verified against SystemC reference models with **100% exact match**.
@@ -21,7 +21,7 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 | Down projection | 0.995683 |
 | Post-MLP residual | 0.999701 |
 
-### Backend PnR: 19 routed through DRT (9 logic-only + 8 macro-bearing + 2 academic demos)
+### Backend PnR: 21 routed through DRT (9 logic-only + 10 macro-bearing + 2 academic demos)
 
 19 designs configured for ORFS sky130hd at 250 MHz (4ns clock). NOR ROM and SRAM macro collateral integrated via sky130 HAL layer. Six rounds of density work — die resizing (v2, 41%), SRAM col_mux + macro consolidation in kv_cache_demo (-93%), NOR ROM internal-mux refactor (v3, embed_rom + lm_head_demo each -55%), `nor_rom_4096x1024` fold=2 reshape for rope (v4), v5 `[[memory]]` + new SRAM macros (`sram_4096x16`, `sram_256x16`) for rmsnorm/swiglu/lut_interp + rom_bank die shrink, and **v6: `sram_512x32` macro for codebook_decoder + vector_unit cell count drop 791K → 127K via v5 SRAM library** — reduced total routed area from 96.6 mm² to **46.1 mm² (52% reduction)**.
 
@@ -50,7 +50,9 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 | **codebook_decoder** | **5× sram_512x32** | **800×800** | 30% | **0** | **-0.02 MET** | **249** |
 | rom_bank | 1× nor_rom_1024x880 | 1500×1500 | 63% | **0** | -2.01 | 167 |
 | mac_array | 1× nor_rom_1024x880 | 2500×3000 | 31% | 641 | -3.88 | 127 |
-| rope | 2× nor_rom_4096x1024 (fold=2, mirrored) | 3000×3300 | 72% | 418 | -4.14 | 122 |
+| rope (legacy) | 2× nor_rom_4096x1024 (fold=2, mirrored) | 3000×3300 | 72% | 418 | -4.14 | 122 |
+| **rope_gen** (v7 split) | **2× nor_rom_4096x1024 (fold=2, mirrored)** | **3000×3300** | 72% | **350** | **-2.79** | **147** |
+| **rope_apply** (v7 split) | none (pure stdcell) | **800×800** | **17%** | **0** | **-1.20** | **192** |
 | embed_rom | 1× nor_rom_65536x192 (internal mux) | 1900×2400 | 78% | **0** | -3.63 | 131 |
 | vector_unit ⚠️ | 4× SRAM + 2× nor_rom_4096x1024 | 3000×3500 | TBD | TBD | TBD | TBD |
 | kv_cache_demo | 4× sram_8192x8 (col_mux=32) | 595×705 | 87% | **0** | -0.34 | 230 |
@@ -58,7 +60,18 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 
 ⚠️ **vector_unit (v6 source improvements landed, PnR pending):** v5 SRAM library + schedule annotations (`rmsnorm_accumulate s4`, `swiglu_compute s8`, `dequantize s6`, `residual_add s4`) dropped synth cell count from 791K → **127K (-84%)**. Full PnR aborted in GRT NDR retry loop after 1h+; needs hierarchical PnR or further GRT workaround. Source improvements remain valid for future work.
 
+✅ **v7 — RoPE table/datapath split (rope_gen + rope_apply):** monolithic rope.k carried both the cos/sin tables AND the rotate datapath in one tile, fighting macro-edge congestion against the 1024-bit rotate logic. Split into two separately-hardenable Kanagawa modules: `rope_gen` (chip-level, owns 2× nor_rom_4096x1024 fold=2 macros) + `rope_apply` (per-layer, pure stdcell BF16 rotate at `[[schedule(8)]]`). Result: total area 9.90 → 10.54 mm² (+6%), but **WNS -4.14 → -2.79 ns (-33%), fmax 122 → 147 MHz (+20%), DRC 418 → 350 (-16%)** — the architectural separation lets each tile route cleanly. rope_apply is the new fmax floor (192 MHz, 0 DRC, sub-second per iter). Sets up multi-layer scaling: future N-layer chip would broadcast 1× rope_gen to N× rope_apply, saving (N-1)×9.9 mm² of duplicated ROM.
+
 See [backend-metrics.md](backend-metrics.md) for full metrics, timing analysis, and lessons learned.
+
+### Full-Chip Floorplan
+
+![full chip floorplan](images/full_chip_floorplan.png)
+
+21 hardened tiles arranged on a ~10.5 × 7.7 mm (80 mm²) die, organized into three
+tiers: folded NOR ROM (top), large macro-bearing (middle), pure stdcell + small
+SRAM (bottom). Red arrow shows the rope_gen → rope_apply broadcast bus that
+unblocks multi-layer scaling.
 
 ### Test Suite
 - **44 E2E checks** at CI dimensions — all passing

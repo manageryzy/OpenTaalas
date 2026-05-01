@@ -68,6 +68,8 @@ add_orfs_design(NAME scale_store       PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_
 add_orfs_design(NAME rmsnorm           PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/rmsnorm")
 add_orfs_design(NAME swiglu            PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/swiglu")
 add_orfs_design(NAME rope              PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/rope")
+add_orfs_design(NAME rope_gen          PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/rope_gen")
+add_orfs_design(NAME rope_apply        PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/rope_apply")
 add_orfs_design(NAME attention_unit    PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/attention_unit")
 
 # Tier 3: Composite modules

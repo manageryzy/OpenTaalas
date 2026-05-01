@@ -89,6 +89,8 @@ add_kanagawa_rtl(NAME attention_unit SOURCE attention_unit.k)
 add_kanagawa_rtl(NAME rmsnorm SOURCE rmsnorm.k)
 add_kanagawa_rtl(NAME swiglu SOURCE swiglu.k)
 add_kanagawa_rtl(NAME rope SOURCE rope.k)
+add_kanagawa_rtl(NAME rope_gen SOURCE rope_gen.k)
+add_kanagawa_rtl(NAME rope_apply SOURCE rope_apply.k)
 
 # Phase 4: Integration
 add_kanagawa_rtl(NAME vector_unit SOURCE vector_unit.k)
@@ -124,7 +126,7 @@ if(KANAGAWA_FOUND)
     kanagawa_rom_bank kanagawa_scale_store kanagawa_lut_interp
     kanagawa_codebook_decoder kanagawa_mac_pe kanagawa_dequant kanagawa_mac_array
     kanagawa_kv_cache kanagawa_attention_unit kanagawa_rmsnorm
-    kanagawa_swiglu kanagawa_rope
+    kanagawa_swiglu kanagawa_rope kanagawa_rope_gen kanagawa_rope_apply
     kanagawa_vector_unit kanagawa_layer_tile
     kanagawa_embed_rom kanagawa_lm_head kanagawa_global_controller
     kanagawa_llama_chip
@@ -133,7 +135,7 @@ if(KANAGAWA_FOUND)
     kanagawa_rom_bank kanagawa_scale_store kanagawa_lut_interp
     kanagawa_codebook_decoder kanagawa_mac_pe kanagawa_dequant kanagawa_mac_array
     kanagawa_kv_cache kanagawa_attention_unit kanagawa_rmsnorm
-    kanagawa_swiglu kanagawa_rope
+    kanagawa_swiglu kanagawa_rope kanagawa_rope_gen kanagawa_rope_apply
     kanagawa_vector_unit kanagawa_layer_tile
     kanagawa_embed_rom kanagawa_lm_head kanagawa_global_controller
     kanagawa_llama_chip

@@ -34,7 +34,7 @@
                     "width": 1
                 },
                 {
-                    "name": "data_in_4",
+                    "name": "data_in_1",
                     "width": 44
                 },
                 {
@@ -68,7 +68,7 @@
             "name": "underflow"
         },
         {
-            "container": "passthrough_data_4",
+            "container": "passthrough_data_1",
             "name": "underflow"
         }
     ],
@@ -128,7 +128,7 @@
                 },
                 {
                     "name": "genblk1.fifo.usedw",
-                    "width": 7
+                    "width": 6
                 },
                 {
                     "name": "genblk1.fifo.fifo_inst.data",
@@ -140,7 +140,7 @@
                 },
                 {
                     "name": "genblk1.fifo.fifo_inst.usedw",
-                    "width": 7
+                    "width": 6
                 },
                 {
                     "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.almost_full_nxt",
@@ -152,15 +152,15 @@
                 },
                 {
                     "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_ff",
-                    "width": 7
+                    "width": 6
                 },
                 {
                     "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_nxt",
-                    "width": 7
+                    "width": 6
                 },
                 {
                     "name": "genblk1.fifo.fifo_inst.gen_with_mux.ptrs.usedw_out",
-                    "width": 7
+                    "width": 6
                 }
             ],
             "top_level_signals": [

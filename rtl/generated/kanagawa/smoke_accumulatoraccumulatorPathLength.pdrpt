@@ -357,7 +357,7 @@
             ],
             [
                 {
-                    "name": "stage3",
+                    "name": "stage2",
                     "type": "Stage"
                 }
             ],

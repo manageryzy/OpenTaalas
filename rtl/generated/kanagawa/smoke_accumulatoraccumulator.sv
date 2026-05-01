@@ -1,6 +1,6 @@
 
 // This file was generated. Do not modify.
-// kanagawa --backend=sv --import-dir=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library --base-library=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library/mini-base.k --output=/home/mana/workspace/OpenTaalas/rtl/generated/kanagawa/smoke_accumulator /home/mana/workspace/OpenTaalas/rtl/kanagawa/smoke_accumulator.k
+// kanagawa --backend=sv --import-dir=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library --base-library=/home/mana/workspace/OpenTaalas/third-party/kanagawa/library/mini-base.k --output=/home/mana/workspace/OpenTaalas/rtl/generated/kanagawa/smoke_accumulator --frequency=250 --register-ratio=8 --max-register-ratio=16 /home/mana/workspace/OpenTaalas/rtl/kanagawa/smoke_accumulator.k
 
 `default_nettype wire
 module accumulatorDebugView_addEntry
@@ -187,8 +187,6 @@ module accumulator_add_BasicBlock_0(	// smoke_accumulator.k:17:9
   end // always_comb
   reg   [7:0] p0__value;	// smoke_accumulator.k:17:9
   reg         p0_stage2_enable = 1'h0;	// smoke_accumulator.k:17:9
-  reg   [7:0] p0__value_0;	// smoke_accumulator.k:17:9
-  reg         p0_stage3_enable = 1'h0;	// smoke_accumulator.k:17:9
   always @(posedge clk) begin	// smoke_accumulator.k:17:9
     p0_data_in_2 <= data_in_2;	// smoke_accumulator.k:17:9
     if (rst)	// smoke_accumulator.k:17:9
@@ -200,15 +198,10 @@ module accumulator_add_BasicBlock_0(	// smoke_accumulator.k:17:9
       p0_stage2_enable <= 1'h0;	// smoke_accumulator.k:17:9
     else	// smoke_accumulator.k:17:9
       p0_stage2_enable <= p0_stage1_enable;	// smoke_accumulator.k:17:9
-    p0__value_0 <= p0__value;	// smoke_accumulator.k:17:9
-    if (rst)	// smoke_accumulator.k:17:9
-      p0_stage3_enable <= 1'h0;	// smoke_accumulator.k:17:9
-    else	// smoke_accumulator.k:17:9
-      p0_stage3_enable <= p0_stage2_enable;	// smoke_accumulator.k:17:9
   end // always @(posedge)
   always_comb begin	// smoke_accumulator.k:17:9
-    fifo_wren_0_0 = p0_stage3_enable;	// smoke_accumulator.k:15:5, :17:9
-    fifo_data_out_0_0 = p0__value_0;	// smoke_accumulator.k:15:5, :17:9
+    fifo_wren_0_0 = p0_stage2_enable;	// smoke_accumulator.k:15:5, :17:9
+    fifo_data_out_0_0 = p0__value;	// smoke_accumulator.k:15:5, :17:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
@@ -234,11 +227,11 @@ module accumulator_add_BasicBlock_0(	// smoke_accumulator.k:17:9
   );	// smoke_accumulator.k:15:5
   accumulatorDebugView_addExit accumulatorDebugView_addExit_instance (	// smoke_accumulator.k:15:5
     .clk          (clk),	// smoke_accumulator.k:15:5
-    ._ReturnValue (p0_stage2_enable ? p0__value : 'x),	// smoke_accumulator.k:15:5, :17:9
-    .valid        (p0_stage2_enable),	// smoke_accumulator.k:17:9
+    ._ReturnValue (p0_stage1_enable ? _value : 'x),	// smoke_accumulator.k:15:5, :17:9, :19:9, :28:26
+    .valid        (p0_stage1_enable),	// smoke_accumulator.k:17:9
     .valid_out    (/* unused */)
   );	// smoke_accumulator.k:15:5
-  assign done_out = p0_stage3_enable;	// smoke_accumulator.k:17:9
+  assign done_out = p0_stage2_enable;	// smoke_accumulator.k:17:9
   assign global_out__value_3_0_valid = global_out__value_3_0_valid_0;	// smoke_accumulator.k:17:9
   assign global_out__value_3_0 = global_out__value_3_0_0;	// smoke_accumulator.k:17:9
   assign fifo_data_out_0 = fifo_data_out_0_0;	// smoke_accumulator.k:17:9
@@ -464,7 +457,7 @@ module accumulator(
     .MIN_WRITE_DELAY(0),
     .AUTO_PIPELINE_GROUP("fifo_0_add_Return"),
     .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(4),
+    .ALMOSTFULL_ENTRIES(3),
     .USE_LUTRAM(1)
   ) fifo_0_add_Return (
     .clock         (clk),

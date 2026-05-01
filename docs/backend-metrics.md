@@ -38,7 +38,9 @@
 | **codebook_decoder** | **4,491** | **5× sram_512x32** | **800×800** | 30% | **0** | **-0.02 MET** | **249** |
 | rom_bank | 136,629 | 1× nor_rom_1024x880 | 1500×1500 | 63% | **0** | -2.01 | 167 |
 | mac_array (s2) | 233,861 | 1× nor_rom_1024x880 | 2500×3000 | 31% | 641 | -3.88 | 127 |
-| rope | 478,014 | 2× nor_rom_4096x1024 (fold=2, mirrored) | 3000×3300 | 72% | 418 | -4.14 | 122 |
+| rope (legacy) | 478,014 | 2× nor_rom_4096x1024 (fold=2, mirrored) | 3000×3300 | 72% | 418 | -4.14 | 122 |
+| **rope_gen** (v7 split) | ~5,000 | 2× nor_rom_4096x1024 (fold=2, mirrored) | 3000×3300 | 72% | **350** | **-2.79** | **147** |
+| **rope_apply** (v7 split) | ~5,800 | none (pure stdcell) | 800×800 | 17% | **0** | **-1.20** | **192** |
 | embed_rom | 32,365 | 1× nor_rom_65536x192 (internal mux) | 1900×2400 | 78% | **0** | -3.63 | 131 |
 | vector_unit | 790,947 | 2× nor_rom_4096x1024 | 4000×5500 | 55% | 488 | -17.68 | 43 |
 
@@ -50,13 +52,34 @@
   - **`[[memory]]` annotations + new SRAM macros (`sram_4096x16`, `sram_256x16`)** — `rmsnorm._gamma[4096]` was gate-synthesizing into ~65,000 individual flip-flops because the array was a plain `uint16[4096]` (no `[[memory]]` annotation, no matching HAL macro). Same story for `swiglu._sigmoid_lut[256]` and `lut_interp._table[256]`. After the annotation + adding two new SRAM macros to the HAL: **rmsnorm cell area 2.95 → 0.19 mm² (-94%), die 5.51 → 1.44 mm² (-74%), WNS -2.03 → -0.87 ns, fmax 166 → 205 MHz.** **lut_interp 0.32 → 0.07 mm² (-78%), die 0.54 → 0.25 mm² (-54%), WNS -0.41 → +0.05 ns (MET), fmax 227 → 253 MHz.** **swiglu 0.32 → 0.12 mm² (-64%), die 0.60 → 0.49 mm² (-18%) — the only timing regression (-1.42 → -2.40 ns) because the SyncRam read latency disrupted the schedule(7) pipeline.**
   - **`rom_bank` die-shrink** — was 25% utilization at 2400×2400 (5.76 mm²). Tightened to 1500×1500 with PLACE_DENSITY_LB_ADDON=0.10. Result: **5.76 → 2.25 mm² (-61%), 0 DRC, WNS -2.35 → -2.01 ns (better), fmax 157 → 167 MHz.** Same 880-pin macro, just less wasted whitespace.
   - **Combined v5 savings: 12.4 mm² (rmsnorm + swiglu + lut_interp + rom_bank old dies) → 4.4 mm² (-64%, 8 mm² saved on these four modules alone).**
+- *v7 (RoPE table/datapath split):* Monolithic `rope.k` carried both the 8.4 Mbit cos/sin tables AND the 1024-bit BF16 rotate datapath in one tile. Macro-edge congestion fought the rotate logic for routing space, capping fmax at 122 MHz with 418 DRC. Split into two separately-hardenable Kanagawa modules: `rope_gen.k` (chip-level, owns 2× nor_rom_4096x1024 macros, ~5K cells, broadcasts 1024-bit cos/sin bus) + `rope_apply.k` (per-layer, pure stdcell BF16 rotate at `[[schedule(8)]]`). The split needed three coordinated edits: (1) two new exported `.k` modules, (2) remove `_cos_table`/`_sin_table` and `rope_read/write_*` methods from `vector_unit.k` (delegated to rope_gen), (3) two new ORFS configs with dedicated SDC. **Results: rope_gen 350 DRC / -2.79 ns / 147 MHz (vs legacy rope: 418 / -4.14 / 122 — better on all 3 axes), rope_apply 0 DRC / -1.20 ns / 192 MHz at 800×800.** Total area 9.90 → 10.54 mm² (+6%) but +20% layer fmax + cleaner DRC convergence. Trap encountered: tried rope_gen at 3000×2400 (smaller than rope's 3000×3300) thinking fewer cells = smaller die — wrong. Pin congestion is cell-count-independent; the 2× 1024-bit dout buses need the same pin escape area regardless of internal cell count. GRT entered 8-NDR-disable death spiral, even disabling root `clknet_0_clk` NDR. Resized back to 3000×3300, GRT exited cleanly with 4 NDR disables, DRT converged in ~3.5h. **Sets up multi-layer scaling**: future N-layer chip broadcasts 1× rope_gen → N× rope_apply, saving (N-1)×9.9 mm² of duplicated ROM. The single-layer chip sees +6% area but +20% fmax — the win compounds with layer count.
 
-### Rendered Floorplans
+### Full-Chip Floorplan
 
-| rom_bank (2.4×2.4 mm) | mac_array (2.5×3 mm) | rope (3×3.3 mm, fold=2 macros mirrored) |
+![full chip floorplan](images/full_chip_floorplan.png)
+
+Hierarchical chip layout (~10.5 × 7.7 mm = 80 mm² total) showing all 21 hardened
+tiles to scale. Three tiers organized by macro complexity:
+
+- **Top tier** — folded NOR ROM tiles (`embed_rom`, `lm_head_demo`)
+- **Middle tier** — large macro-bearing tiles (`rope_gen`, `mac_array`, `rom_bank`)
+- **Bottom tier** — pure stdcell + small SRAM tiles
+
+Red arrow shows the **rope_gen → rope_apply broadcast bus** (2× 1024-bit cos/sin),
+the critical inter-tile path that drove the v7 SDC tuning (40% input_delay budget).
+Tiles with red borders indicate residual DRC or PnR-pending status.
+
+### Rendered Floorplans (per-tile)
+
+| rom_bank (2.4×2.4 mm) | mac_array (2.5×3 mm) | rope (legacy, 3×3.3 mm, fold=2 macros mirrored) |
 |:---:|:---:|:---:|
 | ![rom_bank](images/rom_bank_final.png) | ![mac_array](images/mac_array_final.png) | ![rope](images/rope_final.png) |
 | 1× NOR ROM centered | 1× NOR ROM centered | 2× NOR ROM (mirrored, dout faces die edges) |
+
+| **rope_gen (v7, 3×3.3 mm)** | **rope_apply (v7, 0.8×0.8 mm)** |
+|:---:|:---:|
+| ![rope_gen](images/rope_gen_final.png) | ![rope_apply](images/rope_apply_final.png) |
+| 2× NOR ROM, ~5K cells, 350 DRC, 147 MHz | Pure stdcell, 5.8K cells, **0 DRC, 192 MHz** |
 
 | vector_unit (4×5.5 mm) | kv_cache_demo (0.60×0.71 mm) |
 |:---:|:---:|
