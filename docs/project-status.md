@@ -4,7 +4,7 @@
 
 Open-source LLM inference ASIC targeting sky130hd PDK. Kanagawa HLS → SystemVerilog RTL → Verilator co-simulation verification → OpenROAD synthesis and place-and-route.
 
-## Current State (2026-04-30)
+## Current State (2026-05-06)
 
 ### Hardware Verification: COMPLETE
 All RTL modules verified against SystemC reference models with **100% exact match**.
@@ -20,6 +20,51 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 | SwiGLU activation | 0.998585 |
 | Down projection | 0.995683 |
 | Post-MLP residual | 0.999701 |
+
+### Multi-Layer Floorplan (v8 — K=2 cascaded RoPE)
+
+The v8 round adds **physical layer parallelism** scaffolding for K=2 (or K=3) hardened transformer layers in parallel. Key architectural change: **cascaded** cos/sin instead of broadcast — `rope_gen → L0.rope_apply → L1.rope_apply → ...` with each layer registering its inputs and forwarding to the next. Each cascade hop is ≤ 1 mm in the floorplan vs. v7's ~5 mm broadcast bus.
+
+**Implemented**:
+- `rope_apply.k` adds cos_out/sin_out 1-cycle pass-through (forward_cos/sin + read_*_forwarded methods)
+- `llama_chip.k` FSM grows K-way dispatch helpers (decode_get_layer_slot_k2/k3)
+- `rtl/sv/multi_layer_chip_wrapper.sv` shows the cascade chain at SV level
+- `mac_array` re-PnR'd at 1800×2400 (was 2500×3000) — **0 DRC** (was 641 in v6)
+- `rope_apply` re-PnR'd at 2800×2800 with cascade ports (was 800×800 in v7) — **0 DRC**, fmax 128 MHz
+- `flow/designs/sky130hd/multi_layer_chip/` ORFS skeleton config registered
+- `docs/images/multi_layer_floorplan.png` synthetic figure
+
+The cascade infrastructure is expensive: rope_apply cell count grew 5× (Kanagawa pipelines 1024-bit data through multiple FIFO stages); die went from 0.64 → 7.84 mm² (12×). Trade-off accepted because the architecture eliminates the 2048-pin broadcast bus across the chip and scales to any K without rope_gen retopology.
+
+Full multi-layer hierarchical PnR (transformer_layer_block × 2 + chip-singletons) is the next concrete step — the source-level wrapper, ORFS configs, and cascade chain are all in place.
+
+### Hierarchical PnR Scaffold (v9 — first integration test)
+
+The v9 round establishes the **hierarchical PnR pattern** for multi-tile chips. Goal: stop running flat ORFS PnR on 100K+ cell designs (which hang in `repair_design` for days), and instead instantiate hardened tiles as black-box macros at the chip top level.
+
+**What's done:**
+- `rope_gen` and `rope_apply` abstract LEF/Liberty extracted via OpenROAD `write_abstract_lef` + `write_timing_model` from each tile's existing PnR results.
+- Tile collateral staged in `flow/macros/sky130hd/` (`.lef`, `.lib`, `.gds` for rope_apply; LEF+LIB for rope_gen since that tile didn't reach `6_final`).
+- Black-box stubs `rope_gen.bb.v` and `rope_apply.bb.v` declare module ports for Yosys.
+- `multi_layer_chip` config switched: tile internal SV REMOVED from `VERILOG_FILES`, added `EQUIVALENCE_CHECK=0`, `LEC_CHECK=0`, `DONT_BUFFER_PORTS=1`, `GPL_TIMING_DRIVEN=0`.
+- macro_place.tcl places 1× rope_gen (TOP band, x=1500..4500, y=3189..6489) + 2× rope_apply (BOTTOM band, side-by-side at x=200..3000 and x=3100..5900) with per-master matching.
+
+**Validated through CTS in under 3 minutes** (vs flat PnR which hangs for days):
+
+| Stage | Time | Status |
+|-------|------|--------|
+| 1_synth | 1s | 4 stdcells + 3 macro instances (vs flat: 302K stdcells) |
+| 2_floorplan + PDN | 30s | clean (after re-genned abstract LEF without `-bloat_occupied_layers`) |
+| 3_place | 36s | 0 violations |
+| 4_cts | 100s | 89 buffers, 1036 hold buffers — WNS=-13.88, TNS=-58K (chip cascade SDC too tight) |
+| 5_grt | blocked | DRT-0073 pin access on rope_apply boundary pins (next step: re-PnR rope_apply with edge keepout) |
+
+**Lessons (saved to `feedback_hierarchical_pnr.md`):**
+- `-bloat_occupied_layers` makes the abstract block met4/met5 entirely → PDN-0232/PDN-0233. Use default (pin-aware OBS) instead.
+- `EQUIVALENCE_CHECK=0 + LEC_CHECK=0` mandatory — abstract LIB has no truth tables, KeplerFormal asserts otherwise.
+- `DONT_BUFFER_PORTS=1` mandatory — top-level pass-through has 12K+ cascade ports; default port buffering inserts hundreds of thousands of buffers.
+- Per-master macro placement (not per-instance) — instance names change with Yosys runs.
+- Tile pins need ≥ 5µm keepout from macro boundary, otherwise GRT fails to find access points.
 
 ### Backend PnR: 21 routed through DRT (9 logic-only + 10 macro-bearing + 2 academic demos)
 
@@ -49,10 +94,10 @@ Real-data verification at full LLaMA 3.1 8B dimensions (DIM=4096, HEADS=32, KV_H
 | **swiglu** (s8) | **3× sram_256x16** | **700×700** | 25% | **0** | -2.36 | 157 |
 | **codebook_decoder** | **5× sram_512x32** | **800×800** | 30% | **0** | **-0.02 MET** | **249** |
 | rom_bank | 1× nor_rom_1024x880 | 1500×1500 | 63% | **0** | -2.01 | 167 |
-| mac_array | 1× nor_rom_1024x880 | 2500×3000 | 31% | 641 | -3.88 | 127 |
+| **mac_array** (v8) | 1× nor_rom_1024x880 + 1× sram_512x32 | **1800×2400** | 36% | **0** | -3.67 | **130** |
 | rope (legacy) | 2× nor_rom_4096x1024 (fold=2, mirrored) | 3000×3300 | 72% | 418 | -4.14 | 122 |
-| **rope_gen** (v7 split) | **2× nor_rom_4096x1024 (fold=2, mirrored)** | **3000×3300** | 72% | **350** | **-2.79** | **147** |
-| **rope_apply** (v7 split) | none (pure stdcell) | **800×800** | **17%** | **0** | **-1.20** | **192** |
+| **rope_gen** (v8) | 2× nor_rom_4096x1024 (fold=2, mirrored) | 3000×3300 | 72% | 357 | -2.79 | 147 |
+| **rope_apply** (v8 cascade) | none (pure stdcell + 2× 1024-bit pass-through reg) | **2800×2800** | 35% | **0** | -3.78 | **128** |
 | embed_rom | 1× nor_rom_65536x192 (internal mux) | 1900×2400 | 78% | **0** | -3.63 | 131 |
 | vector_unit ⚠️ | 4× SRAM + 2× nor_rom_4096x1024 | 3000×3500 | TBD | TBD | TBD | TBD |
 | kv_cache_demo | 4× sram_8192x8 (col_mux=32) | 595×705 | 87% | **0** | -0.34 | 230 |

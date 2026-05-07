@@ -84,6 +84,9 @@ add_orfs_design(NAME lm_head           PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_
 add_orfs_design(NAME global_controller PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/global_controller")
 add_orfs_design(NAME llama_chip        PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/llama_chip")
 
+# v8 multi-layer (K=2) chip — cascade integration test
+add_orfs_design(NAME multi_layer_chip  PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/multi_layer_chip")
+
 # --- Aggregate target ---
 add_custom_target(backend_all
   DEPENDS

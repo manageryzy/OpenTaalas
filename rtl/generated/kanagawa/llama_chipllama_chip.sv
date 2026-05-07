@@ -45,6 +45,34 @@ module llama_chipDebugView_decode_get_layerExit
     `endif // KANAGAWA_PRINT_DEBUG_VIEW
     assign valid_out = valid;
 endmodule
+module llama_chipDebugView_decode_get_layer_slot_k2Exit
+(
+    input wire clk,
+    input wire _ReturnValue,
+    input wire valid,
+    output logic valid_out
+);
+    `ifdef KANAGAWA_PRINT_DEBUG_VIEW
+        always_ff @(posedge clk) begin
+            if (valid) $display("decode_get_layer_slot_k2Exit time: %0t ReturnValue: %p", $time, _ReturnValue);
+        end
+    `endif // KANAGAWA_PRINT_DEBUG_VIEW
+    assign valid_out = valid;
+endmodule
+module llama_chipDebugView_decode_get_layer_slot_k3Exit
+(
+    input wire clk,
+    input wire[1:0]  _ReturnValue,
+    input wire valid,
+    output logic valid_out
+);
+    `ifdef KANAGAWA_PRINT_DEBUG_VIEW
+        always_ff @(posedge clk) begin
+            if (valid) $display("decode_get_layer_slot_k3Exit time: %0t ReturnValue: %p", $time, _ReturnValue);
+        end
+    `endif // KANAGAWA_PRINT_DEBUG_VIEW
+    assign valid_out = valid;
+endmodule
 module llama_chipDebugView_set_outputEntry
 (
     input wire clk,
@@ -118,14 +146,14 @@ endmodule
 `ifndef _TYPESCOPE_CoreModuleTypeScope
 `define _TYPESCOPE_CoreModuleTypeScope
 `endif // _TYPESCOPE_CoreModuleTypeScope
-module llama_chip_reset_BasicBlock_0(	// llama_chip.k:117:9
+module llama_chip_reset_BasicBlock_0(	// llama_chip.k:146:9
   input  wire       clk,
   input  wire       rst,
   output wire       done_out,
-  output wire       global_out__state_8_2_valid,
-  output wire       global_out__token_count_9_1_valid,
-  output wire       global_out__output_token_10_1_valid,
-  output wire       global_out__current_layer_11_2_valid,
+  output wire       global_out__state_10_2_valid,
+  output wire       global_out__token_count_11_1_valid,
+  output wire       global_out__output_token_12_1_valid,
+  output wire       global_out__current_layer_13_2_valid,
   output wire       fifo_wren_0,
   input  wire       fifo_almost_full_in_raw_0,
   input  wire       fifo_overflow_in_0,
@@ -137,51 +165,51 @@ module llama_chip_reset_BasicBlock_0(	// llama_chip.k:117:9
 
   wire        _fifo_overflow_ffc_0_data_out;
   wire        _fifo_almostfull_ffc_0_data_out;
-  logic       done_out_0;	// llama_chip.k:117:9
-  logic       global_out__state_8_2_valid_0;	// llama_chip.k:117:9
-  logic       global_out__token_count_9_1_valid_0;	// llama_chip.k:117:9
-  logic       global_out__output_token_10_1_valid_0;	// llama_chip.k:117:9
-  logic       global_out__current_layer_11_2_valid_0;	// llama_chip.k:117:9
-  logic       fifo_wren_0_0;	// llama_chip.k:117:9
-  logic       input_rdy_0_0;	// llama_chip.k:117:9
-  logic [7:0] control_state_out_0;	// llama_chip.k:117:9
-  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:117:9
-  always_comb begin	// llama_chip.k:117:9
-    input_rdy_0_0 = _GEN;	// llama_chip.k:117:9
+  logic       done_out_0;	// llama_chip.k:146:9
+  logic       global_out__state_10_2_valid_0;	// llama_chip.k:146:9
+  logic       global_out__token_count_11_1_valid_0;	// llama_chip.k:146:9
+  logic       global_out__output_token_12_1_valid_0;	// llama_chip.k:146:9
+  logic       global_out__current_layer_13_2_valid_0;	// llama_chip.k:146:9
+  logic       fifo_wren_0_0;	// llama_chip.k:146:9
+  logic       input_rdy_0_0;	// llama_chip.k:146:9
+  logic [7:0] control_state_out_0;	// llama_chip.k:146:9
+  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:146:9
+  always_comb begin	// llama_chip.k:146:9
+    input_rdy_0_0 = _GEN;	// llama_chip.k:146:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// llama_chip.k:117:9
+       ~input_valid_0};	// llama_chip.k:146:9
   end // always_comb
-  reg         p0_stage1_enable = 1'h0;	// llama_chip.k:117:9
-  always_comb begin	// llama_chip.k:117:9
-    global_out__state_8_2_valid_0 = p0_stage1_enable;	// llama_chip.k:117:9
-    global_out__token_count_9_1_valid_0 = p0_stage1_enable;	// llama_chip.k:117:9
-    global_out__output_token_10_1_valid_0 = p0_stage1_enable;	// llama_chip.k:117:9
-    global_out__current_layer_11_2_valid_0 = p0_stage1_enable;	// llama_chip.k:117:9
+  reg         p0_stage1_enable = 1'h0;	// llama_chip.k:146:9
+  always_comb begin	// llama_chip.k:146:9
+    global_out__state_10_2_valid_0 = p0_stage1_enable;	// llama_chip.k:146:9
+    global_out__token_count_11_1_valid_0 = p0_stage1_enable;	// llama_chip.k:146:9
+    global_out__output_token_12_1_valid_0 = p0_stage1_enable;	// llama_chip.k:146:9
+    global_out__current_layer_13_2_valid_0 = p0_stage1_enable;	// llama_chip.k:146:9
   end // always_comb
-  reg         p0_stage2_enable = 1'h0;	// llama_chip.k:117:9
-  always @(posedge clk) begin	// llama_chip.k:117:9
-    if (rst) begin	// llama_chip.k:117:9
-      p0_stage1_enable <= 1'h0;	// llama_chip.k:117:9
-      p0_stage2_enable <= 1'h0;	// llama_chip.k:117:9
+  reg         p0_stage2_enable = 1'h0;	// llama_chip.k:146:9
+  always @(posedge clk) begin	// llama_chip.k:146:9
+    if (rst) begin	// llama_chip.k:146:9
+      p0_stage1_enable <= 1'h0;	// llama_chip.k:146:9
+      p0_stage2_enable <= 1'h0;	// llama_chip.k:146:9
     end
-    else begin	// llama_chip.k:117:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:117:9
-      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:117:9
+    else begin	// llama_chip.k:146:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:146:9
+      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:146:9
     end
   end // always @(posedge)
-  always_comb	// llama_chip.k:117:9
-    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:117:9, :126:9
+  always_comb	// llama_chip.k:146:9
+    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:146:9, :155:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:117:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:146:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -189,24 +217,24 @@ module llama_chip_reset_BasicBlock_0(	// llama_chip.k:117:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:117:9
+    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:146:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  assign done_out = p0_stage2_enable;	// llama_chip.k:117:9
-  assign global_out__state_8_2_valid = global_out__state_8_2_valid_0;	// llama_chip.k:117:9
-  assign global_out__token_count_9_1_valid = global_out__token_count_9_1_valid_0;	// llama_chip.k:117:9
-  assign global_out__output_token_10_1_valid = global_out__output_token_10_1_valid_0;	// llama_chip.k:117:9
-  assign global_out__current_layer_11_2_valid = global_out__current_layer_11_2_valid_0;	// llama_chip.k:117:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:117:9
-  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:117:9
-  assign control_state_out = control_state_out_0;	// llama_chip.k:117:9
+  assign done_out = p0_stage2_enable;	// llama_chip.k:146:9
+  assign global_out__state_10_2_valid = global_out__state_10_2_valid_0;	// llama_chip.k:146:9
+  assign global_out__token_count_11_1_valid = global_out__token_count_11_1_valid_0;	// llama_chip.k:146:9
+  assign global_out__output_token_12_1_valid = global_out__output_token_12_1_valid_0;	// llama_chip.k:146:9
+  assign global_out__current_layer_13_2_valid = global_out__current_layer_13_2_valid_0;	// llama_chip.k:146:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:146:9
+  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:146:9
+  assign control_state_out = control_state_out_0;	// llama_chip.k:146:9
 endmodule
 
-module llama_chip_get_token_count_BasicBlock_0(	// llama_chip.k:111:9
+module llama_chip_get_token_count_BasicBlock_0(	// llama_chip.k:140:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  input  wire [11:0] global_in__token_count_9,
+  input  wire [11:0] global_in__token_count_11,
   output wire [11:0] fifo_data_out_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
@@ -219,47 +247,47 @@ module llama_chip_get_token_count_BasicBlock_0(	// llama_chip.k:111:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [11:0] global_in__token_count_9_0 = global_in__token_count_9;	// llama_chip.k:111:9
-  logic        done_out_0;	// llama_chip.k:111:9
-  logic [11:0] fifo_data_out_0_0;	// llama_chip.k:111:9
-  logic        fifo_wren_0_0;	// llama_chip.k:111:9
-  logic        input_rdy_0_0;	// llama_chip.k:111:9
-  logic [7:0]  control_state_out_0;	// llama_chip.k:111:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:111:9
-  always_comb begin	// llama_chip.k:111:9
-    input_rdy_0_0 = _GEN;	// llama_chip.k:111:9
+  wire  [11:0] global_in__token_count_11_0 = global_in__token_count_11;	// llama_chip.k:140:9
+  logic        done_out_0;	// llama_chip.k:140:9
+  logic [11:0] fifo_data_out_0_0;	// llama_chip.k:140:9
+  logic        fifo_wren_0_0;	// llama_chip.k:140:9
+  logic        input_rdy_0_0;	// llama_chip.k:140:9
+  logic [7:0]  control_state_out_0;	// llama_chip.k:140:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:140:9
+  always_comb begin	// llama_chip.k:140:9
+    input_rdy_0_0 = _GEN;	// llama_chip.k:140:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// llama_chip.k:111:9
+       ~input_valid_0};	// llama_chip.k:140:9
   end // always_comb
-  reg          p0_stage1_enable = 1'h0;	// llama_chip.k:111:9
-  reg   [11:0] p0_global_in__token_count_9;	// llama_chip.k:111:9
-  reg          p0_stage2_enable = 1'h0;	// llama_chip.k:111:9
-  always @(posedge clk) begin	// llama_chip.k:111:9
-    if (rst)	// llama_chip.k:111:9
-      p0_stage1_enable <= 1'h0;	// llama_chip.k:111:9
-    else	// llama_chip.k:111:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:111:9
-    p0_global_in__token_count_9 <= global_in__token_count_9_0;	// llama_chip.k:111:9
-    if (rst)	// llama_chip.k:111:9
-      p0_stage2_enable <= 1'h0;	// llama_chip.k:111:9
-    else	// llama_chip.k:111:9
-      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:111:9
+  reg          p0_stage1_enable = 1'h0;	// llama_chip.k:140:9
+  reg   [11:0] p0_global_in__token_count_11;	// llama_chip.k:140:9
+  reg          p0_stage2_enable = 1'h0;	// llama_chip.k:140:9
+  always @(posedge clk) begin	// llama_chip.k:140:9
+    if (rst)	// llama_chip.k:140:9
+      p0_stage1_enable <= 1'h0;	// llama_chip.k:140:9
+    else	// llama_chip.k:140:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:140:9
+    p0_global_in__token_count_11 <= global_in__token_count_11_0;	// llama_chip.k:140:9
+    if (rst)	// llama_chip.k:140:9
+      p0_stage2_enable <= 1'h0;	// llama_chip.k:140:9
+    else	// llama_chip.k:140:9
+      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:140:9
   end // always @(posedge)
-  always_comb begin	// llama_chip.k:111:9
-    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:109:5, :111:9
-    fifo_data_out_0_0 = p0_global_in__token_count_9;	// llama_chip.k:109:5, :111:9
+  always_comb begin	// llama_chip.k:140:9
+    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:138:5, :140:9
+    fifo_data_out_0_0 = p0_global_in__token_count_11;	// llama_chip.k:138:5, :140:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:111:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:140:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -267,27 +295,27 @@ module llama_chip_get_token_count_BasicBlock_0(	// llama_chip.k:111:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:111:9
+    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:140:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  llama_chipDebugView_get_token_countExit llama_chipDebugView_get_token_countExit_instance (	// llama_chip.k:109:5
-    .clk          (clk),	// llama_chip.k:109:5
-    ._ReturnValue (p0_stage1_enable ? global_in__token_count_9_0 : 'x),	// llama_chip.k:109:5, :111:9
-    .valid        (p0_stage1_enable),	// llama_chip.k:111:9
+  llama_chipDebugView_get_token_countExit llama_chipDebugView_get_token_countExit_instance (	// llama_chip.k:138:5
+    .clk          (clk),	// llama_chip.k:138:5
+    ._ReturnValue (p0_stage1_enable ? global_in__token_count_11_0 : 'x),	// llama_chip.k:138:5, :140:9
+    .valid        (p0_stage1_enable),	// llama_chip.k:140:9
     .valid_out    (/* unused */)
-  );	// llama_chip.k:109:5
-  assign done_out = p0_stage2_enable;	// llama_chip.k:111:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// llama_chip.k:111:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:111:9
-  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:111:9
-  assign control_state_out = control_state_out_0;	// llama_chip.k:111:9
+  );	// llama_chip.k:138:5
+  assign done_out = p0_stage2_enable;	// llama_chip.k:140:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// llama_chip.k:140:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:140:9
+  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:140:9
+  assign control_state_out = control_state_out_0;	// llama_chip.k:140:9
 endmodule
 
-module llama_chip_is_output_ready_BasicBlock_0(	// llama_chip.k:105:9
+module llama_chip_is_output_ready_BasicBlock_0(	// llama_chip.k:134:9
   input  wire       clk,
   input  wire       rst,
   output wire       done_out,
-  input  wire [5:0] global_in__state_8,
+  input  wire [5:0] global_in__state_10,
   output wire       fifo_data_out_0,
   output wire       fifo_wren_0,
   input  wire       fifo_almost_full_in_raw_0,
@@ -300,50 +328,50 @@ module llama_chip_is_output_ready_BasicBlock_0(	// llama_chip.k:105:9
 
   wire        _fifo_overflow_ffc_0_data_out;
   wire        _fifo_almostfull_ffc_0_data_out;
-  wire  [5:0] global_in__state_8_0 = global_in__state_8;	// llama_chip.k:105:9
-  logic       done_out_0;	// llama_chip.k:105:9
-  logic       fifo_data_out_0_0;	// llama_chip.k:105:9
-  logic       fifo_wren_0_0;	// llama_chip.k:105:9
-  logic       input_rdy_0_0;	// llama_chip.k:105:9
-  logic [7:0] control_state_out_0;	// llama_chip.k:105:9
-  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:105:9
-  always_comb begin	// llama_chip.k:105:9
-    input_rdy_0_0 = _GEN;	// llama_chip.k:105:9
+  wire  [5:0] global_in__state_10_0 = global_in__state_10;	// llama_chip.k:134:9
+  logic       done_out_0;	// llama_chip.k:134:9
+  logic       fifo_data_out_0_0;	// llama_chip.k:134:9
+  logic       fifo_wren_0_0;	// llama_chip.k:134:9
+  logic       input_rdy_0_0;	// llama_chip.k:134:9
+  logic [7:0] control_state_out_0;	// llama_chip.k:134:9
+  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:134:9
+  always_comb begin	// llama_chip.k:134:9
+    input_rdy_0_0 = _GEN;	// llama_chip.k:134:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// llama_chip.k:105:9
+       ~input_valid_0};	// llama_chip.k:134:9
   end // always_comb
-  reg         p0_stage1_enable = 1'h0;	// llama_chip.k:105:9
+  reg         p0_stage1_enable = 1'h0;	// llama_chip.k:134:9
   wire        _state_eq_35_ =
-    global_in__state_8_0[5] & ~(global_in__state_8_0[4]) & ~(global_in__state_8_0[3])
-    & ~(global_in__state_8_0[2]) & global_in__state_8_0[1] & global_in__state_8_0[0];	// llama_chip.k:105:{9,16}
-  reg         p0__state_eq_35_;	// llama_chip.k:105:9
-  reg         p0_stage2_enable = 1'h0;	// llama_chip.k:105:9
-  always @(posedge clk) begin	// llama_chip.k:105:9
-    if (rst)	// llama_chip.k:105:9
-      p0_stage1_enable <= 1'h0;	// llama_chip.k:105:9
-    else	// llama_chip.k:105:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:105:9
-    p0__state_eq_35_ <= _state_eq_35_;	// llama_chip.k:105:{9,16}
-    if (rst)	// llama_chip.k:105:9
-      p0_stage2_enable <= 1'h0;	// llama_chip.k:105:9
-    else	// llama_chip.k:105:9
-      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:105:9
+    global_in__state_10_0[5] & ~(global_in__state_10_0[4]) & ~(global_in__state_10_0[3])
+    & ~(global_in__state_10_0[2]) & global_in__state_10_0[1] & global_in__state_10_0[0];	// llama_chip.k:134:{9,16}
+  reg         p0__state_eq_35_;	// llama_chip.k:134:9
+  reg         p0_stage2_enable = 1'h0;	// llama_chip.k:134:9
+  always @(posedge clk) begin	// llama_chip.k:134:9
+    if (rst)	// llama_chip.k:134:9
+      p0_stage1_enable <= 1'h0;	// llama_chip.k:134:9
+    else	// llama_chip.k:134:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:134:9
+    p0__state_eq_35_ <= _state_eq_35_;	// llama_chip.k:134:{9,16}
+    if (rst)	// llama_chip.k:134:9
+      p0_stage2_enable <= 1'h0;	// llama_chip.k:134:9
+    else	// llama_chip.k:134:9
+      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:134:9
   end // always @(posedge)
-  always_comb begin	// llama_chip.k:105:9
-    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:103:5, :105:9
-    fifo_data_out_0_0 = p0__state_eq_35_;	// llama_chip.k:103:5, :105:9
+  always_comb begin	// llama_chip.k:134:9
+    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:132:5, :134:9
+    fifo_data_out_0_0 = p0__state_eq_35_;	// llama_chip.k:132:5, :134:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:105:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:134:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -351,27 +379,27 @@ module llama_chip_is_output_ready_BasicBlock_0(	// llama_chip.k:105:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:105:9
+    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:134:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  llama_chipDebugView_is_output_readyExit llama_chipDebugView_is_output_readyExit_instance (	// llama_chip.k:103:5
-    .clk          (clk),	// llama_chip.k:103:5
-    ._ReturnValue (p0_stage1_enable ? _state_eq_35_ : 'x),	// llama_chip.k:103:5, :105:{9,16}
-    .valid        (p0_stage1_enable),	// llama_chip.k:105:9
+  llama_chipDebugView_is_output_readyExit llama_chipDebugView_is_output_readyExit_instance (	// llama_chip.k:132:5
+    .clk          (clk),	// llama_chip.k:132:5
+    ._ReturnValue (p0_stage1_enable ? _state_eq_35_ : 'x),	// llama_chip.k:132:5, :134:{9,16}
+    .valid        (p0_stage1_enable),	// llama_chip.k:134:9
     .valid_out    (/* unused */)
-  );	// llama_chip.k:103:5
-  assign done_out = p0_stage2_enable;	// llama_chip.k:105:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// llama_chip.k:105:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:105:9
-  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:105:9
-  assign control_state_out = control_state_out_0;	// llama_chip.k:105:9
+  );	// llama_chip.k:132:5
+  assign done_out = p0_stage2_enable;	// llama_chip.k:134:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// llama_chip.k:134:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:134:9
+  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:134:9
+  assign control_state_out = control_state_out_0;	// llama_chip.k:134:9
 endmodule
 
-module llama_chip_is_idle_BasicBlock_0(	// llama_chip.k:99:9
+module llama_chip_is_idle_BasicBlock_0(	// llama_chip.k:128:9
   input  wire       clk,
   input  wire       rst,
   output wire       done_out,
-  input  wire [5:0] global_in__state_8,
+  input  wire [5:0] global_in__state_10,
   output wire       fifo_data_out_0,
   output wire       fifo_wren_0,
   input  wire       fifo_almost_full_in_raw_0,
@@ -384,51 +412,51 @@ module llama_chip_is_idle_BasicBlock_0(	// llama_chip.k:99:9
 
   wire        _fifo_overflow_ffc_0_data_out;
   wire        _fifo_almostfull_ffc_0_data_out;
-  wire  [5:0] global_in__state_8_0 = global_in__state_8;	// llama_chip.k:99:9
-  logic       done_out_0;	// llama_chip.k:99:9
-  logic       fifo_data_out_0_0;	// llama_chip.k:99:9
-  logic       fifo_wren_0_0;	// llama_chip.k:99:9
-  logic       input_rdy_0_0;	// llama_chip.k:99:9
-  logic [7:0] control_state_out_0;	// llama_chip.k:99:9
-  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:99:9
-  always_comb begin	// llama_chip.k:99:9
-    input_rdy_0_0 = _GEN;	// llama_chip.k:99:9
+  wire  [5:0] global_in__state_10_0 = global_in__state_10;	// llama_chip.k:128:9
+  logic       done_out_0;	// llama_chip.k:128:9
+  logic       fifo_data_out_0_0;	// llama_chip.k:128:9
+  logic       fifo_wren_0_0;	// llama_chip.k:128:9
+  logic       input_rdy_0_0;	// llama_chip.k:128:9
+  logic [7:0] control_state_out_0;	// llama_chip.k:128:9
+  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:128:9
+  always_comb begin	// llama_chip.k:128:9
+    input_rdy_0_0 = _GEN;	// llama_chip.k:128:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// llama_chip.k:99:9
+       ~input_valid_0};	// llama_chip.k:128:9
   end // always_comb
-  reg         p0_stage1_enable = 1'h0;	// llama_chip.k:99:9
+  reg         p0_stage1_enable = 1'h0;	// llama_chip.k:128:9
   wire        _state_eq_0_ =
-    ~(global_in__state_8_0[5]) & ~(global_in__state_8_0[4]) & ~(global_in__state_8_0[3])
-    & ~(global_in__state_8_0[2]) & ~(global_in__state_8_0[1])
-    & ~(global_in__state_8_0[0]);	// llama_chip.k:99:{9,16}
-  reg         p0__state_eq_0_;	// llama_chip.k:99:9
-  reg         p0_stage2_enable = 1'h0;	// llama_chip.k:99:9
-  always @(posedge clk) begin	// llama_chip.k:99:9
-    if (rst)	// llama_chip.k:99:9
-      p0_stage1_enable <= 1'h0;	// llama_chip.k:99:9
-    else	// llama_chip.k:99:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:99:9
-    p0__state_eq_0_ <= _state_eq_0_;	// llama_chip.k:99:{9,16}
-    if (rst)	// llama_chip.k:99:9
-      p0_stage2_enable <= 1'h0;	// llama_chip.k:99:9
-    else	// llama_chip.k:99:9
-      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:99:9
+    ~(global_in__state_10_0[5]) & ~(global_in__state_10_0[4])
+    & ~(global_in__state_10_0[3]) & ~(global_in__state_10_0[2])
+    & ~(global_in__state_10_0[1]) & ~(global_in__state_10_0[0]);	// llama_chip.k:128:{9,16}
+  reg         p0__state_eq_0_;	// llama_chip.k:128:9
+  reg         p0_stage2_enable = 1'h0;	// llama_chip.k:128:9
+  always @(posedge clk) begin	// llama_chip.k:128:9
+    if (rst)	// llama_chip.k:128:9
+      p0_stage1_enable <= 1'h0;	// llama_chip.k:128:9
+    else	// llama_chip.k:128:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:128:9
+    p0__state_eq_0_ <= _state_eq_0_;	// llama_chip.k:128:{9,16}
+    if (rst)	// llama_chip.k:128:9
+      p0_stage2_enable <= 1'h0;	// llama_chip.k:128:9
+    else	// llama_chip.k:128:9
+      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:128:9
   end // always @(posedge)
-  always_comb begin	// llama_chip.k:99:9
-    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:97:5, :99:9
-    fifo_data_out_0_0 = p0__state_eq_0_;	// llama_chip.k:97:5, :99:9
+  always_comb begin	// llama_chip.k:128:9
+    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:126:5, :128:9
+    fifo_data_out_0_0 = p0__state_eq_0_;	// llama_chip.k:126:5, :128:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:99:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:128:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -436,27 +464,27 @@ module llama_chip_is_idle_BasicBlock_0(	// llama_chip.k:99:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:99:9
+    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:128:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  llama_chipDebugView_is_idleExit llama_chipDebugView_is_idleExit_instance (	// llama_chip.k:97:5
-    .clk          (clk),	// llama_chip.k:97:5
-    ._ReturnValue (p0_stage1_enable ? _state_eq_0_ : 'x),	// llama_chip.k:97:5, :99:{9,16}
-    .valid        (p0_stage1_enable),	// llama_chip.k:99:9
+  llama_chipDebugView_is_idleExit llama_chipDebugView_is_idleExit_instance (	// llama_chip.k:126:5
+    .clk          (clk),	// llama_chip.k:126:5
+    ._ReturnValue (p0_stage1_enable ? _state_eq_0_ : 'x),	// llama_chip.k:126:5, :128:{9,16}
+    .valid        (p0_stage1_enable),	// llama_chip.k:128:9
     .valid_out    (/* unused */)
-  );	// llama_chip.k:97:5
-  assign done_out = p0_stage2_enable;	// llama_chip.k:99:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// llama_chip.k:99:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:99:9
-  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:99:9
-  assign control_state_out = control_state_out_0;	// llama_chip.k:99:9
+  );	// llama_chip.k:126:5
+  assign done_out = p0_stage2_enable;	// llama_chip.k:128:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// llama_chip.k:128:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:128:9
+  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:128:9
+  assign control_state_out = control_state_out_0;	// llama_chip.k:128:9
 endmodule
 
-module llama_chip_get_output_BasicBlock_0(	// llama_chip.k:93:9
+module llama_chip_get_output_BasicBlock_0(	// llama_chip.k:122:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  input  wire [16:0] global_in__output_token_10,
+  input  wire [16:0] global_in__output_token_12,
   output wire [16:0] fifo_data_out_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
@@ -469,47 +497,47 @@ module llama_chip_get_output_BasicBlock_0(	// llama_chip.k:93:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [16:0] global_in__output_token_10_0 = global_in__output_token_10;	// llama_chip.k:93:9
-  logic        done_out_0;	// llama_chip.k:93:9
-  logic [16:0] fifo_data_out_0_0;	// llama_chip.k:93:9
-  logic        fifo_wren_0_0;	// llama_chip.k:93:9
-  logic        input_rdy_0_0;	// llama_chip.k:93:9
-  logic [7:0]  control_state_out_0;	// llama_chip.k:93:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:93:9
-  always_comb begin	// llama_chip.k:93:9
-    input_rdy_0_0 = _GEN;	// llama_chip.k:93:9
+  wire  [16:0] global_in__output_token_12_0 = global_in__output_token_12;	// llama_chip.k:122:9
+  logic        done_out_0;	// llama_chip.k:122:9
+  logic [16:0] fifo_data_out_0_0;	// llama_chip.k:122:9
+  logic        fifo_wren_0_0;	// llama_chip.k:122:9
+  logic        input_rdy_0_0;	// llama_chip.k:122:9
+  logic [7:0]  control_state_out_0;	// llama_chip.k:122:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:122:9
+  always_comb begin	// llama_chip.k:122:9
+    input_rdy_0_0 = _GEN;	// llama_chip.k:122:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// llama_chip.k:93:9
+       ~input_valid_0};	// llama_chip.k:122:9
   end // always_comb
-  reg          p0_stage1_enable = 1'h0;	// llama_chip.k:93:9
-  reg   [16:0] p0_global_in__output_token_10;	// llama_chip.k:93:9
-  reg          p0_stage2_enable = 1'h0;	// llama_chip.k:93:9
-  always @(posedge clk) begin	// llama_chip.k:93:9
-    if (rst)	// llama_chip.k:93:9
-      p0_stage1_enable <= 1'h0;	// llama_chip.k:93:9
-    else	// llama_chip.k:93:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:93:9
-    p0_global_in__output_token_10 <= global_in__output_token_10_0;	// llama_chip.k:93:9
-    if (rst)	// llama_chip.k:93:9
-      p0_stage2_enable <= 1'h0;	// llama_chip.k:93:9
-    else	// llama_chip.k:93:9
-      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:93:9
+  reg          p0_stage1_enable = 1'h0;	// llama_chip.k:122:9
+  reg   [16:0] p0_global_in__output_token_12;	// llama_chip.k:122:9
+  reg          p0_stage2_enable = 1'h0;	// llama_chip.k:122:9
+  always @(posedge clk) begin	// llama_chip.k:122:9
+    if (rst)	// llama_chip.k:122:9
+      p0_stage1_enable <= 1'h0;	// llama_chip.k:122:9
+    else	// llama_chip.k:122:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:122:9
+    p0_global_in__output_token_12 <= global_in__output_token_12_0;	// llama_chip.k:122:9
+    if (rst)	// llama_chip.k:122:9
+      p0_stage2_enable <= 1'h0;	// llama_chip.k:122:9
+    else	// llama_chip.k:122:9
+      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:122:9
   end // always @(posedge)
-  always_comb begin	// llama_chip.k:93:9
-    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:91:5, :93:9
-    fifo_data_out_0_0 = p0_global_in__output_token_10;	// llama_chip.k:91:5, :93:9
+  always_comb begin	// llama_chip.k:122:9
+    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:120:5, :122:9
+    fifo_data_out_0_0 = p0_global_in__output_token_12;	// llama_chip.k:120:5, :122:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:93:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:122:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -517,32 +545,32 @@ module llama_chip_get_output_BasicBlock_0(	// llama_chip.k:93:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:93:9
+    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:122:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  llama_chipDebugView_get_outputExit llama_chipDebugView_get_outputExit_instance (	// llama_chip.k:91:5
-    .clk          (clk),	// llama_chip.k:91:5
-    ._ReturnValue (p0_stage1_enable ? global_in__output_token_10_0 : 'x),	// llama_chip.k:91:5, :93:9
-    .valid        (p0_stage1_enable),	// llama_chip.k:93:9
+  llama_chipDebugView_get_outputExit llama_chipDebugView_get_outputExit_instance (	// llama_chip.k:120:5
+    .clk          (clk),	// llama_chip.k:120:5
+    ._ReturnValue (p0_stage1_enable ? global_in__output_token_12_0 : 'x),	// llama_chip.k:120:5, :122:9
+    .valid        (p0_stage1_enable),	// llama_chip.k:122:9
     .valid_out    (/* unused */)
-  );	// llama_chip.k:91:5
-  assign done_out = p0_stage2_enable;	// llama_chip.k:93:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// llama_chip.k:93:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:93:9
-  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:93:9
-  assign control_state_out = control_state_out_0;	// llama_chip.k:93:9
+  );	// llama_chip.k:120:5
+  assign done_out = p0_stage2_enable;	// llama_chip.k:122:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// llama_chip.k:122:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:122:9
+  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:122:9
+  assign control_state_out = control_state_out_0;	// llama_chip.k:122:9
 endmodule
 
-module llama_chip_set_output_BasicBlock_0(	// llama_chip.k:84:9
+module llama_chip_set_output_BasicBlock_0(	// llama_chip.k:113:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  output wire        global_out__output_token_10_0_valid,
-  output wire [16:0] global_out__output_token_10_0,
+  output wire        global_out__output_token_12_0_valid,
+  output wire [16:0] global_out__output_token_12_0,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
-  input  wire [16:0] data_in_14,
+  input  wire [16:0] data_in_18,
   input  wire        input_fifo_underflow_0,
   output wire        input_rdy_0,
   input  wire        input_valid_0,
@@ -551,49 +579,49 @@ module llama_chip_set_output_BasicBlock_0(	// llama_chip.k:84:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  logic        done_out_0;	// llama_chip.k:84:9
-  logic        global_out__output_token_10_0_valid_0;	// llama_chip.k:84:9
-  logic [16:0] global_out__output_token_10_0_0;	// llama_chip.k:84:9
-  logic        fifo_wren_0_0;	// llama_chip.k:84:9
-  logic        input_rdy_0_0;	// llama_chip.k:84:9
-  logic [7:0]  control_state_out_0;	// llama_chip.k:84:9
-  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:84:9
-  always_comb begin	// llama_chip.k:84:9
-    input_rdy_0_0 = _GEN;	// llama_chip.k:84:9
+  logic        done_out_0;	// llama_chip.k:113:9
+  logic        global_out__output_token_12_0_valid_0;	// llama_chip.k:113:9
+  logic [16:0] global_out__output_token_12_0_0;	// llama_chip.k:113:9
+  logic        fifo_wren_0_0;	// llama_chip.k:113:9
+  logic        input_rdy_0_0;	// llama_chip.k:113:9
+  logic [7:0]  control_state_out_0;	// llama_chip.k:113:9
+  wire         _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:113:9
+  always_comb begin	// llama_chip.k:113:9
+    input_rdy_0_0 = _GEN;	// llama_chip.k:113:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// llama_chip.k:84:9
+       ~input_valid_0};	// llama_chip.k:113:9
   end // always_comb
-  reg   [16:0] p0_data_in_14;	// llama_chip.k:84:9
-  reg          p0_stage1_enable = 1'h0;	// llama_chip.k:84:9
-  always_comb begin	// llama_chip.k:84:9
-    global_out__output_token_10_0_0 = p0_data_in_14;	// llama_chip.k:84:9
-    global_out__output_token_10_0_valid_0 = p0_stage1_enable;	// llama_chip.k:84:9
+  reg   [16:0] p0_data_in_18;	// llama_chip.k:113:9
+  reg          p0_stage1_enable = 1'h0;	// llama_chip.k:113:9
+  always_comb begin	// llama_chip.k:113:9
+    global_out__output_token_12_0_0 = p0_data_in_18;	// llama_chip.k:113:9
+    global_out__output_token_12_0_valid_0 = p0_stage1_enable;	// llama_chip.k:113:9
   end // always_comb
-  reg          p0_stage2_enable = 1'h0;	// llama_chip.k:84:9
-  always @(posedge clk) begin	// llama_chip.k:84:9
-    p0_data_in_14 <= data_in_14;	// llama_chip.k:84:9
-    if (rst) begin	// llama_chip.k:84:9
-      p0_stage1_enable <= 1'h0;	// llama_chip.k:84:9
-      p0_stage2_enable <= 1'h0;	// llama_chip.k:84:9
+  reg          p0_stage2_enable = 1'h0;	// llama_chip.k:113:9
+  always @(posedge clk) begin	// llama_chip.k:113:9
+    p0_data_in_18 <= data_in_18;	// llama_chip.k:113:9
+    if (rst) begin	// llama_chip.k:113:9
+      p0_stage1_enable <= 1'h0;	// llama_chip.k:113:9
+      p0_stage2_enable <= 1'h0;	// llama_chip.k:113:9
     end
-    else begin	// llama_chip.k:84:9
-      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:84:9
-      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:84:9
+    else begin	// llama_chip.k:113:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:113:9
+      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:113:9
     end
   end // always @(posedge)
-  always_comb	// llama_chip.k:84:9
-    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:84:9, :88:9
+  always_comb	// llama_chip.k:113:9
+    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:113:9, :117:9
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:84:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:113:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -601,28 +629,207 @@ module llama_chip_set_output_BasicBlock_0(	// llama_chip.k:84:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:84:9
+    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:113:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  llama_chipDebugView_set_outputEntry llama_chipDebugView_set_outputEntry_instance (	// llama_chip.k:88:9
-    .clk       (clk),	// llama_chip.k:88:9
-    ._token_id (p0_stage1_enable ? p0_data_in_14 : 'x),	// llama_chip.k:84:9, :88:9
-    .valid     (p0_stage1_enable),	// llama_chip.k:84:9
+  llama_chipDebugView_set_outputEntry llama_chipDebugView_set_outputEntry_instance (	// llama_chip.k:117:9
+    .clk       (clk),	// llama_chip.k:117:9
+    ._token_id (p0_stage1_enable ? p0_data_in_18 : 'x),	// llama_chip.k:113:9, :117:9
+    .valid     (p0_stage1_enable),	// llama_chip.k:113:9
     .valid_out (/* unused */)
-  );	// llama_chip.k:88:9
-  assign done_out = p0_stage2_enable;	// llama_chip.k:84:9
-  assign global_out__output_token_10_0_valid = global_out__output_token_10_0_valid_0;	// llama_chip.k:84:9
-  assign global_out__output_token_10_0 = global_out__output_token_10_0_0;	// llama_chip.k:84:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:84:9
-  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:84:9
-  assign control_state_out = control_state_out_0;	// llama_chip.k:84:9
+  );	// llama_chip.k:117:9
+  assign done_out = p0_stage2_enable;	// llama_chip.k:113:9
+  assign global_out__output_token_12_0_valid = global_out__output_token_12_0_valid_0;	// llama_chip.k:113:9
+  assign global_out__output_token_12_0 = global_out__output_token_12_0_0;	// llama_chip.k:113:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:113:9
+  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:113:9
+  assign control_state_out = control_state_out_0;	// llama_chip.k:113:9
+endmodule
+
+module llama_chip_decode_get_layer_slot_k3_BasicBlock_0(	// llama_chip.k:94:9
+  input  wire       clk,
+  input  wire       rst,
+  output wire       done_out,
+  input  wire [4:0] global_in__current_layer_13,
+  output wire [1:0] fifo_data_out_0,
+  output wire       fifo_wren_0,
+  input  wire       fifo_almost_full_in_raw_0,
+  input  wire       fifo_overflow_in_0,
+  input  wire       input_fifo_underflow_0,
+  output wire       input_rdy_0,
+  input  wire       input_valid_0,
+  output wire [7:0] control_state_out
+);
+
+  wire        _fifo_overflow_ffc_0_data_out;
+  wire        _fifo_almostfull_ffc_0_data_out;
+  wire  [4:0] global_in__current_layer_13_0 = global_in__current_layer_13;	// llama_chip.k:94:9
+  logic       done_out_0;	// llama_chip.k:94:9
+  logic [1:0] fifo_data_out_0_0;	// llama_chip.k:94:9
+  logic       fifo_wren_0_0;	// llama_chip.k:94:9
+  logic       input_rdy_0_0;	// llama_chip.k:94:9
+  logic [7:0] control_state_out_0;	// llama_chip.k:94:9
+  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:94:9
+  always_comb begin	// llama_chip.k:94:9
+    input_rdy_0_0 = _GEN;	// llama_chip.k:94:9
+    control_state_out_0 =
+      {2'h0,
+       ~_fifo_overflow_ffc_0_data_out,
+       input_fifo_underflow_0,
+       2'h0,
+       ~_fifo_almostfull_ffc_0_data_out,
+       ~input_valid_0};	// llama_chip.k:94:9
+  end // always_comb
+  reg         p0_stage1_enable = 1'h0;	// llama_chip.k:94:9
+  wire        _GEN_0 =
+    global_in__current_layer_13_0[2] & ~(global_in__current_layer_13_0[1]);	// llama_chip.k:94:9, :96:{9,13,31,43}, :97:{14,18,36,48}, :98:{14,18,36,48}, :99:{14,18,36,48}, :100:{14,18,36,48}, :101:{14,18,36,48}, :102:{14,18,36,48}, :103:{14,18,36,48}, :104:{14,18,36,48}, :105:{14,18,36,48}, :106:36
+  wire        _GEN_1 =
+    global_in__current_layer_13_0[2] ^ ~(global_in__current_layer_13_0[1]);	// llama_chip.k:94:9, :96:{9,13,31,43}, :97:{14,18,36,48}, :98:{14,18,36,48}, :99:{14,18,36,48}, :100:{14,18,36,48}, :101:{14,18,36,48}, :102:{14,18,36,48}, :103:{14,18,36,48}, :104:{14,18,36,48}, :105:{14,18,36,48}, :106:36
+  wire        _GEN_2 = global_in__current_layer_13_0[3] ? _GEN_0 : _GEN_1;	// llama_chip.k:94:9, :96:{9,13,31,43}, :97:{14,18,36,48}, :98:{14,18,36,48}, :99:{14,18,36,48}, :100:{14,18,36,48}, :101:{14,18,36,48}, :102:{14,18,36,48}, :103:{14,18,36,48}, :104:{14,18,36,48}, :105:{14,18,36,48}, :106:36
+  wire        _GEN_3 =
+    ~(global_in__current_layer_13_0[2]) & global_in__current_layer_13_0[1];	// llama_chip.k:94:9, :96:{9,13,31,43}, :97:{14,18,36,48}, :98:{14,18,36,48}, :99:{14,18,36,48}, :100:{14,18,36,48}, :101:{14,18,36,48}, :102:{14,18,36,48}, :103:{14,18,36,48}, :104:{14,18,36,48}, :105:{14,18,36,48}, :106:36
+  wire        _GEN_4 = global_in__current_layer_13_0[3] ? _GEN_3 : _GEN_0;	// llama_chip.k:94:9, :96:{9,13,31,43}, :97:{14,18,36,48}, :98:{14,18,36,48}, :99:{14,18,36,48}, :100:{14,18,36,48}, :101:{14,18,36,48}, :102:{14,18,36,48}, :103:{14,18,36,48}, :104:{14,18,36,48}, :105:{14,18,36,48}, :106:36
+  wire        _GEN_5 = global_in__current_layer_13_0[4] ? _GEN_2 : _GEN_4;	// llama_chip.k:94:9, :96:{9,13,31,43}, :97:{14,18,36,48}, :98:{14,18,36,48}, :99:{14,18,36,48}, :100:{14,18,36,48}, :101:{14,18,36,48}, :102:{14,18,36,48}, :103:{14,18,36,48}, :104:{14,18,36,48}, :105:{14,18,36,48}, :106:36
+  wire        _GEN_6 = global_in__current_layer_13_0[3] ? _GEN_1 : _GEN_3;	// llama_chip.k:94:9, :96:{9,13,31,43}, :97:{14,18,36,48}, :98:{14,18,36,48}, :99:{14,18,36,48}, :100:{14,18,36,48}, :101:{14,18,36,48}, :102:{14,18,36,48}, :103:{14,18,36,48}, :104:{14,18,36,48}, :105:{14,18,36,48}, :106:36
+  wire  [1:0] slot =
+    {global_in__current_layer_13_0[0]
+       ? _GEN_5
+       : global_in__current_layer_13_0[4] ? _GEN_4 : _GEN_6,
+     global_in__current_layer_13_0[0]
+       ? (global_in__current_layer_13_0[4] ? _GEN_6 : _GEN_2)
+       : _GEN_5};	// llama_chip.k:94:9, :96:{9,13,31,43}, :97:{14,18,36,48}, :98:{14,18,36,48}, :99:{14,18,36,48}, :100:{14,18,36,48}, :101:{14,18,36,48}, :102:{14,18,36,48}, :103:{14,18,36,48}, :104:{14,18,36,48}, :105:{14,18,36,48}, :106:36
+  reg   [1:0] p0_slot;	// llama_chip.k:94:9
+  reg         p0_stage2_enable = 1'h0;	// llama_chip.k:94:9
+  always @(posedge clk) begin	// llama_chip.k:94:9
+    if (rst)	// llama_chip.k:94:9
+      p0_stage1_enable <= 1'h0;	// llama_chip.k:94:9
+    else	// llama_chip.k:94:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:94:9
+    p0_slot <= slot;	// llama_chip.k:94:9, :96:{9,13,31,43}, :97:{14,18,36,48}, :98:{14,18,36,48}, :99:{14,18,36,48}, :100:{14,18,36,48}, :101:{14,18,36,48}, :102:{14,18,36,48}, :103:{14,18,36,48}, :104:{14,18,36,48}, :105:{14,18,36,48}, :106:36
+    if (rst)	// llama_chip.k:94:9
+      p0_stage2_enable <= 1'h0;	// llama_chip.k:94:9
+    else	// llama_chip.k:94:9
+      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:94:9
+  end // always @(posedge)
+  always_comb begin	// llama_chip.k:94:9
+    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:91:5, :94:9
+    fifo_data_out_0_0 = p0_slot;	// llama_chip.k:91:5, :94:9
+  end // always_comb
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_almostfull_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:94:9
+    .data_out (_fifo_almostfull_ffc_0_data_out)
+  );
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_overflow_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:94:9
+    .data_out (_fifo_overflow_ffc_0_data_out)
+  );
+  llama_chipDebugView_decode_get_layer_slot_k3Exit llama_chipDebugView_decode_get_layer_slot_k3Exit_instance (	// llama_chip.k:91:5
+    .clk          (clk),	// llama_chip.k:91:5
+    ._ReturnValue (p0_stage1_enable ? slot : 'x),	// llama_chip.k:91:5, :94:9, :96:{9,13,31,43}, :97:{14,18,36,48}, :98:{14,18,36,48}, :99:{14,18,36,48}, :100:{14,18,36,48}, :101:{14,18,36,48}, :102:{14,18,36,48}, :103:{14,18,36,48}, :104:{14,18,36,48}, :105:{14,18,36,48}, :106:36
+    .valid        (p0_stage1_enable),	// llama_chip.k:94:9
+    .valid_out    (/* unused */)
+  );	// llama_chip.k:91:5
+  assign done_out = p0_stage2_enable;	// llama_chip.k:94:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// llama_chip.k:94:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:94:9
+  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:94:9
+  assign control_state_out = control_state_out_0;	// llama_chip.k:94:9
+endmodule
+
+module llama_chip_decode_get_layer_slot_k2_BasicBlock_0(	// llama_chip.k:87:9
+  input  wire       clk,
+  input  wire       rst,
+  output wire       done_out,
+  input  wire [4:0] global_in__current_layer_13,
+  output wire       fifo_data_out_0,
+  output wire       fifo_wren_0,
+  input  wire       fifo_almost_full_in_raw_0,
+  input  wire       fifo_overflow_in_0,
+  input  wire       input_fifo_underflow_0,
+  output wire       input_rdy_0,
+  input  wire       input_valid_0,
+  output wire [7:0] control_state_out
+);
+
+  wire        _fifo_overflow_ffc_0_data_out;
+  wire        _fifo_almostfull_ffc_0_data_out;
+  wire  [4:0] global_in__current_layer_13_0 = global_in__current_layer_13;	// llama_chip.k:87:9
+  logic       done_out_0;	// llama_chip.k:87:9
+  logic       fifo_data_out_0_0;	// llama_chip.k:87:9
+  logic       fifo_wren_0_0;	// llama_chip.k:87:9
+  logic       input_rdy_0_0;	// llama_chip.k:87:9
+  logic [7:0] control_state_out_0;	// llama_chip.k:87:9
+  wire        _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// llama_chip.k:87:9
+  always_comb begin	// llama_chip.k:87:9
+    input_rdy_0_0 = _GEN;	// llama_chip.k:87:9
+    control_state_out_0 =
+      {2'h0,
+       ~_fifo_overflow_ffc_0_data_out,
+       input_fifo_underflow_0,
+       2'h0,
+       ~_fifo_almostfull_ffc_0_data_out,
+       ~input_valid_0};	// llama_chip.k:87:9
+  end // always_comb
+  reg         p0_stage1_enable = 1'h0;	// llama_chip.k:87:9
+  reg         p0__current_layer;	// llama_chip.k:87:9
+  reg         p0_stage2_enable = 1'h0;	// llama_chip.k:87:9
+  always @(posedge clk) begin	// llama_chip.k:87:9
+    if (rst)	// llama_chip.k:87:9
+      p0_stage1_enable <= 1'h0;	// llama_chip.k:87:9
+    else	// llama_chip.k:87:9
+      p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:87:9
+    p0__current_layer <= global_in__current_layer_13_0[0];	// llama_chip.k:87:{9,28}
+    if (rst)	// llama_chip.k:87:9
+      p0_stage2_enable <= 1'h0;	// llama_chip.k:87:9
+    else	// llama_chip.k:87:9
+      p0_stage2_enable <= p0_stage1_enable;	// llama_chip.k:87:9
+  end // always @(posedge)
+  always_comb begin	// llama_chip.k:87:9
+    fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:85:5, :87:9
+    fifo_data_out_0_0 = p0__current_layer;	// llama_chip.k:85:5, :87:9
+  end // always_comb
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_almostfull_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_almost_full_in_raw_0),	// llama_chip.k:87:9
+    .data_out (_fifo_almostfull_ffc_0_data_out)
+  );
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_overflow_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_overflow_in_0),	// llama_chip.k:87:9
+    .data_out (_fifo_overflow_ffc_0_data_out)
+  );
+  llama_chipDebugView_decode_get_layer_slot_k2Exit llama_chipDebugView_decode_get_layer_slot_k2Exit_instance (	// llama_chip.k:85:5
+    .clk          (clk),	// llama_chip.k:85:5
+    ._ReturnValue (p0_stage1_enable ? global_in__current_layer_13_0[0] : 'x),	// llama_chip.k:85:5, :87:{9,28}
+    .valid        (p0_stage1_enable),	// llama_chip.k:87:9
+    .valid_out    (/* unused */)
+  );	// llama_chip.k:85:5
+  assign done_out = p0_stage2_enable;	// llama_chip.k:87:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// llama_chip.k:87:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:87:9
+  assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:87:9
+  assign control_state_out = control_state_out_0;	// llama_chip.k:87:9
 endmodule
 
 module llama_chip_decode_get_layer_BasicBlock_0(	// llama_chip.k:78:9
   input  wire       clk,
   input  wire       rst,
   output wire       done_out,
-  input  wire [4:0] global_in__current_layer_11,
+  input  wire [4:0] global_in__current_layer_13,
   output wire [4:0] fifo_data_out_0,
   output wire       fifo_wren_0,
   input  wire       fifo_almost_full_in_raw_0,
@@ -635,7 +842,7 @@ module llama_chip_decode_get_layer_BasicBlock_0(	// llama_chip.k:78:9
 
   wire        _fifo_overflow_ffc_0_data_out;
   wire        _fifo_almostfull_ffc_0_data_out;
-  wire  [4:0] global_in__current_layer_11_0 = global_in__current_layer_11;	// llama_chip.k:78:9
+  wire  [4:0] global_in__current_layer_13_0 = global_in__current_layer_13;	// llama_chip.k:78:9
   logic       done_out_0;	// llama_chip.k:78:9
   logic [4:0] fifo_data_out_0_0;	// llama_chip.k:78:9
   logic       fifo_wren_0_0;	// llama_chip.k:78:9
@@ -653,14 +860,14 @@ module llama_chip_decode_get_layer_BasicBlock_0(	// llama_chip.k:78:9
        ~input_valid_0};	// llama_chip.k:78:9
   end // always_comb
   reg         p0_stage1_enable = 1'h0;	// llama_chip.k:78:9
-  reg   [4:0] p0_global_in__current_layer_11;	// llama_chip.k:78:9
+  reg   [4:0] p0_global_in__current_layer_13;	// llama_chip.k:78:9
   reg         p0_stage2_enable = 1'h0;	// llama_chip.k:78:9
   always @(posedge clk) begin	// llama_chip.k:78:9
     if (rst)	// llama_chip.k:78:9
       p0_stage1_enable <= 1'h0;	// llama_chip.k:78:9
     else	// llama_chip.k:78:9
       p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:78:9
-    p0_global_in__current_layer_11 <= global_in__current_layer_11_0;	// llama_chip.k:78:9
+    p0_global_in__current_layer_13 <= global_in__current_layer_13_0;	// llama_chip.k:78:9
     if (rst)	// llama_chip.k:78:9
       p0_stage2_enable <= 1'h0;	// llama_chip.k:78:9
     else	// llama_chip.k:78:9
@@ -668,7 +875,7 @@ module llama_chip_decode_get_layer_BasicBlock_0(	// llama_chip.k:78:9
   end // always @(posedge)
   always_comb begin	// llama_chip.k:78:9
     fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:76:5, :78:9
-    fifo_data_out_0_0 = p0_global_in__current_layer_11;	// llama_chip.k:76:5, :78:9
+    fifo_data_out_0_0 = p0_global_in__current_layer_13;	// llama_chip.k:76:5, :78:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
@@ -688,7 +895,7 @@ module llama_chip_decode_get_layer_BasicBlock_0(	// llama_chip.k:78:9
   );
   llama_chipDebugView_decode_get_layerExit llama_chipDebugView_decode_get_layerExit_instance (	// llama_chip.k:76:5
     .clk          (clk),	// llama_chip.k:76:5
-    ._ReturnValue (p0_stage1_enable ? global_in__current_layer_11_0 : 'x),	// llama_chip.k:76:5, :78:9
+    ._ReturnValue (p0_stage1_enable ? global_in__current_layer_13_0 : 'x),	// llama_chip.k:76:5, :78:9
     .valid        (p0_stage1_enable),	// llama_chip.k:78:9
     .valid_out    (/* unused */)
   );	// llama_chip.k:76:5
@@ -703,7 +910,7 @@ module llama_chip_decode_get_state_BasicBlock_0(	// llama_chip.k:72:9
   input  wire       clk,
   input  wire       rst,
   output wire       done_out,
-  input  wire [5:0] global_in__state_8,
+  input  wire [5:0] global_in__state_10,
   output wire [5:0] fifo_data_out_0,
   output wire       fifo_wren_0,
   input  wire       fifo_almost_full_in_raw_0,
@@ -716,7 +923,7 @@ module llama_chip_decode_get_state_BasicBlock_0(	// llama_chip.k:72:9
 
   wire        _fifo_overflow_ffc_0_data_out;
   wire        _fifo_almostfull_ffc_0_data_out;
-  wire  [5:0] global_in__state_8_0 = global_in__state_8;	// llama_chip.k:72:9
+  wire  [5:0] global_in__state_10_0 = global_in__state_10;	// llama_chip.k:72:9
   logic       done_out_0;	// llama_chip.k:72:9
   logic [5:0] fifo_data_out_0_0;	// llama_chip.k:72:9
   logic       fifo_wren_0_0;	// llama_chip.k:72:9
@@ -734,14 +941,14 @@ module llama_chip_decode_get_state_BasicBlock_0(	// llama_chip.k:72:9
        ~input_valid_0};	// llama_chip.k:72:9
   end // always_comb
   reg         p0_stage1_enable = 1'h0;	// llama_chip.k:72:9
-  reg   [5:0] p0_global_in__state_8;	// llama_chip.k:72:9
+  reg   [5:0] p0_global_in__state_10;	// llama_chip.k:72:9
   reg         p0_stage2_enable = 1'h0;	// llama_chip.k:72:9
   always @(posedge clk) begin	// llama_chip.k:72:9
     if (rst)	// llama_chip.k:72:9
       p0_stage1_enable <= 1'h0;	// llama_chip.k:72:9
     else	// llama_chip.k:72:9
       p0_stage1_enable <= _GEN & input_valid_0;	// llama_chip.k:72:9
-    p0_global_in__state_8 <= global_in__state_8_0;	// llama_chip.k:72:9
+    p0_global_in__state_10 <= global_in__state_10_0;	// llama_chip.k:72:9
     if (rst)	// llama_chip.k:72:9
       p0_stage2_enable <= 1'h0;	// llama_chip.k:72:9
     else	// llama_chip.k:72:9
@@ -749,7 +956,7 @@ module llama_chip_decode_get_state_BasicBlock_0(	// llama_chip.k:72:9
   end // always @(posedge)
   always_comb begin	// llama_chip.k:72:9
     fifo_wren_0_0 = p0_stage2_enable;	// llama_chip.k:70:5, :72:9
-    fifo_data_out_0_0 = p0_global_in__state_8;	// llama_chip.k:70:5, :72:9
+    fifo_data_out_0_0 = p0_global_in__state_10;	// llama_chip.k:70:5, :72:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
@@ -769,7 +976,7 @@ module llama_chip_decode_get_state_BasicBlock_0(	// llama_chip.k:72:9
   );
   llama_chipDebugView_decode_get_stateExit llama_chipDebugView_decode_get_stateExit_instance (	// llama_chip.k:70:5
     .clk          (clk),	// llama_chip.k:70:5
-    ._ReturnValue (p0_stage1_enable ? global_in__state_8_0 : 'x),	// llama_chip.k:70:5, :72:9
+    ._ReturnValue (p0_stage1_enable ? global_in__state_10_0 : 'x),	// llama_chip.k:70:5, :72:9
     .valid        (p0_stage1_enable),	// llama_chip.k:72:9
     .valid_out    (/* unused */)
   );	// llama_chip.k:70:5
@@ -784,15 +991,15 @@ module llama_chip_decode_advance_BasicBlock_0(	// llama_chip.k:43:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  input  wire [5:0]  global_in__state_8,
-  input  wire [11:0] global_in__token_count_9,
-  input  wire [4:0]  global_in__current_layer_11,
-  output wire        global_out__state_8_1_valid,
-  output wire [5:0]  global_out__state_8_1,
-  output wire        global_out__token_count_9_0_valid,
-  output wire [11:0] global_out__token_count_9_0,
-  output wire        global_out__current_layer_11_1_valid,
-  output wire [4:0]  global_out__current_layer_11_1,
+  input  wire [5:0]  global_in__state_10,
+  input  wire [11:0] global_in__token_count_11,
+  input  wire [4:0]  global_in__current_layer_13,
+  output wire        global_out__state_10_1_valid,
+  output wire [5:0]  global_out__state_10_1,
+  output wire        global_out__token_count_11_0_valid,
+  output wire [11:0] global_out__token_count_11_0,
+  output wire        global_out__current_layer_13_1_valid,
+  output wire [4:0]  global_out__current_layer_13_1,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
@@ -804,16 +1011,16 @@ module llama_chip_decode_advance_BasicBlock_0(	// llama_chip.k:43:9
 
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
-  wire  [5:0]  global_in__state_8_0 = global_in__state_8;	// llama_chip.k:43:9
-  wire  [11:0] global_in__token_count_9_0 = global_in__token_count_9;	// llama_chip.k:43:9
-  wire  [4:0]  global_in__current_layer_11_0 = global_in__current_layer_11;	// llama_chip.k:43:9
+  wire  [5:0]  global_in__state_10_0 = global_in__state_10;	// llama_chip.k:43:9
+  wire  [11:0] global_in__token_count_11_0 = global_in__token_count_11;	// llama_chip.k:43:9
+  wire  [4:0]  global_in__current_layer_13_0 = global_in__current_layer_13;	// llama_chip.k:43:9
   logic        done_out_0;	// llama_chip.k:43:9
-  logic        global_out__state_8_1_valid_0;	// llama_chip.k:43:9
-  logic [5:0]  global_out__state_8_1_0;	// llama_chip.k:43:9
-  logic        global_out__token_count_9_0_valid_0;	// llama_chip.k:43:9
-  logic [11:0] global_out__token_count_9_0_0;	// llama_chip.k:43:9
-  logic        global_out__current_layer_11_1_valid_0;	// llama_chip.k:43:9
-  logic [4:0]  global_out__current_layer_11_1_0;	// llama_chip.k:43:9
+  logic        global_out__state_10_1_valid_0;	// llama_chip.k:43:9
+  logic [5:0]  global_out__state_10_1_0;	// llama_chip.k:43:9
+  logic        global_out__token_count_11_0_valid_0;	// llama_chip.k:43:9
+  logic [11:0] global_out__token_count_11_0_0;	// llama_chip.k:43:9
+  logic        global_out__current_layer_13_1_valid_0;	// llama_chip.k:43:9
+  logic [4:0]  global_out__current_layer_13_1_0;	// llama_chip.k:43:9
   logic        fifo_wren_0_0;	// llama_chip.k:43:9
   logic        input_rdy_0_0;	// llama_chip.k:43:9
   logic [7:0]  control_state_out_0;	// llama_chip.k:43:9
@@ -829,15 +1036,15 @@ module llama_chip_decode_advance_BasicBlock_0(	// llama_chip.k:43:9
        ~input_valid_0};	// llama_chip.k:43:9
   end // always_comb
   reg          p0_stage1_enable = 1'h0;	// llama_chip.k:43:9
-  wire         _state_eq_35_ = global_in__state_8_0 == 6'h23;	// llama_chip.k:43:9, :45:17
-  wire  [5:0]  _state = _state_eq_35_ ? 6'h0 : global_in__state_8_0;	// llama_chip.k:43:9, :45:17
+  wire         _state_eq_35_ = global_in__state_10_0 == 6'h23;	// llama_chip.k:43:9, :45:17
+  wire  [5:0]  _state = _state_eq_35_ ? 6'h0 : global_in__state_10_0;	// llama_chip.k:43:9, :45:17
   always_comb begin	// llama_chip.k:43:9
-    global_out__token_count_9_0_0 = 12'(global_in__token_count_9_0 + 12'h1);	// llama_chip.k:43:9, :47:32
-    global_out__token_count_9_0_valid_0 = p0_stage1_enable & _state_eq_35_;	// llama_chip.k:43:9, :45:17
+    global_out__token_count_11_0_0 = 12'(global_in__token_count_11_0 + 12'h1);	// llama_chip.k:43:9, :47:32
+    global_out__token_count_11_0_valid_0 = p0_stage1_enable & _state_eq_35_;	// llama_chip.k:43:9, :45:17
   end // always_comb
   always_comb begin	// llama_chip.k:43:9
-    global_out__state_8_1_0 = _state_eq_35_ ? 6'h0 : 6'(_state + 6'h1);	// llama_chip.k:43:9, :45:17, :64:26
-    global_out__state_8_1_valid_0 = p0_stage1_enable;	// llama_chip.k:43:9
+    global_out__state_10_1_0 = _state_eq_35_ ? 6'h0 : 6'(_state + 6'h1);	// llama_chip.k:43:9, :45:17, :64:26
+    global_out__state_10_1_valid_0 = p0_stage1_enable;	// llama_chip.k:43:9
   end // always_comb
   wire  [4:0]  CastSource = 5'(_state[4:0] - 5'h1);	// llama_chip.k:43:9, :61:56
   wire         not__state_eq_35__and__state_ge_1__and__state_le_32_ =
@@ -845,28 +1052,28 @@ module llama_chip_decode_advance_BasicBlock_0(	// llama_chip.k:43:9
   wire         _GEN_0 =
     ~_state_eq_35_ & ~not__state_eq_35__and__state_ge_1__and__state_le_32_;	// llama_chip.k:43:9, :45:17, :57:17, :59:21, :61:42
   always_comb begin	// llama_chip.k:43:9
-    global_out__current_layer_11_1_0 =
+    global_out__current_layer_13_1_0 =
       {CastSource[4]
-         ? global_in__current_layer_11_0[4] & ~_state_eq_35_
+         ? global_in__current_layer_13_0[4] & ~_state_eq_35_
            | not__state_eq_35__and__state_ge_1__and__state_le_32_
-         : global_in__current_layer_11_0[4] & _GEN_0,
+         : global_in__current_layer_13_0[4] & _GEN_0,
        CastSource[3]
-         ? global_in__current_layer_11_0[3] & ~_state_eq_35_
+         ? global_in__current_layer_13_0[3] & ~_state_eq_35_
            | not__state_eq_35__and__state_ge_1__and__state_le_32_
-         : global_in__current_layer_11_0[3] & _GEN_0,
+         : global_in__current_layer_13_0[3] & _GEN_0,
        CastSource[2]
-         ? global_in__current_layer_11_0[2] & ~_state_eq_35_
+         ? global_in__current_layer_13_0[2] & ~_state_eq_35_
            | not__state_eq_35__and__state_ge_1__and__state_le_32_
-         : global_in__current_layer_11_0[2] & _GEN_0,
+         : global_in__current_layer_13_0[2] & _GEN_0,
        CastSource[1]
-         ? global_in__current_layer_11_0[1] & ~_state_eq_35_
+         ? global_in__current_layer_13_0[1] & ~_state_eq_35_
            | not__state_eq_35__and__state_ge_1__and__state_le_32_
-         : global_in__current_layer_11_0[1] & _GEN_0,
+         : global_in__current_layer_13_0[1] & _GEN_0,
        CastSource[0]
-         ? global_in__current_layer_11_0[0] & ~_state_eq_35_
+         ? global_in__current_layer_13_0[0] & ~_state_eq_35_
            | not__state_eq_35__and__state_ge_1__and__state_le_32_
-         : global_in__current_layer_11_0[0] & _GEN_0};	// llama_chip.k:43:9, :45:17, :57:17, :59:21, :61:{42,56}
-    global_out__current_layer_11_1_valid_0 =
+         : global_in__current_layer_13_0[0] & _GEN_0};	// llama_chip.k:43:9, :45:17, :57:17, :59:21, :61:{42,56}
+    global_out__current_layer_13_1_valid_0 =
       p0_stage1_enable
       & (not__state_eq_35__and__state_ge_1__and__state_le_32_ | _state_eq_35_);	// llama_chip.k:43:9, :45:17, :57:17, :59:21
   end // always_comb
@@ -900,12 +1107,12 @@ module llama_chip_decode_advance_BasicBlock_0(	// llama_chip.k:43:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
   assign done_out = p0_stage2_enable;	// llama_chip.k:43:9
-  assign global_out__state_8_1_valid = global_out__state_8_1_valid_0;	// llama_chip.k:43:9
-  assign global_out__state_8_1 = global_out__state_8_1_0;	// llama_chip.k:43:9
-  assign global_out__token_count_9_0_valid = global_out__token_count_9_0_valid_0;	// llama_chip.k:43:9
-  assign global_out__token_count_9_0 = global_out__token_count_9_0_0;	// llama_chip.k:43:9
-  assign global_out__current_layer_11_1_valid = global_out__current_layer_11_1_valid_0;	// llama_chip.k:43:9
-  assign global_out__current_layer_11_1 = global_out__current_layer_11_1_0;	// llama_chip.k:43:9
+  assign global_out__state_10_1_valid = global_out__state_10_1_valid_0;	// llama_chip.k:43:9
+  assign global_out__state_10_1 = global_out__state_10_1_0;	// llama_chip.k:43:9
+  assign global_out__token_count_11_0_valid = global_out__token_count_11_0_valid_0;	// llama_chip.k:43:9
+  assign global_out__token_count_11_0 = global_out__token_count_11_0_0;	// llama_chip.k:43:9
+  assign global_out__current_layer_13_1_valid = global_out__current_layer_13_1_valid_0;	// llama_chip.k:43:9
+  assign global_out__current_layer_13_1 = global_out__current_layer_13_1_0;	// llama_chip.k:43:9
   assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:43:9
   assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:43:9
   assign control_state_out = control_state_out_0;	// llama_chip.k:43:9
@@ -915,12 +1122,12 @@ module llama_chip_decode_start_BasicBlock_0(	// llama_chip.k:31:9
   input  wire        clk,
   input  wire        rst,
   output wire        done_out,
-  output wire        global_out__state_8_0_valid,
-  output wire        global_out__current_layer_11_0_valid,
+  output wire        global_out__state_10_0_valid,
+  output wire        global_out__current_layer_13_0_valid,
   output wire        fifo_wren_0,
   input  wire        fifo_almost_full_in_raw_0,
   input  wire        fifo_overflow_in_0,
-  input  wire [16:0] data_in_10,
+  input  wire [16:0] data_in_12,
   input  wire        input_fifo_underflow_0,
   output wire        input_rdy_0,
   input  wire        input_valid_0,
@@ -930,8 +1137,8 @@ module llama_chip_decode_start_BasicBlock_0(	// llama_chip.k:31:9
   wire         _fifo_overflow_ffc_0_data_out;
   wire         _fifo_almostfull_ffc_0_data_out;
   logic        done_out_0;	// llama_chip.k:31:9
-  logic        global_out__state_8_0_valid_0;	// llama_chip.k:31:9
-  logic        global_out__current_layer_11_0_valid_0;	// llama_chip.k:31:9
+  logic        global_out__state_10_0_valid_0;	// llama_chip.k:31:9
+  logic        global_out__current_layer_13_0_valid_0;	// llama_chip.k:31:9
   logic        fifo_wren_0_0;	// llama_chip.k:31:9
   logic        input_rdy_0_0;	// llama_chip.k:31:9
   logic [7:0]  control_state_out_0;	// llama_chip.k:31:9
@@ -946,15 +1153,15 @@ module llama_chip_decode_start_BasicBlock_0(	// llama_chip.k:31:9
        ~_fifo_almostfull_ffc_0_data_out,
        ~input_valid_0};	// llama_chip.k:31:9
   end // always_comb
-  reg   [16:0] p0_data_in_10;	// llama_chip.k:31:9
+  reg   [16:0] p0_data_in_12;	// llama_chip.k:31:9
   reg          p0_stage1_enable = 1'h0;	// llama_chip.k:31:9
   always_comb begin	// llama_chip.k:31:9
-    global_out__state_8_0_valid_0 = p0_stage1_enable;	// llama_chip.k:31:9
-    global_out__current_layer_11_0_valid_0 = p0_stage1_enable;	// llama_chip.k:31:9
+    global_out__state_10_0_valid_0 = p0_stage1_enable;	// llama_chip.k:31:9
+    global_out__current_layer_13_0_valid_0 = p0_stage1_enable;	// llama_chip.k:31:9
   end // always_comb
   reg          p0_stage2_enable = 1'h0;	// llama_chip.k:31:9
   always @(posedge clk) begin	// llama_chip.k:31:9
-    p0_data_in_10 <= data_in_10;	// llama_chip.k:31:9
+    p0_data_in_12 <= data_in_12;	// llama_chip.k:31:9
     if (rst) begin	// llama_chip.k:31:9
       p0_stage1_enable <= 1'h0;	// llama_chip.k:31:9
       p0_stage2_enable <= 1'h0;	// llama_chip.k:31:9
@@ -984,13 +1191,13 @@ module llama_chip_decode_start_BasicBlock_0(	// llama_chip.k:31:9
   );
   llama_chipDebugView_decode_startEntry llama_chipDebugView_decode_startEntry_instance (	// llama_chip.k:38:9
     .clk       (clk),	// llama_chip.k:38:9
-    ._token_id (p0_stage1_enable ? p0_data_in_10 : 'x),	// llama_chip.k:31:9, :38:9
+    ._token_id (p0_stage1_enable ? p0_data_in_12 : 'x),	// llama_chip.k:31:9, :38:9
     .valid     (p0_stage1_enable),	// llama_chip.k:31:9
     .valid_out (/* unused */)
   );	// llama_chip.k:38:9
   assign done_out = p0_stage2_enable;	// llama_chip.k:31:9
-  assign global_out__state_8_0_valid = global_out__state_8_0_valid_0;	// llama_chip.k:31:9
-  assign global_out__current_layer_11_0_valid = global_out__current_layer_11_0_valid_0;	// llama_chip.k:31:9
+  assign global_out__state_10_0_valid = global_out__state_10_0_valid_0;	// llama_chip.k:31:9
+  assign global_out__current_layer_13_0_valid = global_out__current_layer_13_0_valid_0;	// llama_chip.k:31:9
   assign fifo_wren_0 = fifo_wren_0_0;	// llama_chip.k:31:9
   assign input_rdy_0 = input_rdy_0_0;	// llama_chip.k:31:9
   assign control_state_out = control_state_out_0;	// llama_chip.k:31:9
@@ -1088,6 +1295,10 @@ module llama_chip(
   input  wire        decode_get_state_rden_in,
   input  wire        decode_get_layer_valid_in,
   input  wire        decode_get_layer_rden_in,
+  input  wire        decode_get_layer_slot_k2_valid_in,
+  input  wire        decode_get_layer_slot_k2_rden_in,
+  input  wire        decode_get_layer_slot_k3_valid_in,
+  input  wire        decode_get_layer_slot_k3_rden_in,
   input  wire        set_output_valid_in,
   input  wire [16:0] set_output_token_id_in,
   input  wire        set_output_rden_in,
@@ -1114,6 +1325,12 @@ module llama_chip(
   output wire        decode_get_layer_rdy_out,
   output wire        decode_get_layer_empty_out,
   output wire [4:0]  decode_get_layer_result_out,
+  output wire        decode_get_layer_slot_k2_rdy_out,
+  output wire        decode_get_layer_slot_k2_empty_out,
+  output wire        decode_get_layer_slot_k2_result_out,
+  output wire        decode_get_layer_slot_k3_rdy_out,
+  output wire        decode_get_layer_slot_k3_empty_out,
+  output wire [1:0]  decode_get_layer_slot_k3_result_out,
   output wire        set_output_rdy_out,
   output wire        set_output_empty_out,
   output wire        get_output_rdy_out,
@@ -1133,74 +1350,90 @@ module llama_chip(
   output wire        stall_rate_supported_out
 );
 
-  wire        _reset_BasicBlock_0Impl_global_out__state_8_2_valid;	// llama_chip.k:117:9
-  wire        _reset_BasicBlock_0Impl_global_out__token_count_9_1_valid;	// llama_chip.k:117:9
-  wire        _reset_BasicBlock_0Impl_global_out__output_token_10_1_valid;	// llama_chip.k:117:9
-  wire        _reset_BasicBlock_0Impl_global_out__current_layer_11_2_valid;	// llama_chip.k:117:9
-  wire        _reset_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:117:9
-  wire        _reset_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:117:9
-  wire [11:0] _get_token_count_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:111:9
-  wire        _get_token_count_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:111:9
-  wire        _get_token_count_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:111:9
-  wire        _is_output_ready_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:105:9
-  wire        _is_output_ready_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:105:9
-  wire        _is_output_ready_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:105:9
-  wire        _is_idle_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:99:9
-  wire        _is_idle_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:99:9
-  wire        _is_idle_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:99:9
-  wire [16:0] _get_output_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:93:9
-  wire        _get_output_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:93:9
-  wire        _get_output_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:93:9
-  wire        _set_output_BasicBlock_0Impl_global_out__output_token_10_0_valid;	// llama_chip.k:84:9
-  wire [16:0] _set_output_BasicBlock_0Impl_global_out__output_token_10_0;	// llama_chip.k:84:9
-  wire        _set_output_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:84:9
-  wire        _set_output_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:84:9
+  wire        _reset_BasicBlock_0Impl_global_out__state_10_2_valid;	// llama_chip.k:146:9
+  wire        _reset_BasicBlock_0Impl_global_out__token_count_11_1_valid;	// llama_chip.k:146:9
+  wire        _reset_BasicBlock_0Impl_global_out__output_token_12_1_valid;	// llama_chip.k:146:9
+  wire        _reset_BasicBlock_0Impl_global_out__current_layer_13_2_valid;	// llama_chip.k:146:9
+  wire        _reset_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:146:9
+  wire        _reset_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:146:9
+  wire [11:0] _get_token_count_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:140:9
+  wire        _get_token_count_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:140:9
+  wire        _get_token_count_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:140:9
+  wire        _is_output_ready_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:134:9
+  wire        _is_output_ready_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:134:9
+  wire        _is_output_ready_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:134:9
+  wire        _is_idle_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:128:9
+  wire        _is_idle_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:128:9
+  wire        _is_idle_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:128:9
+  wire [16:0] _get_output_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:122:9
+  wire        _get_output_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:122:9
+  wire        _get_output_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:122:9
+  wire        _set_output_BasicBlock_0Impl_global_out__output_token_12_0_valid;	// llama_chip.k:113:9
+  wire [16:0] _set_output_BasicBlock_0Impl_global_out__output_token_12_0;	// llama_chip.k:113:9
+  wire        _set_output_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:113:9
+  wire        _set_output_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:113:9
+  wire [1:0]  _decode_get_layer_slot_k3_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:94:9
+  wire        _decode_get_layer_slot_k3_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:94:9
+  wire        _decode_get_layer_slot_k3_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:94:9
+  wire        _decode_get_layer_slot_k2_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:87:9
+  wire        _decode_get_layer_slot_k2_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:87:9
+  wire        _decode_get_layer_slot_k2_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:87:9
   wire [4:0]  _decode_get_layer_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:78:9
   wire        _decode_get_layer_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:78:9
   wire        _decode_get_layer_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:78:9
   wire [5:0]  _decode_get_state_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:72:9
   wire        _decode_get_state_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:72:9
   wire        _decode_get_state_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:72:9
-  wire        _decode_advance_BasicBlock_0Impl_global_out__state_8_1_valid;	// llama_chip.k:43:9
-  wire [5:0]  _decode_advance_BasicBlock_0Impl_global_out__state_8_1;	// llama_chip.k:43:9
-  wire        _decode_advance_BasicBlock_0Impl_global_out__token_count_9_0_valid;	// llama_chip.k:43:9
-  wire [11:0] _decode_advance_BasicBlock_0Impl_global_out__token_count_9_0;	// llama_chip.k:43:9
-  wire        _decode_advance_BasicBlock_0Impl_global_out__current_layer_11_1_valid;	// llama_chip.k:43:9
-  wire [4:0]  _decode_advance_BasicBlock_0Impl_global_out__current_layer_11_1;	// llama_chip.k:43:9
+  wire        _decode_advance_BasicBlock_0Impl_global_out__state_10_1_valid;	// llama_chip.k:43:9
+  wire [5:0]  _decode_advance_BasicBlock_0Impl_global_out__state_10_1;	// llama_chip.k:43:9
+  wire        _decode_advance_BasicBlock_0Impl_global_out__token_count_11_0_valid;	// llama_chip.k:43:9
+  wire [11:0] _decode_advance_BasicBlock_0Impl_global_out__token_count_11_0;	// llama_chip.k:43:9
+  wire        _decode_advance_BasicBlock_0Impl_global_out__current_layer_13_1_valid;	// llama_chip.k:43:9
+  wire [4:0]  _decode_advance_BasicBlock_0Impl_global_out__current_layer_13_1;	// llama_chip.k:43:9
   wire        _decode_advance_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:43:9
   wire        _decode_advance_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:43:9
-  wire        _decode_start_BasicBlock_0Impl_global_out__state_8_0_valid;	// llama_chip.k:31:9
-  wire        _decode_start_BasicBlock_0Impl_global_out__current_layer_11_0_valid;	// llama_chip.k:31:9
+  wire        _decode_start_BasicBlock_0Impl_global_out__state_10_0_valid;	// llama_chip.k:31:9
+  wire        _decode_start_BasicBlock_0Impl_global_out__current_layer_13_0_valid;	// llama_chip.k:31:9
   wire        _decode_start_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:31:9
   wire        _decode_start_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:31:9
-  wire        _fifo_9_reset_Return_overflow_out;
-  wire        _fifo_9_reset_Return_underflow_out;
-  wire        _fifo_9_reset_Return_empty;
-  wire        _fifo_9_reset_Return_full;
-  wire        _fifo_8_get_token_count_Return_overflow_out;
-  wire        _fifo_8_get_token_count_Return_underflow_out;
-  wire        _fifo_8_get_token_count_Return_empty;
-  wire        _fifo_8_get_token_count_Return_full;
-  wire [11:0] _fifo_8_get_token_count_Return_q;
-  wire        _fifo_7_is_output_ready_Return_overflow_out;
-  wire        _fifo_7_is_output_ready_Return_underflow_out;
-  wire        _fifo_7_is_output_ready_Return_empty;
-  wire        _fifo_7_is_output_ready_Return_full;
-  wire        _fifo_7_is_output_ready_Return_q;
-  wire        _fifo_6_is_idle_Return_overflow_out;
-  wire        _fifo_6_is_idle_Return_underflow_out;
-  wire        _fifo_6_is_idle_Return_empty;
-  wire        _fifo_6_is_idle_Return_full;
-  wire        _fifo_6_is_idle_Return_q;
-  wire        _fifo_5_get_output_Return_overflow_out;
-  wire        _fifo_5_get_output_Return_underflow_out;
-  wire        _fifo_5_get_output_Return_empty;
-  wire        _fifo_5_get_output_Return_full;
-  wire [16:0] _fifo_5_get_output_Return_q;
-  wire        _fifo_4_set_output_Return_overflow_out;
-  wire        _fifo_4_set_output_Return_underflow_out;
-  wire        _fifo_4_set_output_Return_empty;
-  wire        _fifo_4_set_output_Return_full;
+  wire        _fifo_11_reset_Return_overflow_out;
+  wire        _fifo_11_reset_Return_underflow_out;
+  wire        _fifo_11_reset_Return_empty;
+  wire        _fifo_11_reset_Return_full;
+  wire        _fifo_10_get_token_count_Return_overflow_out;
+  wire        _fifo_10_get_token_count_Return_underflow_out;
+  wire        _fifo_10_get_token_count_Return_empty;
+  wire        _fifo_10_get_token_count_Return_full;
+  wire [11:0] _fifo_10_get_token_count_Return_q;
+  wire        _fifo_9_is_output_ready_Return_overflow_out;
+  wire        _fifo_9_is_output_ready_Return_underflow_out;
+  wire        _fifo_9_is_output_ready_Return_empty;
+  wire        _fifo_9_is_output_ready_Return_full;
+  wire        _fifo_9_is_output_ready_Return_q;
+  wire        _fifo_8_is_idle_Return_overflow_out;
+  wire        _fifo_8_is_idle_Return_underflow_out;
+  wire        _fifo_8_is_idle_Return_empty;
+  wire        _fifo_8_is_idle_Return_full;
+  wire        _fifo_8_is_idle_Return_q;
+  wire        _fifo_7_get_output_Return_overflow_out;
+  wire        _fifo_7_get_output_Return_underflow_out;
+  wire        _fifo_7_get_output_Return_empty;
+  wire        _fifo_7_get_output_Return_full;
+  wire [16:0] _fifo_7_get_output_Return_q;
+  wire        _fifo_6_set_output_Return_overflow_out;
+  wire        _fifo_6_set_output_Return_underflow_out;
+  wire        _fifo_6_set_output_Return_empty;
+  wire        _fifo_6_set_output_Return_full;
+  wire        _fifo_5_decode_get_layer_slot_k3_Return_overflow_out;
+  wire        _fifo_5_decode_get_layer_slot_k3_Return_underflow_out;
+  wire        _fifo_5_decode_get_layer_slot_k3_Return_empty;
+  wire        _fifo_5_decode_get_layer_slot_k3_Return_full;
+  wire [1:0]  _fifo_5_decode_get_layer_slot_k3_Return_q;
+  wire        _fifo_4_decode_get_layer_slot_k2_Return_overflow_out;
+  wire        _fifo_4_decode_get_layer_slot_k2_Return_underflow_out;
+  wire        _fifo_4_decode_get_layer_slot_k2_Return_empty;
+  wire        _fifo_4_decode_get_layer_slot_k2_Return_full;
+  wire        _fifo_4_decode_get_layer_slot_k2_Return_q;
   wire        _fifo_3_decode_get_layer_Return_overflow_out;
   wire        _fifo_3_decode_get_layer_Return_underflow_out;
   wire        _fifo_3_decode_get_layer_Return_empty;
@@ -1219,6 +1452,8 @@ module llama_chip(
   wire        _fifo_0_decode_start_Return_underflow_out;
   wire        _fifo_0_decode_start_Return_empty;
   wire        _fifo_0_decode_start_Return_full;
+  wire        _has_startup_completed_delayed_11_delay_chain_data_out;
+  wire        _has_startup_completed_delayed_10_delay_chain_data_out;
   wire        _has_startup_completed_delayed_9_delay_chain_data_out;
   wire        _has_startup_completed_delayed_8_delay_chain_data_out;
   wire        _has_startup_completed_delayed_7_delay_chain_data_out;
@@ -1234,7 +1469,7 @@ module llama_chip(
   wire [11:0] __token_count_value_out;	// llama_chip.k:21:5
   wire [5:0]  __state_value_out;	// llama_chip.k:20:5
   wire        _reset_control_rst_and_startup_done_out;
-  wire [23:0] _reset_control_rst_delayed_out;
+  wire [27:0] _reset_control_rst_delayed_out;
   wire        _reset_control_reset_sequence_finished_this_cycle_out;
   logic  stall_rate_supported_out_net;
   logic  reset_empty_out_net;
@@ -1253,6 +1488,12 @@ module llama_chip(
   logic  get_output_rdy_out_net;
   logic  set_output_empty_out_net;
   logic  set_output_rdy_out_net;
+  logic  decode_get_layer_slot_k3_empty_out_net;
+  logic [1:0] decode_get_layer_slot_k3_result_out_net;
+  logic  decode_get_layer_slot_k3_rdy_out_net;
+  logic  decode_get_layer_slot_k2_empty_out_net;
+  logic  decode_get_layer_slot_k2_result_out_net;
+  logic  decode_get_layer_slot_k2_rdy_out_net;
   logic  decode_get_layer_empty_out_net;
   logic [4:0] decode_get_layer_result_out_net;
   logic  decode_get_layer_rdy_out_net;
@@ -1269,7 +1510,7 @@ module llama_chip(
   //synopsys translate_off
   KanagawaStringTable string_table(.clk(clk));
   //synopsys translate_on
-  logic [23:0] reg_rst_delayed;
+  logic [27:0] reg_rst_delayed;
   logic combined_reset;
   assign combined_reset = rst;
   logic reset_sequence_finished_this_cycle;
@@ -1301,6 +1542,10 @@ module llama_chip(
   logic has_startup_completed_delayed_8;
 
   logic has_startup_completed_delayed_9;
+
+  logic has_startup_completed_delayed_10;
+
+  logic has_startup_completed_delayed_11;
 
   struct packed {
       logic rden;
@@ -1347,9 +1592,31 @@ module llama_chip(
       logic empty;
       logic wren;
       logic almost_full;
+      logic [0:0] data_in;
+      logic [0:0] data_out;
       logic overflow;
       logic underflow;
   } fifo_data_4;
+
+  struct packed {
+      logic rden;
+      logic empty;
+      logic wren;
+      logic almost_full;
+      logic [1:0] data_in;
+      logic [1:0] data_out;
+      logic overflow;
+      logic underflow;
+  } fifo_data_5;
+
+  struct packed {
+      logic rden;
+      logic empty;
+      logic wren;
+      logic almost_full;
+      logic overflow;
+      logic underflow;
+  } fifo_data_6;
 
   struct packed {
       logic rden;
@@ -1360,29 +1627,29 @@ module llama_chip(
       logic [16:0] data_out;
       logic overflow;
       logic underflow;
-  } fifo_data_5;
-
-  struct packed {
-      logic rden;
-      logic empty;
-      logic wren;
-      logic almost_full;
-      logic [0:0] data_in;
-      logic [0:0] data_out;
-      logic overflow;
-      logic underflow;
-  } fifo_data_6;
-
-  struct packed {
-      logic rden;
-      logic empty;
-      logic wren;
-      logic almost_full;
-      logic [0:0] data_in;
-      logic [0:0] data_out;
-      logic overflow;
-      logic underflow;
   } fifo_data_7;
+
+  struct packed {
+      logic rden;
+      logic empty;
+      logic wren;
+      logic almost_full;
+      logic [0:0] data_in;
+      logic [0:0] data_out;
+      logic overflow;
+      logic underflow;
+  } fifo_data_8;
+
+  struct packed {
+      logic rden;
+      logic empty;
+      logic wren;
+      logic almost_full;
+      logic [0:0] data_in;
+      logic [0:0] data_out;
+      logic overflow;
+      logic underflow;
+  } fifo_data_9;
 
   struct packed {
       logic rden;
@@ -1393,7 +1660,7 @@ module llama_chip(
       logic [11:0] data_out;
       logic overflow;
       logic underflow;
-  } fifo_data_8;
+  } fifo_data_10;
 
   struct packed {
       logic rden;
@@ -1402,7 +1669,7 @@ module llama_chip(
       logic almost_full;
       logic overflow;
       logic underflow;
-  } fifo_data_9;
+  } fifo_data_11;
 
   struct packed {
       logic rdy_int;
@@ -1410,25 +1677,9 @@ module llama_chip(
       logic valid;
       logic [16:0] data;
       logic underflow;
-  } passthrough_data_10;
-  assign passthrough_data_10.underflow = 1'b0;
-  assign passthrough_data_10.rdy_ext = passthrough_data_10.rdy_int & !(!has_startup_completed_delayed_0);
-  struct packed {
-      logic rdy_int;
-      logic rdy_ext;
-      logic valid;
-      logic underflow;
-  } passthrough_data_11;
-  assign passthrough_data_11.underflow = 1'b0;
-  assign passthrough_data_11.rdy_ext = passthrough_data_11.rdy_int & !(!has_startup_completed_delayed_1);
-  struct packed {
-      logic rdy_int;
-      logic rdy_ext;
-      logic valid;
-      logic underflow;
   } passthrough_data_12;
   assign passthrough_data_12.underflow = 1'b0;
-  assign passthrough_data_12.rdy_ext = passthrough_data_12.rdy_int & !(!has_startup_completed_delayed_2);
+  assign passthrough_data_12.rdy_ext = passthrough_data_12.rdy_int & !(!has_startup_completed_delayed_0);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
@@ -1436,16 +1687,15 @@ module llama_chip(
       logic underflow;
   } passthrough_data_13;
   assign passthrough_data_13.underflow = 1'b0;
-  assign passthrough_data_13.rdy_ext = passthrough_data_13.rdy_int & !(!has_startup_completed_delayed_3);
+  assign passthrough_data_13.rdy_ext = passthrough_data_13.rdy_int & !(!has_startup_completed_delayed_1);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
       logic valid;
-      logic [16:0] data;
       logic underflow;
   } passthrough_data_14;
   assign passthrough_data_14.underflow = 1'b0;
-  assign passthrough_data_14.rdy_ext = passthrough_data_14.rdy_int & !(!has_startup_completed_delayed_4);
+  assign passthrough_data_14.rdy_ext = passthrough_data_14.rdy_int & !(!has_startup_completed_delayed_2);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
@@ -1453,7 +1703,7 @@ module llama_chip(
       logic underflow;
   } passthrough_data_15;
   assign passthrough_data_15.underflow = 1'b0;
-  assign passthrough_data_15.rdy_ext = passthrough_data_15.rdy_int & !(!has_startup_completed_delayed_5);
+  assign passthrough_data_15.rdy_ext = passthrough_data_15.rdy_int & !(!has_startup_completed_delayed_3);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
@@ -1461,7 +1711,7 @@ module llama_chip(
       logic underflow;
   } passthrough_data_16;
   assign passthrough_data_16.underflow = 1'b0;
-  assign passthrough_data_16.rdy_ext = passthrough_data_16.rdy_int & !(!has_startup_completed_delayed_6);
+  assign passthrough_data_16.rdy_ext = passthrough_data_16.rdy_int & !(!has_startup_completed_delayed_4);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
@@ -1469,15 +1719,16 @@ module llama_chip(
       logic underflow;
   } passthrough_data_17;
   assign passthrough_data_17.underflow = 1'b0;
-  assign passthrough_data_17.rdy_ext = passthrough_data_17.rdy_int & !(!has_startup_completed_delayed_7);
+  assign passthrough_data_17.rdy_ext = passthrough_data_17.rdy_int & !(!has_startup_completed_delayed_5);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
       logic valid;
+      logic [16:0] data;
       logic underflow;
   } passthrough_data_18;
   assign passthrough_data_18.underflow = 1'b0;
-  assign passthrough_data_18.rdy_ext = passthrough_data_18.rdy_int & !(!has_startup_completed_delayed_8);
+  assign passthrough_data_18.rdy_ext = passthrough_data_18.rdy_int & !(!has_startup_completed_delayed_6);
   struct packed {
       logic rdy_int;
       logic rdy_ext;
@@ -1485,55 +1736,97 @@ module llama_chip(
       logic underflow;
   } passthrough_data_19;
   assign passthrough_data_19.underflow = 1'b0;
-  assign passthrough_data_19.rdy_ext = passthrough_data_19.rdy_int & !(!has_startup_completed_delayed_9);
-  assign decode_start_rdy_out_net = passthrough_data_10.rdy_ext;
-  assign passthrough_data_10.valid = decode_start_rdy_out & decode_start_valid_in;
-  assign passthrough_data_10.data = { decode_start_token_id_in };
+  assign passthrough_data_19.rdy_ext = passthrough_data_19.rdy_int & !(!has_startup_completed_delayed_7);
+  struct packed {
+      logic rdy_int;
+      logic rdy_ext;
+      logic valid;
+      logic underflow;
+  } passthrough_data_20;
+  assign passthrough_data_20.underflow = 1'b0;
+  assign passthrough_data_20.rdy_ext = passthrough_data_20.rdy_int & !(!has_startup_completed_delayed_8);
+  struct packed {
+      logic rdy_int;
+      logic rdy_ext;
+      logic valid;
+      logic underflow;
+  } passthrough_data_21;
+  assign passthrough_data_21.underflow = 1'b0;
+  assign passthrough_data_21.rdy_ext = passthrough_data_21.rdy_int & !(!has_startup_completed_delayed_9);
+  struct packed {
+      logic rdy_int;
+      logic rdy_ext;
+      logic valid;
+      logic underflow;
+  } passthrough_data_22;
+  assign passthrough_data_22.underflow = 1'b0;
+  assign passthrough_data_22.rdy_ext = passthrough_data_22.rdy_int & !(!has_startup_completed_delayed_10);
+  struct packed {
+      logic rdy_int;
+      logic rdy_ext;
+      logic valid;
+      logic underflow;
+  } passthrough_data_23;
+  assign passthrough_data_23.underflow = 1'b0;
+  assign passthrough_data_23.rdy_ext = passthrough_data_23.rdy_int & !(!has_startup_completed_delayed_11);
+  assign decode_start_rdy_out_net = passthrough_data_12.rdy_ext;
+  assign passthrough_data_12.valid = decode_start_rdy_out & decode_start_valid_in;
+  assign passthrough_data_12.data = { decode_start_token_id_in };
   assign fifo_data_0.rden = decode_start_rden_in;
   assign decode_start_empty_out_net = fifo_data_0.empty;
-  assign decode_advance_rdy_out_net = passthrough_data_11.rdy_ext;
-  assign passthrough_data_11.valid = decode_advance_rdy_out & decode_advance_valid_in;
+  assign decode_advance_rdy_out_net = passthrough_data_13.rdy_ext;
+  assign passthrough_data_13.valid = decode_advance_rdy_out & decode_advance_valid_in;
   assign fifo_data_1.rden = decode_advance_rden_in;
   assign decode_advance_empty_out_net = fifo_data_1.empty;
-  assign decode_get_state_rdy_out_net = passthrough_data_12.rdy_ext;
-  assign passthrough_data_12.valid = decode_get_state_rdy_out & decode_get_state_valid_in;
+  assign decode_get_state_rdy_out_net = passthrough_data_14.rdy_ext;
+  assign passthrough_data_14.valid = decode_get_state_rdy_out & decode_get_state_valid_in;
   assign fifo_data_2.rden = decode_get_state_rden_in;
   assign decode_get_state_result_out_net = fifo_data_2.data_out;
   assign decode_get_state_empty_out_net = fifo_data_2.empty;
-  assign decode_get_layer_rdy_out_net = passthrough_data_13.rdy_ext;
-  assign passthrough_data_13.valid = decode_get_layer_rdy_out & decode_get_layer_valid_in;
+  assign decode_get_layer_rdy_out_net = passthrough_data_15.rdy_ext;
+  assign passthrough_data_15.valid = decode_get_layer_rdy_out & decode_get_layer_valid_in;
   assign fifo_data_3.rden = decode_get_layer_rden_in;
   assign decode_get_layer_result_out_net = fifo_data_3.data_out;
   assign decode_get_layer_empty_out_net = fifo_data_3.empty;
-  assign set_output_rdy_out_net = passthrough_data_14.rdy_ext;
-  assign passthrough_data_14.valid = set_output_rdy_out & set_output_valid_in;
-  assign passthrough_data_14.data = { set_output_token_id_in };
-  assign fifo_data_4.rden = set_output_rden_in;
-  assign set_output_empty_out_net = fifo_data_4.empty;
-  assign get_output_rdy_out_net = passthrough_data_15.rdy_ext;
-  assign passthrough_data_15.valid = get_output_rdy_out & get_output_valid_in;
-  assign fifo_data_5.rden = get_output_rden_in;
-  assign get_output_result_out_net = fifo_data_5.data_out;
-  assign get_output_empty_out_net = fifo_data_5.empty;
-  assign is_idle_rdy_out_net = passthrough_data_16.rdy_ext;
-  assign passthrough_data_16.valid = is_idle_rdy_out & is_idle_valid_in;
-  assign fifo_data_6.rden = is_idle_rden_in;
-  assign is_idle_result_out_net = fifo_data_6.data_out;
-  assign is_idle_empty_out_net = fifo_data_6.empty;
-  assign is_output_ready_rdy_out_net = passthrough_data_17.rdy_ext;
-  assign passthrough_data_17.valid = is_output_ready_rdy_out & is_output_ready_valid_in;
-  assign fifo_data_7.rden = is_output_ready_rden_in;
-  assign is_output_ready_result_out_net = fifo_data_7.data_out;
-  assign is_output_ready_empty_out_net = fifo_data_7.empty;
-  assign get_token_count_rdy_out_net = passthrough_data_18.rdy_ext;
-  assign passthrough_data_18.valid = get_token_count_rdy_out & get_token_count_valid_in;
-  assign fifo_data_8.rden = get_token_count_rden_in;
-  assign get_token_count_result_out_net = fifo_data_8.data_out;
-  assign get_token_count_empty_out_net = fifo_data_8.empty;
-  assign reset_rdy_out_net = passthrough_data_19.rdy_ext;
-  assign passthrough_data_19.valid = reset_rdy_out & reset_valid_in;
-  assign fifo_data_9.rden = reset_rden_in;
-  assign reset_empty_out_net = fifo_data_9.empty;
+  assign decode_get_layer_slot_k2_rdy_out_net = passthrough_data_16.rdy_ext;
+  assign passthrough_data_16.valid = decode_get_layer_slot_k2_rdy_out & decode_get_layer_slot_k2_valid_in;
+  assign fifo_data_4.rden = decode_get_layer_slot_k2_rden_in;
+  assign decode_get_layer_slot_k2_result_out_net = fifo_data_4.data_out;
+  assign decode_get_layer_slot_k2_empty_out_net = fifo_data_4.empty;
+  assign decode_get_layer_slot_k3_rdy_out_net = passthrough_data_17.rdy_ext;
+  assign passthrough_data_17.valid = decode_get_layer_slot_k3_rdy_out & decode_get_layer_slot_k3_valid_in;
+  assign fifo_data_5.rden = decode_get_layer_slot_k3_rden_in;
+  assign decode_get_layer_slot_k3_result_out_net = fifo_data_5.data_out;
+  assign decode_get_layer_slot_k3_empty_out_net = fifo_data_5.empty;
+  assign set_output_rdy_out_net = passthrough_data_18.rdy_ext;
+  assign passthrough_data_18.valid = set_output_rdy_out & set_output_valid_in;
+  assign passthrough_data_18.data = { set_output_token_id_in };
+  assign fifo_data_6.rden = set_output_rden_in;
+  assign set_output_empty_out_net = fifo_data_6.empty;
+  assign get_output_rdy_out_net = passthrough_data_19.rdy_ext;
+  assign passthrough_data_19.valid = get_output_rdy_out & get_output_valid_in;
+  assign fifo_data_7.rden = get_output_rden_in;
+  assign get_output_result_out_net = fifo_data_7.data_out;
+  assign get_output_empty_out_net = fifo_data_7.empty;
+  assign is_idle_rdy_out_net = passthrough_data_20.rdy_ext;
+  assign passthrough_data_20.valid = is_idle_rdy_out & is_idle_valid_in;
+  assign fifo_data_8.rden = is_idle_rden_in;
+  assign is_idle_result_out_net = fifo_data_8.data_out;
+  assign is_idle_empty_out_net = fifo_data_8.empty;
+  assign is_output_ready_rdy_out_net = passthrough_data_21.rdy_ext;
+  assign passthrough_data_21.valid = is_output_ready_rdy_out & is_output_ready_valid_in;
+  assign fifo_data_9.rden = is_output_ready_rden_in;
+  assign is_output_ready_result_out_net = fifo_data_9.data_out;
+  assign is_output_ready_empty_out_net = fifo_data_9.empty;
+  assign get_token_count_rdy_out_net = passthrough_data_22.rdy_ext;
+  assign passthrough_data_22.valid = get_token_count_rdy_out & get_token_count_valid_in;
+  assign fifo_data_10.rden = get_token_count_rden_in;
+  assign get_token_count_result_out_net = fifo_data_10.data_out;
+  assign get_token_count_empty_out_net = fifo_data_10.empty;
+  assign reset_rdy_out_net = passthrough_data_23.rdy_ext;
+  assign passthrough_data_23.valid = reset_rdy_out & reset_valid_in;
+  assign fifo_data_11.rden = reset_rden_in;
+  assign reset_empty_out_net = fifo_data_11.empty;
   always_comb begin
     rst_and_startup_done_out_net = _reset_control_rst_and_startup_done_out;
     reg_rst_delayed = _reset_control_rst_delayed_out;
@@ -1548,6 +1841,8 @@ module llama_chip(
     has_startup_completed_delayed_7 = _has_startup_completed_delayed_7_delay_chain_data_out;
     has_startup_completed_delayed_8 = _has_startup_completed_delayed_8_delay_chain_data_out;
     has_startup_completed_delayed_9 = _has_startup_completed_delayed_9_delay_chain_data_out;
+    has_startup_completed_delayed_10 = _has_startup_completed_delayed_10_delay_chain_data_out;
+    has_startup_completed_delayed_11 = _has_startup_completed_delayed_11_delay_chain_data_out;
     fifo_data_0.overflow = _fifo_0_decode_start_Return_overflow_out;
     fifo_data_0.underflow = _fifo_0_decode_start_Return_underflow_out;
     fifo_data_0.empty = _fifo_0_decode_start_Return_empty;
@@ -1566,66 +1861,82 @@ module llama_chip(
     fifo_data_3.empty = _fifo_3_decode_get_layer_Return_empty;
     fifo_data_3.almost_full = _fifo_3_decode_get_layer_Return_full;
     fifo_data_3.data_out = _fifo_3_decode_get_layer_Return_q;
-    fifo_data_4.overflow = _fifo_4_set_output_Return_overflow_out;
-    fifo_data_4.underflow = _fifo_4_set_output_Return_underflow_out;
-    fifo_data_4.empty = _fifo_4_set_output_Return_empty;
-    fifo_data_4.almost_full = _fifo_4_set_output_Return_full;
-    fifo_data_5.overflow = _fifo_5_get_output_Return_overflow_out;
-    fifo_data_5.underflow = _fifo_5_get_output_Return_underflow_out;
-    fifo_data_5.empty = _fifo_5_get_output_Return_empty;
-    fifo_data_5.almost_full = _fifo_5_get_output_Return_full;
-    fifo_data_5.data_out = _fifo_5_get_output_Return_q;
-    fifo_data_6.overflow = _fifo_6_is_idle_Return_overflow_out;
-    fifo_data_6.underflow = _fifo_6_is_idle_Return_underflow_out;
-    fifo_data_6.empty = _fifo_6_is_idle_Return_empty;
-    fifo_data_6.almost_full = _fifo_6_is_idle_Return_full;
-    fifo_data_6.data_out = _fifo_6_is_idle_Return_q;
-    fifo_data_7.overflow = _fifo_7_is_output_ready_Return_overflow_out;
-    fifo_data_7.underflow = _fifo_7_is_output_ready_Return_underflow_out;
-    fifo_data_7.empty = _fifo_7_is_output_ready_Return_empty;
-    fifo_data_7.almost_full = _fifo_7_is_output_ready_Return_full;
-    fifo_data_7.data_out = _fifo_7_is_output_ready_Return_q;
-    fifo_data_8.overflow = _fifo_8_get_token_count_Return_overflow_out;
-    fifo_data_8.underflow = _fifo_8_get_token_count_Return_underflow_out;
-    fifo_data_8.empty = _fifo_8_get_token_count_Return_empty;
-    fifo_data_8.almost_full = _fifo_8_get_token_count_Return_full;
-    fifo_data_8.data_out = _fifo_8_get_token_count_Return_q;
-    fifo_data_9.overflow = _fifo_9_reset_Return_overflow_out;
-    fifo_data_9.underflow = _fifo_9_reset_Return_underflow_out;
-    fifo_data_9.empty = _fifo_9_reset_Return_empty;
-    fifo_data_9.almost_full = _fifo_9_reset_Return_full;
+    fifo_data_4.overflow = _fifo_4_decode_get_layer_slot_k2_Return_overflow_out;
+    fifo_data_4.underflow = _fifo_4_decode_get_layer_slot_k2_Return_underflow_out;
+    fifo_data_4.empty = _fifo_4_decode_get_layer_slot_k2_Return_empty;
+    fifo_data_4.almost_full = _fifo_4_decode_get_layer_slot_k2_Return_full;
+    fifo_data_4.data_out = _fifo_4_decode_get_layer_slot_k2_Return_q;
+    fifo_data_5.overflow = _fifo_5_decode_get_layer_slot_k3_Return_overflow_out;
+    fifo_data_5.underflow = _fifo_5_decode_get_layer_slot_k3_Return_underflow_out;
+    fifo_data_5.empty = _fifo_5_decode_get_layer_slot_k3_Return_empty;
+    fifo_data_5.almost_full = _fifo_5_decode_get_layer_slot_k3_Return_full;
+    fifo_data_5.data_out = _fifo_5_decode_get_layer_slot_k3_Return_q;
+    fifo_data_6.overflow = _fifo_6_set_output_Return_overflow_out;
+    fifo_data_6.underflow = _fifo_6_set_output_Return_underflow_out;
+    fifo_data_6.empty = _fifo_6_set_output_Return_empty;
+    fifo_data_6.almost_full = _fifo_6_set_output_Return_full;
+    fifo_data_7.overflow = _fifo_7_get_output_Return_overflow_out;
+    fifo_data_7.underflow = _fifo_7_get_output_Return_underflow_out;
+    fifo_data_7.empty = _fifo_7_get_output_Return_empty;
+    fifo_data_7.almost_full = _fifo_7_get_output_Return_full;
+    fifo_data_7.data_out = _fifo_7_get_output_Return_q;
+    fifo_data_8.overflow = _fifo_8_is_idle_Return_overflow_out;
+    fifo_data_8.underflow = _fifo_8_is_idle_Return_underflow_out;
+    fifo_data_8.empty = _fifo_8_is_idle_Return_empty;
+    fifo_data_8.almost_full = _fifo_8_is_idle_Return_full;
+    fifo_data_8.data_out = _fifo_8_is_idle_Return_q;
+    fifo_data_9.overflow = _fifo_9_is_output_ready_Return_overflow_out;
+    fifo_data_9.underflow = _fifo_9_is_output_ready_Return_underflow_out;
+    fifo_data_9.empty = _fifo_9_is_output_ready_Return_empty;
+    fifo_data_9.almost_full = _fifo_9_is_output_ready_Return_full;
+    fifo_data_9.data_out = _fifo_9_is_output_ready_Return_q;
+    fifo_data_10.overflow = _fifo_10_get_token_count_Return_overflow_out;
+    fifo_data_10.underflow = _fifo_10_get_token_count_Return_underflow_out;
+    fifo_data_10.empty = _fifo_10_get_token_count_Return_empty;
+    fifo_data_10.almost_full = _fifo_10_get_token_count_Return_full;
+    fifo_data_10.data_out = _fifo_10_get_token_count_Return_q;
+    fifo_data_11.overflow = _fifo_11_reset_Return_overflow_out;
+    fifo_data_11.underflow = _fifo_11_reset_Return_underflow_out;
+    fifo_data_11.empty = _fifo_11_reset_Return_empty;
+    fifo_data_11.almost_full = _fifo_11_reset_Return_full;
     fifo_data_0.wren = _decode_start_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:31:9
-    passthrough_data_10.rdy_int = _decode_start_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:31:9
+    passthrough_data_12.rdy_int = _decode_start_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:31:9
     fifo_data_1.wren = _decode_advance_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:43:9
-    passthrough_data_11.rdy_int = _decode_advance_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:43:9
+    passthrough_data_13.rdy_int = _decode_advance_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:43:9
     fifo_data_2.data_in = _decode_get_state_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:72:9
     fifo_data_2.wren = _decode_get_state_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:72:9
-    passthrough_data_12.rdy_int = _decode_get_state_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:72:9
+    passthrough_data_14.rdy_int = _decode_get_state_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:72:9
     fifo_data_3.data_in = _decode_get_layer_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:78:9
     fifo_data_3.wren = _decode_get_layer_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:78:9
-    passthrough_data_13.rdy_int = _decode_get_layer_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:78:9
-    fifo_data_4.wren = _set_output_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:84:9
-    passthrough_data_14.rdy_int = _set_output_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:84:9
-    fifo_data_5.data_in = _get_output_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:93:9
-    fifo_data_5.wren = _get_output_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:93:9
-    passthrough_data_15.rdy_int = _get_output_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:93:9
-    fifo_data_6.data_in = _is_idle_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:99:9
-    fifo_data_6.wren = _is_idle_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:99:9
-    passthrough_data_16.rdy_int = _is_idle_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:99:9
-    fifo_data_7.data_in = _is_output_ready_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:105:9
-    fifo_data_7.wren = _is_output_ready_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:105:9
-    passthrough_data_17.rdy_int = _is_output_ready_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:105:9
-    fifo_data_8.data_in = _get_token_count_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:111:9
-    fifo_data_8.wren = _get_token_count_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:111:9
-    passthrough_data_18.rdy_int = _get_token_count_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:111:9
-    fifo_data_9.wren = _reset_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:117:9
-    passthrough_data_19.rdy_int = _reset_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:117:9
+    passthrough_data_15.rdy_int = _decode_get_layer_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:78:9
+    fifo_data_4.data_in = _decode_get_layer_slot_k2_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:87:9
+    fifo_data_4.wren = _decode_get_layer_slot_k2_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:87:9
+    passthrough_data_16.rdy_int = _decode_get_layer_slot_k2_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:87:9
+    fifo_data_5.data_in = _decode_get_layer_slot_k3_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:94:9
+    fifo_data_5.wren = _decode_get_layer_slot_k3_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:94:9
+    passthrough_data_17.rdy_int = _decode_get_layer_slot_k3_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:94:9
+    fifo_data_6.wren = _set_output_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:113:9
+    passthrough_data_18.rdy_int = _set_output_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:113:9
+    fifo_data_7.data_in = _get_output_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:122:9
+    fifo_data_7.wren = _get_output_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:122:9
+    passthrough_data_19.rdy_int = _get_output_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:122:9
+    fifo_data_8.data_in = _is_idle_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:128:9
+    fifo_data_8.wren = _is_idle_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:128:9
+    passthrough_data_20.rdy_int = _is_idle_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:128:9
+    fifo_data_9.data_in = _is_output_ready_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:134:9
+    fifo_data_9.wren = _is_output_ready_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:134:9
+    passthrough_data_21.rdy_int = _is_output_ready_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:134:9
+    fifo_data_10.data_in = _get_token_count_BasicBlock_0Impl_fifo_data_out_0;	// llama_chip.k:140:9
+    fifo_data_10.wren = _get_token_count_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:140:9
+    passthrough_data_22.rdy_int = _get_token_count_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:140:9
+    fifo_data_11.wren = _reset_BasicBlock_0Impl_fifo_wren_0;	// llama_chip.k:146:9
+    passthrough_data_23.rdy_int = _reset_BasicBlock_0Impl_input_rdy_0;	// llama_chip.k:146:9
   end // always_comb
 
   assign has_startup_completed_raw = 1'b1;
   assign stall_rate_supported_out_net = 1'b0;
   KanagawaResetControl #(
-    .WIDTH(24),
+    .WIDTH(28),
     .DELAY_CYCLES(3),
     .FAN_OUT_LEVELS(1),
     .HOLD_CYCLES(18),
@@ -1643,36 +1954,36 @@ module llama_chip(
   llama_chip_reg_6_w3_v_0_6_1_v_2_6_0_i_6_0 _state (	// llama_chip.k:20:5
     .clk           (clk),	// llama_chip.k:20:5
     .rst           (reg_rst_delayed[0]),	// llama_chip.k:20:5
-    .input_valid_0 (_decode_start_BasicBlock_0Impl_global_out__state_8_0_valid),	// llama_chip.k:31:9
-    .input_valid_1 (_decode_advance_BasicBlock_0Impl_global_out__state_8_1_valid),	// llama_chip.k:43:9
-    .input_1       (_decode_advance_BasicBlock_0Impl_global_out__state_8_1),	// llama_chip.k:43:9
-    .input_valid_2 (_reset_BasicBlock_0Impl_global_out__state_8_2_valid),	// llama_chip.k:117:9
+    .input_valid_0 (_decode_start_BasicBlock_0Impl_global_out__state_10_0_valid),	// llama_chip.k:31:9
+    .input_valid_1 (_decode_advance_BasicBlock_0Impl_global_out__state_10_1_valid),	// llama_chip.k:43:9
+    .input_1       (_decode_advance_BasicBlock_0Impl_global_out__state_10_1),	// llama_chip.k:43:9
+    .input_valid_2 (_reset_BasicBlock_0Impl_global_out__state_10_2_valid),	// llama_chip.k:146:9
     .value_out     (__state_value_out)
   );	// llama_chip.k:20:5
   llama_chip_reg_12_w2_v_1_12_0_i_12_0 _token_count (	// llama_chip.k:21:5
     .clk           (clk),	// llama_chip.k:20:5
     .rst           (reg_rst_delayed[1]),	// llama_chip.k:21:5
-    .input_valid_0 (_decode_advance_BasicBlock_0Impl_global_out__token_count_9_0_valid),	// llama_chip.k:43:9
-    .input_0       (_decode_advance_BasicBlock_0Impl_global_out__token_count_9_0),	// llama_chip.k:43:9
-    .input_valid_1 (_reset_BasicBlock_0Impl_global_out__token_count_9_1_valid),	// llama_chip.k:117:9
+    .input_valid_0 (_decode_advance_BasicBlock_0Impl_global_out__token_count_11_0_valid),	// llama_chip.k:43:9
+    .input_0       (_decode_advance_BasicBlock_0Impl_global_out__token_count_11_0),	// llama_chip.k:43:9
+    .input_valid_1 (_reset_BasicBlock_0Impl_global_out__token_count_11_1_valid),	// llama_chip.k:146:9
     .value_out     (__token_count_value_out)
   );	// llama_chip.k:21:5
   llama_chip_reg_17_w2_v_1_17_0_i_17_0 _output_token (	// llama_chip.k:23:5
     .clk           (clk),	// llama_chip.k:20:5
     .rst           (reg_rst_delayed[2]),	// llama_chip.k:23:5
-    .input_valid_0 (_set_output_BasicBlock_0Impl_global_out__output_token_10_0_valid),	// llama_chip.k:84:9
-    .input_0       (_set_output_BasicBlock_0Impl_global_out__output_token_10_0),	// llama_chip.k:84:9
-    .input_valid_1 (_reset_BasicBlock_0Impl_global_out__output_token_10_1_valid),	// llama_chip.k:117:9
+    .input_valid_0 (_set_output_BasicBlock_0Impl_global_out__output_token_12_0_valid),	// llama_chip.k:113:9
+    .input_0       (_set_output_BasicBlock_0Impl_global_out__output_token_12_0),	// llama_chip.k:113:9
+    .input_valid_1 (_reset_BasicBlock_0Impl_global_out__output_token_12_1_valid),	// llama_chip.k:146:9
     .value_out     (__output_token_value_out)
   );	// llama_chip.k:23:5
   llama_chip_reg_5_w3_v_0_5_0_v_2_5_0_i_5_0 _current_layer (	// llama_chip.k:24:5
     .clk           (clk),	// llama_chip.k:20:5
     .rst           (reg_rst_delayed[3]),	// llama_chip.k:24:5
-    .input_valid_0 (_decode_start_BasicBlock_0Impl_global_out__current_layer_11_0_valid),	// llama_chip.k:31:9
+    .input_valid_0 (_decode_start_BasicBlock_0Impl_global_out__current_layer_13_0_valid),	// llama_chip.k:31:9
     .input_valid_1
-      (_decode_advance_BasicBlock_0Impl_global_out__current_layer_11_1_valid),	// llama_chip.k:43:9
-    .input_1       (_decode_advance_BasicBlock_0Impl_global_out__current_layer_11_1),	// llama_chip.k:43:9
-    .input_valid_2 (_reset_BasicBlock_0Impl_global_out__current_layer_11_2_valid),	// llama_chip.k:117:9
+      (_decode_advance_BasicBlock_0Impl_global_out__current_layer_13_1_valid),	// llama_chip.k:43:9
+    .input_1       (_decode_advance_BasicBlock_0Impl_global_out__current_layer_13_1),	// llama_chip.k:43:9
+    .input_valid_2 (_reset_BasicBlock_0Impl_global_out__current_layer_13_2_valid),	// llama_chip.k:146:9
     .value_out     (__current_layer_value_out)
   );	// llama_chip.k:24:5
   KanagawaFlipFlopChainNoEnable #(
@@ -1754,6 +2065,22 @@ module llama_chip(
     .clk      (clk),
     .data_in  (has_others_completed),
     .data_out (_has_startup_completed_delayed_9_delay_chain_data_out)
+  );
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) has_startup_completed_delayed_10_delay_chain (
+    .clk      (clk),
+    .data_in  (has_others_completed),
+    .data_out (_has_startup_completed_delayed_10_delay_chain_data_out)
+  );
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) has_startup_completed_delayed_11_delay_chain (
+    .clk      (clk),
+    .data_in  (has_others_completed),
+    .data_out (_has_startup_completed_delayed_11_delay_chain_data_out)
   );
   KanagawaWriteDelayFifo #(
     .IS_TRANSACTIONAL(0),
@@ -1854,24 +2181,72 @@ module llama_chip(
   KanagawaWriteDelayFifo #(
     .IS_TRANSACTIONAL(0),
     .END_TRANSACTION_OFFSET(0),
+    .WIDTH(1),
+    .PORT_WIDTH(1),
+    .WRITE_DELAY(0),
+    .ALMOSTEMPTY_VAL(0),
+    .MIN_WRITE_DELAY(0),
+    .AUTO_PIPELINE_GROUP("fifo_4_decode_get_layer_slot_k2_Return"),
+    .DEPTH(32),
+    .ALMOSTFULL_ENTRIES(3),
+    .USE_LUTRAM(1)
+  ) fifo_4_decode_get_layer_slot_k2_Return (
+    .clock         (clk),
+    .rst           (reg_rst_delayed[8]),
+    .overflow_out  (_fifo_4_decode_get_layer_slot_k2_Return_overflow_out),
+    .underflow_out (_fifo_4_decode_get_layer_slot_k2_Return_underflow_out),
+    .empty         (_fifo_4_decode_get_layer_slot_k2_Return_empty),
+    .rdreq         (fifo_data_4.rden),
+    .full          (_fifo_4_decode_get_layer_slot_k2_Return_full),
+    .wrreq         (fifo_data_4.wren),
+    .data          (fifo_data_4.data_in),
+    .q             (_fifo_4_decode_get_layer_slot_k2_Return_q)
+  );
+  KanagawaWriteDelayFifo #(
+    .IS_TRANSACTIONAL(0),
+    .END_TRANSACTION_OFFSET(0),
+    .WIDTH(2),
+    .PORT_WIDTH(2),
+    .WRITE_DELAY(0),
+    .ALMOSTEMPTY_VAL(0),
+    .MIN_WRITE_DELAY(0),
+    .AUTO_PIPELINE_GROUP("fifo_5_decode_get_layer_slot_k3_Return"),
+    .DEPTH(32),
+    .ALMOSTFULL_ENTRIES(3),
+    .USE_LUTRAM(1)
+  ) fifo_5_decode_get_layer_slot_k3_Return (
+    .clock         (clk),
+    .rst           (reg_rst_delayed[9]),
+    .overflow_out  (_fifo_5_decode_get_layer_slot_k3_Return_overflow_out),
+    .underflow_out (_fifo_5_decode_get_layer_slot_k3_Return_underflow_out),
+    .empty         (_fifo_5_decode_get_layer_slot_k3_Return_empty),
+    .rdreq         (fifo_data_5.rden),
+    .full          (_fifo_5_decode_get_layer_slot_k3_Return_full),
+    .wrreq         (fifo_data_5.wren),
+    .data          (fifo_data_5.data_in),
+    .q             (_fifo_5_decode_get_layer_slot_k3_Return_q)
+  );
+  KanagawaWriteDelayFifo #(
+    .IS_TRANSACTIONAL(0),
+    .END_TRANSACTION_OFFSET(0),
     .WIDTH(0),
     .PORT_WIDTH(1),
     .WRITE_DELAY(0),
     .ALMOSTEMPTY_VAL(0),
     .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_4_set_output_Return"),
+    .AUTO_PIPELINE_GROUP("fifo_6_set_output_Return"),
     .DEPTH(32),
     .ALMOSTFULL_ENTRIES(3),
     .USE_LUTRAM(0)
-  ) fifo_4_set_output_Return (
+  ) fifo_6_set_output_Return (
     .clock         (clk),
-    .rst           (reg_rst_delayed[8]),
-    .overflow_out  (_fifo_4_set_output_Return_overflow_out),
-    .underflow_out (_fifo_4_set_output_Return_underflow_out),
-    .empty         (_fifo_4_set_output_Return_empty),
-    .rdreq         (fifo_data_4.rden),
-    .full          (_fifo_4_set_output_Return_full),
-    .wrreq         (fifo_data_4.wren),
+    .rst           (reg_rst_delayed[10]),
+    .overflow_out  (_fifo_6_set_output_Return_overflow_out),
+    .underflow_out (_fifo_6_set_output_Return_underflow_out),
+    .empty         (_fifo_6_set_output_Return_empty),
+    .rdreq         (fifo_data_6.rden),
+    .full          (_fifo_6_set_output_Return_full),
+    .wrreq         (fifo_data_6.wren),
     .data          ('0),
     .q             (/* unused */)
   );
@@ -1883,69 +2258,69 @@ module llama_chip(
     .WRITE_DELAY(0),
     .ALMOSTEMPTY_VAL(0),
     .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_5_get_output_Return"),
+    .AUTO_PIPELINE_GROUP("fifo_7_get_output_Return"),
     .DEPTH(32),
     .ALMOSTFULL_ENTRIES(3),
     .USE_LUTRAM(1)
-  ) fifo_5_get_output_Return (
-    .clock         (clk),
-    .rst           (reg_rst_delayed[9]),
-    .overflow_out  (_fifo_5_get_output_Return_overflow_out),
-    .underflow_out (_fifo_5_get_output_Return_underflow_out),
-    .empty         (_fifo_5_get_output_Return_empty),
-    .rdreq         (fifo_data_5.rden),
-    .full          (_fifo_5_get_output_Return_full),
-    .wrreq         (fifo_data_5.wren),
-    .data          (fifo_data_5.data_in),
-    .q             (_fifo_5_get_output_Return_q)
-  );
-  KanagawaWriteDelayFifo #(
-    .IS_TRANSACTIONAL(0),
-    .END_TRANSACTION_OFFSET(0),
-    .WIDTH(1),
-    .PORT_WIDTH(1),
-    .WRITE_DELAY(0),
-    .ALMOSTEMPTY_VAL(0),
-    .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_6_is_idle_Return"),
-    .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(3),
-    .USE_LUTRAM(1)
-  ) fifo_6_is_idle_Return (
-    .clock         (clk),
-    .rst           (reg_rst_delayed[10]),
-    .overflow_out  (_fifo_6_is_idle_Return_overflow_out),
-    .underflow_out (_fifo_6_is_idle_Return_underflow_out),
-    .empty         (_fifo_6_is_idle_Return_empty),
-    .rdreq         (fifo_data_6.rden),
-    .full          (_fifo_6_is_idle_Return_full),
-    .wrreq         (fifo_data_6.wren),
-    .data          (fifo_data_6.data_in),
-    .q             (_fifo_6_is_idle_Return_q)
-  );
-  KanagawaWriteDelayFifo #(
-    .IS_TRANSACTIONAL(0),
-    .END_TRANSACTION_OFFSET(0),
-    .WIDTH(1),
-    .PORT_WIDTH(1),
-    .WRITE_DELAY(0),
-    .ALMOSTEMPTY_VAL(0),
-    .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_7_is_output_ready_Return"),
-    .DEPTH(32),
-    .ALMOSTFULL_ENTRIES(3),
-    .USE_LUTRAM(1)
-  ) fifo_7_is_output_ready_Return (
+  ) fifo_7_get_output_Return (
     .clock         (clk),
     .rst           (reg_rst_delayed[11]),
-    .overflow_out  (_fifo_7_is_output_ready_Return_overflow_out),
-    .underflow_out (_fifo_7_is_output_ready_Return_underflow_out),
-    .empty         (_fifo_7_is_output_ready_Return_empty),
+    .overflow_out  (_fifo_7_get_output_Return_overflow_out),
+    .underflow_out (_fifo_7_get_output_Return_underflow_out),
+    .empty         (_fifo_7_get_output_Return_empty),
     .rdreq         (fifo_data_7.rden),
-    .full          (_fifo_7_is_output_ready_Return_full),
+    .full          (_fifo_7_get_output_Return_full),
     .wrreq         (fifo_data_7.wren),
     .data          (fifo_data_7.data_in),
-    .q             (_fifo_7_is_output_ready_Return_q)
+    .q             (_fifo_7_get_output_Return_q)
+  );
+  KanagawaWriteDelayFifo #(
+    .IS_TRANSACTIONAL(0),
+    .END_TRANSACTION_OFFSET(0),
+    .WIDTH(1),
+    .PORT_WIDTH(1),
+    .WRITE_DELAY(0),
+    .ALMOSTEMPTY_VAL(0),
+    .MIN_WRITE_DELAY(0),
+    .AUTO_PIPELINE_GROUP("fifo_8_is_idle_Return"),
+    .DEPTH(32),
+    .ALMOSTFULL_ENTRIES(3),
+    .USE_LUTRAM(1)
+  ) fifo_8_is_idle_Return (
+    .clock         (clk),
+    .rst           (reg_rst_delayed[12]),
+    .overflow_out  (_fifo_8_is_idle_Return_overflow_out),
+    .underflow_out (_fifo_8_is_idle_Return_underflow_out),
+    .empty         (_fifo_8_is_idle_Return_empty),
+    .rdreq         (fifo_data_8.rden),
+    .full          (_fifo_8_is_idle_Return_full),
+    .wrreq         (fifo_data_8.wren),
+    .data          (fifo_data_8.data_in),
+    .q             (_fifo_8_is_idle_Return_q)
+  );
+  KanagawaWriteDelayFifo #(
+    .IS_TRANSACTIONAL(0),
+    .END_TRANSACTION_OFFSET(0),
+    .WIDTH(1),
+    .PORT_WIDTH(1),
+    .WRITE_DELAY(0),
+    .ALMOSTEMPTY_VAL(0),
+    .MIN_WRITE_DELAY(0),
+    .AUTO_PIPELINE_GROUP("fifo_9_is_output_ready_Return"),
+    .DEPTH(32),
+    .ALMOSTFULL_ENTRIES(3),
+    .USE_LUTRAM(1)
+  ) fifo_9_is_output_ready_Return (
+    .clock         (clk),
+    .rst           (reg_rst_delayed[13]),
+    .overflow_out  (_fifo_9_is_output_ready_Return_overflow_out),
+    .underflow_out (_fifo_9_is_output_ready_Return_underflow_out),
+    .empty         (_fifo_9_is_output_ready_Return_empty),
+    .rdreq         (fifo_data_9.rden),
+    .full          (_fifo_9_is_output_ready_Return_full),
+    .wrreq         (fifo_data_9.wren),
+    .data          (fifo_data_9.data_in),
+    .q             (_fifo_9_is_output_ready_Return_q)
   );
   KanagawaWriteDelayFifo #(
     .IS_TRANSACTIONAL(0),
@@ -1955,21 +2330,21 @@ module llama_chip(
     .WRITE_DELAY(0),
     .ALMOSTEMPTY_VAL(0),
     .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_8_get_token_count_Return"),
+    .AUTO_PIPELINE_GROUP("fifo_10_get_token_count_Return"),
     .DEPTH(32),
     .ALMOSTFULL_ENTRIES(3),
     .USE_LUTRAM(1)
-  ) fifo_8_get_token_count_Return (
+  ) fifo_10_get_token_count_Return (
     .clock         (clk),
-    .rst           (reg_rst_delayed[12]),
-    .overflow_out  (_fifo_8_get_token_count_Return_overflow_out),
-    .underflow_out (_fifo_8_get_token_count_Return_underflow_out),
-    .empty         (_fifo_8_get_token_count_Return_empty),
-    .rdreq         (fifo_data_8.rden),
-    .full          (_fifo_8_get_token_count_Return_full),
-    .wrreq         (fifo_data_8.wren),
-    .data          (fifo_data_8.data_in),
-    .q             (_fifo_8_get_token_count_Return_q)
+    .rst           (reg_rst_delayed[14]),
+    .overflow_out  (_fifo_10_get_token_count_Return_overflow_out),
+    .underflow_out (_fifo_10_get_token_count_Return_underflow_out),
+    .empty         (_fifo_10_get_token_count_Return_empty),
+    .rdreq         (fifo_data_10.rden),
+    .full          (_fifo_10_get_token_count_Return_full),
+    .wrreq         (fifo_data_10.wren),
+    .data          (fifo_data_10.data_in),
+    .q             (_fifo_10_get_token_count_Return_q)
   );
   KanagawaWriteDelayFifo #(
     .IS_TRANSACTIONAL(0),
@@ -1979,187 +2354,217 @@ module llama_chip(
     .WRITE_DELAY(0),
     .ALMOSTEMPTY_VAL(0),
     .MIN_WRITE_DELAY(0),
-    .AUTO_PIPELINE_GROUP("fifo_9_reset_Return"),
+    .AUTO_PIPELINE_GROUP("fifo_11_reset_Return"),
     .DEPTH(32),
     .ALMOSTFULL_ENTRIES(3),
     .USE_LUTRAM(0)
-  ) fifo_9_reset_Return (
+  ) fifo_11_reset_Return (
     .clock         (clk),
-    .rst           (reg_rst_delayed[13]),
-    .overflow_out  (_fifo_9_reset_Return_overflow_out),
-    .underflow_out (_fifo_9_reset_Return_underflow_out),
-    .empty         (_fifo_9_reset_Return_empty),
-    .rdreq         (fifo_data_9.rden),
-    .full          (_fifo_9_reset_Return_full),
-    .wrreq         (fifo_data_9.wren),
+    .rst           (reg_rst_delayed[15]),
+    .overflow_out  (_fifo_11_reset_Return_overflow_out),
+    .underflow_out (_fifo_11_reset_Return_underflow_out),
+    .empty         (_fifo_11_reset_Return_empty),
+    .rdreq         (fifo_data_11.rden),
+    .full          (_fifo_11_reset_Return_full),
+    .wrreq         (fifo_data_11.wren),
     .data          ('0),
     .q             (/* unused */)
   );
   llama_chip_decode_start_BasicBlock_0 decode_start_BasicBlock_0Impl (	// llama_chip.k:31:9
     .clk                                  (clk),	// llama_chip.k:31:9
-    .rst                                  (reg_rst_delayed[14]),	// llama_chip.k:31:9
+    .rst                                  (reg_rst_delayed[16]),	// llama_chip.k:31:9
     .done_out                             (/* unused */),
-    .global_out__state_8_0_valid
-      (_decode_start_BasicBlock_0Impl_global_out__state_8_0_valid),
-    .global_out__current_layer_11_0_valid
-      (_decode_start_BasicBlock_0Impl_global_out__current_layer_11_0_valid),
+    .global_out__state_10_0_valid
+      (_decode_start_BasicBlock_0Impl_global_out__state_10_0_valid),
+    .global_out__current_layer_13_0_valid
+      (_decode_start_BasicBlock_0Impl_global_out__current_layer_13_0_valid),
     .fifo_wren_0                          (_decode_start_BasicBlock_0Impl_fifo_wren_0),
     .fifo_almost_full_in_raw_0            (fifo_data_0.almost_full),	// llama_chip.k:31:9
     .fifo_overflow_in_0                   (fifo_data_0.overflow),	// llama_chip.k:31:9
-    .data_in_10                           (passthrough_data_10.data),	// llama_chip.k:31:9
-    .input_fifo_underflow_0               (passthrough_data_10.underflow),	// llama_chip.k:31:9
+    .data_in_12                           (passthrough_data_12.data),	// llama_chip.k:31:9
+    .input_fifo_underflow_0               (passthrough_data_12.underflow),	// llama_chip.k:31:9
     .input_rdy_0                          (_decode_start_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                        (passthrough_data_10.valid),	// llama_chip.k:31:9
+    .input_valid_0                        (passthrough_data_12.valid),	// llama_chip.k:31:9
     .control_state_out                    (/* unused */)
   );	// llama_chip.k:31:9
   llama_chip_decode_advance_BasicBlock_0 decode_advance_BasicBlock_0Impl (	// llama_chip.k:43:9
     .clk                                  (clk),	// llama_chip.k:43:9
-    .rst                                  (reg_rst_delayed[15]),	// llama_chip.k:43:9
+    .rst                                  (reg_rst_delayed[17]),	// llama_chip.k:43:9
     .done_out                             (/* unused */),
-    .global_in__state_8                   (__state_value_out),	// llama_chip.k:20:5
-    .global_in__token_count_9             (__token_count_value_out),	// llama_chip.k:21:5
-    .global_in__current_layer_11          (__current_layer_value_out),	// llama_chip.k:24:5
-    .global_out__state_8_1_valid
-      (_decode_advance_BasicBlock_0Impl_global_out__state_8_1_valid),
-    .global_out__state_8_1
-      (_decode_advance_BasicBlock_0Impl_global_out__state_8_1),
-    .global_out__token_count_9_0_valid
-      (_decode_advance_BasicBlock_0Impl_global_out__token_count_9_0_valid),
-    .global_out__token_count_9_0
-      (_decode_advance_BasicBlock_0Impl_global_out__token_count_9_0),
-    .global_out__current_layer_11_1_valid
-      (_decode_advance_BasicBlock_0Impl_global_out__current_layer_11_1_valid),
-    .global_out__current_layer_11_1
-      (_decode_advance_BasicBlock_0Impl_global_out__current_layer_11_1),
+    .global_in__state_10                  (__state_value_out),	// llama_chip.k:20:5
+    .global_in__token_count_11            (__token_count_value_out),	// llama_chip.k:21:5
+    .global_in__current_layer_13          (__current_layer_value_out),	// llama_chip.k:24:5
+    .global_out__state_10_1_valid
+      (_decode_advance_BasicBlock_0Impl_global_out__state_10_1_valid),
+    .global_out__state_10_1
+      (_decode_advance_BasicBlock_0Impl_global_out__state_10_1),
+    .global_out__token_count_11_0_valid
+      (_decode_advance_BasicBlock_0Impl_global_out__token_count_11_0_valid),
+    .global_out__token_count_11_0
+      (_decode_advance_BasicBlock_0Impl_global_out__token_count_11_0),
+    .global_out__current_layer_13_1_valid
+      (_decode_advance_BasicBlock_0Impl_global_out__current_layer_13_1_valid),
+    .global_out__current_layer_13_1
+      (_decode_advance_BasicBlock_0Impl_global_out__current_layer_13_1),
     .fifo_wren_0                          (_decode_advance_BasicBlock_0Impl_fifo_wren_0),
     .fifo_almost_full_in_raw_0            (fifo_data_1.almost_full),	// llama_chip.k:43:9
     .fifo_overflow_in_0                   (fifo_data_1.overflow),	// llama_chip.k:43:9
-    .input_fifo_underflow_0               (passthrough_data_11.underflow),	// llama_chip.k:43:9
+    .input_fifo_underflow_0               (passthrough_data_13.underflow),	// llama_chip.k:43:9
     .input_rdy_0                          (_decode_advance_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                        (passthrough_data_11.valid),	// llama_chip.k:43:9
+    .input_valid_0                        (passthrough_data_13.valid),	// llama_chip.k:43:9
     .control_state_out                    (/* unused */)
   );	// llama_chip.k:43:9
   llama_chip_decode_get_state_BasicBlock_0 decode_get_state_BasicBlock_0Impl (	// llama_chip.k:72:9
     .clk                       (clk),	// llama_chip.k:72:9
-    .rst                       (reg_rst_delayed[16]),	// llama_chip.k:72:9
+    .rst                       (reg_rst_delayed[18]),	// llama_chip.k:72:9
     .done_out                  (/* unused */),
-    .global_in__state_8        (__state_value_out),	// llama_chip.k:20:5
+    .global_in__state_10       (__state_value_out),	// llama_chip.k:20:5
     .fifo_data_out_0           (_decode_get_state_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_decode_get_state_BasicBlock_0Impl_fifo_wren_0),
     .fifo_almost_full_in_raw_0 (fifo_data_2.almost_full),	// llama_chip.k:72:9
     .fifo_overflow_in_0        (fifo_data_2.overflow),	// llama_chip.k:72:9
-    .input_fifo_underflow_0    (passthrough_data_12.underflow),	// llama_chip.k:72:9
+    .input_fifo_underflow_0    (passthrough_data_14.underflow),	// llama_chip.k:72:9
     .input_rdy_0               (_decode_get_state_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_12.valid),	// llama_chip.k:72:9
+    .input_valid_0             (passthrough_data_14.valid),	// llama_chip.k:72:9
     .control_state_out         (/* unused */)
   );	// llama_chip.k:72:9
   llama_chip_decode_get_layer_BasicBlock_0 decode_get_layer_BasicBlock_0Impl (	// llama_chip.k:78:9
     .clk                         (clk),	// llama_chip.k:78:9
-    .rst                         (reg_rst_delayed[17]),	// llama_chip.k:78:9
+    .rst                         (reg_rst_delayed[19]),	// llama_chip.k:78:9
     .done_out                    (/* unused */),
-    .global_in__current_layer_11 (__current_layer_value_out),	// llama_chip.k:24:5
+    .global_in__current_layer_13 (__current_layer_value_out),	// llama_chip.k:24:5
     .fifo_data_out_0             (_decode_get_layer_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0                 (_decode_get_layer_BasicBlock_0Impl_fifo_wren_0),
     .fifo_almost_full_in_raw_0   (fifo_data_3.almost_full),	// llama_chip.k:78:9
     .fifo_overflow_in_0          (fifo_data_3.overflow),	// llama_chip.k:78:9
-    .input_fifo_underflow_0      (passthrough_data_13.underflow),	// llama_chip.k:78:9
+    .input_fifo_underflow_0      (passthrough_data_15.underflow),	// llama_chip.k:78:9
     .input_rdy_0                 (_decode_get_layer_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0               (passthrough_data_13.valid),	// llama_chip.k:78:9
+    .input_valid_0               (passthrough_data_15.valid),	// llama_chip.k:78:9
     .control_state_out           (/* unused */)
   );	// llama_chip.k:78:9
-  llama_chip_set_output_BasicBlock_0 set_output_BasicBlock_0Impl (	// llama_chip.k:84:9
-    .clk                                 (clk),	// llama_chip.k:84:9
-    .rst                                 (reg_rst_delayed[18]),	// llama_chip.k:84:9
+  llama_chip_decode_get_layer_slot_k2_BasicBlock_0 decode_get_layer_slot_k2_BasicBlock_0Impl (	// llama_chip.k:87:9
+    .clk                         (clk),	// llama_chip.k:87:9
+    .rst                         (reg_rst_delayed[20]),	// llama_chip.k:87:9
+    .done_out                    (/* unused */),
+    .global_in__current_layer_13 (__current_layer_value_out),	// llama_chip.k:24:5
+    .fifo_data_out_0
+      (_decode_get_layer_slot_k2_BasicBlock_0Impl_fifo_data_out_0),
+    .fifo_wren_0                 (_decode_get_layer_slot_k2_BasicBlock_0Impl_fifo_wren_0),
+    .fifo_almost_full_in_raw_0   (fifo_data_4.almost_full),	// llama_chip.k:87:9
+    .fifo_overflow_in_0          (fifo_data_4.overflow),	// llama_chip.k:87:9
+    .input_fifo_underflow_0      (passthrough_data_16.underflow),	// llama_chip.k:87:9
+    .input_rdy_0                 (_decode_get_layer_slot_k2_BasicBlock_0Impl_input_rdy_0),
+    .input_valid_0               (passthrough_data_16.valid),	// llama_chip.k:87:9
+    .control_state_out           (/* unused */)
+  );	// llama_chip.k:87:9
+  llama_chip_decode_get_layer_slot_k3_BasicBlock_0 decode_get_layer_slot_k3_BasicBlock_0Impl (	// llama_chip.k:94:9
+    .clk                         (clk),	// llama_chip.k:94:9
+    .rst                         (reg_rst_delayed[21]),	// llama_chip.k:94:9
+    .done_out                    (/* unused */),
+    .global_in__current_layer_13 (__current_layer_value_out),	// llama_chip.k:24:5
+    .fifo_data_out_0
+      (_decode_get_layer_slot_k3_BasicBlock_0Impl_fifo_data_out_0),
+    .fifo_wren_0                 (_decode_get_layer_slot_k3_BasicBlock_0Impl_fifo_wren_0),
+    .fifo_almost_full_in_raw_0   (fifo_data_5.almost_full),	// llama_chip.k:94:9
+    .fifo_overflow_in_0          (fifo_data_5.overflow),	// llama_chip.k:94:9
+    .input_fifo_underflow_0      (passthrough_data_17.underflow),	// llama_chip.k:94:9
+    .input_rdy_0                 (_decode_get_layer_slot_k3_BasicBlock_0Impl_input_rdy_0),
+    .input_valid_0               (passthrough_data_17.valid),	// llama_chip.k:94:9
+    .control_state_out           (/* unused */)
+  );	// llama_chip.k:94:9
+  llama_chip_set_output_BasicBlock_0 set_output_BasicBlock_0Impl (	// llama_chip.k:113:9
+    .clk                                 (clk),	// llama_chip.k:113:9
+    .rst                                 (reg_rst_delayed[22]),	// llama_chip.k:113:9
     .done_out                            (/* unused */),
-    .global_out__output_token_10_0_valid
-      (_set_output_BasicBlock_0Impl_global_out__output_token_10_0_valid),
-    .global_out__output_token_10_0
-      (_set_output_BasicBlock_0Impl_global_out__output_token_10_0),
+    .global_out__output_token_12_0_valid
+      (_set_output_BasicBlock_0Impl_global_out__output_token_12_0_valid),
+    .global_out__output_token_12_0
+      (_set_output_BasicBlock_0Impl_global_out__output_token_12_0),
     .fifo_wren_0                         (_set_output_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0           (fifo_data_4.almost_full),	// llama_chip.k:84:9
-    .fifo_overflow_in_0                  (fifo_data_4.overflow),	// llama_chip.k:84:9
-    .data_in_14                          (passthrough_data_14.data),	// llama_chip.k:84:9
-    .input_fifo_underflow_0              (passthrough_data_14.underflow),	// llama_chip.k:84:9
+    .fifo_almost_full_in_raw_0           (fifo_data_6.almost_full),	// llama_chip.k:113:9
+    .fifo_overflow_in_0                  (fifo_data_6.overflow),	// llama_chip.k:113:9
+    .data_in_18                          (passthrough_data_18.data),	// llama_chip.k:113:9
+    .input_fifo_underflow_0              (passthrough_data_18.underflow),	// llama_chip.k:113:9
     .input_rdy_0                         (_set_output_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                       (passthrough_data_14.valid),	// llama_chip.k:84:9
+    .input_valid_0                       (passthrough_data_18.valid),	// llama_chip.k:113:9
     .control_state_out                   (/* unused */)
-  );	// llama_chip.k:84:9
-  llama_chip_get_output_BasicBlock_0 get_output_BasicBlock_0Impl (	// llama_chip.k:93:9
-    .clk                        (clk),	// llama_chip.k:93:9
-    .rst                        (reg_rst_delayed[19]),	// llama_chip.k:93:9
+  );	// llama_chip.k:113:9
+  llama_chip_get_output_BasicBlock_0 get_output_BasicBlock_0Impl (	// llama_chip.k:122:9
+    .clk                        (clk),	// llama_chip.k:122:9
+    .rst                        (reg_rst_delayed[23]),	// llama_chip.k:122:9
     .done_out                   (/* unused */),
-    .global_in__output_token_10 (__output_token_value_out),	// llama_chip.k:23:5
+    .global_in__output_token_12 (__output_token_value_out),	// llama_chip.k:23:5
     .fifo_data_out_0            (_get_output_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0                (_get_output_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0  (fifo_data_5.almost_full),	// llama_chip.k:93:9
-    .fifo_overflow_in_0         (fifo_data_5.overflow),	// llama_chip.k:93:9
-    .input_fifo_underflow_0     (passthrough_data_15.underflow),	// llama_chip.k:93:9
+    .fifo_almost_full_in_raw_0  (fifo_data_7.almost_full),	// llama_chip.k:122:9
+    .fifo_overflow_in_0         (fifo_data_7.overflow),	// llama_chip.k:122:9
+    .input_fifo_underflow_0     (passthrough_data_19.underflow),	// llama_chip.k:122:9
     .input_rdy_0                (_get_output_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0              (passthrough_data_15.valid),	// llama_chip.k:93:9
+    .input_valid_0              (passthrough_data_19.valid),	// llama_chip.k:122:9
     .control_state_out          (/* unused */)
-  );	// llama_chip.k:93:9
-  llama_chip_is_idle_BasicBlock_0 is_idle_BasicBlock_0Impl (	// llama_chip.k:99:9
-    .clk                       (clk),	// llama_chip.k:99:9
-    .rst                       (reg_rst_delayed[20]),	// llama_chip.k:99:9
+  );	// llama_chip.k:122:9
+  llama_chip_is_idle_BasicBlock_0 is_idle_BasicBlock_0Impl (	// llama_chip.k:128:9
+    .clk                       (clk),	// llama_chip.k:128:9
+    .rst                       (reg_rst_delayed[24]),	// llama_chip.k:128:9
     .done_out                  (/* unused */),
-    .global_in__state_8        (__state_value_out),	// llama_chip.k:20:5
+    .global_in__state_10       (__state_value_out),	// llama_chip.k:20:5
     .fifo_data_out_0           (_is_idle_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_is_idle_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_6.almost_full),	// llama_chip.k:99:9
-    .fifo_overflow_in_0        (fifo_data_6.overflow),	// llama_chip.k:99:9
-    .input_fifo_underflow_0    (passthrough_data_16.underflow),	// llama_chip.k:99:9
+    .fifo_almost_full_in_raw_0 (fifo_data_8.almost_full),	// llama_chip.k:128:9
+    .fifo_overflow_in_0        (fifo_data_8.overflow),	// llama_chip.k:128:9
+    .input_fifo_underflow_0    (passthrough_data_20.underflow),	// llama_chip.k:128:9
     .input_rdy_0               (_is_idle_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_16.valid),	// llama_chip.k:99:9
+    .input_valid_0             (passthrough_data_20.valid),	// llama_chip.k:128:9
     .control_state_out         (/* unused */)
-  );	// llama_chip.k:99:9
-  llama_chip_is_output_ready_BasicBlock_0 is_output_ready_BasicBlock_0Impl (	// llama_chip.k:105:9
-    .clk                       (clk),	// llama_chip.k:105:9
-    .rst                       (reg_rst_delayed[21]),	// llama_chip.k:105:9
+  );	// llama_chip.k:128:9
+  llama_chip_is_output_ready_BasicBlock_0 is_output_ready_BasicBlock_0Impl (	// llama_chip.k:134:9
+    .clk                       (clk),	// llama_chip.k:134:9
+    .rst                       (reg_rst_delayed[25]),	// llama_chip.k:134:9
     .done_out                  (/* unused */),
-    .global_in__state_8        (__state_value_out),	// llama_chip.k:20:5
+    .global_in__state_10       (__state_value_out),	// llama_chip.k:20:5
     .fifo_data_out_0           (_is_output_ready_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_is_output_ready_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_7.almost_full),	// llama_chip.k:105:9
-    .fifo_overflow_in_0        (fifo_data_7.overflow),	// llama_chip.k:105:9
-    .input_fifo_underflow_0    (passthrough_data_17.underflow),	// llama_chip.k:105:9
+    .fifo_almost_full_in_raw_0 (fifo_data_9.almost_full),	// llama_chip.k:134:9
+    .fifo_overflow_in_0        (fifo_data_9.overflow),	// llama_chip.k:134:9
+    .input_fifo_underflow_0    (passthrough_data_21.underflow),	// llama_chip.k:134:9
     .input_rdy_0               (_is_output_ready_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_17.valid),	// llama_chip.k:105:9
+    .input_valid_0             (passthrough_data_21.valid),	// llama_chip.k:134:9
     .control_state_out         (/* unused */)
-  );	// llama_chip.k:105:9
-  llama_chip_get_token_count_BasicBlock_0 get_token_count_BasicBlock_0Impl (	// llama_chip.k:111:9
-    .clk                       (clk),	// llama_chip.k:111:9
-    .rst                       (reg_rst_delayed[22]),	// llama_chip.k:111:9
+  );	// llama_chip.k:134:9
+  llama_chip_get_token_count_BasicBlock_0 get_token_count_BasicBlock_0Impl (	// llama_chip.k:140:9
+    .clk                       (clk),	// llama_chip.k:140:9
+    .rst                       (reg_rst_delayed[26]),	// llama_chip.k:140:9
     .done_out                  (/* unused */),
-    .global_in__token_count_9  (__token_count_value_out),	// llama_chip.k:21:5
+    .global_in__token_count_11 (__token_count_value_out),	// llama_chip.k:21:5
     .fifo_data_out_0           (_get_token_count_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_get_token_count_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_8.almost_full),	// llama_chip.k:111:9
-    .fifo_overflow_in_0        (fifo_data_8.overflow),	// llama_chip.k:111:9
-    .input_fifo_underflow_0    (passthrough_data_18.underflow),	// llama_chip.k:111:9
+    .fifo_almost_full_in_raw_0 (fifo_data_10.almost_full),	// llama_chip.k:140:9
+    .fifo_overflow_in_0        (fifo_data_10.overflow),	// llama_chip.k:140:9
+    .input_fifo_underflow_0    (passthrough_data_22.underflow),	// llama_chip.k:140:9
     .input_rdy_0               (_get_token_count_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_18.valid),	// llama_chip.k:111:9
+    .input_valid_0             (passthrough_data_22.valid),	// llama_chip.k:140:9
     .control_state_out         (/* unused */)
-  );	// llama_chip.k:111:9
-  llama_chip_reset_BasicBlock_0 reset_BasicBlock_0Impl (	// llama_chip.k:117:9
-    .clk                                  (clk),	// llama_chip.k:117:9
-    .rst                                  (reg_rst_delayed[23]),	// llama_chip.k:117:9
+  );	// llama_chip.k:140:9
+  llama_chip_reset_BasicBlock_0 reset_BasicBlock_0Impl (	// llama_chip.k:146:9
+    .clk                                  (clk),	// llama_chip.k:146:9
+    .rst                                  (reg_rst_delayed[27]),	// llama_chip.k:146:9
     .done_out                             (/* unused */),
-    .global_out__state_8_2_valid
-      (_reset_BasicBlock_0Impl_global_out__state_8_2_valid),
-    .global_out__token_count_9_1_valid
-      (_reset_BasicBlock_0Impl_global_out__token_count_9_1_valid),
-    .global_out__output_token_10_1_valid
-      (_reset_BasicBlock_0Impl_global_out__output_token_10_1_valid),
-    .global_out__current_layer_11_2_valid
-      (_reset_BasicBlock_0Impl_global_out__current_layer_11_2_valid),
+    .global_out__state_10_2_valid
+      (_reset_BasicBlock_0Impl_global_out__state_10_2_valid),
+    .global_out__token_count_11_1_valid
+      (_reset_BasicBlock_0Impl_global_out__token_count_11_1_valid),
+    .global_out__output_token_12_1_valid
+      (_reset_BasicBlock_0Impl_global_out__output_token_12_1_valid),
+    .global_out__current_layer_13_2_valid
+      (_reset_BasicBlock_0Impl_global_out__current_layer_13_2_valid),
     .fifo_wren_0                          (_reset_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0            (fifo_data_9.almost_full),	// llama_chip.k:117:9
-    .fifo_overflow_in_0                   (fifo_data_9.overflow),	// llama_chip.k:117:9
-    .input_fifo_underflow_0               (passthrough_data_19.underflow),	// llama_chip.k:117:9
+    .fifo_almost_full_in_raw_0            (fifo_data_11.almost_full),	// llama_chip.k:146:9
+    .fifo_overflow_in_0                   (fifo_data_11.overflow),	// llama_chip.k:146:9
+    .input_fifo_underflow_0               (passthrough_data_23.underflow),	// llama_chip.k:146:9
     .input_rdy_0                          (_reset_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0                        (passthrough_data_19.valid),	// llama_chip.k:117:9
+    .input_valid_0                        (passthrough_data_23.valid),	// llama_chip.k:146:9
     .control_state_out                    (/* unused */)
-  );	// llama_chip.k:117:9
+  );	// llama_chip.k:146:9
   assign rst_and_startup_done_out = rst_and_startup_done_out_net;
   assign decode_start_rdy_out = decode_start_rdy_out_net;
   assign decode_start_empty_out = decode_start_empty_out_net;
@@ -2171,6 +2576,12 @@ module llama_chip(
   assign decode_get_layer_rdy_out = decode_get_layer_rdy_out_net;
   assign decode_get_layer_empty_out = decode_get_layer_empty_out_net;
   assign decode_get_layer_result_out = decode_get_layer_result_out_net;
+  assign decode_get_layer_slot_k2_rdy_out = decode_get_layer_slot_k2_rdy_out_net;
+  assign decode_get_layer_slot_k2_empty_out = decode_get_layer_slot_k2_empty_out_net;
+  assign decode_get_layer_slot_k2_result_out = decode_get_layer_slot_k2_result_out_net;
+  assign decode_get_layer_slot_k3_rdy_out = decode_get_layer_slot_k3_rdy_out_net;
+  assign decode_get_layer_slot_k3_empty_out = decode_get_layer_slot_k3_empty_out_net;
+  assign decode_get_layer_slot_k3_result_out = decode_get_layer_slot_k3_result_out_net;
   assign set_output_rdy_out = set_output_rdy_out_net;
   assign set_output_empty_out = set_output_empty_out_net;
   assign get_output_rdy_out = get_output_rdy_out_net;
@@ -2199,6 +2610,10 @@ module llama_chip_EsiWrapper(
      input  wire                                         decode_advance_arg_valid,
   // input  wire /*Zero Width*/                          decode_get_layer_arg,
      input  wire                                         decode_get_layer_arg_valid,
+  // input  wire /*Zero Width*/                          decode_get_layer_slot_k2_arg,
+     input  wire                                         decode_get_layer_slot_k2_arg_valid,
+  // input  wire /*Zero Width*/                          decode_get_layer_slot_k3_arg,
+     input  wire                                         decode_get_layer_slot_k3_arg_valid,
   // input  wire /*Zero Width*/                          decode_get_state_arg,
      input  wire                                         decode_get_state_arg_valid,
      input  wire struct packed {logic [16:0] token_id; } decode_start_arg,
@@ -2217,6 +2632,8 @@ module llama_chip_EsiWrapper(
      input  wire                                         set_output_arg_valid,
      input  wire                                         decode_advance_result_rden,
      input  wire                                         decode_get_layer_result_rden,
+     input  wire                                         decode_get_layer_slot_k2_result_rden,
+     input  wire                                         decode_get_layer_slot_k3_result_rden,
      input  wire                                         decode_get_state_result_rden,
      input  wire                                         decode_start_result_rden,
      input  wire                                         get_output_result_rden,
@@ -2227,6 +2644,8 @@ module llama_chip_EsiWrapper(
      input  wire                                         set_output_result_rden,
      output wire                                         decode_advance_arg_ready,
      output wire                                         decode_get_layer_arg_ready,
+     output wire                                         decode_get_layer_slot_k2_arg_ready,
+     output wire                                         decode_get_layer_slot_k3_arg_ready,
      output wire                                         decode_get_state_arg_ready,
      output wire                                         decode_start_arg_ready,
      output wire                                         get_output_arg_ready,
@@ -2239,6 +2658,10 @@ module llama_chip_EsiWrapper(
      output wire                                         decode_advance_result_empty,
      output wire [4:0]                                   decode_get_layer_result,
      output wire                                         decode_get_layer_result_empty,
+     output wire                                         decode_get_layer_slot_k2_result,
+     output wire                                         decode_get_layer_slot_k2_result_empty,
+     output wire [1:0]                                   decode_get_layer_slot_k3_result,
+     output wire                                         decode_get_layer_slot_k3_result_empty,
      output wire [5:0]                                   decode_get_state_result,
      output wire                                         decode_get_state_result_empty,
   // output wire /*Zero Width*/                          decode_start_result,
@@ -2261,66 +2684,84 @@ module llama_chip_EsiWrapper(
 
   wire [5:0]  _EsiWrapped_decode_get_state_result_out;
   wire [4:0]  _EsiWrapped_decode_get_layer_result_out;
+  wire        _EsiWrapped_decode_get_layer_slot_k2_result_out;
+  wire [1:0]  _EsiWrapped_decode_get_layer_slot_k3_result_out;
   wire [16:0] _EsiWrapped_get_output_result_out;
   wire [11:0] _EsiWrapped_get_token_count_result_out;
   llama_chip EsiWrapped (
-    .clk                         (clk),
-    .rst                         (rst),
-    .decode_start_valid_in       (decode_start_arg_valid),
-    .decode_start_token_id_in    (decode_start_arg.token_id),
-    .decode_start_rden_in        (decode_start_result_rden),
-    .decode_advance_valid_in     (decode_advance_arg_valid),
-    .decode_advance_rden_in      (decode_advance_result_rden),
-    .decode_get_state_valid_in   (decode_get_state_arg_valid),
-    .decode_get_state_rden_in    (decode_get_state_result_rden),
-    .decode_get_layer_valid_in   (decode_get_layer_arg_valid),
-    .decode_get_layer_rden_in    (decode_get_layer_result_rden),
-    .set_output_valid_in         (set_output_arg_valid),
-    .set_output_token_id_in      (set_output_arg.token_id),
-    .set_output_rden_in          (set_output_result_rden),
-    .get_output_valid_in         (get_output_arg_valid),
-    .get_output_rden_in          (get_output_result_rden),
-    .is_idle_valid_in            (is_idle_arg_valid),
-    .is_idle_rden_in             (is_idle_result_rden),
-    .is_output_ready_valid_in    (is_output_ready_arg_valid),
-    .is_output_ready_rden_in     (is_output_ready_result_rden),
-    .get_token_count_valid_in    (get_token_count_arg_valid),
-    .get_token_count_rden_in     (get_token_count_result_rden),
-    .reset_valid_in              (reset_arg_valid),
-    .reset_rden_in               (reset_result_rden),
-    .stall_rate_in               (stall_rate_in),
-    .stall_rate_valid_in         (stall_rate_valid_in),
-    .rst_and_startup_done_out    (rst_and_startup_done_out),
-    .decode_start_rdy_out        (decode_start_arg_ready),
-    .decode_start_empty_out      (decode_start_result_empty),
-    .decode_advance_rdy_out      (decode_advance_arg_ready),
-    .decode_advance_empty_out    (decode_advance_result_empty),
-    .decode_get_state_rdy_out    (decode_get_state_arg_ready),
-    .decode_get_state_empty_out  (decode_get_state_result_empty),
-    .decode_get_state_result_out (_EsiWrapped_decode_get_state_result_out),
-    .decode_get_layer_rdy_out    (decode_get_layer_arg_ready),
-    .decode_get_layer_empty_out  (decode_get_layer_result_empty),
-    .decode_get_layer_result_out (_EsiWrapped_decode_get_layer_result_out),
-    .set_output_rdy_out          (set_output_arg_ready),
-    .set_output_empty_out        (set_output_result_empty),
-    .get_output_rdy_out          (get_output_arg_ready),
-    .get_output_empty_out        (get_output_result_empty),
-    .get_output_result_out       (_EsiWrapped_get_output_result_out),
-    .is_idle_rdy_out             (is_idle_arg_ready),
-    .is_idle_empty_out           (is_idle_result_empty),
-    .is_idle_result_out          (is_idle_result),
-    .is_output_ready_rdy_out     (is_output_ready_arg_ready),
-    .is_output_ready_empty_out   (is_output_ready_result_empty),
-    .is_output_ready_result_out  (is_output_ready_result),
-    .get_token_count_rdy_out     (get_token_count_arg_ready),
-    .get_token_count_empty_out   (get_token_count_result_empty),
-    .get_token_count_result_out  (_EsiWrapped_get_token_count_result_out),
-    .reset_rdy_out               (reset_arg_ready),
-    .reset_empty_out             (reset_result_empty),
-    .stall_rate_supported_out    (stall_rate_supported_out)
+    .clk                                 (clk),
+    .rst                                 (rst),
+    .decode_start_valid_in               (decode_start_arg_valid),
+    .decode_start_token_id_in            (decode_start_arg.token_id),
+    .decode_start_rden_in                (decode_start_result_rden),
+    .decode_advance_valid_in             (decode_advance_arg_valid),
+    .decode_advance_rden_in              (decode_advance_result_rden),
+    .decode_get_state_valid_in           (decode_get_state_arg_valid),
+    .decode_get_state_rden_in            (decode_get_state_result_rden),
+    .decode_get_layer_valid_in           (decode_get_layer_arg_valid),
+    .decode_get_layer_rden_in            (decode_get_layer_result_rden),
+    .decode_get_layer_slot_k2_valid_in   (decode_get_layer_slot_k2_arg_valid),
+    .decode_get_layer_slot_k2_rden_in    (decode_get_layer_slot_k2_result_rden),
+    .decode_get_layer_slot_k3_valid_in   (decode_get_layer_slot_k3_arg_valid),
+    .decode_get_layer_slot_k3_rden_in    (decode_get_layer_slot_k3_result_rden),
+    .set_output_valid_in                 (set_output_arg_valid),
+    .set_output_token_id_in              (set_output_arg.token_id),
+    .set_output_rden_in                  (set_output_result_rden),
+    .get_output_valid_in                 (get_output_arg_valid),
+    .get_output_rden_in                  (get_output_result_rden),
+    .is_idle_valid_in                    (is_idle_arg_valid),
+    .is_idle_rden_in                     (is_idle_result_rden),
+    .is_output_ready_valid_in            (is_output_ready_arg_valid),
+    .is_output_ready_rden_in             (is_output_ready_result_rden),
+    .get_token_count_valid_in            (get_token_count_arg_valid),
+    .get_token_count_rden_in             (get_token_count_result_rden),
+    .reset_valid_in                      (reset_arg_valid),
+    .reset_rden_in                       (reset_result_rden),
+    .stall_rate_in                       (stall_rate_in),
+    .stall_rate_valid_in                 (stall_rate_valid_in),
+    .rst_and_startup_done_out            (rst_and_startup_done_out),
+    .decode_start_rdy_out                (decode_start_arg_ready),
+    .decode_start_empty_out              (decode_start_result_empty),
+    .decode_advance_rdy_out              (decode_advance_arg_ready),
+    .decode_advance_empty_out            (decode_advance_result_empty),
+    .decode_get_state_rdy_out            (decode_get_state_arg_ready),
+    .decode_get_state_empty_out          (decode_get_state_result_empty),
+    .decode_get_state_result_out         (_EsiWrapped_decode_get_state_result_out),
+    .decode_get_layer_rdy_out            (decode_get_layer_arg_ready),
+    .decode_get_layer_empty_out          (decode_get_layer_result_empty),
+    .decode_get_layer_result_out         (_EsiWrapped_decode_get_layer_result_out),
+    .decode_get_layer_slot_k2_rdy_out    (decode_get_layer_slot_k2_arg_ready),
+    .decode_get_layer_slot_k2_empty_out  (decode_get_layer_slot_k2_result_empty),
+    .decode_get_layer_slot_k2_result_out
+      (_EsiWrapped_decode_get_layer_slot_k2_result_out),
+    .decode_get_layer_slot_k3_rdy_out    (decode_get_layer_slot_k3_arg_ready),
+    .decode_get_layer_slot_k3_empty_out  (decode_get_layer_slot_k3_result_empty),
+    .decode_get_layer_slot_k3_result_out
+      (_EsiWrapped_decode_get_layer_slot_k3_result_out),
+    .set_output_rdy_out                  (set_output_arg_ready),
+    .set_output_empty_out                (set_output_result_empty),
+    .get_output_rdy_out                  (get_output_arg_ready),
+    .get_output_empty_out                (get_output_result_empty),
+    .get_output_result_out               (_EsiWrapped_get_output_result_out),
+    .is_idle_rdy_out                     (is_idle_arg_ready),
+    .is_idle_empty_out                   (is_idle_result_empty),
+    .is_idle_result_out                  (is_idle_result),
+    .is_output_ready_rdy_out             (is_output_ready_arg_ready),
+    .is_output_ready_empty_out           (is_output_ready_result_empty),
+    .is_output_ready_result_out          (is_output_ready_result),
+    .get_token_count_rdy_out             (get_token_count_arg_ready),
+    .get_token_count_empty_out           (get_token_count_result_empty),
+    .get_token_count_result_out          (_EsiWrapped_get_token_count_result_out),
+    .reset_rdy_out                       (reset_arg_ready),
+    .reset_empty_out                     (reset_result_empty),
+    .stall_rate_supported_out            (stall_rate_supported_out)
   );
   // Zero width: assign decode_advance_result = /*Zero width*/;
   assign decode_get_layer_result = _EsiWrapped_decode_get_layer_result_out;
+  assign decode_get_layer_slot_k2_result =
+    _EsiWrapped_decode_get_layer_slot_k2_result_out;
+  assign decode_get_layer_slot_k3_result =
+    _EsiWrapped_decode_get_layer_slot_k3_result_out;
   assign decode_get_state_result = _EsiWrapped_decode_get_state_result_out;
   // Zero width: assign decode_start_result = /*Zero width*/;
   assign get_output_result = _EsiWrapped_get_output_result_out;

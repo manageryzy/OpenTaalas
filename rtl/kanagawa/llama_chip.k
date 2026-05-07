@@ -78,6 +78,35 @@ public:
         return _current_layer;
     }
 
+    // Multi-layer dispatch — return which physical layer slot (0..K-1) should
+    // execute the current logical layer. The chip wrapper instantiates K
+    // copies of the per-layer block; this round-robin sends logical layers
+    // 0,K,2K,... to slot 0; 1,K+1,2K+1,... to slot 1; etc. K=2 dispatch.
+    uint1 decode_get_layer_slot_k2()
+    {
+        return cast<uint1>(_current_layer & 1);
+    }
+
+    // K=3 dispatch — three-way round-robin.
+    uint2 decode_get_layer_slot_k3()
+    {
+        // _current_layer % 3 — small lookup avoids divider.
+        uint<5> v = _current_layer;
+        uint2 slot = 0;
+        if (v >= 30) { slot = cast<uint2>(v - 30); }
+        else if (v >= 27) { slot = cast<uint2>(v - 27); }
+        else if (v >= 24) { slot = cast<uint2>(v - 24); }
+        else if (v >= 21) { slot = cast<uint2>(v - 21); }
+        else if (v >= 18) { slot = cast<uint2>(v - 18); }
+        else if (v >= 15) { slot = cast<uint2>(v - 15); }
+        else if (v >= 12) { slot = cast<uint2>(v - 12); }
+        else if (v >= 9)  { slot = cast<uint2>(v - 9); }
+        else if (v >= 6)  { slot = cast<uint2>(v - 6); }
+        else if (v >= 3)  { slot = cast<uint2>(v - 3); }
+        else              { slot = cast<uint2>(v); }
+        return slot;
+    }
+
     // Store the predicted next-token ID from LM head.
     void set_output(uint17 token_id)
     {

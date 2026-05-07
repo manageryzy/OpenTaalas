@@ -1203,6 +1203,279 @@
             ],
             [
                 {
+                    "name": "decode_get_layer_slot_k2",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k2_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
+            85,
+            1,
+            86,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k2",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k2_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
+            85,
+            1,
+            86,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k2",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k2_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
+            85,
+            1,
+            86,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k3",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k3_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
+            91,
+            1,
+            92,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k3",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k3_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
+            91,
+            1,
+            92,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k3",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k3_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_lut",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
+            96,
+            1,
+            97,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k3",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "decode_get_layer_slot_k3_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
+            91,
+            1,
+            92,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
                     "name": "set_output",
                     "type": "Function"
                 }
@@ -1226,9 +1499,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            88,
+            117,
             1,
-            89,
+            118,
             1,
             1,
             1
@@ -1265,9 +1538,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            84,
+            113,
             1,
-            85,
+            114,
             1,
             1,
             1
@@ -1304,9 +1577,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            88,
+            117,
             1,
-            89,
+            118,
             1,
             1,
             1
@@ -1343,9 +1616,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            88,
+            117,
             1,
-            89,
+            118,
             1,
             1,
             1
@@ -1382,9 +1655,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            91,
+            120,
             1,
-            92,
+            121,
             1,
             1,
             1
@@ -1421,9 +1694,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            91,
+            120,
             1,
-            92,
+            121,
             1,
             1,
             1
@@ -1460,9 +1733,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            91,
+            120,
             1,
-            92,
+            121,
             1,
             1,
             1
@@ -1499,9 +1772,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            97,
+            126,
             1,
-            98,
+            127,
             1,
             1,
             1
@@ -1538,9 +1811,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            97,
+            126,
             1,
-            98,
+            127,
             1,
             1,
             1
@@ -1577,9 +1850,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            99,
+            128,
             1,
-            100,
+            129,
             1,
             1,
             1
@@ -1616,9 +1889,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            97,
+            126,
             1,
-            98,
+            127,
             1,
             1,
             1
@@ -1655,9 +1928,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            103,
+            132,
             1,
-            104,
+            133,
             1,
             1,
             1
@@ -1694,9 +1967,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            103,
+            132,
             1,
-            104,
+            133,
             1,
             1,
             1
@@ -1733,9 +2006,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            105,
+            134,
             1,
-            106,
+            135,
             1,
             1,
             1
@@ -1772,9 +2045,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            103,
+            132,
             1,
-            104,
+            133,
             1,
             1,
             1
@@ -1811,9 +2084,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            109,
+            138,
             1,
-            110,
+            139,
             1,
             1,
             1
@@ -1850,9 +2123,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            109,
+            138,
             1,
-            110,
+            139,
             1,
             1,
             1
@@ -1889,9 +2162,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            109,
+            138,
             1,
-            110,
+            139,
             1,
             1,
             1
@@ -1928,9 +2201,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            126,
+            155,
             1,
-            127,
+            156,
             1,
             1,
             1
@@ -1967,9 +2240,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            117,
+            146,
             1,
-            118,
+            147,
             1,
             1,
             1
@@ -2006,9 +2279,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            117,
+            146,
             1,
-            118,
+            147,
             1,
             1,
             1
@@ -2045,9 +2318,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            117,
+            146,
             1,
-            118,
+            147,
             1,
             1,
             1
@@ -2084,9 +2357,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            117,
+            146,
             1,
-            118,
+            147,
             1,
             1,
             1
@@ -2123,9 +2396,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            126,
+            155,
             1,
-            127,
+            156,
             1,
             1,
             1
@@ -2162,9 +2435,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/llama_chip.k",
-            126,
+            155,
             1,
-            127,
+            156,
             1,
             1,
             1

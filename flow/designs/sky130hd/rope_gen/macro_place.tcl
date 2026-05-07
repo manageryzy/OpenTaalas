@@ -1,17 +1,17 @@
 # Place 2× nor_rom_4096x1024 fold=2 macros in rope_gen.
-# Match proven rope layout exactly — same die, same y_base, same orientations.
-# Die: 3000×3300, mirrored MY/R0 so dout faces opposite die edges.
+# v8 reverted to v7's proven 3000×3300 die + MY/R0 placement after multiple
+# attempts at 3300×3000 hit GRT NDR death spirals.
 #
 # Each macro: 956×1118 µm. Pin sides:
 #   dout[1023:0] on EAST (x=956)
 #   addr[11:0], ce, clk on WEST (x=0)
 #
-# Layout (vertically centered):
+# Layout (vertically centered, mirrored):
 #   left macro x=200 (orientation MY, dout faces west)
 #   gap: 200 µm
 #   right macro x=1356 (orientation R0, dout faces east)
 #   east margin: 3000 - (1356 + 956) = 688 µm
-# y_base = (3300 - 1118)/2 = 1091 (matches original rope)
+# y_base = (3300 - 1118)/2 = 1091
 set block [ord::get_db_block]
 set macros {}
 foreach inst [$block getInsts] {

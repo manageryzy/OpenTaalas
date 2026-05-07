@@ -1,14 +1,15 @@
 // OpenTaalas - RoPE rotation datapath (per-layer instance)
 // Pure combinational/pipelined BF16 rotate. No tables — cos/sin
-// values come from a single chip-level rope_gen broadcast bus.
+// values come from upstream tile via cascade chain.
+//
+// Cascade: rope_gen → L0.rope_apply → L1.rope_apply → ... → LK-1.rope_apply
+// Each tile registers cos/sin once and exposes them to the next layer,
+// keeping inter-tile wires short (≤ 1 mm) instead of broadcasting from
+// rope_gen to all K layers in a star fanout.
 //
 // Two rotation outputs per pair of inputs:
 //   new_even = x_even * cos - x_odd  * sin
 //   new_odd  = x_even * sin + x_odd  * cos
-//
-// Splitting from rope_gen lets each layer instantiate this small
-// macro-free tile (~25K cells, 800×800) instead of duplicating the
-// 8.4 Mbit cos/sin ROM. See docs/backend-metrics.md for rationale.
 
 module opentaalas.rope_apply
     { rope_apply
@@ -16,7 +17,44 @@ module opentaalas.rope_apply
 
 class rope_apply
 {
+private:
+    // Registered copy of cos/sin row received from the upstream tile.
+    // Each layer in the chain adds 1 cycle of latency on the cascade path.
+    uint<1024> _cos_reg = 0;
+    uint<1024> _sin_reg = 0;
+
 public:
+    // Cascade pass-through: latch cos value from upstream tile (rope_gen for L0,
+    // upstream rope_apply for L>0). Wired to read_cos_forwarded on the downstream
+    // tile in the multi-layer chip wrapper.
+    void forward_cos(uint<1024> v)
+    {
+        atomic { _cos_reg = v; }
+    }
+
+    void forward_sin(uint<1024> v)
+    {
+        atomic { _sin_reg = v; }
+    }
+
+    // Read the latched cos/sin value (1-cycle delayed copy of the most-recent
+    // forward_cos/forward_sin input). Drives the next downstream rope_apply's
+    // forward_cos/sin input.
+    uint<1024> read_cos_forwarded()
+    {
+        uint<1024> v;
+        atomic { v = _cos_reg; }
+        return v;
+    }
+
+    uint<1024> read_sin_forwarded()
+    {
+        uint<1024> v;
+        atomic { v = _sin_reg; }
+        return v;
+    }
+
+
     // Rotate even-indexed output of a (x_even, x_odd) pair.
     // Returns x_even * cos - x_odd * sin.
     // [[schedule(8)]] — two parallel BF16 mults + chained BF16 sub.

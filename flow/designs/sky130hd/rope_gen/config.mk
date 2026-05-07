@@ -16,13 +16,19 @@ export SDC_FILE        = $(_this_dir)/constraint.sdc
 
 export SYNTH_HDL_FRONTEND = slang
 export SYNTH_HIERARCHICAL = 1
-# Match proven rope die size (3000×3300) — original rope routed at this size
-# with 418 DRC. Despite rope_gen having 6× fewer cells (rotate datapath moved
-# to rope_apply), the macro-edge pin congestion (2× 1024-bit dout = 2048 wide
-# pins) is unchanged and dominates routability. Tried 3000×2400 first; GRT
-# entered 8-round NDR death spiral disabling clknet_0_clk — same pattern as
-# vector_unit. Pin congestion is cell-count-independent, so shrinking the die
-# below the original rope footprint provides no margin for pin escape.
+# v8 multi-layer: kept v7's PROVEN 3000×3300 die. Two failed attempts:
+#   v8a 3300×3000 + R270 macros — failed PDN-0233 (LEF SYMMETRY X Y rules
+#       out 90° rotations).
+#   v8b/c 3300×3000 + MY/R0 macros + IO_CONSTRAINTS pushing dout SOUTH —
+#       failed GRT 8-NDR death spiral; pin congestion in the y=0..941
+#       channel below the macros killed routing.
+#   v8d 3300×3000 + MY/R0 macros, no IO_CONSTRAINTS — same death spiral
+#       (7 NDR disables incl. root clknet_0_clk).
+# Conclusion: the wider die (3300 vs 3000) shifts the PDN met4 strap density
+# distribution and breaks routability for this macro layout. v7's proven
+# 3000×3300 (taller than wide) is what the macros + macros-route layout
+# converges on. Chip-level multi_layer_chip absorbs the 3000×3300 footprint
+# into its top band by laying it out on its side relative to the layer band.
 export DIE_AREA  = 0 0 3000 3300
 export CORE_AREA = 10 10 2990 3290
 export PLACE_DENSITY_LB_ADDON = 0.20
