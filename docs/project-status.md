@@ -115,11 +115,15 @@ See [backend-metrics.md](backend-metrics.md) for full metrics, timing analysis, 
 
 20 hardened tiles arranged on ~13.7 × 8.7 mm = 119 mm² (synthetic, post v12 layer_orchestrator), organized into four tiers: folded NOR ROM + composition tiles (top), large macro-bearing (middle), small SRAM-bearing (bottom-middle), pure stdcell (bottom). Red arrow shows the v11.3 256-bit phased cascade `rope_gen → transformer_layer_block`; dashed purple arrow shows the v12 composition path where `rope_apply` + `vector_unit` are composed inside `layer_orchestrator`. Earlier-iteration synthetic figures preserved as `images/full_chip_floorplan_v7.png` (pre-v8) and `images/multi_layer_floorplan_v8.png` (1024-bit single-cycle cascade).
 
-### Multi-Layer Floorplan (v11.3 K=2 cascade)
+### Multi-Layer Floorplan (v11.3 — actual integration)
 
 ![multi layer floorplan v11.3](images/multi_layer_floorplan.png)
 
-Two `transformer_layer_block` instances (L0, L1) chained via 256-bit phased cascade. `rope_gen` at top broadcasts to L0 (via chip-level 4:1 phase slicer); L0 forwards to L1. Boundary pin count per layer_block: 1225 (vs v10's 4290 — 3.5×↓).
+**This is the real `multi_layer_chip` topology**, not a hypothetical: only 3 macros are instantiated at chip level (`rope_gen` + 2× `transformer_layer_block`). Each `transformer_layer_block` wraps `rope_apply` only — the per-layer compute (mac_arrays, vector_unit, kv_cache, attention_unit, embed_rom, lm_head, layer_tile, etc.) is standalone per-tile PnR only, not integrated. Composing all of it into one layer_block hits the 561K-cell flat-PnR wall; hierarchical PnR is the path forward.
+
+Cascade: `rope_gen` SOUTH dout → chip-level 4:1 phase slicer → L0 NORTH; L0 forwards to L1 (256-bit phased registered hop). Boundary pin count per layer_block: 1225 (vs v10's 4290 — 3.5×↓). Chip DRT plateau ~2M residual is architectural.
+
+Older synthetic figure (with hypothetical per-layer mac/vector/kv tiles drawn as if integrated) preserved as `images/multi_layer_floorplan_v8.png`.
 
 ### Test Suite
 - **44 E2E checks** at CI dimensions — all passing

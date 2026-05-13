@@ -1,225 +1,172 @@
 #!/usr/bin/env python3
-"""Render the v11.3 K=2 multi-layer floorplan with 256-bit phased cascade.
+"""Render the v11.3 multi_layer_chip floorplan — the ACTUAL integration.
 
-Two physical transformer_layer_block macros (L0, L1) sit side-by-side. The
-chip-shared rope_gen sits at top with a chip-level 4:1 phase slicer feeding
-phased 256-bit segments to each layer_block.
+What is hardened at chip level today (multi_layer_chip_wrapper.sv):
+    1× rope_gen               (chip-singleton)
+    2× transformer_layer_block (per layer; each wraps rope_apply only)
+    + chip-level 4:1 phase slicer in glue logic
 
-v8 → v11.3 changes:
-- rope_apply.k cascade serialized: 1024-bit single-cycle → 4× 256-bit phased
-- transformer_layer_block hardened with 256-bit cascade ports (1225 pins,
-  down from v10's 4290 pins — 3.5× reduction)
-- Chip wrapper has a 4:1 phase slicer in the open area near rope_gen
-- Chip DRT iter-0 violations 38M → 3.66M (10×↓), plateau ~3M → ~2M (33%↓)
-- Chip-level routing dominated by control + handshake + clock in the
-  inter-macro channels — architectural ceiling, not flow-tunable
+That's it. The mac_arrays, vector_unit, kv_cache, attention_unit etc. are
+standalone per-tile PnR validations — they are NOT instantiated in
+multi_layer_chip. Folding them into transformer_layer_block hits the
+561K-cell flat-PnR wall (per `feedback_chip_routing_plateau.md`).
+
+The figure draws the chip honestly and shows where the per-layer compute
+would go in a future hierarchical-PnR-enabled integration.
+
+Updated 2026-05-13 to reflect actual v11.3 RTL (was previously drawing
+hypothetical per-layer mac/vector/kv tiles as if they were integrated).
 """
 import os
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
 
-# Per-tile (name, w, h, n_macros, color, label, group)
-PER_LAYER_TILES = [
-    # mac_array 3x3 grid (Q, K, V, O on row 0; gate, up, down on row 1; row 2 has 1 spare slot used by rope_apply)
-    ("mac_q",    1800, 2400, 1, "#3a6dd0", "mac_q\n1800×2400"),
-    ("mac_k",    1800, 2400, 1, "#3a6dd0", "mac_k\n1800×2400"),
-    ("mac_v",    1800, 2400, 1, "#3a6dd0", "mac_v\n1800×2400"),
-    ("mac_o",    1800, 2400, 1, "#3a6dd0", "mac_o\n1800×2400"),
-    ("mac_gate", 1800, 2400, 1, "#3a6dd0", "mac_gate\n1800×2400"),
-    ("mac_up",   1800, 2400, 1, "#3a6dd0", "mac_up\n1800×2400"),
-    ("mac_down", 1800, 2400, 1, "#3a6dd0", "mac_down\n1800×2400"),
-    ("vector_unit", 3000, 3500, 6, "#37b370", "vector_unit\n3000×3500"),
-    ("kv_cache",     595,  705, 4, "#37b370", "kv_cache\n595×705"),
-    ("attention_unit",1000,1000,0, "#7c7c7c", "attn\n1000×1000"),
-    ("layer_tile",   1000,1000, 0, "#7c7c7c", "FSM\n1000×1000"),
-    ("rope_apply",    800, 800, 0, "#7c7c7c", "rope_apply\n800×800\n(cascade)"),
+# Actual chip-level macros in multi_layer_chip_wrapper.sv (v11.3)
+CHIP_MACROS = [
+    # (name, w, h, color, label)
+    ("rope_gen",    3300, 3000, "#3a6dd0",
+        "rope_gen (R270, SOUTH dout)\n3300×3000\n2× nor_rom_4096x1024\n350 DRC, 147 MHz"),
+    ("l0_block",    3000, 3500, "#a25dff",
+        "L0.transformer_layer_block (v11.3)\n3000×3500\nrope_apply hardened\n1225 boundary pins\n0 DRC, 128 MHz"),
+    ("l1_block",    3000, 3500, "#a25dff",
+        "L1.transformer_layer_block (v11.3)\n3000×3500\nrope_apply hardened\n1225 boundary pins\n0 DRC, 128 MHz"),
 ]
-CHIP_SINGLETONS = [
-    ("rope_gen",    3300, 3000, 2, "#3a6dd0", "rope_gen (R270, SOUTH dout)\n3300×3000"),
-    ("embed_rom",   1900, 2400, 1, "#5b8def", "embed_rom\n1900×2400"),
-    ("lm_head",     1900, 2400, 1, "#5b8def", "lm_head\n1900×2400"),
-    ("global_ctrl", 1000, 1000, 0, "#7c7c7c", "global_ctrl\n1000×1000"),
-]
-
-
-def layer_block_layout(x0, y0, mirror=False):
-    """Place one transformer-layer block at origin (x0, y0).
-
-    Layout per block:
-      mac3x3 grid (5800 × 7600) on top
-      bottom row: VU (3000) | rope_apply (800) | kv_cache (595) | attn (1000) | FSM (1000)
-                 (~6395 wide, fits within 5800 if VU is its own subrow)
-
-    For mirror=True (L1), swap the rope_apply to LEFT side so its EAST cos_out
-    faces L1 NEXT (no L2 in K=2, but conceptually right).
-
-    Returns: dict tile_name → (x, y) (lower-left corner)
-    """
-    placements = {}
-    ch = 200  # channel
-    # mac3x3: 3 cols × 3 rows of (1800×2400). Row order top-to-bottom: Q-K-V, O-gate-up, down-spare-spare
-    mac_names = [
-        ["mac_q", "mac_k", "mac_v"],
-        ["mac_o", "mac_gate", "mac_up"],
-        ["mac_down", None, None],
-    ]
-    # Place mac3x3 in upper part of layer band
-    mac_grid_top_y = y0 + 4500  # leaves room for VU/ctrl below
-    for r in range(3):
-        for c in range(3):
-            name = mac_names[r][c]
-            if name is None:
-                continue
-            mx = x0 + c * (1800 + ch)
-            my = mac_grid_top_y - (r + 1) * 2400 - r * ch
-            placements[name] = (mx, my)
-    # Bottom row: VU (3000×3500), then small tiles
-    vu_x = x0 + (0 if not mirror else (5800 - 3000))
-    vu_y = y0
-    placements["vector_unit"] = (vu_x, vu_y)
-    # Small tiles in remaining width
-    sm_x = x0 + (3000 + ch if not mirror else 0)
-    sm_y_base = y0
-    placements["rope_apply"]    = (sm_x, sm_y_base + 0)
-    placements["kv_cache"]      = (sm_x, sm_y_base + 800 + ch)
-    placements["attention_unit"] = (sm_x + 800 + ch, sm_y_base + 0)
-    placements["layer_tile"]     = (sm_x + 800 + ch, sm_y_base + 1000 + ch)
-    return placements
 
 
 def main():
-    # Chip dimensions
-    layer_block_w = 5800
-    layer_block_h = 8000  # mac3x3 (7400) + bottom row (3500) - 2900 overlap accounting; rough
-    layer_block_h = 4500 + 3500 + 200  # actual: bottom row 3500 + mac3x3 with mac_grid_top_y=4500
-    layer_block_h = 8200  # 4500 + 2400 + 1300 (spacing)
+    # Chip layout: rope_gen on top, 2 layer_blocks below side-by-side.
+    # Channel margin between macros.
+    ch = 300
 
-    chip_w = 2 * layer_block_w + 200  # 11800
-    chip_h = layer_block_h + 200 + 3000  # layer band + channel + singleton band
-    # Bump for label margins
-    chip_w_eff = chip_w + 200
-    chip_h_eff = chip_h + 200
+    # Layer block placements (bottom band)
+    l0_x, l0_y = 200, 200
+    l1_x, l1_y = l0_x + 3000 + 600, 200
 
-    fig, ax = plt.subplots(figsize=(16, 13))
-    ax.add_patch(Rectangle((0, 0), chip_w_eff, chip_h_eff, linewidth=2,
+    # rope_gen placement (top band, centered above the two blocks)
+    rg_x = (l0_x + l1_x + 3000) // 2 - 3300 // 2
+    rg_y = l0_y + 3500 + ch + 600
+
+    placements = {
+        "rope_gen": (rg_x, rg_y),
+        "l0_block": (l0_x, l0_y),
+        "l1_block": (l1_x, l1_y),
+    }
+
+    chip_w = l1_x + 3000 + 200
+    chip_h = rg_y + 3000 + 600
+
+    fig, ax = plt.subplots(figsize=(13, 12))
+    ax.add_patch(Rectangle((0, 0), chip_w, chip_h, linewidth=2,
                            edgecolor="black", facecolor="#f8f8f8"))
 
-    # === TOP BAND: chip-singletons ===
-    top_y = layer_block_h + 200
-    cur_x = 100
-    singleton_pos = {}
-    for name, w, h, n_macros, color, label in CHIP_SINGLETONS:
-        # Stack singletons left-to-right; rope_gen last (it's the widest)
-        pass
-    # Manual placement: rope_gen centered horizontally, embed_rom to its left,
-    # lm_head to its right, global_ctrl tucked next to lm_head.
-    rg_w, rg_h = 3300, 3000
-    rg_x = (chip_w - rg_w) // 2
-    singleton_pos["rope_gen"] = (rg_x, top_y)
-    singleton_pos["embed_rom"] = (rg_x - 1900 - 200, top_y)
-    singleton_pos["lm_head"]   = (rg_x + rg_w + 200, top_y)
-    singleton_pos["global_ctrl"] = (rg_x + rg_w + 200, top_y + 2400 + 100)
-
-    # === LAYER BAND: 2 layer blocks side by side ===
-    l0 = layer_block_layout(100, 100, mirror=False)
-    l1 = layer_block_layout(100 + layer_block_w + 200, 100, mirror=True)
-
-    # Draw all placed tiles
-    def draw_tile(name, x, y, w, h, n_macros, color, label, prefix=""):
-        edge = "black"
-        lw = 1.0
-        ax.add_patch(Rectangle((x, y), w, h, linewidth=lw,
-                               edgecolor=edge, facecolor=color, alpha=0.55))
-        if n_macros and n_macros > 0:
-            macro_h = min(60, h * 0.06)
-            macro_w = w * 0.85 / max(n_macros, 1)
-            for i in range(n_macros):
-                mx = x + (w - n_macros * macro_w * 1.05) / 2 + i * macro_w * 1.05
-                my = y + h - macro_h - 30
-                ax.add_patch(Rectangle((mx, my), macro_w, macro_h,
+    # Draw each macro
+    for name, w, h, color, label in CHIP_MACROS:
+        x, y = placements[name]
+        ax.add_patch(Rectangle((x, y), w, h, linewidth=1.5,
+                               edgecolor="black", facecolor=color, alpha=0.55))
+        # Indicate the inner macros (NOR ROM for rope_gen, abstract for layer_block)
+        if name == "rope_gen":
+            for i, mx in enumerate([x + 200, x + 1900]):
+                ax.add_patch(Rectangle((mx, y + 100), 1200, 800,
                                        linewidth=0.5, edgecolor="black",
                                        facecolor="#1a1a4d", alpha=0.85))
-        fontsize = 6 if min(w, h) < 700 else 8
-        ax.text(x + w / 2, y + h / 2, prefix + label, ha="center", va="center",
-                fontsize=fontsize,
-                color="white" if color == "#3a6dd0" else "black",
-                weight="bold" if min(w, h) >= 1500 else "normal")
+                ax.text(mx + 600, y + 500, f"nor_rom_4096x1024\n(fold=2)",
+                        ha="center", va="center", fontsize=7, color="white", weight="bold")
+        elif "block" in name:
+            # Show the abstract LEF status
+            ax.add_patch(Rectangle((x + 100, y + h - 700), w - 200, 500,
+                                   linewidth=0.5, edgecolor="black",
+                                   facecolor="#5a2f8c", alpha=0.85))
+            ax.text(x + w / 2, y + h - 450, "rope_apply\n(hardened abstract LEF)",
+                    ha="center", va="center", fontsize=8, color="white", weight="bold")
 
-    for name, w, h, n_macros, color, label in PER_LAYER_TILES:
-        x, y = l0[name]
-        draw_tile(name, x, y, w, h, n_macros, color, label, prefix="L0.")
-        x, y = l1[name]
-        draw_tile(name, x, y, w, h, n_macros, color, label, prefix="L1.")
+        ax.text(x + w / 2, y + h / 2 - 200, label, ha="center", va="center",
+                fontsize=9, color="black", weight="bold")
 
-    for name, w, h, n_macros, color, label in CHIP_SINGLETONS:
-        x, y = singleton_pos[name]
-        draw_tile(name, x, y, w, h, n_macros, color, label)
-
-    # === Cascade arrows ===
-    # rope_gen SOUTH → L0.rope_apply NORTH
-    rg_x, rg_y = singleton_pos["rope_gen"]
-    rg_south_x = rg_x + rg_w / 2
+    # === Cascade arrows (v11.3 256-bit phased) ===
+    # rope_gen SOUTH → L0.layer_block (cos/sin row, sliced 4:1 in chip glue)
+    rg_south_x = rg_x + 3300 / 2
     rg_south_y = rg_y
-    l0_ra_x, l0_ra_y = l0["rope_apply"]
-    l0_ra_north_x = l0_ra_x + 800 / 2
-    l0_ra_north_y = l0_ra_y + 800
+    l0_north_x = l0_x + 3000 / 2
+    l0_north_y = l0_y + 3500
     ax.annotate("",
-                xy=(l0_ra_north_x, l0_ra_north_y),
+                xy=(l0_north_x, l0_north_y),
                 xytext=(rg_south_x, rg_south_y),
-                arrowprops=dict(arrowstyle="->", color="#d0212e", lw=2.5))
-    ax.text((rg_south_x + l0_ra_north_x) / 2 + 100,
-            (rg_south_y + l0_ra_north_y) / 2,
-            "v11.3 cascade\n4× 256-bit phased\n+ chip-level 4:1 slicer\nrope_gen → L0",
-            ha="left", va="center", fontsize=8, color="#d0212e", weight="bold",
+                arrowprops=dict(arrowstyle="->", color="#d0212e", lw=3))
+    ax.text(rg_south_x - 1600, (rg_south_y + l0_north_y) / 2,
+            "v11.3 cascade\n4× 256-bit phased\n(chip-level 4:1 slicer\nin open area near rope_gen)\nL0 input",
+            ha="center", va="center", fontsize=8, color="#d0212e", weight="bold",
+            bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="#d0212e"))
+
+    # L0 → L1 forward cascade (registered pass-through)
+    l0_east_x = l0_x + 3000
+    l0_east_y = l0_y + 3500 / 2
+    l1_west_x = l1_x
+    l1_west_y = l1_y + 3500 / 2
+    ax.annotate("",
+                xy=(l1_west_x, l1_west_y),
+                xytext=(l0_east_x, l0_east_y),
+                arrowprops=dict(arrowstyle="->", color="#d0212e", lw=3))
+    ax.text((l0_east_x + l1_west_x) / 2, (l0_east_y + l1_west_y) / 2 + 250,
+            "L0 → L1 forward\n(phased 256-bit\nregistered hop)",
+            ha="center", va="center", fontsize=8, color="#d0212e", weight="bold",
             bbox=dict(boxstyle="round,pad=0.25", facecolor="white", edgecolor="#d0212e"))
 
-    # L0.rope_apply EAST → L1.rope_apply WEST (cascade hop)
-    l0_ra_east_x = l0_ra_x + 800
-    l0_ra_east_y = l0_ra_y + 800 / 2
-    l1_ra_x, l1_ra_y = l1["rope_apply"]
-    l1_ra_west_x = l1_ra_x
-    l1_ra_west_y = l1_ra_y + 800 / 2
-    ax.annotate("",
-                xy=(l1_ra_west_x, l1_ra_west_y),
-                xytext=(l0_ra_east_x, l0_ra_east_y),
-                arrowprops=dict(arrowstyle="->", color="#d0212e", lw=2.5))
-    midx = (l0_ra_east_x + l1_ra_west_x) / 2
-    midy = (l0_ra_east_y + l1_ra_west_y) / 2
-    ax.text(midx, midy + 200,
-            "L0.RA → L1.RA\n(phased 256-bit)\n≤ 1 mm hop",
-            ha="center", va="center", fontsize=7, color="#d0212e", weight="bold",
-            bbox=dict(boxstyle="round,pad=0.2", facecolor="white", edgecolor="#d0212e"))
+    # === Note: what's missing from this chip ===
+    note_text = (
+        "What's INSIDE each transformer_layer_block (v11.3):\n"
+        "  • rope_apply hardened (~111K cells, cascade I/O, 0 DRC)\n"
+        "\n"
+        "What's NOT in this chip (standalone per-tile PnR only):\n"
+        "  • mac_array × 7 (Q/K/V/O/gate/up/down)\n"
+        "  • vector_unit, kv_cache, attention_unit\n"
+        "  • embed_rom, lm_head, global_controller, layer_tile\n"
+        "  • codebook_decoder, rmsnorm, swiglu, lut_interp\n"
+        "\n"
+        "Why: composing all per-layer compute into one layer_block hits the\n"
+        "561K-cell flat-PnR wall (GPL repair_design hangs). Hierarchical PnR\n"
+        "is the path forward. v12 layer_orchestrator (rope_apply + vector_unit,\n"
+        "408K cells, 0 DRC standalone) is the first proof of composition."
+    )
+    ax.text(chip_w / 2, -1800, note_text,
+            ha="center", va="top", fontsize=9, family="monospace",
+            bbox=dict(boxstyle="round,pad=0.5", facecolor="#fffce8", edgecolor="#888"))
+
+    # === Chip DRT plateau callout ===
+    plateau_text = (
+        "Chip DRT plateau: ~2M residual violations\n"
+        "(architectural ceiling for multi-macro sky130 — \n"
+        "  inter-macro channels carry handshake + clock\n"
+        "  signals competing for the same routing tracks)"
+    )
+    ax.text(chip_w + 200, chip_h / 2, plateau_text,
+            ha="left", va="center", fontsize=9, color="#a02020",
+            bbox=dict(boxstyle="round,pad=0.3", facecolor="#fff0f0", edgecolor="#a02020"))
 
     # Title and axes
-    ax.set_xlim(-300, chip_w_eff + 300)
-    ax.set_ylim(-300, chip_h_eff + 300)
+    ax.set_xlim(-300, chip_w + 3200)
+    ax.set_ylim(-2500, chip_h + 200)
     ax.set_aspect("equal")
     ax.set_xlabel("x (µm)")
     ax.set_ylabel("y (µm)")
-    title = ("OpenTaalas v11.3 Multi-Layer Floorplan (K=2, 256-bit phased cascade)\n"
-             f"Chip: ~{chip_w_eff/1000:.1f} × {chip_h_eff/1000:.1f} mm "
-             f"= {chip_w_eff*chip_h_eff/1e6:.1f} mm² · synthetic figure (chip DRT plateau ~2M residual)")
-    ax.set_title(title, fontsize=13, weight="bold")
+    title = ("OpenTaalas v11.3 multi_layer_chip — ACTUAL Integration (3 macros)\n"
+             f"rope_gen + 2× transformer_layer_block · "
+             f"~{chip_w/1000:.1f} × {chip_h/1000:.1f} mm")
+    ax.set_title(title, fontsize=12, weight="bold")
     ax.grid(True, alpha=0.2, linestyle=":")
 
-    # Legend (reuse v7 colors)
     legend_elems = [
-        Rectangle((0,0), 1, 1, facecolor="#3a6dd0", alpha=0.55, edgecolor="black", label="Per-layer NOR ROM tile"),
-        Rectangle((0,0), 1, 1, facecolor="#5b8def", alpha=0.55, edgecolor="black", label="Folded NOR ROM (chip-singleton)"),
-        Rectangle((0,0), 1, 1, facecolor="#37b370", alpha=0.55, edgecolor="black", label="SRAM-bearing tile"),
-        Rectangle((0,0), 1, 1, facecolor="#7c7c7c", alpha=0.55, edgecolor="black", label="Pure stdcell tile"),
-        Rectangle((0,0), 1, 1, facecolor="#1a1a4d", alpha=0.85, edgecolor="black", label="Macro instance"),
+        Rectangle((0,0), 1, 1, facecolor="#3a6dd0", alpha=0.55, edgecolor="black",
+                  label="Chip-singleton (rope_gen, 2× NOR ROM)"),
+        Rectangle((0,0), 1, 1, facecolor="#a25dff", alpha=0.55, edgecolor="black",
+                  label="Per-layer transformer_layer_block (v11.3)"),
+        Rectangle((0,0), 1, 1, facecolor="#5a2f8c", alpha=0.85, edgecolor="black",
+                  label="Hardened sub-block inside layer_block (rope_apply)"),
+        Rectangle((0,0), 1, 1, facecolor="#1a1a4d", alpha=0.85, edgecolor="black",
+                  label="Macro instance (NOR ROM/SRAM)"),
     ]
-    ax.legend(handles=legend_elems, loc="upper right", fontsize=9, framealpha=0.95)
-
-    # Annotation key
-    ax.text(-280, chip_h_eff / 2,
-            "K=2 layer blocks\n(L0 left, L1 right;\nidentical layout)",
-            ha="left", va="center", fontsize=9, style="italic", rotation=90)
-    ax.text(-280, top_y + 1500,
-            "Chip-singletons\n(rope_gen, embed_rom,\nlm_head, global_ctrl)",
-            ha="left", va="center", fontsize=9, style="italic", rotation=90)
+    ax.legend(handles=legend_elems, loc="upper left", fontsize=9, framealpha=0.95)
 
     plt.tight_layout()
     out = "/home/mana/workspace/OpenTaalas/docs/images/multi_layer_floorplan.png"

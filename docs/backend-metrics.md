@@ -69,11 +69,15 @@ Synthetic figure (post v12 layer_orchestrator) — chip layout ~13.7 × 8.7 mm =
 
 **Red arrow:** v11.3 256-bit phased cascade `rope_gen → transformer_layer_block` (replaces v10's 1024-bit single-cycle bus; chip-level 4:1 slicer in chip glue). **Dashed purple arrow:** v12 composition path — `rope_apply` and `vector_unit` are composed inside `layer_orchestrator` as private class fields. Tiles with red borders indicate standalone PnR pending (`vector_unit` — but composes cleanly inside the v12 orchestrator).
 
-### Multi-Layer Floorplan (v11.3 K=2 cascade)
+### Multi-Layer Floorplan (v11.3 — what's actually integrated)
 
 ![multi layer floorplan v11.3](images/multi_layer_floorplan.png)
 
-K=2 chip integration: two `transformer_layer_block` instances side-by-side, chained via 256-bit phased cascade. `rope_gen` at top broadcasts a single 1024-bit row per cycle to a chip-level 4:1 slicer that delivers 4 phased 256-bit segments to L0; L0 forwards to L1 via short cascade hop. Chip DRT reaches ~2M residual (architectural ceiling, not flow-tunable — see v11.3 section above).
+**Faithful drawing of the v11.3 `multi_layer_chip` chip-level integration** — only 3 macros: `rope_gen` + 2× `transformer_layer_block`. Each `transformer_layer_block` (purple) wraps only the hardened `rope_apply` abstract LEF — the rest of the per-layer compute (mac_arrays, vector_unit, kv_cache, attention_unit, etc.) is NOT integrated at chip level. Those are standalone per-tile PnR validations that hit the 561K-cell flat-PnR wall when composed.
+
+Cascade: `rope_gen` SOUTH dout → chip-level 4:1 phase slicer (in chip glue) → L0 NORTH; L0 EAST → L1 WEST forward register. Chip DRT plateau ~2M residual is architectural (inter-macro channels carry handshake + clock signals competing for the same routing tracks).
+
+The earlier figure (`images/multi_layer_floorplan_v8.png`) showed the v8 hypothetical layout with per-layer mac/vector/kv tiles drawn as if integrated — that was misleading and has been replaced.
 
 ### Rendered Floorplans (per-tile)
 
