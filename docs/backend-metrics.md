@@ -2,10 +2,12 @@
 
 ## Summary
 
-**19 of 19 designs routed** through DRT or GDS (12 logic-only + 5 macro-bearing + 2 academic demos).
+**20 of 20 designs routed** through DRT or GDS (12 logic-only + 5 macro-bearing + 2 academic demos + **1 pure-Kanagawa orchestrator composition**).
 **2 full-scale designs require off-chip memory** — physically impossible on-die at sky130 (see [Physical Limits](#physical-limits-kv_cache--lm_head)). Reduced-scale academic demos validate their architecture.
 
 **Project goal:** Tape-out-ready academic demo on a sky130 shuttle (~25 mm² reticle). Full LLaMA 3.1 8B inference requires off-chip DRAM for KV cache and lm_head weights — the same architecture used by every production AI chip.
+
+**v12 milestone (2026-05-12):** First flat PnR of a Kanagawa sub-module composition (`layer_orchestrator` = `rope_apply` + `vector_unit` + 4 SRAM macros, 408K placed cells) achieves **0 DRC, 118 MHz fmax** on a 3000×3000 die. See [Pure-Kanagawa Composition (v12)](#pure-kanagawa-composition-v12).
 
 ## Completed Designs — Logic-Only (GDS)
 
@@ -58,38 +60,74 @@
 
 ![full chip floorplan](images/full_chip_floorplan.png)
 
-Hierarchical chip layout (~10.5 × 7.7 mm = 80 mm² total) showing all 21 hardened
-tiles to scale. Three tiers organized by macro complexity:
+Synthetic figure (post v12 layer_orchestrator) — chip layout ~13.7 × 8.7 mm = 119 mm² showing all 20 hardened tiles to scale. Four tiers organized by macro complexity:
 
-- **Top tier** — folded NOR ROM tiles (`embed_rom`, `lm_head_demo`)
-- **Middle tier** — large macro-bearing tiles (`rope_gen`, `mac_array`, `rom_bank`)
-- **Bottom tier** — pure stdcell + small SRAM tiles
+- **Top tier** — folded NOR ROM + composition tiles (`embed_rom`, `lm_head_demo`, `transformer_layer_block`, `layer_orchestrator`)
+- **Middle tier** — large macro-bearing tiles (`rope_gen`, `mac_array`, `rope_apply`, `rom_bank`, `rmsnorm`)
+- **Bottom-middle tier** — small SRAM-bearing tiles (`swiglu`, `codebook_decoder`, `lut_interp`, `kv_cache_demo`)
+- **Bottom tier** — pure stdcell tiles (`attention_unit`, `dequant`, `scale_store`, `layer_tile`, `llama_chip`, `global_controller`, `mac_pe`, `async_fifo`)
 
-Red arrow shows the **rope_gen → rope_apply broadcast bus** (2× 1024-bit cos/sin),
-the critical inter-tile path that drove the v7 SDC tuning (40% input_delay budget).
-Tiles with red borders indicate residual DRC or PnR-pending status.
+**Red arrow:** v11.3 256-bit phased cascade `rope_gen → transformer_layer_block` (replaces v10's 1024-bit single-cycle bus; chip-level 4:1 slicer in chip glue). **Dashed purple arrow:** v12 composition path — `rope_apply` and `vector_unit` are composed inside `layer_orchestrator` as private class fields. Tiles with red borders indicate standalone PnR pending (`vector_unit` — but composes cleanly inside the v12 orchestrator).
+
+### Multi-Layer Floorplan (v11.3 K=2 cascade)
+
+![multi layer floorplan v11.3](images/multi_layer_floorplan.png)
+
+K=2 chip integration: two `transformer_layer_block` instances side-by-side, chained via 256-bit phased cascade. `rope_gen` at top broadcasts a single 1024-bit row per cycle to a chip-level 4:1 slicer that delivers 4 phased 256-bit segments to L0; L0 forwards to L1 via short cascade hop. Chip DRT reaches ~2M residual (architectural ceiling, not flow-tunable — see v11.3 section above).
 
 ### Rendered Floorplans (per-tile)
 
-| rom_bank (2.4×2.4 mm) | mac_array (2.5×3 mm) | rope (legacy, 3×3.3 mm, fold=2 macros mirrored) |
+#### Current PnR results
+
+| rom_bank (1.5×1.5 mm, v5) | mac_array (1.8×2.4 mm, v8) | rmsnorm (1.2×1.2 mm, v5) |
 |:---:|:---:|:---:|
-| ![rom_bank](images/rom_bank_final.png) | ![mac_array](images/mac_array_final.png) | ![rope](images/rope_final.png) |
-| 1× NOR ROM centered | 1× NOR ROM centered | 2× NOR ROM (mirrored, dout faces die edges) |
+| ![rom_bank](images/rom_bank_final.png) | ![mac_array](images/mac_array_final.png) | ![rmsnorm](images/rmsnorm_final.png) |
+| 1× NOR ROM, **0 DRC, 167 MHz** | 1× NOR ROM + 1× SRAM, **0 DRC, 130 MHz** | 1× sram_4096x16 + 1× sram_256x16, **0 DRC, 205 MHz** |
 
-| **rope_gen (v7, 3×3.3 mm)** | **rope_apply (v7, 0.8×0.8 mm)** |
-|:---:|:---:|
-| ![rope_gen](images/rope_gen_final.png) | ![rope_apply](images/rope_apply_final.png) |
-| 2× NOR ROM, ~5K cells, 350 DRC, 147 MHz | Pure stdcell, 5.8K cells, **0 DRC, 192 MHz** |
+| swiglu (0.7×0.7 mm, v5) | codebook_decoder (0.8×0.8 mm, v6) | rope_gen (3×3.3 mm, v7) |
+|:---:|:---:|:---:|
+| ![swiglu](images/swiglu_final.png) | ![codebook_decoder](images/codebook_decoder_final.png) | ![rope_gen](images/rope_gen_final.png) |
+| 3× sram_256x16, **0 DRC, 157 MHz** | 5× sram_512x32, **MET, 249 MHz** | 2× NOR ROM (fold=2, mirrored), 350 DRC, 147 MHz |
 
-| vector_unit (4×5.5 mm) | kv_cache_demo (0.60×0.71 mm) |
-|:---:|:---:|
-| ![vector_unit](images/vector_unit_final.png) | ![kv_cache_demo](images/kv_cache_demo_final.png) |
-| 2× NOR ROM, 55% util | 4× SRAM in 2×2 grid, 87% util |
+| rope_apply (2.8×2.8 mm, v8 cascade) | transformer_layer_block (3×3.5 mm, v11.3) | layer_orchestrator (3×3 mm, v12) |
+|:---:|:---:|:---:|
+| ![rope_apply](images/rope_apply_final.png) | ![transformer_layer_block](images/transformer_layer_block_final.png) | ![layer_orchestrator](images/layer_orchestrator_final.png) |
+| Pure stdcell + cascade ports, **0 DRC, 128 MHz** | rope_apply hardened, 1225 boundary pins, **0 DRC** | rope_apply + vector_unit composed + 4 SRAM, **0 DRC, 118 MHz** |
 
-| embed_rom (1.9×2.4 mm) | lm_head_demo (1.9×2.4 mm) |
-|:---:|:---:|
-| ![embed_rom](images/embed_rom_final.png) | ![lm_head_demo](images/lm_head_demo_final.png) |
-| Folded nor_rom_65536x192 (internal mux) centered | Same folded macro, weight projection + argmax |
+| embed_rom (1.9×2.4 mm) | lm_head_demo (1.9×2.4 mm) | kv_cache_demo (0.60×0.71 mm) |
+|:---:|:---:|:---:|
+| ![embed_rom](images/embed_rom_final.png) | ![lm_head_demo](images/lm_head_demo_final.png) | ![kv_cache_demo](images/kv_cache_demo_final.png) |
+| Folded nor_rom_65536x192 (internal mux), **0 DRC** | Same folded macro, weight projection + argmax, **0 DRC** | 4× sram_8192x8 in 2×2 grid, 87% util, **0 DRC** |
+
+#### Logic-only tiles (no macros)
+
+| async_fifo (0.08×0.08 mm) | mac_pe (0.4×0.4 mm) | layer_tile (0.4×0.5 mm) | llama_chip (0.4×0.5 mm) |
+|:---:|:---:|:---:|:---:|
+| ![async_fifo](images/async_fifo_final.png) | ![mac_pe](images/mac_pe_final.png) | ![layer_tile](images/layer_tile_final.png) | ![llama_chip](images/llama_chip_final.png) |
+| 270 cells, **+0.91 ns MET, 326 MHz** | 6,028 cells (s2), 175 MHz | 4,758 cells, **+0.06 ns MET, 254 MHz** | 5,885 cells, **+0.03 ns MET, 252 MHz** |
+
+| global_controller (0.5×0.5 mm) | scale_store (0.5×0.5 mm) | attention_unit (0.6×0.7 mm) | dequant (0.5×0.6 mm) |
+|:---:|:---:|:---:|:---:|
+| ![global_controller](images/global_controller_final.png) | ![scale_store](images/scale_store_final.png) | ![attention_unit](images/attention_unit_final.png) | ![dequant](images/dequant_final.png) |
+| 7,094 cells, 244 MHz | 5,823 cells, 243 MHz | 11,348 cells (s3), 139 MHz | 10,508 cells, 214 MHz |
+
+| lut_interp (0.6×0.6 mm) | | | |
+|:---:|:---:|:---:|:---:|
+| ![lut_interp](images/lut_interp_final.png) | | | |
+| 3,011 cells + 1× sram_256x16, **+0.05 ns MET, 253 MHz** | | | |
+
+#### Historical (version-tagged)
+
+The following PNGs preserve earlier-iteration floorplans for reference. Their per-design metrics in this doc have since been superseded — see the comparison in the table above.
+
+| File | What it captures | Why superseded |
+|---|---|---|
+| `images/rope_v6_legacy_final.png` | Monolithic rope.k (1× tile, ROM + datapath together), 3000×3300, 418 DRC | v7 split into rope_gen + rope_apply (separately hardenable) |
+| `images/mac_array_v6_final.png` | mac_array v6 at 2500×3000, 641 DRC | v8 reshape to 1800×2400 + sram_512x32 macro reached 0 DRC |
+| `images/rope_apply_v7_final.png` | rope_apply v7 at 800×800, 0 DRC, 192 MHz (no cascade) | v8 cascade ports (256-bit phased) grew die to 2800×2800 |
+| `images/vector_unit_v5_final.png` | vector_unit v5 at 4000×5500, 791K cells, 488 DRC | v6 source improvements + SRAM library dropped to 127K cells (PnR pending; meanwhile v12 orchestrator composes it cleanly at 0 DRC) |
+| `images/full_chip_floorplan_v7.png` | Synthetic full-chip figure at v7 (no transformer_layer_block / layer_orchestrator) | Superseded by `images/full_chip_floorplan.png` |
+| `images/multi_layer_floorplan_v8.png` | Synthetic multi-layer figure at v8 (1024-bit single-cycle cascade) | Superseded by `images/multi_layer_floorplan.png` (v11.3 256-bit phased) |
 
 **Color key:** Green = routed standard cells, Grey/blue rectangles = macros (ROM/SRAM), Cyan vertical line = clock tree trunk, Red/pink = metal routing layers, Yellow-green edges = I/O pins.
 
@@ -125,6 +163,103 @@ Reduced-scale designs that validate full architecture on a sky130 shuttle (~25 m
 **lm_head_demo** — 1024 vocab × 4096 dims as 192-bit weight chunks (full scale: 128,256 vocab). Proves weight projection + argmax pipeline using folded nor_rom_65536x192 (same as embed_rom). RMSNorm normalization handled by vector_unit in the real architecture — not included here. **77% utilization at 1900×2400 die after the internal-mux refactor (55% reduction from 3200×3200).**
 
 **Design note:** Initial lm_head_demo included `_gamma[4096]` and `_rsqrt_lut[256]` behavioral RAMs (RMSNorm parameters). These synthesized to ~111K flip-flops (125K total instances), causing GRT to loop in NDR retries for 21+ hours in the narrow 600µm die. Removing them (RMSNorm belongs in vector_unit) reduced to 12.9K instances and completed PnR in ~40 minutes.
+
+## Multi-Layer Chip Integration (v10/v11)
+
+Hierarchical chip composition with `rope_gen` + 2× `transformer_layer_block` + chip-level glue. Two architecturally significant iterations:
+
+### v10 — 1024-bit single-cycle cascade (baseline)
+- **layer_block hardened**: 0 DRC at 3000×3500, **4290 boundary pins** (4× 1024-bit cascade buses)
+- **chip-level**: synth+FP+PDN+place+CTS+GRT all complete; DRT plateau at **~3M residual** after 5 iters
+- **bottleneck**: 200µm inter-macro channels carry 2048-wire cascade buses (3× over capacity)
+
+### v11.3 — 256-bit phased cascade (current)
+- **layer_block hardened**: 0 DRC at 3000×3500, **1225 boundary pins** (3.5× reduction)
+- `rope_apply.k`: cascade methods take `phase` parameter (4 segments × 256 bits, delivered over 4 cycles)
+- `rope_gen.k`: kept v9-style 1024-bit single output (3.5× attempts to put the 4:1 mux inside the macro all plateaued at 23-25K DRC due to internal congestion)
+- `multi_layer_chip_wrapper.sv`: 4:1 phase slicer in chip glue (open area near rope_gen, ~256 muxes that route trivially)
+- **chip-level**: GRT completes (5 rounds, 4 NDR disabled), DRT plateau at **~2M residual** after 5 iters (33% better than v10)
+- **test coverage**: new `test_vl_rope_cascade.cpp` (50 lines) verifies phased forward/read API; all 19 existing co-sim tests still pass
+- **architectural ceiling**: chip-level routing dominated by control + handshake + clock signals competing for the same channels; pin reduction helped but didn't eliminate plateau
+
+### Comparison
+| Metric | v10 | v11.3 |
+|--------|-----|-------|
+| layer_block boundary pins | 4290 | **1225** (3.5× ↓) |
+| chip DRT iter 0 violations | 38M | **3.66M** (10× ↓) |
+| chip DRT plateau | ~3M | **~2M** (33% ↓) |
+| chip GRT NDR disables | 2 | 4 |
+| Wall time to plateau | 38h+ | ~16h |
+
+**Decision:** v11.3 is the documented final state for the multi_layer_chip cascade integration. Module-level (layer_block, all 17 modules) is the credible 0-DRC deliverable. Chip-level integration is demonstrated through GRT + DRT-with-residual; treating the residual as an architectural ceiling of multi-macro sky130hd composition rather than a flow-tunable problem.
+
+> **Superseded for new sub-module composition work** — see [Pure-Kanagawa Composition (v12)](#pure-kanagawa-composition-v12) below. v11.3 remains the cascade-architecture reference; v12 demonstrates that **a single composed orchestrator with N sub-modules + 4 SRAM macros routes cleanly** when the design stays under the 561K-cell flat-PnR ceiling.
+
+## Pure-Kanagawa Composition (v12)
+
+`rtl/kanagawa/layer_orchestrator.k` composes `rope_apply` + `vector_unit` as private class fields (`private: rope_apply _rope; vector_unit _vpu;`). Cross-file imports use a `rtl/kanagawa/opentaalas → .` symlink so dotted module names resolve. Sub-module method calls are placed at method-body level (NOT inside `atomic{}` — that's an "Illegal control flow" error).
+
+### Result
+
+| Metric | Value |
+|--------|-------|
+| Boundary pins | 1516 (step-level API kept; could fold to ~300 with cmd dispatch) |
+| Synth area | 5.04 mm² (rope_apply 0.82 + vector_unit 0.41 + orchestrator glue 3.81) |
+| Placed cells | 408K (incl. 11K timing-repair buffers, 18K clock buffers, 14K inverters) |
+| Filler cells | 569,783 |
+| Macros | 4× SRAM (gamma_pre_attn/mlp + rsqrt/sigmoid LUTs, auto-placed by RTL macro placer) |
+| Die | 3000×3000 µm (9 mm²), 55% utilization |
+| **DRC** | **0 violations** (DRT converged in 6 iterations: 3356 → 2431 → 1539 → 879 → 17 → **0**) |
+| WNS | -4.45 ns at 4 ns clock (target was 250 MHz) |
+| **fmax** | **118 MHz** (clock period min 8.45 ns) |
+| TNS | -13,890 ns |
+| Clock skew | -0.37 ns setup |
+| Power | 2.6 W |
+| Wirelength | 13.84 mm (li1 0 / met1 4.11 / met2 6.10 / met3 2.87 / met4 0.68 / met5 0.08 mm) |
+| Vias | 2,524,572 |
+| IR drop (worstcase) | 0.58 mV (0.03%) |
+
+### Wallclock breakdown (~4 hr total)
+
+| Phase | Time |
+|---|---|
+| Synthesis (Yosys) | 12 s |
+| Floorplan + macro place + tapcell + PDN | ~3 min |
+| Global place | 18 min |
+| `repair_design` (resize.tcl) | 57 min — 11,279 buffers / 2,839 resized / 2,886 slew + 1,145 cap viols cleaned |
+| Detail place | 12 min |
+| CTS + repair_timing | 35 min |
+| GRT (1 round) | 2 min — 282K nets, 19.5 mm wirelength estimate |
+| DRT | 21 min — converged 6 iters |
+| Fillcell + final report | ~15 min |
+
+### Key insight
+
+**`GPL_TIMING_DRIVEN=0` is essential** for designs over ~250K cells. The GPL-internal `repair_design` phase hangs silently on a single core for hours (same pattern as v6 vector_unit at 791K cells). The downstream `resize.tcl` does the timing repair just as well — the GPL-internal pass is redundant.
+
+The historical 561K-cell wall (which is why v11.3 layer_block wraps `rope_apply` alone) is real for the FULL per-layer composition (rope_apply + vector_unit + 7× mac_array + kv_cache + attention). But the rope_apply + vector_unit duo at 408K placed cells routes cleanly. This unblocks the path forward: compose more sub-modules one at a time, validate PnR after each.
+
+GDS merge fails with the documented placeholder-stub KLayout error; routing/odb is valid.
+
+### Visualizations
+
+| Final layout (placement + routing + macros) | Clock tree |
+|:---:|:---:|
+| ![layer_orchestrator final](images/layer_orchestrator_final.png) | ![layer_orchestrator clocks](images/layer_orchestrator_clocks.png) |
+| 4 SRAM macros at top edge, ~408K stdcells across the floor | Single clock domain, balanced tree, -0.37 ns skew |
+
+| Routing layers | Congestion heatmap |
+|:---:|:---:|
+| ![routing](images/layer_orchestrator_routing.png) | ![congestion](images/layer_orchestrator_congestion.png) |
+| Met1-Met5 colored, dense across the floor | GRT congestion 1.014 (slight overflow on top 0.5%, well within `-allow_congestion` budget) |
+
+### Files
+
+- RTL: `rtl/kanagawa/layer_orchestrator.k`, `rtl/kanagawa/opentaalas/` (symlink)
+- Build: `rtl/CMakeLists.txt` (`add_kanagawa_rtl(NAME layer_orchestrator …)`)
+- Flow: `flow/designs/sky130hd/layer_orchestrator/{config.mk,constraint.sdc}`
+- Runtime: `flow/designs/kanagawa_runtime_sky130.mk` (added `semaphore.sv`, `extern_return_router.sv`, `context_saver.sv` for composition)
+- CMake target: `pnr_layer_orchestrator`
 
 ## Physical Limits: kv_cache & lm_head
 

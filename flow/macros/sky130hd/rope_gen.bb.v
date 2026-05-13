@@ -1,6 +1,6 @@
 // Black-box stub for rope_gen tile macro (hierarchical PnR).
-// Exposes only the top-level Kanagawa ports — internal nor_rom_4096x1024
-// instances are hidden inside the abstract LEF/Liberty.
+// v11.3: reverted to v9-style 1024-bit single output. Phase slicing is in
+// chip wrapper (multi_layer_chip_wrapper.sv) — keeps rope_gen routable.
 (* blackbox *)
 module rope_gen (
   input  wire          clk,

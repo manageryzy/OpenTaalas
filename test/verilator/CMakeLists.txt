@@ -135,6 +135,7 @@ add_verilator_cosim_test(NAME attention_unit  TOP attention_unit  TEST test_vl_a
 add_verilator_cosim_test(NAME rmsnorm        TOP rmsnorm_unit    TEST test_vl_rmsnorm.cpp)
 add_verilator_cosim_test(NAME swiglu         TOP swiglu_unit     TEST test_vl_swiglu.cpp)
 add_verilator_cosim_test(NAME rope           TOP rope_unit       TEST test_vl_rope.cpp)
+add_verilator_cosim_test(NAME rope_apply     TOP rope_apply      TEST test_vl_rope_cascade.cpp)
 
 # =============================================================================
 # Phase 4: Integration
@@ -155,7 +156,12 @@ add_verilator_cosim_test(NAME llama_chip        TOP llama_chip        TEST test_
 # =============================================================================
 set(_wrapper_sv "${CMAKE_SOURCE_DIR}/rtl/sv/transformer_layer_wrapper.sv")
 set(_layer_sub_modules
-  mac_array vector_unit kv_cache attention_unit layer_tile
+  mac_array vector_unit kv_cache attention_unit layer_tile rope_apply
+)
+# kv_cache_demo has different naming (no double-prefix); add SV directly.
+list(APPEND _layer_extra_sv
+  ${_gen_dir}/kv_cache_demokv_cache_demo_types.sv
+  ${_gen_dir}/kv_cache_demokv_cache_demo.sv
 )
 
 # Check that all sub-module SV files exist
@@ -170,6 +176,15 @@ foreach(_mod ${_layer_sub_modules})
     break()
   endif()
   list(APPEND _layer_sv_sources "${_t}" "${_s}")
+endforeach()
+# Append non-standard-named SV (kv_cache_demo) after the loop.
+foreach(_extra ${_layer_extra_sv})
+  if(EXISTS "${_extra}")
+    list(APPEND _layer_sv_sources "${_extra}")
+  else()
+    message(STATUS "Skipping verilator_cosim_transformer_layer: ${_extra} not found")
+    set(_layer_all_found FALSE)
+  endif()
 endforeach()
 
 if(_layer_all_found AND EXISTS "${_wrapper_sv}")

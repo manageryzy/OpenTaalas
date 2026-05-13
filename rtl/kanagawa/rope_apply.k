@@ -7,6 +7,10 @@
 // keeping inter-tile wires short (≤ 1 mm) instead of broadcasting from
 // rope_gen to all K layers in a star fanout.
 //
+// v11 (256-bit phased cascade): cos/sin row is 4×256-bit segments, delivered
+// over 4 consecutive cycles by the producer (rope_gen or upstream rope_apply).
+// Cuts boundary pin count 4× to fit chip-level routing channel capacity.
+//
 // Two rotation outputs per pair of inputs:
 //   new_even = x_even * cos - x_odd  * sin
 //   new_odd  = x_even * sin + x_odd  * cos
@@ -18,39 +22,37 @@ module opentaalas.rope_apply
 class rope_apply
 {
 private:
-    // Registered copy of cos/sin row received from the upstream tile.
-    // Each layer in the chain adds 1 cycle of latency on the cascade path.
-    uint<1024> _cos_reg = 0;
-    uint<1024> _sin_reg = 0;
+    // 4× 256-bit segments make up the 1024-bit cos/sin row.
+    // Phased cascade: producer sends segment N in cycle N (phase 0..3).
+    uint<256>[4] _cos_seg;
+    uint<256>[4] _sin_seg;
 
 public:
-    // Cascade pass-through: latch cos value from upstream tile (rope_gen for L0,
-    // upstream rope_apply for L>0). Wired to read_cos_forwarded on the downstream
-    // tile in the multi-layer chip wrapper.
-    void forward_cos(uint<1024> v)
+    // Phased cascade input. Producer asserts forward_cos with phase 0,1,2,3
+    // on consecutive cycles to deliver the full row over 4 cycles.
+    void forward_cos(uint2 phase, uint<256> v)
     {
-        atomic { _cos_reg = v; }
+        atomic { _cos_seg[phase] = v; }
     }
 
-    void forward_sin(uint<1024> v)
+    void forward_sin(uint2 phase, uint<256> v)
     {
-        atomic { _sin_reg = v; }
+        atomic { _sin_seg[phase] = v; }
     }
 
-    // Read the latched cos/sin value (1-cycle delayed copy of the most-recent
-    // forward_cos/forward_sin input). Drives the next downstream rope_apply's
-    // forward_cos/sin input.
-    uint<1024> read_cos_forwarded()
+    // Phased cascade output. Consumer reads phase N to get segment N.
+    // Drives the next downstream rope_apply's forward_cos/sin input.
+    uint<256> read_cos_forwarded(uint2 phase)
     {
-        uint<1024> v;
-        atomic { v = _cos_reg; }
+        uint<256> v;
+        atomic { v = _cos_seg[phase]; }
         return v;
     }
 
-    uint<1024> read_sin_forwarded()
+    uint<256> read_sin_forwarded(uint2 phase)
     {
-        uint<1024> v;
-        atomic { v = _sin_reg; }
+        uint<256> v;
+        atomic { v = _sin_seg[phase]; }
         return v;
     }
 

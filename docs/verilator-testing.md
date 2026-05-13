@@ -78,3 +78,4 @@ RTL vs SystemC is **100% exact match** on all VPU operations. The remaining gap 
 - kv_cache, attention_unit, rmsnorm, swiglu, rope, vector_unit
 - layer_tile, embed_rom, lm_head, global_controller, llama_chip
 - transformer_layer (per-sub-module pipeline)
+- **rope_cascade** (v11 — verifies the 256-bit phased forward/read API on rope_apply, 50 lines, all checks passing)

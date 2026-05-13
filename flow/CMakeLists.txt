@@ -87,6 +87,17 @@ add_orfs_design(NAME llama_chip        PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_
 # v8 multi-layer (K=2) chip — cascade integration test
 add_orfs_design(NAME multi_layer_chip  PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/multi_layer_chip")
 
+# v10: layer_block — hardens transformer_layer_wrapper (now includes rope_apply
+# folded inside per docs/orfs-flow-todo.md). Replaces standalone rope_apply tile
+# at chip level with a single layer_block macro that contains both the layer
+# compute (mac_arrays + VU + KV + attn + FSM) and the rope_apply rotate datapath.
+add_orfs_design(NAME transformer_layer_block PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/transformer_layer_block")
+
+# v12: pure-Kanagawa orchestrator (rope_apply + vector_unit composed via class
+# fields). Tests whether sub-module composition yields routable PnR for the
+# combined design (~240K cells + 4 SRAM macros).
+add_orfs_design(NAME layer_orchestrator PLATFORM ${PLATFORM} CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}/designs/sky130hd/layer_orchestrator")
+
 # --- Aggregate target ---
 add_custom_target(backend_all
   DEPENDS

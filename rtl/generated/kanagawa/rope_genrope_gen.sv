@@ -92,7 +92,7 @@ endmodule
 `ifndef _TYPESCOPE_CoreModuleTypeScope
 `define _TYPESCOPE_CoreModuleTypeScope
 `endif // _TYPESCOPE_CoreModuleTypeScope
-module rope_gen_write_sin_row_BasicBlock_0(	// rope_gen.k:48:9
+module rope_gen_write_sin_row_BasicBlock_0(	// rope_gen.k:54:9
   input  wire          clk,
   input  wire          rst,
   output wire          done_out,
@@ -111,10 +111,103 @@ module rope_gen_write_sin_row_BasicBlock_0(	// rope_gen.k:48:9
 
   wire           _fifo_overflow_ffc_0_data_out;
   wire           _fifo_almostfull_ffc_0_data_out;
+  logic          done_out_0;	// rope_gen.k:54:9
+  logic [1023:0] memory_write_data_out_9_0_0;	// rope_gen.k:54:9
+  logic [11:0]   memory_write_addr_out_9_0_0;	// rope_gen.k:54:9
+  logic          memory_wren_9_0_0;	// rope_gen.k:54:9
+  logic          fifo_wren_0_0;	// rope_gen.k:54:9
+  logic          input_rdy_0_0;	// rope_gen.k:54:9
+  logic [7:0]    control_state_out_0;	// rope_gen.k:54:9
+  wire           _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// rope_gen.k:54:9
+  wire           _GEN_0 = _GEN & input_valid_0;	// rope_gen.k:54:9
+  always_comb begin	// rope_gen.k:54:9
+    input_rdy_0_0 = _GEN;	// rope_gen.k:54:9
+    control_state_out_0 =
+      {2'h0,
+       ~_fifo_overflow_ffc_0_data_out,
+       input_fifo_underflow_0,
+       2'h0,
+       ~_fifo_almostfull_ffc_0_data_out,
+       ~input_valid_0};	// rope_gen.k:54:9
+  end // always_comb
+  always_comb begin	// rope_gen.k:54:9
+    memory_wren_9_0_0 = _GEN_0;	// rope_gen.k:54:{9,18}
+    memory_write_addr_out_9_0_0 = data_in_7[11:0];	// rope_gen.k:54:18
+    memory_write_data_out_9_0_0 = data_in_7[1035:12];	// rope_gen.k:54:18
+  end // always_comb
+  reg   [11:0]   p0_position;	// rope_gen.k:54:9
+  reg   [1023:0] p0_value;	// rope_gen.k:54:9
+  reg            p0_stage1_enable = 1'h0;	// rope_gen.k:54:9
+  reg            p0_stage2_enable = 1'h0;	// rope_gen.k:54:9
+  always @(posedge clk) begin	// rope_gen.k:54:9
+    p0_position <= data_in_7[11:0];	// rope_gen.k:54:9
+    p0_value <= data_in_7[1035:12];	// rope_gen.k:54:9
+    if (rst) begin	// rope_gen.k:54:9
+      p0_stage1_enable <= 1'h0;	// rope_gen.k:54:9
+      p0_stage2_enable <= 1'h0;	// rope_gen.k:54:9
+    end
+    else begin	// rope_gen.k:54:9
+      p0_stage1_enable <= _GEN_0;	// rope_gen.k:54:9
+      p0_stage2_enable <= p0_stage1_enable;	// rope_gen.k:54:9
+    end
+  end // always @(posedge)
+  always_comb	// rope_gen.k:54:9
+    fifo_wren_0_0 = p0_stage2_enable;	// rope_gen.k:54:9, :55:9
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_almostfull_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_almost_full_in_raw_0),	// rope_gen.k:54:9
+    .data_out (_fifo_almostfull_ffc_0_data_out)
+  );
+  KanagawaFlipFlopChainNoEnable #(
+    .WIDTH(1),
+    .DEPTH(1)
+  ) fifo_overflow_ffc_0 (
+    .clk      (clk),
+    .data_in  (~fifo_overflow_in_0),	// rope_gen.k:54:9
+    .data_out (_fifo_overflow_ffc_0_data_out)
+  );
+  rope_genDebugView_write_sin_rowEntry rope_genDebugView_write_sin_rowEntry_instance (	// rope_gen.k:55:9
+    .clk       (clk),	// rope_gen.k:55:9
+    ._position (p0_stage1_enable ? p0_position : 'x),	// rope_gen.k:54:9, :55:9
+    ._value    (p0_stage1_enable ? p0_value : 'x),	// rope_gen.k:54:9, :55:9
+    .valid     (p0_stage1_enable),	// rope_gen.k:54:9
+    .valid_out (/* unused */)
+  );	// rope_gen.k:55:9
+  assign done_out = p0_stage2_enable;	// rope_gen.k:54:9
+  assign memory_write_data_out_9_0 = memory_write_data_out_9_0_0;	// rope_gen.k:54:9
+  assign memory_write_addr_out_9_0 = memory_write_addr_out_9_0_0;	// rope_gen.k:54:9
+  assign memory_wren_9_0 = memory_wren_9_0_0;	// rope_gen.k:54:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// rope_gen.k:54:9
+  assign input_rdy_0 = input_rdy_0_0;	// rope_gen.k:54:9
+  assign control_state_out = control_state_out_0;	// rope_gen.k:54:9
+endmodule
+
+module rope_gen_write_cos_row_BasicBlock_0(	// rope_gen.k:48:9
+  input  wire          clk,
+  input  wire          rst,
+  output wire          done_out,
+  output wire [1023:0] memory_write_data_out_8_0,
+  output wire [11:0]   memory_write_addr_out_8_0,
+  output wire          memory_wren_8_0,
+  output wire          fifo_wren_0,
+  input  wire          fifo_almost_full_in_raw_0,
+  input  wire          fifo_overflow_in_0,
+  input  wire [1035:0] data_in_6,
+  input  wire          input_fifo_underflow_0,
+  output wire          input_rdy_0,
+  input  wire          input_valid_0,
+  output wire [7:0]    control_state_out
+);
+
+  wire           _fifo_overflow_ffc_0_data_out;
+  wire           _fifo_almostfull_ffc_0_data_out;
   logic          done_out_0;	// rope_gen.k:48:9
-  logic [1023:0] memory_write_data_out_9_0_0;	// rope_gen.k:48:9
-  logic [11:0]   memory_write_addr_out_9_0_0;	// rope_gen.k:48:9
-  logic          memory_wren_9_0_0;	// rope_gen.k:48:9
+  logic [1023:0] memory_write_data_out_8_0_0;	// rope_gen.k:48:9
+  logic [11:0]   memory_write_addr_out_8_0_0;	// rope_gen.k:48:9
+  logic          memory_wren_8_0_0;	// rope_gen.k:48:9
   logic          fifo_wren_0_0;	// rope_gen.k:48:9
   logic          input_rdy_0_0;	// rope_gen.k:48:9
   logic [7:0]    control_state_out_0;	// rope_gen.k:48:9
@@ -131,17 +224,17 @@ module rope_gen_write_sin_row_BasicBlock_0(	// rope_gen.k:48:9
        ~input_valid_0};	// rope_gen.k:48:9
   end // always_comb
   always_comb begin	// rope_gen.k:48:9
-    memory_wren_9_0_0 = _GEN_0;	// rope_gen.k:48:{9,18}
-    memory_write_addr_out_9_0_0 = data_in_7[11:0];	// rope_gen.k:48:18
-    memory_write_data_out_9_0_0 = data_in_7[1035:12];	// rope_gen.k:48:18
+    memory_wren_8_0_0 = _GEN_0;	// rope_gen.k:48:{9,18}
+    memory_write_addr_out_8_0_0 = data_in_6[11:0];	// rope_gen.k:48:18
+    memory_write_data_out_8_0_0 = data_in_6[1035:12];	// rope_gen.k:48:18
   end // always_comb
   reg   [11:0]   p0_position;	// rope_gen.k:48:9
   reg   [1023:0] p0_value;	// rope_gen.k:48:9
   reg            p0_stage1_enable = 1'h0;	// rope_gen.k:48:9
   reg            p0_stage2_enable = 1'h0;	// rope_gen.k:48:9
   always @(posedge clk) begin	// rope_gen.k:48:9
-    p0_position <= data_in_7[11:0];	// rope_gen.k:48:9
-    p0_value <= data_in_7[1035:12];	// rope_gen.k:48:9
+    p0_position <= data_in_6[11:0];	// rope_gen.k:48:9
+    p0_value <= data_in_6[1035:12];	// rope_gen.k:48:9
     if (rst) begin	// rope_gen.k:48:9
       p0_stage1_enable <= 1'h0;	// rope_gen.k:48:9
       p0_stage2_enable <= 1'h0;	// rope_gen.k:48:9
@@ -169,7 +262,7 @@ module rope_gen_write_sin_row_BasicBlock_0(	// rope_gen.k:48:9
     .data_in  (~fifo_overflow_in_0),	// rope_gen.k:48:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  rope_genDebugView_write_sin_rowEntry rope_genDebugView_write_sin_rowEntry_instance (	// rope_gen.k:49:9
+  rope_genDebugView_write_cos_rowEntry rope_genDebugView_write_cos_rowEntry_instance (	// rope_gen.k:49:9
     .clk       (clk),	// rope_gen.k:49:9
     ._position (p0_stage1_enable ? p0_position : 'x),	// rope_gen.k:48:9, :49:9
     ._value    (p0_stage1_enable ? p0_value : 'x),	// rope_gen.k:48:9, :49:9
@@ -177,108 +270,15 @@ module rope_gen_write_sin_row_BasicBlock_0(	// rope_gen.k:48:9
     .valid_out (/* unused */)
   );	// rope_gen.k:49:9
   assign done_out = p0_stage2_enable;	// rope_gen.k:48:9
-  assign memory_write_data_out_9_0 = memory_write_data_out_9_0_0;	// rope_gen.k:48:9
-  assign memory_write_addr_out_9_0 = memory_write_addr_out_9_0_0;	// rope_gen.k:48:9
-  assign memory_wren_9_0 = memory_wren_9_0_0;	// rope_gen.k:48:9
+  assign memory_write_data_out_8_0 = memory_write_data_out_8_0_0;	// rope_gen.k:48:9
+  assign memory_write_addr_out_8_0 = memory_write_addr_out_8_0_0;	// rope_gen.k:48:9
+  assign memory_wren_8_0 = memory_wren_8_0_0;	// rope_gen.k:48:9
   assign fifo_wren_0 = fifo_wren_0_0;	// rope_gen.k:48:9
   assign input_rdy_0 = input_rdy_0_0;	// rope_gen.k:48:9
   assign control_state_out = control_state_out_0;	// rope_gen.k:48:9
 endmodule
 
-module rope_gen_write_cos_row_BasicBlock_0(	// rope_gen.k:42:9
-  input  wire          clk,
-  input  wire          rst,
-  output wire          done_out,
-  output wire [1023:0] memory_write_data_out_8_0,
-  output wire [11:0]   memory_write_addr_out_8_0,
-  output wire          memory_wren_8_0,
-  output wire          fifo_wren_0,
-  input  wire          fifo_almost_full_in_raw_0,
-  input  wire          fifo_overflow_in_0,
-  input  wire [1035:0] data_in_6,
-  input  wire          input_fifo_underflow_0,
-  output wire          input_rdy_0,
-  input  wire          input_valid_0,
-  output wire [7:0]    control_state_out
-);
-
-  wire           _fifo_overflow_ffc_0_data_out;
-  wire           _fifo_almostfull_ffc_0_data_out;
-  logic          done_out_0;	// rope_gen.k:42:9
-  logic [1023:0] memory_write_data_out_8_0_0;	// rope_gen.k:42:9
-  logic [11:0]   memory_write_addr_out_8_0_0;	// rope_gen.k:42:9
-  logic          memory_wren_8_0_0;	// rope_gen.k:42:9
-  logic          fifo_wren_0_0;	// rope_gen.k:42:9
-  logic          input_rdy_0_0;	// rope_gen.k:42:9
-  logic [7:0]    control_state_out_0;	// rope_gen.k:42:9
-  wire           _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// rope_gen.k:42:9
-  wire           _GEN_0 = _GEN & input_valid_0;	// rope_gen.k:42:9
-  always_comb begin	// rope_gen.k:42:9
-    input_rdy_0_0 = _GEN;	// rope_gen.k:42:9
-    control_state_out_0 =
-      {2'h0,
-       ~_fifo_overflow_ffc_0_data_out,
-       input_fifo_underflow_0,
-       2'h0,
-       ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// rope_gen.k:42:9
-  end // always_comb
-  always_comb begin	// rope_gen.k:42:9
-    memory_wren_8_0_0 = _GEN_0;	// rope_gen.k:42:{9,18}
-    memory_write_addr_out_8_0_0 = data_in_6[11:0];	// rope_gen.k:42:18
-    memory_write_data_out_8_0_0 = data_in_6[1035:12];	// rope_gen.k:42:18
-  end // always_comb
-  reg   [11:0]   p0_position;	// rope_gen.k:42:9
-  reg   [1023:0] p0_value;	// rope_gen.k:42:9
-  reg            p0_stage1_enable = 1'h0;	// rope_gen.k:42:9
-  reg            p0_stage2_enable = 1'h0;	// rope_gen.k:42:9
-  always @(posedge clk) begin	// rope_gen.k:42:9
-    p0_position <= data_in_6[11:0];	// rope_gen.k:42:9
-    p0_value <= data_in_6[1035:12];	// rope_gen.k:42:9
-    if (rst) begin	// rope_gen.k:42:9
-      p0_stage1_enable <= 1'h0;	// rope_gen.k:42:9
-      p0_stage2_enable <= 1'h0;	// rope_gen.k:42:9
-    end
-    else begin	// rope_gen.k:42:9
-      p0_stage1_enable <= _GEN_0;	// rope_gen.k:42:9
-      p0_stage2_enable <= p0_stage1_enable;	// rope_gen.k:42:9
-    end
-  end // always @(posedge)
-  always_comb	// rope_gen.k:42:9
-    fifo_wren_0_0 = p0_stage2_enable;	// rope_gen.k:42:9, :43:9
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_almostfull_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// rope_gen.k:42:9
-    .data_out (_fifo_almostfull_ffc_0_data_out)
-  );
-  KanagawaFlipFlopChainNoEnable #(
-    .WIDTH(1),
-    .DEPTH(1)
-  ) fifo_overflow_ffc_0 (
-    .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// rope_gen.k:42:9
-    .data_out (_fifo_overflow_ffc_0_data_out)
-  );
-  rope_genDebugView_write_cos_rowEntry rope_genDebugView_write_cos_rowEntry_instance (	// rope_gen.k:43:9
-    .clk       (clk),	// rope_gen.k:43:9
-    ._position (p0_stage1_enable ? p0_position : 'x),	// rope_gen.k:42:9, :43:9
-    ._value    (p0_stage1_enable ? p0_value : 'x),	// rope_gen.k:42:9, :43:9
-    .valid     (p0_stage1_enable),	// rope_gen.k:42:9
-    .valid_out (/* unused */)
-  );	// rope_gen.k:43:9
-  assign done_out = p0_stage2_enable;	// rope_gen.k:42:9
-  assign memory_write_data_out_8_0 = memory_write_data_out_8_0_0;	// rope_gen.k:42:9
-  assign memory_write_addr_out_8_0 = memory_write_addr_out_8_0_0;	// rope_gen.k:42:9
-  assign memory_wren_8_0 = memory_wren_8_0_0;	// rope_gen.k:42:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// rope_gen.k:42:9
-  assign input_rdy_0 = input_rdy_0_0;	// rope_gen.k:42:9
-  assign control_state_out = control_state_out_0;	// rope_gen.k:42:9
-endmodule
-
-module rope_gen_read_sin_row_BasicBlock_0(	// rope_gen.k:34:9
+module rope_gen_read_sin_row_BasicBlock_0(	// rope_gen.k:40:9
   input  wire          clk,
   input  wire          rst,
   output wire          done_out,
@@ -298,61 +298,61 @@ module rope_gen_read_sin_row_BasicBlock_0(	// rope_gen.k:34:9
 
   wire           _fifo_overflow_ffc_0_data_out;
   wire           _fifo_almostfull_ffc_0_data_out;
-  wire  [1023:0] memory_read_data_in_9_0_0 = memory_read_data_in_9_0;	// rope_gen.k:34:9
-  logic          done_out_0;	// rope_gen.k:34:9
-  logic [11:0]   memory_read_addr_out_9_0_0;	// rope_gen.k:34:9
-  logic          memory_rden_out_9_0_0;	// rope_gen.k:34:9
-  logic [1023:0] fifo_data_out_0_0;	// rope_gen.k:34:9
-  logic          fifo_wren_0_0;	// rope_gen.k:34:9
-  logic          input_rdy_0_0;	// rope_gen.k:34:9
-  logic [7:0]    control_state_out_0;	// rope_gen.k:34:9
-  wire           _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// rope_gen.k:34:9
-  wire           _GEN_0 = _GEN & input_valid_0;	// rope_gen.k:34:9
-  always_comb begin	// rope_gen.k:34:9
-    input_rdy_0_0 = _GEN;	// rope_gen.k:34:9
+  wire  [1023:0] memory_read_data_in_9_0_0 = memory_read_data_in_9_0;	// rope_gen.k:40:9
+  logic          done_out_0;	// rope_gen.k:40:9
+  logic [11:0]   memory_read_addr_out_9_0_0;	// rope_gen.k:40:9
+  logic          memory_rden_out_9_0_0;	// rope_gen.k:40:9
+  logic [1023:0] fifo_data_out_0_0;	// rope_gen.k:40:9
+  logic          fifo_wren_0_0;	// rope_gen.k:40:9
+  logic          input_rdy_0_0;	// rope_gen.k:40:9
+  logic [7:0]    control_state_out_0;	// rope_gen.k:40:9
+  wire           _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// rope_gen.k:40:9
+  wire           _GEN_0 = _GEN & input_valid_0;	// rope_gen.k:40:9
+  always_comb begin	// rope_gen.k:40:9
+    input_rdy_0_0 = _GEN;	// rope_gen.k:40:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// rope_gen.k:34:9
+       ~input_valid_0};	// rope_gen.k:40:9
   end // always_comb
-  always_comb begin	// rope_gen.k:34:9
-    memory_read_addr_out_9_0_0 = data_in_5;	// rope_gen.k:35:27
-    memory_rden_out_9_0_0 = _GEN_0;	// rope_gen.k:34:9, :35:27
+  always_comb begin	// rope_gen.k:40:9
+    memory_read_addr_out_9_0_0 = data_in_5;	// rope_gen.k:41:27
+    memory_rden_out_9_0_0 = _GEN_0;	// rope_gen.k:40:9, :41:27
   end // always_comb
-  reg   [11:0]   p0_data_in_5;	// rope_gen.k:34:9
-  reg            p0_stage1_enable = 1'h0;	// rope_gen.k:34:9
-  reg            p0_stage2_enable = 1'h0;	// rope_gen.k:34:9
-  reg   [1023:0] p0_memory_read_data_in_9_0;	// rope_gen.k:34:9
-  reg            p0_stage3_enable = 1'h0;	// rope_gen.k:34:9
-  always @(posedge clk) begin	// rope_gen.k:34:9
-    p0_data_in_5 <= data_in_5;	// rope_gen.k:34:9
-    if (rst) begin	// rope_gen.k:34:9
-      p0_stage1_enable <= 1'h0;	// rope_gen.k:34:9
-      p0_stage2_enable <= 1'h0;	// rope_gen.k:34:9
+  reg   [11:0]   p0_data_in_5;	// rope_gen.k:40:9
+  reg            p0_stage1_enable = 1'h0;	// rope_gen.k:40:9
+  reg            p0_stage2_enable = 1'h0;	// rope_gen.k:40:9
+  reg   [1023:0] p0_memory_read_data_in_9_0;	// rope_gen.k:40:9
+  reg            p0_stage3_enable = 1'h0;	// rope_gen.k:40:9
+  always @(posedge clk) begin	// rope_gen.k:40:9
+    p0_data_in_5 <= data_in_5;	// rope_gen.k:40:9
+    if (rst) begin	// rope_gen.k:40:9
+      p0_stage1_enable <= 1'h0;	// rope_gen.k:40:9
+      p0_stage2_enable <= 1'h0;	// rope_gen.k:40:9
     end
-    else begin	// rope_gen.k:34:9
-      p0_stage1_enable <= _GEN_0;	// rope_gen.k:34:9
-      p0_stage2_enable <= p0_stage1_enable;	// rope_gen.k:34:9
+    else begin	// rope_gen.k:40:9
+      p0_stage1_enable <= _GEN_0;	// rope_gen.k:40:9
+      p0_stage2_enable <= p0_stage1_enable;	// rope_gen.k:40:9
     end
-    p0_memory_read_data_in_9_0 <= memory_read_data_in_9_0_0;	// rope_gen.k:34:9
-    if (rst)	// rope_gen.k:34:9
-      p0_stage3_enable <= 1'h0;	// rope_gen.k:34:9
-    else	// rope_gen.k:34:9
-      p0_stage3_enable <= p0_stage2_enable;	// rope_gen.k:34:9
+    p0_memory_read_data_in_9_0 <= memory_read_data_in_9_0_0;	// rope_gen.k:40:9
+    if (rst)	// rope_gen.k:40:9
+      p0_stage3_enable <= 1'h0;	// rope_gen.k:40:9
+    else	// rope_gen.k:40:9
+      p0_stage3_enable <= p0_stage2_enable;	// rope_gen.k:40:9
   end // always @(posedge)
-  always_comb begin	// rope_gen.k:34:9
-    fifo_wren_0_0 = p0_stage3_enable;	// rope_gen.k:32:5, :34:9
-    fifo_data_out_0_0 = p0_memory_read_data_in_9_0;	// rope_gen.k:32:5, :34:9
+  always_comb begin	// rope_gen.k:40:9
+    fifo_wren_0_0 = p0_stage3_enable;	// rope_gen.k:38:5, :40:9
+    fifo_data_out_0_0 = p0_memory_read_data_in_9_0;	// rope_gen.k:38:5, :40:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// rope_gen.k:34:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// rope_gen.k:40:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -360,31 +360,31 @@ module rope_gen_read_sin_row_BasicBlock_0(	// rope_gen.k:34:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// rope_gen.k:34:9
+    .data_in  (~fifo_overflow_in_0),	// rope_gen.k:40:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  rope_genDebugView_read_sin_rowEntry rope_genDebugView_read_sin_rowEntry_instance (	// rope_gen.k:32:5
-    .clk       (clk),	// rope_gen.k:32:5
-    ._position (p0_stage1_enable ? p0_data_in_5 : 'x),	// rope_gen.k:32:5, :34:9
-    .valid     (p0_stage1_enable),	// rope_gen.k:34:9
+  rope_genDebugView_read_sin_rowEntry rope_genDebugView_read_sin_rowEntry_instance (	// rope_gen.k:38:5
+    .clk       (clk),	// rope_gen.k:38:5
+    ._position (p0_stage1_enable ? p0_data_in_5 : 'x),	// rope_gen.k:38:5, :40:9
+    .valid     (p0_stage1_enable),	// rope_gen.k:40:9
     .valid_out (/* unused */)
-  );	// rope_gen.k:32:5
-  rope_genDebugView_read_sin_rowExit rope_genDebugView_read_sin_rowExit_instance (	// rope_gen.k:32:5
-    .clk          (clk),	// rope_gen.k:32:5
-    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_9_0_0 : 'x),	// rope_gen.k:32:5, :34:9
-    .valid        (p0_stage2_enable),	// rope_gen.k:34:9
+  );	// rope_gen.k:38:5
+  rope_genDebugView_read_sin_rowExit rope_genDebugView_read_sin_rowExit_instance (	// rope_gen.k:38:5
+    .clk          (clk),	// rope_gen.k:38:5
+    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_9_0_0 : 'x),	// rope_gen.k:38:5, :40:9
+    .valid        (p0_stage2_enable),	// rope_gen.k:40:9
     .valid_out    (/* unused */)
-  );	// rope_gen.k:32:5
-  assign done_out = p0_stage3_enable;	// rope_gen.k:34:9
-  assign memory_read_addr_out_9_0 = memory_read_addr_out_9_0_0;	// rope_gen.k:34:9
-  assign memory_rden_out_9_0 = memory_rden_out_9_0_0;	// rope_gen.k:34:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// rope_gen.k:34:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// rope_gen.k:34:9
-  assign input_rdy_0 = input_rdy_0_0;	// rope_gen.k:34:9
-  assign control_state_out = control_state_out_0;	// rope_gen.k:34:9
+  );	// rope_gen.k:38:5
+  assign done_out = p0_stage3_enable;	// rope_gen.k:40:9
+  assign memory_read_addr_out_9_0 = memory_read_addr_out_9_0_0;	// rope_gen.k:40:9
+  assign memory_rden_out_9_0 = memory_rden_out_9_0_0;	// rope_gen.k:40:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// rope_gen.k:40:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// rope_gen.k:40:9
+  assign input_rdy_0 = input_rdy_0_0;	// rope_gen.k:40:9
+  assign control_state_out = control_state_out_0;	// rope_gen.k:40:9
 endmodule
 
-module rope_gen_read_cos_row_BasicBlock_0(	// rope_gen.k:26:9
+module rope_gen_read_cos_row_BasicBlock_0(	// rope_gen.k:33:9
   input  wire          clk,
   input  wire          rst,
   output wire          done_out,
@@ -404,61 +404,61 @@ module rope_gen_read_cos_row_BasicBlock_0(	// rope_gen.k:26:9
 
   wire           _fifo_overflow_ffc_0_data_out;
   wire           _fifo_almostfull_ffc_0_data_out;
-  wire  [1023:0] memory_read_data_in_8_0_0 = memory_read_data_in_8_0;	// rope_gen.k:26:9
-  logic          done_out_0;	// rope_gen.k:26:9
-  logic [11:0]   memory_read_addr_out_8_0_0;	// rope_gen.k:26:9
-  logic          memory_rden_out_8_0_0;	// rope_gen.k:26:9
-  logic [1023:0] fifo_data_out_0_0;	// rope_gen.k:26:9
-  logic          fifo_wren_0_0;	// rope_gen.k:26:9
-  logic          input_rdy_0_0;	// rope_gen.k:26:9
-  logic [7:0]    control_state_out_0;	// rope_gen.k:26:9
-  wire           _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// rope_gen.k:26:9
-  wire           _GEN_0 = _GEN & input_valid_0;	// rope_gen.k:26:9
-  always_comb begin	// rope_gen.k:26:9
-    input_rdy_0_0 = _GEN;	// rope_gen.k:26:9
+  wire  [1023:0] memory_read_data_in_8_0_0 = memory_read_data_in_8_0;	// rope_gen.k:33:9
+  logic          done_out_0;	// rope_gen.k:33:9
+  logic [11:0]   memory_read_addr_out_8_0_0;	// rope_gen.k:33:9
+  logic          memory_rden_out_8_0_0;	// rope_gen.k:33:9
+  logic [1023:0] fifo_data_out_0_0;	// rope_gen.k:33:9
+  logic          fifo_wren_0_0;	// rope_gen.k:33:9
+  logic          input_rdy_0_0;	// rope_gen.k:33:9
+  logic [7:0]    control_state_out_0;	// rope_gen.k:33:9
+  wire           _GEN = ~rst & _fifo_almostfull_ffc_0_data_out;	// rope_gen.k:33:9
+  wire           _GEN_0 = _GEN & input_valid_0;	// rope_gen.k:33:9
+  always_comb begin	// rope_gen.k:33:9
+    input_rdy_0_0 = _GEN;	// rope_gen.k:33:9
     control_state_out_0 =
       {2'h0,
        ~_fifo_overflow_ffc_0_data_out,
        input_fifo_underflow_0,
        2'h0,
        ~_fifo_almostfull_ffc_0_data_out,
-       ~input_valid_0};	// rope_gen.k:26:9
+       ~input_valid_0};	// rope_gen.k:33:9
   end // always_comb
-  always_comb begin	// rope_gen.k:26:9
-    memory_read_addr_out_8_0_0 = data_in_4;	// rope_gen.k:27:27
-    memory_rden_out_8_0_0 = _GEN_0;	// rope_gen.k:26:9, :27:27
+  always_comb begin	// rope_gen.k:33:9
+    memory_read_addr_out_8_0_0 = data_in_4;	// rope_gen.k:34:27
+    memory_rden_out_8_0_0 = _GEN_0;	// rope_gen.k:33:9, :34:27
   end // always_comb
-  reg   [11:0]   p0_data_in_4;	// rope_gen.k:26:9
-  reg            p0_stage1_enable = 1'h0;	// rope_gen.k:26:9
-  reg            p0_stage2_enable = 1'h0;	// rope_gen.k:26:9
-  reg   [1023:0] p0_memory_read_data_in_8_0;	// rope_gen.k:26:9
-  reg            p0_stage3_enable = 1'h0;	// rope_gen.k:26:9
-  always @(posedge clk) begin	// rope_gen.k:26:9
-    p0_data_in_4 <= data_in_4;	// rope_gen.k:26:9
-    if (rst) begin	// rope_gen.k:26:9
-      p0_stage1_enable <= 1'h0;	// rope_gen.k:26:9
-      p0_stage2_enable <= 1'h0;	// rope_gen.k:26:9
+  reg   [11:0]   p0_data_in_4;	// rope_gen.k:33:9
+  reg            p0_stage1_enable = 1'h0;	// rope_gen.k:33:9
+  reg            p0_stage2_enable = 1'h0;	// rope_gen.k:33:9
+  reg   [1023:0] p0_memory_read_data_in_8_0;	// rope_gen.k:33:9
+  reg            p0_stage3_enable = 1'h0;	// rope_gen.k:33:9
+  always @(posedge clk) begin	// rope_gen.k:33:9
+    p0_data_in_4 <= data_in_4;	// rope_gen.k:33:9
+    if (rst) begin	// rope_gen.k:33:9
+      p0_stage1_enable <= 1'h0;	// rope_gen.k:33:9
+      p0_stage2_enable <= 1'h0;	// rope_gen.k:33:9
     end
-    else begin	// rope_gen.k:26:9
-      p0_stage1_enable <= _GEN_0;	// rope_gen.k:26:9
-      p0_stage2_enable <= p0_stage1_enable;	// rope_gen.k:26:9
+    else begin	// rope_gen.k:33:9
+      p0_stage1_enable <= _GEN_0;	// rope_gen.k:33:9
+      p0_stage2_enable <= p0_stage1_enable;	// rope_gen.k:33:9
     end
-    p0_memory_read_data_in_8_0 <= memory_read_data_in_8_0_0;	// rope_gen.k:26:9
-    if (rst)	// rope_gen.k:26:9
-      p0_stage3_enable <= 1'h0;	// rope_gen.k:26:9
-    else	// rope_gen.k:26:9
-      p0_stage3_enable <= p0_stage2_enable;	// rope_gen.k:26:9
+    p0_memory_read_data_in_8_0 <= memory_read_data_in_8_0_0;	// rope_gen.k:33:9
+    if (rst)	// rope_gen.k:33:9
+      p0_stage3_enable <= 1'h0;	// rope_gen.k:33:9
+    else	// rope_gen.k:33:9
+      p0_stage3_enable <= p0_stage2_enable;	// rope_gen.k:33:9
   end // always @(posedge)
-  always_comb begin	// rope_gen.k:26:9
-    fifo_wren_0_0 = p0_stage3_enable;	// rope_gen.k:24:5, :26:9
-    fifo_data_out_0_0 = p0_memory_read_data_in_8_0;	// rope_gen.k:24:5, :26:9
+  always_comb begin	// rope_gen.k:33:9
+    fifo_wren_0_0 = p0_stage3_enable;	// rope_gen.k:31:5, :33:9
+    fifo_data_out_0_0 = p0_memory_read_data_in_8_0;	// rope_gen.k:31:5, :33:9
   end // always_comb
   KanagawaFlipFlopChainNoEnable #(
     .WIDTH(1),
     .DEPTH(1)
   ) fifo_almostfull_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_almost_full_in_raw_0),	// rope_gen.k:26:9
+    .data_in  (~fifo_almost_full_in_raw_0),	// rope_gen.k:33:9
     .data_out (_fifo_almostfull_ffc_0_data_out)
   );
   KanagawaFlipFlopChainNoEnable #(
@@ -466,28 +466,28 @@ module rope_gen_read_cos_row_BasicBlock_0(	// rope_gen.k:26:9
     .DEPTH(1)
   ) fifo_overflow_ffc_0 (
     .clk      (clk),
-    .data_in  (~fifo_overflow_in_0),	// rope_gen.k:26:9
+    .data_in  (~fifo_overflow_in_0),	// rope_gen.k:33:9
     .data_out (_fifo_overflow_ffc_0_data_out)
   );
-  rope_genDebugView_read_cos_rowEntry rope_genDebugView_read_cos_rowEntry_instance (	// rope_gen.k:24:5
-    .clk       (clk),	// rope_gen.k:24:5
-    ._position (p0_stage1_enable ? p0_data_in_4 : 'x),	// rope_gen.k:24:5, :26:9
-    .valid     (p0_stage1_enable),	// rope_gen.k:26:9
+  rope_genDebugView_read_cos_rowEntry rope_genDebugView_read_cos_rowEntry_instance (	// rope_gen.k:31:5
+    .clk       (clk),	// rope_gen.k:31:5
+    ._position (p0_stage1_enable ? p0_data_in_4 : 'x),	// rope_gen.k:31:5, :33:9
+    .valid     (p0_stage1_enable),	// rope_gen.k:33:9
     .valid_out (/* unused */)
-  );	// rope_gen.k:24:5
-  rope_genDebugView_read_cos_rowExit rope_genDebugView_read_cos_rowExit_instance (	// rope_gen.k:24:5
-    .clk          (clk),	// rope_gen.k:24:5
-    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_8_0_0 : 'x),	// rope_gen.k:24:5, :26:9
-    .valid        (p0_stage2_enable),	// rope_gen.k:26:9
+  );	// rope_gen.k:31:5
+  rope_genDebugView_read_cos_rowExit rope_genDebugView_read_cos_rowExit_instance (	// rope_gen.k:31:5
+    .clk          (clk),	// rope_gen.k:31:5
+    ._ReturnValue (p0_stage2_enable ? memory_read_data_in_8_0_0 : 'x),	// rope_gen.k:31:5, :33:9
+    .valid        (p0_stage2_enable),	// rope_gen.k:33:9
     .valid_out    (/* unused */)
-  );	// rope_gen.k:24:5
-  assign done_out = p0_stage3_enable;	// rope_gen.k:26:9
-  assign memory_read_addr_out_8_0 = memory_read_addr_out_8_0_0;	// rope_gen.k:26:9
-  assign memory_rden_out_8_0 = memory_rden_out_8_0_0;	// rope_gen.k:26:9
-  assign fifo_data_out_0 = fifo_data_out_0_0;	// rope_gen.k:26:9
-  assign fifo_wren_0 = fifo_wren_0_0;	// rope_gen.k:26:9
-  assign input_rdy_0 = input_rdy_0_0;	// rope_gen.k:26:9
-  assign control_state_out = control_state_out_0;	// rope_gen.k:26:9
+  );	// rope_gen.k:31:5
+  assign done_out = p0_stage3_enable;	// rope_gen.k:33:9
+  assign memory_read_addr_out_8_0 = memory_read_addr_out_8_0_0;	// rope_gen.k:33:9
+  assign memory_rden_out_8_0 = memory_rden_out_8_0_0;	// rope_gen.k:33:9
+  assign fifo_data_out_0 = fifo_data_out_0_0;	// rope_gen.k:33:9
+  assign fifo_wren_0 = fifo_wren_0_0;	// rope_gen.k:33:9
+  assign input_rdy_0 = input_rdy_0_0;	// rope_gen.k:33:9
+  assign control_state_out = control_state_out_0;	// rope_gen.k:33:9
 endmodule
 
 module rope_gen__cos_table__mem_container(	// rope_gen.k:19:5
@@ -607,26 +607,26 @@ module rope_gen(
   output wire          stall_rate_supported_out
 );
 
-  wire [1023:0] _write_sin_row_BasicBlock_0Impl_memory_write_data_out_9_0;	// rope_gen.k:48:9
-  wire [11:0]   _write_sin_row_BasicBlock_0Impl_memory_write_addr_out_9_0;	// rope_gen.k:48:9
-  wire          _write_sin_row_BasicBlock_0Impl_memory_wren_9_0;	// rope_gen.k:48:9
-  wire          _write_sin_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:48:9
-  wire          _write_sin_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:48:9
-  wire [1023:0] _write_cos_row_BasicBlock_0Impl_memory_write_data_out_8_0;	// rope_gen.k:42:9
-  wire [11:0]   _write_cos_row_BasicBlock_0Impl_memory_write_addr_out_8_0;	// rope_gen.k:42:9
-  wire          _write_cos_row_BasicBlock_0Impl_memory_wren_8_0;	// rope_gen.k:42:9
-  wire          _write_cos_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:42:9
-  wire          _write_cos_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:42:9
-  wire [11:0]   _read_sin_row_BasicBlock_0Impl_memory_read_addr_out_9_0;	// rope_gen.k:34:9
-  wire          _read_sin_row_BasicBlock_0Impl_memory_rden_out_9_0;	// rope_gen.k:34:9
-  wire [1023:0] _read_sin_row_BasicBlock_0Impl_fifo_data_out_0;	// rope_gen.k:34:9
-  wire          _read_sin_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:34:9
-  wire          _read_sin_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:34:9
-  wire [11:0]   _read_cos_row_BasicBlock_0Impl_memory_read_addr_out_8_0;	// rope_gen.k:26:9
-  wire          _read_cos_row_BasicBlock_0Impl_memory_rden_out_8_0;	// rope_gen.k:26:9
-  wire [1023:0] _read_cos_row_BasicBlock_0Impl_fifo_data_out_0;	// rope_gen.k:26:9
-  wire          _read_cos_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:26:9
-  wire          _read_cos_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:26:9
+  wire [1023:0] _write_sin_row_BasicBlock_0Impl_memory_write_data_out_9_0;	// rope_gen.k:54:9
+  wire [11:0]   _write_sin_row_BasicBlock_0Impl_memory_write_addr_out_9_0;	// rope_gen.k:54:9
+  wire          _write_sin_row_BasicBlock_0Impl_memory_wren_9_0;	// rope_gen.k:54:9
+  wire          _write_sin_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:54:9
+  wire          _write_sin_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:54:9
+  wire [1023:0] _write_cos_row_BasicBlock_0Impl_memory_write_data_out_8_0;	// rope_gen.k:48:9
+  wire [11:0]   _write_cos_row_BasicBlock_0Impl_memory_write_addr_out_8_0;	// rope_gen.k:48:9
+  wire          _write_cos_row_BasicBlock_0Impl_memory_wren_8_0;	// rope_gen.k:48:9
+  wire          _write_cos_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:48:9
+  wire          _write_cos_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:48:9
+  wire [11:0]   _read_sin_row_BasicBlock_0Impl_memory_read_addr_out_9_0;	// rope_gen.k:40:9
+  wire          _read_sin_row_BasicBlock_0Impl_memory_rden_out_9_0;	// rope_gen.k:40:9
+  wire [1023:0] _read_sin_row_BasicBlock_0Impl_fifo_data_out_0;	// rope_gen.k:40:9
+  wire          _read_sin_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:40:9
+  wire          _read_sin_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:40:9
+  wire [11:0]   _read_cos_row_BasicBlock_0Impl_memory_read_addr_out_8_0;	// rope_gen.k:33:9
+  wire          _read_cos_row_BasicBlock_0Impl_memory_rden_out_8_0;	// rope_gen.k:33:9
+  wire [1023:0] _read_cos_row_BasicBlock_0Impl_fifo_data_out_0;	// rope_gen.k:33:9
+  wire          _read_cos_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:33:9
+  wire          _read_cos_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:33:9
   wire          _fifo_3_write_sin_row_Return_overflow_out;
   wire          _fifo_3_write_sin_row_Return_underflow_out;
   wire          _fifo_3_write_sin_row_Return_empty;
@@ -821,16 +821,16 @@ module rope_gen(
     fifo_data_3.underflow = _fifo_3_write_sin_row_Return_underflow_out;
     fifo_data_3.empty = _fifo_3_write_sin_row_Return_empty;
     fifo_data_3.almost_full = _fifo_3_write_sin_row_Return_full;
-    fifo_data_0.data_in = _read_cos_row_BasicBlock_0Impl_fifo_data_out_0;	// rope_gen.k:26:9
-    fifo_data_0.wren = _read_cos_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:26:9
-    passthrough_data_4.rdy_int = _read_cos_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:26:9
-    fifo_data_1.data_in = _read_sin_row_BasicBlock_0Impl_fifo_data_out_0;	// rope_gen.k:34:9
-    fifo_data_1.wren = _read_sin_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:34:9
-    passthrough_data_5.rdy_int = _read_sin_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:34:9
-    fifo_data_2.wren = _write_cos_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:42:9
-    passthrough_data_6.rdy_int = _write_cos_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:42:9
-    fifo_data_3.wren = _write_sin_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:48:9
-    passthrough_data_7.rdy_int = _write_sin_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:48:9
+    fifo_data_0.data_in = _read_cos_row_BasicBlock_0Impl_fifo_data_out_0;	// rope_gen.k:33:9
+    fifo_data_0.wren = _read_cos_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:33:9
+    passthrough_data_4.rdy_int = _read_cos_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:33:9
+    fifo_data_1.data_in = _read_sin_row_BasicBlock_0Impl_fifo_data_out_0;	// rope_gen.k:40:9
+    fifo_data_1.wren = _read_sin_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:40:9
+    passthrough_data_5.rdy_int = _read_sin_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:40:9
+    fifo_data_2.wren = _write_cos_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:48:9
+    passthrough_data_6.rdy_int = _write_cos_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:48:9
+    fifo_data_3.wren = _write_sin_row_BasicBlock_0Impl_fifo_wren_0;	// rope_gen.k:54:9
+    passthrough_data_7.rdy_int = _write_sin_row_BasicBlock_0Impl_input_rdy_0;	// rope_gen.k:54:9
   end // always_comb
 
   assign has_startup_completed_raw = 1'b1;
@@ -854,22 +854,22 @@ module rope_gen(
   rope_gen__cos_table__mem_container _cos_table (	// rope_gen.k:19:5
     .clk             (clk),	// rope_gen.k:19:5
     .rst             (1'b0),	// rope_gen.k:19:5
-    .rden_in_0       (_read_cos_row_BasicBlock_0Impl_memory_rden_out_8_0),	// rope_gen.k:26:9
-    .read_addr_in_0  (_read_cos_row_BasicBlock_0Impl_memory_read_addr_out_8_0),	// rope_gen.k:26:9
-    .wren_in_0       (_write_cos_row_BasicBlock_0Impl_memory_wren_8_0),	// rope_gen.k:42:9
-    .write_addr_in_0 (_write_cos_row_BasicBlock_0Impl_memory_write_addr_out_8_0),	// rope_gen.k:42:9
-    .write_data_in_0 (_write_cos_row_BasicBlock_0Impl_memory_write_data_out_8_0),	// rope_gen.k:42:9
+    .rden_in_0       (_read_cos_row_BasicBlock_0Impl_memory_rden_out_8_0),	// rope_gen.k:33:9
+    .read_addr_in_0  (_read_cos_row_BasicBlock_0Impl_memory_read_addr_out_8_0),	// rope_gen.k:33:9
+    .wren_in_0       (_write_cos_row_BasicBlock_0Impl_memory_wren_8_0),	// rope_gen.k:48:9
+    .write_addr_in_0 (_write_cos_row_BasicBlock_0Impl_memory_write_addr_out_8_0),	// rope_gen.k:48:9
+    .write_data_in_0 (_write_cos_row_BasicBlock_0Impl_memory_write_data_out_8_0),	// rope_gen.k:48:9
     .read_data_out_0 (__cos_table_read_data_out_0),
     .init_completed  (__cos_table_init_completed)
   );	// rope_gen.k:19:5
   rope_gen__sin_table__mem_container _sin_table (	// rope_gen.k:20:5
     .clk             (clk),	// rope_gen.k:19:5
     .rst             (1'b0),	// rope_gen.k:19:5
-    .rden_in_0       (_read_sin_row_BasicBlock_0Impl_memory_rden_out_9_0),	// rope_gen.k:34:9
-    .read_addr_in_0  (_read_sin_row_BasicBlock_0Impl_memory_read_addr_out_9_0),	// rope_gen.k:34:9
-    .wren_in_0       (_write_sin_row_BasicBlock_0Impl_memory_wren_9_0),	// rope_gen.k:48:9
-    .write_addr_in_0 (_write_sin_row_BasicBlock_0Impl_memory_write_addr_out_9_0),	// rope_gen.k:48:9
-    .write_data_in_0 (_write_sin_row_BasicBlock_0Impl_memory_write_data_out_9_0),	// rope_gen.k:48:9
+    .rden_in_0       (_read_sin_row_BasicBlock_0Impl_memory_rden_out_9_0),	// rope_gen.k:40:9
+    .read_addr_in_0  (_read_sin_row_BasicBlock_0Impl_memory_read_addr_out_9_0),	// rope_gen.k:40:9
+    .wren_in_0       (_write_sin_row_BasicBlock_0Impl_memory_wren_9_0),	// rope_gen.k:54:9
+    .write_addr_in_0 (_write_sin_row_BasicBlock_0Impl_memory_write_addr_out_9_0),	// rope_gen.k:54:9
+    .write_data_in_0 (_write_sin_row_BasicBlock_0Impl_memory_write_data_out_9_0),	// rope_gen.k:54:9
     .read_data_out_0 (__sin_table_read_data_out_0),
     .init_completed  (__sin_table_init_completed)
   );	// rope_gen.k:20:5
@@ -1001,43 +1001,43 @@ module rope_gen(
     .data          ('0),
     .q             (/* unused */)
   );
-  rope_gen_read_cos_row_BasicBlock_0 read_cos_row_BasicBlock_0Impl (	// rope_gen.k:26:9
-    .clk                       (clk),	// rope_gen.k:26:9
-    .rst                       (reg_rst_delayed[4]),	// rope_gen.k:26:9
+  rope_gen_read_cos_row_BasicBlock_0 read_cos_row_BasicBlock_0Impl (	// rope_gen.k:33:9
+    .clk                       (clk),	// rope_gen.k:33:9
+    .rst                       (reg_rst_delayed[4]),	// rope_gen.k:33:9
     .done_out                  (/* unused */),
     .memory_read_data_in_8_0   (__cos_table_read_data_out_0),	// rope_gen.k:19:5
     .memory_read_addr_out_8_0  (_read_cos_row_BasicBlock_0Impl_memory_read_addr_out_8_0),
     .memory_rden_out_8_0       (_read_cos_row_BasicBlock_0Impl_memory_rden_out_8_0),
     .fifo_data_out_0           (_read_cos_row_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_read_cos_row_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_0.almost_full),	// rope_gen.k:26:9
-    .fifo_overflow_in_0        (fifo_data_0.overflow),	// rope_gen.k:26:9
-    .data_in_4                 (passthrough_data_4.data),	// rope_gen.k:26:9
-    .input_fifo_underflow_0    (passthrough_data_4.underflow),	// rope_gen.k:26:9
+    .fifo_almost_full_in_raw_0 (fifo_data_0.almost_full),	// rope_gen.k:33:9
+    .fifo_overflow_in_0        (fifo_data_0.overflow),	// rope_gen.k:33:9
+    .data_in_4                 (passthrough_data_4.data),	// rope_gen.k:33:9
+    .input_fifo_underflow_0    (passthrough_data_4.underflow),	// rope_gen.k:33:9
     .input_rdy_0               (_read_cos_row_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_4.valid),	// rope_gen.k:26:9
+    .input_valid_0             (passthrough_data_4.valid),	// rope_gen.k:33:9
     .control_state_out         (/* unused */)
-  );	// rope_gen.k:26:9
-  rope_gen_read_sin_row_BasicBlock_0 read_sin_row_BasicBlock_0Impl (	// rope_gen.k:34:9
-    .clk                       (clk),	// rope_gen.k:34:9
-    .rst                       (reg_rst_delayed[5]),	// rope_gen.k:34:9
+  );	// rope_gen.k:33:9
+  rope_gen_read_sin_row_BasicBlock_0 read_sin_row_BasicBlock_0Impl (	// rope_gen.k:40:9
+    .clk                       (clk),	// rope_gen.k:40:9
+    .rst                       (reg_rst_delayed[5]),	// rope_gen.k:40:9
     .done_out                  (/* unused */),
     .memory_read_data_in_9_0   (__sin_table_read_data_out_0),	// rope_gen.k:20:5
     .memory_read_addr_out_9_0  (_read_sin_row_BasicBlock_0Impl_memory_read_addr_out_9_0),
     .memory_rden_out_9_0       (_read_sin_row_BasicBlock_0Impl_memory_rden_out_9_0),
     .fifo_data_out_0           (_read_sin_row_BasicBlock_0Impl_fifo_data_out_0),
     .fifo_wren_0               (_read_sin_row_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_1.almost_full),	// rope_gen.k:34:9
-    .fifo_overflow_in_0        (fifo_data_1.overflow),	// rope_gen.k:34:9
-    .data_in_5                 (passthrough_data_5.data),	// rope_gen.k:34:9
-    .input_fifo_underflow_0    (passthrough_data_5.underflow),	// rope_gen.k:34:9
+    .fifo_almost_full_in_raw_0 (fifo_data_1.almost_full),	// rope_gen.k:40:9
+    .fifo_overflow_in_0        (fifo_data_1.overflow),	// rope_gen.k:40:9
+    .data_in_5                 (passthrough_data_5.data),	// rope_gen.k:40:9
+    .input_fifo_underflow_0    (passthrough_data_5.underflow),	// rope_gen.k:40:9
     .input_rdy_0               (_read_sin_row_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_5.valid),	// rope_gen.k:34:9
+    .input_valid_0             (passthrough_data_5.valid),	// rope_gen.k:40:9
     .control_state_out         (/* unused */)
-  );	// rope_gen.k:34:9
-  rope_gen_write_cos_row_BasicBlock_0 write_cos_row_BasicBlock_0Impl (	// rope_gen.k:42:9
-    .clk                       (clk),	// rope_gen.k:42:9
-    .rst                       (reg_rst_delayed[6]),	// rope_gen.k:42:9
+  );	// rope_gen.k:40:9
+  rope_gen_write_cos_row_BasicBlock_0 write_cos_row_BasicBlock_0Impl (	// rope_gen.k:48:9
+    .clk                       (clk),	// rope_gen.k:48:9
+    .rst                       (reg_rst_delayed[6]),	// rope_gen.k:48:9
     .done_out                  (/* unused */),
     .memory_write_data_out_8_0
       (_write_cos_row_BasicBlock_0Impl_memory_write_data_out_8_0),
@@ -1045,17 +1045,17 @@ module rope_gen(
       (_write_cos_row_BasicBlock_0Impl_memory_write_addr_out_8_0),
     .memory_wren_8_0           (_write_cos_row_BasicBlock_0Impl_memory_wren_8_0),
     .fifo_wren_0               (_write_cos_row_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_2.almost_full),	// rope_gen.k:42:9
-    .fifo_overflow_in_0        (fifo_data_2.overflow),	// rope_gen.k:42:9
-    .data_in_6                 (passthrough_data_6.data),	// rope_gen.k:42:9
-    .input_fifo_underflow_0    (passthrough_data_6.underflow),	// rope_gen.k:42:9
+    .fifo_almost_full_in_raw_0 (fifo_data_2.almost_full),	// rope_gen.k:48:9
+    .fifo_overflow_in_0        (fifo_data_2.overflow),	// rope_gen.k:48:9
+    .data_in_6                 (passthrough_data_6.data),	// rope_gen.k:48:9
+    .input_fifo_underflow_0    (passthrough_data_6.underflow),	// rope_gen.k:48:9
     .input_rdy_0               (_write_cos_row_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_6.valid),	// rope_gen.k:42:9
+    .input_valid_0             (passthrough_data_6.valid),	// rope_gen.k:48:9
     .control_state_out         (/* unused */)
-  );	// rope_gen.k:42:9
-  rope_gen_write_sin_row_BasicBlock_0 write_sin_row_BasicBlock_0Impl (	// rope_gen.k:48:9
-    .clk                       (clk),	// rope_gen.k:48:9
-    .rst                       (reg_rst_delayed[7]),	// rope_gen.k:48:9
+  );	// rope_gen.k:48:9
+  rope_gen_write_sin_row_BasicBlock_0 write_sin_row_BasicBlock_0Impl (	// rope_gen.k:54:9
+    .clk                       (clk),	// rope_gen.k:54:9
+    .rst                       (reg_rst_delayed[7]),	// rope_gen.k:54:9
     .done_out                  (/* unused */),
     .memory_write_data_out_9_0
       (_write_sin_row_BasicBlock_0Impl_memory_write_data_out_9_0),
@@ -1063,14 +1063,14 @@ module rope_gen(
       (_write_sin_row_BasicBlock_0Impl_memory_write_addr_out_9_0),
     .memory_wren_9_0           (_write_sin_row_BasicBlock_0Impl_memory_wren_9_0),
     .fifo_wren_0               (_write_sin_row_BasicBlock_0Impl_fifo_wren_0),
-    .fifo_almost_full_in_raw_0 (fifo_data_3.almost_full),	// rope_gen.k:48:9
-    .fifo_overflow_in_0        (fifo_data_3.overflow),	// rope_gen.k:48:9
-    .data_in_7                 (passthrough_data_7.data),	// rope_gen.k:48:9
-    .input_fifo_underflow_0    (passthrough_data_7.underflow),	// rope_gen.k:48:9
+    .fifo_almost_full_in_raw_0 (fifo_data_3.almost_full),	// rope_gen.k:54:9
+    .fifo_overflow_in_0        (fifo_data_3.overflow),	// rope_gen.k:54:9
+    .data_in_7                 (passthrough_data_7.data),	// rope_gen.k:54:9
+    .input_fifo_underflow_0    (passthrough_data_7.underflow),	// rope_gen.k:54:9
     .input_rdy_0               (_write_sin_row_BasicBlock_0Impl_input_rdy_0),
-    .input_valid_0             (passthrough_data_7.valid),	// rope_gen.k:48:9
+    .input_valid_0             (passthrough_data_7.valid),	// rope_gen.k:54:9
     .control_state_out         (/* unused */)
-  );	// rope_gen.k:48:9
+  );	// rope_gen.k:54:9
   assign rst_and_startup_done_out = rst_and_startup_done_out_net;
   assign read_cos_row_rdy_out = read_cos_row_rdy_out_net;
   assign read_cos_row_empty_out = read_cos_row_empty_out_net;

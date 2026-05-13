@@ -24,6 +24,9 @@ KANAGAWA_RUNTIME_SV = \
   $(_kanagawa_rtl)/register_fifo.sv \
   $(_kanagawa_rtl)/one_register_fifo.sv \
   $(_kanagawa_rtl)/skid_buffer.sv \
+  $(_kanagawa_rtl)/semaphore.sv \
+  $(_kanagawa_rtl)/extern_return_router.sv \
+  $(_kanagawa_rtl)/context_saver.sv \
   $(_kanagawa_rtl)/hal/mock/hal_non_mergeable_registers.sv \
   $(_kanagawa_rtl)/hal/mock/hal_show_ahead_fifo.sv \
   $(_kanagawa_rtl)/hal/mock/hal_ready_valid_fifo.sv \

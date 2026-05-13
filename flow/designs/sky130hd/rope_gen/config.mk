@@ -10,7 +10,7 @@ include $(_this_dir)/../../kanagawa_runtime_sky130.mk
 export VERILOG_FILES   = $(_project)/rtl/generated/kanagawa/rope_genrope_gen.sv \
                          $(_project)/rtl/generated/kanagawa/rope_genrope_gen_types.sv \
                          $(KANAGAWA_RUNTIME_SV) \
-                         $(MACRO_BB)
+                         $(filter-out %/rope_gen.bb.v,$(MACRO_BB))
 export VERILOG_DEFINES = $(KANAGAWA_VERILOG_DEFINES)
 export SDC_FILE        = $(_this_dir)/constraint.sdc
 
@@ -42,6 +42,12 @@ export MACRO_PLACEMENT_TCL = $(_this_dir)/macro_place.tcl
 export SYNTH_MEMORY_MAX_BITS = 65536
 export REMOVE_ABC_BUFFERS = 1
 
-export ADDITIONAL_LEFS = $(MACRO_LEFS)
-export ADDITIONAL_LIBS = $(MACRO_LIBS)
+export ADDITIONAL_LEFS = $(filter-out %/rope_gen.lef,$(MACRO_LEFS))
+export ADDITIONAL_LIBS = $(filter-out %/rope_gen.lib,$(MACRO_LIBS))
+
+# Disable LEC: abstract LIBs for large block macros (transformer_layer_block has
+# 557 outputs, only 13 truth tables) crash KeplerFormal LEC. Standard ORFS
+# practice for hierarchical PnR with abstract macros.
+export EQUIVALENCE_CHECK = 0
+export LEC_CHECK = 0
 export ADDITIONAL_GDS  = $(MACRO_GDS)

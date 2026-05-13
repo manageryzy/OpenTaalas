@@ -32,9 +32,18 @@ export SYNTH_HIERARCHICAL = 0
 # Layout: rope_gen TOP band, 2× rope_apply BOTTOM band side-by-side.
 # Width: max(3000 + margins, 2× 2800 + channel) = 6000 µm
 # Height: 3300 (rope_gen) + 200 (channel) + 2800 (rope_apply) + 200 (margin) = 6500 µm
-export DIE_AREA  = 0 0 6000 6500
-export CORE_AREA = 10 10 5990 6490
-export PLACE_DENSITY_LB_ADDON = 0.10
+# v10 (shrunk): rope_gen tucked above L0 (left column), L1 stays right.
+# Layout:
+#   rope_gen 3000×3300 at (50, 3750), above L0
+#   L0       3000×3500 at (50,   50)
+#   L1       3000×3500 at (3250, 50), 200µm cascade channel from L0
+# Width:  50 + 3000 + 200 + 3000 + 50 = 6300
+# Height: 50 + 3500 + 200 + 3300 + 50 = 7100
+# Die: 6300 × 7100 = 44.7 mm² (8% smaller than 6600×7400 = 48.8 mm²)
+# Empty area: top-right 3000×3300 = 9.9 mm² (rope_gen could be expanded here in K=3)
+export DIE_AREA  = 0 0 6300 7100
+export CORE_AREA = 10 10 6290 7090
+export PLACE_DENSITY_LB_ADDON = 0.05
 # Hierarchical PnR (v9). rope_gen + 2× rope_apply imported as black-box
 # macros via flow/macros/sky130hd/{rope_gen,rope_apply}.{lef,lib,gds,bb.v}.
 # Top-level cell count drops from 302K (flat) to 4 stdcells of glue logic.
@@ -61,3 +70,7 @@ export REMOVE_ABC_BUFFERS = 1
 export ADDITIONAL_LEFS = $(MACRO_LEFS)
 export ADDITIONAL_LIBS = $(MACRO_LIBS)
 export ADDITIONAL_GDS  = $(MACRO_GDS)
+
+# Custom PDN: skip macro internal grids (layer_block has met4 fully obstructed;
+# chip met5 stripes align with macro's met5 power pins for direct connection).
+export PDN_TCL = $(_this_dir)/pdn.tcl

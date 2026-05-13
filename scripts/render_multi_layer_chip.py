@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-"""Render the v8 K=2 multi-layer floorplan with cascaded RoPE.
+"""Render the v11.3 K=2 multi-layer floorplan with 256-bit phased cascade.
 
-Two physical transformer layers (L0, L1) sit side-by-side in the bottom band.
-The chip-shared rope_gen sits in the top band, rotated R270 so its 1024-bit
-cos/sin dout buses exit the SOUTH edge directly above the layer band.
+Two physical transformer_layer_block macros (L0, L1) sit side-by-side. The
+chip-shared rope_gen sits at top with a chip-level 4:1 phase slicer feeding
+phased 256-bit segments to each layer_block.
 
-Cascade chain (the v8 architectural change):
-    rope_gen (top)  --SOUTH-->  L0.rope_apply  --EAST--> L1.rope_apply
-Each cascade hop is ≤ 1 mm — no chip-spanning broadcast.
-
-Compared to v7 (which was 1 layer + a star-broadcast SDC sketch), v8 doubles
-the per-layer compute area and replaces the broadcast bus with two short hops.
+v8 → v11.3 changes:
+- rope_apply.k cascade serialized: 1024-bit single-cycle → 4× 256-bit phased
+- transformer_layer_block hardened with 256-bit cascade ports (1225 pins,
+  down from v10's 4290 pins — 3.5× reduction)
+- Chip wrapper has a 4:1 phase slicer in the open area near rope_gen
+- Chip DRT iter-0 violations 38M → 3.66M (10×↓), plateau ~3M → ~2M (33%↓)
+- Chip-level routing dominated by control + handshake + clock in the
+  inter-macro channels — architectural ceiling, not flow-tunable
 """
 import os
 import matplotlib.pyplot as plt
@@ -168,7 +170,7 @@ def main():
                 arrowprops=dict(arrowstyle="->", color="#d0212e", lw=2.5))
     ax.text((rg_south_x + l0_ra_north_x) / 2 + 100,
             (rg_south_y + l0_ra_north_y) / 2,
-            "cos/sin\n(2× 1024-bit)\nrope_gen → L0",
+            "v11.3 cascade\n4× 256-bit phased\n+ chip-level 4:1 slicer\nrope_gen → L0",
             ha="left", va="center", fontsize=8, color="#d0212e", weight="bold",
             bbox=dict(boxstyle="round,pad=0.25", facecolor="white", edgecolor="#d0212e"))
 
@@ -185,7 +187,7 @@ def main():
     midx = (l0_ra_east_x + l1_ra_west_x) / 2
     midy = (l0_ra_east_y + l1_ra_west_y) / 2
     ax.text(midx, midy + 200,
-            "L0.RA → L1.RA\n(1-cycle reg)\n≤ 1 mm hop",
+            "L0.RA → L1.RA\n(phased 256-bit)\n≤ 1 mm hop",
             ha="center", va="center", fontsize=7, color="#d0212e", weight="bold",
             bbox=dict(boxstyle="round,pad=0.2", facecolor="white", edgecolor="#d0212e"))
 
@@ -195,9 +197,9 @@ def main():
     ax.set_aspect("equal")
     ax.set_xlabel("x (µm)")
     ax.set_ylabel("y (µm)")
-    title = ("OpenTaalas v8 Multi-Layer Floorplan (K=2, cascaded RoPE)\n"
+    title = ("OpenTaalas v11.3 Multi-Layer Floorplan (K=2, 256-bit phased cascade)\n"
              f"Chip: ~{chip_w_eff/1000:.1f} × {chip_h_eff/1000:.1f} mm "
-             f"= {chip_w_eff*chip_h_eff/1e6:.1f} mm²")
+             f"= {chip_w_eff*chip_h_eff/1e6:.1f} mm² · synthetic figure (chip DRT plateau ~2M residual)")
     ax.set_title(title, fontsize=13, weight="bold")
     ax.grid(True, alpha=0.2, linestyle=":")
 

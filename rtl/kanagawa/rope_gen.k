@@ -20,7 +20,14 @@ private:
     [[memory]] uint<1024>[4096] _sin_table;
 
 public:
-    // Read full cos row for a position (all 64 freq pairs, 1024 bits)
+    // v11.3: revert to v9-style 1024-bit single output. The phased 256-bit
+    // slicing has been moved to the chip-level wrapper (see
+    // multi_layer_chip_wrapper.sv). This keeps rope_gen routable (v9 PnR
+    // achieved 147 MHz / 350 DRC at 3000×3300 die). The chip-level slicer mux
+    // is small stdcell logic (~1000 cells = 1024×4:1 mux pair) and sits in
+    // the empty chip glue area near rope_gen — far easier to route there than
+    // inside the macro, which was also fighting nor_rom_4096x1024 macro
+    // placement (unsolvable congestion → 23K residual DRC in 12 PnR rounds).
     uint<1024> read_cos_row(uint12 position)
     {
         uint<1024> result;
@@ -28,7 +35,6 @@ public:
         return result;
     }
 
-    // Read full sin row for a position (all 64 freq pairs, 1024 bits)
     uint<1024> read_sin_row(uint12 position)
     {
         uint<1024> result;
@@ -36,13 +42,13 @@ public:
         return result;
     }
 
-    // Write full cos row (programming interface)
+    // Write full cos row (programming interface, full 1024-bit unchanged)
     void write_cos_row(uint12 position, uint<1024> value)
     {
         atomic { _cos_table[position] = value; }
     }
 
-    // Write full sin row (programming interface)
+    // Write full sin row (programming interface, full 1024-bit unchanged)
     void write_sin_row(uint12 position, uint<1024> value)
     {
         atomic { _sin_table[position] = value; }

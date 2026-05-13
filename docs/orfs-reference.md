@@ -16,10 +16,12 @@ export SYNTH_HIERARCHICAL = 1
 export SYNTH_MINIMUM_KEEP_SIZE = 5000
 export CORE_UTILIZATION = 60
 export PLACE_DENSITY_LB_ADDON = 0.2
-export REMOVE_ABC_BUFFERS = 1
+export SKIP_LAST_GASP = 1     # replaces deprecated REMOVE_ABC_BUFFERS
 export SYNTH_MEMORY_MAX_BITS = 65536
 export LEC_CHECK = 0
 ```
+
+> The project's existing 24 designs still use `REMOVE_ABC_BUFFERS = 1` (deprecated upstream); migration to `SKIP_LAST_GASP` is tracked in [`orfs-flow-todo.md`](orfs-flow-todo.md) item A1.
 
 **constraint.sdc example:**
 ```sdc
@@ -49,8 +51,15 @@ set_output_delay [expr $clk_period * 0.2] -clock $clk_name [all_outputs]
 | `SYNTH_HIERARCHICAL = 1` | Hierarchical synthesis | Essential for complex designs |
 | `SYNTH_MEMORY_MAX_BITS = 65536` | Max memory as flip-flops | Default 4096 too small for 512x64 SRAMs |
 | `SYNTH_MINIMUM_KEEP_SIZE = 5000` | Min module size to keep hierarchy | Prevents flattening large modules |
-| `REMOVE_ABC_BUFFERS = 1` | Remove ABC-inserted buffers | Lets OpenROAD handle buffering |
+| `SKIP_LAST_GASP = 1` | Skip ABC last-gasp resize | Replaces deprecated `REMOVE_ABC_BUFFERS = 1` |
 | `LEC_CHECK = 0` | Skip logic equivalence check | Speeds up flow |
+| `GPL_TIMING_DRIVEN = 0` | Skip GPL-internal repair_design | Essential for designs >250K cells (GPL repair hangs silently); resize.tcl still does timing repair |
+| `SKIP_INCREMENTAL_REPAIR = 1` | Skip repair_design/timing in GRT | Prevents incremental GRT NDR retry loops |
+| `RECOVER_POWER = 0` | Skip incremental GRT power recovery | Pairs with `SKIP_INCREMENTAL_REPAIR` to avoid GRT-0116 → DRT refusal |
+| `SKIP_ANTENNA_REPAIR = 1` + `SKIP_ANTENNA_REPAIR_POST_DRT = 1` | Skip antenna repair before+after DRT | Antenna repair triggers incremental GRT that gets stuck |
+| `SYNTH_HIERARCHICAL = 1` | Hierarchical synthesis | **Mandatory** for macro-bearing designs (avoids 15h+ synthesis on flatten) |
+| `MACRO_PLACE_HALO = 10 10` | Macro-to-stdcell halo | Default 40 µm too large for small macros — drop to 10 if cells sparse |
+| `EQUIVALENCE_CHECK = 0` + `LEC_CHECK = 0` | Skip LEC | Required for designs that include macro abstracts (KeplerFormal LEC crashes on >500-output truth tables) |
 
 ## Failure Modes & Diagnosis
 
@@ -60,6 +69,10 @@ set_output_delay [expr $clk_period * 0.2] -clock $clk_name [all_outputs]
 | `GRT-0116` | Global routing | Congestion overflow | Reduce utilization OR increase PLACE_DENSITY_LB_ADDON |
 | `DPL-0036` in CTS | Clock tree synthesis | CTS buffers pushed util over edge | Need ~5% headroom beyond post-resize util |
 | `STA-0441` | Timing analysis | Input delay on clock port | Exclude clock from `set_input_delay` in SDC |
+| GPL silent hang on big designs | Global place (3_3) | repair_design uses 1 core for hours, no log progress | Set `GPL_TIMING_DRIVEN = 0`. Documented on vector_unit (791K cells); applies to designs >250K |
+| KLayout `Stream has unknown format` | GDS merge (6_1_merge) | Macro `.gds` files are placeholder stubs (~250 bytes) | Cosmetic — routing/odb is valid. Real macro GDS would fix it |
+| `MPL-0055` "Couldn't find solution at requested utilization" | Macro placement (2_2) | Halo + density too tight for the macro count | Reduce `MACRO_PLACE_HALO` or increase die area |
+| GRT NDR retry death-spiral | Global routing (5_1) | Single-cell overflow loops disabling NDR for hours | Use `-allow_congestion` (eventually accepts overflow) |
 
 **Key insights:**
 - Post-resize utilization != final utilization -- CTS adds ~4-5% from clock buffers, fill cells add more

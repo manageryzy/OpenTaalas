@@ -106,6 +106,9 @@ add_kanagawa_rtl(NAME llama_chip SOURCE llama_chip.k)
 add_kanagawa_rtl(NAME kv_cache_demo SOURCE kv_cache_demo.k)
 add_kanagawa_rtl(NAME lm_head_demo SOURCE lm_head_demo.k)
 
+# v12: pure-Kanagawa orchestrator composing rope_apply + vector_unit
+add_kanagawa_rtl(NAME layer_orchestrator SOURCE layer_orchestrator.k)
+
 # =============================================================================
 # Aggregate targets
 # =============================================================================

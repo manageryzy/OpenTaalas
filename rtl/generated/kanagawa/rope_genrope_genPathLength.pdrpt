@@ -56,166 +56,10 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            24,
+            31,
             1,
-            25,
-            1,
-            1,
-            1
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "read_cos_row",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "read_cos_row_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "1_loadmemory",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            27,
-            1,
-            28,
-            1,
-            1,
-            1
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "read_cos_row",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "read_cos_row_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "2_releasesemaphore",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            24,
-            1,
-            25,
-            1,
-            1,
-            1
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "read_cos_row",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "read_cos_row_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage3",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "0_enqueue",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            24,
-            1,
-            25,
-            1,
-            1,
-            1
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "read_sin_row",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "read_sin_row_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "0_acquiresemaphore",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
             32,
             1,
-            33,
-            1,
             1,
             1
         ],
@@ -228,13 +72,13 @@
             ],
             [
                 {
-                    "name": "read_sin_row",
+                    "name": "read_cos_row",
                     "type": "Function"
                 }
             ],
             [
                 {
-                    "name": "read_sin_row_BasicBlock_0",
+                    "name": "read_cos_row_BasicBlock_0",
                     "type": "Basic block"
                 }
             ],
@@ -251,9 +95,165 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
+            34,
+            1,
             35,
             1,
-            36,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_cos_row",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_cos_row_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
+            31,
+            1,
+            32,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_cos_row",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_cos_row_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage3",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
+            31,
+            1,
+            32,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_sin_row",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_sin_row_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
+            38,
+            1,
+            39,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "read_sin_row",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "read_sin_row_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_loadmemory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
+            41,
+            1,
+            42,
             1,
             1,
             1
@@ -290,9 +290,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            32,
+            38,
             1,
-            33,
+            39,
             1,
             1,
             1
@@ -329,48 +329,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            32,
+            38,
             1,
-            33,
-            1,
-            1,
-            1
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "write_cos_row",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "write_cos_row_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "0_acquiresemaphore",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            43,
-            1,
-            44,
+            39,
             1,
             1,
             1
@@ -391,123 +352,6 @@
             [
                 {
                     "name": "write_cos_row_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "1_storememory",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            42,
-            1,
-            43,
-            1,
-            1,
-            1
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "write_cos_row",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "write_cos_row_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage1",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "2_releasesemaphore",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            43,
-            1,
-            44,
-            1,
-            1,
-            1
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "write_cos_row",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "write_cos_row_BasicBlock_0",
-                    "type": "Basic block"
-                }
-            ],
-            [
-                {
-                    "name": "stage2",
-                    "type": "Stage"
-                }
-            ],
-            [
-                {
-                    "name": "0_enqueue",
-                    "type": "Operation"
-                }
-            ],
-            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            43,
-            1,
-            44,
-            1,
-            1,
-            1
-        ],
-        [
-            [
-                {
-                    "name": "",
-                    "type": "Object"
-                }
-            ],
-            [
-                {
-                    "name": "write_sin_row",
-                    "type": "Function"
-                }
-            ],
-            [
-                {
-                    "name": "write_sin_row_BasicBlock_0",
                     "type": "Basic block"
                 }
             ],
@@ -540,13 +384,13 @@
             ],
             [
                 {
-                    "name": "write_sin_row",
+                    "name": "write_cos_row",
                     "type": "Function"
                 }
             ],
             [
                 {
-                    "name": "write_sin_row_BasicBlock_0",
+                    "name": "write_cos_row_BasicBlock_0",
                     "type": "Basic block"
                 }
             ],
@@ -579,6 +423,162 @@
             ],
             [
                 {
+                    "name": "write_cos_row",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_cos_row_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "2_releasesemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
+            49,
+            1,
+            50,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_cos_row",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_cos_row_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage2",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_enqueue",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
+            49,
+            1,
+            50,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_sin_row",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_sin_row_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "0_acquiresemaphore",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
+            55,
+            1,
+            56,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
+                    "name": "write_sin_row",
+                    "type": "Function"
+                }
+            ],
+            [
+                {
+                    "name": "write_sin_row_BasicBlock_0",
+                    "type": "Basic block"
+                }
+            ],
+            [
+                {
+                    "name": "stage1",
+                    "type": "Stage"
+                }
+            ],
+            [
+                {
+                    "name": "1_storememory",
+                    "type": "Operation"
+                }
+            ],
+            "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
+            54,
+            1,
+            55,
+            1,
+            1,
+            1
+        ],
+        [
+            [
+                {
+                    "name": "",
+                    "type": "Object"
+                }
+            ],
+            [
+                {
                     "name": "write_sin_row",
                     "type": "Function"
                 }
@@ -602,9 +602,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            49,
+            55,
             1,
-            50,
+            56,
             1,
             1,
             1
@@ -641,9 +641,9 @@
                 }
             ],
             "\/home\/mana\/workspace\/OpenTaalas\/rtl\/kanagawa\/rope_gen.k",
-            49,
+            55,
             1,
-            50,
+            56,
             1,
             1,
             1

@@ -113,10 +113,13 @@ See [backend-metrics.md](backend-metrics.md) for full metrics, timing analysis, 
 
 ![full chip floorplan](images/full_chip_floorplan.png)
 
-21 hardened tiles arranged on a ~10.5 × 7.7 mm (80 mm²) die, organized into three
-tiers: folded NOR ROM (top), large macro-bearing (middle), pure stdcell + small
-SRAM (bottom). Red arrow shows the rope_gen → rope_apply broadcast bus that
-unblocks multi-layer scaling.
+20 hardened tiles arranged on ~13.7 × 8.7 mm = 119 mm² (synthetic, post v12 layer_orchestrator), organized into four tiers: folded NOR ROM + composition tiles (top), large macro-bearing (middle), small SRAM-bearing (bottom-middle), pure stdcell (bottom). Red arrow shows the v11.3 256-bit phased cascade `rope_gen → transformer_layer_block`; dashed purple arrow shows the v12 composition path where `rope_apply` + `vector_unit` are composed inside `layer_orchestrator`. Earlier-iteration synthetic figures preserved as `images/full_chip_floorplan_v7.png` (pre-v8) and `images/multi_layer_floorplan_v8.png` (1024-bit single-cycle cascade).
+
+### Multi-Layer Floorplan (v11.3 K=2 cascade)
+
+![multi layer floorplan v11.3](images/multi_layer_floorplan.png)
+
+Two `transformer_layer_block` instances (L0, L1) chained via 256-bit phased cascade. `rope_gen` at top broadcasts to L0 (via chip-level 4:1 phase slicer); L0 forwards to L1. Boundary pin count per layer_block: 1225 (vs v10's 4290 — 3.5×↓).
 
 ### Test Suite
 - **44 E2E checks** at CI dimensions — all passing
@@ -140,12 +143,69 @@ The ~0.14% SwiGLU error vs FP32 is inherent to the 256-entry sigmoid LUT. Error 
 
 Further improvement requires more LUT entries or piecewise-linear interpolation (hardware change).
 
+## v11 — 256-bit Phased Cascade (May 2026)
+
+The v8/v10 1024-bit cascade was rearchitected to serialize cos/sin row delivery into 4 × 256-bit phased segments over 4 cycles. **Layer_block boundary pin count drops 4290 → 1225 (3.5×).**
+
+### What changed
+- `rtl/kanagawa/rope_apply.k`: cascade methods take `phase` parameter (`uint<256>[4] _cos_seg`/`_sin_seg`)
+- `rtl/kanagawa/rope_gen.k`: kept v9-style 1024-bit single output (3 attempts to put the 4:1 mux inside the macro all plateaued at 23-25K DRC due to internal congestion against the nor_rom_4096x1024 macros — see memory `feedback_kanagawa_dynamic_shift.md`)
+- `rtl/sv/multi_layer_chip_wrapper.sv`: 4:1 phase slicer in chip glue (`always_comb` case on `rg_read_cos_row_phase_in`). Routes trivially in the open glue area near rope_gen.
+- `test/verilator/test_vl_rope_cascade.cpp`: new 50-line co-sim test for phased forward/read API. All 19 existing per-module tests still pass.
+
+### Per-module results (v11.3)
+| Module | Result | Notes |
+|--------|--------|-------|
+| `transformer_layer_block` (rope_apply alone) | **0 DRC, 1225 pins, 121–150 MHz** | 3.5× pin reduction vs v10 |
+| `rope_gen` | reused v9 macro (350 DRC, 147 MHz, 1024-bit out) | no re-PnR needed |
+| All 17 per-module SystemC + Verilator tests | ✓ pass | including new cascade test |
+
+### Chip-level (multi_layer_chip)
+| Metric | v10 | v11.3 |
+|--------|-----|-------|
+| layer_block boundary pins | 4290 | **1225** (3.5× ↓) |
+| chip DRT iter 0 violations | 38M | **3.66M** (10× ↓) |
+| chip DRT plateau | ~3M | **~2M** (33% ↓) |
+| Wall time to plateau | 38h+ | ~16h |
+
+**Plateau is architectural, not flow-tunable.** The remaining ~2M residual is dominated by control + handshake + clock signals competing for the same 200µm inter-macro channels. Pin reduction helped but didn't eliminate it. See `docs/backend-metrics.md` "Multi-Layer Chip Integration" section for full table and memory `feedback_chip_routing_plateau.md` for the architectural rationale.
+
+**Decision:** v11.3 is the documented final state. Module-level (layer_block + 17 modules) is the credible 0-DRC deliverable. Chip integration is shown as "GRT proven, DRT progresses but plateaus at architectural limit of multi-macro sky130hd composition".
+
+## v12 — Pure-Kanagawa `layer_orchestrator` (May 2026)
+
+Validated Kanagawa sub-module composition end-to-end (HLS → Yosys → ORFS → DRT clean). New file `rtl/kanagawa/layer_orchestrator.k` composes `rope_apply` + `vector_unit` as private class fields; cross-file imports via `opentaalas → .` symlink; sub-module method calls at method-body level (NOT inside `atomic{}`).
+
+### Result
+| Metric | Value |
+|--------|-------|
+| Boundary pins | 1516 (vs v11.3's 1225 — full step-level API kept) |
+| Synth area | 5.04 mm² (rope_apply 0.82 + vector_unit 0.41 + orchestrator glue 3.81) |
+| Placed cells | 408K (incl. 11K timing-repair buffers, 18K clock buffers) + 570K fillers |
+| Macros | 4× SRAM (gamma_pre_attn/mlp + rsqrt/sigmoid LUTs), auto-placed |
+| Die | 3000×3000 µm (9 mm²), 55% util |
+| **DRC** | **0 violations** (DRT converged in 6 iters: 3356→2431→1539→879→17→0) |
+| WNS | -4.45 ns @ 4 ns target |
+| **fmax** | **118 MHz** (clock period min 8.45 ns) |
+| Power | 2.6 W |
+| IR drop | 0.03% |
+| Wirelength | 13.84 mm |
+| Wallclock | ~4 hr (synth 12s, GPL 18min, repair_design 57min, CTS 35min, GRT 2min, DRT 21min) |
+
+### Key insight
+The historic 561K-cell wall (which forced v11.3 to wrap rope_apply alone in layer_block) is real for the FULL per-layer composition (+7× mac_array + kv_cache + attention). But the rope_apply + vector_unit duo at 408K cells routes cleanly. **`GPL_TIMING_DRIVEN=0` is essential** — without it, the GPL-internal repair_design hangs the same way it did on v6 vector_unit. The downstream `resize.tcl` does timing repair just fine.
+
+GDS merge fails with the documented placeholder-stub KLayout error; routing/odb is valid.
+
+**Files:** `rtl/kanagawa/layer_orchestrator.k`, `flow/designs/sky130hd/layer_orchestrator/{config.mk,constraint.sdc}`. Memory: `project_kanagawa_composition.md`.
+
 ## Next Steps
 
 1. **Hierarchical PnR for vector_unit** — currently 791K cells flat; pipelined RTL stalls in ORFS GPL. Partitioning would unblock retiming for the largest design.
 2. **DRC cleanup** — rope (418), mac_array (641), vector_unit (488) have remaining DRT violations
 3. **vector_unit re-route** — macro_place updated for new fold=2 macro shape; needs hierarchical PnR before re-route can land
 4. **lm_head architecture** — 188 MB weight store needs external DRAM interface, not on-die ROM
+5. **Tape-out retargeting (if pursued)** — chip-level clean GDS requires either a finer PDK (smaller channel-to-pin ratio), fewer macros at chip top, or feed-through routing on met4/met5 (requires re-PnR'ing every macro with `MAX_ROUTING_LAYER=met3`)
 
 ## Architecture
 
